@@ -19,7 +19,7 @@ public class MeetingRoomsII {
 	            return i1.start-i2.start;
 	        }
 	    });
-	 
+	    // use a pq to get the swept interval has min end value
 	    PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
 	    int count=1;
 	    queue.offer(intervals[0].end);
