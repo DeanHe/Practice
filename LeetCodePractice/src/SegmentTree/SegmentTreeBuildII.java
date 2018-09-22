@@ -1,3 +1,5 @@
+package SegmentTree;
+
 public class SegmentTreeBuildII {
 	class SegmentTreeNode {
 		public int start, end, max;

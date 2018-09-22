@@ -1,3 +1,5 @@
+package String;
+
 // https://www.lintcode.com/problem/log-sorting/description
 
 import java.util.*;

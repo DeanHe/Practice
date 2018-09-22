@@ -1,3 +1,5 @@
+package Array;
+
 import java.util.*;
 
 /*Given an array of integers, find how many unique pairs in the array such that their sum is equal to a specific target number. Please return the number of pairs.*/

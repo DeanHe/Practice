@@ -1,4 +1,6 @@
-import java.util.Arrays;
+package TwoPointers;
+
+import java.util.*;
 
 //https://www.geeksforgeeks.org/count-number-of-substrings-with-exactly-k-distinct-characters/
 public class SubstringsWithExactlyKdistinctCharacters {

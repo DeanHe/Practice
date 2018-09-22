@@ -1,5 +1,15 @@
+package LinkedList;
 
 public class LinkedListCycle {
+	class ListNode {
+		int val;
+		ListNode next;
+
+		ListNode(int val) {
+		          this.val = val;
+		          this.next = null;
+		      }
+	}
 	/**
      * @param head: The first node of linked list.
      * @return: True if it has a cycle, or false
@@ -20,14 +30,4 @@ public class LinkedListCycle {
         }
         return true;
     }
-}
-
-class ListNode {
-	int val;
-	ListNode next;
-
-	ListNode(int val) {
-	          this.val = val;
-	          this.next = null;
-	      }
 }

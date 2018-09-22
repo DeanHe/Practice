@@ -1,3 +1,5 @@
+package BinarySearch;
+
 import java.util.*;
 /*Given an array, find two numbers in the array and their sum is closest to the target value but does not exceed the target value, return their sum.*/
 public class ClosestTargetValue {

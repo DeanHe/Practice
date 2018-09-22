@@ -1,3 +1,5 @@
+package SegmentTree;
+
 
 public class IntervalSumII {
 	class SegmentTreeNode {

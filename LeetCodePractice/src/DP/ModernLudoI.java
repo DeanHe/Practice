@@ -1,3 +1,5 @@
+package DP;
+
 // https://www.lintcode.com/problem/modern-ludo-i/description
 
 public class ModernLudoI {

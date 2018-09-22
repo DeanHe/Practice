@@ -1,3 +1,5 @@
+package String;
+
 import java.util.*;
 
 // https://www.lintcode.com/problem/unique-substring/

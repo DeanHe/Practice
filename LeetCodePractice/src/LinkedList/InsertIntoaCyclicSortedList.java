@@ -1,3 +1,5 @@
+package LinkedList;
+
 // https://www.lintcode.com/problem/insert-into-a-cyclic-sorted-list/description
 public class InsertIntoaCyclicSortedList {
 	/*

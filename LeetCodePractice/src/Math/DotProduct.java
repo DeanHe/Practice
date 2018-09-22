@@ -1,3 +1,5 @@
+package Math;
+
 // https://www.lintcode.com/problem/dot-product/description
 public class DotProduct {
 	/**

@@ -1,3 +1,6 @@
+package TwoPointers;
+
+import java.util.*;
 
 public class LongestSubstringwithAtMostKDistinctCharacters {
 	/**

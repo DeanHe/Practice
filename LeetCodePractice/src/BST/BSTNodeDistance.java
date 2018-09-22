@@ -1,3 +1,5 @@
+package BST;
+
 // https://www.lintcode.com/problem/bst-node-distance/description
 
 /*Given a list of numbers, construct a BST from it and find the distance between two given nodes.*/

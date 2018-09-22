@@ -1,3 +1,5 @@
+package BST;
+
 import java.util.*;
 
 /**

@@ -1,3 +1,5 @@
+package Window;
+
 import java.util.*;
 
 public class SlidingWindowMaximum {

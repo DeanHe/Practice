@@ -1,3 +1,5 @@
+package Sort;
+
 import java.util.*;
 
 /*Give a List of data representing the coordinates[x,y] of each restaurant. 

@@ -1,3 +1,5 @@
+package DFS;
+
 // https://www.lintcode.com/problem/can-reach-the-endpoint/description
 
 public class CanReachTheEndpoint {

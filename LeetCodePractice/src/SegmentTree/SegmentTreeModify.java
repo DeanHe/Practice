@@ -1,3 +1,5 @@
+package SegmentTree;
+
 public class SegmentTreeModify {
 	/**
      *@param root, index, value: The root of segment tree and 

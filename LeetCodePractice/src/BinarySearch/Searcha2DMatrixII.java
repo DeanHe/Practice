@@ -1,3 +1,5 @@
+package BinarySearch;
+
 // https://www.lintcode.com/problem/search-a-2d-matrix-ii/description
 public class Searcha2DMatrixII {
 	/**

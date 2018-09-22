@@ -1,3 +1,5 @@
+package SegmentTree;
+
 import java.util.*;
 
 public class IntervalMinimumNumber {

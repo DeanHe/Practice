@@ -1,3 +1,5 @@
+package SegmentTree;
+
 import java.util.*;
 
 public class CountOfSmallerNumberBeforeItself {
@@ -37,19 +39,19 @@ public class CountOfSmallerNumberBeforeItself {
             }
             int mid = (root.start + root.end) / 2;
             int leftCount = 0, rightCount = 0;
-            // 左子区
+            //left range
             if(start <= mid) {
-                if(end <= mid){ // 包含
+                if(end <= mid){ //contain
                     leftCount = querySegmentTree(root.left, start, end);
-                } else { // 分裂
+                } else { //right range
                     leftCount = querySegmentTree(root.left, start, mid);
                 }
             } 
-            // 右子区
+            //right range
             if(end >= mid + 1) {
-                if(start >= mid + 1){ // 包含
+                if(start >= mid + 1){ //contain
                     rightCount = querySegmentTree(root.right, start, end);
-                } else { // 分裂
+                } else { //split
                     rightCount = querySegmentTree(root.right, mid + 1, end);
                 }
             }
@@ -60,14 +62,14 @@ public class CountOfSmallerNumberBeforeItself {
                 root.count += value;
                 return;
             }
-            int mid = (root.start + root.end) / 2;   // 查询
+            int mid = (root.start + root.end) / 2;   //query
             if(root.start <= index && index <= mid){
                 modifySegmentTree(root.left, index, value);
             }
             if(index >= mid + 1 && index <= root.end){
                 modifySegmentTree(root.right, index, value);
             }
-            root.count = root.left.count + root.right.count;  //更新
+            root.count = root.left.count + root.right.count;  //update
         }
     public List<Integer> countOfSmallerNumberII(int[] A) {
         // write your code here

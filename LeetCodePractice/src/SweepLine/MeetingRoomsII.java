@@ -25,16 +25,14 @@ public class MeetingRoomsII {
 	    queue.offer(intervals[0].end);
 	 
 	    for(int i=1; i<intervals.length; i++){
-	        if(intervals[i].start<queue.peek()){
-	            count++;
-	 
+	    	Interval cur = intervals[i];
+	        if(cur.start < queue.peek()){
+	            count++;	 
 	        }else{
 	            queue.poll();
-	        }
-	 
-	        queue.offer(intervals[i].end);
-	    }
-	 
+	        } 
+	        queue.offer(cur.end);
+	    }	 
 	    return count;
 	}
 

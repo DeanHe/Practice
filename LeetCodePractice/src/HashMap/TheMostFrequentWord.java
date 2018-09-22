@@ -1,3 +1,5 @@
+package HashMap;
+
 import java.util.*;
 
 /*Give a string s witch represents the content of the novel, and then give a list indicating that the words do not participate in statistics, find the most frequent word(return the one with the smallest lexicographic order if there are more than one word)*/

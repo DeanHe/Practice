@@ -1,3 +1,5 @@
+package SweepLine;
+
 import java.util.*;
 
 /*There is a process sequence that contains the start and end of each process. There is a query sequence asking how many processes are running at a certain point in time. Please return the query result of the query sequence.
