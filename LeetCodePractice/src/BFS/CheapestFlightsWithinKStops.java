@@ -34,7 +34,7 @@ public class CheapestFlightsWithinKStops {
     }
 	
 	// using BFS
-	public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+	public int findCheapestPriceBFS(int n, int[][] flights, int src, int dst, int K) {
         int[] costs = new int[n];
         Arrays.fill(costs, Integer.MAX_VALUE);
         costs[src] = 0;
@@ -66,5 +66,26 @@ public class CheapestFlightsWithinKStops {
             stops++;
         }
     	return costs[dst] == Integer.MAX_VALUE ? -1 : costs[dst];
+    }
+	// using DP
+	public int findCheapestPriceDP(int n, int[][] flights, int src, int dst, int K) {
+		int[][] dp = new int[K + 2][n];
+        for(int[] row : dp){
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+        dp[0][src] = 0;
+        for(int i = 1; i <= K + 1; i++){
+        	dp[i][src] = 0;
+        	for(int[] flight : flights){
+        		int start = flight[0];
+        		int end = flight[1];
+        		int cost = flight[2];
+                if(dp[i - 1][start] < Integer.MAX_VALUE){
+                    dp[i][end] = Math.min(dp[i][end], dp[i - 1][start] + cost);
+                }
+        	}
+        }
+        return dp[K + 1][dst] == Integer.MAX_VALUE ? -1 : dp[K + 1][dst];
+        
     }
 }
