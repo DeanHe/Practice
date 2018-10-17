@@ -9,23 +9,20 @@ public class ReadNcharactersGivenRead4II extends Reader4 {
      * @param n maximum number of characters to read
      * @return the number of characters read
      */
-    char[] buffer = new char[4];
-    int head = 0, tail = 0;
+	char[] buf4 = new char[4];
+    int read4EndPos = 0, read4curPos = 0;
     public int read(char[] buf, int n) {
         // Write your code here
-       int i = 0;
-        while (i < n) {
-            if (head == tail) {               // queue is empty
-                head = 0;
-                tail = read4(buffer);         // enqueue
-                if (tail == 0) {
-                    break;
+        for(int i = 0; i < n; i++){
+            if(read4curPos == read4EndPos){
+                read4EndPos = read4(buf4);
+                read4curPos = 0;
+                if(read4EndPos == 0){
+                    return i;
                 }
             }
-            while (i < n && head < tail) {
-                buf[i++] = buffer[head++];    // dequeue
-            }
+            buf[i] = buf4[read4curPos++];
         }
-        return i;
+        return n;
     }
 }
