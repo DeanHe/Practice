@@ -66,7 +66,7 @@ public class CourseSchedule {
     }
      
     private boolean dfs(ArrayList[] graph, boolean[] visited, int cur){
-        //true- no cycle // fasle - with cycle
+        //true- no cycle; fasle - with cycle
         if(visited[cur]){
             return false;
         }
