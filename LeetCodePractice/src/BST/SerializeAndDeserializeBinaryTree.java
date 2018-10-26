@@ -2,24 +2,22 @@ package BST;
 
 import java.util.*;
 
-/**
- * Definition of TreeNode:
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left, right;
- *     public TreeNode(int val) {
- *         this.val = val;
- *         this.left = this.right = null;
- *     }
- * }
- */
 // https://www.lintcode.com/problem/serialize-and-deserialize-binary-tree/description
 public class SerializeAndDeserializeBinaryTree {
+	class TreeNode {
+	      public int val;
+	      public TreeNode left, right;
+	      public TreeNode(int val) {
+	          this.val = val;
+	          this.left = this.right = null;
+	      }
+	 }
 	/**
      * This method will be invoked first, you should design your own algorithm 
      * to serialize a binary tree which denote by a root node to a string which
      * can be easily deserialized by your own "deserialize" method later.
      */
+	// pre-order
     public String serialize(TreeNode root) {
         // write your code here
         if(root == null){

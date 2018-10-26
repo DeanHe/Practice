@@ -1,6 +1,14 @@
 package LinkedList;
 
 public class ReverseNodesInkGroup {
+	class ListNode {
+		 int val;
+		 ListNode next;
+		 ListNode(int x) {
+			 val = x;
+			 next = null;
+		 }
+	}
 	//区间的reverse。因为题目要求的是k group逆转嘛。注意reverse返回的是最后一个(last)节点，这样下一个k-group就可以用上了
     public static ListNode reverse(ListNode pre, ListNode post){
         ListNode last = pre.next;
