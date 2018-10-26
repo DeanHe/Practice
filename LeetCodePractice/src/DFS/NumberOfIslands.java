@@ -72,19 +72,19 @@ public class NumberOfIslands {
 					int temp2 = 0;
 					if (r > 0 && grid[r - 1][c]) {
 						temp2 = (r - 1) * cols + c;
-						unionFind.connect(temp1, temp2);
+						unionFind.union(temp1, temp2);
 					}
 					if (r < rows - 1 && grid[r + 1][c]) {
 						temp2 = (r + 1) * cols + c;
-						unionFind.connect(temp1, temp2);
+						unionFind.union(temp1, temp2);
 					}
 					if (c > 0 && grid[r][c - 1]) {
 						temp2 = r * cols + c - 1;
-						unionFind.connect(temp1, temp2);
+						unionFind.union(temp1, temp2);
 					}
 					if (c < cols - 1 && grid[r][c + 1]) {
 						temp2 = r * cols + c + 1;
-						unionFind.connect(temp1, temp2);
+						unionFind.union(temp1, temp2);
 					}
 				}
 			}
@@ -104,16 +104,16 @@ class UnionFind {
 		}
 	}
 
-	public int root(int x) {
+	public int getRoot(int x) {
 		while (id[x] != x) {
 			x = id[x];
 		}
 		return x;
 	}
 
-	public void connect(int a, int b) {
-		int root_a = root(a);
-		int root_b = root(b);
+	public void union(int a, int b) {
+		int root_a = getRoot(a);
+		int root_b = getRoot(b);
 		if (root_a != root_b) {
 			id[root_a] = root_b;
 			count--;

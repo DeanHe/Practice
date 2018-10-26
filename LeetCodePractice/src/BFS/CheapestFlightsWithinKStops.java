@@ -4,13 +4,21 @@ import java.util.*;
 
 public class CheapestFlightsWithinKStops {
 	// using Dijkstra algorithm
+	/**
+     * @param n: # of cities
+     * @param flights: a 2D array
+     * @param src: a integer
+     * @param dst: a integer
+     * @param K: a integer represents up to k stops
+     * @return: return a integer
+     */
 	public int findCheapestPriceDijk(int n, int[][] flights, int src, int dst, int K) {
         int[][] graph = new int[n][n];
         for(int[] f : flights){
             graph[f[0]][f[1]] = f[2];
         }
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {return a[1] - b[1];});
-        // stop : price : stop
+        // city : price : stop
         pq.offer(new int[]{src, 0, -1});
         while(!pq.isEmpty()){
             int[] temp = pq.poll();
