@@ -2,7 +2,6 @@ package BST;
 
 import java.util.*;
 
-import BST.MinimumSumPath.TreeNode;
 //Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
 public class PathSumII {
 	class TreeNode {
