@@ -25,8 +25,7 @@ public class KillProcess {
     			}
     		}
     	}
-    	return res;
-    	
+    	return res;    	
     }
     
     private Map<Integer, List<Integer>> buildTree(List<Integer> pid, List<Integer> ppid){
