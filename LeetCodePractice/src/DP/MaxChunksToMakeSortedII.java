@@ -40,6 +40,6 @@ public int maxChunksToSorted(int[] arr) {
         		ans++;
         	}
         }
-        return ans;
+        return ans + 1;
     }
 }
