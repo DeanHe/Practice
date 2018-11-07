@@ -1,7 +1,15 @@
 package DP;
-//Given n items with size nums[i] which an integer array and all positive numbers, no duplicates. 
-//An integer target denotes the size of a backpack. Find the number of possible fill the backpack.
-// each item can be used unlimited times
+/*Given n items with size nums[i] which an integer array and all positive numbers, no duplicates. 
+An integer target denotes the size of a backpack. Find the number of possible fill the backpack.
+ each item can be used unlimited times
+
+Example
+Given candidate items [2,3,6,7] and target 7,
+
+A solution set is: 
+[7]
+[2, 2, 3]
+return 2*/
 public class BackpackIV {
 	/**
      * @param nums an integer array and all positive numbers, no duplicates

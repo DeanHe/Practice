@@ -15,9 +15,9 @@ public class CountAndSay {
 
 	public String getSay(String string) {
 		StringBuilder temp = new StringBuilder();
-		int count = 1;
-		for (int i = 0; i < string.length(); i++) {
-			if (i + 1 < string.length()
+		int count = 1, len = string.length();
+		for (int i = 0; i < len; i++) {
+			if (i + 1 < len
 					&& string.charAt(i) == string.charAt(i + 1)) {
 				count++;
 			} else {
