@@ -9,7 +9,7 @@ public class TrappingRainWater {
          if(A == null || A.length == 0){
         	 return 0;
          }
-         int max, total = 0, len = A.length;
+         int total = 0, len = A.length;
          int[] left = new int[len];
          int[] right = new int[len];
          
