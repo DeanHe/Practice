@@ -28,16 +28,18 @@ public class BackpackVII {
 		int len = prices.length;
 		int[][] dp = new int[len][n + 1];
 		for (int i = 0; i < len; i++) {
-			for (int amount = amounts[i]; amount > 0; amount--) {
-				for (int j = 1; j <= n; j++) {
+			for (int j = 1; j <= n; j++) {
+				for (int amount = 0; amount <= amounts[i]; amount++) {
 					if (i == 0) {
 						if (j >= amount * prices[0]) {
-							dp[0][j] = Math.max(dp[0][j], dp[0][j - amount * prices[0]] + weight[i]);
+							dp[0][j] = amount * weight[0];
 						}
 					} else {
-						dp[i][j] = dp[i][j - 1]; // not take
+						// not take
+						dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);                 
 						if (j >= amount * prices[i]) {
-							dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - amount * prices[i]] + weight[i]);
+						    // take
+							dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - amount * prices[i]] + amount * weight[i]);
 						}
 					}
 				}

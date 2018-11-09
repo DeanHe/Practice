@@ -18,5 +18,6 @@ public class BackpackVIII {
      */
     public int backPackVIII(int n, int[] value, int[] amount) {
         // write your code here
+    	
     }
 }
