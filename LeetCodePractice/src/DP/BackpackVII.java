@@ -24,7 +24,6 @@ public class BackpackVII {
 	 * @return: the maximum weight
 	 */
 	public int backPackVII(int n, int[] prices, int[] weight, int[] amounts) {
-		// write your code here
 		int len = prices.length;
 		int[][] dp = new int[len][n + 1];
 		for (int i = 0; i < len; i++) {
@@ -46,5 +45,23 @@ public class BackpackVII {
 			}
 		}
 		return dp[len - 1][n];
+	}
+	
+	public int backPackVII2(int n, int[] prices, int[] weight, int[] amounts) {
+		int len = prices.length;
+		int[][] dp = new int[len + 1][n + 1];
+		for (int i = 1; i <= len; i++) {
+			for (int j = 1; j <= n; j++) {
+				for (int amount = 0; amount <= amounts[i]; amount++) {
+					// not take
+					dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);                 
+					if (j >= amount * prices[i - 1]) {
+					    // take
+						dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - amount * prices[i - 1]] + amount * weight[i - 1]);
+					}
+				}
+			}
+		}
+		return dp[len][n];
 	}
 }
