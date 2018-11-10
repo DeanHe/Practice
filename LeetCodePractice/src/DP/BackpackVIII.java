@@ -16,23 +16,38 @@ public class BackpackVIII {
      * @param amount: the number of coins
      * @return: how many different value
      */
-    public int backPackVIII(int n, int[] value, int[] amount) {
-        // write your code here
-    	int len = value.length;
+	public int backPackVIII(int n, int[] value, int[] amount) {
+		int len = value.length;
+        int count = 0;
+    	boolean[] dp = new boolean[n + 1];
+    	dp[0] = true;
+    	for(int i = 0; i < len; i ++){
+    		int[] cnt = new int[n + 1];
+    		for(int j = value[i]; j <= n; j++){
+    			if(!dp[j] && dp[j - value[i]] && cnt[j - value[i]] < amount[i]){
+    				cnt[j] = cnt[j - value[i]] + 1;
+    				dp[j] = true;
+    				count++;
+    			}
+    		}
+    	}
+    	return count;
+    }
+	
+	public int backPackVIII2D(int n, int[] value, int[] amount) {
+        int len = value.length;
+        int count = 0;
     	boolean[][] dp = new boolean[len + 1][n + 1];
     	for(int i = 1; i <= len; i ++){
+    	    dp[i - 1][0] = true;
     		for(int j = 1; j <= n; j++){
-    			for(int a = 0; a <= amount[i]; a++){
-    				if(dp[i - 1][j]){
-    					dp[i][j] = true;
-    				}
-    				if(j >= a * value[i - 1] && dp[i - 1][j - a * value[i - 1]]){
+    			for(int a = 0; a <= amount[i - 1]; a++){
+    				if(!dp[i][j] && j >= a * value[i - 1] && dp[i - 1][j - a * value[i - 1]]){
     					dp[i][j] = true;
     				}
     			}
     		}
     	}
-    	int count = 0;
     	for(int i = 1; i <= n; i++){
     		if(dp[len][i]){
     			count++;
