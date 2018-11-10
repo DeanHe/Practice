@@ -19,17 +19,25 @@ public class BackpackVIII {
     public int backPackVIII(int n, int[] value, int[] amount) {
         // write your code here
     	int len = value.length;
-    	int[][] dp = new int[len + 1][n + 1];
-    	for(int i = 0; i <= len; i ++){
+    	boolean[][] dp = new boolean[len + 1][n + 1];
+    	for(int i = 1; i <= len; i ++){
     		for(int j = 1; j <= n; j++){
     			for(int a = 0; a <= amount[i]; a++){
-    				dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
-    				if(j >= a * value[i - 1]){
-    					
+    				if(dp[i - 1][j]){
+    					dp[i][j] = true;
     				}
-    				dp[i][j] = dp[i - 1][j] + 
+    				if(j >= a * value[i - 1] && dp[i - 1][j - a * value[i - 1]]){
+    					dp[i][j] = true;
+    				}
     			}
     		}
     	}
+    	int count = 0;
+    	for(int i = 1; i <= n; i++){
+    		if(dp[len][i]){
+    			count++;
+    		}
+    	}
+    	return count;
     }
 }
