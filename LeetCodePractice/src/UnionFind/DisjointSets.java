@@ -66,14 +66,8 @@ public class DisjointSets {
 		for (Node node : list) {
 			union(node);
 		}
-		HashSet<Integer> rootSet = new HashSet<>(parent.values());
-		for (int root : rootSet) {
-			ArrayList<Node> ls = new ArrayList<>();
-			for (Node node : list) {
-				if (parent.get(node.id1) == root) {
-					ls.add(node);
-				}
-			}
+		for (int root : groups.keySet()) {
+			ArrayList<Node> ls = groups.get(root);
 			Collections.sort(ls, new Comparator<Node>() {
 
 				@Override
@@ -85,7 +79,6 @@ public class DisjointSets {
 					}
 				}
 			});
-			groups.put(root, ls);
 		}
 	}
 
@@ -104,21 +97,29 @@ public class DisjointSets {
 			int root_id1 = parent.get(node.id1);
 			if (parent.containsKey(node.id2)) {
 				int root_id2 = parent.get(node.id2);
-				for (Map.Entry<Integer, Integer> entry : parent.entrySet()) {
-					if (entry.getValue() == root_id2) {
-						entry.setValue(root_id1);
+				if (root_id1 != root_id2) {
+					ArrayList<Node> root_id2_list = groups.get(root_id2);
+					for (Node n2 : root_id2_list) {
+						parent.put(n2.id1, root_id1);
+						parent.put(n2.id2, root_id1);
+						groups.get(root_id1).add(n2);
 					}
+					groups.remove(root_id2);
 				}
 			} else {
 				parent.put(node.id2, root_id1);
 			}
+			groups.get(root_id1).add(node);
 		} else {
 			if (parent.containsKey(node.id2)) {
 				int root_id2 = parent.get(node.id2);
 				parent.put(node.id1, root_id2);
+				groups.get(root_id2).add(node);
 			} else {
 				parent.put(node.id1, node.id1);
 				parent.put(node.id2, node.id1);
+				groups.put(node.id1, new ArrayList<>());
+				groups.get(node.id1).add(node);
 			}
 		}
 	}
