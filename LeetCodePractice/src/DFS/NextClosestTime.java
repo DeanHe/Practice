@@ -1,8 +1,13 @@
 package DFS;
 
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.print.attribute.standard.RequestingUserName;
+
+import TwoPointers.KemptySlots;
 
 /*Given a time represented in the format "HH:MM", form the next closest time by reusing the current digits. There is no limit on how many times a digit can be reused.
 
@@ -20,7 +25,7 @@ Explanation:
 The next closest time choosing from digits 2, 3, 5, 9, is 22:22. It may be assumed that the returned time is next day's time since it is smaller than the input time numerically.
 */
 public class NextClosestTime {
-	int diff = Integer.MAX_VALUE;
+	int minDiff = Integer.MAX_VALUE;
 	String result = "";
 	/**
      * @param time: the given time
@@ -36,15 +41,46 @@ public class NextClosestTime {
         	return time;
         }
         ArrayList<Integer> digits = new ArrayList<>(set);
-        int time = toTime(Integer.parseInt(time.substring(0,2)), Integer.parseInt(time.substring(3,5)));
-        
+        int hour = Integer.parseInt(time.substring(0,2));
+    	int minute = Integer.parseInt(time.substring(3,5));
+        int timeValue = hour * 60 + minute;
+        dfs(digits, 0, timeValue, "");
+        return result;
     }
-    private void dfs(ArrayList<Integer> digits, int pos, int time, String temp){
-    	
-    }
-    private int toTime(int hour, int minute){
-    	return hour * 60 + minute;
-    }
-    int ti
-    
+    private void dfs(ArrayList<Integer> digits, int pos, int timeValue, String temp){
+    	if(pos == 4){
+    		int hour = Integer.parseInt(temp.substring(0,2));
+        	int minute = Integer.parseInt(temp.substring(2,4));
+            int newTime = hour * 60 + minute;
+    		if(newTime == timeValue){
+    			return;
+    		}
+    		int diff = newTime - timeValue;
+    		if(diff < 0){
+    			diff = 1440 + newTime - timeValue;
+    		}
+    		if(diff < minDiff){
+    			minDiff = diff;
+    			result = temp.substring(0, 2) + ":" + temp.substring(2, 4);
+    		}
+    		return;
+    	}
+    	int len = digits.size();
+    	for(int i = 0; i < len; i++){
+    		int cur = digits.get(i);
+    		if(pos == 0 && cur > 2){
+    			continue; //first letter should be 1 or 2
+    		}
+    		if(pos == 1 && Integer.parseInt(temp) * 10 + cur > 23){
+    			continue;
+    		}
+    		if(pos == 2 && cur > 5){
+    			continue;
+    		}
+    		if(pos == 3 && Integer.parseInt(temp.substring(2)) * 10 + cur > 59){
+    			continue;
+    		}
+    		dfs(digits, pos + 1, timeValue, temp + cur);
+    	}
+    }   
 }
