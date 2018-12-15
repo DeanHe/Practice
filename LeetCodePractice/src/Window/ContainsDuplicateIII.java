@@ -1,10 +1,6 @@
 package Window;
 
-import java.awt.event.MouseWheelEvent;
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /*Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute difference between nums[i] and nums[j] is at most t and the absolute difference between i and j is at most k.
 Example 1:
