@@ -1,7 +1,19 @@
 package HashMap;
 
 import java.util.*;
+/*Given an array of strings, group anagrams together.
 
+All inputs will be in lower-case.
+
+Have you met this question in a real interview?  
+Example
+Given strs = ["eat", "tea", "tan", "ate", "nat", "bat"],
+Return 
+[
+    ["ate", "eat","tea"],
+    ["nat","tan"],
+    ["bat"]
+]*/
 public class GroupAnagrams {
 	public List<List<String>> groupAnagrams(String[] strs) {
 		if (strs.length == 0) return new ArrayList();
