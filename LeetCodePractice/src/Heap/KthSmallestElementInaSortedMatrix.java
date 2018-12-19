@@ -22,7 +22,7 @@ public class KthSmallestElementInaSortedMatrix {
         int cols = matrix[0].length;
         int low = matrix[0][0], high = matrix[rows - 1][cols - 1];
         while(low <= high){
-        	int mid = low + (high - low) / 2;
+        	int mid = low + (high - low) / 2; // fake a mid number, and find count of numbers less than it in matrix
         	int count = countLessOrEqualTo(matrix, mid);
         	if(count < k){
         		low = mid + 1;
