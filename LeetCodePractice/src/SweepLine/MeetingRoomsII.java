@@ -1,5 +1,9 @@
 package SweepLine;
 // https://www.programcreek.com/2014/05/leetcode-meeting-rooms-ii-java/
+/*Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
+
+Example
+Given intervals = [(0,30),(5,10),(15,20)], return 2.*/
 import java.util.*;
 
 public class MeetingRoomsII {

@@ -39,12 +39,10 @@ public class RemoveDuplicatesfromSortedArray {
 			return A.length;
 		}
         //two pointer
-		int i = 0, j = 1;
-		while (j < A.length) {
-			if (A[i] == A[j]) {
-				j++;
-			} else {
-				A[++i] = A[j++];
+		int i = 0;
+		for(int j = 1; j < A.length; j++){
+			if(A[i] != A[j]){
+				A[++i] = A[j];
 			}
 		}
 		return i + 1;
