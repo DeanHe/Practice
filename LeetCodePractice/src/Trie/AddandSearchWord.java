@@ -27,8 +27,7 @@ public class AddandSearchWord {
 			if (p.arr[index] != null) {
 				p = p.arr[index];
 			} else {
-				TrieNode temp = new TrieNode();
-				p.arr[index] = temp;
+				p.arr[index] = new TrieNode();
 				p = p.arr[index];
 			}
 		}
