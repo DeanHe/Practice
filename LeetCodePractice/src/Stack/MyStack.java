@@ -1,5 +1,17 @@
 package Stack;
 // https://leetcode.com/problems/implement-stack-using-queues/description/
+/*
+Example£º
+push 1
+queue£º1 size 1
+push 2
+queue£º2 1 size 2
+queue£º1 2
+push 3
+queue£º3 1 2  size 3
+queue£º2 3 1
+queue£º1 2 3
+ */
 import java.util.*;
 
 public class MyStack {
