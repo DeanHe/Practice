@@ -19,9 +19,20 @@ public class ValidateBinarySearchTree {
 	}
 	
 	public boolean isValidBST(TreeNode root) {
-        
+		if(root == null){
+            return true;
+        }
+        return isBSTHelper(root, null, null);
     }
-	private boolean isBSTHelper() {
-		
+	private boolean isBSTHelper(TreeNode root, TreeNode minNode, TreeNode maxNode) {
+		if(root == null){
+            return true;
+        }
+        if((minNode !=null && root.val <= minNode.val) || (maxNode !=null && root.val >= maxNode.val)){
+            return false;
+        }
+        boolean left = isBSTHelper(root.left, minNode, root);
+        boolean right = isBSTHelper(root.right, root, maxNode);
+        return left && right;
 	}
 }
