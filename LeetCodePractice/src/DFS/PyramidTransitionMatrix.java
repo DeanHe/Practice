@@ -37,43 +37,38 @@ public class PyramidTransitionMatrix {
 		for(String s : allowed) {
 			String key = s.substring(0, 2);
 			String value = s.substring(2);
-			if(map.containsKey(key)) {
-				map.get(key).add(value);
-			} else {
+			if(!map.containsKey(key)) {
 				List<String> ls = new ArrayList<>();
-				ls.add(value);
 				map.put(key, ls);
 			}
+			map.get(key).add(value);
 		}
         return helper(bottom, map);
     }
-	private List<String> dfs(String cur, Map<String, List<String>> map) {
-		int len = cur.length();
-		List<String> ls = new ArrayList<>();
-		ls.add("");
-		for(int i = 0; i < len - 1; i++) {
-			List<String> temp = new ArrayList<>();
-			String candidate = cur.substring(i, i + 2);
-			if(map.containsKey(candidate)) {
-				temp.addAll(map.get(candidate));
-			}
-			List<String> nextlevel = new ArrayList<>();
-			for(String s : ls) {
-				for(String t : temp) {
-					nextlevel.add(s + t);
-				}
-			}
-			ls = new ArrayList<>(nextlevel);
+	private void getAllNextLevels(String level, int index, StringBuilder sb, ArrayList<String> candidates, Map<String, List<String>> map) {
+		if(index == level.length() - 1) {
+			candidates.add(sb.toString());
+			return;
 		}
-		return ls;
+		for(String val : map.get(level.substring(index, index + 2))) {
+			sb.append(val);
+			getAllNextLevels(level, index + 1, sb, candidates, map);
+			sb.deleteCharAt(sb.length() - 1);
+		}
 	}
-	private boolean helper(String cur, Map<String, List<String>> map) {
-		List<String> level = dfs(cur, map);
-		for(String s : level) {
-			if(s.length() == 1) {
-				return true;
+	private boolean helper(String level, Map<String, List<String>> map) {
+		if(level.length() == 1) {
+			return true;
+		}
+		for(int i = 0; i < level.length() - 1; i++) {
+			if(!map.containsKey(level.substring(i, i + 2))) {
+				return false;
 			}
-			if(helper(s, map)) {
+		}
+		ArrayList<String> candidates = new ArrayList<>();
+		getAllNextLevels(level, 0, new StringBuilder(), candidates, map);
+		for(String candidate : candidates) {
+			if(helper(candidate, map)) {
 				return true;
 			}
 		}
