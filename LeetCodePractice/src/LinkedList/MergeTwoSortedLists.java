@@ -1,14 +1,7 @@
 package LinkedList;
 
 public class MergeTwoSortedLists {
-	class ListNode {
-		 int val;
-		 ListNode next;
-		 ListNode(int x) {
-			 val = x;
-			 next = null;
-		 }
-	}
+	
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode result = new ListNode(0);
         ListNode current = result;

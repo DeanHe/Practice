@@ -2,14 +2,7 @@ package LinkedList;
 
 // two pointer
 public class RemoveNthNodeFromEndofList {
-	class ListNode {
-		 int val;
-		 ListNode next;
-		 ListNode(int x) {
-			 val = x;
-			 next = null;
-		 }
-	}
+
 	public ListNode removeNthFromEnd(ListNode head, int n) {
         if(head == null || n == 0){
             return head;

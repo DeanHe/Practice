@@ -1,14 +1,6 @@
 package LinkedList;
 
 public class SwapNodesinPairs {
-	class ListNode {
-		  int val;
-		  ListNode next;
-		  ListNode(int x) {
-		      val = x;
-		      next = null;
-		  }
-	}
 		      
 	public ListNode swapPairs(ListNode head) {
         if(head == null || head.next == null){

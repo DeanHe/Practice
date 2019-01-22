@@ -1,14 +1,6 @@
 package LinkedList;
 
 public class ReverseAlinkedList {
-	class ListNode {
-		 int val;
-		 ListNode next;
-		 ListNode(int x) {
-			 val = x;
-			 next = null;
-		 }
-	}
 	
 	public ListNode reverse(ListNode head){
     	ListNode preHead = new ListNode(0);

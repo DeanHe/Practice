@@ -6,16 +6,7 @@ public class InsertIntoaCyclicSortedList {
      * @param node: a list node in the list
      * @param x: An integer
      * @return: the inserted new list node
-     */
-	class ListNode {
-		 int val;
-		 ListNode next;
-		 ListNode(int x) {
-			 val = x;
-			 next = null;
-		 }
-	}
-	
+     */	
     public ListNode insert(ListNode node, int x) {
         // write your code here
         if(node == null){

@@ -3,15 +3,6 @@ package LinkedList;
 import java.util.*;
 
 public class MergeKsortedLists {
-	class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode(int val) {
-			this.val = val;
-			this.next = null;
-		}
-	}
 
 	/**
 	 * @param lists:
