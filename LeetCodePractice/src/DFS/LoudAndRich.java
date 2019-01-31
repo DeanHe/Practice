@@ -40,24 +40,35 @@ richer[i][0] != richer[i][1]
 richer[i]'s are all different.
 The observations in richer are all logically consistent.*/
 public class LoudAndRich {
+	int[] ans;
+	ArrayList<Integer>[] graph;
+	
 	public int[] loudAndRich(int[][] richer, int[] quiet) {
 		int len = quiet.length;
-		HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
+		ans = new int[len];
+		graph = new ArrayList[len];
+		for(int i = 0; i < len; i++){
+			graph[i] = new ArrayList<>();
+			ans[i] = -1;
+		}
 		for(int[] iter : richer){
-			if(!graph.containsKey(iter[1])){
-				graph.put(iter[1], new ArrayList<>());
-			}
-			graph.get(iter[1]).add(iter[0]);
+			graph[iter[1]].add(iter[0]);
 		}
 		for(int i = 0; i < len; i++){
-			int quietest = quiet[i];
-			Queue<Integer> queue = new LinkedList<>();
-			queue.offer(i);
+			dfs(quiet, i);
 		}
-        
+        return ans;
     }
-	private int dfs(int[][] richer, int[] quiet, int cur){
-		int quietest = Integer.MAX_VALUE;
-		
+	private int dfs(int[] quiet, int cur){
+		if(ans[cur] == -1){
+			ans[cur] = cur;
+		}
+		for(int richerNeighbor : graph[cur]){
+			int candidate = dfs(quiet, richerNeighbor);
+			if(quiet[candidate] < quiet[ans[cur]]){
+				ans[cur] = candidate;
+			}
+		}
+		return ans[cur];
 	}
 }

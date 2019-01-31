@@ -1,6 +1,5 @@
 package Stack;
 
-import java.lang.annotation.Repeatable;
 import java.util.Stack;
 
 /*Given an expression s includes numbers, letters and brackets. Number represents the number of repetitions inside the brackets(can be a string or another expression)£®Please expand expression to be a string.
