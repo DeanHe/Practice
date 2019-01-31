@@ -22,10 +22,10 @@ public class TwoSumGreaterThanTarget {
     	int start = 0, end = len - 1;
     	while(start < end){
     		int sum = nums[start] + nums[end];
-    		if(sum > target){
-    			count += end - start;
+    		if(sum <= target){
     			start++;
     		} else {
+    			count += end - start;
     			end--;
     		}
     	}
