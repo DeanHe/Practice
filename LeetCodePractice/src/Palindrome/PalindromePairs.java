@@ -1,4 +1,4 @@
-package HashMap;
+package Palindrome;
 
 import java.util.*;
 

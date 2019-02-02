@@ -18,13 +18,13 @@ public class BestTimeToBuyAndSellStock {
 	      if(prices == null || prices.length == 0){
 	    	  return 0;
 	      }
-	      int max = 0;
-	      // set min to remember the lowest price before
-	      int min = prices[0];
+	      int profit = 0;
+	      // set lowestPriceBefore to remember the lowest price before
+	      int lowestPriceBefore = prices[0];
 	      for(int i = 1; i < prices.length; i++){
-	    	 min = Math.min(min, prices[i]);
-	    	 max = Math.max(max, prices[i] - min);
+	    	 lowestPriceBefore = Math.min(lowestPriceBefore, prices[i]);
+	    	 profit = Math.max(profit, prices[i] - lowestPriceBefore);
 	      }
-	      return max;
+	      return profit;
 	}
 }
