@@ -78,12 +78,10 @@ public class WildcardMatching {
 		 */
 		for (int i = 1; i <= sLen; i++) {
 			for (int j = 1; j <= pLen; j++) {
-				if (p.charAt(j - 1) != '*') {
-					if (p.charAt(j - 1) == '?' || s.charAt(i - 1) == p.charAt(j - 1)) {
-						dp[i][j] = dp[i - 1][j - 1];
-					}
-				} else {
+				if (p.charAt(j - 1) == '*') {
 					dp[i][j] = dp[i - 1][j - 1] || dp[i - 1][j] || dp[i][j - 1];
+				} else if(p.charAt(j - 1) == '?' || s.charAt(i - 1) == p.charAt(j - 1)){
+					dp[i][j] = dp[i - 1][j - 1];
 				}
 			}
 		}
@@ -98,28 +96,25 @@ public class WildcardMatching {
 		while (s < str.length()) {
 			// advancing both pointers
 			if (p < pattern.length() && (pattern.charAt(p) == '?' || str.charAt(s) == pattern.charAt(p))) {
-				if (temp.length() != 0) {
-					starMatch.add(temp.toString());
-					temp.setLength(0);
-				}
 				s++;
 				p++;
 			}
 			// * found, only advancing pattern pointer
 			else if (p < pattern.length() && pattern.charAt(p) == '*') {
+				if(starIdx != -1){
+					starMatch.add(temp.toString());
+					temp.setLength(0);
+				}
 				starIdx = p;
 				match = s;
-				temp.append(str.charAt(s));
 				p++;
 			}
 			// last pattern pointer was *, advancing string pointer
 			else if (starIdx != -1) {
+				temp.append(str.charAt(match));
 				p = starIdx + 1;
 				match++;
 				s = match;
-				if (s < str.length() && str.charAt(s) != pattern.charAt(p)) {
-					temp.append(str.charAt(s));
-				}
 			}
 			// current pattern pointer is not star, last patter pointer was not
 			// *
@@ -127,10 +122,8 @@ public class WildcardMatching {
 			else
 				return false;
 		}
-		if (temp.length() != 0) {
-			starMatch.add(temp.toString());
-			temp.setLength(0);
-		}
+		starMatch.add(temp.toString());
+		temp.setLength(0);
 		// check for remaining characters in pattern
 		while (p < pattern.length() && pattern.charAt(p) == '*')
 			p++;
