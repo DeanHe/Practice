@@ -1,5 +1,8 @@
 package DP;
-/*Give two integers to represent the height and width of the grid. The starting point is in the upper left corner and the ending point is in the upper right corner. You can go to the top right, right or bottom right. Find out the number of paths you can reach the end. And the result needs to mod 1000000007.*/
+/*Give two integers to represent the height and width of the grid. 
+ * The starting point is in the upper left corner and the ending point is in the upper right corner. 
+ * You can go to the top right, right or bottom right. 
+ * Find out the number of paths you can reach the end. And the result needs to mod 1000000007.*/
 public class UniquePathIV {
 	/**
      * @param height: the given height

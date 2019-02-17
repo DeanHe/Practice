@@ -12,7 +12,7 @@ Given candidate set [2,3,6,7] and target 7, a solution set is:
 [2, 2, 3]
 Notice
 All numbers (including target) will be positive integers.
-Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+Elements in a combination must be in non-descending order.
 The solution set must not contain duplicate combinations.*/
 public class CombinationSum {
 	/**

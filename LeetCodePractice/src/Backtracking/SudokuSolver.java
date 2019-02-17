@@ -1,5 +1,9 @@
 package Backtracking;
+/*Write a program to solve a Sudoku puzzle by filling the empty cells.
 
+Empty cells are indicated by the number 0.
+
+You may assume that there will be only one unique solution.*/
 public class SudokuSolver {
 	public void solveSudoku(char[][] board) {
 		if (board == null || board.length == 0) {
