@@ -4,15 +4,6 @@ import java.util.*;
 
 //Given a binary tree, return the preorder traversal of its nodes' values.
 public class BinaryTreePreorderTraversal {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 	/**
      * @param root: The root of binary tree.
      * @return: Preorder in ArrayList which contains node values.

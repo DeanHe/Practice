@@ -6,14 +6,6 @@ Given root = {1}, target = 4.428571, return 1.
 Given target value is a floating point.
 You are guaranteed to have only one unique value in the BST that is closest to the target.*/
 public class ClosestBinarySearchTreeValue {
-	class TreeNode {
-	    TreeNode left;
-	    TreeNode right;
-	    int val;
-	    TreeNode(int x) {
-	        val = x;
-	    }
-	}
 	
 	public int closestValue(TreeNode root, double target) {
         // write your code here

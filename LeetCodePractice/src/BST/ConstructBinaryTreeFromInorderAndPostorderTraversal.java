@@ -7,14 +7,6 @@ You may assume that duplicates do not exist in the tree.
 
 Given inorder [1,2,3] and postorder [1,3,2], return a tree:*/
 public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
-	class TreeNode {
-	      public int val;
-	      public TreeNode left, right;
-	      public TreeNode(int val) {
-	          this.val = val;
-	          this.left = this.right = null;
-	      }
-	  }
 	
 	/**
      *@param inorder : A list of integers that inorder traversal of a tree

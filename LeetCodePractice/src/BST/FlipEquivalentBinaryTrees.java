@@ -3,15 +3,6 @@ package BST;
 A binary tree X is flip equivalent to a binary tree Y if and only if we can make X equal to Y after some number of flip operations.
 Write a function that determines whether two binary trees are flip equivalent.  The trees are given by root nodes root1 and root2.*/
 public class FlipEquivalentBinaryTrees {
-	class TreeNode {
-		public int val;
-		public TreeNode left, right;
-
-		public TreeNode(int val) {
-			this.val = val;
-			this.left = this.right = null;
-		}
-	}
 	
 	public boolean flipEquiv(TreeNode root1, TreeNode root2) {
         if(root1 == null && root2 == null){

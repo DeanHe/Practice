@@ -8,16 +8,7 @@ You may assume that duplicates do not exist in the tree.
 
 Example
 Given in-order [1,2,3] and pre-order [2,1,3], return a tree*/
-public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
-	  class TreeNode {
-	      public int val;
-	      public TreeNode left, right;
-	      public TreeNode(int val) {
-	          this.val = val;
-	          this.left = this.right = null;
-	      }
-	  }
-	 
+public class ConstructBinaryTreeFromPreorderAndInorderTraversal {	 
 	  /**
 	     *@param preorder : A list of integers that preorder traversal of a tree
 	     *@param inorder : A list of integers that inorder traversal of a tree

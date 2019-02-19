@@ -5,15 +5,6 @@ Each camera at a node can monitor its parent, itself, and its immediate children
 Calculate the minimum number of cameras needed to monitor all nodes of the tree.*/
 //https://leetcode.com/problems/binary-tree-cameras/discuss/211180/JavaC%2B%2BPython-Greedy-DFS
 public class BinaryTreeCameras {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 	int camera = 0;
     public int minCameraCover(TreeNode root) {
         if(dfs(root) < 1){

@@ -6,15 +6,6 @@ import java.util.Stack;
 
 Calling next() will return the next smallest number in the BST.*/
 public class BinarySearchTreeIterator {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 	Stack<TreeNode> stack;
 	public BinarySearchTreeIterator(TreeNode root) {
 		stack = new Stack<>();

@@ -12,15 +12,6 @@ Note:
 pre[] and post[] are both permutations of 1, 2, ..., pre.length.
 It is guaranteed an answer exists. If there exists multiple answers, you can return any of them.*/
 public class ConstructBinaryTreeFromPreorderAndPostorderTraversal {
-	class TreeNode {
-		public int val;
-		public TreeNode left, right;
-
-		public TreeNode(int val) {
-			this.val = val;
-			this.left = this.right = null;
-		}
-	}
 
 	public TreeNode constructFromPrePost(int[] pre, int[] post) {
 		if(pre.length != post.length) {

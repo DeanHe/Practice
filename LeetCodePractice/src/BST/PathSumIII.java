@@ -5,15 +5,7 @@ package BST;
 //The path does not need to start or end at the root or a leaf, 
 //but it must go downwards (traveling only from parent nodes to child nodes).
 public class PathSumIII {
-	class TreeNode {
-		public int val;
-		public TreeNode left, right;
 
-		public TreeNode(int val) {
-			this.val = val;
-			this.left = this.right = null;
-		}
-	}
 	public int pathSum(TreeNode root, int sum) {
         if(root == null){
             return 0;

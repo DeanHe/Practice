@@ -3,15 +3,6 @@ package BST;
 import java.util.*;
 //Given a binary tree, return the postorder traversal of its nodes' values.
 public class BinaryTreePostorderTraversal {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 
 	/**
      * @param root: The root of binary tree.

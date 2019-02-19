@@ -3,15 +3,7 @@ package BST;
 /*In a binary search tree, (Only) two nodes are swapped. Find out these nodes and swap them. 
 If there no node swapped, return original root of tree.*/
 public class RecoverBinarySearchTree {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
 
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 	TreeNode first = null;
 	TreeNode second = null;
 	TreeNode previous = new TreeNode(Integer.MIN_VALUE);

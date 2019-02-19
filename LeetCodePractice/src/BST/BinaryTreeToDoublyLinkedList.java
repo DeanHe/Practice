@@ -1,15 +1,6 @@
 package BST;
 
 public class BinaryTreeToDoublyLinkedList {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 	
 	TreeNode head = null;
 	static TreeNode pre = null;

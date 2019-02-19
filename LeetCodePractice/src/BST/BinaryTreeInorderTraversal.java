@@ -5,15 +5,6 @@ import java.util.*;
 /*Given a binary tree, return the inorder traversal of its nodes' values.
 */
 public class BinaryTreeInorderTraversal {
-	class TreeNode {
-		TreeNode left;
-		TreeNode right;
-		int val;
-
-		TreeNode(int x) {
-			val = x;
-		}
-	}
 
 	/**
 	 * @param root:

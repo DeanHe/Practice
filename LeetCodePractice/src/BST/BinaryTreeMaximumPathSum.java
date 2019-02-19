@@ -2,15 +2,6 @@ package BST;
 //Given a binary tree, find the maximum path sum.
 //The path may start and end at any node in the tree
 public class BinaryTreeMaximumPathSum {
-	class TreeNode {
-		public int val;
-		public TreeNode left, right;
-
-		public TreeNode(int val) {
-			this.val = val;
-			this.left = this.right = null;
-		}
-	}
 	
 	private class ResultType {
         // singlePath: the max path starts from current node towards bottom, it can be 0
