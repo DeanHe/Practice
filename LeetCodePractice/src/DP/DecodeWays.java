@@ -28,7 +28,6 @@ public class DecodeWays {
         }
         int len = s.length();
         int[] dp = new int[len + 1];
-      //dp[i] means the s  pre i letters can be decoded # of ways
         dp[0] = 1;
         if(s.charAt(0) == '0') {
         	dp[1] = 0;
@@ -36,6 +35,7 @@ public class DecodeWays {
         	dp[1] = 1;
         }
         for(int i = 2; i <= len; i++) {
+        	//nam1, nam2
         	char nam1 = s.charAt(i - 2);
         	char nam2 = s.charAt(i - 1);
         	if(nam2 != '0') {
