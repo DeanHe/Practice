@@ -35,8 +35,8 @@ public class BackpackVI {
      * @return an integer
      */
     public int backPackVI(int[] nums, int target) {
-        int len = nums.length;
-        int[] dp = new int[target+1];
+       int len = nums.length;
+       int[] dp = new int[target+1];
        dp[0] = 1;
        for(int i = 1; i <= target; i++){
            for(int j = 0; j < len; j++){
@@ -45,6 +45,6 @@ public class BackpackVI {
                }
            }
        }
-        return dp[target];
+       return dp[target];
     }
 }
