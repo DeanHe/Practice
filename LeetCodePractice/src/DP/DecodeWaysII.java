@@ -55,7 +55,16 @@ public class DecodeWaysII {
     			char nam1 = s.charAt(i - 2);
     			char nam2 = s.charAt(i - 1);	
     			if(nam1 == '*') {
-    				
+    				if(nam2 == '0'){
+    					dp[i] = 2 * dp[i - 2];
+    				} else {
+    					dp[i] = dp[i - 1];
+    					if(nam2 <= '6'){
+    						dp[i] += 2 * dp[i - 2];
+    					} else {
+    						dp[i] += dp[i - 2];
+    					}
+    				}
     			} else {
     				if(nam2 != '0') {
     	        		dp[i] = dp[i - 1];

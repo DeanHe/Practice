@@ -8,13 +8,6 @@ Given intervals = [[0,30],[5,10],[15,20]], return false.*/
 import java.util.*;
 
 public class MeetingRooms {
-	class Interval {
-		int start, end;
-		public Interval(int start, int end) {
-			this.start = start;
-			this.end = end;
-		}
-	}
 	public boolean canAttendMeetings(Interval[] intervals) {
 		if(intervals == null || intervals.length == 0){
 			return true;

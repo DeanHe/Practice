@@ -34,13 +34,6 @@ class Point {
 }
 
 public class MeetingRoomsII {
-	class Interval {
-		int start, end;
-		public Interval(int start, int end) {
-			this.start = start;
-			this.end = end;
-		}
-	}
 	public int minMeetingRooms(Interval[] intervals) {
 		List<Point> list = new ArrayList<>(intervals.length*2);
 	    for(Interval i : intervals){
