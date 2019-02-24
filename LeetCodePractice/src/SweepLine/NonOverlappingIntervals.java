@@ -30,12 +30,6 @@ Notice
 You may assume the interval's end point is always bigger than its start point.
 Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
 */public class NonOverlappingIntervals {
-	class Interval {
-	      int start;
-	      int end;
-	      Interval() { start = 0; end = 0; }
-	      Interval(int s, int e) { start = s; end = e; }
-	  }
 	
 	/**
      * @param intervals: a collection of intervals

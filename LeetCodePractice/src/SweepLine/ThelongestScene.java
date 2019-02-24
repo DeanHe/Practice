@@ -9,18 +9,9 @@ public class ThelongestScene {
      * @param str: The scene string
      * @return: Return the length longest scene
      */
-    
-    class Segment {
-        public int start;
-        public int end;
-        public Segment(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-    class Cmp implements Comparator<Segment>{
+    class Cmp implements Comparator<Interval>{
        @Override
-       public int compare(Segment a, Segment b){
+       public int compare(Interval a, Interval b){
             if(a.start == b.start) {
                 return a.end - b.end;
             }
@@ -30,9 +21,9 @@ public class ThelongestScene {
     
     public int getLongestScene(String str) {
         // Write your code here
-        Segment[] scene = new Segment[26];
+    	Interval[] scene = new Interval[26];
         for(int i = 0; i < 26; i++) {
-            scene[i] = new Segment(str.length(), -1);
+            scene[i] = new Interval(str.length(), -1);
         }
         for(int i = 0; i < str.length(); i++) {
             int index = str.charAt(i) - 'a';

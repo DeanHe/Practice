@@ -3,6 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import SweepLine.Interval;
+
 public class Solution {
 
 	public static void main(String[] args) {
@@ -49,5 +51,24 @@ public class Solution {
             }
         }
         return res;
+    }
+	
+	public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
+        ArrayList<Interval> result = new ArrayList<Interval>();
+        int insertPos = 0;
+        for(Interval i : intervals){
+            if(i.end < newInterval.start){
+            	result.add(i);
+            	insertPos++;
+            } else if(i.start > newInterval.end){
+            	result.add(i);
+            } else {
+            	newInterval.start = Math.min(newInterval.start, i.start);
+            	newInterval.end = Math.max(newInterval.end, i.end);
+            }
+        }
+        result.add(insertPos, newInterval);
+        // write your code here
+        return result;
     }
 }

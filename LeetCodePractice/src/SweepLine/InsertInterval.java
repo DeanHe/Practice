@@ -11,12 +11,6 @@ Insert (2, 5) into [(1,2), (5,9)], we get [(1,9)].
 Insert (3, 4) into [(1,2), (5,9)], we get [(1,2), (3,4), (5,9)].
 */
 public class InsertInterval {
-	class Interval {
-	      int start;
-	      int end;
-	      Interval() { start = 0; end = 0; }
-	      Interval(int s, int e) { start = s; end = e; }
-	  }
 	/**
      * Insert newInterval into intervals.
      * @param intervals: Sorted interval list.
