@@ -56,10 +56,10 @@ public class NumberOfIslands {
 			return;
 		}
 		grid[r][c] = false;
-		dfs(grid, r - 1, c);
-		dfs(grid, r + 1, c);
-		dfs(grid, r, c + 1);
-		dfs(grid, r, c - 1);
+		int[] direct = new int[]{0, 1, 0, -1, 0};
+		for(int i = 0; i < direct.length - 1; i++){
+			dfs(grid, r + direct[i], c + direct[i + 1]);
+		}
 	}
 
 	// Union Find way
