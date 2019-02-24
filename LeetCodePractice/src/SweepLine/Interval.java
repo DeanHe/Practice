@@ -1,9 +1,10 @@
 package SweepLine;
 
 public class Interval {
-	int start, end;
+	public int start;
+	public int end;
 
-	Interval(int start, int end) {
+	public Interval(int start, int end) {
 		this.start = start;
 		this.end = end;
 	}
