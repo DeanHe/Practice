@@ -67,8 +67,9 @@ public class WallsAndGates {
     			for(int j = 0; j < direct.length - 1; j++){
     				int nb_r = cur.r + direct[j];
     				int nb_c = cur.c + direct[j + 1];
-    				if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb)){
-    					
+    				if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && rooms[nb_r][nb_c] == Integer.MAX_VALUE){
+    					rooms[nb_r][nb_c] = rooms[cur.r][cur.c] + 1;
+    					queue.offer(new Coordinate(nb_r, nb_c));
     				}
     			}
     		}
