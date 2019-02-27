@@ -36,19 +36,19 @@ public class WordSearch {
         if(r < 0 || r >= rows || c < 0 || c >= cols){
             return false;
         }
-        if(checked[r][c] == true){
+        if(checked[r][c]){
             return false;
         }
-        if(word.charAt(i) == board[r][c]){
-            checked[r][c] = true;
-            boolean res = dfs(board, checked, word, i + 1, r - 1, c) 
-                        || dfs(board, checked, word, i + 1, r + 1, c) 
-                        || dfs(board, checked, word, i + 1, r, c - 1) 
-                        || dfs(board, checked, word, i + 1, r, c + 1);
-            checked[r][c] = false;
-            return res;
-        } else {
-            return false;
+        if(word.charAt(i) != board[r][c]){
+        	return false;
         }
+        checked[r][c] = true;
+        int[] direct = new int[]{0, 1, 0, -1, 0};
+        boolean ans = false;
+		for(int j = 0; j < direct.length - 1; j++){
+			ans  = ans || dfs(board, checked, word, i + 1, r + direct[j], c + direct[j + 1]);
+		}
+		checked[r][c] = false;
+		return ans;
     }
 }
