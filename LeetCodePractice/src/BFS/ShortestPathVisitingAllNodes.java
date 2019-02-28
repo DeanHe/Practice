@@ -25,7 +25,7 @@ public class ShortestPathVisitingAllNodes {
 		int N = graph.length;
 		int[][] dist = new int[N][1 << N];
 		for (int[] row : dist) {
-			Arrays.fill(row, N * N);
+			Arrays.fill(row, Integer.MAX_VALUE);
 		}
 		Queue<State> queue = new LinkedList<>();
 		for (int i = 0; i < N; i++) {
