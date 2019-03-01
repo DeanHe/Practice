@@ -35,9 +35,9 @@ public class FindTheShortestSuperstring {
         for(int[] rows : dp){
         	Arrays.fill(rows, Integer.MAX_VALUE);
         }
-        //previous[s][i] means previous string k leads to dp[s][i]
-        int[][] previous = new int[1 << N][N];
-        for(int[] rows : previous){
+        //backNode[s][i] means string k leads to dp[s][i]
+        int[][] backNode = new int[1 << N][N];
+        for(int[] rows : backNode){
         	Arrays.fill(rows, -1);
         }
         // the last substring of superString from A, minLen of superString
@@ -48,11 +48,11 @@ public class FindTheShortestSuperstring {
         for(int s = 1; s < (1 << N); s++){
         	for(int i = 0; i < N; i++){
         		if((s & (1 << i)) > 0){
-        			int pre = s - (1 << i);
+        			int pre_s = s - (1 << i);
         			for(int j = 0; j < N; j++){
-        				if(dp[pre][j] != Integer.MAX_VALUE && dp[pre][j] + append[j][i] < dp[s][i]){
-        					dp[s][i] = dp[pre][j] + append[j][i];
-        					previous[s][i] = j;
+        				if(dp[pre_s][j] != Integer.MAX_VALUE && dp[pre_s][j] + append[j][i] < dp[s][i]){
+        					dp[s][i] = dp[pre_s][j] + append[j][i];
+        					backNode[s][i] = j;
         				}
         			}
         		}
@@ -66,14 +66,14 @@ public class FindTheShortestSuperstring {
         int s = (1 << N) - 1;
         int cur = last;
         while(s > 0){
-        	int pre = previous[s][cur];
+        	int pre = backNode[s][cur];
         	if(pre == -1){
         		sb.insert(0, A[cur]);
         	} else {
         		String appendPart = A[cur].substring(A[cur].length() - append[pre][cur]);
         		sb.insert(0, appendPart);
         	}
-        	s = s & ~(1 << cur);
+        	s = s - (1 << cur);
             cur = pre;
         }
         return sb.toString();

@@ -39,17 +39,17 @@ public class Searcha2DMatrixII {
         int row = matrix.length;
         int col = matrix[0].length;
         int count = 0;
-        int x = row - 1;
-        int y = 0;
-        while(x >= 0 && y < col){
-            if(matrix[x][y] == target){
+        int r = row - 1;
+        int c = 0;
+        while(r >= 0 && c < col){
+            if(matrix[r][c] == target){
                 count++;
-                x--;
-                y++;
-            } else if(matrix[x][y] < target){
-                y++;
+                r--;
+                c++;
+            } else if(matrix[r][c] < target){
+                c++;
             } else {
-                x--;
+                r--;
             }
         }
         return count;
