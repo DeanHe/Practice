@@ -21,6 +21,7 @@ public class PalindromePermutationII {
     	List<String> res = new ArrayList<>();
     	// count of character and appearance
     	HashMap<Character, Integer> map = new HashMap<>();
+    	int odd = 0;
     	for(int i = 0; i < s.length(); i++){
     		char c = s.charAt(i);
     		if(map.containsKey(c)){
@@ -28,29 +29,49 @@ public class PalindromePermutationII {
     		} else {
     			map.put(c, 1);
     		}
+    		if(map.get(c) % 2 == 0){
+    			odd += -1;
+    		} else {
+    			odd += 1;
+    		}
     	}
-    	String sb = "";
-    	boolean[] visited = new boolean[s.length()];
-    	dfs(){
-    		
+    	if(odd > 1){
+    		// cannot form palindrome
+    		return res;
     	}
+    	String evenStr = "", charInMid = "";
+    	for(char c : map.keySet()){
+    		if(map.get(c) % 2 == 1){
+    			charInMid += c;
+    		}
+    		for(int i = 0; i < map.get(c) / 2; i++){
+    			evenStr += c;
+    		}
+    	}
+    	
+    	StringBuilder sb = new StringBuilder();
+    	boolean[] visited = new boolean[evenStr.length()];
+    	dfs(evenStr, charInMid, sb, res, visited);
+    	return res;
     }
-    private void dfs(String s, String sb, List<String> res, boolean[] visited){
-    	if(sb.length() == s.length() && isPalidrome(sb)){
-    		res.add(sb);
+    private void dfs(String evenStr, String charInMid, StringBuilder sb,  List<String> res, boolean[] visited){
+    	if(sb.length() == evenStr.length()){
+    		res.add(sb.toString() + charInMid + sb.reverse().toString());
+    		sb.reverse(); // reverse back sb
+    		return;
     	}
-    	for(int i = 0; i < s.length(); i++){
-    		if(i > 0 && s.){
-    			
+    	for(int i = 0; i < evenStr.length(); i++){
+    		if(i > 0 && evenStr.charAt(i) == evenStr.charAt(i - 1) && !visited[i - 1]){
+    			continue;
     		}
     		if(!visited[i]){
     			visited[i] = true;
-    			dfs(s, sb + s.charAt(i), res, visited);
+    			char c = evenStr.charAt(i);
+    			sb.append(c);
+    			dfs(evenStr, charInMid, sb, res, visited);
     			visited[i] = false;
+    			sb.deleteCharAt(sb.length() - 1);
     		}
     	}
-    }
-    private boolean isPalidrome(String s){
-    	
     }
 }
