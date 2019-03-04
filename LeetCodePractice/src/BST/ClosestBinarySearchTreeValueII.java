@@ -107,7 +107,10 @@ public class ClosestBinarySearchTreeValueII {
     					res.add(values.get(right));
     					right++;
     				}
-    			} 
+    			} else {
+    				res.add(values.get(left));
+					left--;
+    			}
     		} else {
     			if(right < len){
     				res.add(values.get(right));
