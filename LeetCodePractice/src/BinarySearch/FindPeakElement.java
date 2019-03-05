@@ -1,4 +1,4 @@
-package BinarySearch;
+  package BinarySearch;
 /*There is an integer array which has the following features:
 
 The numbers in adjacent positions are different.
