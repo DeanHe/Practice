@@ -51,4 +51,23 @@ public class UniquePathIV {
         }
         return (int)dp[0];
     }
+    
+    public int uniquePathRollingArrayII(int height, int width) {
+        // Write your code here
+        long[][] dp = new long[height][2];
+        dp[0][0] = 1;
+        for(int c = 1; c < width; c++){
+            for(int r = 0; r < height; r++){
+                dp[r][c % 2] = dp[r][(c - 1) % 2];
+                if(r > 0){
+                    dp[r][c % 2] += dp[r - 1][(c - 1) % 2];
+                }
+                if(r + 1 < height){
+                    dp[r][c % 2] += dp[r + 1][(c - 1) % 2];
+                }
+                dp[r][c % 2] = dp[r][c % 2] % 1000000007;
+            }
+        }
+        return (int)dp[0][(width - 1) % 2];
+    }
 }
