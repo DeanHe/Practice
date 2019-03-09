@@ -22,17 +22,9 @@ public class ShortestDistancefromAllBuildings {
      * @param grid: the 2D grid
      * @return: the shortest distance
      */
-    class Point {
-        int x;
-        int y;
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-    
     int[][] distances;
     int[][] numReach;
+    int[] direct = {0, 1, 0, -1, 0};
     int rows, cols;
     public int shortestDistance(int[][] grid) {
         // write your code here
@@ -74,21 +66,13 @@ public class ShortestDistancefromAllBuildings {
                 Point cur = queue.poll();
                 numReach[cur.x][cur.y]++;
                 distances[cur.x][cur.y] += dist;
-                if(inbound(cur.x + 1, cur.y, grid) && !visited[cur.x + 1][cur.y]){
-                    queue.offer(new Point(cur.x + 1, cur.y));
-                    visited[cur.x + 1][cur.y] = true;
-                }
-                if(inbound(cur.x - 1, cur.y, grid) && !visited[cur.x - 1][cur.y]){
-                    queue.offer(new Point(cur.x - 1, cur.y));
-                    visited[cur.x - 1][cur.y] = true;
-                }
-                if(inbound(cur.x, cur.y + 1, grid) && !visited[cur.x][cur.y + 1]){
-                    queue.offer(new Point(cur.x, cur.y + 1));
-                    visited[cur.x][cur.y + 1] = true;
-                }
-                if(inbound(cur.x, cur.y - 1, grid) && !visited[cur.x][cur.y - 1]){
-                    queue.offer(new Point(cur.x, cur.y - 1));
-                    visited[cur.x][cur.y - 1] = true;
+                for(int j = 0; j < direct.length - 1; j++){
+                	int nb_x = cur.x + direct[j];
+                	int nb_y = cur.y + direct[j + 1];
+                	if(inbound(nb_x, nb_y, grid) && !visited[nb_x][nb_y]){
+                        queue.offer(new Point(nb_x, cur.y));
+                        visited[nb_x][nb_y] = true;
+                    }
                 }
             }
             dist++;
