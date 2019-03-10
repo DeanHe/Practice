@@ -63,8 +63,8 @@ public class SortIntegersII {
                 swap(array, i++, j);
             }
         }
-        swap(array, i + 1, end);
-        return i + 1;
+        swap(array, i, end);
+        return i;
     }
      
     private void swap(int [] array, int i, int j){

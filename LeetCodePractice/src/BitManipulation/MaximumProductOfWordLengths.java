@@ -19,14 +19,21 @@ public class MaximumProductOfWordLengths {
 	public int maxProduct(String[] words) {
         int len = words.length;
         int[] hash = new int[len];
+        int maxProductLen = 0;
         for(int i = 0; i < len; i++){
         	String s = words[i];
         	for(int j = 0; j < s.length(); j++){
-        		hash[i] = hash[i] | (s.charAt(j) - 'a');
+        		int visited = 1 << (s.charAt(j) - 'a');
+        		hash[i] = hash[i] | visited;
         	}
         }
-        for(){
-        	
+        for(int i = 0; i < len; i++){
+        	for(int j = i + 1; j < len; j++){
+        		if((hash[i] & hash[j]) == 0){
+        			maxProductLen = Math.max(maxProductLen, words[i].length() * words[j].length());
+        		}
+        	}
         }
+        return maxProductLen;
     }
 }
