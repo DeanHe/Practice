@@ -45,7 +45,6 @@ public class NetworkDelayTime {
             }
             List<Node> neighbors = graph.get(entry[0]);
             neighbors.add(new Node(entry[1], entry[2]));
-            graph.put(entry[0], neighbors);
         }
         
         PriorityQueue<Node> pq = new PriorityQueue<>(N, new Comparator<Node>(){
@@ -56,18 +55,18 @@ public class NetworkDelayTime {
         Node start = new Node(K, 0);
         pq.offer(start);
         
-        Map<Integer, Integer> results = new HashMap<>();
+        Map<Integer, Integer> visited = new HashMap<>();
         // Dijkstra's Algorithm
         while(!pq.isEmpty()){
             Node cur = pq.poll();
-            if(results.containsKey(cur.index)){
+            if(visited.containsKey(cur.index)){
                 continue;
             }
-            results.put(cur.index, cur.dist);
+            visited.put(cur.index, cur.dist);
             if(graph.containsKey(cur.index)){
                 List<Node> neighbors = graph.get(cur.index);
                 for(Node nb : neighbors){
-                    if(!results.containsKey(nb.index)){
+                    if(!visited.containsKey(nb.index)){
                         nb.dist = cur.dist + nb.dist;
                         pq.offer(nb);
                     }
@@ -75,11 +74,11 @@ public class NetworkDelayTime {
             }                     
         }
         
-        if(results.size() != N){
+        if(visited.size() != N){
             return -1;
         }
         int ans = 0;
-        for(int d : results.values()){
+        for(int d : visited.values()){
             ans = Math.max(ans, d);
         }
         return ans;

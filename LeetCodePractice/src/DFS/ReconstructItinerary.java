@@ -1,4 +1,4 @@
-package Backtracking;
+package DFS;
 
 import java.util.*;
 /*Given a list of airline tickets represented by pairs of departure and arrival airports [from, to], reconstruct the itinerary in order. All of the tickets belong to a man who departs from JFK. Thus, the itinerary must begin with JFK.
@@ -16,7 +16,7 @@ Example 2:
 Input: [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
 Output: ["JFK","ATL","JFK","SFO","ATL","SFO"]
 Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"].But it is larger in lexical order.*/
-//This is an application of Hierholzer’s algorithm to find a Eulerian path.
+//This is an application of Hierholzer’s algorithm to find a Eulerian path, need to visit all directed edges in the graph.
 public class ReconstructItinerary {
 	Map<String, PriorityQueue<String>> graph = new HashMap<>();
 	List<String> path = new ArrayList<String>();
@@ -34,6 +34,7 @@ public class ReconstructItinerary {
     private void dfs(String departure){
     	PriorityQueue<String> neighbors = graph.get(departure);
     	while(neighbors != null && !neighbors.isEmpty()){
+    		// remove the edge from the graph after visit
     		String next = neighbors.poll();
     		dfs(next);
     	}
