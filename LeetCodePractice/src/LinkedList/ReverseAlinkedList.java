@@ -12,12 +12,12 @@ public class ReverseAlinkedList {
 	
 	public ListNode reverse(ListNode head){
     	ListNode preHead = new ListNode(0);
-    	ListNode next = null;
+    	ListNode post = null;
     	while(head != null){
-    		next = head.next;
+    		post = head.next;
     		head.next = preHead.next;
     		preHead.next = head;
-    		head = next;
+    		head = post;
     	}
     	return preHead.next;
     }
