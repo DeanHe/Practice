@@ -25,7 +25,34 @@ public class PlusOneLinkedList {
      */
     public ListNode plusOne(ListNode head) {
         // Write your code here
+    	if(head == null){
+    		return head;
+    	}
     	ListNode dummyHead = new ListNode(0);
     	dummyHead.next = head;
+    	ListNode lastNotNine = dummyHead;
+    	ListNode cur = dummyHead;
+    	while(cur.next != null){
+    		cur = cur.next;
+    		if(cur.val != 9){
+    			lastNotNine = cur;
+    		}
+    	}
+    	//cur is at last node
+    	if(cur.val != 9){
+    		cur.val++;
+    		return dummyHead.next;
+    	} else {
+    		lastNotNine.val++;
+    		while(lastNotNine.next != null){
+    			lastNotNine = lastNotNine.next;
+    			lastNotNine.val = 0;
+    		}
+    		if(dummyHead.val != 0){
+    			return dummyHead;
+    		} else {
+    			return dummyHead.next;
+    		}
+    	}
     }
 }
