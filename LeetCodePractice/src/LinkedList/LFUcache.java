@@ -39,6 +39,7 @@ public class LFUcache {
             int evit = lists.get(min).iterator().next();
             lists.get(min).remove(evit);
             valueHash.remove(evit);
+            countHash.remove(evit);
         }
         valueHash.put(key, value);
         countHash.put(key, 1);
@@ -54,7 +55,7 @@ public class LFUcache {
         int count = countHash.get(key);
         countHash.put(key, count + 1);
         lists.get(count).remove(key);
-        if(count == min && lists.get(count).size() == 0){
+        if(count == min && lists.get(min).size() == 0){
             min++;
         }
         if(!lists.containsKey(count + 1)){
