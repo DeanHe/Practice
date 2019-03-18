@@ -2,7 +2,7 @@ package Stack;
 
 import java.util.Stack;
 
-/*Given an expression s includes numbers, letters and brackets. Number represents the number of repetitions inside the brackets(can be a string or another expression)£®Please expand expression to be a string.
+/*Given an expression s includes numbers, letters and brackets. Number represents the number of repetitions inside the brackets(can be a string or another expression)ï¿½ï¿½Please expand expression to be a string.
 
 Example
 s = abc3[a] return abcaaa
@@ -24,8 +24,8 @@ public class DecodeString {
     			stack.push(String.valueOf(count));
     			count = 0;
     		} else if(c == ']'){
-    			String repeat = getRepeat(stack);
-    			stack.push(repeat);
+    			String sub = getRepeat(stack);
+    			stack.push(sub);
     		} else if(Character.isDigit(c)){
     			count = count * 10 + c - '0';
     		} else {
@@ -35,24 +35,21 @@ public class DecodeString {
     	return getRepeat(stack);
     }
     private String getRepeat(Stack<String> stack) {
-    	StringBuilder sb = new StringBuilder();
-    	int count = -1;
+    	StringBuilder reepeat = new StringBuilder();
+    	int count = 1;
     	while(!stack.isEmpty()) {
-    		if(isNumber(stack.peek())) {
-    			count = Integer.parseInt(stack.pop());
+    		String cur = stack.pop();
+    		if(isNumber(cur)) {
+    			count = Integer.parseInt(cur);
     			break;
     		} else {
-    			sb.insert(0, stack.pop());
+    			reepeat.insert(0, cur);
     		}
     	}
     	StringBuilder ans = new StringBuilder();
-    	if(count == -1){
-    	    ans.append(sb.toString());
-    	} else {
-    	    for(int i = 0; i < count; i++) {
-    		    ans.append(sb.toString());
-    	    }
-    	}
+    	for(int i = 0; i < count; i++) {
+		    ans.append(reepeat.toString());
+	    }
     	return ans.toString();
     }
     private boolean isNumber(String s) {

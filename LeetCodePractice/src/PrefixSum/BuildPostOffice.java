@@ -1,7 +1,6 @@
 package PrefixSum;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /*Given a 2D grid, each cell is either an house 1 or empty 0 (the number zero, one), find the place to build a post office, the distance that post office to all the house sum is smallest. Return the smallest distance. Return -1 if it is not possible.
@@ -80,14 +79,14 @@ public class BuildPostOffice {
 				end = mid - 1;
 			}
 		}
-		int ceiling = 0;
+		int floor = 0;
 		if (houses.get(end) <= index) {
-			ceiling = end;
+			floor = end;
 		} else {
-			ceiling = start;
+			floor = start;
 		}
-		int leftComparison = index * (ceiling + 1) - preSum.get(ceiling + 1);
-		int rightComparison = preSum.get(totalHouses) - preSum.get(ceiling + 1) - index * (totalHouses - (ceiling + 1));
+		int leftComparison = index * (floor + 1) - preSum.get(floor + 1);
+		int rightComparison = preSum.get(totalHouses) - preSum.get(floor + 1) - index * (totalHouses - (floor + 1));
 		return leftComparison + rightComparison;
 	}
 }
