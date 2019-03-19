@@ -1,4 +1,4 @@
-package Stack;
+package DividAndConquer;
 
 import java.util.Stack;
 
