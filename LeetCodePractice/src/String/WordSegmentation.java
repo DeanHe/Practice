@@ -18,12 +18,22 @@ public class WordSegmentation {
      */
     public String[] wordSegmentation(String s, int k) {
         // Write your code here
-    	int len = s.length();
     	ArrayList<String> res = new ArrayList<>();
     	String[] words =s.split("\\s+");
-    	int count = 0;
+    	String temp = "";
     	for(String word : words){
-    		
+    		if(temp.isEmpty()){
+    			temp = temp + word;
+    		} else {
+    			if(temp.length() + word.length() + 1 <= k){
+    				temp = temp + " " + word;
+    			} else {
+    				res.add(temp);
+    				temp = word;
+    			}
+    		}
     	}
+    	res.add(temp);
+    	return res.toArray(new String[0]);
     }
 }
