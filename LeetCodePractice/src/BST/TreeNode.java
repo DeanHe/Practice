@@ -1,11 +1,11 @@
 package BST;
 
 public class TreeNode {
-	TreeNode left;
-	TreeNode right;
-	int val;
+	public TreeNode left;
+	public TreeNode right;
+	public int val;
 
-	TreeNode(int x) {
+	public TreeNode(int x) {
 		val = x;
 	}
 }
