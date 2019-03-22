@@ -1,4 +1,4 @@
-package Heap;
+package BinarySearch;
 
 import java.util.*;
 
