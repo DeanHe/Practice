@@ -1,4 +1,4 @@
-package String;
+package String.Abbreviation;
 /*Given a non-empty string word and an abbreviation abbr, return whether the string matches with the given abbreviation.
 
 A string such as "word" contains only the following valid abbreviations:
