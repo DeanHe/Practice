@@ -1,4 +1,4 @@
-package String;
+package String.Abbreviation;
 
 /*Write a function to generate the generalized abbreviations of a word.(order does not matter)
 Example
