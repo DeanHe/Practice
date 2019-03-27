@@ -42,14 +42,11 @@ public class TopKFrequentWords {
         
         PriorityQueue<Pair> Q = new PriorityQueue<Pair>(k, pairComparator);
         for (String word : counter.keySet()) {
-            Pair peak = Q.peek();
             Pair newPair = new Pair(word, counter.get(word));
-            if (Q.size() < k) {
-                Q.add(newPair);
-            } else if (pairComparator.compare(newPair, peak) > 0) {
-                Q.poll();
-                Q.add(newPair);
-            }
+            Q.add(newPair);
+            if (Q.size() > k) {
+            	Q.poll();
+            } 
         }
         
         String[] result = new String[k];

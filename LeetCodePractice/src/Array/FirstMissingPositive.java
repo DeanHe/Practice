@@ -1,31 +1,41 @@
 package Array;
-// https://www.programcreek.com/2014/05/leetcode-first-missing-positive-java/
+/*Given an unsorted integer array, find the first missing positive integer.
+
+Example
+Example 1:
+
+Input:[1,2,0]
+Output:3
+Example 2:
+
+Input:[3,4,-1,1]
+Output:2
+Challenge
+Your algorithm should run in O(n) time and uses constant space.*/
+// http://www.cnblogs.com/yuzhangcmu/p/4200096.html
 // bucket-sort like algorithm
 public class FirstMissingPositive {
 	public int firstMissingPositive(int[] A) {
-		int n = A.length;
-		for (int i = 0; i < n; i++) {
-			// when the ith element is not i
-			while (A[i] != i) {
-				// no need to swap when ith element is out of range [0,n]
-				if (A[i] < 0 || A[i] >= n)
-					break;
-	 
-				//handle duplicate elements
-				if(A[i]==A[A[i]])
-	                    		break;
-				// swap elements
-				int temp = A[i];
-				A[i] = A[temp];
-				A[temp] = temp;
-			}
-		}
-	 
-		for (int i = 0; i < n; i++) {
-			if (A[i] != i)
-				return i;
-		}
-	 
-		return n;
+		if(A == null){
+            return 1;
+        }
+        int size = A.length;
+        for (int i = 0; i < size; i++) {
+            while (A[i] > 0 && A[i] <= size && A[i] != (i + 1)) {
+                if (A[i] == A[A[i]-1]) {
+                    break;
+                }
+                int tmp = A[A[i]-1];
+                A[A[i]-1] = A[i];
+                A[i] = tmp;
+            }
+        }
+
+        for(int i = 0; i < size; i++){
+            if(A[i] != i + 1){
+                return i + 1;
+            }
+        }
+        return size + 1;
 	}
 }
