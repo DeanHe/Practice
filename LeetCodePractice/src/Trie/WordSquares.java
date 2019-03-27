@@ -25,19 +25,75 @@ All words will have the exact same length.
 Word length is at least 1 and at most 5.
 Each word contains only lowercase English alphabet a-z.*/
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class WordSquares {
+	int len;
 	/*
      * @param words: a set of words without duplicates
      * @return: all word squares
      */
     public List<List<String>> wordSquares(String[] words) {
         // write your code here
+    	List<List<String>> res = new ArrayList<>();
+    	if(words.length == 0){
+    		return res;
+    	}
+    	len = words[0].length();
+    	Map<String, List<String>> prefixMap = buildPrefixMap(words);
+    	List<String> squares = new ArrayList<>();
+    	dfs(0, res, squares, prefixMap);
+    	return res;
     }
     
     private Map<String, List<String>> buildPrefixMap(String[] words){
-    	
+    	Map<String, List<String>> map = new HashMap<>();
+    	map.put("", new ArrayList<>());
+    	for(String w : words){
+    		int len = w.length();
+    		for(int i = 1; i <= len; i++){
+    			String prefix = w.substring(0, i);
+    			if(!map.containsKey(prefix)){
+    				map.put(prefix, new ArrayList<>());
+    			}
+    			map.get(prefix).add(w);
+    		}
+    		map.get("").add(w);
+    	}
+    	return map;
+    }
+    private boolean checkPrefix(String cand, int row, List<String> squares, Map<String, List<String>> prefixMap){
+    	for(int c = row + 1; c < len; c++){
+    		String prefix = "";
+    		for(int r = 0; r < row; r++){
+    			prefix += squares.get(r).charAt(c);
+    		}
+    		prefix += cand.charAt(c);
+    		if(!prefixMap.containsKey(prefix)){
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    private void dfs(int row, List<List<String>> res, List<String> squares, Map<String, List<String>> prefixMap){
+    	if(row == len){
+    		res.add(new ArrayList<>(squares));
+    		return;
+    	}
+    	String prefix = "";
+    	for(int r = 0; r < row; r++){
+    		// row here is same as col index
+    		prefix += squares.get(r).charAt(row);
+    	}
+    	for(String cand : prefixMap.get(prefix)){
+    		if(checkPrefix(cand, row, squares, prefixMap)){
+    			squares.add(cand);
+    			dfs(row + 1, res, squares, prefixMap);
+    			squares.remove(squares.size() - 1);
+    		}
+    	}
     }
 }
