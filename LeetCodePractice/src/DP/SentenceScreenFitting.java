@@ -51,5 +51,23 @@ public class SentenceScreenFitting {
      */
     public int wordsTyping(String[] sentence, int rows, int cols) {
         // Write your code here
+    	StringBuilder sb = new StringBuilder();
+    	for(String s : sentence){
+    		sb.append(s);
+    		sb.append(" ");
+    	}
+    	int len = sb.length();
+    	int count = 0;
+    	for(int r = 0; r < rows; r++){
+    		count += cols;
+    		if(sb.charAt(count % len) == ' '){
+    			count++;
+    		} else {
+    			while(count > 0 && sb.charAt((count - 1) % len) != ' '){
+    				count--;
+    			}
+    		}
+    	}
+    	return count / len;
     }
 }
