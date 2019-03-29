@@ -1,4 +1,7 @@
 package BinarySearch;
+
+import java.util.Arrays;
+
 /*Winter is coming! Your first job during the contest is to design a standard heater with fixed warm radius to warm all the houses.
 Now, you are given positions of houses and heaters on a horizontal line, find out minimum radius of heaters so that all houses could be covered by those heaters.
 So, your input will be the positions of houses and heaters seperately, and your expected output will be the minimum radius standard of heaters.
@@ -25,6 +28,27 @@ Output: 1
 Explanation: The two heater was placed in the position 1 and 4. We need to use radius 1 standard, then all the houses can be warmed.*/
 public class Heaters {
 	public int findRadius(int[] houses, int[] heaters) {
-        
+		int radius = Integer.MIN_VALUE;
+        Arrays.sort(heaters);
+        for(int house : houses){
+        	int idx = Arrays.binarySearch(heaters, house);
+        	if(idx < 0){
+        		idx = -(idx + 1);
+        	}
+        	int leftDist;
+        	if(idx > 0){
+        		leftDist = house - heaters[idx - 1];
+        	} else {
+        		leftDist = Integer.MAX_VALUE;
+        	}
+        	int rightDist;
+        	if(idx < heaters.length){
+        		rightDist = heaters[idx] - house;
+        	} else {
+        		rightDist = Integer.MAX_VALUE;
+        	}
+        	radius = Math.max(radius, Math.min(leftDist, rightDist));
+        }
+        return radius;
     }
 }
