@@ -12,31 +12,31 @@ public class SlidingWindowMaximum {
         // write your code here
         //need to maintain a deque which is decreasing order
         ArrayList<Integer> res = new ArrayList<>();
-        Deque<Integer> dequeue = new ArrayDeque<>();
+        Deque<Integer> deque = new ArrayDeque<>();
         if(nums.length == 0){
             return res;
         }
         for(int i = 0; i < k - 1; i++){
-            inQueue(dequeue, nums[i]);
+            inQueue(deque, nums[i]);
         }
         for(int i = k -1; i < nums.length; i++){
-            inQueue(dequeue, nums[i]);
-            res.add(dequeue.peekFirst());
-            outQueue(dequeue, nums[i - k + 1]);
+            inQueue(deque, nums[i]);
+            res.add(deque.peekFirst());
+            outQueue(deque, nums[i - k + 1]);
         }
         return res;
     }
     
-    private void inQueue(Deque<Integer> dequeue, int val){
-        while(!dequeue.isEmpty() && dequeue.peekLast() < val){
-            dequeue.pollLast();
+    private void inQueue(Deque<Integer> deque, int val){
+        while(!deque.isEmpty() && deque.peekLast() < val){
+            deque.pollLast();
         }
-        dequeue.offer(val);
+        deque.offer(val);
     }
     
-    private void outQueue(Deque<Integer> dequeue, int val){
-        if(dequeue.peekFirst() == val){
-            dequeue.pollFirst();
+    private void outQueue(Deque<Integer> deque, int val){
+        if(deque.peekFirst() == val){
+            deque.pollFirst();
         }
     }
 }
