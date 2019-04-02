@@ -46,17 +46,16 @@ public class CloneGraph {
 			UndirectedGraphNode cur = queue.poll();
 			List<UndirectedGraphNode> cur_nbs = cur.neighbors;
 			for(UndirectedGraphNode cur_nb : cur_nbs){
+				UndirectedGraphNode cur_copy = map.get(cur);
+				UndirectedGraphNode cur_nb_copy = null;
 				if(!map.containsKey(cur_nb)){
-					UndirectedGraphNode cur_nb_copy = new UndirectedGraphNode(cur_nb.label);
+					cur_nb_copy = new UndirectedGraphNode(cur_nb.label);
 					map.put(cur_nb, cur_nb_copy);
-					UndirectedGraphNode cur_copy = map.get(cur);
-					cur_copy.neighbors.add(cur_nb_copy);
 					queue.offer(cur_nb);
 				} else {
-					UndirectedGraphNode cur_copy = map.get(cur);
-					UndirectedGraphNode cur_nb_copy = map.get(cur_nb);
-					cur_copy.neighbors.add(cur_nb_copy);
+					cur_nb_copy = map.get(cur_nb);
 				}
+				cur_copy.neighbors.add(cur_nb_copy);
 			}
 		}
     	return root_copy;

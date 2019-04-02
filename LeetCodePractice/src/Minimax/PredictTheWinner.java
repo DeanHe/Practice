@@ -37,6 +37,22 @@ public class PredictTheWinner {
 		return dp[0][len - 1] >= 0;
     }
 	
+	public boolean PredictTheWinner1D(int[] nums) {
+		int len = nums.length;
+		//dp[i] saves how much more scores that the first-in-action player will get from 0 to i than the second player
+		int[] dp = new int[len];
+		for(int r = len - 1; r >= 0; r--){
+			for(int c = r; c < len; c++){
+				if(r == c){
+					dp[c] = nums[r];
+				} else {
+					dp[c] = Math.max(nums[r] - dp[c], nums[c] - dp[c - 1]);
+				}
+			}
+		}
+		return dp[len - 1] >= 0;
+    }
+	
 	public boolean PredictTheWinnerRecursion(int[] nums) {
 		return exceed(nums, 0, nums.length - 1) >= 0;
     }

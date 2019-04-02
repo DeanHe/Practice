@@ -47,18 +47,17 @@ public class CheapestFlightsWithinKStops {
         	int city = temp[0];
         	int price = temp[1];
             int stop = temp[2];
-            if(stop > K){
-                continue;
+            if(stop <= K){
+            	if(city == dst){
+            		return price;
+            	}
+            	for(int nb = 0; nb < graph[city].length; nb++){
+            		if(graph[city][nb] > 0){
+            			// is valid nb
+            			pq.offer(new int[]{nb, graph[city][nb] + price, stop + 1});
+            		}
+            	}
             }
-        	if(city == dst){
-        		return price;
-        	}
-        	for(int nb = 0; nb < graph[city].length; nb++){
-        		if(graph[city][nb] > 0){
-        			// is valid nb
-        			pq.offer(new int[]{nb, graph[city][nb] + price, stop + 1});
-        		}
-        	}
         }
     	return -1;
     }
