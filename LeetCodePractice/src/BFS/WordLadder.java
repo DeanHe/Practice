@@ -39,21 +39,21 @@ public class WordLadder {
        Queue<String> queue = new LinkedList<>();
        queue.offer(start);
        while(!queue.isEmpty()){
-           dist++;
            int size = queue.size();
            for(int i = 0; i < size; i++){
                String cur = queue.poll();
+               if(end.equals(cur)){
+                   return dist;
+               }
                visited.add(cur);
                ArrayList<String> neighbors = findNeighbors(cur, dict);
-               for(String temp : neighbors){
-                   if(end.equals(temp)){
-                       return dist;
-                   }
-                   if(!visited.contains(temp)){
-                       queue.offer(temp);
+               for(String nb : neighbors){
+                   if(!visited.contains(nb)){
+                       queue.offer(nb);
                    }
                }
            }
+           dist++;
        }
        return 0;
    }

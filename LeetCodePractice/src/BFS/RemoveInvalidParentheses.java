@@ -42,13 +42,12 @@ public class RemoveInvalidParentheses {
         	// generate all possible states
         	for(int i = 0; i < cur.length(); i++){
         		// if s[i] is letter
-        		if(cur.charAt(i) != '(' && cur.charAt(i) != ')'){
-        			continue;
-        		}
-        		String temp = cur.substring(0, i) + cur.substring(i + 1);
-        		if(!visited.contains(temp)){
-        			queue.offer(temp);
-        			visited.add(temp);
+        		if(cur.charAt(i) == '(' || cur.charAt(i) == ')'){
+        			String temp = cur.substring(0, i) + cur.substring(i + 1);
+            		if(!visited.contains(temp)){
+            			queue.offer(temp);
+            			visited.add(temp);
+            		}
         		}
         	}
         }

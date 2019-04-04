@@ -61,7 +61,7 @@ public class MinimumHeightTrees {
 			degree[node1]++;
 			degree[node2]++;
 		}
-		Queue<Integer> queue = new ArrayDeque<>();
+		Queue<Integer> queue = new LinkedList<>();
 		//put leaf to queue
 		for(int i = 0; i < n; i++){
 			if(degree[i] == 1){

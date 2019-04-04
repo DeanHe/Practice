@@ -73,8 +73,8 @@ public class PacificAtlanticWaterFlow {
 				int nb_c = cur[1] + dirs[i + 1];
 				if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && !visited[nb_r][nb_c]
 						&& matrix[nb_r][nb_c] >= matrix[cur[0]][cur[1]]) {
-					visited[nb_r][nb_c] = true;
 					queue.offer(new int[] { nb_r, nb_c });
+					visited[nb_r][nb_c] = true;
 				}
 			}
 		}

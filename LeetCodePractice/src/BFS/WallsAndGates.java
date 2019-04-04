@@ -40,22 +40,15 @@ public class WallsAndGates {
      * @param rooms: m x n 2D grid
      * @return: nothing
      */
-	class Coordinate {
-		int r, c;
-		public Coordinate(int r, int c){
-			this.r = c;
-			this.r = c;
-		}
-	}
     public void wallsAndGates(int[][] rooms) {
         // write your code here
     	int rows = rooms.length;
     	int cols = rooms[0].length;
-    	Queue<Coordinate> queue = new LinkedList<>();
+    	Queue<int[]> queue = new LinkedList<>();
     	for(int r = 0; r < rows; r++){
     		for(int c = 0; c < cols; c++){
     			if(rooms[r][c] == 0){
-    				queue.offer(new Coordinate(r, c));
+    				queue.offer(new int[]{r, c});
     			}
     		}
     	}
@@ -63,13 +56,15 @@ public class WallsAndGates {
     	while(!queue.isEmpty()){
     		int qLen = queue.size();
     		for(int i = 0; i < qLen; i++){
-    			Coordinate cur = queue.poll();
+    			int[] cur = queue.poll();
+    			int cur_r = cur[0];
+    			int cur_c = cur[1];
     			for(int j = 0; j < direct.length - 1; j++){
-    				int nb_r = cur.r + direct[j];
-    				int nb_c = cur.c + direct[j + 1];
+    				int nb_r = cur_r + direct[j];
+    				int nb_c = cur_c + direct[j + 1];
     				if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && rooms[nb_r][nb_c] == Integer.MAX_VALUE){
-    					rooms[nb_r][nb_c] = rooms[cur.r][cur.c] + 1;
-    					queue.offer(new Coordinate(nb_r, nb_c));
+    					rooms[nb_r][nb_c] = rooms[cur_r][cur_c] + 1;
+    					queue.offer(new int[]{nb_r, nb_c});
     				}
     			}
     		}

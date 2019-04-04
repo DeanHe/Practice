@@ -55,36 +55,31 @@ public class SurroundedRegions {
            }
        }
    }
-   private void bfs(char[][] board, int i, int j){
+   private void bfs(char[][] board, int r, int c){
        int rows = board.length;
        int cols = board[0].length;
-       int index = i * cols + j;
-       Queue<Integer> queue = new LinkedList<>();
-       queue.offer(index);
-       board[i][j] = '#';
+       Queue<int[]> queue = new LinkedList<>();
+       queue.offer(new int[]{r, c});
+       board[r][c] = '#';
        while(!queue.isEmpty()){
-           int cur = queue.poll();
-           int r = cur / cols;
-           int c = cur % cols;
-           if(r > 0  && board[r - 1][c] == 'O'){
-               board[r - 1][c] = '#';
-               int new_index = (r - 1) * cols + c;
-               queue.offer(new_index);
+           int[] cur = queue.poll();
+           int cur_r = cur[0];
+           int cur_c = cur[1];
+           if(cur_r > 0  && board[cur_r - 1][cur_c] == 'O'){
+               board[cur_r - 1][cur_c] = '#';
+               queue.offer(new int[]{cur_r - 1, cur_c});
            }
-           if(r < rows - 1 && board[r + 1][c] == 'O'){
-               board[r + 1][c] = '#';
-               int new_index = (r + 1) * cols + c;
-               queue.offer(new_index);
+           if(cur_r < rows - 1 && board[cur_r + 1][cur_c] == 'O'){
+               board[cur_r + 1][cur_c] = '#';
+               queue.offer(new int[]{cur_r + 1, cur_c});
            }
-           if(c > 0 && board[r][c - 1] == 'O'){
-               board[r][c - 1] = '#';
-               int new_index = r * cols + c - 1;
-               queue.offer(new_index);
+           if(cur_c > 0 && board[cur_r][cur_c - 1] == 'O'){
+               board[cur_r][cur_c - 1] = '#';;
+               queue.offer(new int[]{cur_r, cur_c - 1});
            }
-           if(c < cols - 1 && board[r][c + 1] == 'O'){
-               board[r][c + 1] = '#';
-               int new_index = r * cols + c + 1;
-               queue.offer(new_index);
+           if(cur_c < cols - 1 && board[cur_r][cur_c + 1] == 'O'){
+               board[cur_r][cur_c + 1] = '#';
+               queue.offer(new int[]{cur_r, cur_c + 1});
            }
        }
    }

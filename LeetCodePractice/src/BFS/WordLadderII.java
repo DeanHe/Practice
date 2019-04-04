@@ -31,7 +31,8 @@ public class WordLadderII {
    public List<List<String>> findLadders(String start, String end, Set<String> dict) {
        // write your code here
        List<List<String>> res = new ArrayList<List<String>>();
-       Map<String, List<String>> neighborsMap = new HashMap<String, List<String>>();
+       // key: the to string, value: the from strings
+       Map<String, List<String>> neighborsMap = new HashMap<String, List<String>>(); 
        // the smallest step from start to current node
        Map<String, Integer> distance = new HashMap<>();
        dict.add(start);
@@ -54,13 +55,13 @@ public class WordLadderII {
        while(!queue.isEmpty()){
            int size = queue.size();
            for(int i = 0; i < size; i++){
-               String temp = queue.poll();
-               List<String> neighbors = findNeighbors(temp, dict);
-               for(String n : neighbors){
-                   neighborsMap.get(n).add(temp);
-                   if(!distance.containsKey(n)){
-                       distance.put(n, distance.get(temp) + 1);
-                       queue.offer(n);
+               String cur = queue.poll();
+               List<String> neighbors = findNeighbors(cur, dict);
+               for(String nb : neighbors){
+                   neighborsMap.get(nb).add(cur);
+                   if(!distance.containsKey(nb)){
+                       distance.put(nb, distance.get(cur) + 1);
+                       queue.offer(nb);
                    }
                }
            }
@@ -74,8 +75,8 @@ public class WordLadderII {
            res.add(new ArrayList<String>(path));
            Collections.reverse(path);
        } else {
-           List<String> list = neighborsMap.get(current);
-           for(String nb : list){
+           List<String> neighbors = neighborsMap.get(current);
+           for(String nb : neighbors){
                if(distance.containsKey(nb) && distance.get(current) == distance.get(nb) + 1){
                    dfs(start, nb, neighborsMap, distance, res, path);   
                }
