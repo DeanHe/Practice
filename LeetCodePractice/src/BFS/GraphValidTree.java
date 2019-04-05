@@ -38,15 +38,14 @@ public class GraphValidTree {
 	        int cur = queue.poll();
 	        if(visited[cur]){
 	            return false;
-	        } else {
-	            visited[cur] = true;
-	            ArrayList<Integer> neighbors = map.get(cur);
-	            for(int nb : neighbors){
-	                if(!visited[nb]){
-	                    queue.offer(nb);
-	                }
-	            }
 	        }
+	        visited[cur] = true;
+            ArrayList<Integer> neighbors = map.get(cur);
+            for(int nb : neighbors){
+                if(!visited[nb]){
+                    queue.offer(nb);
+                }
+            }
 	    }
 	    for(int i = 0; i < n; i++){
 	        if(!visited[i]){
