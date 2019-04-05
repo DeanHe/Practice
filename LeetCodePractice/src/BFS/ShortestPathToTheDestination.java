@@ -29,22 +29,25 @@ public class ShortestPathToTheDestination {
         int step = 0;
         boolean[][] visited = new boolean[targetMap.length][targetMap[0].length];
         int[] direct = new int[]{0, 1, 0, -1, 0};
-        Queue<Coordinate> queue = new LinkedList<>();
-        queue.offer(new Coordinate(0, 0));
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0});
         visited[0][0] = true;
         while(!queue.isEmpty()){
             int size = queue.size();
             for(int i = 0; i < size; i++){
-                Coordinate cur = queue.poll();
-                if(targetMap[cur.x][cur.y] == 2){
+                int[] cur = queue.poll();
+                int cur_r = cur[0];
+                int cur_c = cur[1];
+                if(targetMap[cur_r][cur_c] == 2){
                     return step;
                 }
                 for(int j = 0; j < direct.length - 1; j++){
-                	 Coordinate nb = new Coordinate(cur.x + direct[j], cur.y + direct[j + 1]);
-                     if(isValid(targetMap, nb.x, nb.y)){
-                         if(!visited[nb.x][nb.y]){
-                             queue.offer(nb);
-                             visited[nb.x][nb.y] = true;
+                	 int nb_r = cur_r + direct[j];
+                	 int nb_c = cur_c + direct[j + 1];
+                     if(isValid(targetMap, nb_r, nb_c)){
+                         if(!visited[nb_r][nb_c]){
+                             queue.offer(new int[]{nb_r, nb_c});
+                             visited[nb_r][nb_c] = true;
                          }
                      }
                 }
@@ -67,14 +70,5 @@ public class ShortestPathToTheDestination {
             return false;
         }
         return true;
-    }
-}
-
-class Coordinate {
-    int x;
-    int y;
-    public Coordinate(int x, int y){
-        this.x = x;
-        this.y = y;
     }
 }
