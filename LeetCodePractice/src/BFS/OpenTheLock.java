@@ -32,10 +32,10 @@ Input: deadends = ["0000"], target = "8888"
 Output: -1*/
 public class OpenTheLock {
 	public int openLock(String[] deadends, String target) {
-        int ans = 0;
+        int step = 0;
         String start = "0000";
         if(target == start){
-            return ans;
+            return step;
         }
         HashSet<String> deadEnds= new HashSet<>(Arrays.asList(deadends));
         if(deadEnds.contains(target) || deadEnds.contains(start)) {
@@ -50,7 +50,7 @@ public class OpenTheLock {
             for(int i = 0; i < size; i++){
                 String cur = queue.poll();
                 if(target.equals(cur)){
-                    return ans;
+                    return step;
                 }
                 ArrayList<String> neighbors = getNeighbors(cur);
                 for(String nb : neighbors){
@@ -60,7 +60,7 @@ public class OpenTheLock {
                     }
                 }
             }
-            ans++;
+            step++;
         }
         return -1;
     }

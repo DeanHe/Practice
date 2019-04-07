@@ -50,7 +50,6 @@ public class RottingOranges {
         int day = 0;
         while(!queue.isEmpty()){
         	int len = queue.size();
-        	day++;
         	for(int i = 0; i < len; i++){
         		int[] cur = queue.poll();
         		for(int j = 0; j < direct.length - 1; j++){
@@ -63,6 +62,7 @@ public class RottingOranges {
         			}
         		}
         	}
+        	day++;
         }
         if(fresh > 0){
         	return -1;

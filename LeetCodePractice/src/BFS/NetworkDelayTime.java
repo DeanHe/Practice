@@ -24,63 +24,118 @@ import java.util.*;
 
 public class NetworkDelayTime {
 	class Node {
-        int index, dist;
-        public Node(int index, int dist){
-            this.index = index;
-            this.dist = dist;
-        }
-    }	
+		int index, dist;
+
+		public Node(int index, int dist) {
+			this.index = index;
+			this.dist = dist;
+		}
+	}
+
 	/**
-     * @param times: a 2D array
-     * @param N: an integer, # of network nodes, labelled 1 to N
-     * @param K: an integer, we send a signal from a certain node K
-     * @return: how long will it take for all nodes to receive the signal
-     */
-    public int networkDelayTime(int[][] times, int N, int K) {
-        // Write your code here
-    	Map<Integer, List<Node>> graph = new HashMap<>();
-        for(int[] entry : times){
-            if(!graph.containsKey(entry[0])){
-                graph.put(entry[0], new ArrayList<Node>());
-            }
-            List<Node> neighbors = graph.get(entry[0]);
-            neighbors.add(new Node(entry[1], entry[2]));
-        }
-        
-        PriorityQueue<Node> pq = new PriorityQueue<>(N, new Comparator<Node>(){
-            public int compare(Node a, Node b){
-                return a.dist - b.dist;
-            }
-        });
-        Node start = new Node(K, 0);
-        pq.offer(start);
-        
-        Map<Integer, Integer> visited = new HashMap<>();
-        // Dijkstra's Algorithm
-        while(!pq.isEmpty()){
-            Node cur = pq.poll();
-            if(visited.containsKey(cur.index)){
-                continue;
-            }
-            visited.put(cur.index, cur.dist);
-            if(graph.containsKey(cur.index)){
-                List<Node> neighbors = graph.get(cur.index);
-                for(Node nb : neighbors){
-                    if(!visited.containsKey(nb.index)){
-                        nb.dist = cur.dist + nb.dist;
-                        pq.offer(nb);
-                    }
-                }
-            }                     
-        }
-        
-        if(visited.size() != N){
-            return -1;
-        }
-        int ans = 0;
-        for(int d : visited.values()){
-            ans = Math.max(ans, d);
-        }
-        return ans;
-    }
+	 * @param times:
+	 *            a 2D array
+	 * @param N:
+	 *            an integer, # of network nodes, labelled 1 to N
+	 * @param K:
+	 *            an integer, we send a signal from a certain node K
+	 * @return: how long will it take for all nodes to receive the signal
+	 */
+	public int networkDelayTime(int[][] times, int N, int K) {
+		// Write your code here
+		Map<Integer, List<Node>> graph = new HashMap<>();
+		Map<Integer, Integer> distMap = new HashMap<>();
+		for (int[] entry : times) {
+			if (!graph.containsKey(entry[0])) {
+				graph.put(entry[0], new ArrayList<Node>());
+			}
+			List<Node> neighbors = graph.get(entry[0]);
+			neighbors.add(new Node(entry[1], entry[2]));
+		}
+
+		PriorityQueue<Node> pq = new PriorityQueue<>(N, new Comparator<Node>() {
+			public int compare(Node a, Node b) {
+				return a.dist - b.dist;
+			}
+		});
+		Node start = new Node(K, 0);
+		pq.offer(start);
+		// Dijkstra's Algorithm
+		while (!pq.isEmpty()) {
+			Node cur = pq.poll();
+			if (distMap.containsKey(cur.index)) {
+				continue;
+			}
+			distMap.put(cur.index, cur.dist);
+			if (graph.containsKey(cur.index)) {
+				List<Node> neighbors = graph.get(cur.index);
+				for (Node nb : neighbors) {
+					if (!distMap.containsKey(nb.index)) {
+						nb.dist = cur.dist + nb.dist;
+						pq.offer(nb);
+					}
+				}
+			}
+		}
+
+		if (distMap.size() != N) {
+			return -1;
+		}
+		int ans = 0;
+		for (int d : distMap.values()) {
+			ans = Math.max(ans, d);
+		}
+		return ans;
+	}
+
+	public int networkDelayTimeV2(int[][] times, int N, int K) {
+		// Write your code here
+		Map<Integer, List<Node>> graph = new HashMap<>();
+		int[] dist = new int[N + 1];
+		HashSet<Integer> visited = new HashSet<>();
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		for (int[] entry : times) {
+			if (!graph.containsKey(entry[0])) {
+				graph.put(entry[0], new ArrayList<Node>());
+			}
+			List<Node> neighbors = graph.get(entry[0]);
+			neighbors.add(new Node(entry[1], entry[2]));
+		}
+
+		PriorityQueue<Node> pq = new PriorityQueue<>(N, new Comparator<Node>() {
+			public int compare(Node a, Node b) {
+				return a.dist - b.dist;
+			}
+		});
+		Node start = new Node(K, 0);
+		dist[start.index] = start.dist;
+		visited.add(start.index);
+		pq.offer(start);
+		// Dijkstra's Algorithm
+		while (!pq.isEmpty()) {
+			Node cur = pq.poll();
+			if (visited.contains(cur)) {
+				continue;
+			}
+			visited.add(cur.index);
+			if (graph.containsKey(cur.index)) {
+				List<Node> neighbors = graph.get(cur.index);
+				for (Node nb : neighbors) {
+					if (dist[nb.index] > cur.dist + nb.dist) {
+						dist[nb.index] = cur.dist + nb.dist;
+						nb.dist = dist[nb.index];
+						pq.offer(nb);
+					}
+				}
+			}
+		}
+		int ans = 0;
+		for (int i = 1; i <= N; i++) {
+			if (dist[i] == Integer.MAX_VALUE) {
+				return -1;
+			}
+			ans = Math.max(ans, dist[i]);
+		}
+		return ans;
+	}
 }
