@@ -25,6 +25,7 @@ public class CombinationSum {
         if(candidates == null || candidates.length == 0){
             return res;
         }
+        Arrays.sort(candidates);
         ArrayList<Integer> temp = new ArrayList<>();
         dfs(candidates, target, 0, temp, res);
         return res;
