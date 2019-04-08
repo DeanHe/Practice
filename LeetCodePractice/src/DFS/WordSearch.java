@@ -27,10 +27,10 @@ public class WordSearch {
         return false;
     }
     
-    private boolean dfs(char[][] board, boolean[][] checked, String word, int i, int r, int c){
+    private boolean dfs(char[][] board, boolean[][] checked, String word, int count, int r, int c){
         int rows = board.length;
         int cols = board[0].length;
-        if(i == word.length()){
+        if(count == word.length()){
             return true;
         }
         if(r < 0 || r >= rows || c < 0 || c >= cols){
@@ -39,14 +39,14 @@ public class WordSearch {
         if(checked[r][c]){
             return false;
         }
-        if(word.charAt(i) != board[r][c]){
+        if(word.charAt(count) != board[r][c]){
         	return false;
         }
         checked[r][c] = true;
         int[] direct = new int[]{0, 1, 0, -1, 0};
         boolean ans = false;
 		for(int j = 0; j < direct.length - 1; j++){
-			ans  = ans || dfs(board, checked, word, i + 1, r + direct[j], c + direct[j + 1]);
+			ans  = ans || dfs(board, checked, word, count + 1, r + direct[j], c + direct[j + 1]);
 		}
 		checked[r][c] = false;
 		return ans;

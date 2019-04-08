@@ -43,6 +43,7 @@ public class NQueensII {
     private void dfs(int[] board, int n, int row){
         if(n == row){
             count++;
+            return;
         }
         for(int c = 0; c < n; c++){
             if(isValid(board, row, c)){
