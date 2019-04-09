@@ -16,34 +16,34 @@ public class ProcessSequence {
 	public List<Integer> numberOfProcesses(List<Interval> logs, List<Integer> queries) {
 		// Write your code here
 		List<Integer> ans = new ArrayList<>();
-		List<Integer> temp = new ArrayList<>();
-		Map<Integer, Integer> hash = new HashMap<Integer, Integer>();
+		List<Integer> timeline = new ArrayList<>();
+		Map<Integer, Integer> posToIndex = new HashMap<Integer, Integer>();
 		for (Interval i : logs) {
-			temp.add(i.start);
-			temp.add(i.end);
-			temp.add(i.end + 1);
+			timeline.add(i.start);
+			timeline.add(i.end);
+			timeline.add(i.end + 1);
 		}
 		for (int i : queries) {
-			temp.add(i);
+			timeline.add(i);
 		}
-		Collections.sort(temp);
+		Collections.sort(timeline);
 		int index = 1;
-		for (int i : temp) {
-			if (!hash.containsKey(i)) {
-				hash.put(i, index);
+		for (int i : timeline) {
+			if (!posToIndex.containsKey(i)) {
+				posToIndex.put(i, index);
 				index++;
 			}
 		}
-		int[] count = new int[index + 1];
+		int[] overlap = new int[index + 1];
 		for (Interval i : logs) {
-			count[hash.get(i.start)]++;
-			count[hash.get(i.end + 1)]--;
+			overlap[posToIndex.get(i.start)]++;
+			overlap[posToIndex.get(i.end + 1)]--;
 		}
 		for (int i = 1; i <= index; i++) {
-			count[i] += count[i - 1];
+			overlap[i] += overlap[i - 1];
 		}
 		for (int i : queries) {
-			ans.add(count[hash.get(i)]);
+			ans.add(overlap[posToIndex.get(i)]);
 		}
 		return ans;
 	}

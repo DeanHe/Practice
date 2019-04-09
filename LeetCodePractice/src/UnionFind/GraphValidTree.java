@@ -19,19 +19,17 @@ public class GraphValidTree {
 	    }
 	    // find the root of x and compress the path
 	    int compressed_find(int x){
-	        int parent =  parent_map.get(x);
-	        while(parent !=  parent_map.get(parent)){
-	            parent =  parent_map.get(parent);
+	    	int root = x;
+	        while(root !=  parent_map.get(root)){
+	            root =  parent_map.get(root);
 	        }
 	        // here parent equals root of x
-	        int temp = -1;
-	        int fa =  parent_map.get(x);
-	        while(fa != parent){
-	            temp =  parent_map.get(fa);
-	            parent_map.put(fa, parent);
-	            fa = temp;
+	        while(parent_map.get(x) != root){
+	            int fa =  parent_map.get(x);
+	            parent_map.put(x, root);
+	            x = fa;
 	        }
-	        return parent;
+	        return root;
 	    }
 	    void union(int a, int b){
 	        int root_a = compressed_find(a);

@@ -36,10 +36,10 @@ public class FlowerProblem {
 	            root = parent[root];
 	        }
 	        // compress path
-	        while(x != root){
-	            int x_father = parent[x];
+	        while(parent[x] != root){
+	            int father = parent[x];
 	            parent[x] = root;
-	            x = x_father;
+	            x = father;
 	        }
 	        return x;
 		}
