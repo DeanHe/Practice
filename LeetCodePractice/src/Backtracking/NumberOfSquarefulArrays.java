@@ -45,9 +45,6 @@ public class NumberOfSquarefulArrays {
 			return;
 		}
 		for(int i = 0; i < len; i++){
-			if(checked[i]){
-				continue;
-			}
 			if(i > 0 && A[i] == A[i - 1] && !checked[i - 1]){
 				continue;
 			}
@@ -57,11 +54,13 @@ public class NumberOfSquarefulArrays {
 					continue;
 				}
 			}
-			checked[i] = true;
-			list.add(A[i]);
-			dfs(A, list, checked);
-			list.remove(list.size() - 1);
-			checked[i] = false;
+			if(!checked[i]){
+				checked[i] = true;
+				list.add(A[i]);
+				dfs(A, list, checked);
+				list.remove(list.size() - 1);
+				checked[i] = false;
+			}
 		}
 	}
 	// using DP
