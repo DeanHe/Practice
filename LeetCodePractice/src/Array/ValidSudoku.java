@@ -29,8 +29,8 @@ public class ValidSudoku {
 				int startCol = j - j % 3;
 				for (int m = 0; m < 3; m++) {
 					for (int n = 0; n < 3; n++) {
-						if (board[startRow + m][startCol + n] == board[i][j] && i != startRow + m
-								&& j != startCol + n) {
+						if (board[startRow + m][startCol + n] == board[i][j]
+								&& (i != startRow + m || j != startCol + n)) {
 							return false;
 						}
 					}

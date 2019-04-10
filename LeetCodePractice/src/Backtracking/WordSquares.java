@@ -44,8 +44,8 @@ public class WordSquares {
     	}
     	len = words[0].length();
     	Map<String, List<String>> prefixMap = buildPrefixMap(words);
-    	List<String> squares = new ArrayList<>();
-    	dfs(0, res, squares, prefixMap);
+    	List<String> square = new ArrayList<>();
+    	dfs(0, res, square, prefixMap);
     	return res;
     }
     
@@ -78,21 +78,21 @@ public class WordSquares {
     	}
     	return true;
     }
-    private void dfs(int row, List<List<String>> res, List<String> squares, Map<String, List<String>> prefixMap){
+    private void dfs(int row, List<List<String>> res, List<String> square, Map<String, List<String>> prefixMap){
     	if(row == len){
-    		res.add(new ArrayList<>(squares));
+    		res.add(new ArrayList<>(square));
     		return;
     	}
     	String prefix = "";
     	for(int r = 0; r < row; r++){
     		// row here is same as col index
-    		prefix += squares.get(r).charAt(row);
+    		prefix += square.get(r).charAt(row);
     	}
     	for(String cand : prefixMap.get(prefix)){
-    		if(checkPrefix(cand, row, squares, prefixMap)){
-    			squares.add(cand);
-    			dfs(row + 1, res, squares, prefixMap);
-    			squares.remove(squares.size() - 1);
+    		if(checkPrefix(cand, row, square, prefixMap)){
+    			square.add(cand);
+    			dfs(row + 1, res, square, prefixMap);
+    			square.remove(square.size() - 1);
     		}
     	}
     }

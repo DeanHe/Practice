@@ -13,10 +13,10 @@ public class SudokuSolver {
 	}
 
 	public boolean helper(char[][] board, int i, int j) {
-		if (j >= board[0].length) {
+		if (j == board[0].length) {
 			return helper(board, i + 1, 0);
 		}
-		if (i >= board.length) {
+		if (i == board.length) {
 			return true;
 		}
 		if (board[i][j] == '.') {
