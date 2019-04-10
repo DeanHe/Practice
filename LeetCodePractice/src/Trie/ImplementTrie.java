@@ -30,12 +30,9 @@ public class ImplementTrie {
             char c = word.charAt(i);
             int index = c - 'a';
             if(p.arr[index] == null){
-                TrieNode temp = new TrieNode();
-                p.arr[index] = temp;
-                p = temp;
-            } else {
-                p = p.arr[index];
+                p.arr[index] = new TrieNode();
             }
+            p = p.arr[index];
         }
         p.isEnd = true;
     }

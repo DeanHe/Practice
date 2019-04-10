@@ -20,10 +20,11 @@ public class FlowerProblem {
 		public int count, k;
 		int[] parent; // id[i] is parent of i
 		// group id : group size
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] size;
 
 		public UnionFind(int n) {
 			parent = new int[n];
+			size = new int[n];
 			for (int i = 0; i < n; i++) {
 				parent[i] = -1;
 			}
@@ -49,14 +50,14 @@ public class FlowerProblem {
 			int root_b = getRoot(b);
 			if (root_a != root_b) {
 				parent[root_a] = root_b;
-				if(map.get(root_a) >= k && map.get(root_b) >= k){
+				if(size[root_a] >= k && size[root_b] >= k){
 					count--;
-				} else if(map.get(root_a) < k && map.get(root_b) < k){
-					if(map.get(root_a) + map.get(root_b) >= k){
+				} else if(size[root_a] < k && size[root_b] < k){
+					if(size[root_a] + size[root_b] >= k){
 						count++;
 					}
 				}
-				map.put(root_b, map.get(root_a) + map.get(root_b));
+				size[root_b] += size[root_a];
 			}
 		}
 	}
@@ -74,7 +75,7 @@ public class FlowerProblem {
         for(int i = 0; i < len; i++){
         	int spot = flowers[i] - 1;
         	unionFind.parent[spot] = spot;
-        	unionFind.map.put(spot, 1);
+        	unionFind.size[spot] = 1;
         	if(k <= 1){
         		unionFind.count++;
         	}

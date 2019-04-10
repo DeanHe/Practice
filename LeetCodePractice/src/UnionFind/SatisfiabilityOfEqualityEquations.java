@@ -56,10 +56,10 @@ public class SatisfiabilityOfEqualityEquations {
 		while(root != id[root]){
 			root = id[root];
 		}
-		while(x != root){
-			int temp = id[x];
+		while(id[x] != root){
+			int fa = id[x];
 			id[x] = root;
-			x = temp;
+			x = fa;
 		}
 		return root;
 	}
