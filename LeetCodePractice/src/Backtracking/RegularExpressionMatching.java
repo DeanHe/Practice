@@ -11,13 +11,13 @@ The function prototype should be:
 bool isMatch(string s, string p)
 
 Example
-isMatch("aa","a") ¡ú false
-isMatch("aa","aa") ¡ú true
-isMatch("aaa","aa") ¡ú false
-isMatch("aa", "a*") ¡ú true
-isMatch("aa", ".*") ¡ú true
-isMatch("ab", ".*") ¡ú true
-isMatch("aab", "c*a*b") ¡ú true*/
+isMatch("aa","a") is false
+isMatch("aa","aa") is true
+isMatch("aaa","aa") is false
+isMatch("aa", "a*") is true
+isMatch("aa", ".*") is true
+isMatch("ab", ".*") is true
+isMatch("aab", "c*a*b") is true*/
 public class RegularExpressionMatching {
 	public boolean isMatch(String s, String p) {
 		if (p.length() == 0) {
