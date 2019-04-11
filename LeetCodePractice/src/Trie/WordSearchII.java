@@ -13,7 +13,7 @@ public class WordSearchII {
 	 * @return: A list of string
 	 */
 	HashSet<String> set = new HashSet<>();
-
+	int rows, cols;
 	public ArrayList<String> wordSearchII(char[][] board, ArrayList<String> words) {
 		// write your code here
 		ArrayList<String> res = new ArrayList<>();
@@ -24,8 +24,8 @@ public class WordSearchII {
 		for (String s : words) {
 			trie.insert(s);
 		}
-		int rows = board.length;
-		int cols = board[0].length;
+		rows = board.length;
+		cols = board[0].length;
 		boolean[][] checked = new boolean[rows][cols];
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
@@ -37,8 +37,6 @@ public class WordSearchII {
 	}
 
 	private void dfs(char[][] board, boolean[][] checked, int r, int c, Trie trie, String s) {
-		int rows = board.length;
-		int cols = board[0].length;
 		if (r < 0 || r >= rows || c < 0 || c >= cols) {
 			return;
 		}
@@ -71,7 +69,10 @@ class TrieNode {
 }
 
 class Trie {
-	TrieNode root = new TrieNode();
+	TrieNode root;
+	public Trie(){
+		root = new TrieNode();
+	}
 
 	public void insert(String word) {
 		TrieNode p = root;

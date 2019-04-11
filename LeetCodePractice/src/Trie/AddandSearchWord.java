@@ -1,5 +1,35 @@
 package Trie;
+/*Design a data structure that supports the following two operations: addWord(word) and search(word)
 
+search(word) can search a literal word or a regular expression string containing only letters a-z or ..
+
+A . means it can represent any one letter.
+
+Example
+Example 1:
+
+Input:
+  addWord("a")
+  search(".")
+Output:
+  true
+Example 2:
+
+Input:
+  addWord("bad")
+  addWord("dad")
+  addWord("mad")
+  search("pad")  
+  search("bad")  
+  search(".ad")  
+  search("b..")  
+Output:
+  false
+  true
+  true
+  true
+Notice
+You may assume that all words are consist of lowercase letters a-z.*/
 public class AddandSearchWord {
 	class TrieNode {
 		TrieNode[] arr;
