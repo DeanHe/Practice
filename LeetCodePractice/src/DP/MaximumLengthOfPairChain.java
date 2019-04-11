@@ -15,6 +15,7 @@ The number of given pairs will be in the range [1, 1000].*/
 public class MaximumLengthOfPairChain {
 	public int findLongestChain(int[][] pairs) {
 		Arrays.sort(pairs, (a, b) -> a[0] - b[0]);
+		// dp[i] means longest chain size ended with pair[i]
         int[] dp = new int[pairs.length];
         Arrays.fill(dp, 1);
         for(int i = 0; i < pairs.length; i++){

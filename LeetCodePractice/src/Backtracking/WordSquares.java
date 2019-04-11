@@ -50,6 +50,7 @@ public class WordSquares {
     }
     
     private Map<String, List<String>> buildPrefixMap(String[] words){
+    	//prefx : words
     	Map<String, List<String>> map = new HashMap<>();
     	map.put("", new ArrayList<>());
     	for(String w : words){
@@ -65,11 +66,11 @@ public class WordSquares {
     	}
     	return map;
     }
-    private boolean checkPrefix(String cand, int row, List<String> squares, Map<String, List<String>> prefixMap){
+    private boolean checkPrefix(String cand, int row, List<String> square, Map<String, List<String>> prefixMap){
     	for(int c = row + 1; c < len; c++){
     		String prefix = "";
     		for(int r = 0; r < row; r++){
-    			prefix += squares.get(r).charAt(c);
+    			prefix += square.get(r).charAt(c);
     		}
     		prefix += cand.charAt(c);
     		if(!prefixMap.containsKey(prefix)){
