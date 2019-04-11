@@ -1,4 +1,4 @@
-package BST;
+package BFS;
 
 import java.util.*;
 /*There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
@@ -42,13 +42,13 @@ public class AlienDictionary {
         Map<Character, Integer> indegree = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         //initialize degree map
-        for(int i = 0; i < words.length; i++){
-            char[] charArray = words[i].toCharArray();
-            for(int j = 0; j < charArray.length; j++){
-                indegree.put(charArray[j], 0);
+        for(String word : words){
+            char[] charArray = word.toCharArray();
+            for(char c : charArray){
+                indegree.put(c, 0);
             }
         }
-        //compare adjacent string & fill map
+        //compare adjacent string & fill graph
         for(int i = 0; i < words.length - 1; i++){
             String cur = words[i];
             String post = words[i + 1];
@@ -57,13 +57,11 @@ public class AlienDictionary {
                 char cur_c = cur.charAt(j);
                 char post_c = post.charAt(j);
                 if(cur_c != post_c){
-                    Set<Character> neighbors = new HashSet<>();
-                    if(graph.containsKey(cur_c)){
-                        neighbors =graph.get(cur_c);
+                    if(!graph.containsKey(cur_c)){
+                        graph.put(cur_c, new HashSet<>());
                     }
-                    if(!neighbors.contains(post_c)){
-                        neighbors.add(post_c);
-                        graph.put(cur_c, neighbors);
+                    if(!graph.get(cur_c).contains(post_c)){
+                    	graph.get(cur_c).add(post_c);
                         int degree = indegree.get(post_c) + 1;
                         indegree.put(post_c, degree);
                     }

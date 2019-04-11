@@ -2,6 +2,8 @@ package DP;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /*A frog is crossing a river. The river is divided into x units and at each unit there may or may not exist a stone. The frog can jump on a stone, but it must not jump into the water.
 Given a list of stones' positions (in units) in sorted ascending order, determine if the frog is able to cross the river by landing on the last stone. Initially, the frog is on the first stone and assume the first jump must be 1 unit.
@@ -21,8 +23,8 @@ public class FrogJump {
     	map.get(stones[0]).add(0);
     	for(int i = 0; i < len - 1; i++){
     		int stone = stones[i];
-    		HashSet<Integer> copy = new HashSet<>(map.get(stone)); //java bug
-    		for(int k : copy){
+    		HashSet<Integer> lastSteps = new HashSet<>(map.get(stone)); //java bug
+    		for(int k : lastSteps){
     			//k - 1;
         		if(map.containsKey(stone + k - 1)){
         			map.get(stone + k - 1).add(k - 1);
