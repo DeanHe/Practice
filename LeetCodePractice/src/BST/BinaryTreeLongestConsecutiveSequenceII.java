@@ -46,6 +46,7 @@ public class BinaryTreeLongestConsecutiveSequenceII {
     }
     
     class ResultType {
+    	//maxDecrease from this node, maxIncrease from this node.
     	public int maxLen, maxDecrease, maxIncrease;
     	public ResultType(int maxLen, int maxDecrease, int maxIncrease){
     		this.maxLen = maxLen;
