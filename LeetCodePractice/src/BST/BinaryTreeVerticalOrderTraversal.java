@@ -42,6 +42,7 @@ public class BinaryTreeVerticalOrderTraversal {
     	if(root == null){
     		return res;
     	}
+    	//column : List of Nodes
     	Map<Integer, List<Integer>> map = new HashMap<>();
     	Queue<Integer> qCol = new LinkedList<>();
     	Queue<TreeNode> qNode = new LinkedList<>();
