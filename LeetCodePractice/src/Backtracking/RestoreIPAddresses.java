@@ -43,10 +43,8 @@ public class RestoreIPAddresses {
 			    }
 			    sb.deleteCharAt(sb.length() - 1);
 			    res.add(sb.toString());
-			    return;
-		    } else {
-			    return;
 		    }
+		    return;
 	    }
 
 	    for(int i = pos + 1; i <= s.length() && i <= pos + 3; i++){

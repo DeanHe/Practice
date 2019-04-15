@@ -38,6 +38,7 @@ public class GuessTheWord {
 			}
 		}
 		for (int i = 0, score = 0; i < 10 && score < 6; i++) {
+			// the least unique word
 			String minimax_str = "";
 			int minimax_count = 1000;
 			for (String w : wordlist) {
