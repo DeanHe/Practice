@@ -27,7 +27,7 @@ public class MaxPair {
     	int aLen = a.length;
     	int bLen = b.length;
     	int sum = 0;
-    	int bLastPos =bLen - 1;
+    	int bLastPos = bLen - 1;
     	for(int i = 0; i < aLen; i++){
     		for(int j = bLastPos; j >= 0; j--){
     			if(a[i] + b[j] <= x){

@@ -33,7 +33,7 @@ public class AerialMovie {
         int[] res = new int[2];
         int len = dur.length;
         Arrays.sort(dur);
-        int start = 0, end = len - 1, mid;
+        int start = 0, end = len - 1;
         while(start < end){
             if(dur[start] + dur[end] <= total){
                 if(dur[start] + dur[end] > res[0] + res[1]){
