@@ -25,9 +25,9 @@ The size of the input 2D-array will be between 3 and 1000.
 Every integer represented in the 2D-array will be between 1 and N, where N is the size of the input array.*/
 
 /*
-case1: 2 parents no circle
-case2: 2 parents with circle
-case3: 1 parent with circle
+case1: There is a loop in the graph, and no vertex has more than 1 parent. In this case, you can simply output the edge in the loop that occurs last.
+case2: A vertex has more than 1 parent, but there isn't a loop in the graph
+case3: 1 A vertex has more than 1 parent, and is part of a loop.
 
 1) Check whether there is a node having two parents. 
     If so, store them as candidates A and B, and set the second edge invalid. 
@@ -58,8 +58,8 @@ public class RedundantConnectionII {
 			int end = edge[1];
 			if (parent[end] > 0) {
 				// already has parent
-				candidate1 = new int[]{parent[end], end};
-				candidate2 = new int[]{start, end};
+				candidate1 = new int[]{parent[end], end}; //case 3
+				candidate2 = new int[]{start, end};   // case 2
 				//mark edge
 				edge[0] = -1;
 				edge[1] = -1;
@@ -76,7 +76,7 @@ public class RedundantConnectionII {
 			int root_e = findRoot(end);
 			if(root_s == root_e){
 				if (candidate1[0] == -1) {
-					return edge;
+					return edge; // case 1
 				} else {
 					return candidate1;
 				}
