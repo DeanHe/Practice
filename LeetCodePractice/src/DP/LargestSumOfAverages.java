@@ -30,9 +30,9 @@ public class LargestSumOfAverages {
         for(int i = 1; i <= len; i++){
             sum[i] = sum[i - 1] + A[i - 1];
         }
-        return dfs(A, sum, mem, len, K);
+        return dfs(A, sum, mem, K, len);
 	}
-	private double dfs(int[] A, double[] preSum, double[][] mem, int n, int k){
+	private double dfs(int[] A, double[] preSum, double[][] mem, int k, int n){
 		if(mem[k][n] > 0){
 			return mem[k][n];
 		}
