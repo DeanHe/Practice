@@ -1,7 +1,5 @@
 package DP;
 
-import java.util.Arrays;
-
 /*Give two integers to represent the height and width of the grid. 
  * The starting point is in the upper left corner and the ending point is in the upper right corner. 
  * You can go to the top right, right or bottom right. 
