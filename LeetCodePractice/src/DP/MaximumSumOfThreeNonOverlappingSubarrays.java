@@ -16,6 +16,24 @@ nums[i] will be between 1 and 65535.
 k will be between 1 and floor(nums.length / 3).*/
 public class MaximumSumOfThreeNonOverlappingSubarrays {
 	public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
+		int maxVal = Integer.MIN_VALUE;
+        int len = nums.length;
+        int[] res = new int[3];
+        int[] sum = new int[len + 1];
+        int[] left =new int[len];
+        int[] right = new int[len];
+        for(int i = 0; i < len; i++){
+        	sum[i + 1] = nums[i] + sum[i];
+        }
+        for(int i = k, total = sum[k] - sum[0]; i < len; i++){
+        	if(sum[i + 1] - sum[i + 1 -k] > total){
+        		left[i] = i + 1 - k;
+            	total = sum[i + 1] - sum[i + 1 -k];
+        	} else {
+        		left[i] = left[i - 1];
+        	}
+        }
         
+        return res;
     }
 }
