@@ -20,20 +20,41 @@ public class MaximumSumOfThreeNonOverlappingSubarrays {
         int len = nums.length;
         int[] res = new int[3];
         int[] sum = new int[len + 1];
+        // left[i] is the start position of subarray of k with max sum in nums[0, i], it is in range [0, i - k]
         int[] left =new int[len];
         int[] right = new int[len];
         for(int i = 0; i < len; i++){
         	sum[i + 1] = nums[i] + sum[i];
         }
+     // left[i] is the start position of subarray of k with max sum in nums[i, len - 1], it is in range [i, len - 1 - k]
         for(int i = k, total = sum[k] - sum[0]; i < len; i++){
-        	if(sum[i + 1] - sum[i + 1 -k] > total){
+        	if(sum[i + 1] - sum[i + 1 - k] > total){
         		left[i] = i + 1 - k;
-            	total = sum[i + 1] - sum[i + 1 -k];
+            	total = sum[i + 1] - sum[i + 1 - k];
         	} else {
         		left[i] = left[i - 1];
         	}
         }
-        
+        // caution: the condition is ">= tot" for right interval, and "> tot" for left interval
+        for(int i = len - k - 1, total = sum[len] - sum[len - k]; i >= 0; i--){
+        	if(sum[i + k] - sum[i] >= total){
+        		total = sum[i + k] - sum[i];
+        		right[i] = i;
+        	} else {
+        		right[i] = right[i + 1];
+        	}
+        }
+        // check all possible middle interval
+        for(int i = k; i <= len - 2 * k; i++){
+        	int l = left[i - 1], r = right[i + k];
+        	int total = (sum[i + k] - sum[i]) + (sum[l + k] - sum[l]) + (sum[r + k] - sum[r]);
+        	if(total > maxVal){
+        		maxVal = total;
+        		res[0] = l;
+        		res[1] = i;
+        		res[2] = r;
+        	}
+        }
         return res;
     }
 }
