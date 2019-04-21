@@ -42,4 +42,43 @@ public class MaximumSumOfTwoNonOverlappingSubarrays {
         }
         return res;
     }
+	
+	// mimic best sell stock III
+	public int maxSumTwoNoOverlapII(int[] A, int L, int M) {
+		int len = A.length;
+        int[] preSum = new int[len + 1];
+        for(int i = 1; i <= len; i++){
+            preSum[i] = preSum[i - 1] + A[i - 1];
+        }
+        int[] Lleft = new int[len + 1];
+        int[] Lright = new int[len + 1];
+        int[] Mleft = new int[len + 1];
+        int[] Mright = new int[len + 1];
+        for(int i = L; i <= len; i++){     	
+        	Lleft[i] = Math.max(Lleft[i - 1], preSum[i] - preSum[i - L]);
+        }
+        //System.out.println(Arrays.toString(Lleft));
+        for(int i = M; i <= len; i++){      		
+    		Mleft[i] = Math.max(Mleft[i - 1], preSum[i] - preSum[i - M]);
+    	}
+        //System.out.println(Arrays.toString(Mleft));
+        for(int i = len - L; i >= 0; i--){
+        	Lright[i] = Math.max(Lright[i + 1], preSum[i + L] - preSum[i]);
+        }
+        //System.out.println(Arrays.toString(Lright));
+        for(int i = len - M; i >= 0; i--){   		
+        	Mright[i] = Math.max(Mright[i + 1], preSum[i + M] - preSum[i]);
+        }
+        //System.out.println(Arrays.toString(Mright));
+        int res = Integer.MIN_VALUE;
+        for(int i = L; i + M <= len; i++){
+            int tmp = Lleft[i] + Mright[i];
+            res = Math.max(res, tmp);
+        }
+        for(int i = M; i + L <= len; i++){
+            int tmp = Mleft[i] + Lright[i];
+            res = Math.max(res, tmp);
+        }
+        return res;
+    }
 }
