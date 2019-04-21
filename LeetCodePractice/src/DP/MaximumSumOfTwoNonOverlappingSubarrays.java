@@ -22,6 +22,7 @@ Example 3:
 Input: A = [2,1,5,6,0,9,5,0,3,8], L = 4, M = 3
 Output: 31
 Explanation: One choice of subarrays is [5,6,0,9] with length 4, and [3,8] with length 3.*/
+// similar to Best Time To Buy and Sell Stock III
 public class MaximumSumOfTwoNonOverlappingSubarrays {
 	public int maxSumTwoNoOverlap(int[] A, int L, int M) {
         int len = A.length;
