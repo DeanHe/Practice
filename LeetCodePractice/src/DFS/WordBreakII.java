@@ -29,11 +29,12 @@ public class WordBreakII {
             return breakMap.get(s);
         }
         List<String> res = new ArrayList<>();
-        if(s.length() == 0){
+        int len = s.length();
+        if(len == 0){
             res.add("");
             return res;
         }
-        for(int i = 1; i <= s.length(); i++){
+        for(int i = 1; i <= len; i++){
             String left = s.substring(0, i);
             String right = s.substring(i);
             if(wordDict.contains(left)){
