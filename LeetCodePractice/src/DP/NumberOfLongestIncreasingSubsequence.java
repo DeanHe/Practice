@@ -13,7 +13,9 @@ Note: Length of the given array will be not exceed 2000 and the answer is guaran
 public class NumberOfLongestIncreasingSubsequence {
 	public int findNumberOfLIS(int[] nums) {
         int len = nums.length;
+        //dp_longest[i] means LIS length ended with nums[i]
         int[] dp_longest = new int[len];
+      //dp_longest[i] means # of LIS ended with nums[i]
         int[] dp_count = new int[len];
         for(int i = 0; i < len; i++){
         	dp_count[i] = 1;
