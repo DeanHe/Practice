@@ -16,10 +16,9 @@ Input: [[5,4],[6,4],[6,7],[2,3]]
 Output: 3 
 Explanation: The maximum number of envelopes you can Russian doll is 3 ([2,3] => [5,4] => [6,7]).
 
-Sort the array. Ascend on width and descend on height if width are same.
+Sort the array. Ascend on width and ascend on height if width are same.
 Find the longest increasing subsequence based on height.
 Since the width is increasing, we only need to consider height.
-[3, 4] cannot contains [3, 3], so we need to put [3, 4] before [3, 3] when sorting otherwise it will be counted as an increasing number if the order is [3, 3], [3, 4]
 */
 public class RussianDollEnvelopes {
 	public int maxEnvelopes(int[][] envelopes) {
@@ -36,6 +35,7 @@ public class RussianDollEnvelopes {
 			}
 		});
 		int len = envelopes.length;
+		// dp[i] means longest increasing sequence ended with envelopes[i]
 		int[] dp = new int[len];
 		int maxOverlap = 1;
 		for (int i = 0; i < len; i++) {
