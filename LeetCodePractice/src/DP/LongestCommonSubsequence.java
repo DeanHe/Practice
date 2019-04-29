@@ -1,5 +1,22 @@
 package DP;
+/*Given two strings, find the longest common subsequence (LCS).
+Your code should return the length of LCS.
 
+Example
+Example 1:
+	Input:  "ABCD" and "EDCA"
+	Output:  1
+	
+	Explanation:
+	LCS is 'A' or  'D' or 'C'
+
+Example 2:
+	Input: "ABCD" and "EACB"
+	Output:  2
+	
+	Explanation: 
+	LCS is "AC"
+*/
 public class LongestCommonSubsequence {
 	/**
      * @param A, B: Two strings.

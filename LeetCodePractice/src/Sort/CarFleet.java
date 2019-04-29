@@ -1,4 +1,9 @@
 package Sort;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.TreeMap;
+
 /*N cars are going to the same destination along a one lane road.  The destination is target miles away.
 Each car i has a constant speed speed[i] (in miles per hour), and initial position position[i] miles towards the target along the road.
 A car can never pass another car ahead of it, but it can catch up to it, and drive bumper to bumper at the same speed.
@@ -26,7 +31,46 @@ Note:
 0 <= position[i] < target
 All initial positions are different.*/
 public class CarFleet {
+	class Car {
+		int pos;
+		double timeToArrive;
+		public Car(int pos, double timeToArrive){
+			this.pos = pos;
+			this.timeToArrive = timeToArrive;
+		}
+	}
 	public int carFleet(int target, int[] position, int[] speed) {
-        
+        int len = position.length;
+        Car[] car = new Car[len];
+        for(int i = 0; i < len; i++){
+        	car[i] =  new Car(position[i], 1.0 * (target - position[i]) / speed[i]);
+        }
+        Arrays.sort(car, (a, b) -> a.pos - b.pos);
+        double longestTimeToArrive = 0;
+        int res = 0;
+        for(int i = len - 1; i >= 0; i--){
+        	if(car[i].timeToArrive > longestTimeToArrive){
+        		longestTimeToArrive = car[i].timeToArrive;
+        		res++;
+        	}
+        }
+        return res;
+    }
+	
+	public int carFleetWithTreeMap(int target, int[] position, int[] speed) {
+        int len = position.length;
+        TreeMap<Integer, Double> map = new TreeMap<>(Collections.reverseOrder());
+        for(int i = 0; i < len; i++){
+        	map.put(position[i], 1.0 * (target - position[i]) / speed[i]);
+        }
+        double longestTimeToArrive = 0;
+        int res = 0;
+        for(Double timeToArrive : map.values()){
+        	if(timeToArrive > longestTimeToArrive){
+        		longestTimeToArrive = timeToArrive;
+        		res++;
+        	}
+        }
+        return res;
     }
 }
