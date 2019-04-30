@@ -66,7 +66,7 @@ public class TheSkylineProblem {
 			
 		});
 		// process edges
-		PriorityQueue<Integer> heightHeap = new PriorityQueue<>(10, Collections.reverseOrder());
+		PriorityQueue<Integer> heightHeap = new PriorityQueue<>(Collections.reverseOrder());
 		for(Edge edge : edges){
 			if(edge.isStart){
 				if(heightHeap.isEmpty() || edge.height > heightHeap.peek()){

@@ -35,7 +35,7 @@ class Point {
 
 public class MeetingRoomsII {
 	public int minMeetingRooms(Interval[] intervals) {
-		List<Point> list = new ArrayList<>(intervals.length*2);
+		List<Point> list = new ArrayList<>();
 	    for(Interval i : intervals){
 	    	list.add(new Point(i.start, true));
 	    	list.add(new Point(i.end, false));

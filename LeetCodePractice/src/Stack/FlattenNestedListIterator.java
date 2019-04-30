@@ -56,8 +56,9 @@ public class FlattenNestedListIterator {
 					return true;
 				}
 				stack.pop();
-				for(int i = cur.getList().size() - 1; i >= 0; i--){
-					stack.push(cur.getList().get(i));
+				List<NestedInteger> ls = cur.getList();
+				for(int i = ls.size() - 1; i >= 0; i--){
+					stack.push(ls.get(i));
 				}
 			}
 			return false;
