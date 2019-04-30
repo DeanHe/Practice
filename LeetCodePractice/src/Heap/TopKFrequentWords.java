@@ -14,7 +14,7 @@ Output: ["the", "is", "sunny", "day"]
 Explanation: "the", "is", "sunny" and "day" are the four most frequent words,
     with the number of occurrence being 4, 3, 2 and 1 respectively.
 Note:
-You may assume k is always valid, 1 ≤ k ≤ number of unique elements.
+You may assume k is always valid, 1 <= k <= number of unique elements.
 Input words contain only lowercase letters.
 Follow up:
 Try to solve it in O(n log k) time and O(n) extra space.*/
@@ -68,16 +68,8 @@ public class TopKFrequentWords {
         }
         
         String[] result = new String[k];
-        int index = 0;
-        while (!Q.isEmpty()) {
-            result[index++] = Q.poll().word;
-        }
-        
-        // reverse
-        for (int i = 0; i < index / 2; i++) {
-            String temp = result[i];
-            result[i] = result[index - i - 1];
-            result[index - i - 1] = temp;
+        for (int i = k - 1; i >= 0; i--) {
+            result[i] = Q.poll().word;
         }
         
         return result;
