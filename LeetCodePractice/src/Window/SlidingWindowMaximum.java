@@ -34,7 +34,7 @@ public class SlidingWindowMaximum {
         for(int i = 0; i < k - 1; i++){
             inQueue(deque, nums[i]);
         }
-        for(int i = k -1; i < nums.length; i++){
+        for(int i = k - 1; i < nums.length; i++){
             inQueue(deque, nums[i]);
             res.add(deque.peekFirst());
             outQueue(deque, nums[i - k + 1]);
