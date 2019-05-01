@@ -59,9 +59,9 @@ public class SimpleQueries {
 				end = mid;
 			}
 		}
-		if(nums[mid] < target){
-			return mid + 1;
+		if(nums[start] < target){
+			return end;
 		}
-		return mid;
+		return start;
 	}
 }

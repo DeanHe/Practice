@@ -26,36 +26,36 @@ public class WordSearchII {
 		}
 		rows = board.length;
 		cols = board[0].length;
-		boolean[][] checked = new boolean[rows][cols];
+		boolean[][] visited = new boolean[rows][cols];
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
-				dfs(board, checked, r, c, trie, "");
+				dfs(board, visited, r, c, trie, "");
 			}
 		}
 		res.addAll(set);
 		return res;
 	}
 
-	private void dfs(char[][] board, boolean[][] checked, int r, int c, Trie trie, String s) {
+	private void dfs(char[][] board, boolean[][] visited, int r, int c, Trie trie, String s) {
 		if (r < 0 || r >= rows || c < 0 || c >= cols) {
 			return;
 		}
-		if (checked[r][c]) {
+		if (visited[r][c]) {
 			return;
 		}
 		s = s + board[r][c];
 		if (!trie.startWith(s)) {
 			return;
 		}
-		if (trie.search(s) == true) {
+		if (trie.search(s)) {
 			set.add(s);
 		}
-		checked[r][c] = true;
-		dfs(board, checked, r + 1, c, trie, s);
-		dfs(board, checked, r - 1, c, trie, s);
-		dfs(board, checked, r, c + 1, trie, s);
-		dfs(board, checked, r, c - 1, trie, s);
-		checked[r][c] = false;
+		visited[r][c] = true;
+		int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+		for (int i = 0; i < dirs.length; i++) {
+			dfs(board, visited, r + dirs[i][0], c + dirs[i][1], trie, s);
+		}
+		visited[r][c] = false;
 	}
 }
 
