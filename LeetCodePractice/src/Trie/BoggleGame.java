@@ -47,9 +47,9 @@ public class BoggleGame {
 		}
 		rows = board.length;
 		cols = board[0].length;
-		boolean[][] visited = new boolean[rows][cols];
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
+				boolean[][] visited = new boolean[rows][cols];
 				ArrayList<String> fill = new ArrayList<>();
 				dfs(board, visited, r, c, trie, "", fill, res);
 			}
@@ -60,6 +60,7 @@ public class BoggleGame {
 	private void dfs(char[][] board, boolean[][] visited, int r, int c, Trie trie, String s, ArrayList<String> fill,
 			ArrayList<String> res) {
 		if (fill.size() > res.size()) {
+			// System.out.println(Arrays.toString(fill.toArray()));
 			res.clear();
 			res.addAll(fill);
 		}
@@ -82,12 +83,13 @@ public class BoggleGame {
 				}
 			}
 			fill.remove(fill.size() - 1);
+			// here not reset visited is for pruning, bug?
 		} else {
-			int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+			int[][] dirs = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
 			for (int i = 0; i < dirs.length; i++) {
 				dfs(board, visited, r + dirs[i][0], c + dirs[i][1], trie, s, fill, res);
 			}
+			visited[r][c] = false;
 		}
-		visited[r][c] = false;
 	}
 }
