@@ -34,44 +34,51 @@ Letters in all strings will be chosen from the set {'A', 'B', 'C', 'D', 'E', 'F'
 public class PyramidTransitionMatrix {
 	public boolean pyramidTransition(String bottom, List<String> allowed) {
 		Map<String, List<String>> map = new HashMap<>();
-		for(String s : allowed) {
+		for (String s : allowed) {
 			String key = s.substring(0, 2);
 			String value = s.substring(2);
-			if(!map.containsKey(key)) {
+			if (!map.containsKey(key)) {
 				List<String> ls = new ArrayList<>();
 				map.put(key, ls);
 			}
 			map.get(key).add(value);
 		}
-        return helper(bottom, map);
-    }
-	private void getAllNextLevels(String level, int index, StringBuilder sb, ArrayList<String> candidates, Map<String, List<String>> map) {
-		if(index == level.length() - 1) {
-			candidates.add(sb.toString());
-			return;
-		}
-		for(String val : map.get(level.substring(index, index + 2))) {
-			sb.append(val);
-			getAllNextLevels(level, index + 1, sb, candidates, map);
-			sb.deleteCharAt(sb.length() - 1);
-		}
+		return helper(bottom, map);
 	}
+
 	private boolean helper(String level, Map<String, List<String>> map) {
-		if(level.length() == 1) {
+		if (level.length() == 1) {
 			return true;
 		}
-		for(int i = 0; i < level.length() - 1; i++) {
-			if(!map.containsKey(level.substring(i, i + 2))) {
+		for (int i = 0; i < level.length() - 1; i++) {
+			if (!map.containsKey(level.substring(i, i + 2))) {
 				return false;
 			}
 		}
 		ArrayList<String> candidates = new ArrayList<>();
-		getAllNextLevels(level, 0, new StringBuilder(), candidates, map);
-		for(String candidate : candidates) {
-			if(helper(candidate, map)) {
+		getAllNextLevels(level, new StringBuilder(), candidates, map);
+		for (String candidate : candidates) {
+			if (helper(candidate, map)) {
 				return true;
 			}
 		}
-		return false;		
+		return false;
+	}
+
+	private void getAllNextLevels(String level, StringBuilder sb, ArrayList<String> candidates,
+			Map<String, List<String>> map) {
+		if (level.length() == 1) {
+			candidates.add(sb.toString());
+			return;
+		}
+		String key = level.substring(0, 2);
+		if (map.containsKey(key)) {
+			List<String> vals = map.get(key);
+			for (String transition : vals) {
+				sb.append(transition);
+				getAllNextLevels(level.substring(1), sb, candidates, map);
+				sb.deleteCharAt(sb.length() - 1);
+			}
+		}
 	}
 }
