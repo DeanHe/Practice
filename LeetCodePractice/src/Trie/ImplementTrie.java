@@ -7,15 +7,6 @@ package Trie;
  * trie.startsWith("lint"); will return true
  */
 public class ImplementTrie {
-	class TrieNode {
-	    TrieNode[] arr;
-	    boolean isEnd;
-	    // Initialize your data structure here.
-	    public TrieNode() {
-	        arr = new TrieNode[26];
-	        isEnd = false;
-	    }
-	}
 	private TrieNode root;
 
     public ImplementTrie() {
