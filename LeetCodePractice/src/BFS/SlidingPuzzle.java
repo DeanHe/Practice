@@ -1,4 +1,7 @@
 package BFS;
+
+import java.util.*;
+
 /*On a 2x3 board, there are 5 tiles represented by the integers 1 through 5, and an empty square represented by 0.
 
 A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.
@@ -41,10 +44,56 @@ board will be a 2 x 3 array as described above.
 board[i][j] will be a permutation of [0, 1, 2, 3, 4, 5].*/
 public class SlidingPuzzle {
 	/**
-     * @param board: the given board
-     * @return:  the least number of moves required so that the state of the board is solved
-     */
-    public int slidingPuzzle(int[][] board) {
-        // write your code here
-    }
+	 * @param board:
+	 *            the given board
+	 * @return: the least number of moves required so that the state of the
+	 *          board is solved
+	 */
+	public int slidingPuzzle(int[][] board) {
+		// write your code here
+		String start = "";
+		for (int[] row : board) {
+			for (int num : row) {
+				start += num;
+			}
+		}
+		String target = "123450";
+		Set<String> visited = new HashSet<>();
+		Queue<String> queue = new LinkedList<>();
+		queue.offer(start);
+		visited.add(start);
+		int[] dirs = { -1, 1, -3, 3 };
+		int move = 0;
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			for (int i = 0; i < size; i++) {
+				String cur = queue.poll();
+				if (cur.equals(target)) {
+					return move;
+				}
+				int zeroIdx = cur.indexOf("0");
+				for (int k = 0; k < dirs.length; k++) {
+					int nextIdx = zeroIdx + dirs[k];
+					if (nextIdx < 0 || nextIdx >= cur.length() || (zeroIdx == 2 && nextIdx == 3) || (zeroIdx == 3 && nextIdx == 2)) {
+						continue;
+					}
+					String nb = swap(cur, zeroIdx, nextIdx);
+					if (!visited.contains(nb)) {
+						visited.add(nb);
+						queue.offer(nb);
+					}
+				}
+			}
+			move++;
+		}
+		return -1;
+	}
+
+	private String swap(String s, int i, int j) {
+		char[] arr = s.toCharArray();
+		char temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+		return String.valueOf(arr);
+	}
 }
