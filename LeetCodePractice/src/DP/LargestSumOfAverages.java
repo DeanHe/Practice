@@ -42,7 +42,7 @@ public class LargestSumOfAverages {
 		}
 		for(int i = k - 1; i < n; i++){
 			// transition: dp[k][i] = max(dp[k - 1][j] + avg(A[j + 1] ~ A[i]))
-			mem[k][n] = Math.max(mem[k][n], dfs(A, preSum, mem, i, k - 1) + (preSum[n] - preSum[i]) / (n - i));
+			mem[k][n] = Math.max(mem[k][n], dfs(A, preSum, mem, k - 1, i) + (preSum[n] - preSum[i]) / (n - i));
 		}
 		return mem[k][n];
 	}
