@@ -73,7 +73,6 @@ public class OpenTheLock {
             char[] tempChars = rotate(c);
             sb.setCharAt(i, tempChars[0]);
             nbs.add(sb.toString());
-            sb = new StringBuilder(s);
             sb.setCharAt(i, tempChars[1]);
             nbs.add(sb.toString());
         }

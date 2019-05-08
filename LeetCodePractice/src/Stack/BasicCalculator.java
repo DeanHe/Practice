@@ -20,51 +20,44 @@ Input: "(1+(4+5+2)-3)+(6+8)"
 Output: 23*/
 public class BasicCalculator {
 	public int calculate(String s) {
-		if(s == null || s.length() == 0){
+		if (s == null || s.length() == 0) {
 			return 0;
 		}
 		Stack<Integer> stack = new Stack<>();
-        int len = s.length();
-        int cur = 0;
-        char sign = '+';
-        for(int i = 0; i < len; i++){
-        	char c = s.charAt(i);
-        	if(Character.isDigit(c)){
-        		cur = cur * 10 + c - '0';
-        	} else if (c == '(') {
-				int parenthese_count = 0, parenthese_start_pos = i;
-				for(; i < len; i++){
-					if(s.charAt(i) == '('){
-						parenthese_count++;
-					}
-					if(s.charAt(i) == ')'){
-						parenthese_count--;
-					}
-					if(parenthese_count == 0){
-						break;
-					}
-				}
-				cur = calculate(s.substring(parenthese_start_pos + 1, i));
+		int len = s.length();
+		int res = 0;
+		int cur = 0;
+		int sign = 1;
+		for (int i = 0; i < len; i++) {
+			char c = s.charAt(i);
+			if (Character.isDigit(c)) {
+				cur = cur * 10 + c - '0';
+			} else if (c == '+') {
+				res += sign * cur;
+				cur = 0;
+				sign = 1;
+			} else if (c == '-') {
+				res += sign * cur;
+				cur = 0;
+				sign = -1;
+			} else if (c == '(') {
+				// we push the result first, then sign;
+				stack.push(res);
+				stack.push(sign);
+				// reset the sign and result for the value in the parenthesis
+				sign = 1;
+				res = 0;
+			} else if (c == ')') {
+				res += sign * cur;
+				cur = 0;
+				res *= stack.pop(); // stack.pop() is the sign before the parenthesis
+				res += stack.pop(); // stack.pop() now is the result calculated before the parenthesis
 			}
-        	if((!Character.isDigit(c) && s.charAt(i) != ' ') || i == len - 1){
-        		if(sign == '+'){
-        			stack.push(cur);
-        		} else if(sign == '-'){
-        			stack.push(-cur);
-        		} else if(sign == '*'){
-        			stack.push(stack.pop() * cur);
-        		} else if(sign == '/'){
-        			stack.push(stack.pop() / cur);
-        		}
-        		sign = s.charAt(i);
-        		cur = 0;
-        	}
-        }
-        int res = 0;
-        for(int i : stack){
-        	res += i;
-        }
-        return res;  
+		}
+		if (cur != 0) {
+			res += sign * cur;
+		}
+		return res;
 	}
 
 }
