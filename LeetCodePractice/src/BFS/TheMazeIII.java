@@ -1,30 +1,34 @@
 package BFS;
-/*There is a ball in a maze with empty spaces and walls. 
-The ball can go through empty spaces by rolling up, down, left or right, but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction.
-
-Given the ball's start position, the destination and the maze, find the shortest distance for the ball to stop at the destination. The distance is defined by the number of empty spaces traveled by the ball from the start position (excluded) to the destination (included). If the ball cannot stop at the destination, return -1.
-
-The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls. The start and destination coordinates are represented by row and column indexes.
+/*
+There is a ball in a maze with empty spaces and walls. The ball can go through empty spaces by rolling up (u), down (d), left (l) or right (r), but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction. There is also a hole in this maze. The ball will drop into the hole if it rolls on to the hole.
+Given the ball position, the hole position and the maze, find out how the ball could drop into the hole by moving the shortest distance. The distance is defined by the number of empty spaces traveled by the ball from the start position (excluded) to the hole (included). Output the moving directions by using 'u', 'd', 'l' and 'r'. Since there could be several different shortest ways, you should output the lexicographically smallest way. If the ball cannot reach the hole, output "impossible".
+The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls. The ball and the hole coordinates are represented by row and column indexes.
 
 Example
-Given:
-a maze represented by a 2D array
+Example 1:
 
-0 0 1 0 0
-0 0 0 0 0
-0 0 0 1 0
-1 1 0 1 1
-0 0 0 0 0
+Input:
+[[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,0,0,0]]
+[4,3]
+[0,1]
 
-start coordinate (rowStart, colStart) = (0, 4)
-destination coordinate (rowDest, colDest) = (4, 4)
+Output:
+"lul"
+Example 2:
 
-Return:12
+Input:
+[[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,0,0,0]]
+[0,0]
+[1,1]
+[2,2]
+[3,3]
+Output:
+"impossible"
 Notice
-1.There is only one ball and one destination in the maze.
-2.Both the ball and the destination exist on an empty space, and they will not be at the same position initially.
+1.There is only one ball and one hole in the maze.
+2.Both the ball and hole exist on an empty space, and they will not be at the same position initially.
 3.The given maze does not contain border (like the red rectangle in the example pictures), but you could assume the border of the maze are all walls.
-4.The maze contains at least 2 empty spaces, and both the width and height of the maze won't exceed 100.
+4.The maze contains at least 2 empty spaces, and the width and the height of the maze won't exceed 30.
 */
 
 import java.util.*;

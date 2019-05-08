@@ -39,7 +39,7 @@ public class WordLadderII {
        dict.add(end);
        bfs(start, end, dict, neighborsMap, distance);
        List<String> path = new ArrayList<>();
-       dfs(start, end, neighborsMap, distance, res, path);
+       dfs(end, start, neighborsMap, distance, res, path);
        return res;
    }
    private void bfs(String start, String end, Set<String> dict, Map<String, List<String>> neighborsMap, Map<String, Integer> distance){
@@ -68,9 +68,9 @@ public class WordLadderII {
        }
    }
    
-   private void dfs(String start, String current, Map<String, List<String>> neighborsMap, Map<String, Integer> distance, List<List<String>> res, List<String> path){
+   private void dfs(String current, String target, Map<String, List<String>> neighborsMap, Map<String, Integer> distance, List<List<String>> res, List<String> path){
        path.add(current);
-       if(current.equals(start)){
+       if(current.equals(target)){
            Collections.reverse(path);
            res.add(new ArrayList<String>(path));
            Collections.reverse(path);
@@ -78,7 +78,7 @@ public class WordLadderII {
            List<String> neighbors = neighborsMap.get(current);
            for(String nb : neighbors){
                if(distance.containsKey(nb) && distance.get(current) == distance.get(nb) + 1){
-                   dfs(start, nb, neighborsMap, distance, res, path);   
+                   dfs(target, nb, neighborsMap, distance, res, path);   
                }
            }
        }

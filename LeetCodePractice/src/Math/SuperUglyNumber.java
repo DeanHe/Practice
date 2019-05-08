@@ -14,7 +14,8 @@ Note:
 1 is a super ugly number for any given primes.
 The given numbers in primes are in ascending order.
 0 < k ≤ 100, 0 < n ≤ 106, 0 < primes[i] < 1000.
-The nth super ugly number is guaranteed to fit in a 32-bit signed integer.*/
+The nth super ugly number is guaranteed to fit in a 32-bit signed integer.
+similar to find Kth element in N sorted List*/
 public class SuperUglyNumber {
 	public int nthSuperUglyNumber(int n, int[] primes) {
 		int[] ugly = new int[n];

@@ -60,13 +60,7 @@ public class ShortestPathToTheDestination {
     private boolean isValid(int[][] targetMap, int x, int y){
         int rows = targetMap.length;
         int cols = targetMap[0].length;
-        if(x < 0 || x >= rows){
-            return false;
-        }
-        if(y < 0 || y >= cols){
-            return false;
-        }
-        if(targetMap[x][y] == 1){
+        if(x < 0 || x >= rows || y < 0 || y >= cols || targetMap[x][y] == 1){
             return false;
         }
         return true;
