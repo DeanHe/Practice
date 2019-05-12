@@ -63,7 +63,7 @@ public class SimilarStringGroups {
             	diff++;
             	if(diff == 1){
             		c1 = s1.charAt(i);
-            		c2 = s1.charAt(i);
+            		c2 = s2.charAt(i);
             	} else if(diff == 2){
             		if(s1.charAt(i) != c2 || s2.charAt(i) != c1){
             			return false;
