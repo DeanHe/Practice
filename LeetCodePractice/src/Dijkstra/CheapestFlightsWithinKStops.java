@@ -1,4 +1,4 @@
-package BFS;
+package Dijkstra;
 
 import java.util.*;
 /*There are n cities connected by m flights. Each fight starts from city u and arrives at v with a price w.
