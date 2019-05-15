@@ -23,14 +23,6 @@ Notice
 import java.util.*;
 
 public class NetworkDelayTime {
-	class Node {
-		int index, dist;
-
-		public Node(int index, int dist) {
-			this.index = index;
-			this.dist = dist;
-		}
-	}
 
 	/**
 	 * @param times:
