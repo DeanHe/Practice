@@ -57,7 +57,7 @@ public class ReachableNodesInSubdividedGraph {
 			graph.get(edge[0]).add(new Node(edge[1], edge[2]));
 			graph.get(edge[1]).add(new Node(edge[0], edge[2]));
 		}
-		PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.dist - b.dist);
+		PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> b.dist - a.dist);
 		pq.offer(new Node(0, M));
 		while(!pq.isEmpty()){
 			Node cur = pq.poll();
@@ -69,7 +69,7 @@ public class ReachableNodesInSubdividedGraph {
 				List<Node> neighbors = graph.get(cur.index);
 				for (Node nb : neighbors) {
 					int remainMove = cur.dist - nb.dist - 1;
-					if (!moveMap.containsKey(nb.index) && remainMove > 0) {
+					if (!moveMap.containsKey(nb.index) && remainMove >= 0) {
 						pq.offer(new Node(nb.index, remainMove));
 					}
 				}
@@ -80,13 +80,6 @@ public class ReachableNodesInSubdividedGraph {
 			int remainMove1 = moveMap.getOrDefault(edge[0], 0);
 			int remainMove2 = moveMap.getOrDefault(edge[0], 0);
 			res += Math.min(remainMove1 + remainMove2, edge[2]);
-			if(moveMap.containsKey(edge[0]) && moveMap.containsKey(edge[1])){
-				res += edge[2];
-			} else if(moveMap.containsKey(edge[0]) && !moveMap.containsKey(edge[1])){
-				res += Math.min(moveMap.get(edge[0]), edge[2]);
-			} else if(moveMap.containsKey(edge[1]) && !moveMap.containsKey(edge[0])){
-				res += Math.min(moveMap.get(edge[1]), edge[2]);
-			}
 		}
 		return res;
     }

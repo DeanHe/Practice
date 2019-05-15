@@ -28,14 +28,33 @@ public class Solution {
 		graph.put(9, Arrays.asList(3));
 		List<Integer> path = solution.getShortestPath(graph, 1, 6);
 		System.out.println(Arrays.toString(path.toArray()));*/
-		int a = solution.greateCommonDivisor(2, 3);
+		Map<String, Character> map = new HashMap<>();
+		map.put(".-", 'a');
+		map.put("-.", 'b');
+		map.put(".-.", 'c');
+		String a = solution.translate(".-.-.-.", map);
 		int x = 1;
 	}
-	private int greateCommonDivisor(int A, int B) {
-		if(B == 0){
-			return A;
-		} else {
-			return greateCommonDivisor(B, A % B);
+	public String translate(String code, Map<String, Character> map){
+		StringBuilder sb = new StringBuilder();
+		dfs(code, map, sb);
+		return sb.toString();
+	}
+	private boolean dfs(String code, Map<String, Character> map, StringBuilder sb){
+		if(code.length() == 0){
+			return true;
 		}
+		int len = code.length();
+		for(int i = 1; i <= len; i++){
+			String sub = code.substring(0, i);
+			if(map.containsKey(sub)){
+				sb.append(map.get(sub));
+				if(dfs(code.substring(i), map, sb)){
+					return true;
+				}
+				sb.delete(sb.length() - sub.length() + 1, sb.length());
+			}
+		}
+		return false;
 	}
 }
