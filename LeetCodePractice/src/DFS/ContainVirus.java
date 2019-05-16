@@ -41,8 +41,26 @@ The number of rows and columns of grid will each be in the range [1, 50].
 Each grid[i][j] will be either 0 or 1.
 Throughout the described process, there is always a contiguous viral region that will infect strictly more uncontaminated squares in the next round.
 */
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class ContainVirus {
+	Set<Integer> visited;
+	List<Set<Integer>> affectedRegions;
+	List<Integer> perimeters;
+	int[][] grid;
+	int rows, cols;
+	int[] dir = {0, 1, 0, -1, 0};
 	public int containVirus(int[][] grid) {
-        
+        this.grid = grid;
+        rows = grid.length;
+        cols = grid[0].length;
+        int res = 0;
+        while(true){
+        	visited = new HashSet<>();
+        	
+        }
     }
 }
