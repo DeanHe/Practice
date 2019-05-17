@@ -42,25 +42,91 @@ Each grid[i][j] will be either 0 or 1.
 Throughout the described process, there is always a contiguous viral region that will infect strictly more uncontaminated squares in the next round.
 */
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ContainVirus {
 	Set<Integer> visited;
 	List<Set<Integer>> affectedRegions;
-	List<Integer> perimeters;
+	List<Set<Integer>> frontiers;
+	List<Integer> walls;
 	int[][] grid;
 	int rows, cols;
-	int[] dir = {0, 1, 0, -1, 0};
+	int[] dirs = {0, 1, 0, -1, 0};
 	public int containVirus(int[][] grid) {
         this.grid = grid;
         rows = grid.length;
         cols = grid[0].length;
         int res = 0;
+        //continuous simulation
         while(true){
         	visited = new HashSet<>();
-        	
+        	affectedRegions = new ArrayList<>();
+        	frontiers = new ArrayList<>();
+        	walls = new ArrayList<>();
+        	for(int r = 0; r < rows; r++){
+        		for(int c = 0; c < cols; c++){
+        			int idx = r * cols + c;
+        			if(grid[r][c] == 1 && !visited.contains(idx)){
+        				affectedRegions.add(new HashSet<>());
+        				frontiers.add(new HashSet<>());
+        				walls.add(0);
+        				dfs(r, c);
+        			}
+        		}
+        	}
+        	if(affectedRegions.isEmpty()){
+        		break;
+        	}
+        	int mostAffectRegionIdx = 0;
+        	for(int i = 0; i < frontiers.size(); i++){
+        		if(frontiers.get(mostAffectRegionIdx).size() < frontiers.get(i).size()){
+        			mostAffectRegionIdx = i;
+        		}
+        	}
+        	res += walls.get(mostAffectRegionIdx);
+        	// reset controlled affected region and update other affected region
+        	for(int i = 0; i < affectedRegions.size(); i++){
+        		Set<Integer> region = affectedRegions.get(i);
+        		if(i == mostAffectRegionIdx){
+        			for(int idx : region){
+        				int r = idx / cols;
+        				int c = idx % cols;
+        				grid[r][c] = -1;
+        			}
+        		} else {
+        			for(int idx : region){
+        				int r = idx / cols;
+        				int c = idx % cols;
+        				for(int j = 0; j + 1 < dirs.length; j++){
+        					int nb_r = r + dirs[j];
+        					int nb_c = c + dirs[j + 1];
+        					if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && grid[nb_r][nb_c] == 0){
+        						grid[nb_r][nb_c] = 1;
+        					}
+        				}
+        			}
+        		}
+        	}
         }
+        return res;
     }
+	private void dfs(int r, int c){
+		int idx = r * cols + c;
+		visited.add(idx);
+		int last = affectedRegions.size() - 1;
+		affectedRegions.get(last).add(idx);
+		for(int i = 0; i + 1 < dirs.length; i++){
+			int nb_r = r + dirs[i];
+			int nb_c = c + dirs[i + 1];
+			if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols){
+				int nb_idx = nb_r * cols + nb_c;
+				if(grid[nb_r][nb_c] == 1 && !visited.contains(nb_idx)){
+					dfs(nb_r, nb_c);
+				} else if(grid[nb_r][nb_c] == 0){
+					frontiers.get(last).add(nb_idx);
+					walls.set(last, walls.get(last) + 1);
+				}
+			}
+		}
+	}
 }
