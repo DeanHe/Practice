@@ -46,15 +46,17 @@ public class TargetSum {
             return 0;
         }
         int target = (S + totalSum) / 2;
-        int[] dp = new int[target + 1];
-        dp[0] = 1;
-        for(int i = 0; i < len; i++){
-            for(int j = target; j >= 0; j--){
-                if(j >= nums[i]){
-                    dp[j] += dp[j - nums[i]];
+        //dp[i][j] means number of subset from nums[0: j - 1] has sum equals to i
+        int[][] dp = new int[target + 1][len + 1];
+        dp[0][0] = 1;
+        for(int i = 0; i <= target; i++){
+            for(int j = 1; j <= len; j++){
+            	dp[i][j] = dp[i][j - 1];
+                if(i >= nums[j - 1]){
+                    dp[i][j] += dp[i - nums[j - 1]][j - 1];
                 }
             }
         }
-        return dp[target];     
+        return dp[target][len];     
     }
 }
