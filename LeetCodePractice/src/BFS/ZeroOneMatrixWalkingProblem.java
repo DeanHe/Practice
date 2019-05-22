@@ -31,7 +31,9 @@ public class ZeroOneMatrixWalkingProblem {
 		int res = srcDist[rows - 1][cols - 1];
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
-				res = Math.min(res, srcDist[r][c] + desDist[r][c]);
+				if(srcDist[r][c] != Integer.MAX_VALUE && desDist[r][c] != Integer.MAX_VALUE){
+					res = Math.min(res, srcDist[r][c] + desDist[r][c]);
+				}
 			}
 		}
 		return res == Integer.MAX_VALUE ? -1 : res;
@@ -48,8 +50,8 @@ public class ZeroOneMatrixWalkingProblem {
 				int cur_r = cur[0];
 				int cur_c = cur[1];
 				for (int j = 0; j < dirs.length - 1; j++) {
-					int nb_r = cur_r + dirs[0];
-					int nb_c = cur_c + dirs[1];
+					int nb_r = cur_r + dirs[j];
+					int nb_c = cur_c + dirs[j + 1];
 					if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols) {
 						if (dist[nb_r][nb_c] == Integer.MAX_VALUE) {
 							dist[nb_r][nb_c] = dist[cur_r][cur_c] + 1;
