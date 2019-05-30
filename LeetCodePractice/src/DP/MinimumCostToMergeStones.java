@@ -37,6 +37,37 @@ public class MinimumCostToMergeStones {
      */
     public int mergeStones(int[] stones, int K) {
         // write your code here
-    	List<Integer> xIntegers = Arrays.asList(a);
+    	int len = stones.length;
+    	if((len - 1) % (K - 1) != 0){
+    		return -1;
+    	}
+    	int[] preSum = new int[len + 1];
+    	for(int i = 1; i <= len; i++){
+    		preSum[i] = preSum[i - 1] + stones[i - 1];
+    	}
+    	int[][][] dp = new int[len][len][K + 1];
+    	//dp[i][j][k] means minimum cost to divide A[i:j] to k consecutive piles
+    	for(int i = 0; i < len; i++){
+    		for(int j = 0; j < len; j++){
+    			for(int k = 0; k <= K; k++){
+    				dp[i][j][k] = Integer.MAX_VALUE;
+    			}
+    		}
+    	}
+    	for(int i = 0; i < len; i++){
+    		dp[i][i][1] = 0;
+    	}
+    	for(int d = 1; d < len; d++){
+    		for(int i = 0; i + d < len; i++){
+    			int j = i + d;
+    			for(int k = 2; k <= K; k++){
+    				for(int m = i; m < j; m += K - 1){
+    					dp[i][j][k] = Math.min(dp[i][j][k], dp[i][m][1] + dp[m + 1][j][k - 1]);
+    				}
+    			}
+    			dp[i][j][1] = dp[i][j][K] + (preSum[j + 1] - preSum[i]);
+    		}
+    	}
+    	return dp[0][len - 1][1];
     }
 }
