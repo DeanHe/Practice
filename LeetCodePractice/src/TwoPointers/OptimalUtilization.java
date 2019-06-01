@@ -1,4 +1,5 @@
 package TwoPointers;
+
 /*Give two sorted arrays. To take a number from each of the two arrays, the sum of the two numbers needs to be less than or equal to k, and you need to find the index combination with the largest sum of the two numbers. Returns a pair of indexes containing two arrays. If you have multiple index answers with equal sum of two numbers, you should choose the index pair with the smallest index of the first array.
 
 The sum of the two numbers <= k
@@ -17,11 +18,14 @@ Output:
 [2, 3]*/
 public class OptimalUtilization {
 	/**
-     * @param A: a integer sorted array
-     * @param B: a integer sorted array
-     * @param K: a integer
-     * @return: return a pair of index
-     */
+	 * @param A:
+	 *            a integer sorted array
+	 * @param B:
+	 *            a integer sorted array
+	 * @param K:
+	 *            a integer
+	 * @return: return a pair of index
+	 */
 	public int[] optimalUtilization(int[] A, int[] B, int K) {
 		// write your code here
 		int[] res = { -1, -1 };
@@ -32,15 +36,13 @@ public class OptimalUtilization {
 				if (A[i] + B[j] <= K) {
 					if (temp < A[i] + B[j]) {
 						temp = A[i] + B[j];
-						res[0] = i;
-						res[1] = j;
-					} else if (temp == A[i] + B[j]) {
 						while (j > 0 && B[j] == B[j - 1]) {
 							j--;
 						}
-						if (res[0] > i) {
-							res[0] = i;
-							res[1] = j;
+						res[0] = i;
+						res[1] = j;
+						while (i + 1 < A.length && A[i] == A[i + 1]) {
+							i++;
 						}
 					}
 					break;
