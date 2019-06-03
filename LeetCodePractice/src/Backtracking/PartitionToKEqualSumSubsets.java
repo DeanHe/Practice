@@ -38,8 +38,7 @@ public class PartitionToKEqualSumSubsets {
 				if(dfs(nums, visited, i + 1, sum + nums[i], target, k)){
 					return true;
 				}
-				visited[i] = false;
-				
+				visited[i] = false;				
 			}
 		}
 		return false;
