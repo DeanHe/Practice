@@ -28,59 +28,45 @@ Note:
 1 <= N <= 10^9
 ExamRoom.seat() and ExamRoom.leave() will be called at most 10^4 times across all test cases.
 Calls to ExamRoom.leave(p) are guaranteed to have a student currently sitting in seat number p.*/
-public class ExamRoom {
-	PriorityQueue<Interval> pq;
+public class ExamRoomII {
     int N;
+    TreeSet<Integer> students;
 
-    class Interval {
-        int x, y, dist;
-        public Interval(int x, int y) {
-            this.x = x;
-            this.y = y;
-            if (x == -1) {
-                this.dist = y;
-            } else if (y == N) {
-                this.dist = N - 1 - x;
-            } else {
-                this.dist = Math.abs(x - y) / 2;    
-            }
-        }
-    }
     
-	public ExamRoom(int N) {
-		this.pq = new PriorityQueue<>((a, b) -> a.dist != b.dist? b.dist - a.dist : a.x - b.x);
+	public ExamRoomII(int N) {
         this.N = N;
-        pq.add(new Interval(-1, N));
+        this.students = new TreeSet<>();
     }
     
-	// O(logn): poll top candidate, split into two new intervals
     public int seat() {
     	int seat = 0;
-        Interval interval = pq.poll();
-        if (interval.x == -1) seat = 0;
-        else if (interval.y == N) seat = N - 1;
-        else seat = (interval.x + interval.y) / 2; 
-        
-        pq.offer(new Interval(interval.x, seat));
-        pq.offer(new Interval(seat, interval.y));
-            
+    	if(students.size() > 0){
+    		//Tenatively, dist is the max distance to the closest student,
+            //We start by considering the left-most seat.
+    		int dist = students.first();
+            Integer pre = null;
+            for(int s : students){
+            	if(pre != null){
+            		int d = (s - pre) / 2;
+            		if(d > dist){
+            			dist = d;
+            			seat = pre + d;
+            		}
+            	}
+            	pre = s;
+            }
+          //Considering the right-most seat.
+            if(N - 1 - students.last() > dist){
+            	seat = N - 1;
+        	}
+    	}
+    	//Add the student to our sorted TreeSet of positions.
+        students.add(seat);
         return seat;
     }
     
- // O(n)Find head and tail based on p. Delete and merge two ends
     public void leave(int p) {
-    	Interval head = null, tail = null;
-        List<Interval> intervals = new ArrayList<>(pq);
-        for (Interval interval : intervals) {
-            if (interval.x == p) tail = interval;
-            if (interval.y == p) head = interval;
-            if (head != null && tail != null) break;
-        }
-        // Delete
-        pq.remove(head);
-        pq.remove(tail);
-        // Merge
-        pq.offer(new Interval(head.x, tail.y));
+    	students.remove(p);
     }
 }
 /**
