@@ -31,5 +31,27 @@ If you couldn't get >= k pieces, return 0.
      */
     public int woodCut(int[] L, int k) {
         // write your code here
+    	int left = 1, right = 0;
+    	int res = 0;
+    	for(int l : L){
+    		right = Math.max(right, l);
+    	}
+    	while(left <= right){
+    		int mid = left + (right - left) / 2;
+    		if(count(L, mid) >= k){
+    			res = mid;
+    			left = mid + 1;
+    		} else {
+    			right = mid - 1;
+    		}
+    	}
+    	return res;
+    }
+    private int count(int[] L, int len) {
+    	int count = 0;
+    	for(int l : L){
+    		count += l / len;
+    	}
+    	return count;
     }
 }
