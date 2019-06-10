@@ -31,34 +31,34 @@ If we can't, it is either we successfully divide the array into m parts and the 
 */
 public class SplitArrayLargestSum {
 	public int splitArray(int[] nums, int m) {
-        long lowerBound = 0, upperBound = 0;
+        long start = 0, end = 0;
         for(int n : nums){
-        	lowerBound = Math.max(lowerBound, n);
-        	upperBound += n;
+        	start = Math.max(start, n);
+        	end += n;
         }
         if(m == 1){
-        	return (int)upperBound;
+        	return (int)end;
         }
-        while(lowerBound <= upperBound){
-        	long mid = lowerBound + (upperBound - lowerBound) / 2;
-        	if(canSplit(nums, m, mid)){
-        		lowerBound = mid + 1;
+        while(start <= end){
+        	long largestSubarraySum = start + (end - start) / 2;
+        	if(canSplit(nums, m, largestSubarraySum)){
+        		start = largestSubarraySum + 1;
         	} else {
-        		upperBound = mid - 1;
+        		end = largestSubarraySum - 1;
         	}
         }
-        return (int)lowerBound;
+        return (int)start;
     }
 	//nums can have m greedy subarray with sum less than max
-	private boolean canSplit(int[] nums, int m, long max){
-		int count = 0;
-		int sum = 0;
+	private boolean canSplit(int[] nums, int m, long largestSubarraySum){
+		int count = 0, sum = 0;
 		for(int n : nums){
 			sum += n;
-			if(sum > max){
+			if(sum + n > largestSubarraySum){
 				count++;
-				sum = n;
+				sum = 0;
 			}
+            sum += n;
 			if(count == m){
 				//means max is too small;
 				return true;

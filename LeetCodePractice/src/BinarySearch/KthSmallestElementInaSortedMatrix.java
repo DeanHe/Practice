@@ -38,7 +38,7 @@ public class KthSmallestElementInaSortedMatrix {
         int cols = matrix[0].length;
         int c = cols - 1; // iterate trough the last column from top row to bottom
         for(int r = 0; r < rows; r++){
-        	while(c>= 0 && matrix[r][c] < target){
+        	while(c>= 0 && matrix[r][c] > target){
         		c--;
         	}
         	count += c + 1;
