@@ -1,5 +1,5 @@
 package Sort;
-/*ind K-th largest element in an array.
+/*find K-th largest element in an array.
 
 Example
 Example 1:
