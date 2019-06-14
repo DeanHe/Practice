@@ -21,6 +21,7 @@ public class MaximalSquare {
     	}
     	int max = 0, rows = matrix.length, cols = matrix[0].length;
     	int[][] dp = new int[rows][cols];
+    	//init
     	for(int r = 0; r < rows; r++){
     		if(matrix[r][0] == 1){
     			max = 1;
@@ -34,7 +35,7 @@ public class MaximalSquare {
     		}
     		dp[0][c] = matrix[0][c];
     	}
-    	
+    	//transfer
     	for(int r = 1; r < rows; r++){
     		for(int c = 1; c < cols; c++){
     			if(matrix[r][c] == 1){

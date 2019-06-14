@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.Stack;
 
 import BFS.PrintShortestPathToTheDestination;
+import BST.QuadNode;
+import BST.QuadTree;
 import DFS.MorseCodeTranslation;
 import LinkedList.QueueWithFixedArray;
 import SweepLine.Interval;
