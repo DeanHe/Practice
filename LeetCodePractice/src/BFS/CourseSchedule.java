@@ -23,16 +23,16 @@ public class CourseSchedule {
 	//BFS
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // write your code here
-    	ArrayList[] graph = new ArrayList[numCourses];
+    	List<List<Integer>> graph = new ArrayList<>(numCourses);
     	   for(int i = 0; i < numCourses; i++){
-    	       graph[i] = new ArrayList();
+    	       graph.add(new ArrayList<>());
     	   }
     	   int[] indegree = new int[numCourses];
     	    
     	   for(int i =0; i < prerequisites.length; i++){
     	       int post = prerequisites[i][0];
     	       int pre = prerequisites[i][1];
-    	      graph[pre].add(post);
+    	       graph.get(pre).add(post);
     	      indegree[post]++;
     	   }
     	    
@@ -47,7 +47,7 @@ public class CourseSchedule {
     	   while(!queue.isEmpty()){
     	       int course = queue.poll();
     	       count++;
-    	       int size = graph[course].size();
+    	       int size = graph.get(course).size();
     	       for(int i = 0; i < size; i++){
     	               if(--indegree[i] == 0){
     	                   queue.offer(i);
@@ -59,15 +59,15 @@ public class CourseSchedule {
     
     //DFS
     public boolean canFinishDFS(int numCourses, int[][] prerequisites) {
-       ArrayList[] graph = new ArrayList[numCourses];
+       List<List<Integer>> graph = new ArrayList<>(numCourses);
        boolean[] visited = new boolean[numCourses];
        for(int i = 0; i < numCourses; i++){
-           graph[i] = new ArrayList<Integer>();
+           graph.add(new ArrayList<Integer>());
        }
        for(int i = 0; i < prerequisites.length; i++){
             int pre = prerequisites[i][1];
             int post = prerequisites[i][0];
-           graph[pre].add(post);
+           graph.get(pre).add(post);
        }
        for(int i = 0; i < numCourses; i++){
            if(!dfs(graph,visited,i)){
@@ -77,14 +77,14 @@ public class CourseSchedule {
        return true;
     }
      
-    private boolean dfs(ArrayList[] graph, boolean[] visited, int cur){
+    private boolean dfs(List<List<Integer>> graph, boolean[] visited, int cur){
         //true- no cycle; fasle - with cycle
         if(visited[cur]){
             return false;
         }
         visited[cur] = true; 
-        for(int i = 0; i < graph[cur].size(); i++){
-            if(!dfs(graph, visited, (int)graph[cur].get(i))){
+        for(int i = 0; i < graph.get(cur).size(); i++){
+            if(!dfs(graph, visited, (int)graph.get(cur).get(i))){
                 return false;
             }
         }
