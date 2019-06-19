@@ -15,7 +15,7 @@ Example 2:
 	Output:  2
 	
 	Explanation: 
-	LCS is "AC"
+	LCS is "AC" or "AB"
 */
 public class LongestCommonSubsequence {
 	/**

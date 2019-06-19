@@ -40,9 +40,9 @@ import java.util.Queue;
 		}
  */
 public class QuadTree {
-	public QuadNode convert(int[][] matrix, int len, int r, int c){
+	public QuadNode convert(int[][] matrix, int len, int r, int c) {
 		QuadNode root = new QuadNode();
-		if(len == 1){
+		if (len == 1) {
 			root.val = matrix[r][c];
 			return root;
 		}
@@ -51,6 +51,14 @@ public class QuadTree {
 		root.UR = convert(matrix, len, r, c + len);
 		root.LL = convert(matrix, len, r + len, c);
 		root.LR = convert(matrix, len, r + len, c + len);
+		int temp = root.UL.val;
+		if (root.UR.val == temp && root.LL.val == temp && root.LR.val == temp) {
+			root.val = temp;
+			root.UL = null;
+			root.UR = null;
+			root.LL = null;
+			root.LR = null;
+		}
 		return root;
 	}
 }

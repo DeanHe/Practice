@@ -1,4 +1,7 @@
 package Stack;
+
+import java.util.*;
+
 /*
 On a single threaded CPU, we execute some functions.  Each function has a unique id between 0 and N-1.
 We store logs in timestamp order that describe when a function is entered or exited.
@@ -26,5 +29,28 @@ Note:
 Two functions won't start or end at the same time.
 Functions will always log when they exit.*/
 public class ExclusiveTimeOfFunctions {
-
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int[] res = new int[n];
+        Stack<Integer> stack = new Stack<>(); //store id, not timestamp
+    	int preTime = 0; // store pre thread start time
+        for(String record : logs){
+        	String[] arr = record.split(":");
+        	int id = Integer.parseInt(arr[0]);
+        	String sign = arr[1];
+        	int curTime = Integer.parseInt(arr[2]); 
+        	if(sign.equals("start")){
+        		if(!stack.isEmpty()){
+        			int pre_id = stack.peek();
+        			res[pre_id] += curTime - preTime;
+        		}
+        		stack.push(id);
+        		preTime = curTime;
+        	} else {
+        		int cur_id = stack.pop();
+        		res[cur_id] += curTime + 1 - preTime;
+        		preTime = curTime + 1;
+        	}
+        }
+        return res;
+    }	
 }
