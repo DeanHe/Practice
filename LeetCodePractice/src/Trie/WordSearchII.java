@@ -14,6 +14,7 @@ public class WordSearchII {
 	 */
 	HashSet<String> set = new HashSet<>();
 	int rows, cols;
+	int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 	public ArrayList<String> wordSearchII(char[][] board, ArrayList<String> words) {
 		// write your code here
 		ArrayList<String> res = new ArrayList<>();
@@ -51,7 +52,6 @@ public class WordSearchII {
 			set.add(s);
 		}
 		visited[r][c] = true;
-		int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 		for (int i = 0; i < dirs.length; i++) {
 			dfs(board, visited, r + dirs[i][0], c + dirs[i][1], trie, s);
 		}

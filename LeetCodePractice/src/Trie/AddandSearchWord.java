@@ -46,12 +46,10 @@ public class AddandSearchWord {
 		for (int i = 0; i < len; i++) {
 			char c = word.charAt(i);
 			int index = c - 'a';
-			if (p.arr[index] != null) {
-				p = p.arr[index];
-			} else {
+			if (p.arr[index] == null) {
 				p.arr[index] = new TrieNode();
-				p = p.arr[index];
 			}
+			p = p.arr[index];
 		}
 		p.isEnd = true;
 	}
