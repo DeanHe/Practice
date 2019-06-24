@@ -31,13 +31,12 @@ public class SlidingWindowMaximum {
         if(nums.length == 0){
             return res;
         }
-        for(int i = 0; i < k - 1; i++){
+        for(int i = 0; i < nums.length; i++){
             inQueue(deque, nums[i]);
-        }
-        for(int i = k - 1; i < nums.length; i++){
-            inQueue(deque, nums[i]);
-            res.add(deque.peekFirst());
-            outQueue(deque, nums[i - k + 1]);
+            if(i >= k - 1){
+            	res.add(deque.peekFirst());
+                outQueue(deque, nums[i - k + 1]);
+            }
         }
         return res;
     }

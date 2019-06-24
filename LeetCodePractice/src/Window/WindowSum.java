@@ -10,12 +10,14 @@ public class WindowSum {
         if(nums == null || nums.length < k || k <= 0){
             return new int[0];
         }
+        int windowSum = 0;
         int[] res = new int[nums.length - k + 1];
-        for(int i = 0; i < k; i++){
-            res[0] += nums[i];
-        }
-        for(int i = 1; i + k - 1 < nums.length; i++){
-            res[i] = res[i - 1] - nums[i - 1] + nums[i + k - 1];
+        for(int i = 0; i < nums.length; i++){
+        	windowSum += nums[i];
+        	if(i >= k - 1){
+        		res[i - k + 1] = windowSum;
+        		windowSum -= nums[i - k + 1];
+        	}
         }
         return res;
     }
