@@ -53,7 +53,7 @@ public class ReplaceWords {
 			sb.append(trim(root, w));
 			sb.append(" ");
 		}
-		return sb.deleteCharAt(sb.length() - 1).toString();
+		return sb.toString().trim();
 	}
 
 	private String trim(TrieNode root, String word) {
