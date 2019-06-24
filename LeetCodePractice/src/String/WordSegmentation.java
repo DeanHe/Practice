@@ -36,4 +36,27 @@ public class WordSegmentation {
     	res.add(temp);
     	return res.toArray(new String[0]);
     }
+    
+    public String[] wordSegmentationWithSB(String s, int k) {
+        // Write your code here
+    	ArrayList<String> res = new ArrayList<>();
+    	String[] words =s.split("\\s+");
+    	StringBuilder sb = new StringBuilder();
+    	for(String word : words){
+    		if(sb.length() == 0){
+    			sb.append(word);
+    		} else {
+    			if(word.length() + sb.length() + 1 <= k){
+    				sb.append(" ");
+        			sb.append(word);
+        		} else {
+        			res.add(sb.toString());
+        			sb.setLength(0);
+        			sb.append(word);
+        		}
+    		}
+    	}
+    	res.add(sb.toString());
+    	return res.toArray(new String[0]);
+    }
 }
