@@ -41,9 +41,7 @@ Note:
 0 <= stations.length <= 500
 0 < stations[0][0] < stations[1][0] < ... < stations[stations.length-1][0] < target*/
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Currency;
 import java.util.PriorityQueue;
 
 public class MinimumNumberOfRefuelingStops {

@@ -16,11 +16,10 @@ public class GenerateParentheses {
 		List<String> res = new ArrayList<String>();
 		if (n < 1) {
 			return res;
-		} else {
-			String temp = new String();
-			helper(n, n, res, temp);
-			return res;
 		}
+		String temp = new String();
+		helper(n, n, res, temp);
+		return res;
 	}
 
 	public void helper(int left, int right, List<String> res, String temp) {
