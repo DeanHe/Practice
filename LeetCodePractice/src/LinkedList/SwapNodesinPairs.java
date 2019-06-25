@@ -12,10 +12,10 @@ public class SwapNodesinPairs {
         if(head == null || head.next == null){
         	return head;	        	
         }
-        ListNode fake = new ListNode(0);
-        fake.next = head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
         
-        ListNode pre = fake;
+        ListNode pre = dummy;
         ListNode cur = head;
         
         while(cur != null && cur.next != null){
@@ -27,6 +27,6 @@ public class SwapNodesinPairs {
         	cur = cur.next;        	
         }
         
-        return fake.next;	        
+        return dummy.next;	        
     }
 }
