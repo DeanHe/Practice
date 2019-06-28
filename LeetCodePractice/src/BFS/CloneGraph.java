@@ -36,10 +36,10 @@ public class CloneGraph {
     	if(node == null){
     		return null;
     	}
-    	UndirectedGraphNode root_copy = new UndirectedGraphNode(node.label);
+    	UndirectedGraphNode copyRoot = new UndirectedGraphNode(node.label);
     	// map between original node and copied node
     	Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
-    	map.put(node, root_copy);
+    	map.put(node, copyRoot);
     	Queue<UndirectedGraphNode> queue = new LinkedList<>();
     	queue.offer(node);
     	while (!queue.isEmpty()) {
@@ -58,6 +58,6 @@ public class CloneGraph {
 				cur_copy.neighbors.add(cur_nb_copy);
 			}
 		}
-    	return root_copy;
+    	return copyRoot;
     }
 }
