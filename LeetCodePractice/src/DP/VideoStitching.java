@@ -1,4 +1,7 @@
 package DP;
+
+import java.util.Arrays;
+
 /*ou are given a series of video clips from a sporting event that lasted T seconds.  These video clips can be overlapping with each other and have varied lengths.
 
 Each video clip clips[i] is an interval: it starts at time clips[i][0] and ends at time clips[i][1].  We can cut these clips into segments freely: for example, a clip [0, 7] can be cut into segments [0, 1] + [1, 3] + [3, 7].
@@ -42,5 +45,56 @@ Note:
 0 <= clips[i][0], clips[i][1] <= 100
 0 <= T <= 100*/
 public class VideoStitching {
-
+	public int videoStitching(int[][] clips, int T) {
+		int UPPER_BOUND = 101;
+        int[][] dp = new int[T + 1][T + 1];
+        for(int i = 0; i <= T; i++){
+            for(int j = 0; j <= T; j++){
+                dp[i][j] = UPPER_BOUND;
+            }
+        }
+        for(int[] clip : clips ){
+        	int c_start = clip[0];
+        	int c_end = clip[1];
+        	for(int l = 1; l <= T; l++){
+        		for(int i = 0; i + l <= T; i++){
+        			int j = i + l;
+        			if(c_end < i || c_start > j){
+        				continue;
+        			} else if(c_start <= i && j <= c_end){
+        				dp[i][j] = 1;
+        			}else if(j <= c_end){
+        				dp[i][j] = Math.min(dp[i][j], dp[i][c_start] + 1);
+        			} else if(c_start <= i){
+        				dp[i][j] = Math.min(dp[i][j], dp[c_end][j] + 1);
+        			} else {
+        				dp[i][j] = Math.min(dp[i][j], dp[i][c_start] + 1 + dp[c_end][j]);
+        			}
+        		}
+        	}
+        }
+        return dp[0][T]  == UPPER_BOUND ? -1 : dp[0][T];
+    }
+	public int videoStitchingByGreedy(int[][] clips, int T) {
+		int len = clips.length;
+		Arrays.sort(clips, (int[] a, int[] b) -> a[0] - b[0]);
+		int i = 0, count = 0;
+		int end = 0;
+		while(i < len){
+			if(clips[i][0] > end){
+				return -1;
+			}
+			int maxEnd = end;
+			while(i < len && clips[i][0] <= end){
+				maxEnd = Math.max(maxEnd, clips[i][1]);
+				i++;
+			}
+			count++;
+			end = maxEnd;
+			if(end >= T){
+				return count;
+			}
+		}
+		return -1;
+	}
 }
