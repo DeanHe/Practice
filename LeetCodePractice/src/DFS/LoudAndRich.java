@@ -41,18 +41,18 @@ richer[i]'s are all different.
 The observations in richer are all logically consistent.*/
 public class LoudAndRich {
 	int[] ans;
-	ArrayList<Integer>[] graph;
+	Map<Integer, List<Integer>> graph;
 	
 	public int[] loudAndRich(int[][] richer, int[] quiet) {
 		int len = quiet.length;
 		ans = new int[len];
-		graph = new ArrayList[len];
+		graph = new HashMap<>();
 		for(int i = 0; i < len; i++){
-			graph[i] = new ArrayList<>();
+			graph.put(i, new ArrayList<>());
 			ans[i] = -1;
 		}
-		for(int[] iter : richer){
-			graph[iter[1]].add(iter[0]);
+		for(int[] pair : richer){
+			graph.get(pair[1]).add(pair[0]);
 		}
 		for(int i = 0; i < len; i++){
 			dfs(quiet, i);
@@ -60,15 +60,17 @@ public class LoudAndRich {
         return ans;
     }
 	private int dfs(int[] quiet, int cur){
-		if(ans[cur] == -1){
-			ans[cur] = cur;
+		if(ans[cur] >= 0){
+			return ans[cur];
 		}
-		for(int richerNeighbor : graph[cur]){
+		int temp = cur;
+		for(int richerNeighbor : graph.get(cur)){
 			int candidate = dfs(quiet, richerNeighbor);
-			if(quiet[candidate] < quiet[ans[cur]]){
-				ans[cur] = candidate;
+			if(quiet[candidate] < quiet[temp]){
+				temp = candidate;
 			}
 		}
-		return ans[cur];
+		ans[cur] = temp;
+		return temp;
 	}
 }

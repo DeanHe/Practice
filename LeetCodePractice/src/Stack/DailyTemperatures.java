@@ -13,7 +13,7 @@ public class DailyTemperatures {
         // Write your code here
         int len = temperatures.length;
         int[] res = new int[len];
-        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>(); //stack is monotonically decreasing
         for(int i = 0; i < len; i++){
             while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]){
                 int pre_index = stack.pop();

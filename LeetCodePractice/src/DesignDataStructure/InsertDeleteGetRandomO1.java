@@ -61,12 +61,13 @@ public class InsertDeleteGetRandomO1 {
         	return false;
         }
         int pos = index.get(val);
-        if(pos != ls.size() - 1){ // not the last one than swap the last one with this val
-        	int lastVal = ls.get(ls.size() - 1);
-            ls.set(pos, lastVal);
-            index.put(lastVal, pos);
+        int last = ls.size() - 1;
+        if(pos != last){
+        	 int lastVal = ls.get(last);
+             ls.set(pos, lastVal);
+             index.put(lastVal, pos);
         }
-        ls.remove(ls.size() - 1);
+        ls.remove(last);
         index.remove(val);
         return true;
     }

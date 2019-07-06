@@ -24,6 +24,7 @@ arr will have length in range [1, 10].
 arr[i] will be a permutation of [0, 1, ..., arr.length - 1].*/
 
 //https://leetcode.com/problems/max-chunks-to-make-sorted/discuss/113528/Simple-Java-O(n)-Solution-with-detailed-explanation
+// huahua
 public class MaxChunksToMakeSorted {
 	public int maxChunksToSorted(int[] arr) {
 		int ans = 0, max = 0, len = arr.length;

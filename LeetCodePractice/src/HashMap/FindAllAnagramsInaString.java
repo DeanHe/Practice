@@ -21,7 +21,41 @@ public class FindAllAnagramsInaString {
      * @param p a non-empty string
      * @return a list of index
      */
-    public List<Integer> findAnagrams(String s, String p) {
+	public List<Integer> findAnagrams(String s, String p) {
+        // Write your code here
+        List<Integer> res = new ArrayList<>();
+        if(s == null || p == null || p.length() == 0 || s.length() == 0 || s.length() < p.length()){
+            return res;
+        }
+        int[] dict = new int[26];
+        char[] arr = p.toCharArray();
+        for(char c : arr){
+            dict[c - 'a']++;
+        }
+        int s_len = s.length();
+        int p_len = p.length();
+        int start = 0, end = 0, match = 0;
+        while(end < s_len){
+        	if(dict[s.charAt(end) - 'a'] > 0){
+        		match++;
+        	}
+        	dict[s.charAt(end) - 'a']--;
+        	end++;
+        	if(match == p_len){
+        		res.add(start);
+        	}
+        	if(end - start == p_len){
+        		if(dict[s.charAt(start) - 'a'] >= 0){
+        			match--;
+        		}
+        		dict[s.charAt(start) - 'a']++;
+        		start++;
+        	}
+        }
+        return res;
+    }
+	
+    public List<Integer> findAnagramsNaive(String s, String p) {
         // Write your code here
         List<Integer> res = new ArrayList<>();
         if(s == null || p == null || p.length() == 0 || s.length() == 0 || s.length() < p.length()){
