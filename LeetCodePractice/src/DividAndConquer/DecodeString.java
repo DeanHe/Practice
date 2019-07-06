@@ -35,7 +35,7 @@ public class DecodeString {
     	return getRepeat(stack);
     }
     private String getRepeat(Stack<String> stack) {
-    	StringBuilder reepeat = new StringBuilder();
+    	StringBuilder repeat = new StringBuilder();
     	int count = 1;
     	while(!stack.isEmpty()) {
     		String cur = stack.pop();
@@ -43,12 +43,12 @@ public class DecodeString {
     			count = Integer.parseInt(cur);
     			break;
     		} else {
-    			reepeat.insert(0, cur);
+    			repeat.insert(0, cur);
     		}
     	}
     	StringBuilder ans = new StringBuilder();
     	for(int i = 0; i < count; i++) {
-		    ans.append(reepeat.toString());
+		    ans.append(repeat.toString());
 	    }
     	return ans.toString();
     }
