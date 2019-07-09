@@ -37,7 +37,6 @@ public class PerfectRectangle {
         	}
         	area += (rect[2] - rect[0]) * (rect[3] - rect[1]);
         }
-        System.out.println();
         if(!set.contains(x1 + "" + y1) || !set.contains(x1 + "" + y2) || !set.contains(x2 + "" + y1) || !set.contains(x2 + "" + y2) || set.size() != 4){
         	return false;
         }

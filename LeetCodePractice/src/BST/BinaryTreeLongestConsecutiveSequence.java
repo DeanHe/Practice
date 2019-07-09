@@ -1,4 +1,7 @@
 package BST;
+
+import BST.BinaryTreeLongestConsecutiveSequenceII.ResultType;
+
 /*Given a binary tree, find the length of the longest consecutive sequence path.
 
 The path refers to any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The longest consecutive path need to be from parent to child (cannot be the reverse).
@@ -44,5 +47,38 @@ public class BinaryTreeLongestConsecutiveSequence {
     	int rightMax = dfs(root.right, root, length);
     	int temp = Math.max(leftMax, rightMax);
     	return Math.max(length, temp);
+    }
+    
+    ///////////////// using result type ////////////////////////
+    
+    public int longestConsecutive2(TreeNode root) {
+    	return dfs2(root).maxLen;
+    }
+    
+    private ResultType dfs2(TreeNode root){
+    	if(root == null){
+    		return new ResultType(0, 0);
+    	}
+    	ResultType leftResult = dfs2(root.left);
+    	ResultType rightResult = dfs2(root.right);
+    	int maxLen = 1, singleLen = 1;
+    	if(root.left != null && root.left.val == root.val + 1){
+    		singleLen = Math.max(singleLen, leftResult.singleLen + 1);
+    	}
+    	if(root.right != null && root.right.val == root.val + 1){
+    		singleLen = Math.max(singleLen, rightResult.singleLen + 1);
+    	}
+    	maxLen = singleLen;
+    	maxLen = Math.max(maxLen, Math.max(leftResult.maxLen, rightResult.maxLen));
+    	return new ResultType(maxLen, singleLen);
+    }
+    
+    class ResultType {
+    	//singleLen from this node, maxLen below this node.
+    	public int maxLen, singleLen;
+    	public ResultType(int maxLen, int singleLen){
+    		this.maxLen = maxLen;
+    		this.singleLen = singleLen;
+    	}
     }
 }

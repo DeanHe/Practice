@@ -9,7 +9,7 @@ Given A=[1,2,3] and B=[4,5], the median is 3.
 Challenge
 The overall run time complexity should be O(log (m+n)).*/
 public class MedianOfTwoSortedArrays {
-	public static double findMedianSortedArrays(int A[], int B[]) {
+	public double findMedianSortedArrays(int A[], int B[]) {
 		int len = A.length + B.length;
 		if (len % 2 == 0) {
 			// even
@@ -20,7 +20,7 @@ public class MedianOfTwoSortedArrays {
 		}
 	}
 
-	public static double findKth(int[] A, int aStart, int[] B, int bStart, int K) {
+	private double findKth(int[] A, int aStart, int[] B, int bStart, int K) {
 		// K is count start from 1
 		int aLen = A.length;
 		int bLen = B.length;

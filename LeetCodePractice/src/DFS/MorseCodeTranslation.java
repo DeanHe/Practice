@@ -23,10 +23,10 @@ public class MorseCodeTranslation {
 	}
 
 	private boolean dfs(String code, Map<String, Character> map, StringBuilder sb) {
-		if (code.length() == 0) {
+		int len = code.length();
+		if (len == 0) {
 			return true;
 		}
-		int len = code.length();
 		for (int i = 1; i <= len; i++) {
 			String sub = code.substring(0, i);
 			if (map.containsKey(sub)) {
@@ -34,7 +34,7 @@ public class MorseCodeTranslation {
 				if (dfs(code.substring(i), map, sb)) {
 					return true;
 				}
-				sb.delete(sb.length() - sub.length() + 1, sb.length());
+				sb.deleteCharAt(sb.length() - 1);
 			}
 		}
 		return false;
