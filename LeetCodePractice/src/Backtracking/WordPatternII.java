@@ -31,24 +31,24 @@ public class WordPatternII {
     	if(pattern.length() == 0){
     		return str.length() == 0;
     	}
-    	Character pc = pattern.charAt(0);
-    	if(map.containsKey(pc)){
-    		String matchedWord = map.get(pc);
-    		if(!str.startsWith(matchedWord)){
+    	Character c = pattern.charAt(0);
+    	if(map.containsKey(c)){
+    		String matched = map.get(c);
+    		if(!str.startsWith(matched)){
     			return false;
     		}
-    		return match(pattern.substring(1), str.substring(matchedWord.length()), map, visited);
+    		return match(pattern.substring(1), str.substring(matched.length()), map, visited);
     	}
     	for(int i = 0; i < str.length(); i++){
-    		String word = str.substring(0, i + 1);
-    		if(!visited.contains(word)){
-    			visited.add(word);
-    			map.put(pc, word);
-    			if(match(pattern.substring(1), str.substring(word.length()), map, visited)){
+    		String sub = str.substring(0, i + 1);
+    		if(!visited.contains(sub)){
+    			visited.add(sub);
+    			map.put(c, sub);
+    			if(match(pattern.substring(1), str.substring(sub.length()), map, visited)){
     				return true;
     			}
-    			map.remove(pc);
-    			visited.remove(word);
+    			map.remove(c);
+    			visited.remove(sub);
     		}
     	}
     	return false;

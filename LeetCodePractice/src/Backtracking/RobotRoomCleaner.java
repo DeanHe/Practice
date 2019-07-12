@@ -47,23 +47,24 @@ The initial direction of the robot will be facing up.
 All accessible cells are connected, which means the all cells marked as 1 will be accessible by the robot.
 Assume all four edges of the grid are all surrounded by wall.*/
 public class RobotRoomCleaner {
-	int[] direct = {0, -1, 0, 1, 0};
+	int[] dirs = {0, -1, 0, 1, 0};
 	public void cleanRoom(Robot robot) {
 		dfs(new HashSet<>(), 0, 0, 0, robot);
 	}
 	private void dfs(Set<String> visited, int r, int c, int facing, Robot robot) {
-		if (visited.contains(r + ":" + c)) {
-			return;
-		}
 		visited.add(r + ":" + c);
 		robot.clean();
-		for (int i = 0; i < direct.length - 1; i++) {
+		for (int i = 0; i < dirs.length - 1; i++) {
 			if (robot.move()) {
-				dfs(visited, r + direct[facing], c + direct[facing + 1], facing, robot);
-				backToPreviousPosition(robot);
+				int nb_r = r + dirs[facing];
+				int nb_c = c + dirs[facing + 1];
+				if(!visited.contains(nb_r + ":" + nb_c)){
+					dfs(visited, nb_r, nb_c, facing, robot);
+					backToPreviousPosition(robot);
+				}
 			}
 			facing++;
-			facing = facing % (direct.length - 1);
+			facing = facing % (dirs.length - 1);
 			robot.turnRight();
 		}
 	}

@@ -32,8 +32,8 @@ bottom will be a string with length in range [2, 8].
 allowed will have length in range [0, 200].
 Letters in all strings will be chosen from the set {'A', 'B', 'C', 'D', 'E', 'F', 'G'}.*/
 public class PyramidTransitionMatrix {
+	Map<String, List<String>> map = new HashMap<>();
 	public boolean pyramidTransition(String bottom, List<String> allowed) {
-		Map<String, List<String>> map = new HashMap<>();
 		for (String s : allowed) {
 			String key = s.substring(0, 2);
 			String value = s.substring(2);
@@ -43,10 +43,10 @@ public class PyramidTransitionMatrix {
 			}
 			map.get(key).add(value);
 		}
-		return helper(bottom, map);
+		return helper(bottom);
 	}
 
-	private boolean helper(String level, Map<String, List<String>> map) {
+	private boolean helper(String level) {
 		if (level.length() == 1) {
 			return true;
 		}
@@ -56,17 +56,16 @@ public class PyramidTransitionMatrix {
 			}
 		}
 		ArrayList<String> candidates = new ArrayList<>();
-		getAllNextLevels(level, new StringBuilder(), candidates, map);
+		getAllNextLevels(level, new StringBuilder(), candidates);
 		for (String candidate : candidates) {
-			if (helper(candidate, map)) {
+			if (helper(candidate)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private void getAllNextLevels(String level, StringBuilder sb, ArrayList<String> candidates,
-			Map<String, List<String>> map) {
+	private void getAllNextLevels(String level, StringBuilder sb, ArrayList<String> candidates) {
 		if (level.length() == 1) {
 			candidates.add(sb.toString());
 			return;
@@ -76,7 +75,7 @@ public class PyramidTransitionMatrix {
 			List<String> vals = map.get(key);
 			for (String transition : vals) {
 				sb.append(transition);
-				getAllNextLevels(level.substring(1), sb, candidates, map);
+				getAllNextLevels(level.substring(1), sb, candidates);
 				sb.deleteCharAt(sb.length() - 1);
 			}
 		}

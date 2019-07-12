@@ -5,56 +5,59 @@ Empty cells are indicated by the number 0.
 
 You may assume that there will be only one unique solution.*/
 public class SudokuSolver {
+	int rows, cols;
 	public void solveSudoku(char[][] board) {
 		if (board == null || board.length == 0) {
 			return;
 		}
+		rows = board.length;
+		cols = board[0].length;
 		helper(board, 0, 0);
 	}
 
-	public boolean helper(char[][] board, int i, int j) {
-		if (j == board[0].length) {
-			return helper(board, i + 1, 0);
+	public boolean helper(char[][] board, int r, int c) {
+		if (c == cols) {
+			return helper(board, r + 1, 0);
 		}
-		if (i == board.length) {
+		if (r == rows) {
 			return true;
 		}
-		if (board[i][j] == '.') {
+		if (board[r][c] == '.') {
 			for (int k = 1; k <= 9; k++) {
-				board[i][j] = (char) ('0' + k);
-				if (isValid(board, i, j)) {
-					if (helper(board, i, j + 1)) {
+				board[r][c] = (char) ('0' + k);
+				if (isValid(board, r, c)) {
+					if (helper(board, r, c + 1)) {
 						return true;
 					}
 				}
-				board[i][j] = '.';
+				board[r][c] = '.';
 			}
 			return false;
 		} else {
-			return helper(board, i, j + 1);
+			return helper(board, r, c + 1);
 		}
 	}
 
-	public boolean isValid(char[][] board, int i, int j) {
+	public boolean isValid(char[][] board, int r, int c) {
 		// check if col contains duplicates
-		for (int k = 0; k < board.length; k++) {
-			if (board[i][j] == board[k][j] && k != i) {
+		for (int k = 0; k < rows; k++) {
+			if (board[r][c] == board[k][c] && k != r) {
 				return false;
 			}
 		}
 		// check if row contains duplicates
-		for (int k = 0; k < board[0].length; k++) {
-			if (board[i][k] == board[i][j] && k != j) {
+		for (int k = 0; k < cols; k++) {
+			if (board[r][k] == board[r][c] && k != c) {
 				return false;
 			}
 		}
 		// check the 3*3 matrix contains duplicates
-		int startRow = 3 * (i / 3);
-		int startCol = 3 * (j / 3);
+		int startRow = 3 * (r / 3);
+		int startCol = 3 * (c / 3);
 		for (int m = 0; m < 3; m++) {
 			for (int n = 0; n < 3; n++) {
-				if (board[startRow + m][startCol + n] == board[i][j]
-						&& (startRow + m != i || startCol + n != j)) {
+				if (board[startRow + m][startCol + n] == board[r][c]
+						&& (startRow + m != r || startCol + n != c)) {
 					return false;
 				}
 			}

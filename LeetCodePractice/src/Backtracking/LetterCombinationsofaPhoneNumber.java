@@ -28,14 +28,16 @@ import java.util.*;
 public class LetterCombinationsofaPhoneNumber {
 	String[] matches = { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
 	public List<String> letterCombinations(String digits) {
-		StringBuilder temp = new StringBuilder();
 		List<String> res = new ArrayList<String>();
-		appendDigits(digits, 0, temp, res);
+		if(digits == null || digits.length() == 0){
+		    return res;
+		}
+		appendDigits(digits, 0, "", res);
 		return res;
 
 	}
 
-	public void appendDigits(String digits, int i, StringBuilder temp, List<String> res) {
+	public void appendDigits(String digits, int i, String temp, List<String> res) {
 		if (i == digits.length()) {
 			res.add(temp.toString());
 			return;
@@ -43,9 +45,8 @@ public class LetterCombinationsofaPhoneNumber {
 
 		String letters = matches[digits.charAt(i) - '2'];
 		for (int j = 0; j < letters.length(); j++) {
-			temp.append(letters.charAt(j));
-			appendDigits(digits, i + 1, temp, res);
-			temp.deleteCharAt(temp.length() - 1);
+			char c = letters.charAt(j);
+			appendDigits(digits, i + 1, temp + c, res);
 		}
 	}
 }

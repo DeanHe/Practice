@@ -58,6 +58,7 @@ public class SurroundedRegions {
    private void bfs(char[][] board, int r, int c){
        int rows = board.length;
        int cols = board[0].length;
+       int[] dirs = {0, 1, 0, -1, 0};
        Queue<int[]> queue = new LinkedList<>();
        queue.offer(new int[]{r, c});
        board[r][c] = '#';
@@ -65,21 +66,13 @@ public class SurroundedRegions {
            int[] cur = queue.poll();
            int cur_r = cur[0];
            int cur_c = cur[1];
-           if(cur_r > 0  && board[cur_r - 1][cur_c] == 'O'){
-               board[cur_r - 1][cur_c] = '#';
-               queue.offer(new int[]{cur_r - 1, cur_c});
-           }
-           if(cur_r < rows - 1 && board[cur_r + 1][cur_c] == 'O'){
-               board[cur_r + 1][cur_c] = '#';
-               queue.offer(new int[]{cur_r + 1, cur_c});
-           }
-           if(cur_c > 0 && board[cur_r][cur_c - 1] == 'O'){
-               board[cur_r][cur_c - 1] = '#';;
-               queue.offer(new int[]{cur_r, cur_c - 1});
-           }
-           if(cur_c < cols - 1 && board[cur_r][cur_c + 1] == 'O'){
-               board[cur_r][cur_c + 1] = '#';
-               queue.offer(new int[]{cur_r, cur_c + 1});
+           for(int i = 0; i < dirs.length - 1; i++){
+        	   int nb_r = cur_r + dirs[i];
+        	   int nb_c = cur_c + dirs[i + 1];
+        	   if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && board[nb_r][nb_c] == '0'){
+        		   board[nb_r][nb_c] = '#';
+        		   queue.offer(new int[]{nb_r, nb_c});
+        	   }
            }
        }
    }

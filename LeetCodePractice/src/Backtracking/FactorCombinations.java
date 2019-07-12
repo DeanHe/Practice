@@ -29,9 +29,6 @@ public class FactorCombinations {
 		return res;
 	}
 	private void dfs(List<List<Integer>> res, List<Integer> ls, int target, int start, int product){
-		if(start > target || product > target){
-			return;
-		}
 		if(product == target){
 			res.add(new ArrayList<>(ls));
 			return;
@@ -42,7 +39,7 @@ public class FactorCombinations {
 			}
 			if(target % i == 0){
 				ls.add(i);
-				dfs(res, ls, target, start, i * product);
+				dfs(res, ls, target, i, i * product);
 				ls.remove(ls.size() - 1);
 			}
 		}

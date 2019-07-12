@@ -47,10 +47,10 @@ public class MinimumSpanningTree {
 		HashMap<String, Integer> orderMap = new HashMap<>();
 		int n = 0;
 		for (Connection c : connections) {
-			if (orderMap.containsKey(c.city1)) {
+			if (!orderMap.containsKey(c.city1)) {
 				orderMap.put(c.city1, n++);
 			}
-			if (orderMap.containsKey(c.city2)) {
+			if (!orderMap.containsKey(c.city2)) {
 				orderMap.put(c.city2, n++);
 			}
 		}

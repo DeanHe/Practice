@@ -22,23 +22,23 @@ public class RestoreIPAddresses {
      * @param s the IP string
      * @return All possible valid IP addresses
      */
-    public ArrayList<String> restoreIpAddresses(String s) {
+    public List<String> restoreIpAddresses(String s) {
         // Write your code here
-        ArrayList<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<>();
         if(s == null || s.length() < 4 || s.length() > 12){
             return res;
         }
-        ArrayList<String> tempList = new ArrayList<>();
-        dfs(res, s, 0, tempList);
+        List<String> ls = new ArrayList<>();
+        dfs(res, s, 0, ls);
         return res;
     }
 
-    private void dfs(ArrayList<String> res, String s, int pos, ArrayList<String> tempList){
-	    if(tempList.size() == 4){
+    private void dfs(List<String> res, String s, int pos, List<String> ls){
+	    if(ls.size() == 4){
 		    if(pos == s.length()){
 			    StringBuilder sb = new StringBuilder();
-			    for(String substr : tempList){
-				    sb.append(substr);
+			    for(String sub : ls){
+				    sb.append(sub);
 				    sb.append('.');
 			    }
 			    sb.deleteCharAt(sb.length() - 1);
@@ -48,11 +48,11 @@ public class RestoreIPAddresses {
 	    }
 
 	    for(int i = pos + 1; i <= s.length() && i <= pos + 3; i++){
-		    String substr = s.substring(pos, i);
-		    if(isValidIpNum(substr)){
-			    tempList.add(substr);
-			    dfs(res, s, i, tempList);
-			    tempList.remove(tempList.size() - 1);
+		    String sub = s.substring(pos, i);
+		    if(isValidIpNum(sub)){
+		    	ls.add(sub);
+			    dfs(res, s, i, ls);
+			    ls.remove(ls.size() - 1);
 		    }
 	    }
     }

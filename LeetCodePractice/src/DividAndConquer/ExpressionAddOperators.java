@@ -36,7 +36,7 @@ public class ExpressionAddOperators {
         this.target = target;
         this.digits = num;
         this.res = new ArrayList<>();
-        dfs(0, 0, new StringBuilder(), 0);
+        dfs(0, 0, "", 0);
         return this.res;
     }
     
@@ -46,35 +46,35 @@ public class ExpressionAddOperators {
     ops: Represents the actual expression.
     previousValue: Previous operand of the expression along with the appropriate sign.
     */
-    private void dfs(int index, long value, StringBuilder ops, long previousValue){
+    private void dfs(int idx, long val, String ops, long preVal){
     	// Base case. Time = O(N)
-    	if(index == this.digits.length()){
-    		if(value == target){
-    			this.res.add(ops.toString());
+    	if(idx == this.digits.length()){
+    		if(val == target){
+    			this.res.add(ops);
     		}
     		return;
     	}
-    	long current_val = 0;
-    	String current_val_rep = null;
+    	long cur = 0;
+    	String curStr = null;
     	int len = this.digits.length();
-    	for(int i = index; i < len; i++){
+    	for(int i = idx; i < len; i++){
     		 // Operand
     		char c = this.digits.charAt(i);
-    		current_val = current_val * 10 + Character.getNumericValue(c);
-    		current_val_rep = Long.toString(current_val);
+    		cur = cur * 10 + Character.getNumericValue(c);
+    		curStr = Long.toString(cur);
     		// If this is the first index, simply recurse.
-    		if(index == 0){
-    			dfs(i + 1, current_val, new StringBuilder(ops).append(current_val_rep), current_val);
+    		if(idx == 0){
+    			dfs(i + 1, cur, ops + curStr, cur);
     		} else {
     			// ADD
-    			dfs(i + 1, value + current_val, new StringBuilder(ops).append("+").append(current_val_rep), current_val);
+    			dfs(i + 1, val + cur, ops + "+" + curStr, cur);
     			// SUBTRACT
-    			dfs(i + 1, value - current_val, new StringBuilder(ops).append("-").append(current_val_rep), -current_val);
+    			dfs(i + 1, val - cur, ops + "-" + curStr, -cur);
     			// MULTIPLY
-    			long preAcumulatedValue = value - previousValue;
-    			dfs(i + 1, preAcumulatedValue + (previousValue * current_val), new StringBuilder(ops).append("*").append(current_val_rep), previousValue * current_val);
+    			long before = val - preVal;
+    			dfs(i + 1, before + (preVal * cur), ops + "*" + curStr, preVal * cur);
     		}
-    		if(this.digits.charAt(i) == '0'){
+    		if(c == '0'){
     			break;
     		}
     	}
