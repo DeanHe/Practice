@@ -20,7 +20,7 @@ public class PrintShortestPathToTheDestination {
 	public List<Integer> getShortestPath(Map<Integer, List<Integer>> graph, int start, int end){
 		List<Integer> path = new ArrayList<>();
 		Set<Integer> visited = new HashSet<>();
-		Map<Integer, Integer> parent = new HashMap<>();
+		Map<Integer, Integer> parent = new HashMap<>();  //to:from
 		Queue<Integer> queue = new LinkedList<>();
 		queue.offer(start);
 		visited.add(start);

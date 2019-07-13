@@ -18,8 +18,7 @@ public class MedianOfKSortedArrays {
 			return 0.0;
 		}
 		int N = 0;
-		int K = nums.length;
-		PriorityQueue<Node> pq = new PriorityQueue<>(K, (a, b) -> {
+		PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> {
 			return a.val - b.val;
 		});
 		for(int r = 0; r < nums.length; r++){

@@ -24,7 +24,7 @@ public class KClosestPoints {
     public Point[] kClosest(Point[] points, Point origin, int k) {
         // write your code here
     	final Point global_origin = origin;
-        PriorityQueue<Point> priorityqueue = new PriorityQueue<Point>(k, new Comparator<Point>(){
+        PriorityQueue<Point> pq = new PriorityQueue<Point>(k, new Comparator<Point>(){
                 @Override
                 public int compare(Point a, Point b){
                     int diff = getDistance(b, global_origin) - getDistance(a, global_origin);
@@ -39,15 +39,15 @@ public class KClosestPoints {
             });
         
         for(int i = 0; i < points.length; i++){
-            priorityqueue.offer(points[i]);
-            if(priorityqueue.size() > k){
-                priorityqueue.poll();
+            pq.offer(points[i]);
+            if(pq.size() > k){
+                pq.poll();
             }
         }
-        k = priorityqueue.size();
+        k = pq.size();
         Point[] res = new Point[k];
-        while(!priorityqueue.isEmpty()){
-            res[--k] = priorityqueue.poll();
+        while(!pq.isEmpty()){
+            res[--k] = pq.poll();
         }
         return res;
     }

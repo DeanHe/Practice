@@ -29,6 +29,10 @@ Explanation: You don't need to remove any of the intervals since they're already
 Notice
 You may assume the interval's end point is always bigger than its start point.
 Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
+
+Actually, the problem is the same as "Given a collection of intervals, 
+find the maximum number of intervals that are non-overlapping." (the classic Greedy problem: Interval Scheduling). 
+With the solution to that problem, guess how do we get the minimum number of intervals to remove? : )
 */public class NonOverlappingIntervals {
 	
 	/**
@@ -36,29 +40,19 @@ Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap ea
      * @return: the minimum number of intervals you need to remove
      */
     public int eraseOverlapIntervals(List<Interval> intervals) {
-    	int len = intervals.size(), overlapCount = 0;
+    	int len = intervals.size(), nonOverlapCount = 1;
     	if(len == 0){
-    		return overlapCount;
+    		return 0;
     	}
-        Collections.sort(intervals, new Comparator<Interval>() {
-
-			@Override
-			public int compare(Interval o1, Interval o2) {
-				return o1.start - o1.start;
-			}
-		});
+        Collections.sort(intervals, (a, b) -> a.end - b.end);
         int preEnd = intervals.get(0).end;
         for(int i = 1; i < len; i++){
         	Interval cur = intervals.get(i);
-        	if(preEnd > cur.start){
-        		overlapCount++;
-        		if(preEnd > cur.end){
-        		    preEnd = cur.end;
-        		}
-        	}else {
+        	if(preEnd <= cur.start){
+        		nonOverlapCount++;
         		preEnd = cur.end;
         	}
         }
-		return overlapCount;
+		return len - nonOverlapCount;
     }
 }

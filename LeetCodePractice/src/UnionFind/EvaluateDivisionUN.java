@@ -46,9 +46,9 @@ public class EvaluateDivisionUN {
 			String endRoot = findRoot(parent, dist, de);
 			if (!startRoot.equals(endRoot)) {
 				res[i] = -1.0;
-				continue;
+			} else {
+				res[i] = dist.get(nu) / dist.get(de);
 			}
-			res[i] = dist.get(nu) / dist.get(de);
 		}
 		return res;
 	}

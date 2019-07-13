@@ -24,10 +24,14 @@ public class ShortestPathToTheDestination {
      * @param targetMap: 
      * @return: nothing
      */
+	int rows;
+    int cols;
     public int shortestPath(int[][] targetMap) {
         // Write your code here
         int step = 0;
-        boolean[][] visited = new boolean[targetMap.length][targetMap[0].length];
+        rows = targetMap.length;
+        cols = targetMap[0].length;
+        boolean[][] visited = new boolean[rows][cols];
         int[] direct = new int[]{0, 1, 0, -1, 0};
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{0, 0});
@@ -58,8 +62,6 @@ public class ShortestPathToTheDestination {
     }
     
     private boolean isValid(int[][] targetMap, int x, int y){
-        int rows = targetMap.length;
-        int cols = targetMap[0].length;
         if(x < 0 || x >= rows || y < 0 || y >= cols || targetMap[x][y] == 1){
             return false;
         }

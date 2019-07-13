@@ -49,18 +49,14 @@ public class TopKFrequentWords {
             return new String[0];
         }
         
-        HashMap<String, Integer> counter = new HashMap<>();
+        HashMap<String, Integer> freq = new HashMap<>();
         for (String word : words) {
-            if (counter.containsKey(word)) {
-                counter.put(word, counter.get(word) + 1);
-            } else {
-                counter.put(word, 1);
-            }
+            freq.put(word, freq.getOrDefault(word, 0) + 1);
         }
         
         PriorityQueue<Pair> Q = new PriorityQueue<Pair>(k, pairComparator);
-        for (String word : counter.keySet()) {
-            Pair newPair = new Pair(word, counter.get(word));
+        for (String word : freq.keySet()) {
+            Pair newPair = new Pair(word, freq.get(word));
             Q.add(newPair);
             if (Q.size() > k) {
             	Q.poll();

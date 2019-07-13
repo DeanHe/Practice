@@ -20,15 +20,10 @@ public class TopKFrequentElements {
 		// count the frequency for each element
 		HashMap<Integer, Integer> map = new HashMap<>();
 		for (int n : nums) {
-			if (map.containsKey(n)) {
-				int temp = map.get(n);
-				map.put(n, temp + 1);
-			} else {
-				map.put(n, 1);
-			}
+			map.put(n, map.getOrDefault(n, 0) + 1);
 		}
 		// create a min heap
-		PriorityQueue<Pair> queue = new PriorityQueue<>(new Comparator<Pair>() {
+		PriorityQueue<Pair> pq = new PriorityQueue<>(new Comparator<Pair>() {
 			public int compare(Pair a, Pair b) {
 				return a.count - b.count;
 			}
@@ -36,15 +31,15 @@ public class TopKFrequentElements {
 		// maintain a heap of size k.
 		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 			Pair temp = new Pair(entry.getKey(), entry.getValue());
-			queue.offer(temp);
-			if (queue.size() > k) {
-				queue.poll();
+			pq.offer(temp);
+			if (pq.size() > k) {
+				pq.poll();
 			}
 		}
 		// get all elements from the heap
 		List<Integer> res = new ArrayList<>();
-		while (!queue.isEmpty()) {
-			Pair temp = queue.poll();
+		while (!pq.isEmpty()) {
+			Pair temp = pq.poll();
 			res.add(temp.num);
 		}
 		// reverse the order
