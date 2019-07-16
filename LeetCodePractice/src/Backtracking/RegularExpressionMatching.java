@@ -69,6 +69,15 @@ public class RegularExpressionMatching {
 					dp[i + 1][j + 1] = dp[i][j];
 				}
 				if(p.charAt(j) == '*'){
+					if(p.charAt(j-1) != '.'){
+						if(p.charAt(j-1) == s.charAt(i)){
+							
+						} else {
+							
+						}
+					} else {
+						
+					}
 					if (p.charAt(j-1) != s.charAt(i) && p.charAt(j-1) != '.') {
 						//compare p[j - 2] equals s[i]
 						dp[i + 1][j + 1] = dp[i + 1][j - 1];

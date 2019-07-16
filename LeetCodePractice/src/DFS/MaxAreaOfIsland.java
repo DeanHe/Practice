@@ -20,9 +20,12 @@ Example 2:
 Given the above grid, return 0.
 Note: The length of each dimension in the given grid does not exceed 50.*/
 public class MaxAreaOfIsland {
+	int rows;
+	int cols;
+	int[] direct = { 0, 1, 0, -1, 0 };
 	public int maxAreaOfIsland(int[][] grid) {
-		int rows = grid.length;
-		int cols = grid[0].length;
+		rows = grid.length;
+		cols = grid[0].length;
 		int res = 0;
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
@@ -35,9 +38,6 @@ public class MaxAreaOfIsland {
 	}
 
 	private int dfs(int[][] grid, int r, int c) {
-		int rows = grid.length;
-		int cols = grid[0].length;
-		int[] direct = { 0, 1, 0, -1, 0 };
 		if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] == 0) {
 			return 0;
 		}

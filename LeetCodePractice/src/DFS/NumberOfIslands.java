@@ -27,13 +27,16 @@ public class NumberOfIslands {
 	 *            a boolean 2D matrix
 	 * @return an integer
 	 */
+	int[] direct = new int[]{0, 1, 0, -1, 0};
+	int rows;
+	int cols;
 	public int numIslands(boolean[][] grid) {
 		// DFS
-		int rows = grid.length;
+		rows = grid.length;
 		if (rows == 0) {
 			return 0;
 		}
-		int cols = grid[0].length;
+		cols = grid[0].length;
 		if (cols == 0) {
 			return 0;
 		}
@@ -50,10 +53,7 @@ public class NumberOfIslands {
 	}
 
 	private void dfs(boolean[][] grid, int r, int c) {
-		int rows = grid.length;
-		int cols = grid[0].length;
 		grid[r][c] = false;
-		int[] direct = new int[]{0, 1, 0, -1, 0};
 		for(int i = 0; i < direct.length - 1; i++){
 			int nb_r = r + direct[i];
 			int nb_c = c + direct[i + 1];
@@ -65,11 +65,9 @@ public class NumberOfIslands {
 
 	// Union Find way
 	public int numIslandsUN(boolean[][] grid) {
-		int rows = grid.length;
 		if (rows == 0) {
 			return 0;
 		}
-		int cols = grid[0].length;
 		if (cols == 0) {
 			return 0;
 		}
@@ -91,21 +89,13 @@ public class NumberOfIslands {
 				if (grid[r][c]) {
 					int temp1 = r * cols + c;
 					int temp2 = 0;
-					if (r > 0 && grid[r - 1][c]) {
-						temp2 = (r - 1) * cols + c;
-						unionFind.union(temp1, temp2);
-					}
-					if (r < rows - 1 && grid[r + 1][c]) {
-						temp2 = (r + 1) * cols + c;
-						unionFind.union(temp1, temp2);
-					}
-					if (c > 0 && grid[r][c - 1]) {
-						temp2 = r * cols + c - 1;
-						unionFind.union(temp1, temp2);
-					}
-					if (c < cols - 1 && grid[r][c + 1]) {
-						temp2 = r * cols + c + 1;
-						unionFind.union(temp1, temp2);
+					for(int i = 0; i < direct.length - 1; i++){
+						int nb_r = r + direct[i];
+						int nb_c = c + direct[i + 1];
+						if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && grid[nb_r][nb_c]){
+							temp2 = nb_r * cols + nb_c;
+							unionFind.union(temp1, temp2);
+						}
 					}
 				}
 			}
