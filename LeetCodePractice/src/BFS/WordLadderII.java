@@ -42,6 +42,7 @@ public class WordLadderII {
 		dict.add(end);
 		bfs(start, dict, graph, distance);
 		List<String> path = new ArrayList<>();
+		path.add(end);
 		dfs(end, start, graph, distance, res, path);
 		return res;
 	}
@@ -74,20 +75,20 @@ public class WordLadderII {
 
 	private void dfs(String current, String target, Map<String, List<String>> graph, Map<String, Integer> distance,
 			List<List<String>> res, List<String> path) {
-		path.add(current);
 		if (current.equals(target)) {
 			Collections.reverse(path);
 			res.add(new ArrayList<String>(path));
 			Collections.reverse(path);
-		} else {
-			List<String> neighbors = graph.get(current);
-			for (String nb : neighbors) {
-				if (distance.containsKey(nb) && distance.get(current) == distance.get(nb) + 1) {
-					dfs(target, nb, graph, distance, res, path);
-				}
+			return;
+		}
+		List<String> neighbors = graph.get(current);
+		for (String nb : neighbors) {
+			if (distance.containsKey(nb) && distance.get(current) == distance.get(nb) + 1) {
+				path.add(nb);
+				dfs(nb, target, graph, distance, res, path);
+				path.remove(path.size() - 1);
 			}
 		}
-		path.remove(path.size() - 1);
 	}
 
 	private List<String> findNeighbors(String s, Set<String> dict) {
