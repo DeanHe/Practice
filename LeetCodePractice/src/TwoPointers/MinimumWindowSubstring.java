@@ -28,10 +28,10 @@ public class MinimumWindowSubstring {
         	map.put(c, map.getOrDefault(c, 0) + 1);
         }
         int minLen = slen + 1; // handle res can be s case
-        int j = 0;
+        int l = 0;
         int count = 0;
-        for(int i = 0; i < slen; i++){
-        	char c = s.charAt(i);
+        for(int r = 0; r < slen; r++){
+        	char c = s.charAt(r);
         	if(map.containsKey(c)){
         		map.put(c, map.get(c) - 1);
         		if(map.get(c) >= 0){
@@ -39,18 +39,18 @@ public class MinimumWindowSubstring {
         		}
         	}
         	while (count == tlen) {
-				char left = s.charAt(j);
+				char left = s.charAt(l);
 				if(map.containsKey(left)){
 					map.put(left, map.get(left) + 1); // compensate back the character left
 					if(map.get(left) > 0){
-						if(minLen > i - j + 1){
-							minLen = i - j + 1;
-							res = s.substring(j, i + 1);
+						if(minLen > r - l + 1){
+							minLen = r - l + 1;
+							res = s.substring(l, r + 1);
 						}
 						count--;
 					}
 				}
-				j++;
+				l++;
 			}
         }
         return res;

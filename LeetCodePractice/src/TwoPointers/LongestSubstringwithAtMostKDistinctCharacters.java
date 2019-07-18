@@ -32,12 +32,7 @@ public class LongestSubstringwithAtMostKDistinctCharacters {
 		int len = s.length();
 		for (int end = 0; end < len; end++) {
 			char endChar = s.charAt(end);
-			if (charMap.containsKey(endChar)) {
-				int count = charMap.get(endChar);
-				charMap.put(endChar, count + 1);
-			} else {
-				charMap.put(endChar, 1);
-			}
+			charMap.put(endChar, charMap.getOrDefault(endChar, 0) + 1);
 			if (charMap.size() <= k) {
 				maxLen = Math.max(maxLen, end - start + 1);
 			} else {

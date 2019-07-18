@@ -78,7 +78,7 @@ public class ReachableNodesInSubdividedGraph {
 		int res = moveMap.size();
 		for(int[] edge : edges){
 			int remainMove1 = moveMap.getOrDefault(edge[0], 0);
-			int remainMove2 = moveMap.getOrDefault(edge[0], 0);
+			int remainMove2 = moveMap.getOrDefault(edge[1], 0);
 			res += Math.min(remainMove1 + remainMove2, edge[2]);
 		}
 		return res;

@@ -34,16 +34,16 @@ public class ProcessSequence {
 				index++;
 			}
 		}
-		int[] overlap = new int[index + 1];
+		int[] preSum = new int[index + 1];
 		for (Interval i : logs) {
-			overlap[posToIndex.get(i.start)]++;
-			overlap[posToIndex.get(i.end + 1)]--;
+			preSum[posToIndex.get(i.start)]++;
+			preSum[posToIndex.get(i.end + 1)]--;
 		}
 		for (int i = 1; i <= index; i++) {
-			overlap[i] += overlap[i - 1];
+			preSum[i] += preSum[i - 1];
 		}
 		for (int i : queries) {
-			ans.add(overlap[posToIndex.get(i)]);
+			ans.add(preSum[posToIndex.get(i)]);
 		}
 		return ans;
 	}
