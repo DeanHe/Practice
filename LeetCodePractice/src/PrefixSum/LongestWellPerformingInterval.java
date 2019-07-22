@@ -19,13 +19,18 @@ Explanation: The longest well-performing interval is [9,9,6].
 Constraints:
 
 1 <= hours.length <= 10000
-0 <= hours[i] <= 16*/
+0 <= hours[i] <= 16
+
+solution:
+1 find longest subarray with sum == 1
+2 if sum(array[0:n]) > 0, return n;
+*/
 public class LongestWellPerformingInterval {
 	public int longestWPI(int[] hours) {
         int len = hours.length;
         int res = 0;
         int sum = 0;
-        Map<Integer, Integer> visited = new HashMap<>(); // preSum : index
+        Map<Integer, Integer> visited = new HashMap<>(); // preSum :  preSum's end index
         for(int i = 0; i < len; i++){
             sum += hours[i] > 8 ? 1 : -1;
             if(sum > 0) {
