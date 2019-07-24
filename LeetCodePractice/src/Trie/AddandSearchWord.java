@@ -70,20 +70,19 @@ public class AddandSearchWord {
 		}
 		char c = word.charAt(pos);
 		if (c == '.') {
-			for (int i = 0; i < 26; i++) {
-				if (root.arr[i] != null) {
-					if (dfsSearch(root.arr[i], pos + 1, word)) {
+			for (TrieNode child : root.arr) {
+				if (child != null) {
+					if (dfsSearch(child, pos + 1, word)) {
 						return true;
 					}
 				}
 			}
 		} else {
-			int index = c - 'a';
-			if (root.arr[index] != null) {
-				return dfsSearch(root.arr[index], pos + 1, word);
-			} else {
-				return false;
-			}
+			int idx = c - 'a';
+			TrieNode child = root.arr[idx];
+			if (child != null) {
+				return dfsSearch(child, pos + 1, word);
+			} 
 		}
 		return false;
 	}
