@@ -1,4 +1,5 @@
-package DP;
+package Array;
+
 /*Given an array A of integers, return the number of non-empty continuous 
  subarrays that satisfy the following condition:
 The leftmost element of the subarray is not larger than other elements in the subarray.
@@ -22,6 +23,17 @@ Note:
 */
 public class NumberOfValidSubarrays {
 	int validSubarrays(int[] nums){
-		
+		int res = 0;
+		int len = nums.length;
+		for(int i = 0; i < len; i++){
+			for(int j = i; j < len; j++){
+				if(nums[j] < nums[i]){
+					break;
+				} else {
+					res++;
+				}
+			}
+		}
+		return res;
 	}
 }
