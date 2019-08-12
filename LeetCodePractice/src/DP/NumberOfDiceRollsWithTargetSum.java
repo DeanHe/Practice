@@ -44,14 +44,18 @@ Constraints:
 1 <= target <= 1000*/
 public class NumberOfDiceRollsWithTargetSum {
 	public int numRollsToTarget(int d, int f, int target) {
+		int mod = 1000000007;
 		int[][] dp = new int[d + 1][target + 1];
 		dp[0][0] = 1;
 		for(int c = 1; c <= d; c++) {
 			for(int t = 1; t <= target; t++) {
-				dp[c][t] = dp[c - 1][t];
-				for(int i = 1; i <= f; i++) {
-					if(t - i >= 0) {
-						dp[c][t] += dp[c - 1][t - i];
+				if(t > c * f){
+					continue;
+				} else {
+					for(int i = 1; i <= f; i++) {
+						if(t - i >= 0) {
+							dp[c][t] = (dp[c][t] + dp[c - 1][t - i]) % mod;
+						}
 					}
 				}
 			}
