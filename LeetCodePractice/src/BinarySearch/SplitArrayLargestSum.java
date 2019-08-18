@@ -53,7 +53,6 @@ public class SplitArrayLargestSum {
 	private boolean canSplit(int[] nums, int m, long largestSubarraySum){
 		int count = 0, sum = 0;
 		for(int n : nums){
-			sum += n;
 			if(sum + n > largestSubarraySum){
 				count++;
 				sum = 0;
