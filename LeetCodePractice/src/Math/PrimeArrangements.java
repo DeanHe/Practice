@@ -20,7 +20,10 @@ Output: 682289015
  
 Constraints:
 
-1 <= n <= 100*/
+1 <= n <= 100
+
+https://www.geeksforgeeks.org/sieve-of-eratosthenes/
+*/
 public class PrimeArrangements {
 	int MOD = 1000000007;
 	public int numPrimeArrangements(int n) {
