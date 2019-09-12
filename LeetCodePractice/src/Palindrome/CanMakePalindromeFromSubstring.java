@@ -12,8 +12,6 @@ Return an array answer[], where answer[i] is the result of the i-th query querie
 
 Note that: Each letter is counted individually for replacement so if for example s[left..right] = "aaa", and k = 2, we can only replace two of the letters.  (Also, note that the initial string s is never modified by any query.)
 
- 
-
 Example :
 
 Input: s = "abcda", queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]
