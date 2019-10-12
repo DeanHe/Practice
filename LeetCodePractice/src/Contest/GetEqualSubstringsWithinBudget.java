@@ -19,13 +19,21 @@ Input: s = "abcd", t = "acde", maxCost = 0
 Output: 1
 Explanation: You can't make any change, so the maximum length is 1.
  
-
 Constraints:
 1 <= s.length, t.length <= 10^5
 0 <= maxCost <= 10^6
 s and t only contain lower case English letters.*/
 public class GetEqualSubstringsWithinBudget {
 	public int equalSubstring(String s, String t, int maxCost) {
-        
+		int l = 0, res = 0, cost = 0;
+        for(int r = 0; r < s.length(); r++) {
+        	cost += Math.abs(s.charAt(r) - t.charAt(r));
+        	while(cost > maxCost) {
+        		cost -= Math.abs(s.charAt(l) - t.charAt(l));
+                l++;
+        	}
+        	res = Math.max(res, r - l + 1);
+        }
+        return res;
     }
 }
