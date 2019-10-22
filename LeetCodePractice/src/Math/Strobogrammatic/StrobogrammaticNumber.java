@@ -1,4 +1,4 @@
-package HashMap;
+package Math.Strobogrammatic;
 
 import java.util.*;
 /*A mirror number is a number that looks the same when rotated 180 degrees (looked at upside down).For example, the numbers "69", "88", and "818" are all mirror numbers.
