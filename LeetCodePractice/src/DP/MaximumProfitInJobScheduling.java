@@ -1,4 +1,4 @@
-package Contest;
+package DP;
 
 import java.util.*;
 
