@@ -1,5 +1,6 @@
 package Window;
 
+import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,42 +20,28 @@ Input: A = [1,2,1,3,4], K = 3
 Output: 3
 Explanation: Subarrays formed with exactly 3 different integers: [1,2,1,3], [2,1,3], [1,3,4].*/
 public class SubarraysWithKDifferentIntegers {
-	class Window {
-		Map<Integer, Integer> count;
-		int nonzero;
-		Window(){
-			count = new HashMap<>();
-		}
-		void add(int x){
-			count.put(x, count.getOrDefault(x, 0) + 1);
-			if(count.get(x) == 1){
-				nonzero++;
-			}
-		}
-		void remove(int x){
-			count.put(x, count.get(x) - 1);
-			if(count.get(x) == 0){
-				nonzero--;
-			}
-		}
-		int different(){
-			return nonzero;
-		}
-	}
 	public int subarraysWithKDistinct(int[] A, int K) {
-		Window w1 = new Window();
-        Window w2 = new Window();
-        int res = 0, left1 = 0, left2 = 0;
+		Map<Integer, Integer> map = new HashMap<>();
+        int res = 0, left = 0, uniqueCnt = 0, preDupCnt = 0;
         for(int right = 0; right < A.length; right++){
-        	w1.add(A[right]);
-            w2.add(A[right]);
-            while(w1.different() > K){
-        		w1.remove(A[left1++]);
+        	if(map.getOrDefault(A[right], 0) == 0){
+        		uniqueCnt++;
         	}
-        	while(w2.different() >= K){
-        		w2.remove(A[left2++]);
+        	map.put(A[right], map.getOrDefault(A[right], 0) + 1);
+        	if(uniqueCnt > K){
+        		map.put(A[left], map.get(A[left]) - 1);
+        		left++;
+        		uniqueCnt--;
+        		preDupCnt = 0;
         	}
-            res += left2 - left1;
+        	while(map.get(A[left]) > 1){
+        		map.put(A[left], map.get(A[left]) - 1);
+        		left++;
+        		preDupCnt++;
+        	}
+        	if(uniqueCnt == K){
+        		res += preDupCnt + 1;
+        	}
         }
         return res;
     }
