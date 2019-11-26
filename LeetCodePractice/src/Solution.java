@@ -1,8 +1,6 @@
 import java.util.*;
 
-import BST.ConstructBinarySearchTreeFromLevelOrderTraversals;
-import BST.TreeNode;
-import DP.MaxInterestEvent;
+import UnionFind.TheEarliestMomentWhenEveryoneBecomeFriends;
 
 public class Solution {
 
@@ -13,9 +11,10 @@ public class Solution {
 //		ConstructBinarySearchTreeFromLevelOrderTraversals sol = new ConstructBinarySearchTreeFromLevelOrderTraversals();
 //		TreeNode root = sol.constructTree(level);
 //		System.out.println(root.val);
-		MaxInterestEvent mie = new MaxInterestEvent();
+		TheEarliestMomentWhenEveryoneBecomeFriends mie = new TheEarliestMomentWhenEveryoneBecomeFriends();
 		int[][] events = {{8,9,5}, {9,12,4}, {12,14,2}, {8,12,7}, {13,16,3}, {14,15,4}};
-		int res = mie.arrangeEvent(events);
+		int[][] logs = {{20190101,0,1}, {20190104,3,4}, {20190107,2,3}, {20190211,1,5}, {20190224,2,4}, {20190301,0,3}, {20190312,1,2}, {20190322,4,5}};
+		int res = mie.earliestAcq(logs, 6);
 		System.out.println(res);
 	}
 }
