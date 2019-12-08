@@ -26,6 +26,7 @@ Note:
 public class NthMagicalNumber {
 	public int nthMagicalNumber(int N, int A, int B) {
         long leastCommonMultiple = A * B / greateCommonDivisor(A, B);
+        return (int) leastCommonMultiple;
     }
 	private int greateCommonDivisor(int A, int B) {
 		if(B == 0){

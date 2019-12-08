@@ -11,6 +11,6 @@ Result: "abcabc"
 The same letters are at least distance 3 from each other.*/
 public class RearrangeStringkDistanceApart {
 	public String rearrangeString(String str, int k) {
-		
+		return "";
 	}
 }

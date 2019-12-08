@@ -19,5 +19,6 @@ public class BackpackIX {
      */
     public double backpackIX(int n, int[] prices, double[] probability) {
         // write your code here
+        return 0;
     }
 }

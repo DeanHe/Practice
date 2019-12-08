@@ -27,15 +27,6 @@ Words will only consist of lowercase English letters.
 Queries will only consist of lowercase English letters.
 The number of queries is at most 40000.*/
 public class StreamOfCharacters {
-	class TrieNode {
-		boolean isEnd;
-		TrieNode[] child;
-
-		public TrieNode() {
-			child = new TrieNode[26];
-			isEnd = false;
-		}
-	}
 
 	TrieNode root;
 	StringBuilder buffer;
@@ -54,10 +45,10 @@ public class StreamOfCharacters {
 		for (int i = buffer.length() - 1; i >= 0; i--) {
 			char c = buffer.charAt(i);
 			int idx = c - 'a';
-			if (cur.child[idx] == null) {
+			if (cur.arr[idx] == null) {
 				return false;
 			}
-			cur = cur.child[idx];
+			cur = cur.arr[idx];
 			if (cur.isEnd) {
 				return true;
 			}
@@ -70,10 +61,10 @@ public class StreamOfCharacters {
 		TrieNode cur = root;
 		for (int i = len - 1; i >= 0; i--) {
 			int idx = word.charAt(i) - 'a';
-			if (cur.child[idx] == null) {
-				cur.child[idx] = new TrieNode();
+			if (cur.arr[idx] == null) {
+				cur.arr[idx] = new TrieNode();
 			}
-			cur = cur.child[idx];
+			cur = cur.arr[idx];
 		}
 		cur.isEnd = true;
 	}

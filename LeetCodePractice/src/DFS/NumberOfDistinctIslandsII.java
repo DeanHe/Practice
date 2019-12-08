@@ -57,5 +57,6 @@ public class NumberOfDistinctIslandsII {
      */
     public int numDistinctIslands2(int[][] grid) {
         // write your code here
+        return -1;
     }
 }

@@ -16,9 +16,8 @@ public class ImplementTrie {
     // Inserts a word into the trie.
     public void insert(String word) {
         TrieNode p = root;
-        int len = word.length();
-        for(int i = 0; i < len; i++){
-            char c = word.charAt(i);
+        char[] arr = word.toCharArray();
+        for(char c : arr){
             int index = c - 'a';
             if(p.arr[index] == null){
                 p.arr[index] = new TrieNode();
@@ -31,7 +30,7 @@ public class ImplementTrie {
     // Returns if the word is in the trie.
     public boolean search(String word) {
         TrieNode p = searchNode(word);
-        if(p != null && p.isEnd == true){
+        if(p != null && p.isEnd){
             return true;
         } else {
             return false;

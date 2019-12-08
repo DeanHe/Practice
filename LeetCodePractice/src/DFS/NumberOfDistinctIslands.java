@@ -39,5 +39,6 @@ public class NumberOfDistinctIslands {
      */
     public int numberofDistinctIslands(int[][] grid) {
         // write your code here
+        return -1;
     }
 }

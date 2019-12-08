@@ -37,6 +37,6 @@ board will have the same number of rows and columns, a number in the range [2, 3
 board[i][j] will be only 0s or 1s.*/
 public class TransformToChessboard {
 	public int movesToChessboard(int[][] board) {
-        
+        return -1;
     }
 }
