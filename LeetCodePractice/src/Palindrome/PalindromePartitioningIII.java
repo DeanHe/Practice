@@ -1,4 +1,4 @@
-package Contest;
+package Palindrome;
 
 import java.util.*;
 
@@ -32,45 +32,36 @@ import java.util.*;
         s only contains lowercase English letters.
 */
 public class PalindromePartitioningIII {
-    Map<String, Integer> mem = new HashMap<>();
-
     public int palindromePartition(String s, int k) {
         if (s == null || s.length() <= k) {
             return 0;
         }
+        char[] arr = s.toCharArray();
         int len = s.length();
-        int[][] dp = new int[k][len + 1];  //dp[i][j] means the minimum # of change for string s[0:j) with i cut
-        for (int i = 1; i <= len; i++) {
-            dp[0][i] = minChangeToPalin(s.substring(0, i));
-        }
-        for (int i = 1; i < k; i++) {
-            for (int j = i; j <= len; j++) {
-                dp[i][j] = Integer.MAX_VALUE;
-                for (int p = j; p >= i; p--) {
-                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][p - 1] + minChangeToPalin(s.substring(p - 1, j)));
+        int[][] minChange = new int[len][len]; //minChange[i][j] means the minimum change to make string s[i:j] palindrome
+        for (int l = 2; l <= len; l++) {
+            for (int i = 0, j = i + l - 1; j < len; i++, j++) {
+                if (arr[i] != arr[j]) {
+                    minChange[i][j] = minChange[i + 1][j - 1] + 1;
+                } else {
+                    minChange[i][j] = minChange[i + 1][j - 1];
                 }
             }
         }
-        return dp[k - 1][len];
-    }
-
-    private int minChangeToPalin(String s) {
-        if (s == null || s.length() == 0) {
-            return 0;
+        int[][] dp = new int[k + 1][len];  //dp[i][j] means the minimum # of change for string s[0:j] with i group
+        //init
+        for (int j = 0; j < len; j++) {
+            dp[1][j] = minChange[0][j];
         }
-        if (mem.containsKey(s)) {
-            return mem.get(s);
-        }
-        int res = 0;
-        int len = s.length();
-        int mid = len / 2;
-        char[] arr = s.toCharArray();
-        for (int i = 0; i < mid; i++) {
-            if (arr[i] != arr[len - 1 - i]) {
-                res++;
+        //transfer func
+        for (int p = 2; p <= k; p++) {
+            for (int j = p - 1; j < len; j++) {
+                dp[p][j] = Integer.MAX_VALUE;
+                for (int i = p - 1; i <= j; i++) {
+                    dp[p][j] = Math.min(dp[p][j], dp[p - 1][i - 1] + minChange[i][j]);
+                }
             }
         }
-        mem.put(s, res);
-        return res;
+        return dp[k][len - 1];
     }
 }
