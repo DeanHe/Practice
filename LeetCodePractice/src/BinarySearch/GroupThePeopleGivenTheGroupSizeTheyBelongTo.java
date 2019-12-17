@@ -1,4 +1,4 @@
-package Contest;
+package BinarySearch;
 
 import java.util.*;
 /*

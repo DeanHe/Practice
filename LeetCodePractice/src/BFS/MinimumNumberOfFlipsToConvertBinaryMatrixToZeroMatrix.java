@@ -57,7 +57,6 @@ public class MinimumNumberOfFlipsToConvertBinaryMatrixToZeroMatrix {
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(start);
         Set<Integer> visited = new HashSet<>();
-        visited.add(start);
         int step = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();

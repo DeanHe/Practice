@@ -21,7 +21,7 @@ In Java, the compiler represents the signed integers using 2's complement notati
 Follow up:
 
 If this function is called many times, how would you optimize it?*/
-public class ReverseBits {
+public class   ReverseBits {
 	// you need treat n as an unsigned value
 	public int reverseBits(int n) {
 		int res = 0;
@@ -29,11 +29,8 @@ public class ReverseBits {
 			return res;
 		}
 		for (int i = 0; i < 32; i++) {
-			res += n & 1;
-			n = n >>> 1;
-			if (i < 31) {
-				res = res << 1;
-			}
+			res =  (res << 1) | (n & 1);
+			n = (n >> 1);
 		}
 		return res;
 	}
