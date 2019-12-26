@@ -26,7 +26,7 @@ public class SubarraySumEqualsK {
     public int subarraySumEqualsK (int[] nums, int k) {
     	int len = nums.length;
     	int res = 0;
-    	Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // prefixSum : count;
+    	Map<Integer, Integer> map = new HashMap<>(); // prefixSum : count;
     	map.put(0, 1);
     	int[] preSum = new int[len];
     	preSum[0] = nums[0];
