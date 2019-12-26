@@ -60,33 +60,36 @@ Each box is contained in one box at most.
 */
 public class MaximumCandiesYouCanGetFromBoxes {
 	public int maxCandies(int[] status, int[] candies, int[][] keys, int[][] containedBoxes, int[] initialBoxes) {
-        int len = status.length;
-        boolean[] boxUsed = new boolean[len];
-        boolean[] boxFound = new boolean[len];
-        int res = 0;
-        Queue<Integer> queue = new LinkedList<>();
-        for(int i : initialBoxes){
-        	queue.offer(i);
-        	boxFound[i] = true;
-        }
-        // status 1 is open, 0 is closed
-        while(!queue.isEmpty()){
-        	int cur = queue.poll();
-        	if(status[cur] == 1 && !boxUsed[cur]){
-        		boxUsed[cur] = true;
-        		res += candies[cur];
-        		for(int key : keys[cur]){
-        			status[key] = 1;
-        			if(boxFound[key]){
-        				queue.offer(key);
-        			}
-        		}
-        		for(int nb : containedBoxes[cur]){      		
-            		boxFound[nb] = true;
-            		queue.offer(nb);
-            	}
-        	}
-        }
-        return res;
-    }
+		int len = status.length;
+		boolean[] boxUsed = new boolean[len];
+		boolean[] boxFound = new boolean[len];
+		int res = 0;
+		Queue<Integer> queue = new LinkedList<>();
+		for (int i : initialBoxes) {
+			queue.offer(i);
+			boxFound[i] = true;
+		}
+		// status 1 is open, 0 is closed
+		while (!queue.isEmpty()) {
+			int cur = queue.poll();
+			if (boxUsed[cur]) {
+				continue;
+			}
+			boxUsed[cur] = true;
+			res += candies[cur];
+			for (int key : keys[cur]) {
+				status[key] = 1;
+				if (boxFound[key]) {
+					queue.offer(key);
+				}
+			}
+			for (int nb : containedBoxes[cur]) {
+				boxFound[nb] = true;
+				if (status[nb] == 1) {
+					queue.offer(nb);
+				}
+			}
+		}
+		return res;
+	}
 }
