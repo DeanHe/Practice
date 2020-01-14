@@ -22,11 +22,11 @@ import java.util.*;
 
 public class AccountsMerge {
 	// email : person
-	Map<String, String> owner;
+	private Map<String, String> owner;
 	// email : email root
-	Map<String, String> parent;
+	private Map<String, String> parent;
 	// email root : emails in group
-	Map<String, TreeSet<String>> group;
+	private Map<String, TreeSet<String>> group;
 
 	public List<List<String>> accountsMerge(List<List<String>> accounts) {
 		owner = new HashMap<>();

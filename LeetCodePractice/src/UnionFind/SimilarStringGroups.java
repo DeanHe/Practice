@@ -20,8 +20,8 @@ All words in A consist of lowercase letters only.
 All words in A have the same length and are anagrams of each other.
 The judging time limit has been increased for this question.*/
 public class SimilarStringGroups {
-	int[] parent;
-    int count;
+	private int[] parent;
+    private int count;
     public int numSimilarGroupsUN(String[] A) {
         int len = A.length;
         parent = new int[len];

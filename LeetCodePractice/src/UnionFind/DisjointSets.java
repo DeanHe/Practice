@@ -41,9 +41,9 @@ class Node {
 
 public class DisjointSets {
 	// id : root
-	HashMap<Integer, Integer> parent = new HashMap<>();
+	private HashMap<Integer, Integer> parent = new HashMap<>();
 	// root : nodes
-	HashMap<Integer, ArrayList<Node>> groups = new HashMap<>();
+	private HashMap<Integer, ArrayList<Node>> groups = new HashMap<>();
 
 	public static void main(String[] args) throws Exception {
 

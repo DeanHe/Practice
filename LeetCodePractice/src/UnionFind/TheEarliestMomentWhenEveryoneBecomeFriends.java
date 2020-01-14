@@ -36,14 +36,14 @@ import java.util.*;
 
 
 public class TheEarliestMomentWhenEveryoneBecomeFriends {
-    int[] parent;
-    int[] count;
+    private int[] parent;
+    private int[] size;
     public int earliestAcq(int[][] logs, int N) {
         parent = new int[N];
-        count = new int[N];
+        size = new int[N];
         for(int i = 0; i < N; i++){
             parent[i] = i;
-            count[i] = 1;
+            size[i] = 1;
         }
         Arrays.sort(logs, Comparator.comparingInt(a -> a[0]));
         for (int[] log : logs) {
@@ -54,10 +54,10 @@ public class TheEarliestMomentWhenEveryoneBecomeFriends {
             int root_b = findRoot(b);
             if(root_a != root_b) {
                 parent[root_a] = root_b;
-                count[root_b] += count[root_a];
-                count[root_a] = 0;
+                size[root_b] += size[root_a];
+                size[root_a] = 0;
             }
-            if(count[root_b] == N){
+            if(size[root_b] == N){
                 return time;
             }
         }

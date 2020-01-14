@@ -1,4 +1,5 @@
 package UnionFind;
+
 import java.util.*;
 
 /*There is a garden with N slots. In each slot, there is a flower. The N flowers will bloom one by one in N days. In each day, there will be exactly one flower blooming and it will be in the status of blooming since then.
@@ -15,80 +16,75 @@ output:
 2
 */
 public class FlowerProblem {
-	
-	class UnionFind {
-		public int count, k;
-		int[] parent; // id[i] is parent of i
-		// group id : group size
-        int[] size;
 
-		public UnionFind(int n) {
-			parent = new int[n];
-			size = new int[n];
-			for (int i = 0; i < n; i++) {
-				parent[i] = -1;
-			}
-		}
+    private int count, k;
+    private int[] parent; // id[i] is parent of i
+    // group id : group size
+    private int[] size;
 
-		public int getRoot(int x) {
-			int root = x;
-	        // find root first
-	        while(parent[root] != root){
-	            root = parent[root];
-	        }
-	        // compress path
-	        while(parent[x] != root){
-	            int father = parent[x];
-	            parent[x] = root;
-	            x = father;
-	        }
-	        return x;
-		}
-
-		public void union(int a, int b) {
-			int root_a = getRoot(a);
-			int root_b = getRoot(b);
-			if (root_a != root_b) {
-				parent[root_a] = root_b;
-				if(size[root_a] >= k && size[root_b] >= k){
-					count--;
-				} else if(size[root_a] < k && size[root_b] < k){
-					if(size[root_a] + size[root_b] >= k){
-						count++;
-					}
-				}
-				size[root_b] += size[root_a];
-			}
-		}
-	}
-	/**
+    /**
      * @param flowers: an array
-     * @param k: an integer
-     * @param m: an integer
+     * @param k:       an integer
+     * @param m:       an integer
      * @return: the last day
      */
     public int flowerProblem(int[] flowers, int k, int m) {
-    	int lastDay = -1;
+        int lastDay = -1;
         int len = flowers.length;
-        UnionFind unionFind = new UnionFind(len);
-        unionFind.k = k;
-        for(int i = 0; i < len; i++){
-        	int spot = flowers[i] - 1;
-        	unionFind.parent[spot] = spot;
-        	unionFind.size[spot] = 1;
-        	if(k <= 1){
-        		unionFind.count++;
-        	}
-        	if(spot >= 1 && unionFind.parent[spot - 1] != -1){
-        		unionFind.union(spot - 1, spot);
-        	}
-        	if(spot < len - 1 && unionFind.parent[spot + 1] != -1){
-        		unionFind.union(spot + 1, spot);
-        	}
-        	if(unionFind.count >= m){
-        		lastDay = i + 1;
-        	}
+        parent = new int[len];
+        size = new int[len];
+        for (int i = 0; i < len; i++) {
+            parent[i] = -1;
+        }
+        this.k = k;
+        for (int i = 0; i < len; i++) {
+            int spot = flowers[i] - 1;
+            parent[spot] = spot;
+            size[spot] = 1;
+            if (k <= 1) {
+                count++;
+            }
+            if (spot >= 1 && parent[spot - 1] != -1) {
+                union(spot - 1, spot);
+            }
+            if (spot < len - 1 && parent[spot + 1] != -1) {
+                union(spot + 1, spot);
+            }
+            if (count >= m) {
+                lastDay = i + 1;
+            }
         }
         return lastDay;
+    }
+
+    private int getRoot(int x) {
+        int root = x;
+        // find root first
+        while (parent[root] != root) {
+            root = parent[root];
+        }
+        // compress path
+        while (parent[x] != root) {
+            int father = parent[x];
+            parent[x] = root;
+            x = father;
+        }
+        return x;
+    }
+
+    private void union(int a, int b) {
+        int root_a = getRoot(a);
+        int root_b = getRoot(b);
+        if (root_a != root_b) {
+            parent[root_a] = root_b;
+            if (size[root_a] >= k && size[root_b] >= k) {
+                count--;
+            } else if (size[root_a] < k && size[root_b] < k) {
+                if (size[root_a] + size[root_b] >= k) {
+                    count++;
+                }
+            }
+            size[root_b] += size[root_a];
+        }
     }
 }

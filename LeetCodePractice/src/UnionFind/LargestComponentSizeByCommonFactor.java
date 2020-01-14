@@ -3,9 +3,6 @@ package UnionFind;
 import java.util.HashMap;
 import java.util.Map;
 
-import HashMap.FindAllAnagramsInaString;
-import UnionFind.FlowerProblem.UnionFind;
-
 /*Given a non-empty array of unique positive integers A, consider the following graph:
 
 There are A.length nodes, labelled A[0] to A[A.length - 1];
@@ -34,8 +31,8 @@ Note:
 1 <= A.length <= 20000
 1 <= A[i] <= 100000*/
 public class LargestComponentSizeByCommonFactor {
-	int[] id, size;
-	int maxGroupSize;
+	private int[] id, size;
+	private int maxGroupSize;
 	public int largestComponentSize(int[] A) {
         int len = A.length;
         id = new int[len];

@@ -24,8 +24,8 @@ public class NumberOfIslandsII {
 	}
 	
 	class UnionFind {
-		public int count;
-		int[] parent; // id[i] is parent of i
+		private int count;
+		private int[] parent; // id[i] is parent of i
 
 		public UnionFind(int n) {
 			parent = new int[n];

@@ -25,14 +25,14 @@ Note:
 The size of the input 2D-array will be between 3 and 1000.
 Every integer represented in the 2D-array will be between 1 and N, where N is the size of the input array.*/
 public class RedundantConnection {
-	int[] id, size;
+	private int[] parent, size;
 	public int[] findRedundantConnectionUN(int[][] edges) {
 		int len = edges.length;
-		id = new int[len + 1];
+		parent = new int[len + 1];
 		size = new int[len + 1];
 		//init UN
 		for (int i = 1; i <= len; i++) {
-			id[i] = i;
+			parent[i] = i;
 			size[i] = 1;
 		}
 		for (int[] edge : edges) {
@@ -49,7 +49,7 @@ public class RedundantConnection {
 				root_s = root_e;
 				root_e = temp;
 			}
-			id[root_s] = id[root_e];
+			parent[root_s] = parent[root_e];
 			size[root_e] += size[root_s];
 			size[root_s] = 0;
 		}
@@ -57,12 +57,12 @@ public class RedundantConnection {
 	}
 	private int findRoot(int x) {
 		int root = x;
-		while (id[root] != root) {
-			root = id[root];
+		while (parent[root] != root) {
+			root = parent[root];
 		}
-		while (id[x] != root) {
-			int father = id[x];
-			id[x] = root;
+		while (parent[x] != root) {
+			int father = parent[x];
+			parent[x] = root;
 			x = father;
 		}
 		return root;

@@ -20,24 +20,34 @@ package BST;
 
 public class CountCompleteTreeNodes {
     public int countNodes(TreeNode root) {
-        if(root == null){
+        if (root == null) {
             return 0;
         }
         int res = 0;
         int leftHeight = getLeftHeight(root.left);
         int rightHeight = getRightHeight(root.right);
-        if(leftHeight == rightHeight){
+        if (leftHeight == rightHeight) {
             return (2 << rightHeight) - 1;
         } else {
             return 1 + countNodes(root.left) + countNodes(root.right);
         }
     }
 
-    private int getLeftHeight(TreeNode root){
-        return root == null ? 0 : 1 + getLeftHeight(root.left);
+    private int getLeftHeight(TreeNode root) {
+        int res = 0;
+        while(root != null){
+            root = root.left;
+            res++;
+        }
+        return res;
     }
 
-    private int getRightHeight(TreeNode root){
-        return root == null ? 0 : 1 + getRightHeight(root.right);
+    private int getRightHeight(TreeNode root) {
+        int res = 0;
+        while(root != null){
+            root = root.right;
+            res++;
+        }
+        return res;
     }
 }

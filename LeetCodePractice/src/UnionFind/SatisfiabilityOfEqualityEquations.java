@@ -28,7 +28,7 @@ Example 5:
 Input: ["c==c","b==d","x!=z"]
 Output: true*/
 public class SatisfiabilityOfEqualityEquations {
-	int[] id;
+	private int[] id;
 	public boolean equationsPossible(String[] equations) {
 		//all lower case alphabet
         id = new int[26];

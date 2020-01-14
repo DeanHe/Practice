@@ -40,7 +40,7 @@ Constraints:
 0 <= pairs[i][0], pairs[i][1] < s.length
 s only contains lower case English letters.*/
 public class SmallestStringWithSwaps {
-    int[] parent, size;
+    private int[] parent, size;
 
     public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
         int len = s.length();

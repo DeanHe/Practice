@@ -11,7 +11,7 @@ import java.util.*;
 
 public class GraphValidTree {
 	// map of node and its parent
-	int[] parent;
+	private int[] parent;
 
 	// find the root of x and compress the path
 	int compressed_find(int x) {

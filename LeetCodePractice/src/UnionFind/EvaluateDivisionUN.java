@@ -19,8 +19,8 @@ import java.util.*;
 import java.util.Map;
 
 public class EvaluateDivisionUN {
-	Map<String, String> parent = new HashMap<>();
-	Map<String, Double> dist = new HashMap<>();
+	private Map<String, String> parent = new HashMap<>();
+	private Map<String, Double> dist = new HashMap<>();
 
 	public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 		int len = values.length;

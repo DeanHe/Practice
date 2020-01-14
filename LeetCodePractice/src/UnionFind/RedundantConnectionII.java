@@ -40,8 +40,8 @@ case3: 1 A vertex has more than 1 parent, and is part of a loop.
            remove candidate A instead of B.
 */
 public class RedundantConnectionII {
-	int[] parent;
-	int[] id, size;
+	private int[] parent;
+	private int[] id, size;
 	public int[] findRedundantDirectedConnection(int[][] edges) {
 		int len = edges.length;
 		parent = new int[len + 1];
