@@ -13,7 +13,9 @@ Given the connections = [Acity,Bcity,1], [Acity,Ccity,2], [Bcity,Ccity,3]
 Return [Acity,Bcity,1], [Acity,Ccity,2]
 
 Notice
-Return the connections sorted by the cost, or sorted city1 name if their cost is same, or sorted city2 if their city1 name is also same.*/
+Return the connections sorted by the cost, or sorted city1 name if their cost is same, or sorted city2 if their city1 name is also same.
+Kruskal's Algorithm
+*/
 public class MinimumSpanningTree {
 	class Connection {
 		String city1, city2;
