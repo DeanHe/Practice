@@ -24,5 +24,50 @@ public class Solution {
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 
+
+	}
+
+	public int[] smallerNumbersThanCurrent(int[] nums) {
+		int len = nums.length;
+		int[] res = Arrays.copyOf(nums, len);
+		Arrays.sort(nums);
+		Map<Integer, Integer> orderMap = new HashMap<>();
+		for(int i = 0; i < len; i++){
+			orderMap.putIfAbsent(nums[i], i);
+
+		}
+		for(int i = 0; i < len; i++){
+			int cur = res[i];
+			res[i] = orderMap.get(cur);
+		}
+		return res;
+	}
+
+	public String rankTeams(String[] votes) {
+		int len = votes[0].length();
+		Map<Character, int[]> rankMap = new HashMap<>();
+		for(String vote : votes){
+			char[] arr = vote.toCharArray();
+			for(int i = 0; i < len; i++){
+				char c = arr[i];
+				int[] c_rank = rankMap.getOrDefault(c, new int[len]);
+				c_rank[i]++;
+				rankMap.put(c, c_rank);
+			}
+		}
+		List<Character> list = new ArrayList<>(rankMap.keySet());
+		Collections.sort(list, (a, b) -> {
+			for(int i = 0; i < len; i++){
+				if(rankMap.get(a)[i] != rankMap.get(b)[i]){
+					return rankMap.get(b)[i] - rankMap.get(a)[i];
+				}
+			}
+			return a - b;
+		});
+		StringBuilder sb = new StringBuilder();
+		for(char c : list){
+			sb.append(c);
+		}
+		return sb.toString();
 	}
 }
