@@ -1,5 +1,6 @@
 import java.util.*;
 
+import BST.TreeNode;
 import Backtracking.BraceExpansion;
 import UnionFind.TheEarliestMomentWhenEveryoneBecomeFriends;
 
@@ -69,5 +70,22 @@ public class Solution {
 			sb.append(c);
 		}
 		return sb.toString();
+	}
+
+	static  int sum;
+	public int sumEvenGrandparent(TreeNode root) {
+		dfs(root, null, null);
+		return sum;
+	}
+
+	private void dfs(TreeNode cur, TreeNode parent, TreeNode grandParent){
+		if(cur == null || parent == null || grandParent == null){
+			return;
+		}
+		if(grandParent.val % 2 == 0){
+			sum += cur.val;
+		}
+		dfs(cur.left, cur, parent);
+		dfs(cur.right, cur, parent);
 	}
 }

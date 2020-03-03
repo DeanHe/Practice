@@ -1,4 +1,7 @@
 package DP;
+
+import java.util.Arrays;
+
 /*
 Given an array nums of integers, we need to find the maximum possible sum of elements of the array such that it is divisible by three.
 
@@ -23,26 +26,62 @@ Given an array nums of integers, we need to find the maximum possible sum of ele
 
         1 <= nums.length <= 4 * 10^4
         1 <= nums[i] <= 10^4
+
+        !A number is a multiple of three if and only if its sum of digits is a multiple of three.
 */
 public class GreatestSumDivisibleByThree {
     public int maxSumDivThree(int[] nums) {
-        int sum = 0, leftOne = Integer.MAX_VALUE, leftTwo = Integer.MAX_VALUE;
+        int sum = 0, leftOne = 20000, leftTwo = 20000;
         for(int n : nums){
             sum += n;
-            if(sum % 3 == 1) {
+            if(n % 3 == 1) {
                 leftTwo = Math.min(leftTwo, leftOne + n);
                 leftOne = Math.min(leftOne, n);
-            } else if(sum % 3 == 2){
+            } else if(n % 3 == 2){
                 leftOne = Math.min(leftOne, leftTwo + n);
                 leftTwo = Math.min(leftTwo, n);
             }
         }
-        if((sum % 3) == 0) {
+        if(sum % 3 == 0) {
             return sum;
-        } else if((sum % 2) == 0){
+        } else if(sum % 3 == 2){
             return sum - leftTwo;
         } else {
             return sum - leftOne;
         }
+    }
+
+    public int maxSumDivThreeDP(int[] nums) {
+        return maxSumDivK1(nums, 3);
+    }
+
+    private int maxSumDivK1(int[] nums, int k){
+        if(k == 0){
+            return -1;
+        }
+        int len = nums.length;
+        int[][] dp = new int[len + 1][k];
+        for(int i = 1; i <= len; i++){
+            int n = nums[i - 1];
+            for(int j = 0; j < k; j++){
+                dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
+                dp[i][(n + dp[i - 1][j]) % k] = Math.max(dp[i][(n + dp[i - 1][j]) % k], n + dp[i - 1][j]);
+            }
+            //System.out.println(Arrays.toString(dp[i]));
+        }
+        return dp[len][0];
+    }
+
+    public int maxSumDivK2(int[] nums, int k){
+        if(k==0) return -1;
+        int[] dp = new int[k];
+        for(int num : nums){
+            int tmp[] = Arrays.copyOf(dp,k);
+            for(int i=0;i<k;i++){
+                dp[(num+tmp[i])%k] = Math.max(dp[(num+tmp[i])%k],num+tmp[i]);
+            }
+            //System.out.println(Arrays.toString(dp));
+        }
+        return dp[0];
     }
 }
