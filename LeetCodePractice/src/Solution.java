@@ -28,64 +28,24 @@ public class Solution {
 
 	}
 
-	public int[] smallerNumbersThanCurrent(int[] nums) {
-		int len = nums.length;
-		int[] res = Arrays.copyOf(nums, len);
-		Arrays.sort(nums);
-		Map<Integer, Integer> orderMap = new HashMap<>();
-		for(int i = 0; i < len; i++){
-			orderMap.putIfAbsent(nums[i], i);
-
-		}
-		for(int i = 0; i < len; i++){
-			int cur = res[i];
-			res[i] = orderMap.get(cur);
-		}
-		return res;
-	}
-
-	public String rankTeams(String[] votes) {
-		int len = votes[0].length();
-		Map<Character, int[]> rankMap = new HashMap<>();
-		for(String vote : votes){
-			char[] arr = vote.toCharArray();
+	public int deepestLeavesSum(TreeNode root) {
+		int res = 0;
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			res = 0;
+			int len = queue.size();
 			for(int i = 0; i < len; i++){
-				char c = arr[i];
-				int[] c_rank = rankMap.getOrDefault(c, new int[len]);
-				c_rank[i]++;
-				rankMap.put(c, c_rank);
-			}
-		}
-		List<Character> list = new ArrayList<>(rankMap.keySet());
-		Collections.sort(list, (a, b) -> {
-			for(int i = 0; i < len; i++){
-				if(rankMap.get(a)[i] != rankMap.get(b)[i]){
-					return rankMap.get(b)[i] - rankMap.get(a)[i];
+				TreeNode cur = queue.poll();
+				res += cur.val;
+				if(cur.left != null){
+					queue.offer(cur.left);
+				}
+				if(cur.right != null){
+					queue.offer(cur.right);
 				}
 			}
-			return a - b;
-		});
-		StringBuilder sb = new StringBuilder();
-		for(char c : list){
-			sb.append(c);
 		}
-		return sb.toString();
-	}
-
-	static  int sum;
-	public int sumEvenGrandparent(TreeNode root) {
-		dfs(root, null, null);
-		return sum;
-	}
-
-	private void dfs(TreeNode cur, TreeNode parent, TreeNode grandParent){
-		if(cur == null || parent == null || grandParent == null){
-			return;
-		}
-		if(grandParent.val % 2 == 0){
-			sum += cur.val;
-		}
-		dfs(cur.left, cur, parent);
-		dfs(cur.right, cur, parent);
+		return res;
 	}
 }
