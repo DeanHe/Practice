@@ -33,7 +33,7 @@ Answers within 10^-5 of the correct answer will be considered correct.
 Explanation:
 So to minimize the total wage, we want a small ratio.
 So we sort all workers with their expected ratio, and pick up K first worker.
-Now we have a minimum possible ratio for K worker and we their total quality.
+Now we have a minimum possible ratio for K worker and we count their total quality.
 
 As we pick up next worker with bigger ratio, we increase the ratio for whole group.
 Meanwhile we remove a worker with highest quality so that we keep K workers in the group.
@@ -46,18 +46,18 @@ For every ratio, we find the minimum possible total quality of K workers.
 public class MinimumCostToHireKworkers {
 	public double mincostToHireWorkers(int[] quality, int[] wage, int K) {
 		int len = quality.length;
-		Worker[] worker = new Worker[len];
+		Worker[] workers = new Worker[len];
 		for (int i = 0; i < len; i++) {
-			worker[i] = new Worker(quality[i], wage[i]);
+			workers[i] = new Worker(quality[i], wage[i]);
 		}
-		Arrays.sort(worker, (a, b) -> Double.compare(a.ratio, b.ratio));
+		Arrays.sort(workers, (a, b) -> Double.compare(a.ratio, b.ratio));
 		PriorityQueue<Worker> pq = new PriorityQueue<>((a, b) -> b.quality - a.quality);
 		int qualitySum = 0;
 		double res = Double.MAX_VALUE;
-		for (Worker w : worker) {
+		for (Worker w : workers) {
 			if (pq.size() >= K) {
-				Worker tmp = pq.poll();
-				qualitySum -= tmp.quality;
+				Worker most = pq.poll();
+				qualitySum -= most.quality;
 			}
 			pq.offer(w);
 			qualitySum += w.quality;

@@ -23,7 +23,12 @@ master.guess("eiowzz") returns 2, because "eiowzz" has 2 matches.
 master.guess("abcczz") returns 4, because "abcczz" has 4 matches.
 
 We made 5 calls to master.guess and one of them was the secret, so we pass the test case.
-Note:  Any solutions that attempt to circumvent the judge will result in disqualification.*/
+Note:  Any solutions that attempt to circumvent the judge will result in disqualification.
+
+Time Complexity: O(N^2 log N), where N is the number of words, and assuming their length is O(1). Each call to solve is O(N^2)
+and the number of calls is bounded by O(logN).
+Space Complexity: O(N^2).
+*/
 
 import java.util.*;
 

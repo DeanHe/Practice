@@ -7,7 +7,10 @@ Example
 Gieve s = lintcode,
 dict = ["de", "ding", "co", "code", "lint"].
 
-A solution is ["lint code", "lint co de"].*/
+A solution is ["lint code", "lint co de"].
+O(M * 2 ^ N) in the worse case scenario
+O(M * N ^ 2) worst case, where N is s length, and M is wordDict size
+*/
 import java.util.*;
 
 public class WordBreakII {
@@ -15,16 +18,18 @@ public class WordBreakII {
      * @param s a string
      * @param wordDict a set of words
      */
+    Set<String> wordDict;
+    Map<String, List<String>> breakMap = new HashMap<>();
 	//DFS
     public List<String> wordBreak(String s, Set<String> wordDict) {
         // Write your code here
         if(s == null || s.length() == 0 || wordDict ==null|| wordDict.size() == 0){
             return new ArrayList<String>();
         }
-        Map<String, List<String>> breakMap = new HashMap<>();
-        return helper(s, wordDict, breakMap);
+        this.wordDict = wordDict;
+        return helper(s);
     }
-    private List<String> helper(String s, Set<String> wordDict, Map<String, List<String>> breakMap){
+    private List<String> helper(String s){
         if(breakMap.containsKey(s)){
             return breakMap.get(s);
         }
@@ -38,7 +43,7 @@ public class WordBreakII {
             String left = s.substring(0, i);
             String right = s.substring(i);
             if(wordDict.contains(left)){
-                List<String> rightCombination = helper(right, wordDict, breakMap);
+                List<String> rightCombination = helper(right);
                 for(String comb : rightCombination){
                     if(comb.length() != 0){
                         res.add(left + " " + comb);
