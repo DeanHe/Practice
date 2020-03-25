@@ -20,8 +20,10 @@ Explanation:
 The next closest time choosing from digits 2, 3, 5, 9, is 22:22. It may be assumed that the returned time is next day's time since it is smaller than the input time numerically.
 */
 public class NextClosestTime {
+	int timeValue = 0;
 	int minDiff = Integer.MAX_VALUE;
 	String result = "";
+	ArrayList<Integer> digits;
 	/**
      * @param time: the given time
      * @return: the next closest time
@@ -35,14 +37,14 @@ public class NextClosestTime {
         if(set.size() == 1){
         	return time;
         }
-        ArrayList<Integer> digits = new ArrayList<>(set);
+        digits = new ArrayList<>(set);
         int hour = Integer.parseInt(time.substring(0,2));
     	int minute = Integer.parseInt(time.substring(3,5));
-        int timeValue = hour * 60 + minute;
-        dfs(digits, 0, timeValue, "");
+        timeValue = hour * 60 + minute;
+        dfs(0, "");
         return result;
     }
-    private void dfs(ArrayList<Integer> digits, int pos, int timeValue, String temp){
+    private void dfs(int pos, String temp){
     	if(pos == 4){
     		int hour = Integer.parseInt(temp.substring(0,2));
         	int minute = Integer.parseInt(temp.substring(2,4));
@@ -75,7 +77,7 @@ public class NextClosestTime {
     		if(pos == 3 && Integer.parseInt(temp.substring(2)) * 10 + cur > 59){
     			continue;
     		}
-    		dfs(digits, pos + 1, timeValue, temp + cur);
+    		dfs(pos + 1,temp + cur);
     	}
     }   
 }

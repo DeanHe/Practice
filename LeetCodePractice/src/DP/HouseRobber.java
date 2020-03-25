@@ -1,4 +1,5 @@
 package DP;
+
 /*You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
 
 Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
@@ -16,20 +17,20 @@ Output: 12
 Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
              Total amount you can rob = 2 + 9 + 1 = 12.*/
 public class HouseRobber {
-	public int rob(int[] num) {
-        int length = num.length;
-        if(length == 0){
+    public int rob(int[] num) {
+        int len = num.length;
+        if (len == 0) {
             return 0;
-        } else if(length == 1){
-            return num[0];
-        } else {
-            int[] dp = new int[length];
-            dp[0] = num[0];
-            dp[1] = Math.max(num[0], num[1]);
-            for(int i = 2; i < length; i++){
-                dp[i] = Math.max(dp[i-2] + num[i], dp[i-1]);
-            }
-             return dp[length-1];
         }
+        if (len == 1) {
+            return num[0];
+        }
+        int[] dp = new int[len];
+        dp[0] = num[0];
+        dp[1] = Math.max(num[0], num[1]);
+        for (int i = 2; i < len; i++) {
+            dp[i] = Math.max(dp[i - 2] + num[i], dp[i - 1]);
+        }
+        return dp[len - 1];
     }
 }

@@ -1,4 +1,5 @@
 package Sort;
+
 /*find K-th largest element in an array.
 
 Example
@@ -24,49 +25,51 @@ O(N) best case runtime or O(N ^ 2) worst case + O(1) memeory
 The smart approach is to use the selection algorithm (based on the partion method - the same one as used in quicksort).
 */
 public class KthLargestElement {
-	/**
-     * @param n: An integer
+    /**
+     * @param k:    An integer
      * @param nums: An array
      * @return: the Kth largest element
      */
     public int kthLargestElement(int k, int[] nums) {
         // write your code here
-    	if(nums == null || nums.length == 0){
-    		return 0;
-    	}
-    	if(k <= 0){
-    		return 0;
-    	}
-    	return getKth(nums, 0, nums.length - 1, nums.length - k);
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (k <= 0) {
+            return 0;
+        }
+        return getKth(nums, 0, nums.length - 1, nums.length - k);
     }
-    private int getKth(int[] nums, int start, int end, int k){
-    	if(start == end) {
-    		return nums[start];
-    	}
-    	int index = partition(nums, start, end);
-    	if(index == k){
-    		return nums[index];
-    	} else if(index < k){
-    		return getKth(nums, index + 1, end, k);
-    	} else {
-    		return getKth(nums, start, index - 1, k);
-    	}
+
+    private int getKth(int[] nums, int start, int end, int k) {
+        if (start == end) {
+            return nums[start];
+        }
+        int index = partition(nums, start, end);
+        if (index == k) {
+            return nums[index];
+        } else if (index < k) {
+            return getKth(nums, index + 1, end, k);
+        } else {
+            return getKth(nums, start, index - 1, k);
+        }
     }
-    private int partition(int[] nums, int start, int end){
-    	int pivot = nums[end];
-    	int i = start;
-    	for(int j = start; j < end; j++){
-    		if(nums[j] <= pivot){
-    			swap(nums, i++, j);
-    		}
-    	}
-    	swap(nums, i, end);
-		return i;
-    	
+
+    private int partition(int[] nums, int start, int end) {
+        int pivot = nums[end];
+        int i = start;
+        for (int j = start; j < end; j++) {
+            if (nums[j] <= pivot) {
+                swap(nums, i++, j);
+            }
+        }
+        swap(nums, i, end);
+        return i;
     }
-    private void swap(int[] nums, int i, int j){
-    	int temp = nums[i];
-    	nums[i] = nums[j];
-    	nums[j] = temp;
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }

@@ -3,7 +3,8 @@ package Backtracking;
 import java.util.HashSet;
 import java.util.Set;
 
-/*Given a robot cleaner in a room modeled as a grid.
+/*
+Given a robot cleaner in a room modeled as a grid.
 Each cell in the grid can be empty or blocked.
 The robot cleaner with 4 given APIs can move forward, turn left or turn right. Each turn it made is 90 degrees.
 When it tries to move into a blocked cell, its bumper sensor detects the obstacle and it stays on the current cell.
@@ -45,35 +46,39 @@ The input is only given to initialize the room and the robot's position internal
 The robot's initial position will always be in an accessible cell.
 The initial direction of the robot will be facing up.
 All accessible cells are connected, which means the all cells marked as 1 will be accessible by the robot.
-Assume all four edges of the grid are all surrounded by wall.*/
+Assume all four edges of the grid are all surrounded by wall.
+*/
 public class RobotRoomCleaner {
-	int[] dirs = {0, -1, 0, 1, 0};
-	public void cleanRoom(Robot robot) {
-		dfs(new HashSet<>(), 0, 0, 0, robot);
-	}
-	private void dfs(Set<String> visited, int r, int c, int facing, Robot robot) {
-		visited.add(r + ":" + c);
-		robot.clean();
-		for (int i = 0; i < dirs.length - 1; i++) {
-			if (robot.move()) {
-				int nb_r = r + dirs[facing];
-				int nb_c = c + dirs[facing + 1];
-				if(!visited.contains(nb_r + ":" + nb_c)){
-					dfs(visited, nb_r, nb_c, facing, robot);
-					backToPreviousPosition(robot);
-				}
-			}
-			facing++;
-			facing = facing % (dirs.length - 1);
-			robot.turnRight();
-		}
-	}
-	
-	private void backToPreviousPosition(Robot robot) {
-		robot.turnRight();
-		robot.turnRight();
-		robot.move();
-		robot.turnRight();
-		robot.turnRight();
-	}
+    int[] dirs = {0, -1, 0, 1, 0};
+    Set<String> visited = new HashSet<>();
+
+    public void cleanRoom(Robot robot) {
+        dfs(0, 0, 0, robot);
+    }
+
+    private void dfs(int r, int c, int facing, Robot robot) {
+        visited.add(r + ":" + c);
+        robot.clean();
+        for (int i = 0; i < dirs.length - 1; i++) {
+            if (robot.move()) {
+                int nb_r = r + dirs[facing];
+                int nb_c = c + dirs[facing + 1];
+                if (!visited.contains(nb_r + ":" + nb_c)) {
+                    dfs(nb_r, nb_c, facing, robot);
+                    backToPreviousPosition(robot);
+                }
+            }
+            facing++;
+            facing = facing % (dirs.length - 1);
+            robot.turnRight();
+        }
+    }
+
+    private void backToPreviousPosition(Robot robot) {
+        robot.turnRight();
+        robot.turnRight();
+        robot.move();
+        robot.turnRight();
+        robot.turnRight();
+    }
 }
