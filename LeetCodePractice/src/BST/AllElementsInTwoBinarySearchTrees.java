@@ -3,8 +3,7 @@ package BST;
 import java.util.*;
 
 /*
-Given two binary search trees root1 and root2.
-
+        Given two binary search trees root1 and root2.
         Return a list containing all the integers from both trees sorted in ascending order.
 
         Example 1:

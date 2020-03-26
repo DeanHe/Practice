@@ -59,13 +59,12 @@ public class MinimumCostToMakeAtLeastOneValidPathInaGrid {
             Arrays.fill(row, Integer.MAX_VALUE);
         }
         cost[0][0] = 0;
-        Deque<int[]> deque = new ArrayDeque<>(); // {r, c, dist}
-        deque.offerFirst(new int[]{0, 0, 0});
+        Deque<int[]> deque = new ArrayDeque<>(); // {r, c}
+        deque.offerFirst(new int[]{0, 0});
         while(!deque.isEmpty()){
             int[] cur = deque.pollFirst();
             int r = cur[0];
             int c = cur[1];
-            int dist = cur[2];
             for(int i = 0; i < dirs.length; i++){
                 int[] dir = dirs[i];
                 int nb_r = r + dir[0];
@@ -78,9 +77,9 @@ public class MinimumCostToMakeAtLeastOneValidPathInaGrid {
                     if(cost[nb_r][nb_c] > cost[r][c] + edge){
                         cost[nb_r][nb_c] = cost[r][c] + edge;
                         if(edge == 0){
-                            deque.offerFirst(new int[]{nb_r, nb_c, cost[nb_r][nb_c]});
+                            deque.offerFirst(new int[]{nb_r, nb_c});
                         } else {
-                            deque.offerLast(new int[]{nb_r, nb_c, cost[nb_r][nb_c]});
+                            deque.offerLast(new int[]{nb_r, nb_c});
                         }
                     }
                 }

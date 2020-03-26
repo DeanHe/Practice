@@ -3,7 +3,8 @@ package BST;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Given a binary search tree, return a balanced binary search tree with the same node values.
+/*
+        Given a binary search tree, return a balanced binary search tree with the same node values.
         A binary search tree is balanced if and only if the depth of the two subtrees of every node never differ by more than 1.
         If there is more than one answer, return any of them.
 
@@ -16,7 +17,8 @@ import java.util.List;
         Constraints:
 
         The number of nodes in the tree is between 1 and 10^4.
-        The tree nodes will have distinct values between 1 and 10^5.*/
+        The tree nodes will have distinct values between 1 and 10^5.
+*/
 public class BalanceaBinarySearchTree {
     List<Integer> sortedList =new ArrayList<>();
     public TreeNode balanceBST(TreeNode root) {
