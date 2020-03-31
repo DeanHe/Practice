@@ -48,13 +48,13 @@ public class SegmentTreeQuery {
 		int mid = (root.start + root.end) / 2;
 		if (end <= mid) {
 			return query(root.left, start, end);
-		} else if (start > mid) {
-			return query(root.right, start, end);
-		} else {
-			int left_max = query(root.left, start, mid);
-			int right_max = query(root.right, mid + 1, end);
-			return Math.max(left_max, right_max);
 		}
+		if (mid < start) {
+			return query(root.right, start, end);
+		}
+		int left_max = query(root.left, start, mid);
+		int right_max = query(root.right, mid + 1, end);
+		return Math.max(left_max, right_max);
 	}
 	
 	class SegmentTreeNode {

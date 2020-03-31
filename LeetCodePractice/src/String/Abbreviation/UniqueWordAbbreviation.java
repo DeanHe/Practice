@@ -2,7 +2,8 @@ package String.Abbreviation;
 
 import java.util.*;
 
-/*An abbreviation of a word follows the form . Below are some examples of word abbreviations:
+/*
+An abbreviation of a word follows the form . Below are some examples of word abbreviations:
 
 a) it                      --> it    (no abbreviation)
 

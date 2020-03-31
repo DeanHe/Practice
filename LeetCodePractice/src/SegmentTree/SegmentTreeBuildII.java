@@ -1,6 +1,7 @@
 package SegmentTree;
 
-/*The structure of Segment Tree is a binary tree which each node has two attributes start and end denote an segment / interval.
+/*
+The structure of Segment Tree is a binary tree which each node has two attributes start and end denote an segment / interval.
 
 start and end are both integers, they should be assigned in following rules:
 
@@ -25,20 +26,10 @@ Clarification
 Segment Tree (a.k.a Interval Tree) is an advanced data structure which can support queries like:
 
 which of these intervals contain a given point
-which of these points are in a given interval*/
+which of these points are in a given interval
+*/
 
 public class SegmentTreeBuildII {
-	class SegmentTreeNode {
-		public int start, end, max;
-		public SegmentTreeNode left, right;
-
-		public SegmentTreeNode(int start, int end, int max) {
-		          this.start = start;
-		          this.end = end;
-		          this.max = max;
-		          this.left = this.right = null;
-		      }
-	}
 	/**
      * @param A: a list of integer
      * @return: The root of Segment Tree
@@ -66,5 +57,17 @@ public class SegmentTreeBuildII {
             node.max = Math.max(node.max, node.right.max);
         }
         return node;
+    }
+
+    class SegmentTreeNode {
+        public int start, end, max;
+        public SegmentTreeNode left, right;
+
+        public SegmentTreeNode(int start, int end, int max) {
+            this.start = start;
+            this.end = end;
+            this.max = max;
+            this.left = this.right = null;
+        }
     }
 }

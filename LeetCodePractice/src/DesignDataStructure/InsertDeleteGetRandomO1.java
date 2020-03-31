@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-/*Design a data structure that supports all following operations in average O(1) time.
+/*
+Design a data structure that supports all following operations in average O(1) time.
 
 insert(val): Inserts an item val to the set if not already present.
 remove(val): Removes an item val from the set if present.
@@ -33,7 +34,8 @@ randomSet.remove(1);
 randomSet.insert(2);
 
 // Since 2 is the only number in the set, getRandom always return 2.
-randomSet.getRandom();*/
+randomSet.getRandom();
+*/
 public class InsertDeleteGetRandomO1 {
 	ArrayList<Integer> ls;
 	HashMap<Integer, Integer> index;

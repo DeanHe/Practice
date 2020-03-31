@@ -1,5 +1,6 @@
 package SegmentTree;
-/*The structure of Segment Tree is a binary tree which each node has two attributes start and end denote an segment / interval.
+/*
+The structure of Segment Tree is a binary tree which each node has two attributes start and end denote an segment / interval.
 
 start and end are both integers, they should be assigned in following rules:
 
@@ -39,7 +40,8 @@ which of these intervals contain a given point
 which of these points are in a given interval
 See wiki:
 Segment Tree
-Interval Tree*/
+Interval Tree
+*/
 
 public class SegmentTreeBuild {
 	/**
@@ -47,19 +49,16 @@ public class SegmentTreeBuild {
      *@return: The root of Segment Tree
      */
     public SegmentTreeNode build(int start, int end) {
-        // write your code here
         if(start > end){
             return null;
         }
         if(start == end){
             return new SegmentTreeNode(start, end);
         }
+        SegmentTreeNode node = new SegmentTreeNode(start, end);
         int mid = (start + end) / 2;
-        SegmentTreeNode left = build(start, mid);
-        SegmentTreeNode right = build(mid + 1, end);
-        SegmentTreeNode node = new SegmentTreeNode(start, end); 
-        node.left = left;
-        node.right = right;
+        node.left = build(start, mid);
+        node.right = build(mid + 1, end);
         return node;
     }
     

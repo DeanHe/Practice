@@ -3,7 +3,8 @@ package Array;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+/*
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
 
 Example 1:
 
@@ -22,7 +23,8 @@ Input:
   [5, 6, 7, 8],
   [9,10,11,12]
 ]
-Output: [1,2,3,4,8,12,11,10,9,5,6,7]*/
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+*/
 public class SpiralMatrix {
 	public List<Integer> spiralOrder(int[][] matrix) {
 		List<Integer> res = new ArrayList<Integer>();

@@ -2,7 +2,9 @@ package BinaryIndexedTree;
 
 import java.util.*;
 
-/*You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+/*
+You are given an integer arr nums and you have to return a new counts arr.
+The counts arr has the property where counts[i] is the number of smaller elements to the right of nums[i].
 
 Example:
 
@@ -19,8 +21,7 @@ public class CountOfSmallerNumbersAfterSelf {
 	 *            a list of integers
 	 * @return: return a list of integers
 	 */
-	int[] bit, count;
-
+	int[] bit;
 	public List<Integer> countSmaller(int[] nums) {
 		// write your code here
 		List<Integer> res = new ArrayList<>();
@@ -29,41 +30,38 @@ public class CountOfSmallerNumbersAfterSelf {
 		}
 		int len = nums.length;
 		bit = new int[len + 1];
-		count = new int[len];
 
 		discretization(nums);
 		for (int i = len - 1; i >= 0; i--) {
-			count[i] = getPrefixSum(nums[i] - 1);
+			int count = getPrefixSum(nums[i] - 1);
+			res.add(0, count);
 			update(nums[i]);
-		}
-		for (int i = 0; i < len; i++) {
-			res.add(count[i]);
 		}
 		return res;
 	}
 
 	// this is nlogn
-	// sort the orignal array and mapping the number to
-	// the order in the sorted array;
+	// sort the orignal arr and mapping the number to
+	// the order in the sorted arr;
 	// i.e: [1, 1000, -100, 10, 100] -> [2, 5, 1, 3, 4] , get rid of very large
 	// number or negative number
 	private void discretization(int[] nums) {
 		int[] sorted = nums.clone();
 		Arrays.sort(sorted);
 		for (int i = 0; i < nums.length; i++) {
-			nums[i] = Arrays.binarySearch(sorted, nums[i]) + 1;
+			nums[i] = Arrays.binarySearch(sorted, nums[i]);
 		}
 	}
 
 	private void update(int index) {
-		for (int i = index; i < bit.length; i = i + lowbit(i)) {
+		for (int i = index + 1; i < bit.length; i = i + lowbit(i)) {
 			bit[i]++;
 		}
 	}
 
 	private int getPrefixSum(int index) {
 		int sum = 0;
-		for (int i = index; i > 0; i = i - lowbit(i)) {
+		for (int i = index + 1; i > 0; i = i - lowbit(i)) {
 			sum += bit[i];
 		}
 		return sum;

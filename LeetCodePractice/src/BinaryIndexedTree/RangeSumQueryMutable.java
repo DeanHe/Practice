@@ -1,9 +1,10 @@
 package BinaryIndexedTree;
-/*Description
-Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
+/*
+Description
+Given an integer arr nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
 
 The update(i, val) function modifies nums by updating the element at index i to val.
-1.The array is only modifiable by the update function.
+1.The arr is only modifiable by the update function.
 2.You may assume the number of calls to update and sumRange function is distributed evenly.
 
 Example
@@ -11,11 +12,12 @@ Given nums = [1, 3, 5]
 
 sumRange(0, 2) -> 9
 update(1, 2)
-sumRange(0, 2) -> 8*/
+sumRange(0, 2) -> 8
+*/
 public class RangeSumQueryMutable {
 	
 	class NumArray {
-		private int[] arr, bit;
+		int[] arr, bit;
 		
 	    public NumArray(int[] nums) {
 	    	int len = nums.length;
@@ -29,8 +31,7 @@ public class RangeSumQueryMutable {
 	    public void update(int index, int val) {
 	       int delta = val - arr[index];
 	       arr[index] = val;
-	       
-	       for(int i = index + 1; i <= arr.length; i += lowbit(i)){
+	       for(int i = index + 1; i < bit.length; i += lowbit(i)){
 	    	   bit[i] += delta;
 	       }
 	    }

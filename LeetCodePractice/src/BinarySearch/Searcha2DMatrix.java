@@ -37,14 +37,14 @@ public class Searcha2DMatrix {
         if(matrix == null || matrix.length == 0){
             return false;
         }
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
         int start = 0;
-        int end = row * col - 1;
+        int end = rows * cols - 1;
         while(start + 1 < end){
             int mid = (start + end) / 2;
-            int mid_r = mid / col;
-            int mid_c = mid % col;
+            int mid_r = mid / cols;
+            int mid_c = mid % cols;
             if(matrix[mid_r][mid_c] == target){
                 return true;
             } else if(matrix[mid_r][mid_c] < target){
@@ -53,10 +53,10 @@ public class Searcha2DMatrix {
                 end = mid;
             }
         } 
-        if(matrix[start / col][start % col] == target){
+        if(matrix[start / cols][start % cols] == target){
             return true;
         }
-        if(matrix[end / col][end % col] == target){
+        if(matrix[end / cols][end % cols] == target){
             return true;
         }
         return false;

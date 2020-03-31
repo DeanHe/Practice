@@ -1,5 +1,6 @@
 package Window;
-/*Given an array of n integer with duplicate number, and a moving window(size k), move the window at each iteration from the start of the array, find the maximum number inside the window at each moving.
+/*
+Given an array of n integer with duplicate number, and a moving window(size k), move the window at each iteration from the start of the array, find the maximum number inside the window at each moving.
 
 Example
 For array [1, 2, 7, 7, 8], moving window size k = 3. return [7, 7, 8]
@@ -14,7 +15,8 @@ then the window move one step forward again.
 [1, 2, |7, 7, 8|], return the maximum 8;
 
 Challenge
-o(n) time and O(k) memory*/
+o(n) time and O(k) memory
+*/
 import java.util.*;
 
 public class SlidingWindowMaximum {
@@ -45,7 +47,7 @@ public class SlidingWindowMaximum {
         while(!deque.isEmpty() && deque.peekLast() < val){
             deque.pollLast();
         }
-        deque.offer(val);
+        deque.offerLast(val);
     }
     
     private void outQueue(Deque<Integer> deque, int val){
