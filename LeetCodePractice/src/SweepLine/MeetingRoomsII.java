@@ -22,9 +22,9 @@ class Point {
 				if((o1.isStart && o2.isStart) || (!o1.isStart && !o2.isStart)){
 					return 0;
 				} else if(o1.isStart){
-					return 1;
-				} else {
 					return -1;
+				} else {
+					return 1;
 				}
 			} else {
 				return o1.time - o2.time;

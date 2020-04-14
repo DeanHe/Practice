@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 /*
 Give you an integer arr (index from 0 to n-1, where n is the size of this arr, data value from 0 to 10000) .
-For each element Ai in the arr, count the number of element before this element Ai is smaller than it and return count number arr.
+For each element Ai in the arr, count the number of element left this element Ai is smaller than it and return count number arr.
 
 Example
 Example 1:
@@ -21,7 +21,7 @@ Input:
 Output:
 [0,1,0,0,2]
 Clarification
-Before you do this, you'd better complete the following three questions： Segment Tree Build， Segment Tree Query II，and Count of Smaller Number before itself I 。
+Before you do this, you'd better complete the following three questions： Segment Tree Build， Segment Tree Query II，and Count of Smaller Number left itself I 。
 
 Notice
 We suggest you finish problem Segment Tree Build, Segment Tree Query II and Count of Smaller Number first.

@@ -64,7 +64,7 @@ public class MaximumSumBSTinBinaryTree {
         BSTinfo(int min, int max, int sum, boolean isBST){
             this.min = min;
             this.max = max;
-            this.sum = sum;;
+            this.sum = sum;
             this.isBST = isBST;
         }
     }

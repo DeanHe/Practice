@@ -2,7 +2,8 @@ package PrefixSum;
 
 import java.util.*;
 
-/*Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+/*
+Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
 
 Example
 Example1
@@ -16,7 +17,8 @@ Example2
 Input: nums = [2,1,-1,1,2] and k = 3
 Output: 4
 Explanation:
-subarray [0,1], [1,4], [0,3] and [3,4]*/
+subarray [0,1], [1,4], [0,3] and [3,4]
+*/
 public class SubarraySumEqualsK {
 	/**
      * @param nums: a list of integer
@@ -26,7 +28,7 @@ public class SubarraySumEqualsK {
     public int subarraySumEqualsK (int[] nums, int k) {
     	int len = nums.length;
     	int res = 0;
-    	Map<Integer, Integer> map = new HashMap<>(); // prefixSum : count;
+    	Map<Integer, Integer> map = new HashMap<>(); // prefixSum : count of end position of preSum[:end] == prefixSum;
     	map.put(0, 1);
     	int[] preSum = new int[len];
     	preSum[0] = nums[0];

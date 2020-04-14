@@ -1,4 +1,4 @@
-package BinarySearch;
+package Greedy;
 
 import java.util.*;
 /*
@@ -23,6 +23,9 @@ There are n people whose IDs go from 0 to n - 1 and each person belongs exactly 
         groupSizes.length == n
         1 <= n <= 500
         1 <= groupSizes[i] <= n
+
+        Put people's IDs with same groupSize into buckets, then split each bucket into groups.
+        Greedy fill until you need a new group.
 */
 public class GroupThePeopleGivenTheGroupSizeTheyBelongTo {
     public List<List<Integer>> groupThePeople(int[] groupSizes) {

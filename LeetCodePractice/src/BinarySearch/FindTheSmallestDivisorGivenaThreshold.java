@@ -1,8 +1,7 @@
-package Contest;
-/*Given an array of integers nums and an integer threshold, we will choose a positive integer divisor and divide all the array by it and sum the result of the division. Find the smallest divisor such that the result mentioned above is less than or equal to threshold.
-
+package BinarySearch;
+/*
+        Given an array of integers nums and an integer threshold, we will choose a positive integer divisor and divide all the array by it and sum the result of the division. Find the smallest divisor such that the result mentioned above is less than or equal to threshold.
         Each result of division is rounded to the nearest integer greater than or equal to that element. (For example: 7/3 = 3 and 10/2 = 5).
-
         It is guaranteed that there will be an answer.
 
         Example 1:
@@ -24,22 +23,23 @@ package Contest;
 
         1 <= nums.length <= 5 * 10^4
         1 <= nums[i] <= 10^6
-        nums.length <= threshold <= 10^6*/
+        nums.length <= threshold <= 10^6
+*/
 
 public class FindTheSmallestDivisorGivenaThreshold {
     public int smallestDivisor(int[] nums, int threshold) {
-        int left = 1, right = (int) 1e6;
-        while (left < right) {
-            int mid = left + (right - left) / 2, sum = 0;
+        int start = 1, end = (int) 1e6;
+        while (start < end) {
+            int mid = start + (end - start) / 2, sum = 0;
             for (int n : nums) {
                 sum += (n + mid - 1) / mid;
             }
             if (sum > threshold) {  // divisor is too small
-                left = mid + 1;
+                start = mid + 1;
             } else {    // divisor is too big
-                right = mid;
+                end = mid;
             }
         }
-        return left;
+        return start;
     }
 }

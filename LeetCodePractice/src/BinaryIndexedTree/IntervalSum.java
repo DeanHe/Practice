@@ -52,10 +52,10 @@ public class IntervalSum {
         return res;
     }
     
-    private long prefixSum(int x){
+    private long prefixSum(int idx){
         long res = 0;
-        for(int ind = x + 1; ind > 0; ind -= lowbit(ind)){
-            res += bit[ind];
+        for(int i = idx + 1; i > 0; i -= lowbit(i)){
+            res += bit[i];
         }
         return res;
     }

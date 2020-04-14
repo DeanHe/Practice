@@ -1,7 +1,8 @@
-                                                                                                                                                               package SweepLine;
+package SweepLine;
 
 import java.util.*;
-/*Given a non-overlapping interval list which is sorted by start point.
+/*
+Given a non-overlapping interval list which is sorted by start point.
 
 Insert a new interval into it, make sure the list is still in order and non-overlapping (merge intervals if necessary).
 
@@ -18,13 +19,13 @@ public class InsertInterval {
      * @return: A new sorted interval list.
      */
     public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
-        ArrayList<Interval> result = new ArrayList<Interval>();
+        ArrayList<Interval> result = new ArrayList<>();
         int insertPos = 0;
         for(Interval i : intervals){
             if(i.end < newInterval.start){
                 result.add(i);
                 insertPos++;
-            } else if(i.start > newInterval.end){
+            } else if(newInterval.end < i.start){
                 result.add(i);
             } else {
                 newInterval.start = Math.min(i.start, newInterval.start);
@@ -32,7 +33,6 @@ public class InsertInterval {
             }
         }
         result.add(insertPos, newInterval);
-        // write your code here
         return result;
     }
 }

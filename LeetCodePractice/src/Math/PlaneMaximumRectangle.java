@@ -2,8 +2,11 @@ package Math;
 
 import java.util.HashSet;
 
-/*iven a n point on the two-dimensional coordinate system, output the maximum area of the rectangle that consisting of four points. 
-If it cannot form a rectangle, output 0*/
+/*
+given a n point on the two-dimensional coordinate system,
+output the maximum area of the rectangle that consisting of four points.
+If it cannot form a rectangle, output 0
+*/
 public class PlaneMaximumRectangle {
 	class Point {
 		int x, y;

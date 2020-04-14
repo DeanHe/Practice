@@ -1,5 +1,6 @@
 package DP;
-/*Given a 2D binary matrix filled with 0's and 1's, find the largest square containing all 1's and return its area.
+/*
+Given a 2D binary matrix filled with 0's and 1's, find the largest square containing all 1's and return its area.
 
 Example
 For example, given the following matrix:
@@ -8,7 +9,8 @@ For example, given the following matrix:
 1 0 1 1 1
 1 1 1 1 1
 1 0 0 1 0
-Return 4.*/
+Return 4.
+*/
 public class MaximalSquare {
 	/**
      * @param matrix: a matrix of 0 and 1
@@ -39,15 +41,13 @@ public class MaximalSquare {
     	for(int r = 1; r < rows; r++){
     		for(int c = 1; c < cols; c++){
     			if(matrix[r][c] == 1){
-    				// dp[r][c] means the largest square witdth by bottow-right cornor at r, c
+    				// dp[r][c] means the largest square width by bottom-right corner at r, c
                     // dp[r][c] = min(dp[r-1][c-1],dp[r][c-1],dp[r-1][c]) + 1
     				int temp = Math.min(dp[r - 1][c - 1], dp[r - 1][c]);
     				dp[r][c] = Math.min(temp, dp[r][c - 1]) + 1;
     				if(dp[r][c] > max){
     					max = dp[r][c];
     				}
-    			} else {
-    				dp[r][c] = 0;
     			}
     		}
     	}

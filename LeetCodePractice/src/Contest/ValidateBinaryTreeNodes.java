@@ -26,6 +26,6 @@ package Contest;
 */
 public class ValidateBinaryTreeNodes {
     public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
-
+        return false;
     }
 }

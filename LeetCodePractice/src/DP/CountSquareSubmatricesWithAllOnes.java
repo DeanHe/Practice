@@ -35,6 +35,8 @@ package DP;
         1 <= arr.length <= 300
         1 <= arr[0].length <= 300
         0 <= arr[i][j] <= 1
+
+        similar to MaximalSquare
 */
 public class CountSquareSubmatricesWithAllOnes {
     public int countSquares(int[][] matrix) {

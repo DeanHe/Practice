@@ -1,14 +1,16 @@
 package SweepLine;
 
 import java.util.*;
-/*A string, each character representing a scene. Between two identical characters is considered to be a continuous scene. For example: abcda, you can think of these five characters as the same scene. Or acafghbeb can think of two aca and beb scenes. If there is a coincidence between the scenes, then the scenes are combined. For example, abcab, where abca and bcab are coincident, then the five characters are considered to be the same scene. Give a string to find the longest scene.*/
+/*
+A string, each character representing a scene. Between two identical characters is considered to be a continuous scene.
+For example: abcda, you can think of these five characters as the same scene. Or acafghbeb can think of two aca and beb scenes.
+If there is a coincidence between the scenes, then the scenes are combined. For example, abcab, where abca and bcab are coincident,
+then the five characters are considered to be the same scene. Give a string to find the longest scene.
 
-// https://www.lintcode.com/problem/the-longest-scene/description
+https://www.lintcode.com/problem/the-longest-scene/description
+
+*/
 public class ThelongestScene {
-	/**
-     * @param str: The scene string
-     * @return: Return the length longest scene
-     */
     class Cmp implements Comparator<Interval>{
        @Override
        public int compare(Interval a, Interval b){
@@ -18,9 +20,12 @@ public class ThelongestScene {
             return a.start - b.start;
           }
     }
-    
+    /**
+     * @param str: The scene string
+     * @return: Return the length longest scene
+     */
     public int getLongestScene(String str) {
-        // Write your code here
+        // find each alphabet leftmost and rightmost position
     	Interval[] scene = new Interval[26];
         for(int i = 0; i < 26; i++) {
             scene[i] = new Interval(str.length(), -1);
@@ -35,6 +40,7 @@ public class ThelongestScene {
             }
         }
         Arrays.sort(scene, new Cmp());
+        // find the largest interval after merge intervals
         int ans = scene[0].end - scene[0].start + 1;
         for(int i = 1; i < 26; i++) {
             if(scene[i].end == -1) {

@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/*Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+/*
+Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
 
 Example 1:
 Input: n = 12
@@ -14,7 +15,8 @@ Explanation: 12 = 4 + 4 + 4.
 Example 2:
 Input: n = 13
 Output: 2
-Explanation: 13 = 4 + 9.*/
+Explanation: 13 = 4 + 9.
+*/
 public class PerfectSquares {
 	public int numSquares(int n) {
        int[] dp = new int[n + 1];

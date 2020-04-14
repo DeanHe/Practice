@@ -3,7 +3,8 @@ package DP;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
+/*
+Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
 
 '?' Matches any single character.
 '*' Matches any sequence of characters (including the empty sequence).
@@ -46,7 +47,8 @@ Example 5:
 Input:
 s = "acdcb"
 p = "a*c?b"
-Output: false*/
+Output: false
+*/
 public class WildcardMatching {
 	/**
 	 * @param s:
@@ -71,10 +73,12 @@ public class WildcardMatching {
 		}
 		/*
 		 * Transit function: -- If p.charAt(j - 1) != '*', then dp[i][j] = dp[i
-		 * - 1][j - 1] IFF s.charAt(i) == p.charAt(j) || p.charAt(j) == '?' --
-		 * If p.charAt(j - 1) == '*', then -- dp[i][j] = dp[i - 1][j - 1] || //
-		 * Match 1 character = dp[i][j - 1] || // Match 0 character = dp[i -
-		 * 1][j] // Match any sequence of characters
+		 * - 1][j - 1] IFF s.charAt(i) == p.charAt(j) || p.charAt(j) == '?'
+		 *
+		 * If p.charAt(j - 1) == '*',
+		 * then -- dp[i][j] = dp[i - 1][j - 1] || // Match 1 character
+		 *                  = dp[i][j - 1] || // Match 0 character
+		 *                  = dp[i - 1][j] // Match any sequence of characters
 		 */
 		for (int i = 1; i <= sLen; i++) {
 			for (int j = 1; j <= pLen; j++) {

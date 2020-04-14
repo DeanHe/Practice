@@ -1,5 +1,6 @@
 package BST;
-/*Given a binary tree, find the length of the longest consecutive sequence path.
+/*
+Given a binary tree, find the length of the longest consecutive sequence path.
 The path could be start and end at any node in the tree
 
 Example

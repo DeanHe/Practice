@@ -1,7 +1,8 @@
 package HashMap;
 
 import java.util.*;
-/*Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+/*
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
 
 Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 40,000.
 
@@ -14,7 +15,11 @@ Given s = "cbaebabacd" p = "abc"
 return [0, 6]
 
 The substring with start index = 0 is "cba", which is an anagram of "abc".
-The substring with start index = 6 is "bac", which is an anagram of "abc".*/
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+
+Sliding window problem
+Time Complexity will be O(n) because the "start" and "end" points will only move from left to right once.
+*/
 public class FindAllAnagramsInaString {
 	/**
      * @param s a string
@@ -30,25 +35,28 @@ public class FindAllAnagramsInaString {
         int[] dict = new int[26];
         char[] arr = p.toCharArray();
         for(char c : arr){
-            dict[c - 'a']++;
+            int idx = c - 'a';
+            dict[idx]++;
         }
         int s_len = s.length();
         int p_len = p.length();
         int start = 0, end = 0, match = 0;
         while(end < s_len){
-        	if(dict[s.charAt(end) - 'a'] > 0){
+            int end_idx = s.charAt(end) - 'a';
+        	if(dict[end_idx] >= 1){
         		match++;
         	}
-        	dict[s.charAt(end) - 'a']--;
+        	dict[end_idx]--;
         	end++;
         	if(match == p_len){
         		res.add(start);
         	}
         	if(end - start == p_len){
-        		if(dict[s.charAt(start) - 'a'] >= 0){
+        	    int start_idx = s.charAt(start) - 'a';
+        		if(dict[start_idx] >= 0){
         			match--;
         		}
-        		dict[s.charAt(start) - 'a']++;
+        		dict[start_idx]++;
         		start++;
         	}
         }
@@ -80,8 +88,9 @@ public class FindAllAnagramsInaString {
         int[] match = Arrays.copyOf(dict, dict.length);
         for(int i = 0; i < temp.length(); i++){
             char c = temp.charAt(i);
-            match[c - 'a']--;
-            if(match[c - 'a'] < 0){
+            int idx = c - 'a';
+            match[idx]--;
+            if(match[idx] < 0){
                 return false;
             }
         }

@@ -1,5 +1,8 @@
 package BinarySearch;
-/*Given n pieces of wood with length L[i] (integer array). Cut them into small pieces to guarantee you could have equal or more than k pieces with the same length. What is the longest length you can get from the n pieces of wood? Given L & k, return the maximum length of the small pieces.
+
+/*
+Given n pieces of wood with length L[i] (integer array). Cut them into small pieces to guarantee you could have equal or more than k pieces with the same length.
+What is the longest length you can get from the n pieces of wood? Given L & k, return the maximum length of the small pieces.
 
 Example
 Example 1
@@ -24,34 +27,39 @@ You couldn't cut wood into float length.
 
 If you couldn't get >= k pieces, return 0.
 */public class WoodCut {
-	/**
+    /**
      * @param L: Given n pieces of wood with length L[i]
      * @param k: An integer
      * @return: The maximum length of the small pieces
      */
     public int woodCut(int[] L, int k) {
         // write your code here
-    	int left = 1, right = 0;
-    	int res = 0;
-    	for(int l : L){
-    		right = Math.max(right, l);
-    	}
-    	while(left <= right){
-    		int mid = left + (right - left) / 2;
-    		if(count(L, mid) >= k){
-    			res = mid;
-    			left = mid + 1;
-    		} else {
-    			right = mid - 1;
-    		}
-    	}
-    	return res;
+        int start = 1, end = 0;
+        int res = 0;
+        for (int l : L) {
+            end = Math.max(end, l);
+        }
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (count(L, mid) >= k) {
+                start = mid;
+            } else {
+                end = mid;
+            }
+        }
+        if (count(L, end) >= k) {
+            return end;
+        } else if (count(L, start) >= k) {
+            return start;
+        }
+        return 0;
     }
+
     private int count(int[] L, int len) {
-    	int count = 0;
-    	for(int l : L){
-    		count += l / len;
-    	}
-    	return count;
+        int count = 0;
+        for (int l : L) {
+            count += l / len;
+        }
+        return count;
     }
 }
