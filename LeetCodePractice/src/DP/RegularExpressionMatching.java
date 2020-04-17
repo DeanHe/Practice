@@ -19,6 +19,8 @@ isMatch("aa", ".*") is true
 isMatch("ab", ".*") is true
 isMatch("aab", "c*a*b") is true
 
+similar to Edit Distance
+
 solution：
 1, If p.charAt(j) == s.charAt(i) :  dp[i][j] = dp[i-1][j-1];
 2, If p.charAt(j) == '.' : dp[i][j] = dp[i-1][j-1];
@@ -67,25 +69,22 @@ public class RegularExpressionMatching {
 		int pLen = p.length();
 		boolean[][] dp = new boolean[sLen + 1][pLen + 1];
 		dp[0][0] = true;
-		for (int i = 0; i < pLen; i++) {
-			if (p.charAt(i) == '*' && (dp[0][i] || dp[0][i - 1])) {
-				dp[0][i + 1] = true;
+		for (int i = 1; i < pLen; i++) {
+			if (p.charAt(i) == '*') {
+				dp[0][i + 1] = dp[0][i - 1];
 			}
 		}
 		for (int i = 0; i < sLen; i++) {
 			for (int j = 0; j < pLen; j++) {
-				if (p.charAt(j) == s.charAt(i)) {
+				if (p.charAt(j) == s.charAt(i) || p.charAt(j) == '.') {
 					dp[i + 1][j + 1] = dp[i][j];
-				}
-				if (p.charAt(j) == '.') {
-					dp[i + 1][j + 1] = dp[i][j];
-				}
-				if (p.charAt(j) == '*') {
-					if (p.charAt(j - 1) != s.charAt(i) && p.charAt(j - 1) != '.') {
-						//compare p[j - 2] equals s[i]
-						dp[i + 1][j + 1] = dp[i + 1][j - 1];
-					} else {
-						dp[i + 1][j + 1] = dp[i][j + 1] || dp[i + 1][j] || dp[i + 1][j - 1];
+				} else if (p.charAt(j) == '*') {
+					if(dp[i + 1][j - 1]){
+						// in this case, * counts as empty, compare p[j - 2] equals s[i]
+						dp[i + 1][j + 1] = true;
+					} else if (p.charAt(j - 1) == s.charAt(i) || p.charAt(j - 1) == '.') {
+						///in this case, * counts as one or more
+						dp[i + 1][j + 1] = dp[i][j + 1];
 					}
 				}
 			}
@@ -98,14 +97,14 @@ public class RegularExpressionMatching {
 			return s.length() == 0;
 		}
 		if(p.length() > 1 && p.charAt(1) == '*'){ // second char is '*'
-			if(isMatch(s, p.substring(2))){
+			if(isMatch(s, p.substring(2))){ // in this case, * counts as empty
 				return true;
 			}
-			if(s.length() > 0 && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.')){
+			if(s.length() > 0 && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.')){ //in this case, * counts as one or more
 				return isMatch(s.substring(1), p);
 			}
 			return false;
-		} else { // second char is '*'
+		} else {
 			if(s.length() > 0 && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.')){
 				return isMatch(s.substring(1), p.substring(1));
 			}

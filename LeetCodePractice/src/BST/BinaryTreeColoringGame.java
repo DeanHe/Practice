@@ -1,6 +1,7 @@
 package BST;
 
-/*Two players play a turn based game on a binary tree.  We are given the root of this binary tree, and the number of nodes n in the tree.  n is odd, and each node has a distinct value from 1 to n.
+/*
+Two players play a turn based game on a binary tree.  We are given the root of this binary tree, and the number of nodes n in the tree.  n is odd, and each node has a distinct value from 1 to n.
 
 Initially, the first player names a value x with 1 <= x <= n, and the second player names a value y with 1 <= y <= n and y != x.  The first player colors the node with value x red, and the second player colors the node with value y blue.
 
@@ -24,7 +25,8 @@ Constraints:
 
 root is the root of a binary tree with n nodes and distinct node values from 1 to n.
 n is odd.
-1 <= x <= n <= 100*/
+1 <= x <= n <= 100
+*/
 
 public class BinaryTreeColoringGame {
 	int x_left = 0, x_right = 0;

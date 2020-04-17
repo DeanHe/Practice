@@ -3,7 +3,8 @@ package Backtracking;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
+/*
+Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
 
 Example 1:
 
@@ -14,7 +15,8 @@ Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3)
 Note:
 
 1 <= k <= len(nums) <= 16.
-0 < nums[i] < 10000.*/
+0 < nums[i] < 10000.
+*/
 public class PartitionToKEqualSumSubsetsII {
 	int len, target, k;
 
@@ -30,7 +32,7 @@ public class PartitionToKEqualSumSubsetsII {
 			return res;
 		}
 		for (int i = 0; i < k; i++) {
-			res.add(new ArrayList<Integer>());
+			res.add(new ArrayList<>());
 		}
 		int[] tempSum = new int[len];
 		target = sum / k;

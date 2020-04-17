@@ -2,7 +2,8 @@ package Stack;
 
 import java.util.Stack;
 
-/*Implement a basic calculator to evaluate a simple expression string.
+/*
+Implement a basic calculator to evaluate a simple expression string.
 
 The expression string may contain open ( and closing parentheses ), the plus + or minus sign -, non-negative integers and empty spaces .
 
@@ -14,7 +15,11 @@ Example
 "1 + 1" = 2
 " 6-4 / 2 " = 4
 "2*(5+5*2)/3+(6/2+8)" = 21
-"(2+6* 3+5- (3*14/7+2)*5)+3"=-12*/
+"(2+6* 3+5- (3*14/7+2)*5)+3"=-12
+
+solution:
+to use the interpreter
+*/
 public class BasicCalculatorIII {
 	/**
 	 * @param s: the expression string

@@ -31,11 +31,11 @@ public class BraceExpansion {
         if(s == null || s.length() == 0){
             return new String[0];
         }
-        dfs(s, 0, "");
+        product(s, 0, "");
         Collections.sort(res);
         return res.toArray(new String[res.size()]);
     }
-    private void dfs(String s, int pos, String temp){
+    private void product(String s, int pos, String temp){
         if(pos == s.length()){
             res.add(temp);
             return;
@@ -48,10 +48,10 @@ public class BraceExpansion {
             }
             String[] pool = s.substring(pos + 1, end).split(",");
             for(String letter : pool){
-                dfs(s, end + 1, temp + letter);
+                product(s, end + 1, temp + letter);
             }
         } else {
-            dfs(s, pos + 1, temp + c);
+            product(s, pos + 1, temp + c);
         }
     }
 }

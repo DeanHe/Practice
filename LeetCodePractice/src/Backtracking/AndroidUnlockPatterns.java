@@ -1,12 +1,14 @@
 package Backtracking;
 /*
-Given an Android 3x3 key lock screen and two integers m and n, where 1 ≤ m ≤ n ≤ 9, count the total number of unlock patterns of the Android lock screen, which consist of minimum of m keys and maximum n keys.
+Given an Android 3x3 key lock screen and two integers m and n, where 1 ≤ m ≤ n ≤ 9, count the total number of unlock patterns of the Android lock screen, 
+which consist of minimum of m keys and maximum n keys.
 
 Rules for a valid pattern:
 
 Each pattern must connect at least m keys and at most n keys.
 All the keys must be distinct.
-If the line connecting two consecutive keys in the pattern passes through any other keys, the other keys must have previously selected in the pattern. No jumps through non selected key is allowed.
+If the line connecting two consecutive keys in the pattern passes through any other keys,
+the other keys must have previously selected in the pattern. No jumps through non selected key is allowed.
 The order of keys used matters.
 android unlock
 Explanation:
@@ -25,16 +27,15 @@ Line 1 - 3 is valid because it passes through key 2, which had been selected in 
 Valid move: 6 - 5 - 4 - 1 - 9 - 2
 Line 1 - 9 is valid because it passes through key 5, which had been selected in the pattern.
 Example
-Example1
 
+Example1
 Input: m = 1, n = 1
 Output: 9
-Example2
 
+Example2
 Input: m = 1, n = 2
 Output: 65
 */
-// https://cspiration.com 
 public class AndroidUnlockPatterns {
 	 /**
      * @param m: an integer
@@ -54,19 +55,19 @@ public class AndroidUnlockPatterns {
 		skip[1][9] = skip[9][1] = skip[2][8] = skip[8][2] = skip[3][7] = skip[7][3] = skip[4][6] = skip[6][4] = 5;
 
         int count = 0;
-        for(int remain = m; remain <= n; remain++){
-        	count += 4 * dfs(1, remain);
-        	count += 4 * dfs(2, remain);
-        	count += dfs(5, remain);
+        for(int steps = m; steps <= n; steps++){
+        	count += 4 * dfs(1, steps);
+        	count += 4 * dfs(2, steps);
+        	count += dfs(5, steps);
         }
         return count;
     }
 
-	private int dfs(int curPos, int remain){
-    	if(remain <= 0){
+	private int dfs(int curPos, int steps){
+    	if(steps <= 0){
     		return 0;
     	}
-    	if(remain == 1){
+    	if(steps == 1){
     		return 1;
     	}
     	visited[curPos] = true;
@@ -74,7 +75,7 @@ public class AndroidUnlockPatterns {
     	for(int nextPos = 1; nextPos <= 9; nextPos++){
     		boolean validMove = skip[curPos][nextPos] == 0 || visited[skip[curPos][nextPos]];
     		if(!visited[nextPos] && validMove){
-    			count += dfs(nextPos, remain - 1);
+    			count += dfs(nextPos, steps - 1);
     		}
     	}
     	visited[curPos] = false;

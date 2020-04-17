@@ -31,16 +31,6 @@ There are two cases for the tree structure to be invalid.
 1) A node having two parents;
    including corner case: e.g. [[4,2],[1,5],[5,2],[5,3],[2,4]]
 2) A circle exists
-
-1) Check whether there is a node having two parents. 
-    If so, store them as candidates A and B, and set the second edge invalid. 
-2) Perform normal union find. 
-    If the tree is now valid 
-           simply return candidate B
-    else if candidates not existing 
-           we find a circle, return current edge; 
-    else 
-           remove candidate A instead of B.
 */
 public class RedundantConnectionII {
     private int[] parent;

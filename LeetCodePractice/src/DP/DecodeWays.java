@@ -28,12 +28,14 @@ public class DecodeWays {
         }
         int len = s.length();
         int[] dp = new int[len + 1];
+        // init
         dp[0] = 1;
         if(s.charAt(0) == '0') {
         	dp[1] = 0;
         } else {
         	dp[1] = 1;
         }
+        // transfer
         for(int i = 2; i <= len; i++) {
         	//nam1, nam2
         	char nam1 = s.charAt(i - 2);

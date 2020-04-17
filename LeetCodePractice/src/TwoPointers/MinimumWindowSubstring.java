@@ -3,7 +3,8 @@ package TwoPointers;
 import java.util.HashMap;
 import java.util.Map;
 
-/*Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+/*
+Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 
 Example:
 
@@ -12,7 +13,8 @@ Output: "BANC"
 Note:
 
 If there is no such window in S that covers all characters in T, return the empty string "".
-If there is such window, you are guaranteed that there will always be only one unique minimum window in S.*/
+If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
+*/
 
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
@@ -29,25 +31,25 @@ public class MinimumWindowSubstring {
         }
         int minLen = slen + 1; // handle res can be s case
         int l = 0;
-        int count = 0;
+        int match = 0;
         for(int r = 0; r < slen; r++){
-        	char c = s.charAt(r);
-        	if(map.containsKey(c)){
-        		map.put(c, map.get(c) - 1);
-        		if(map.get(c) >= 0){
-        			count++;
-        		}
+        	char c_r = s.charAt(r);
+        	if(map.containsKey(c_r)){
+				if(map.get(c_r) > 0){ //attn
+					match++;
+				}
+        		map.put(c_r, map.get(c_r) - 1);
         	}
-        	while (count == tlen) {
-				char left = s.charAt(l);
-				if(map.containsKey(left)){
-					map.put(left, map.get(left) + 1); // compensate back the character left
-					if(map.get(left) > 0){
-						if(minLen > r - l + 1){
-							minLen = r - l + 1;
-							res = s.substring(l, r + 1);
-						}
-						count--;
+        	while (match == tlen) {
+				char c_l = s.charAt(l);
+				if(minLen > r - l + 1){
+					minLen = r - l + 1;
+					res = s.substring(l, r + 1);
+				}
+				if(map.containsKey(c_l)){
+					map.put(c_l, map.get(c_l) + 1); // compensate back the character left
+					if(map.get(c_l) > 0){ //attn
+						match--;
 					}
 				}
 				l++;
