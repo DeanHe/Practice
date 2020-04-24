@@ -2,7 +2,8 @@ package Stack;
 
 import java.util.Stack;
 
-/*mplement a basic calculator to evaluate a simple expression string.
+/*
+implement a basic calculator to evaluate a simple expression string.
 
 The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer division should truncate toward zero.
 
@@ -22,7 +23,8 @@ Input:
 Output:
 1
 Notice
-Do not use the eval built-in library function.*/
+Do not use the eval built-in library function.
+*/
 public class BasicCalculatorII {
 	/**
 	 * @param s:
@@ -42,7 +44,7 @@ public class BasicCalculatorII {
 			if (Character.isDigit(c)) {
 				cur = cur * 10 + c - '0';
 			}
-			if ((!Character.isDigit(c) && c != ' ') || i == len - 1) {
+			if ((!Character.isDigit(c) && c != ' ') || i == len - 1) { // attn
 				if (sign == '+') {
 					stack.push(cur);
 				} else if (sign == '-') {

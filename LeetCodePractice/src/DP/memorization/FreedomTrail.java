@@ -1,4 +1,4 @@
-package DFS;
+package DP.memorization;
 /*
 In the video game Fallout 4, the quest "Road to Freedom" requires players to reach a metal dial called the "Freedom Trail Ring", and use the dial to spell a specific keyword in order to open the door.
 

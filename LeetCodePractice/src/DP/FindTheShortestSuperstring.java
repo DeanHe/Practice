@@ -30,12 +30,12 @@ public class FindTheShortestSuperstring {
         		append[i][j] = getAppendLength(A[i], A[j]);
         	}
         }
-        //dp[s][i] means minimum length of state s, ends with string A[i] 
+        //mem[s][i] means minimum length of state s, ends with string A[i]
         int[][] dp = new int[1 << N][N];
         for(int[] rows : dp){
         	Arrays.fill(rows, Integer.MAX_VALUE);
         }
-        //backNode[s][i] means string k leads to dp[s][i]
+        //backNode[s][i] means string k leads to mem[s][i]
         int[][] backNode = new int[1 << N][N];
         for(int[] rows : backNode){
         	Arrays.fill(rows, -1);

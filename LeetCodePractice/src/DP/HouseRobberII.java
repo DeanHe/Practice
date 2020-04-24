@@ -59,7 +59,7 @@ public class HouseRobberII {
     }
 
     private int helper2(int[] nums, int start ,int end){
-        int[][] dp = new int[end + 1][2]; // dp[i][j] means max value of pick i slices with last slice taken 0, not taken 1
+        int[][] dp = new int[end + 1][2]; // mem[i][j] means max value of pick i slices with last slice taken 0, not taken 1
         dp[start][0] = nums[start];
         for(int i = start + 1; i <= end; i++){
             dp[i][0] = dp[i - 1][1] + nums[i];

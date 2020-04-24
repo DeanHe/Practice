@@ -35,7 +35,7 @@ public class RussianDollEnvelopes {
 			}
 		});
 		int len = envelopes.length;
-		// dp[i] means longest increasing sequence ended with envelopes[i]
+		// mem[i] means longest increasing sequence ended with envelopes[i]
 		int[] dp = new int[len];
 		int maxOverlap = 1;
 		for (int i = 0; i < len; i++) {

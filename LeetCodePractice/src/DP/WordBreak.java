@@ -14,7 +14,7 @@ public class WordBreak {
      */
     public boolean wordBreak(String s, Set<String> dict) {
         // write your code here
-        //dp[i] means front ith substring can break 
+        //mem[i] means front ith substring can break
         if(s == null || s.length() == 0){
             return true;
         }

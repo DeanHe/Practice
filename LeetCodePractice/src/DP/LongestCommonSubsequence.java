@@ -27,7 +27,7 @@ public class LongestCommonSubsequence {
         int m = A.length();
         int n = B.length();
         int[][] dp = new int[m+1][n+1];
-        //dp[i][j] means the LCS length formed by A[:i] and B[:j]
+        //mem[i][j] means the LCS length formed by A[:i] and B[:j]
         for(int i = 1; i <= m; i++){
             for(int j = 1; j <= n; j++){
                 if(A.charAt(i - 1) == B.charAt(j - 1)){

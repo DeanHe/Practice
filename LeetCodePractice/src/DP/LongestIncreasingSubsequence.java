@@ -38,11 +38,11 @@ public class LongestIncreasingSubsequence {
             return 0;
         }
         int len = nums.length;
-        // dp[i] means the LIS ends in nums[i]
+        // mem[i] means the LIS ends in nums[i]
         int[] dp = new int[len];
         /* initialization
         for(int i = 0; i < len; i++){
-            dp[i] = 1;
+            mem[i] = 1;
         }
         */
         int res = Integer.MIN_VALUE;

@@ -17,21 +17,21 @@ Hint: Length of the given string will not exceed 100.*/
 
 /*The problem wants us to find the number of ways to do something without giving specific steps like how to achieve it. This can be a typical signal that dynamic programming may come to help.
 
-dp[i][j] stands for the minimal turns we need for string from index i to index j.
+mem[i][j] stands for the minimal turns we need for string from index i to index j.
 So we have
 
-dp[i][i] = 1: we need 1 turn to paint a single character.
-dp[i][i + 1]
-dp[i][i + 1] = 1 if s.chartAt(i) == s.charAt(i + 1)
-dp[i][i + 1] = 2 if s.chartAt(i) != s.charAt(i + 1)
+mem[i][i] = 1: we need 1 turn to paint a single character.
+mem[i][i + 1]
+mem[i][i + 1] = 1 if s.chartAt(i) == s.charAt(i + 1)
+mem[i][i + 1] = 2 if s.chartAt(i) != s.charAt(i + 1)
 Then we can iteration len from 2 to possibly n. For each iteration, we iteration start index from 0 to the farthest possible.
 
-The maximum turns for dp[start][start + len] is len + 1, i.e. print one character each time.
+The maximum turns for mem[start][start + len] is len + 1, i.e. print one character each time.
 We can further divide the substring to two parts: start -> start+k and start+k+1 -> start+len. It is something as following:
 index |start  ...  start + k| |start + k + 1 ... start + len|
 char  |  a    ...       b   | |      c       ...      b     |
 As shown above, if we have s.charAt(start + k) == s.charAt(start + len), we can make it in one turn when we print this character (i.e. b here)
-This case we can reduce our turns to dp[start][start + k] + dp[start + k + 1][start + len] - 1
+This case we can reduce our turns to mem[start][start + k] + mem[start + k + 1][start + len] - 1
 */
 public class StrangePrinter {
 	public int strangePrinter(String s) {

@@ -33,7 +33,7 @@ Constraints:
 public class MaximumProfitInJobScheduling {
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
         int len = startTime.length;
-        // dp[i] means max Profit can be accumulated from 0 : endTime[i]
+        // mem[i] means max Profit can be accumulated from 0 : endTime[i]
         int dp[] = new int[len];
         Job[] jobs = new Job[len];
         for(int i = 0; i < len; i++) {

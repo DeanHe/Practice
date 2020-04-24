@@ -31,7 +31,7 @@ public class CuttingaRod {
      * @return: the max value
      */
     public int cutting(int[] prices, int n) {
-    	// dp[i] means maximum value by using rod of length i 
+    	// mem[i] means maximum value by using rod of length i
         int[] dp = new int[n + 1];   
         for(int i = 1; i <= n; i++){
             for(int j = 1; j <= i; j++){

@@ -61,7 +61,7 @@ public class WildcardMatching {
 		// write your code here
 		int sLen = s.length();
 		int pLen = p.length();
-		// where dp[i][j] means the first i characters in string s matches the
+		// where mem[i][j] means the first i characters in string s matches the
 		// first characters of string p.
 		boolean[][] dp = new boolean[sLen + 1][pLen + 1];
 		// init
@@ -72,13 +72,13 @@ public class WildcardMatching {
 			}
 		}
 		/*
-		 * Transit function: -- If p.charAt(j - 1) != '*', then dp[i][j] = dp[i
+		 * Transit function: -- If p.charAt(j - 1) != '*', then mem[i][j] = mem[i
 		 * - 1][j - 1] IFF s.charAt(i) == p.charAt(j) || p.charAt(j) == '?'
 		 *
 		 * If p.charAt(j - 1) == '*',
-		 * then -- dp[i][j] = dp[i - 1][j - 1] || // Match 1 character
-		 *                  = dp[i][j - 1] || // Match 0 character
-		 *                  = dp[i - 1][j] // Match any sequence of characters
+		 * then -- mem[i][j] = mem[i - 1][j - 1] || // Match 1 character
+		 *                  = mem[i][j - 1] || // Match 0 character
+		 *                  = mem[i - 1][j] // Match any sequence of characters
 		 */
 		for (int i = 1; i <= sLen; i++) {
 			for (int j = 1; j <= pLen; j++) {

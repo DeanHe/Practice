@@ -36,7 +36,7 @@ public class PaintFence {
      */
     public int numWays(int n, int k) {
         // write your code here
-    	// dp[i] means # of ways to paint with last two posts same color or different
+    	// mem[i] means # of ways to paint with last two posts same color or different
     	int[] same = new int[n + 1];
     	int[] diff = new int[n + 1];
     	same[1] = 0;

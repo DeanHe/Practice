@@ -35,7 +35,7 @@ public class MinimumCostTreeFromLeafValues {
 	public int mctFromLeafValues(int[] arr) {
 		int len = arr.length;
 		int[][] max = new int[len][len]; // max[i][j] means max value in arr[i:j];
-		int[][] dp = new int[len][len]; // dp[i][j] means minimum cost tree formed by arr[i:j];
+		int[][] dp = new int[len][len]; // mem[i][j] means minimum cost tree formed by arr[i:j];
 		for (int i = 0; i < len; i++) {
 			int localMax = 0;
 			for (int j = i; j < len; j++) {

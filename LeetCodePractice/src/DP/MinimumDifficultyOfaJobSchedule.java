@@ -44,7 +44,7 @@ public class MinimumDifficultyOfaJobSchedule {
         if(d > len){
             return -1;
         }
-        //dp[i][k] means min difficulty to schedule the first i jobs (1 - based) in k days
+        //mem[i][k] means min difficulty to schedule the first i jobs (1 - based) in k days
         int[][] dp = new int[len + 1][d + 1];
         for(int[] arr : dp){
             Arrays.fill(arr, Integer.MAX_VALUE / 2);

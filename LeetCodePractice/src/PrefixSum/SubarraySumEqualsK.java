@@ -3,7 +3,8 @@ package PrefixSum;
 import java.util.*;
 
 /*
-Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+Given an array of integers and an integer k,
+you need to find the total number of continuous subarrays whose sum equals to k.
 
 Example
 Example1
@@ -26,21 +27,16 @@ public class SubarraySumEqualsK {
      * @return: return an integer, denote the number of continuous subarrays whose sum equals to k
      */
     public int subarraySumEqualsK (int[] nums, int k) {
-    	int len = nums.length;
-    	int res = 0;
-    	Map<Integer, Integer> map = new HashMap<>(); // prefixSum : count of end position of preSum[:end] == prefixSum;
-    	map.put(0, 1);
-    	int[] preSum = new int[len];
-    	preSum[0] = nums[0];
-    	for(int i = 1; i < len; i++){
-    		preSum[i] = preSum[i - 1] + nums[i];
-    	}
-    	for(int i = 0; i < len; i++){
-    		if(map.containsKey(preSum[i] - k)){
-    			res += map.get(preSum[i] - k);
-    		}
-    		map.put(preSum[i], map.getOrDefault(preSum[i], 0) + 1);
-    	}
-    	return res;
+		int len = nums.length, res = 0, preSum = 0;
+		Map<Integer, Integer> preSumCnt = new HashMap<>(); // prefixSum : count of end position of preSum[:end] == prefixSum;
+		preSumCnt.put(0, 1);
+		for(int i = 0; i < len; i++){
+			preSum += nums[i];
+			if(preSumCnt.containsKey(preSum - k)){
+				res += preSumCnt.get(preSum - k);
+			}
+			preSumCnt.put(preSum, preSumCnt.getOrDefault(preSum, 0) + 1);
+		}
+		return res;
     }
 }

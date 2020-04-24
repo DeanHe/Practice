@@ -22,7 +22,7 @@ It is guaranteed that costs.length is even.
 public class TwoCityScheduling {
 	public int twoCitySchedCost(int[][] costs) {
         int N = costs.length / 2;
-        //dp[i][j] represents the cost when considering first (i + j) people in which i people assigned to city A and j people assigned to city B.
+        //mem[i][j] represents the cost when considering first (i + j) people in which i people assigned to city A and j people assigned to city B.
         int[][] dp = new int[N + 1][N + 1];
         for(int i= 1; i <= N; i++){
             dp[0][i] = dp[0][i - 1] + costs[i - 1][1];

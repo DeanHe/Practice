@@ -23,7 +23,7 @@ Notice
 1 <= N <= 50
 Answers will be in the range of 32-bit signed integer.
 
-the optimal sequence A count dp[i] comes from:
+the optimal sequence A count mem[i] comes from:
 1 continuous A
 2 .... Ctrl-A, Ctrl-C, multiple Ctrl-V
 */

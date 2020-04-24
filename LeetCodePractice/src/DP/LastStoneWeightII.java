@@ -31,9 +31,9 @@ This question eaquals to partition an array into 2 subsets whose difference is m
 
 ==> -> diff = total - 2 * S_small  ==> minimize diff equals to  maximize S_small 
 
-Now we should find the maximum of S_small, range from 0 to total / 2, using dp can solve this
+Now we should find the maximum of S_small, range from 0 to total / 2, using mem can solve this
 
-dp[i][j]   = {true if some subset from 1st to j'th has a sum equal to sum i, false otherwise}
+mem[i][j]   = {true if some subset from 1st to j'th has a sum equal to sum i, false otherwise}
     i ranges from (sum of all elements) {1..n}
     j ranges from  {1..n}
 

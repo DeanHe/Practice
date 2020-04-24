@@ -42,7 +42,7 @@ public class DistinctSubsequences {
      */
      //How do you define "distinct" subsequence? Clearly, the 'distinct' here mean different operation combination, not the final string of subsequence. Otherwise, the result is always 0 or 1. 
     //When you see string problem that is about subsequence or matching, dynamic programming method should come to mind naturally. The key is to find the initial and changing condition. 
-    // dp[i][j]，represent S[:i] matches T[:j] count
+    // mem[i][j]，represent S[:i] matches T[:j] count
 	// Let W(i, j) stand for the number of subsequences of S(0, i) equals to T(0, j). 
 	//If S.charAt(i) == T.charAt), W(i, j) = W(i-1, j-1) + W(i-1,j); Otherwise, W(i, j) = W(i-1,j).
 public int numDistinct(String S, String T) {

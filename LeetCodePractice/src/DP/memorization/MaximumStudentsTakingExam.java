@@ -1,4 +1,4 @@
-package DP;
+package DP.memorization;
 
 import java.util.ArrayList;
 import java.util.Arrays;

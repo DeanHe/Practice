@@ -41,8 +41,8 @@ public class MaximalSquare {
     	for(int r = 1; r < rows; r++){
     		for(int c = 1; c < cols; c++){
     			if(matrix[r][c] == 1){
-    				// dp[r][c] means the largest square width by bottom-right corner at r, c
-                    // dp[r][c] = min(dp[r-1][c-1],dp[r][c-1],dp[r-1][c]) + 1
+    				// mem[r][c] means the largest square width by bottom-right corner at r, c
+                    // mem[r][c] = min(mem[r-1][c-1],mem[r][c-1],mem[r-1][c]) + 1
     				int temp = Math.min(dp[r - 1][c - 1], dp[r - 1][c]);
     				dp[r][c] = Math.min(temp, dp[r][c - 1]) + 1;
     				if(dp[r][c] > max){

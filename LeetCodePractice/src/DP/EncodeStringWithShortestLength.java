@@ -30,9 +30,9 @@ You may assume that the input string contains only lowercase English letters. Th
 If an encoding process does not make the string shorter, then do not encode it. If there are several solutions, return any of them is fine.
 */
 
-/*dp[i][j] = shortest string from index i to index j in encoded form.
+/*mem[i][j] = shortest string from index i to index j in encoded form.
 We can write the following formula as:-
-dp[i][j] = min(dp[i][j], dp[i][k] + dp[k+1][j]) or if we can find some pattern in string from i to j which will result in more less length.
+mem[i][j] = min(mem[i][j], mem[i][k] + mem[k+1][j]) or if we can find some pattern in string from i to j which will result in more less length.
 Time Complexity = O(n^3)*/
 public class EncodeStringWithShortestLength {
 	/**

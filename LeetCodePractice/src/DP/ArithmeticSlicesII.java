@@ -56,7 +56,7 @@ public class ArithmeticSlicesII {
 	public int numberOfArithmeticSlices(int[] A) {
         int res = 0;
         int len = A.length;
-        Map<Integer, Integer>[] dp = new Map[len]; //dp[i].get(d) denotes the number of weak arithmetic subsequences that ends with A[i] and its common difference is d.
+        Map<Integer, Integer>[] dp = new Map[len]; //mem[i].get(d) denotes the number of weak arithmetic subsequences that ends with A[i] and its common difference is d.
         for(int i = 0; i < len; i++){
         	dp[i] = new HashMap<>();
         	for(int j = 0; j < i; j++){

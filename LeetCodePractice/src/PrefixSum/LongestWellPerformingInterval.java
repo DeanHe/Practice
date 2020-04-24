@@ -2,7 +2,8 @@ package PrefixSum;
 
 import java.util.*;
 
-/*We are given hours, a list of the number of hours worked per day for a given employee.
+/*
+We are given hours, a list of the number of hours worked per day for a given employee.
 
 A day is considered to be a tiring day if and only if the number of hours worked is (strictly) greater than 8.
 
@@ -22,7 +23,7 @@ Constraints:
 0 <= hours[i] <= 16
 
 solution:
-1 find longest subarray with sum == 1
+1 find longest subarray of element -1 and 1 with sum == 1
 2 if sum(array[0:n]) > 0, return n;
 */
 public class LongestWellPerformingInterval {
@@ -30,7 +31,7 @@ public class LongestWellPerformingInterval {
         int len = hours.length;
         int res = 0;
         int sum = 0;
-        Map<Integer, Integer> visited = new HashMap<>(); // preSum :  preSum's end index
+        Map<Integer, Integer> visited = new HashMap<>(); // preSum :  preSum's first end index
         for(int i = 0; i < len; i++){
             sum += hours[i] > 8 ? 1 : -1;
             if(sum > 0) {
@@ -45,3 +46,5 @@ public class LongestWellPerformingInterval {
         return res;
     }
 }
+// -1, -1, -1, -1, -1, 1, 1  1
+// -1  -2  -3  -4  -5 -4 -3 -2

@@ -30,7 +30,7 @@ public class ArithmeticSlices {
         if(len < 3){
         	return 0;
         }
-        int[] dp = new int[len]; // dp[i] is the number of arithmetic slices which are end with A[i]
+        int[] dp = new int[len]; // mem[i] is the number of arithmetic slices which are end with A[i]
         for(int i = 2; i < len; i++){
         	if(A[i - 1] - A[i - 2] == A[i] - A[i - 1]){
         		dp[i] = dp[i - 1] + 1;

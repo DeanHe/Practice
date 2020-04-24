@@ -43,7 +43,7 @@ public class PizzaWith3nSlices {
 
     private int helper(int[] slices, int rounds, int start, int end){
         int most = 0;
-        int[][][] dp = new int[end + 1][rounds + 1][2]; // dp[i][j][k] means max value of pick j slices from [0:i] with last slice taken 0, not taken 1
+        int[][][] dp = new int[end + 1][rounds + 1][2]; // mem[i][j][k] means max value of pick j slices from [0:i] with last slice taken 0, not taken 1
         dp[start][1][0] = slices[start];
         for(int i = start + 1; i <= end; i++){
             for(int j = 1; j <= rounds; j++){

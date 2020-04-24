@@ -2,7 +2,8 @@ package PrefixSum;
 
 import java.util.TreeSet;
 
-/*Given a non-empty 2D matrix matrix and an integer k, find the max sum of a rectangle in the matrix such that its sum is no larger than k.
+/*
+Given a non-empty 2D matrix matrix and an integer k, find the max sum of a rectangle in the matrix such that its sum is no larger than k.
 
 Example:
 
@@ -13,7 +14,8 @@ Explanation: Because the sum of rectangle [[0, 1], [-2, 3]] is 2,
 Note:
 
 The rectangle inside the matrix must have an area > 0.
-What if the number of rows is much larger than the number of columns?*/
+What if the number of rows is much larger than the number of columns?
+*/
 public class MaxSumOfRectangleNoLargerThanK {
 	public int maxSumSubmatrix(int[][] matrix, int k) {
         if(matrix == null || matrix.length == 0 || matrix[0].length == 0){

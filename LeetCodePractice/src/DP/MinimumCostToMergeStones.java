@@ -46,7 +46,7 @@ public class MinimumCostToMergeStones {
     		preSum[i] = preSum[i - 1] + stones[i - 1];
     	}
     	int[][][] dp = new int[len][len][K + 1];
-    	//dp[i][j][k] means minimum cost to divide A[i:j] to k consecutive piles
+    	//mem[i][j][k] means minimum cost to divide A[i:j] to k consecutive piles
     	for(int i = 0; i < len; i++){
     		for(int j = 0; j < len; j++){
     			for(int k = 0; k <= K; k++){

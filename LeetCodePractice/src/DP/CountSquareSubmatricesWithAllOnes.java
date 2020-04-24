@@ -43,7 +43,7 @@ public class CountSquareSubmatricesWithAllOnes {
         int rows = matrix.length;
         int cols = matrix[0].length;
         int res = 0;
-        int[][] dp = new int[rows][cols]; //dp[i][j] means the max side of square with bottom right at matrix[i][j];
+        int[][] dp = new int[rows][cols]; //mem[i][j] means the max side of square with bottom right at matrix[i][j];
         for(int r = 0; r < rows; r++){
             dp[r][0] = matrix[r][0] == 1 ? 1 : 0;
         }

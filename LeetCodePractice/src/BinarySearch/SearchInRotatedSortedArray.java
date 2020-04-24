@@ -1,5 +1,6 @@
 package BinarySearch;
-/*Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+/*
+Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
 
 (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
 
@@ -16,7 +17,13 @@ Output: 4
 Example 2:
 
 Input: nums = [4,5,6,7,0,1,2], target = 3
-Output: -1*/
+Output: -1
+
+solution:
+1 first check mid is in left monotone or right monotone
+2 check if target in range [start, mid] or [mid, end]
+3 otherwise move the opposite pointer
+*/
 public class SearchInRotatedSortedArray {
 	public int search(int[] A, int target) {
 		if (A == null || A.length == 0) {

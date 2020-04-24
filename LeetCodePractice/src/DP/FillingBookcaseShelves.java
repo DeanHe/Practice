@@ -27,7 +27,7 @@ Constraints:
 public class FillingBookcaseShelves {
 	public int minHeightShelves(int[][] books, int shelf_width) {
         int len = books.length;
-        int[] dp = new int[len + 1]; // dp[i] means the min height of put first i books on shelves
+        int[] dp = new int[len + 1]; // mem[i] means the min height of put first i books on shelves
         dp[0] = 0;
         for(int i = 1; i <= len; i++){
         	int width = books[i - 1][0];

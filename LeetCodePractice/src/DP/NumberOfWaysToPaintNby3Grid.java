@@ -37,7 +37,7 @@ public class NumberOfWaysToPaintNby3Grid {
     int[] colors = {1, 2, 3}; // represent Red, Yellow or Green
 
     public int numOfWays(int n) {
-        //dp[i][a][b][c] means the total # of ways from row 0:i with row i + 1 ending color in a, b, c
+        //mem[i][a][b][c] means the total # of ways from row 0:i with row i + 1 ending color in a, b, c
         int[][][][] dp = new int[n + 1][4][4][4];
         return dfs(n, 0, 0, 0, dp);
     }

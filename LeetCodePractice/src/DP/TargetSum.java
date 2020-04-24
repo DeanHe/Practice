@@ -46,7 +46,7 @@ public class TargetSum {
             return 0;
         }
         int target = (S + totalSum) / 2;
-        //dp[i][j] means number of subset from nums[0: j - 1] has sum equals to i
+        //mem[i][j] means number of subset from nums[0: j - 1] has sum equals to i
         int[][] dp = new int[target + 1][len + 1];
         dp[0][0] = 1;
         for(int i = 0; i <= target; i++){

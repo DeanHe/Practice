@@ -67,7 +67,7 @@ public class GreatestSumDivisibleByThree {
                 dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
                 dp[i][(n + dp[i - 1][j]) % k] = Math.max(dp[i][(n + dp[i - 1][j]) % k], n + dp[i - 1][j]);
             }
-            //System.out.println(Arrays.toString(dp[i]));
+            //System.out.println(Arrays.toString(mem[i]));
         }
         return dp[len][0];
     }
@@ -80,7 +80,7 @@ public class GreatestSumDivisibleByThree {
             for(int i=0;i<k;i++){
                 dp[(num+tmp[i])%k] = Math.max(dp[(num+tmp[i])%k],num+tmp[i]);
             }
-            //System.out.println(Arrays.toString(dp));
+            //System.out.println(Arrays.toString(mem));
         }
         return dp[0];
     }

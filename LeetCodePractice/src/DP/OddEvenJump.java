@@ -52,15 +52,15 @@ import java.util.TreeMap;
         0 <= A[i] < 100000
 
         First let's create a boolean DP array.
-dp[i][0] stands for you can arrive index n - 1 starting from index i at an odd step.
-dp[i][1] stands for you can arrive index n - 1 starting from index i at an even step.
+mem[i][0] stands for you can arrive index n - 1 starting from index i at an odd step.
+mem[i][1] stands for you can arrive index n - 1 starting from index i at an even step.
 Initialization:
-Index n - 1 is always a good start point, regardless it's odd or even step right now. Thus dp[n - 1][0] = dp[n - 1][1] = true.
+Index n - 1 is always a good start point, regardless it's odd or even step right now. Thus mem[n - 1][0] = mem[n - 1][1] = true.
 DP formula:
-dp[i][0] = dp[index_next_greater_number][1] - because next is even step
-dp[i][1] = dp[index_next_smaller_number][0] - because next is odd step
+mem[i][0] = mem[index_next_greater_number][1] - because next is even step
+mem[i][1] = mem[index_next_smaller_number][0] - because next is odd step
 Result:
-Since first step is odd step, then result is count of dp[i][0] with value true.
+Since first step is odd step, then result is count of mem[i][0] with value true.
 
 To quickly find the next greater or smaller number and its index: traverse the array reversely and store data into a TreeMap using the number as Key and its index as Value.
 

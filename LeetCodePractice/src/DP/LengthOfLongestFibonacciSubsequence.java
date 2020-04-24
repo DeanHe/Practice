@@ -31,7 +31,7 @@ public class LengthOfLongestFibonacciSubsequence {
 			map.put(A[i], i);
 		}
         int ans = 0;
-        // dp[i][j] represents fib sequence ends with '... A[j], A[i]' length
+        // mem[i][j] represents fib sequence ends with '... A[j], A[i]' length
         int[][] dp = new int[len][len]; 
         for(int i = 1; i < len; i++){
         	for(int j = i - 1; j >= 0; j--){

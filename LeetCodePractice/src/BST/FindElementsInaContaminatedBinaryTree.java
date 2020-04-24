@@ -3,7 +3,7 @@ package BST;
 import java.util.*;
 
 /*
-Given a binary tree with the following rules:
+        Given a binary tree with the following rules:
 
         root.val == 0
         If treeNode.val == x and treeNode.left != null, then treeNode.left.val == 2 * x + 1

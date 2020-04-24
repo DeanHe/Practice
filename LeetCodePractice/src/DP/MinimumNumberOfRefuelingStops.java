@@ -46,7 +46,7 @@ import java.util.PriorityQueue;
 
 public class MinimumNumberOfRefuelingStops {
 	public int minRefuelStops(int target, int startFuel, int[][] stations) {
-		// dp[t] means the furthest distance that we can get with t times of
+		// mem[t] means the furthest distance that we can get with t times of
 		// refueling.
 		long[] dp = new long[stations.length + 1];
 		dp[0] = startFuel;

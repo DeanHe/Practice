@@ -1,9 +1,8 @@
-import java.util.*;
+import Backtracking.PartitionToKEqualSumSubsetsII;
+import Trie.AutocompleteSystem;
 
-import BST.TreeNode;
-import Backtracking.BraceExpansion;
-import Stack.CountSubmatricesWithAllOnes;
-import UnionFind.TheEarliestMomentWhenEveryoneBecomeFriends;
+import java.util.List;
+
 
 public class Solution {
 
@@ -21,10 +20,18 @@ public class Solution {
 		int res = mie.earliestAcq(logs, 6);
 */
 
-		int[][] events = {{1,1}, {1,0}};
-		CountSubmatricesWithAllOnes cs = new CountSubmatricesWithAllOnes();
-		int res = cs.countMatricies(events);
-		System.out.println(res);
+		String[] sentences = {"i love you", "island","ironman", "i love leetcode"};
+		int[] cnt = {5,3,2,2};
+		AutocompleteSystem cs = new AutocompleteSystem(sentences, cnt);
+		String test = "i a#";
+		for(char c : test.toCharArray()){
+			List<String> res = cs.input(c);
+			System.out.println(res);
+		}
+		for(char c : test.toCharArray()){
+			List<String> res = cs.input(c);
+			System.out.println(res);
+		}
 
 /*		BraceExpansion be = new BraceExpansion();
 		String input = "{a,b,c}d{e,f}";

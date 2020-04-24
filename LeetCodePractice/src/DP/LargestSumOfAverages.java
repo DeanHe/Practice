@@ -38,18 +38,18 @@ public class LargestSumOfAverages {
         if (mem[k][n] > 0) {
             return mem[k][n];
         }
-        // init: dp[1][i] = avg(A[0] ~ A[i - 1])
+        // init: mem[1][i] = avg(A[0] ~ A[i - 1])
         if (k == 1) {
             return preSum[n] / n;
         }
         for (int i = k - 1; i < n; i++) {
-            // transition: dp[k][i] = max(dp[k - 1][j] + avg(A[j + 1] ~ A[i]))
+            // transition: mem[k][i] = max(mem[k - 1][j] + avg(A[j + 1] ~ A[i]))
             mem[k][n] = Math.max(mem[k][n], dfs(A, preSum, mem, k - 1, i) + (preSum[n] - preSum[i]) / (n - i));
         }
         return mem[k][n];
     }
 
-    //method2: 2D dp. Bottom up
+    //method2: 2D mem. Bottom up
     public double largestSumOfAveragesBottomUp(int[] A, int K) {
         if (A == null || A.length == 0) {
             return 0;
@@ -72,7 +72,7 @@ public class LargestSumOfAverages {
         return dp[K][len];
     }
 
-    //method3: 1D dp
+    //method3: 1D mem
     public double largestSumOfAverages(int[] A, int K) {
         if (A == null || A.length == 0) {
             return 0;

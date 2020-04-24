@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
+Given an array of integers nums and a positive integer k,
+find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
 
 Example 1:
 
@@ -19,51 +20,55 @@ Note:
 */
 public class PartitionToKEqualSumSubsetsII {
 	int len, target, k;
+	boolean[] visited;
+	int[]nums, partSum;
+	List<List<Integer>> res;
 
 	public List<List<Integer>> canPartitionKSubsets(int[] nums, int k) {
+		this.nums = nums;
 		int sum = 0;
 		len = nums.length;
-		boolean[] visited = new boolean[len];
+		visited = new boolean[len];
 		for (int i = 0; i < len; i++) {
 			sum += nums[i];
 		}
-		List<List<Integer>> res = new ArrayList<>();
+		res = new ArrayList<>();
 		if (k <= 0 || sum % k != 0) {
 			return res;
 		}
 		for (int i = 0; i < k; i++) {
 			res.add(new ArrayList<>());
 		}
-		int[] tempSum = new int[len];
+		partSum = new int[k];
 		target = sum / k;
 		this.k = k;
-		dfs(res, nums, visited, 0, tempSum);
+		dfs(0);
 		return res;
 	}
 
-	private boolean dfs(List<List<Integer>> res, int[] nums, boolean[] visited, int curIdx, int[] tempSum) {
-		boolean found = true;
+	private boolean dfs(int idx) {
+		boolean partEqual = true;
 		for (int i = 0; i < k; i++) {
-			found = found && (tempSum[i] == target);
-			if (tempSum[i] > target) {
+			partEqual = partEqual && (partSum[i] == target);
+			if (partSum[i] > target) {
 				return false;
 			}
 		}
-		if (found) {
+		if (partEqual) {
 			return true;
 		}
-		for (int i = curIdx; i < len; i++) {
+		for (int i = idx; i < len; i++) {
 			for (int j = 0; j < k; j++) {
-				List<Integer> temp = res.get(j);
+				List<Integer> part = res.get(j);
 				if (!visited[i]) {
 					visited[i] = true;
-					temp.add(nums[i]);
-					tempSum[j] += nums[i];
-					if (dfs(res, nums, visited, i + 1, tempSum)) {
+					part.add(nums[i]);
+					partSum[j] += nums[i];
+					if (dfs(i + 1)) {
 						return true;
 					}
-					temp.remove(temp.size() - 1);
-					tempSum[j] -= nums[i];
+					part.remove(part.size() - 1);
+					partSum[j] -= nums[i];
 					visited[i] = false;
 				}
 			}

@@ -31,7 +31,7 @@ public class PaintHouse {
     		return min;
     	}
     	int[][] dp = new int[houses][colors];
-    	// dp[i][j] means paint to house i with color j the min costs
+    	// mem[i][j] means paint to house i with color j the min costs
         // init
     	for(int i = 0; i < colors; i++){
     		dp[0][i] = costs[0][i];

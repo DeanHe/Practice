@@ -50,7 +50,7 @@ public class MakeArrayStrictlyIncreasing {
         	arr2unique[i] = temp2.get(i);
         }
         arr2 = arr2unique;
-        //dp
+        //mem
         int[] keep = new int[arr1.length];
         int[][] swap = new int[arr1.length][arr2.length];
         Arrays.fill(keep, kInf);

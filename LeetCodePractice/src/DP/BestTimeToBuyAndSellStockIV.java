@@ -27,7 +27,7 @@ public class BestTimeToBuyAndSellStockIV {
         	return sellStockII(prices);
         }
         int[][] dp = new int[K + 1][len];
-        //DP: dp(i,j) is the max profit for up to i transactions by time j (0<=i<=K, 0<=j< len).
+        //DP: mem(i,j) is the max profit for up to i transactions by time j (0<=i<=K, 0<=j< len).
         for(int i = 1; i <= K; i++){
         	int balance = -prices[0];
         	for(int j = 1; j < len; j++){

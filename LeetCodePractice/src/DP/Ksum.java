@@ -17,7 +17,7 @@ public class Ksum {
         // write your code here
         int len = A.length;
         int[][][] dp = new int[len + 1][k + 1][target + 1];
-        //dp[i][j][m] means select j elements from A[:i] to sum up to m
+        //mem[i][j][m] means select j elements from A[:i] to sum up to m
         //init
         for(int i = 0; i <= len; i++){
             dp[i][0][0] = 1;

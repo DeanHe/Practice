@@ -33,12 +33,12 @@ public class New21Game {
 		}
 		int max = K + W - 1;
         double[] sum = new double[max + 1];
-        // dp[x] means probability of get x point
-        // dp[i] = (dp[i - W] + dp[i - W + 1] + ... + dp[i - 1]) / W 
-        // could be simplified to dp[i] = (sum[i - 1] - sum[i - W - 1]) / W.
+        // mem[x] means probability of get x point
+        // mem[i] = (mem[i - W] + mem[i - W + 1] + ... + mem[i - 1]) / W
+        // could be simplified to mem[i] = (sum[i - 1] - sum[i - W - 1]) / W.
         //  if we use sum[i], we can get sum[i] = sum[i - 1] + (sum[i - 1] - sum[i - W - 1]) / W.
         sum[0] = 1;
-        // s = dp[K + 1] + dp[K + 2] + .... + dp[K + W];
+        // s = mem[K + 1] + mem[K + 2] + .... + mem[K + W];
         for(int i = 1; i <= max; i++){
         	if(i <= W){
         		sum[i] = sum[i - 1] + sum[i - 1] / W;

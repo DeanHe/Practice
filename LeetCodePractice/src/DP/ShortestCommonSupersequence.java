@@ -23,7 +23,7 @@ public class ShortestCommonSupersequence {
         int m = A.length();
         int n = B.length();
         int[][] dp = new int[m+1][n+1];
-        //dp[i][j] means the LCS length formed by A[:i] and B[:j]
+        //mem[i][j] means the LCS length formed by A[:i] and B[:j]
         for(int i = 1; i <= m; i++){
             for(int j = 1; j <= n; j++){
                 if(A.charAt(i - 1) == B.charAt(j - 1)){
@@ -41,7 +41,7 @@ public class ShortestCommonSupersequence {
         		i--;
         		j--;
         	} else if(dp[i + 1][j] < dp[i][j + 1]){
-        		//add the char not in LCS, dp value is less
+        		//add the char not in LCS, mem value is less
         		sb.insert(0, A.charAt(i));
         		i--;
         	} else {

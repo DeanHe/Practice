@@ -2,7 +2,8 @@ package Stack;
 
 import java.util.Stack;
 
-/*Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
+/*
+Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
 
 Note:
 The length of num is less than 10002 and will be ≥ k.
@@ -21,7 +22,11 @@ Example 3:
 
 Input: num = "10", k = 2
 Output: "0"
-Explanation: Remove all the digits from the number and it is left with nothing which is 0.*/
+Explanation: Remove all the digits from the number and it is left with nothing which is 0.
+
+analysis:
+use a Monotonic increasing stack
+*/
 public class RemoveKDigits {
 	public String removeKdigits(String num, int k) {
         int len = num.length();

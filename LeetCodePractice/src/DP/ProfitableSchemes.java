@@ -32,7 +32,7 @@ There are 7 possible schemes: (0), (1), (2), (0,1), (0,2), (1,2), and (0,1,2).*/
 public class ProfitableSchemes {
     public int profitableSchemes(int G, int P, int[] group, int[] profit) {
     	int K = profit.length; // # of crimes
-    	//dp[k][i][j] # of schemes to achieve at least i profit using j people by committing first k crimes
+    	//mem[k][i][j] # of schemes to achieve at least i profit using j people by committing first k crimes
         int[][][] dp = new int[K + 1][P + 1][G + 1];
         dp[0][0][0] = 1;
         for(int k = 1; k <= K; k++){
@@ -61,7 +61,7 @@ public class ProfitableSchemes {
     public int profitableSchemesMod(int G, int P, int[] group, int[] profit) {
     	int mod = (int) (1e9 + 7);
     	int K = profit.length; // # of crimes
-    	//dp[k][i][j] # of schemes to achieve at least i profit using j people by committing first k crimes
+    	//mem[k][i][j] # of schemes to achieve at least i profit using j people by committing first k crimes
         int[][][] dp = new int[K + 1][P + 1][G + 1];
         dp[0][0][0] = 1;
         for(int k = 1; k <= K; k++){

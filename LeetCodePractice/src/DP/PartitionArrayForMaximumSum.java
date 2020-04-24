@@ -11,7 +11,7 @@ Explanation: A becomes [15,15,15,9,10,10,10]*/
 public class PartitionArrayForMaximumSum {
 	public int maxSumAfterPartitioning(int[] A, int K) {
 		int len = A.length;
-		int[] dp = new int[len + 1]; // dp[i] means max sum of A[:i - 1]
+		int[] dp = new int[len + 1]; // mem[i] means max sum of A[:i - 1]
 		for (int i = 1; i <= len; i++) {
 			int subMax = Integer.MIN_VALUE;
 			for (int l = 1; l <= Math.min(i, K); l++) {

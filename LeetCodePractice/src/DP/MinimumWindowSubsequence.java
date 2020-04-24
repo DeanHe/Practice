@@ -24,9 +24,9 @@ Given strings S and T, find the minimum (contiguous) substring W of S, so that T
         solution:
         different from MinimumWindowSubstring by requiring the T sequence match
 
-        dp[i][j] = k, i为T的index，j为S的index，k为以[0,i]，[0,j]这2段substring最小的起点在s上
-        if s[j] == t[i], dp[i][j] hen can reuse dp[i - 1][j - 1] as start position
-        if s[j] ！= t[i]，then can reuse dp[i][j - 1]
+        mem[i][j] = k, i为T的index，j为S的index，k为以[0,i]，[0,j]这2段substring最小的起点在s上
+        if s[j] == t[i], mem[i][j] hen can reuse mem[i - 1][j - 1] as start position
+        if s[j] ！= t[i]，then can reuse mem[i][j - 1]
 */
 public class MinimumWindowSubsequence {
     /**
@@ -37,7 +37,7 @@ public class MinimumWindowSubsequence {
     public String minWindow(String s, String t) {
         String res = "";
         int sLen = s.length(), tLen = t.length(), minLen = sLen, start = -1;
-        int[][] dp = new int[sLen][tLen]; // dp[i][j] means the start position of s[:i] contains sequence of t[:j]
+        int[][] dp = new int[sLen][tLen]; // mem[i][j] means the start position of s[:i] contains sequence of t[:j]
         // init
         for (int i = 0; i < sLen; i++) {
             if (s.charAt(i) == t.charAt(0)) {
