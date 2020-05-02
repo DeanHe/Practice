@@ -1,5 +1,6 @@
 package Dijkstra;
-/*There are N network nodes, labelled 1 to N.
+/*
+There are N network nodes, labelled 1 to N.
 
 Given times, a list of travel times as directed edges times[i] = (u, v, w), where u is the source node, v is the target node, and w is the time it takes for a signal to travel from source to target.
 
@@ -18,7 +19,8 @@ Notice
 1.N will be in the range [1, 100].
 2.K will be in the range [1, N].
 3.The length of times will be in the range [1, 6000].
-4.All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 1 <= w <= 100.*/
+4.All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 1 <= w <= 100.
+*/
 
 import java.util.*;
 
@@ -35,99 +37,47 @@ public class NetworkDelayTime {
 	 */
 	public int networkDelayTime(int[][] times, int N, int K) {
 		// Write your code here
-		Map<Integer, List<Node>> graph = new HashMap<>();
-		Map<Integer, Integer> distMap = new HashMap<>();
+		Map<Integer, List<int[]>> graph = new HashMap<>();
+		Map<Integer, Integer> dist = new HashMap<>();
 		for (int[] entry : times) {
-			if (!graph.containsKey(entry[0])) {
-				graph.put(entry[0], new ArrayList<Node>());
-			}
-			List<Node> neighbors = graph.get(entry[0]);
-			neighbors.add(new Node(entry[1], entry[2]));
+			int start = entry[0];
+			int end = entry[1];
+			int travel = entry[2];
+			graph.putIfAbsent(start, new ArrayList<>());
+			List<int[]> neighbors = graph.get(start);
+			neighbors.add(new int[]{end, travel});
 		}
 
-		PriorityQueue<Node> pq = new PriorityQueue<>(N, new Comparator<Node>() {
-			public int compare(Node a, Node b) {
-				return a.dist - b.dist;
-			}
-		});
-		Node start = new Node(K, 0);
+		PriorityQueue<int[]> pq = new PriorityQueue<>(N, (a, b) -> a[1] - b[1]);
+		int res = 0;
+		int[] start = new int[]{K, 0};
 		pq.offer(start);
 		// Dijkstra's Algorithm
 		while (!pq.isEmpty()) {
-			Node cur = pq.poll();
-			if (distMap.containsKey(cur.index)) {
+			int[] cur = pq.poll();
+			int stop = cur[0];
+			int cost = cur[1];
+			if (dist.containsKey(stop)) {
 				continue;
 			}
-			distMap.put(cur.index, cur.dist);
-			if (graph.containsKey(cur.index)) {
-				List<Node> neighbors = graph.get(cur.index);
-				for (Node nb : neighbors) {
-					if (!distMap.containsKey(nb.index)) {
-						nb.dist = cur.dist + nb.dist;
-						pq.offer(nb);
+			dist.put(stop, cost);
+			res = Math.max(res, cost);
+			if (graph.containsKey(stop)) {
+				List<int[]> neighbors = graph.get(stop);
+				for (int[] nb : neighbors) {
+					int nb_stop = nb[0];
+					int nb_travel = nb[1];
+					if (!dist.containsKey(nb_stop)) {
+						int nb_cost = cost + nb_travel;
+						pq.offer(new int[]{nb_stop, nb_cost});
 					}
 				}
 			}
 		}
 
-		if (distMap.size() != N) {
+		if (dist.size() != N) {
 			return -1;
 		}
-		int ans = 0;
-		for (int d : distMap.values()) {
-			ans = Math.max(ans, d);
-		}
-		return ans;
-	}
-
-	public int networkDelayTimeV2(int[][] times, int N, int K) {
-		// Write your code here
-		Map<Integer, List<Node>> graph = new HashMap<>();
-		int[] dist = new int[N + 1];
-		HashSet<Integer> visited = new HashSet<>();
-		Arrays.fill(dist, Integer.MAX_VALUE);
-		for (int[] entry : times) {
-			if (!graph.containsKey(entry[0])) {
-				graph.put(entry[0], new ArrayList<Node>());
-			}
-			List<Node> neighbors = graph.get(entry[0]);
-			neighbors.add(new Node(entry[1], entry[2]));
-		}
-
-		PriorityQueue<Node> pq = new PriorityQueue<>(N, new Comparator<Node>() {
-			public int compare(Node a, Node b) {
-				return a.dist - b.dist;
-			}
-		});
-		Node start = new Node(K, 0);
-		dist[start.index] = start.dist;
-		visited.add(start.index);
-		pq.offer(start);
-		// Dijkstra's Algorithm
-		while (!pq.isEmpty()) {
-			Node cur = pq.poll();
-			if (visited.contains(cur)) {
-				continue;
-			}
-			visited.add(cur.index);
-			if (graph.containsKey(cur.index)) {
-				List<Node> neighbors = graph.get(cur.index);
-				for (Node nb : neighbors) {
-					if (dist[nb.index] > cur.dist + nb.dist) {
-						dist[nb.index] = cur.dist + nb.dist;
-						nb.dist = dist[nb.index];
-						pq.offer(nb);
-					}
-				}
-			}
-		}
-		int ans = 0;
-		for (int i = 1; i <= N; i++) {
-			if (dist[i] == Integer.MAX_VALUE) {
-				return -1;
-			}
-			ans = Math.max(ans, dist[i]);
-		}
-		return ans;
+		return res;
 	}
 }

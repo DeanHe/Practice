@@ -81,17 +81,17 @@ public class SerializeAndDeserializeBinaryTree {
             if(cur != null){
                 if(!array[i].equals("#")){
                     cur.left = new TreeNode(Integer.parseInt(array[i]));
+                    q.offer(cur.left);
                 } else {
                     cur.left = null;
                 }
-                q.offer(cur.left);
                 i++;
                 if(!array[i].equals("#")){
                     cur.right = new TreeNode(Integer.parseInt(array[i]));
+                    q.offer(cur.right);
                 } else {
                     cur.right = null;
                 }
-                q.offer(cur.right);
                 i++;
             } 
         }

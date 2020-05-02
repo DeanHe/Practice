@@ -1,4 +1,5 @@
 package DP;
+
 /*Given two strings, find the longest common subsequence (LCS).
 Your code should return the length of LCS.
 
@@ -18,7 +19,7 @@ Example 2:
 	LCS is "AC" or "AB"
 */
 public class LongestCommonSubsequence {
-	/**
+    /**
      * @param A, B: Two strings.
      * @return: The length of longest common subsequence of A and B.
      */
@@ -26,14 +27,14 @@ public class LongestCommonSubsequence {
         // write your code here
         int m = A.length();
         int n = B.length();
-        int[][] dp = new int[m+1][n+1];
+        int[][] dp = new int[m + 1][n + 1];
         //mem[i][j] means the LCS length formed by A[:i] and B[:j]
-        for(int i = 1; i <= m; i++){
-            for(int j = 1; j <= n; j++){
-                if(A.charAt(i - 1) == B.charAt(j - 1)){
-                    dp[i][j] = dp[i-1][j-1] + 1;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (A.charAt(i) == B.charAt(j)) {
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    dp[i + 1][j + 1] = Math.max(dp[i + 1][j], dp[i][j + 1]);
                 }
             }
         }

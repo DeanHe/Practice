@@ -2,7 +2,8 @@ package Stack;
 
 import java.util.Stack;
 
-/*Given a string s of '(' , ')' and lowercase English characters. 
+/*
+Given a string s of '(' , ')' and lowercase English characters.
 
 Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions ) so that the resulting parentheses string is valid and return any valid string.
 
@@ -36,7 +37,8 @@ Output: "a(b(c)d)"
 Constraints:
 
 1 <= s.length <= 10^5
-s[i] is one of  '(' , ')' and lowercase English letters.*/
+s[i] is one of  '(' , ')' and lowercase English letters.
+*/
 public class MinimumRemoveToMakeValidParentheses {
 	public String minRemoveToMakeValid(String s) {
 		Stack<Integer> stack = new Stack<>();
@@ -47,7 +49,7 @@ public class MinimumRemoveToMakeValidParentheses {
 				stack.push(i);
 			} else if(c == ')'){
 				if(stack.isEmpty()){
-					arr[i] = '*';
+					arr[i] = '*'; // mark redundant ')'
 				} else {
 					stack.pop();
 				}
@@ -55,7 +57,7 @@ public class MinimumRemoveToMakeValidParentheses {
 		}
 		while(!stack.isEmpty()){
 			int i = stack.pop();
-			arr[i] = '*';
+			arr[i] = '*'; // mark redundant '('
 		}
 		StringBuilder sb = new StringBuilder();
 		for(char c : arr){

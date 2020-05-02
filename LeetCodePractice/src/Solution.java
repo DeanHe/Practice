@@ -1,6 +1,8 @@
 import Backtracking.PartitionToKEqualSumSubsetsII;
 import Trie.AutocompleteSystem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -19,7 +21,6 @@ public class Solution {
 		int[][] logs = {{20190101,0,1}, {20190104,3,4}, {20190107,2,3}, {20190211,1,5}, {20190224,2,4}, {20190301,0,3}, {20190312,1,2}, {20190322,4,5}};
 		int res = mie.earliestAcq(logs, 6);
 */
-
 		String[] sentences = {"i love you", "island","ironman", "i love leetcode"};
 		int[] cnt = {5,3,2,2};
 		AutocompleteSystem cs = new AutocompleteSystem(sentences, cnt);

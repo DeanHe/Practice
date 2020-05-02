@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-/*Starting with an undirected graph (the "original graph") with nodes from 0 to N-1, subdivisions are made to some of the edges.
+/*
+Starting with an undirected graph (the "original graph") with nodes from 0 to N-1, subdivisions are made to some of the edges.
 
 The graph is given as follows: edges[k] is a list of integer pairs (i, j, n) such that (i, j) is an edge of the original graph,
 
@@ -42,44 +43,54 @@ The original graph has no parallel edges.
 0 <= edges[i][2] <= 10000
 0 <= M <= 10^9
 1 <= N <= 3000
-A reachable node is a node that can be travelled to using at most M moves starting from node 0.*/
+A reachable node is a node that can be travelled to using at most M moves starting from node 0.
+
+analysis:
+Instead of maintaining a MinHeap which keeps track of shortest distances to the source, we maintain a MaxHeap that keeps track of maximum moves remained for each node.
+*/
 public class ReachableNodesInSubdividedGraph {
 	public int reachableNodes(int[][] edges, int M, int N) {
-		Map<Integer, List<Node>> graph = new HashMap<>();
-		Map<Integer, Integer> moveMap = new HashMap<>();
+		Map<Integer, List<int[]>> graph = new HashMap<>();
+		Map<Integer, Integer> dist = new HashMap<>();
 		for(int[] edge : edges){
-			if(!graph.containsKey(edge[0])){
-				graph.put(edge[0], new ArrayList<>());
-			}
-			if(!graph.containsKey(edge[1])){
-				graph.put(edge[1], new ArrayList<>());
-			}
-			graph.get(edge[0]).add(new Node(edge[1], edge[2]));
-			graph.get(edge[1]).add(new Node(edge[0], edge[2]));
+			int start = edge[0];
+			int end = edge[1];
+			int travel = edge[2];
+			graph.putIfAbsent(start, new ArrayList<>());
+			graph.get(start).add(new int[]{end, travel});
+			graph.putIfAbsent(end, new ArrayList<>());
+			graph.get(end).add(new int[]{start, travel});
 		}
-		PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> b.dist - a.dist);
-		pq.offer(new Node(0, M));
+		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]); // max heap
+		pq.offer(new int[]{0, M});
 		while(!pq.isEmpty()){
-			Node cur = pq.poll();
-			if(moveMap.containsKey(cur.index)){
+			int[] cur = pq.poll();
+			int stop = cur[0];
+			int remain = cur[1];
+			if(dist.containsKey(stop)){
 				continue;
 			}
-			moveMap.put(cur.index, cur.dist);
-			if (graph.containsKey(cur.index)) {
-				List<Node> neighbors = graph.get(cur.index);
-				for (Node nb : neighbors) {
-					int remainMove = cur.dist - nb.dist - 1;
-					if (!moveMap.containsKey(nb.index) && remainMove >= 0) {
-						pq.offer(new Node(nb.index, remainMove));
+			dist.put(stop, remain);
+			if (graph.containsKey(stop)) {
+				List<int[]> neighbors = graph.get(stop);
+				for (int[] nb : neighbors) {
+					int nb_stop =nb[0];
+					int nb_travel = nb[1];
+					int remainMove = remain - nb_travel - 1;
+					if (!dist.containsKey(nb_stop) && remainMove >= 0) {
+						pq.offer(new int[]{nb_stop, remainMove});
 					}
 				}
 			}
 		}
-		int res = moveMap.size();
+		int res = dist.size();
 		for(int[] edge : edges){
-			int remainMove1 = moveMap.getOrDefault(edge[0], 0);
-			int remainMove2 = moveMap.getOrDefault(edge[1], 0);
-			res += Math.min(remainMove1 + remainMove2, edge[2]);
+			int start = edge[0];
+			int end = edge[1];
+			int travel = edge[2];
+			int remainMove1 = dist.getOrDefault(start, 0);
+			int remainMove2 = dist.getOrDefault(end, 0);
+			res += Math.min(remainMove1 + remainMove2, travel);
 		}
 		return res;
     }

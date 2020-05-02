@@ -49,7 +49,7 @@ public class FindTheCityWithTheSmallestNumberOfNeighborsAtaThresholdDistance {
         for (int[] row : graph) {
             Arrays.fill(row, -1);
         }
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             graph[i][i] = 0;
         }
         for (int[] edge : edges) {

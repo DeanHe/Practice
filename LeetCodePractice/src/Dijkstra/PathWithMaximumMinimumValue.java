@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 /*
 Given a matrix of integers A with R rows and C columns, find the maximum score of a path starting at [0,0] and ending at [R-1,C-1].
-The score of a path is the minimum value in that path. For example, the value of the path 8 ¡ú 4 ¡ú 5 ¡ú 9 is 4.
+The score of a path is the minimum value in that path. For example, the value of the path 8 ï¿½ï¿½ 4 ï¿½ï¿½ 5 ï¿½ï¿½ 9 is 4.
 A path moves some number of times from one visited cell to any neighbouring unvisited cell in one of the 4 cardinal directions (north, east, west, south).
 
 Example 1:
@@ -27,31 +27,31 @@ Note:
 */
 
 public class PathWithMaximumMinimumValue {
-	public int maximumMinimumPath(int[][] A) {
-		int[] dirs = {0, 1, 0, -1, 0};
-		int rows = A.length;
-		int cols = A[0].length;
-		int res = A[0][0];
-		boolean[][] visited = new boolean[rows][cols];
-		// r : c : val
-		PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> b[2] - a[2]);
-		maxHeap.offer(new int[] {0, 0, A[0][0]});
-		visited[0][0] = true;
-		while (!maxHeap.isEmpty()) {
-			int[] cur = maxHeap.poll();
-			res = Math.min(res, cur[2]);
-			if(cur[0] == rows - 1 && cur[1] == cols - 1) {
-				return res;
-			}
-			for(int i = 0; i < dirs.length - 1; i++) {
-				int nb_r = cur[0] + dirs[i];
-				int nb_c  =cur[1] + dirs[i + 1];
-				if(nb_r < rows && nb_r >= 0 && nb_c < cols && nb_c >= 0 && !visited[nb_r][nb_c]) {
-					maxHeap.offer(new int[] {nb_r, nb_c, A[nb_r][nb_c]});
-					visited[nb_r][nb_c] = true;
-				}
-			}
-		}
-		return -1;
-	}
+    public int maximumMinimumPath(int[][] A) {
+        int[] dirs = {0, 1, 0, -1, 0};
+        int rows = A.length;
+        int cols = A[0].length;
+        int res = A[0][0];
+        boolean[][] visited = new boolean[rows][cols];
+        // r : c : val
+        PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> b[2] - a[2]);
+        maxHeap.offer(new int[]{0, 0, A[0][0]});
+        visited[0][0] = true;
+        while (!maxHeap.isEmpty()) {
+            int[] cur = maxHeap.poll();
+            res = Math.min(res, cur[2]);
+            if (cur[0] == rows - 1 && cur[1] == cols - 1) {
+                return res;
+            }
+            for (int i = 0; i < dirs.length - 1; i++) {
+                int nb_r = cur[0] + dirs[i];
+                int nb_c = cur[1] + dirs[i + 1];
+                if (nb_r < rows && nb_r >= 0 && nb_c < cols && nb_c >= 0 && !visited[nb_r][nb_c]) {
+                    maxHeap.offer(new int[]{nb_r, nb_c, A[nb_r][nb_c]});
+                    visited[nb_r][nb_c] = true;
+                }
+            }
+        }
+        return -1;
+    }
 }

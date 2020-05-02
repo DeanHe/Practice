@@ -1,7 +1,8 @@
 package Dijkstra;
 
 import java.util.*;
-/*There are n cities connected by m flights. Each fight starts from city u and arrives at v with a price w.
+/*
+There are n cities connected by m flights. Each fight starts from city u and arrives at v with a price w.
 
 Now given all the cities and fights, together with starting city src and the destination dst, your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.
 
@@ -22,7 +23,11 @@ The size of flights will be in range [0, n * (n - 1) / 2].
 The format of each flight will be (src, dst, price).
 The price of each flight will be in the range [1, 10000].
 k is in the range of [0, n - 1].
-There will not be any duplicated flights or self cycles.*/
+There will not be any duplicated flights or self cycles.
+
+analysis:
+not typical Dijkstra case
+*/
 
 public class CheapestFlightsWithinKStops {
 	// using Dijkstra algorithm
@@ -39,8 +44,8 @@ public class CheapestFlightsWithinKStops {
         for(int[] f : flights){
             graph[f[0]][f[1]] = f[2];
         }
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {return a[1] - b[1];});
-        // city : price : stop
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        // city : cost : stop
         pq.offer(new int[]{src, 0, -1});
         while(!pq.isEmpty()){
             int[] temp = pq.poll();
