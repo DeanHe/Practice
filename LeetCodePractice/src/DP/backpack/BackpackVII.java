@@ -1,4 +1,4 @@
-package DP;
+package DP.backpack;
 
 /*Assume that you have n yuan. There are many kinds of rice in the supermarket. Each kind of rice is bagged and must be purchased in the whole bag. 
 Given the weight, price and quantity of each type of rice, find the maximum weight of rice that you can purchase.

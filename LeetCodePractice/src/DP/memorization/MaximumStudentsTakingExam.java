@@ -40,6 +40,8 @@ Given a m * n matrix seats  that represent seats distributions in a classroom. I
         n == seats[i].length
         1 <= m <= 8
         1 <= n <= 8
+
+        tag:bitmask
 */
 public class MaximumStudentsTakingExam {
     int rows, cols, totalState;

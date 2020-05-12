@@ -2,7 +2,8 @@ package BitManipulation;
 
 import java.util.*;
 
-/*With respect to a given puzzle string, a word is valid if both the following conditions are satisfied:
+/*
+With respect to a given puzzle string, a word is valid if both the following conditions are satisfied:
 word contains the first letter of puzzle.
 For each letter in word, that letter is in puzzle.
 For example, if the puzzle is "abcdefg", then valid words are "faced", "cabbage", and "baggage"; while invalid words are "beefed" (doesn't include "a") and "based" (includes "s" which isn't in the puzzle).
@@ -32,36 +33,42 @@ Constraints:
 puzzles[i].length == 7
 words[i][j], puzzles[i][j] are English lowercase letters.
 Each puzzles[i] doesn't contain repeated characters.
+
+analysis:
+use bitmask to represent each word word_bitmask, build map of word_bitmask : count
+use bitmask to represent each puzzle puzzle_bitmask, iterate each valid morph of puzzle_bitmask, check against freqMap
+
+tag:bitmask
 */
 public class NumberOfValidWordsForEachPuzzle {
-	public List<Integer> findNumOfValidWords(String[] words, String[] puzzles) {
-		List<Integer> res = new ArrayList<>();
-		Map<Integer, Integer> map = new HashMap<>();
-		for(String w : words){
-			char[] arr = w.toCharArray();
-			int mask = 0;
-			for(int i = 0; i < arr.length; i++){
-				mask |= 1 << (arr[i] - 'a');
-			}
-			map.put(mask, map.getOrDefault(mask, 0) + 1);
-		}
-		for(String puzzle : puzzles){
-			char[] arr = puzzle.toCharArray();
-			int mask = 0;
-			for(int i = 0; i < arr.length; i++){
-				mask |= 1 << (arr[i] - 'a');
-			}
-			int cnt = 0;
-			int sub = mask;
-			int first = 1 << (arr[0] - 'a');
-			while(sub > 0){
-				if((sub & first) == first && map.containsKey(sub)){
-					cnt += map.get(sub);
-				}
-				sub = (sub - 1) & mask; // reset the lowest bit to get next lower sub
-			}
-			res.add(cnt);
-		}
-		return res;
+    public List<Integer> findNumOfValidWords(String[] words, String[] puzzles) {
+        List<Integer> res = new ArrayList<>();
+        Map<Integer, Integer> wordMaskFreq = new HashMap<>(); // bitmask : count
+        for (String w : words) {
+            char[] arr = w.toCharArray();
+            int mask = 0;
+            for (int i = 0; i < arr.length; i++) {
+                mask |= 1 << (arr[i] - 'a');
+            }
+            wordMaskFreq.put(mask, wordMaskFreq.getOrDefault(mask, 0) + 1);
+        }
+        for (String puzzle : puzzles) {
+            char[] arr = puzzle.toCharArray();
+            int puzzleMask = 0;
+            for (int i = 0; i < arr.length; i++) {
+                puzzleMask |= 1 << (arr[i] - 'a');
+            }
+            int cnt = 0;
+            int candidate = puzzleMask;
+            int first = 1 << (arr[0] - 'a');
+            while (candidate > 0) {
+                if ((candidate & first) == first && wordMaskFreq.containsKey(candidate)) {
+                    cnt += wordMaskFreq.get(candidate);
+                }
+                candidate = (candidate - 1) & puzzleMask; // reset the lowest bit to get next lower candidate
+            }
+            res.add(cnt);
+        }
+        return res;
     }
 }

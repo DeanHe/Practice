@@ -1,4 +1,4 @@
-package DP;
+package DP.backpack;
 /*Give some coins of different value and their quantity. Find how many values which are in range 1 ~ n can these coins be combined
 
 Example

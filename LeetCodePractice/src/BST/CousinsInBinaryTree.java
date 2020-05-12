@@ -10,26 +10,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CousinsInBinaryTree {
-	Map<Integer, Integer> depth;
-	Map<Integer, TreeNode> parent;
+	Map<Integer, Integer> depthMap;
+	Map<Integer, TreeNode> parentMap;
 	public boolean isCousins(TreeNode root, int x, int y) {
-		depth = new HashMap<>();
-		parent = new HashMap<>();
-		dfs(root, null);
-		return depth.get(x) == depth.get(y) && parent.get(x) != parent.get(y);
+		depthMap = new HashMap<>();
+		parentMap = new HashMap<>();
+		dfs(root, 0,null);
+		return x != y && depthMap.get(x) == depthMap.get(y) && parentMap.get(x) != parentMap.get(y);
     }
-	private void dfs(TreeNode root, TreeNode par){
+	private void dfs(TreeNode root, int depth, TreeNode parent){
 		if(root == null){
 			return;
 		}
-		if(par == null){
-			depth.put(root.val, 0);
-		} else {
-			int parentDepth = depth.get(par.val);
-			depth.put(root.val, parentDepth + 1);
-		}
-		parent.put(root.val, par);
-		dfs(root.left, root);
-		dfs(root.right, root);
+		depthMap.put(root.val, depth);
+		parentMap.put(root.val, parent);
+		dfs(root.left, depth + 1, root);
+		dfs(root.right,depth + 1, root);
 	}
 }

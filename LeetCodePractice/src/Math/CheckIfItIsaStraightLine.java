@@ -20,8 +20,8 @@ public class CheckIfItIsaStraightLine {
 	public boolean checkStraightLine(int[][] coordinates) {
         int a_x = coordinates[0][0], a_y = coordinates[0][1], b_x = coordinates[1][0], b_y = coordinates[1][1];
         for(int i = 2; i < coordinates.length; i++){
-            int p_x = coordinates[i][0], p_y = coordinates[i][1];
-            if(1.0 * (a_y - b_y) / (a_x - b_x) != 1.0 * (a_y - p_y) / (a_x - p_x)){
+            int x = coordinates[i][0], y = coordinates[i][1];
+            if(1.0 * (a_y - b_y) / (a_x - b_x) != 1.0 * (a_y - y) / (a_x - x)){
                 return false;
             }
         }

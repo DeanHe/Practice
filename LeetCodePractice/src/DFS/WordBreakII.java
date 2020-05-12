@@ -24,7 +24,7 @@ public class WordBreakII {
     public List<String> wordBreak(String s, Set<String> wordDict) {
         // Write your code here
         if(s == null || s.length() == 0 || wordDict ==null|| wordDict.size() == 0){
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
         this.wordDict = wordDict;
         return helper(s);

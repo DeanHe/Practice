@@ -1,4 +1,4 @@
-package DP;
+package DP.backpack;
 /*You have a total of 10 * n thousand yuan, hoping to apply for a university abroad. The application is required to pay a certain fee. Give the cost of each university application and the probability of getting the University's offer, and the number of university is m. If the economy allows, you can apply for multiple universities. Find the highest probability of receiving at least one offer.
 
 Example
