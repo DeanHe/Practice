@@ -1,5 +1,6 @@
 package DP;
-/*There is a fence with n posts, each post can be painted with one of the k colors.
+/*
+There is a fence with n posts, each post can be painted with one of the k colors.
 You have to paint all the posts such that no more than two adjacent fence posts have the same color.
 Return the total number of ways you can paint the fence.
 
@@ -27,7 +28,8 @@ Explanation:
     way3    1         0          
     way4    1         1       
 Notice
-n and k are non-negative integers.*/
+n and k are non-negative integers.
+*/
 public class PaintFence {
 	/**
      * @param n: non-negative integer, n posts

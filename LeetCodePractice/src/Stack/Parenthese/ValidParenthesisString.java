@@ -1,4 +1,4 @@
-package String;
+package Stack.Parenthese;
 /*
         Given a string containing only three types of characters: '(', ')' and '*', write a function to check whether this string is valid. We define the validity of a string by these rules:
 
@@ -18,6 +18,8 @@ package String;
         Output: True
         Note:
         The string size will be in the range [1, 100].
+
+    tag: String
 */
 public class ValidParenthesisString {
     public boolean checkValidString(String s) {

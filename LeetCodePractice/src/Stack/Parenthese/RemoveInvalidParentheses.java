@@ -1,4 +1,4 @@
-package Backtracking;
+package Stack.Parenthese;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -74,5 +74,56 @@ public class RemoveInvalidParentheses {
             dfs(sb.append(c), pos + 1, removeLeft, removeRight, open);
         }
         sb.setLength(sbLen); // backtrack
+    }
+
+    /* BFS */
+    public List<String> removeInvalidParenthesesBFS(String s) {
+        List<String> res = new ArrayList<>();
+        if(s == null){
+            return res;
+        }
+        Queue<String> queue = new LinkedList<>();
+        HashSet<String> visited = new HashSet<>();
+        queue.offer(s);
+        visited.add(s);
+        boolean found = false;
+        while(!queue.isEmpty()){
+            String cur = queue.poll();
+            if(isValid(cur)){
+                res.add(cur);
+                found = true;
+            }
+            if(found){
+                continue;
+            }
+            // generate all possible states
+            for(int i = 0; i < cur.length(); i++){
+                // if s[i] is letter
+                if(cur.charAt(i) == '(' || cur.charAt(i) == ')'){
+                    String temp = cur.substring(0, i) + cur.substring(i + 1);
+                    if(!visited.contains(temp)){
+                        queue.offer(temp);
+                        visited.add(temp);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    // helper function checks if string s contains valid parantheses
+    private boolean isValid(String s){
+        int count = 0;
+        char[] arr = s.toCharArray();
+        for(char c : arr){
+            if(c == '('){
+                count++;
+            } else if(c == ')'){
+                count--;
+                if(count < 0){
+                    return false;
+                }
+            }
+        }
+        return count == 0;
     }
 }

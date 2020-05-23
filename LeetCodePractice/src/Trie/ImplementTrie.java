@@ -51,8 +51,7 @@ public class ImplementTrie {
     private TrieNode searchNode(String word) {
         TrieNode p = root;
         int len = word.length();
-        for(int i = 0; i < len; i++){
-            char c = word.charAt(i);
+        for(char c : word.toCharArray()){
             int index = c - 'a';
             if(p.arr[index] != null){
                 p = p.arr[index];

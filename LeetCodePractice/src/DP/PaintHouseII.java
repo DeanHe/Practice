@@ -1,5 +1,6 @@
 package DP;
-/*There are a row of n houses, each house can be painted with one of the k colors. 
+/*
+There are a row of n houses, each house can be painted with one of the k colors.
  * The cost of painting each house with a certain color is different. 
  * You have to paint all the houses such that no two adjacent houses have the same color.
 
@@ -16,7 +17,8 @@ Challenge
 Could you solve it in O(nk)?
 
 Notice
-All costs are positive integers.*/
+All costs are positive integers.
+*/
 public class PaintHouseII {
 	/**
      * @param costs: n x k cost matrix

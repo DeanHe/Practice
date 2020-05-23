@@ -36,6 +36,19 @@ import java.util.PriorityQueue;
         1 <= k <= min(200, n ^ m)
         1 <= mat[i][j] <= 5000
         mat[i] is a non decreasing array.
+
+        analysis:
+        similar to Find K Pairs with Smallest Sums
+
+        Intuition:
+        We need to keep at most 200 smallest sums. 1 <= k <= min(200, n ^ m)
+        For the input with one row the answer is the smallest k-th element or top of the max priority queue of size k.
+
+        Algorithm:
+        Calculate max priority queue of size k for the first row.
+        Add the rest rows one by one to the max priority queue and make sure that max priority queue size is less than or equal to k.
+
+        Time: O(m * n * k * log(k))
 */
 public class FindTheKthSmallestSumOfaMatrixWithSortedRows {
     public int kthSmallest(int[][] mat, int k) {

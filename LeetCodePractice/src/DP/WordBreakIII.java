@@ -1,5 +1,6 @@
 package DP;
-/*Give a dictionary of words and a sentence with all whitespace removed, return the number of sentences you can form by inserting whitespaces to the sentence so that each word can be found in the dictionary.
+/*
+Give a dictionary of words and a sentence with all whitespace removed, return the number of sentences you can form by inserting whitespaces to the sentence so that each word can be found in the dictionary.
 
 Example
 Given a String CatMat
@@ -12,7 +13,9 @@ CatMat = Ca tM at
 CatMat = C at Mat
 
 Notice
-Ignore case*/
+Ignore case
+
+*/
 import java.util.*;
 
 public class WordBreakIII {

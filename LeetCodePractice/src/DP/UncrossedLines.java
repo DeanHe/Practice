@@ -22,8 +22,12 @@ Note:
 
 1 <= A.length <= 500
 1 <= B.length <= 500
-1 <= A[i], B[i] <= 2000*/
-// same as longest common subsequence
+1 <= A[i], B[i] <= 2000
+
+analysis:
+same as longest common subsequence
+Time O(N^2), Space O(N^2)
+*/
 public class UncrossedLines {
 	public int maxUncrossedLines(int[] A, int[] B) {
         int lenA = A.length;

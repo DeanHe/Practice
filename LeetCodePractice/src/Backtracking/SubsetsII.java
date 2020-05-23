@@ -33,9 +33,9 @@ public class SubsetsII {
         
     }
     private void helper(ArrayList<ArrayList<Integer>> res, int[] nums, List<Integer> temp, int pos){
-        res.add(new ArrayList<Integer>(temp));
+        res.add(new ArrayList<>(temp));
         int len = nums.length;
-        for(int i = pos; i < len; i++){
+        for(int i = pos; i < nums.length; i++){
             if(i > pos && nums[i] == nums[i - 1]){
                 continue;
             }

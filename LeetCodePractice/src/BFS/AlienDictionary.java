@@ -1,7 +1,11 @@
 package BFS;
 
 import java.util.*;
-/*There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
+/*
+There is a new alien language which uses the latin alphabet. However,
+the order among letters are unknown to you.
+You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language.
+Derive the order of letters in this language.
 
 Example
 Given the following words in dictionary,
@@ -39,13 +43,13 @@ public class AlienDictionary {
             return "";
         }
         Map<Character, Set<Character>> graph = new HashMap<>();
-        Map<Character, Integer> indegree = new HashMap<>();
+        Map<Character, Integer> indegMap = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         //initialize degree map
         for(String word : words){
             char[] charArray = word.toCharArray();
             for(char c : charArray){
-                indegree.put(c, 0);
+                indegMap.put(c, 0);
             }
         }
         //compare adjacent string & fill graph
@@ -62,8 +66,7 @@ public class AlienDictionary {
                     }
                     if(!graph.get(cur_c).contains(post_c)){
                     	graph.get(cur_c).add(post_c);
-                        int degree = indegree.get(post_c) + 1;
-                        indegree.put(post_c, degree);
+                        indegMap.put(post_c, indegMap.get(post_c) + 1);
                     }
                     break;
                 } else {
@@ -76,24 +79,24 @@ public class AlienDictionary {
         //BFS - use Queue to pop char in order
         // as we should return the topo order with lexicographical order
         // we should use PriorityQueue instead of a FIFO Queue
-        Queue<Character> queue = new PriorityQueue<>();
-        for(char c : indegree.keySet()){
-            if(indegree.get(c) == 0){
-                queue.offer(c);
+        Queue<Character> pq = new PriorityQueue<>();
+        for(char c : indegMap.keySet()){
+            if(indegMap.get(c) == 0){
+                pq.offer(c);
             }
         }
-        while(!queue.isEmpty()){
-            char c = queue.poll();
+        while(!pq.isEmpty()){
+            char c = pq.poll();
             sb.append(c);
             if(graph.containsKey(c)){
                 Set<Character> neighbors = graph.get(c);
                 for(char nb : neighbors){
-                    int degree = indegree.get(nb);
-                    if(degree > 0){
-                        degree--;
-                        indegree.put(nb, degree);
-                        if(degree == 0){
-                            queue.offer(nb);
+                    int indeg = indegMap.get(nb);
+                    if(indeg > 0){
+                        indeg--;
+                        indegMap.put(nb, indeg);
+                        if(indeg == 0){
+                            pq.offer(nb);
                         }
                     }
                 }
@@ -101,7 +104,7 @@ public class AlienDictionary {
         }
         System.out.println(sb.toString());
         //avoid loops. only < possible -- eg: ["qd","ab"] res = qa
-        if(sb.length() != indegree.size()){
+        if(sb.length() != indegMap.size()){
             return "";
         }
         return sb.toString();

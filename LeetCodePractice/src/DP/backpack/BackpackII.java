@@ -1,8 +1,10 @@
 package DP.backpack;
 
-/*Given n items with size Ai and value Vi, and a backpack with size m. What's the maximum value can you put into the backpack?
+/*
+Given n items with size Ai and value Vi, and a backpack with size m. What's the maximum value can you put into the backpack?
 Example
-Given 4 items with size [2, 3, 5, 7] and value [1, 5, 2, 4], and a backpack with size 10. The maximum value is 9.*/
+Given 4 items with size [2, 3, 5, 7] and value [1, 5, 2, 4], and a backpack with size 10. The maximum value is 9.
+*/
 public class BackpackII {
 	/**
 	 * @param m:
@@ -11,7 +13,7 @@ public class BackpackII {
 	 *            & V: Given n items with size A[i] and value V[i]
 	 * @return: The maximum value
 	 */
-	public int backPackII(int m, int[] A, int V[]) {
+	public int backPackII(int m, int[] A, int[] V) {
 		// write your code here
 		int len = A.length;
 		int[][] dp = new int[len + 1][m + 1];
@@ -27,5 +29,18 @@ public class BackpackII {
 			}
 		}
 		return dp[len][m];
+	}
+
+	// print selection
+	private String showSelection(int size, int[][] dp, int[] A) {
+		String str = "";
+		int temp = size;
+		for (int i = dp.length - 1; i >= 1; i--) {
+			if (dp[i][temp]  > dp[i - 1][temp]) { // means item (i - 1) is picked
+				str += i - 1 + ",";
+				temp -= A[i - 1];
+			}
+		}
+		return str;
 	}
 }

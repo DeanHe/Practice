@@ -23,17 +23,17 @@ public class Subsets {
      * @return: A list of lists. All valid subsets.
      */
     public ArrayList<ArrayList<Integer>> subsets(int[] nums) {
-        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         if(nums == null || nums.length == 0){
             return res;
         }
         Arrays.sort(nums);
-        ArrayList<Integer> temp = new ArrayList<Integer>();
+        ArrayList<Integer> temp = new ArrayList<>();
         helper(res, nums, temp, 0);
         return res;
     }
     private void helper(ArrayList<ArrayList<Integer>> res, int[] nums, ArrayList<Integer> temp, int pos){
-        res.add(new ArrayList<Integer>(temp));
+        res.add(new ArrayList<>(temp));
         for(int i = pos; i < nums.length; i++){
             temp.add(nums[i]);
             helper(res, nums, temp, i + 1);

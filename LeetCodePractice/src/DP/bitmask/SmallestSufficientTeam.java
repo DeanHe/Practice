@@ -70,8 +70,8 @@ public class SmallestSufficientTeam {
 		for(int i = 0; i < req_skils_len; i++) {
 			map.put(req_skills[i], i);
 		}
-		int[] dp = new int[1 << req_skils_len];
-		int[][] parent = new int[1 << req_skils_len][2]; 
+		int[] dp = new int[1 << req_skils_len]; // dp[i] means number of workers need to meat state i
+		int[][] path = new int[1 << req_skils_len][2];
 		Arrays.fill(dp, Integer.MAX_VALUE - 1);
 		dp[0] = 0;
 		for(int i = 0; i < people_len; i++) {
@@ -86,15 +86,15 @@ public class SmallestSufficientTeam {
 			for(int j = target; j >= 0; j--) {
 				if(dp[j] + 1 < dp[j | skillsPersonHave]){
 					dp[j | skillsPersonHave] = dp[j] + 1;
-					parent[j | skillsPersonHave] = new int[]{j, i};
+					path[j | skillsPersonHave] = new int[]{j, i};
 				}
 			}
 		}
 		List<Integer> res = new ArrayList<>();
 		int state = target;
 		while(state > 0){
-			int preState = parent[state][0];
-			int personAdded = parent[state][1];
+			int preState = path[state][0];
+			int personAdded = path[state][1];
 			res.add(0, personAdded);
 			state = preState;
 		}

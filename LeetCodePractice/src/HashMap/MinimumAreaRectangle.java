@@ -13,8 +13,10 @@ public class MinimumAreaRectangle {
             map.putIfAbsent(point[0], new HashSet<>());
             map.get(point[0]).add(point[1]);
         }
-        for(int[] p1 : points){
-            for(int[] p2 : points){
+        for(int i = 0; i < points.length; i++){
+            for(int j = i + 1; j < points.length; j++){
+                int[] p1 = points[i];
+                int[] p2 = points[j];
                 if(p1[0] == p2[0] || p1[1] == p2[1]){
                     continue;
                 }

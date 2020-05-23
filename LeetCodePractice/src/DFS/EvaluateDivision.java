@@ -42,13 +42,12 @@ public class EvaluateDivision {
             String[] query = queries[i];
             String start = query[0];
             String end = query[1];
-            visited = new HashSet<>();
-            res[i] = dfs(start, end);
+            res[i] = dfs(start, end, new HashSet<>());
         }
         return res;
     }
 
-    private double dfs(String start, String end) {
+    private double dfs(String start, String end, Set<String> visited) {
         if (visited.contains(start)) {
             return -1.0;
         }
@@ -63,7 +62,7 @@ public class EvaluateDivision {
         double res = -1.0;
         for (String nb : neighbors.keySet()) {
             double nb_val = graph.get(start).get(nb);
-            double next = dfs(nb, end);
+            double next = dfs(nb, end, visited);
             if (next != -1.0) {
                 res = nb_val * next;
                 break;
