@@ -1,7 +1,8 @@
 package Heap;
 
 import java.util.*;
-/*You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists.
+/*
+You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists.
 
 Example
 Example 1:
@@ -16,7 +17,8 @@ Notice
 the range [a,b] is smaller than range [c,d] if b-a < d-c or a < c if b-a == d-c.
 The given list may contain duplicates, so ascending order means >= here.
 1 <= k <= 3500
--105 <= value of elements <= 105.*/
+-105 <= value of elements <= 105.
+*/
 public class SmallestRange {
 	public int[] smallestRange(List<List<Integer>> nums) {
         int rows = nums.size();

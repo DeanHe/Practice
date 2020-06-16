@@ -34,77 +34,76 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BricksFallingWhenHit {
-	int rows, cols;
-	int[] dirs = {0, 1, 0, -1, 0};
-	Set<String> invalidHit = new HashSet<>(); // hit on blank
+    int rows, cols;
+    int[] dirs = {0, 1, 0, -1, 0};
+
     public int[] hitBricks(int[][] grid, int[][] hits) {
         rows = grid.length;
         cols = grid[0].length;
         int len = hits.length;
         // remove the brick at the each hit
-        for(int i = 0; i < len; i++){
-        	int[] hit = hits[i];
-        	int hit_r = hit[0];
-        	int hit_c = hit[1];
-        	if(grid[hit_r][hit_c] == 1){
-        		grid[hit_r][hit_c] = 0;
-        	} else {
-        		invalidHit.add(hit_r + "," + hit_c);
-        	}     	
+        for (int i = 0; i < len; i++) {
+            int[] hit = hits[i];
+            int hit_r = hit[0];
+            int hit_c = hit[1];
+            if (grid[hit_r][hit_c] == 1) {
+                grid[hit_r][hit_c] = 3; // means valid hit
+            }
         }
         // mark remaining bricks connected to the top
-        for(int c = 0; c < cols; c++){
-        	dfs(0, c, grid);
+        for (int c = 0; c < cols; c++) {
+            dfs(0, c, grid);
         }
         // reversely add back the hit brick and count its not-connected-to-top neighbors
         int[] res = new int[len];
-        for(int i = len - 1; i >= 0; i--){
-        	int[] hit = hits[i];
-        	int hit_r = hit[0];
-        	int hit_c = hit[1];
-        	if(invalidHit.contains(hit_r + "," + hit_c)){
-        		continue;
-        	}
-        	grid[hit_r][hit_c] = 1;
-        	if(connectedToTop(hit_r, hit_c, grid)){
-        		res[i] = dfs(hit_r, hit_c, grid) - 1;
-        	}
+        for (int i = len - 1; i >= 0; i--) {
+            int[] hit = hits[i];
+            int hit_r = hit[0];
+            int hit_c = hit[1];
+            if (grid[hit_r][hit_c] == 3) {
+                grid[hit_r][hit_c] = 1;
+                if (connectedToTop(hit_r, hit_c, grid)) {
+                    res[i] = dfs(hit_r, hit_c, grid) - 1;
+                }
+            }
         }
         return res;
     }
-    private int dfs(int r, int c, int[][] grid){
-    	int validBrick = 0;
-    	if(r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] == 0){
-			return 0;
-		}
-    	if(grid[r][c] == 1){
-    		// 2 means effective brick still connected to top
-    		grid[r][c] = 2;
-    		validBrick++;
-    		for(int i = 0; i < dirs.length - 1; i++){
-    			int nb_r = r + dirs[i];
-    			int nb_c = c + dirs[i + 1];
-    			validBrick += dfs(nb_r, nb_c, grid);
-    		}
-    	}
-    	return validBrick;
+
+    private int dfs(int r, int c, int[][] grid) {
+        int validBrick = 0;
+        if (r < 0 || r >= rows || c < 0 || c >= cols) {
+            return 0;
+        }
+        if (grid[r][c] == 1) {
+            // 2 means effective brick still connected to top
+            grid[r][c] = 2;
+            validBrick++;
+            for (int i = 0; i < dirs.length - 1; i++) {
+                int nb_r = r + dirs[i];
+                int nb_c = c + dirs[i + 1];
+                validBrick += dfs(nb_r, nb_c, grid);
+            }
+        }
+        return validBrick;
     }
-    private boolean connectedToTop(int r, int c, int[][] grid){
-    	if(r == 0){
-    		return true;
-    	}
-    	if(r + 1 >= 0 && r + 1 < rows && grid[r + 1][c] == 2){
-			return true;
-		}
-    	if(r - 1 >= 0 && r - 1 < rows && grid[r - 1][c] == 2){
-			return true;
-		}
-    	if(c + 1 >= 0 && c + 1 < cols && grid[r][c + 1] == 2){
-			return true;
-		}
-    	if(c - 1 >= 0 && c - 1 < cols && grid[r][c - 1] == 2){
-			return true;
-		}
-    	return false;
+
+    private boolean connectedToTop(int r, int c, int[][] grid) {
+        if (r == 0) {
+            return true;
+        }
+        if (r + 1 >= 0 && r + 1 < rows && grid[r + 1][c] == 2) {
+            return true;
+        }
+        if (r - 1 >= 0 && r - 1 < rows && grid[r - 1][c] == 2) {
+            return true;
+        }
+        if (c + 1 >= 0 && c + 1 < cols && grid[r][c + 1] == 2) {
+            return true;
+        }
+        if (c - 1 >= 0 && c - 1 < cols && grid[r][c - 1] == 2) {
+            return true;
+        }
+        return false;
     }
 }

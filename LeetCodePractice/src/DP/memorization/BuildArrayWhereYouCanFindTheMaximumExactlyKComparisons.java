@@ -1,7 +1,8 @@
 package DP.memorization;
 
 /*
-        Given three integers n, m and k. Consider the following algorithm to find the maximum element of an array of positive integers:
+        Given three integers n, m and k.
+        Consider the following algorithm to find the maximum element of an array of positive integers:
         You should build the array arr which has the following properties:
 
         arr has exactly n integers.

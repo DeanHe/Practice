@@ -54,7 +54,6 @@ public class MinimumDistanceToTypeaWordUsingTwoFingers {
 
     public int minimumDistance(String word) {
         len = word.length();
-        int res = Integer.MAX_VALUE;
         mem = new int[len][27][27];
         return minDistType(word, 0, BLANK, BLANK);
     }

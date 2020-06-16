@@ -1,5 +1,6 @@
 package String;
-/*The API: int read4(char *buf) reads 4 characters at a time from a file.
+/*
+The API: int read4(char *buf) reads 4 characters at a time from a file.
 
 The return value is the actual number of characters read. For example, it returns 3 if there is only 3 characters left in the file.
 
@@ -35,7 +36,11 @@ Output:
 1, buf = "a"
 5, buf = "bcdef"
 Notice
-The read function may be called multiple times.*/
+The read function may be called multiple times.
+
+analysis:
+The difference between Read N Characters Given Read4 is that we need to save the status of the internal buffer if we haven't read all characters from it.
+*/
 public class ReadNcharactersGivenRead4II extends Reader4 {
 	/**
      * @param buf destination buffer

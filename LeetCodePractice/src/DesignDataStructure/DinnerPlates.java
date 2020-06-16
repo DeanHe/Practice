@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-/*You have an infinite number of stacks arranged in a row and numbered (left to right) from 0, each of the stacks has the same maximum capacity.
+/*
+You have an infinite number of stacks arranged in a row and numbered (left to right) from 0, each of the stacks has the same maximum capacity.
 
 Implement the DinnerPlates class:
 
@@ -60,7 +61,8 @@ Constraints:
 1 <= capacity <= 20000
 1 <= val <= 20000
 0 <= index <= 100000
-At most 200000 calls will be made to push, pop, and popAtStack.*/
+At most 200000 calls will be made to push, pop, and popAtStack.
+*/
 public class DinnerPlates {
 	int	cap, elements, last, cur;
 	Map<Integer, Stack<Integer>> map;

@@ -85,11 +85,11 @@ public class BricksFallingWhenHit {
             int nb_c = c + dirs[i + 1];
             if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && grid[nb_r][nb_c] == 1) {
                 int nb_idx = nb_r * cols + nb_c + 1;
-                union(idx, nb_idx);
+                union(nb_idx, idx);
             }
         }
         if (r == 0) {
-            union(0, idx); // Connect to the top of the grid. use 0 as the top roof
+            union(idx, 0); // Connect to the top of the grid. use 0 as the top roof
         }
     }
 

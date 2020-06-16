@@ -24,7 +24,7 @@ public class InertPopRandomWIthWeight {
     	int pos = random.nextInt(ls.size());
     	int last = ls.size() - 1;
     	double percent = pos * 1.0 / last;
-    	int i = 0;
+    	int i;
     	for(i = 0; i < weights.size(); i++){
     		percent -= weights.get(i);
     		if(percent <= 0){

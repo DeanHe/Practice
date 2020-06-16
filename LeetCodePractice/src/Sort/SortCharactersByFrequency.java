@@ -49,9 +49,7 @@ public class SortCharactersByFrequency {
         for(char c : arr){
         	map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        PriorityQueue<Entry<Character, Integer>> pq = new PriorityQueue<>((Entry<Character, Integer> a, Entry<Character, Integer> b) -> {
-        	return b.getValue() - a.getValue();
-        });
+        PriorityQueue<Entry<Character, Integer>> pq = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
         pq.addAll(map.entrySet());
         while(!pq.isEmpty()){
         	Entry<Character, Integer> cur = pq.poll();

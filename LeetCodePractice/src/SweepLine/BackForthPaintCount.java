@@ -32,12 +32,10 @@ public class BackForthPaintCount {
             }
             start = end;
         }
-        if (arr[0] >= x) {
-            res++;
-        }
-        for (int i = 1; i < arr.length; i++) {
-            arr[i] = arr[i - 1] + arr[i];
-            if (arr[i] >= x) {
+        int preSum = 0;
+        for(int a : arr){
+            preSum += a;
+            if(preSum >= x){
                 res++;
             }
         }

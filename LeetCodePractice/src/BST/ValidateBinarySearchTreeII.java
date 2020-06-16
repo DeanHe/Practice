@@ -11,7 +11,7 @@ Output: true
 Given array can represent preorder traversal
 of below tree
     2
-     
+     \
       4
      /
     3
@@ -26,9 +26,9 @@ Output: true
 Given array can represent preorder traversal
 of below tree
      40
-   /   
+   /   \
  30    80 
-        
+  \      \
   35     100 
 
 

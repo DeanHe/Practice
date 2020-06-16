@@ -23,8 +23,8 @@ public class MergeIntervals {
 		if (intervals == null || intervals.size() < 2) {
 			return intervals;
 		}
-		Collections.sort(intervals, new intervalComparator());
-		List<Interval> res = new ArrayList<Interval>();
+		Collections.sort(intervals, (a, b) -> a.start - b.start);
+		List<Interval> res = new ArrayList<>();
 		Interval pre = intervals.get(0);
 		for (int i = 1; i < intervals.size(); i++) {
 			Interval curr = intervals.get(i);
@@ -40,10 +40,28 @@ public class MergeIntervals {
 		return res;
 	}
 
-	class intervalComparator implements Comparator<Interval> {
-		@Override
-		public int compare(Interval o1, Interval o2) {
-			return o1.start - o2.start;
+	public List<Interval> merge2(List<Interval> intervals) {
+		if (intervals == null || intervals.size() < 2) {
+			return intervals;
 		}
+		List<Interval> res = new ArrayList<>();
+		int count = 0;
+		int curStart = Integer.MAX_VALUE, curEnd = Integer.MIN_VALUE;
+		TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+		for(Interval interval : intervals){
+			treeMap.put(interval.start, treeMap.getOrDefault(interval.start, 0) + 1);
+			treeMap.put(interval.end, treeMap.getOrDefault(interval.end, 0) - 1);
+		}
+		for(int tag : treeMap.keySet()){
+			count += treeMap.get(tag);
+			curStart = Math.min(curStart, tag);
+			curEnd = Math.max(curEnd, tag);
+			if(count == 0){
+				res.add(new Interval(curStart, curEnd));
+				curStart = Integer.MAX_VALUE;
+				curEnd = Integer.MIN_VALUE;
+			}
+		}
+		return res;
 	}
 }

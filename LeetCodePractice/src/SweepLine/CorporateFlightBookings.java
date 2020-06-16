@@ -16,6 +16,8 @@ Constraints:
 1 <= bookings[i][2] <= 10000
 */
 
+import java.util.TreeMap;
+
 public class CorporateFlightBookings {
 	public int[] corpFlightBookings(int[][] bookings, int n) {
         int[] res = new int[n];
@@ -30,6 +32,30 @@ public class CorporateFlightBookings {
         }
         for(int i = 1; i < n; i++){
             res[i] += res[i - 1];
+        }
+        return res;
+    }
+
+    public int[] corpFlightBookings2(int[][] bookings, int n) {
+        int[] res = new int[n];
+        TreeMap<Integer, Integer> axis = new TreeMap<>();
+        for(int[] book : bookings){
+            int start = book[0];
+            int end = book[1];
+            int seats = book[2];
+            axis.put(start, axis.getOrDefault(start, 0) + seats);
+            axis.put(end + 1, axis.getOrDefault(end + 1, 0) - seats);
+        }
+        int preSum = 0;
+        for(int tag : axis.keySet()){
+            axis.put(tag, axis.get(tag) + preSum);
+            preSum = axis.get(tag);
+        }
+        for(int i = 1; i <= n; i++){
+            Integer book = axis.floorKey(i);
+            if(book != null){
+                res[i - 1] = axis.get(book);
+            }
         }
         return res;
     }

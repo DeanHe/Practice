@@ -1,6 +1,7 @@
 package DP.memorization;
 
-/*Given an array of integers arr and an integer d. In one step you can jump from index i to index:
+/*
+Given an array of integers arr and an integer d. In one step you can jump from index i to index:
 
         i + x where: i + x < arr.length and 0 < x <= d.
         i - x where: i - x >= 0 and 0 < x <= d.
@@ -37,14 +38,15 @@ package DP.memorization;
         Constraints:
         1 <= arr.length <= 1000
         1 <= arr[i] <= 10^5
-        1 <= d <= arr.length*/
+        1 <= d <= arr.length
+*/
 public class JumpGameV {
-    int[] memo;
+    int[] mem;
     int len, d;
 
     public int maxJumps(int[] arr, int d) {
         len = arr.length;
-        memo = new int[len];
+        mem = new int[len]; // mem[i] means
         this.d = d;
         int res = 0;
         for (int i = 0; i < len; i++) {
@@ -54,8 +56,8 @@ public class JumpGameV {
     }
 
     private int dfs(int[] arr, int idx) {
-        if (memo[idx] > 0) {
-            return memo[idx];
+        if (mem[idx] > 0) {
+            return mem[idx];
         }
         int res = 1;
         for (int i = idx + 1; i < Math.min(len, idx + d + 1) && arr[i] < arr[idx]; i++) {
@@ -64,7 +66,6 @@ public class JumpGameV {
         for (int i = idx - 1; i >= Math.max(0, idx - d) && arr[i] < arr[idx]; i--) {
             res = Math.max(res, dfs(arr, i) + 1);
         }
-        memo[idx] = res;
-        return res;
+        return mem[idx] = res;
     }
 }

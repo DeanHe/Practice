@@ -40,15 +40,9 @@ public class TextNormalization {
 			Tag tag_start = new Tag(span.interval.start);
 			Tag tag_end = new Tag(span.interval.end);
 			for(char c : span.charSet){
-				int start_c_freq = 0;
-				if(tag_start.charFreqMap.containsKey(c)){
-					start_c_freq = tag_start.charFreqMap.get(c);
-				}
+				int start_c_freq = tag_start.charFreqMap.getOrDefault(c, 0);
 				tag_start.charFreqMap.put(c, start_c_freq + 1);
-				int end_c_freq = 0;
-				if(tag_end.charFreqMap.containsKey(c)){
-					end_c_freq = tag_end.charFreqMap.get(c);
-				} 
+				int end_c_freq = tag_end.charFreqMap.getOrDefault(c, 0);
 				tag_end.charFreqMap.put(c, end_c_freq - 1);
 			}
 			axis.add(tag_start);
@@ -66,10 +60,7 @@ public class TextNormalization {
 				if(pre_c_freq > 0){
 					span.charSet.add(c);
 				}
-				int cur_c_freq = 0;
-				if(axis.get(i).charFreqMap.containsKey(c)){
-					cur_c_freq = axis.get(i).charFreqMap.get(c);
-				}
+				int cur_c_freq = axis.get(i).charFreqMap.getOrDefault(c, 0);
 				axis.get(i).charFreqMap.put(c, pre_c_freq + cur_c_freq);
 			}
 			res.add(span);

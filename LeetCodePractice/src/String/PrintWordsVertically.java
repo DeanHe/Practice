@@ -43,19 +43,19 @@ public class PrintWordsVertically {
         List<String> res = new ArrayList<>();
         int maxlen = 0;
         String[] arr = s.split(" ");
-        for(String str : arr){
+        for (String str : arr) {
             maxlen = Math.max(maxlen, str.length());
         }
-        for(int r = 0; r < maxlen; r++){
+        for (int r = 0; r < maxlen; r++) {
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < arr.length; i++){
-                if(r < arr[i].length()){
+            for (int i = 0; i < arr.length; i++) {
+                if (r < arr[i].length()) {
                     sb.append(arr[i].charAt(r));
                 } else {
                     sb.append(" ");
                 }
             }
-            while(sb.charAt(sb.length() - 1) == ' '){
+            while (sb.charAt(sb.length() - 1) == ' ') {
                 sb.deleteCharAt(sb.length() - 1);
             }
             res.add(sb.toString());

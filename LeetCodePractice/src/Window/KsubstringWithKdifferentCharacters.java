@@ -1,5 +1,6 @@
 package Window;
-/*Given a string S and an integer K.
+/*
+Given a string S and an integer K.
 Calculate the number of substrings of length K and containing K different characters
 
 Example
@@ -12,7 +13,8 @@ String: "abacab"
 K: 3
 
 Answer: 2
-substrings: ["bac", "cab"]*/
+substrings: ["bac", "cab"]
+*/
 import java.util.*;
 
 public class KsubstringWithKdifferentCharacters {

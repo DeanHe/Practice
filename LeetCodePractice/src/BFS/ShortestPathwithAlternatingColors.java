@@ -2,7 +2,8 @@ package BFS;
 
 import java.util.*;
 
-/*Consider a directed graph, with nodes labelled 0, 1, ..., n-1.  In this graph, each edge is either red or blue, and there could be self-edges or parallel edges.
+/*
+Consider a directed graph, with nodes labelled 0, 1, ..., n-1.  In this graph, each edge is either red or blue, and there could be self-edges or parallel edges.
 
 Each [i, j] in red_edges denotes a red directed edge from node i to node j.  Similarly, each [i, j] in blue_edges denotes a blue directed edge from node i to node j.
 
@@ -37,7 +38,8 @@ Constraints:
 red_edges.length <= 400
 blue_edges.length <= 400
 red_edges[i].length == blue_edges[i].length == 2
-0 <= red_edges[i][j], blue_edges[i][j] < n*/
+0 <= red_edges[i][j], blue_edges[i][j] < n
+*/
 public class ShortestPathwithAlternatingColors {
     public int[] shortestAlternatingPaths(int n, int[][] red_edges, int[][] blue_edges) {
         Map<Integer, List<Integer>> redGraph = new HashMap<>();
@@ -62,11 +64,9 @@ public class ShortestPathwithAlternatingColors {
         	int size = queue.size();
         	for(int i = 0; i < size; i++){
         		int[] cur = queue.poll();
-        		String curHash = cur[0] + "+" + cur[1];
         		if(res[cur[0]] == -1){
         			res[cur[0]] = dist;
         		}
-            	visited.add(curHash);
             	if(cur[1] == 0 || cur[1] == 1){
             		List<Integer> blueNbs = blueGraph.get(cur[0]);
             		for(int nb : blueNbs){

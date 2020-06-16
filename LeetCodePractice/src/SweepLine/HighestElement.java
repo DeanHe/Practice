@@ -28,9 +28,9 @@ public class HighestElement {
 			 arr[op[0]]++;
 			 arr[op[1] + 1]--;
 		 }
-		 int highest = arr[0];
-		 int prefixSum = arr[0];
-		 for(int i = 1; i < arr.length; i++){
+		 int highest = Integer.MIN_VALUE;
+		 int prefixSum = 0;
+		 for(int i = 0; i < arr.length; i++){
 			 prefixSum += arr[i];
 			 if(prefixSum > highest){
 				 highest = prefixSum;

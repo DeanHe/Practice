@@ -1,8 +1,6 @@
 package Math;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
-/*On an alphabet board, we start at position (0, 0), corresponding to character board[0][0].
+/*
+On an alphabet board, we start at position (0, 0), corresponding to character board[0][0].
 
 Here, board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"], as shown in the diagram below.
 
@@ -34,7 +32,8 @@ Output: "RR!DDRR!UUL!R!"
 Constraints:
 
 1 <= target.length <= 100
-target consists only of English lowercase letters.*/
+target consists only of English lowercase letters.
+*/
 public class AlphabetBoardPath {
 	public String alphabetBoardPath(String target) {
         int pre_r = 0, pre_c = 0;

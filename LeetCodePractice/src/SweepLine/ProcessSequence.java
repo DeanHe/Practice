@@ -2,8 +2,11 @@ package SweepLine;
 
 import java.util.*;
 
-/*There is a process sequence that contains the start and end of each process. There is a query sequence asking how many processes are running at a certain point in time. Please return the query result of the query sequence.
- Given logs = [[1, 1234], [2, 1234]], queries = [1, 1235], return [1, 0].*/
+/*
+There is a process sequence that contains the start and end of each process.
+There is a query sequence asking how many processes are running at a certain point in time. Please return the query result of the query sequence.
+ Given logs = [[1, 1234], [2, 1234]], queries = [1, 1235], return [1, 0].
+ */
 public class ProcessSequence {
 
 	/**
@@ -17,33 +20,33 @@ public class ProcessSequence {
 		// Write your code here
 		List<Integer> ans = new ArrayList<>();
 		List<Integer> timeline = new ArrayList<>();
-		Map<Integer, Integer> posToIndex = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> tagToIdx = new HashMap<>();
 		for (Interval i : logs) {
 			timeline.add(i.start);
 			timeline.add(i.end);
 			timeline.add(i.end + 1);
 		}
-		for (int i : queries) {
-			timeline.add(i);
+		for (int q : queries) {
+			timeline.add(q);
 		}
 		Collections.sort(timeline);
 		int index = 1;
-		for (int i : timeline) {
-			if (!posToIndex.containsKey(i)) {
-				posToIndex.put(i, index);
+		for (int tag : timeline) {
+			if (!tagToIdx.containsKey(tag)) {
+				tagToIdx.put(tag, index);
 				index++;
 			}
 		}
 		int[] preSum = new int[index + 1];
 		for (Interval i : logs) {
-			preSum[posToIndex.get(i.start)]++;
-			preSum[posToIndex.get(i.end + 1)]--;
+			preSum[tagToIdx.get(i.start)]++;
+			preSum[tagToIdx.get(i.end + 1)]--;
 		}
 		for (int i = 1; i <= index; i++) {
 			preSum[i] += preSum[i - 1];
 		}
-		for (int i : queries) {
-			ans.add(preSum[posToIndex.get(i)]);
+		for (int q : queries) {
+			ans.add(preSum[tagToIdx.get(q)]);
 		}
 		return ans;
 	}

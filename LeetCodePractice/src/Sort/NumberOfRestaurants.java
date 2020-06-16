@@ -2,10 +2,12 @@ package Sort;
 
 import java.util.*;
 
-/*Give a List of data representing the coordinates[x,y] of each restaurant. 
+/*
+Give a List of data representing the coordinates[x,y] of each restaurant.
 Customer's coordinates are at the origin[0,0].Find out the n restaurants closest to the customer ,
 you have to pick the restaurant that first appeared, although it may not be the best option. 
-return their coordinates in the original order.*/
+return their coordinates in the original order.
+*/
 // https://www.lintcode.com/problem/number-of-restaurants/description
 public class NumberOfRestaurants {
 	/**
@@ -20,7 +22,7 @@ public class NumberOfRestaurants {
         if(restaurant == null || restaurant.size() == 0 || n > restaurant.size()){
             return null;
         }
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<>();
         int furthestDistance = 0;
         int[] distances = new int[restaurant.size()];
         for(int i = 0; i < distances.length; i++){

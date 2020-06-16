@@ -33,11 +33,7 @@ public class FindMedianFromDataStream {
 	PriorityQueue<Integer> minHeap; // higher half
 
 	public FindMedianFromDataStream() {
-		maxHeap = new PriorityQueue<>(1, new Comparator<Integer>() {
-			public int compare(Integer a, Integer b) {
-				return b.intValue() - a.intValue();
-			}
-		});
+		maxHeap = new PriorityQueue<>(1, (a, b) -> b - a);
 		minHeap = new PriorityQueue<>();
 	}
 

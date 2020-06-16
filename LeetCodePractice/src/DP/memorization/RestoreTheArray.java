@@ -48,14 +48,13 @@ import java.util.Arrays;
 public class RestoreTheArray {
     String s;
     int k, MOD = (int) (1e9 + 7);
-    long[] mem;
+    Long[] mem;
 
     public int numberOfArrays(String s, int k) {
         this.s = s;
         this.k = k;
         int len = s.length();
-        mem = new long[len];
-        Arrays.fill(mem, -1);
+        mem = new Long[len];
         return (int) dfs(0);
     }
 
@@ -63,12 +62,11 @@ public class RestoreTheArray {
         if (pos == s.length()) {
             return 1;
         }
-        if (mem[pos] != -1) {
+        if (mem[pos] != null) {
             return mem[pos];
         }
         if (s.charAt(pos) == '0') {
-            mem[pos] = 0;
-            return mem[pos];
+            return mem[pos] = 0L;
         }
         long res = 0, num = 0;
         for (int i = pos; i < s.length(); i++) {
@@ -78,7 +76,6 @@ public class RestoreTheArray {
             }
             res = (res + dfs(i + 1)) % MOD;
         }
-        mem[pos] = res;
-        return mem[pos];
+        return mem[pos] = res;
     }
 }

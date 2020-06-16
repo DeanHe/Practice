@@ -14,31 +14,26 @@ public class EditDistance {
      */
     public int minDistance(String word1, String word2) {
         // write your code here
-        int m = word1.length();
-        int n = word2.length();
-        int[][] dp = new int[m + 1][n + 1];
+        int l1 = word1.length(), l2 = word2.length();
+        int[][] dp = new int[l1 + 1][l2 + 1];
         //init
-         for(int i = 1; i <= n; i++){
-            dp[0][i] = i;
-        }
-        for(int i = 1; i <= m; i++){
+        for(int i = 1; i <= l1; i++){
             dp[i][0] = i;
         }
-        //function 
-        for(int i = 1; i <= m; i++){
-        	char c1 = word1.charAt(i - 1);
-        	for(int j = 1; j <= n; j++){
-        		char c2 = word2.charAt(j - 1);
-        		if(c1 != c2){
-        			//insert; delete; replace
-        			int temp = Math.min(dp[i - 1][j], dp[i][j - 1]);
-        			dp[i][j] = Math.min(temp, dp[i - 1][j - 1]) + 1;
-        		} else {
-        		    //no opertation
-        			dp[i][j] = dp[i - 1][j - 1];
-        		}
-        	}
+        for(int j = 1; j <= l2; j++){
+            dp[0][j] = j;
         }
-        return dp[m][n];
+        //function
+        for(int i = 0; i < l1; i++){
+            for(int j = 0; j < l2; j++){
+                if(word1.charAt(i) == word2.charAt(j)){ //no opertation
+                    dp[i + 1][j + 1] = dp[i][j];
+                } else { //insert; delete; replace
+                    int temp = Math.min(dp[i][j + 1], dp[i + 1][j]);
+                    dp[i + 1][j + 1] = Math.min(dp[i][j], temp) + 1;
+                }
+            }
+        }
+        return dp[l1][l2];
     }
 }

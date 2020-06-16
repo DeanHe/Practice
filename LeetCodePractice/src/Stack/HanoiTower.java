@@ -1,5 +1,6 @@
 package Stack;
 
+import java.util.LinkedHashMap;
 import java.util.Stack;
 
 /*
@@ -42,7 +43,7 @@ public class HanoiTower {
      */
     public HanoiTower(int i) {
         // create three towers
-        disks = new Stack<Integer>();
+        disks = new Stack<>();
     }
 
     /*

@@ -1,4 +1,12 @@
+import Array.CountTripletOfAscending;
 import Backtracking.PartitionToKEqualSumSubsetsII;
+import BinarySearch.FindKthMissingNumber;
+import DFS.DecompressByteArray;
+import DFS.GenerateRandomMaze;
+import DFS.ReorderRoutesToMakeAllPathsLeadToTheCityZero;
+import DP.ImplementDiff;
+import Scheduling.RearrangeStringkDistanceApart;
+import SweepLine.JobSchedule;
 import Trie.AutocompleteSystem;
 
 import java.util.ArrayList;
@@ -14,8 +22,18 @@ public class Solution {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		RearrangeStringkDistanceApart rearrangeStringkDistanceApart = new RearrangeStringkDistanceApart();
+		String res = rearrangeStringkDistanceApart.rearrangeString("aabbcc", 3);
+		System.out.println(res);
+/*
+		String X = "XMJYAUZ";
+		String Y = "XMJAATZ";
 
-/*		int[]   in = {4, 8, 10, 12, 14, 20, 2};
+		ImplementDiff implementDiff = new ImplementDiff();
+		System.out.println(implementDiff.diff(X, Y));
+
+
+		int[]   in = {4, 8, 10, 12, 14, 20, 2};
 //		int[] level = {5,4,8,1,7,2,6,3};
 //		ConstructBinarySearchTreeFromLevelOrderTraversals sol = new ConstructBinarySearchTreeFromLevelOrderTraversals();
 //		TreeNode root = sol.constructTree(level);

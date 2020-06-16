@@ -19,7 +19,7 @@ package Greedy;
         https://leetcode.com/problems/task-scheduler/discuss/104500/Java-O(n)-time-O(1)-space-1-pass-no-sorting-solution-with-detailed-explanation
         partCount = count(A) - 1
         emptySlots = partCount * (n - (count of tasks with most frequency - 1))
-        availableTasks = tasks.length - count(A) * count of tasks with most frenquency
+        availableTasks = tasks.length - count(A) * count of tasks with most frequency
         idles = max(0, emptySlots - availableTasks)
         result = tasks.length + idles
 */

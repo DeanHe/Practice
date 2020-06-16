@@ -1,5 +1,6 @@
 package Sort;
-/*Three stones are on a number line at positions a, b, and c.
+/*
+Three stones are on a number line at positions a, b, and c.
 Each turn, let's say the stones are currently at positions x, y, z with x < y < z.  You pick up the stone at either position x or position z, and move that stone to an integer position k, with x < k < z and k != y.
 The game ends when you cannot make any more moves, ie. the stones are in consecutive positions.
 When the game ends, what is the minimum and maximum number of moves that you could have made?  Return the answer as an length 2 array: answer = [minimum_moves, maximum_moves]
@@ -20,7 +21,8 @@ Note:
 1 <= a <= 100
 1 <= b <= 100
 1 <= c <= 100
-a != b, b != c, c != a*/
+a != b, b != c, c != a
+*/
 public class MovingStonesUntilConsecutive {
 	public int[] numMovesStones(int a, int b, int c) {
         if(a > b){

@@ -4,8 +4,8 @@ import java.util.*;
 
 // https://leetcode.com/problems/implement-queue-using-stacks/description/
 public class MyQueue {
-	Stack<Integer> input = new Stack<Integer>();
-    Stack<Integer> output = new Stack<Integer>();
+	Stack<Integer> input = new Stack<>();
+    Stack<Integer> output = new Stack<>();
     
     // Push element x to the back of queue.
     public void push(int x) {

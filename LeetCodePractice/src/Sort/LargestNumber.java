@@ -26,7 +26,7 @@ public class LargestNumber {
     public String largestNumber(int[] nums) {
         // write your code here
     	StringBuilder sb = new StringBuilder();
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         for(int i : nums){
        	 list.add(String.valueOf(i));
         }

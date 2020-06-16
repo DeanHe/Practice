@@ -54,7 +54,7 @@ public class KillProcess {
     		int parent = ppid.get(i);
     		int child = pid.get(i);
     		if(!processTree.containsKey(parent)){
-    			processTree.put(parent, new ArrayList<Integer>());
+    			processTree.put(parent, new ArrayList<>());
     		}
     		processTree.get(parent).add(child);
     	}

@@ -29,33 +29,28 @@ Note:
 */
 public class IntervalListIntersections {
 	public int[][] intervalIntersection(int[][] A, int[][] B) {
-        if(A == null || A.length == 0 || B == null || B.length == 0){
-        	return new int[0][0];
-        }
-        int Alen = A.length;
-        int Blen = B.length;
-        List<Interval> res = new ArrayList<>();
-        int i = 0, j = 0;
-        while(i < Alen && j < Blen){
-        	Interval a = new Interval(A[i][0], A[i][1]);
-        	Interval b = new Interval(B[j][0], B[j][1]);
-        	int startMax = Math.max(a.start, b.start);
-        	int endMin = Math.min(a.end, b.end);
-        	if(startMax <= endMin){
-        		res.add(new Interval(startMax, endMin));
-        	}
-        	if(a.end == endMin){
-        		i++;
-        	}
-        	if(b.end == endMin){
-        		j++;
-        	}
-        }
-        int[][] ans = new int[res.size()][2];
-        for(int k = 0; k < res.size(); k++){
-        	Interval a = res.get(k);
-        	ans[k] = new int[]{a.start, a.end};
-        }
-        return ans;
+		if(A == null || A.length == 0 || B == null || B.length == 0){
+			return new int[0][0];
+		}
+		List<int[]> ls = new ArrayList<>();
+		int i = 0, j = 0;
+		while(i < A.length && j < B.length){
+			int startMax = Math.max(A[i][0], B[j][0]);
+			int endMin = Math.min(A[i][1], B[j][1]);
+			if(startMax <= endMin){
+				ls.add(new int[]{startMax, endMin});
+			}
+			if(A[i][1] == endMin){
+				i++;
+			}
+			if(B[j][1] == endMin){
+				j++;
+			}
+		}
+		int[][] res = new int[ls.size()][2];
+		for(i = 0; i < ls.size(); i++){
+			res[i] = new int[]{ls.get(i)[0], ls.get(i)[1]};
+		}
+		return res;
     }
 }

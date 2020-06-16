@@ -1,5 +1,6 @@
 package UnionFind;
-/*Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.
+/*
+Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.
 Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some email that is common to both accounts. Note that even if two accounts have the same name, they may belong to different people as people could have the same name. A person can have any number of accounts initially, but all of their accounts definitely have the same name.
 After merging the accounts, return the accounts in the following format: the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.
 
@@ -16,7 +17,8 @@ Note:
 
 The length of accounts will be in the range [1, 1000].
 The length of accounts[i] will be in the range [1, 10].
-The length of accounts[i][j] will be in the range [1, 30].*/
+The length of accounts[i][j] will be in the range [1, 30].
+*/
 
 import java.util.*;
 
@@ -42,13 +44,13 @@ public class AccountsMerge {
 			}
 		}
 		for (List<String> acct : accounts) {
-			String root = find(acct.get(1));
+			String root = findRoot(acct.get(1));
 			for (int i = 2; i < acct.size(); i++) {
 				union(acct.get(i), root);
 			}
 		}
 		for (List<String> acct : accounts) {
-			String root = find(acct.get(1));
+			String root = findRoot(acct.get(1));
 			if (!group.containsKey(root)) {
 				group.put(root, new TreeSet<>());
 			}
@@ -64,7 +66,7 @@ public class AccountsMerge {
 		return res;
 	}
 
-	private String find(String email) {
+	private String findRoot(String email) {
 		while (!email.equals(parent.get(email))) {
 			email = parent.get(email);
 		}
@@ -72,8 +74,8 @@ public class AccountsMerge {
 	}
 
 	private void union(String a, String b) {
-		String root_a = find(a);
-		String root_b = find(b);
+		String root_a = findRoot(a);
+		String root_b = findRoot(b);
 		parent.put(root_a, root_b);
 	}
 }

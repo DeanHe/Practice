@@ -1,7 +1,8 @@
 package BFS;
 
 import java.util.*;
-/*There are a total of n courses you have to take, labeled from 0 to n - 1.
+/*
+There are a total of n courses you have to take, labeled from 0 to n - 1.
 
 Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
 
@@ -12,7 +13,8 @@ Given n = 2, prerequisites = [[1,0]]
 Return true
 
 Given n = 2, prerequisites = [[1,0],[0,1]]
-Return false*/
+Return false
+*/
 
 public class CourseSchedule {
 	/*
@@ -25,9 +27,9 @@ public class CourseSchedule {
 	// BFS
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
 		// write your code here
-		List<List<Integer>> graph = new ArrayList<>(numCourses);
+		Map<Integer, List<Integer>> graph = new HashMap<>();
 		for (int i = 0; i < numCourses; i++) {
-			graph.add(new ArrayList<>());
+			graph.put(i, new ArrayList<>());
 		}
 		int[] indegree = new int[numCourses];
 
@@ -39,7 +41,7 @@ public class CourseSchedule {
 		}
 
 		int count = 0;
-		Queue<Integer> queue = new LinkedList<Integer>();
+		Queue<Integer> queue = new LinkedList<>();
 		for (int i = 0; i < indegree.length; i++) {
 			if (indegree[i] == 0) {
 				// vertex without pre
@@ -47,9 +49,9 @@ public class CourseSchedule {
 			}
 		}
 		while (!queue.isEmpty()) {
-			int course = queue.poll();
+			int cur = queue.poll();
 			count++;
-			List<Integer> nbs = graph.get(course);
+			List<Integer> nbs = graph.get(cur);
 			for (int nb : nbs) {
 				if (--indegree[nb] == 0) {
 					queue.offer(nb);
@@ -64,7 +66,7 @@ public class CourseSchedule {
 		List<List<Integer>> graph = new ArrayList<>(numCourses);
 		boolean[] visited = new boolean[numCourses];
 		for (int i = 0; i < numCourses; i++) {
-			graph.add(new ArrayList<Integer>());
+			graph.add(new ArrayList<>());
 		}
 		for (int i = 0; i < prerequisites.length; i++) {
 			int pre = prerequisites[i][1];

@@ -42,10 +42,10 @@ public class CarPooling {
             axis.put(trip[1], axis.getOrDefault(trip[1], 0) + trip[0]);
             axis.put(trip[2], axis.getOrDefault(trip[2], 0) - trip[0]);
         }
-        int accumulate = 0;
-        for(int key : axis.keySet()){
-            accumulate += axis.get(key);
-            if(accumulate > capacity){
+        int preSum = 0;
+        for(int tag : axis.keySet()){
+            preSum += axis.get(tag);
+            if(preSum > capacity){
                 return false;
             }
         }

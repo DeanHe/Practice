@@ -2,7 +2,8 @@ package BST;
 
 import java.util.*;
 
-/*Given a binary tree, return the preorder traversal of its nodes' values.
+/*
+Given a binary tree, return the preorder traversal of its nodes' values.
 
 Example:
 
@@ -14,15 +15,16 @@ Input: [1,null,2,3]
    3
 
 Output: [1,2,3]
-Follow up: Recursive solution is trivial, could you do it iteratively?*/
+Follow up: Recursive solution is trivial, could you do it iteratively?
+*/
 public class BinaryTreePreorderTraversal {
 	/**
      * @param root: The root of binary tree.
      * @return: Preorder in ArrayList which contains node values.
      */
     public ArrayList<Integer> preorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-       Stack<TreeNode> stack = new Stack<TreeNode>();
+        ArrayList<Integer> res = new ArrayList<>();
+       Stack<TreeNode> stack = new Stack<>();
        if(root == null){
            return res;
        }
@@ -43,7 +45,7 @@ public class BinaryTreePreorderTraversal {
     
     public ArrayList<Integer> preorderTraversalRecursion(TreeNode root) {
         // write your code here
-        ArrayList<Integer> res = new ArrayList<Integer>();
+        ArrayList<Integer> res = new ArrayList<>();
         helper(root, res);
         return res;
 

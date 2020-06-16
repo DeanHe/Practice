@@ -20,12 +20,24 @@ Constraints:
 2 <= arr1.length == arr2.length <= 40000
 -10^6 <= arr1[i], arr2[i] <= 10^6
 
-|arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + |i - j|
-can be (if i < j):
-1 arr1[i] + arr2[i] - i - arr1[j] - arr2[j] + j
-2 arr1[i] - arr2[i] - i - arr1[j] + arr2[j] + j
-3 -arr1[i] + arr2[i] - i + arr1[j] - arr2[j] + j
-4 -arr1[i] - arr2[i] - i + arr1[j] + arr2[j] + j
+analysis:
+Maximum Manhattan Distance
+
+|Intuition
+Take |arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| as Manhattan distance of two points.
+arr1 is the coordinate of points on the x-axis,
+arr2 is the coordinate of points on the y-axis.
+
+Explanation
+For 3 points on the plane, we always have |AO| - |BO| <= |AB|.
+When AO and BO are in the same direction, we have ||AO| - |BO|| = |AB|.
+
+We take 4 points for point O, left-top, left-bottom, right-top and right-bottom.
+Each time, for each point B, and find the closest A point to O,
+
+Complexity
+Time O(N) for 4 passes
+Space O(1)
 */
 public class MaximumOfAbsoluteValueExpression {
 	public int maxAbsValExpr(int[] arr1, int[] arr2) {

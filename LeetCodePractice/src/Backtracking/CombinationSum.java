@@ -13,7 +13,8 @@ Given candidate set [2,3,6,7] and target 7, a solution set is:
 Notice
 All numbers (including target) will be positive integers.
 Elements in a combination must be in non-descending order.
-The solution set must not contain duplicate combinations.*/
+The solution set must not contain duplicate combinations.
+*/
 public class CombinationSum {
 	/**
      * @param candidates: A list of integers
@@ -35,7 +36,8 @@ public class CombinationSum {
             return;
         }
         if(target == 0){
-            res.add(new ArrayList<Integer>(temp));
+            res.add(new ArrayList<>(temp));
+            return;
         }
         for(int i = pos; i < candidates.length; i++){
             if(i > pos && candidates[i] == candidates[i - 1]){

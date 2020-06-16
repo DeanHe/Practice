@@ -46,7 +46,7 @@ Given a m * n matrix seats  that represent seats distributions in a classroom. I
 public class MaximumStudentsTakingExam {
     int rows, cols, totalState;
     int[][] memo;
-    //mask represents occupacy status for a row, for example 100001 means 1st and 6th seats are taken
+    //mask represents occupancy status for a row, for example 100001 means 1st and 6th seats are taken
     //use backtrack to get all combination of seat assignment for a row based on previous row's mask
     List<Integer> masks;
 
@@ -54,7 +54,7 @@ public class MaximumStudentsTakingExam {
         rows = seats.length;
         cols = seats[0].length;
         totalState = 1 << cols;
-        // memo[i][j] stores the max student count for row range in [i, RowCount - 1] when the previous row's mask is j
+        // mem[i][j] stores the max student count for row range in [i, RowCount - 1] when the previous row's mask is j
         memo = new int[rows][totalState];
         for (int[] row : memo) {
             Arrays.fill(row, -1);
@@ -75,8 +75,7 @@ public class MaximumStudentsTakingExam {
         for (int m : masks) {
             res = Math.max(res, Integer.bitCount(m) + getMax(seats, r + 1, m));
         }
-        memo[r][preMask] = res;
-        return res;
+        return memo[r][preMask] = res;
     }
 
     // this returns all combination of legal seat assignment for a given row based on prevous row's mask

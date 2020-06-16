@@ -16,25 +16,23 @@ import java.util.Stack;
 
         1 <= preorder.length <= 100
         The values of preorder are distinct.
+
+analysis:
+use array as parameter passed by ref
 */
 public class ConstructBinarySearchTreeFromPreorderTraversal {
-    int idx;
-    int[] preorder;
 
     public TreeNode bstFromPreorder(int[] preorder) {
-        this.idx = 0;
-        this.preorder = preorder;
-        return dfs(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return dfs(preorder, new int[]{0}, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    private TreeNode dfs(int lower, int upper) {
-        if (idx == preorder.length || preorder[idx] < lower || preorder[idx] > upper) {
+    private TreeNode dfs(int[] preorder, int[] idx, int lower, int upper) {
+        if (idx[0] == preorder.length || preorder[idx[0]] < lower || preorder[idx[0]] > upper) {
             return null;
         }
-        TreeNode node = new TreeNode(preorder[idx]);
-        idx++;
-        node.left = dfs(lower, node.val);
-        node.right = dfs(node.val, upper);
+        TreeNode node = new TreeNode(preorder[idx[0]++]);
+        node.left = dfs(preorder, idx, lower, node.val);
+        node.right = dfs(preorder, idx, node.val, upper);
         return node;
     }
 

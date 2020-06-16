@@ -2,7 +2,8 @@ package DFS;
 
 import java.util.*;
 
-/*The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+/*
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
 Given an integer n, return all distinct solutions to the n-queens puzzle.
 Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
 
@@ -30,7 +31,8 @@ Output:
 ]
 
 Challenge
-Can you do it without recursion?*/
+Can you do it without recursion?
+*/
 public class NQueens {
 	/**
      * Get all distinct N-Queen solutions
@@ -77,10 +79,10 @@ public class NQueens {
     
     ArrayList<String> translateString(int[] board) {
         ArrayList<String> res = new ArrayList<>();
-        for(int i = 0; i < board.length; i++){
+        for(int r = 0; r < board.length; r++){
             StringBuilder sb = new StringBuilder();
-            for(int j = 0; j < board.length; j++){
-                if(board[i] == j){
+            for(int c = 0; c < board.length; c++){
+                if(board[r] == c){
                     sb.append('Q');
                 } else {
                     sb.append('.');

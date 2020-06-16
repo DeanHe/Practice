@@ -27,7 +27,7 @@ public class LargestDivisibleSubset {
 		}
         int len = nums.length;
         int[] dp = new int[len]; // means max length of subset ending with nums[i]
-        int[] pre = new int[len];
+        int[] pre = new int[len]; // the previous index of element i in the largestDivisibleSubset ends with element i
         int maxLen = Integer.MIN_VALUE, endIndex = -1;
         Arrays.sort(nums);
         for(int i = 0; i < len; i++){
@@ -47,7 +47,7 @@ public class LargestDivisibleSubset {
         	}
         }
         while(endIndex != -1){
-        	res.add(nums[endIndex]);
+        	res.add(0, nums[endIndex]);
         	endIndex = pre[endIndex];
         }
         return res;

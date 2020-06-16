@@ -37,10 +37,10 @@ public class NonOverlappingIntervals {
      * @return: the minimum number of intervals you need to remove
      */
     public int eraseOverlapIntervals(int[][] intervals) {
-    	int len = intervals.length, nonOverlapCount = 1;
-    	if(len == 0){
+    	if(intervals.length == 0){
     		return 0;
     	}
+		int nonOverlapCount = 1;
         Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
         int preEnd = intervals[0][1];
         for(int[] cur : intervals){
@@ -49,14 +49,14 @@ public class NonOverlappingIntervals {
         		preEnd = cur[1];
         	}
         }
-		return len - nonOverlapCount;
+		return intervals.length - nonOverlapCount;
     }
 
 	public int eraseOverlapIntervals2(int[][] intervals) {
-		int len = intervals.length, nonOverlapCount = 1;
-		if(len == 0){
+		if(intervals.length == 0){
 			return 0;
 		}
+		int nonOverlapCount = 1;
 		Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 		int minEnd = intervals[0][1];
 		for(int[] cur : intervals){
@@ -67,6 +67,6 @@ public class NonOverlappingIntervals {
 				minEnd = Math.min(minEnd, cur[1]);
 			}
 		}
-		return len - nonOverlapCount;
+		return intervals.length - nonOverlapCount;
 	}
 }

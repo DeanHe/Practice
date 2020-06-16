@@ -59,9 +59,9 @@ public class MinimumNumberOfArrowsToBurstBalloons {
 			return 0;
 		}
 		Arrays.sort(points, (a, b) -> a[0] - b[0]);
-		int len = points.length, count = 1;
+		int count = 1;
 		int minEnd = points[0][1];
-		for(int i = 1; i < len; i++){
+		for(int i = 1; i < points.length; i++){
 			if(points[i][0] > minEnd){
 				count++;
 				minEnd = points[i][1];

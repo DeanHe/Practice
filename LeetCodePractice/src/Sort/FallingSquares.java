@@ -2,7 +2,8 @@ package Sort;
 
 import java.util.*;
 
-/*On an infinite number line (x-axis), we drop given squares in the order they are given.
+/*
+On an infinite number line (x-axis), we drop given squares in the order they are given.
 
 The i-th square dropped (positions[i] = (left, side_length)) is a square with the left-most point being positions[i][0] and sidelength positions[i][1].
 
@@ -34,7 +35,8 @@ Note:
 
 1 <= positions.length <= 1000.
 1 <= positions[i][0] <= 10^8.
-1 <= positions[i][1] <= 10^6.*/
+1 <= positions[i][1] <= 10^6.
+*/
 public class FallingSquares {
 
 	public List<Integer> fallingSquares(int[][] positions) {

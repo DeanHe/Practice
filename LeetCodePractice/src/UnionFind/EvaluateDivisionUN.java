@@ -28,8 +28,8 @@ public class EvaluateDivisionUN {
 		for (int i = 0; i < len; i++) {
 			String nu = equations.get(i).get(0);
 			String de = equations.get(i).get(1);
-			String startRoot = findRoot(parent, dist, nu);
-			String endRoot = findRoot(parent, dist, de);
+			String startRoot = findRoot(nu);
+			String endRoot = findRoot(de);
 			if (!startRoot.equals(endRoot)) {
 				parent.put(startRoot, endRoot);
 				dist.put(startRoot, dist.get(de) * values[i] / dist.get(nu));
@@ -42,8 +42,8 @@ public class EvaluateDivisionUN {
 				res[i] = -1.0;
 				continue;
 			}
-			String startRoot = findRoot(parent, dist, nu);
-			String endRoot = findRoot(parent, dist, de);
+			String startRoot = findRoot(nu);
+			String endRoot = findRoot(de);
 			if (!startRoot.equals(endRoot)) {
 				res[i] = -1.0;
 			} else {
@@ -53,7 +53,7 @@ public class EvaluateDivisionUN {
 		return res;
 	}
 
-	private String findRoot(Map<String, String> parent, Map<String, Double> dist, String s) {
+	private String findRoot(String s) {
 		if (!parent.containsKey(s)) {
 			parent.put(s, s);
 			dist.put(s, 1.0);

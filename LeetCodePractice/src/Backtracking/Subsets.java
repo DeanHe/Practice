@@ -1,5 +1,6 @@
 package Backtracking;
-/*Given a set of distinct integers, nums, return all possible subsets (the power set).
+/*
+Given a set of distinct integers, nums, return all possible subsets (the power set).
 Note: The solution set must not contain duplicate subsets.
 Example:
 
@@ -14,12 +15,13 @@ Output:
   [2,3],
   [1,2],
   []
-]*/
+]
+*/
 import java.util.*;
 
 public class Subsets {
 	/**
-     * @param S: A set of distinct integers.
+     * @param nums: A set of distinct integers.
      * @return: A list of lists. All valid subsets.
      */
     public ArrayList<ArrayList<Integer>> subsets(int[] nums) {

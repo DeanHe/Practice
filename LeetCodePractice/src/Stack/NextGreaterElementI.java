@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-/*You are given two arrays (without duplicates) nums1 and nums2 where nums1's elements are subset of nums2. Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
+/*
+You are given two arrays (without duplicates) nums1 and nums2 where nums1's elements are subset of nums2. Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
 The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, output -1 for this number.
 
 Example
@@ -25,7 +26,11 @@ Explanation:
     For number 4 in the first array, there is no next greater number for it in the second array, so output -1.
 Notice
 1.All elements in nums1 and nums2 are unique.
-2.The length of both nums1 and nums2 would not exceed 1000.*/
+2.The length of both nums1 and nums2 would not exceed 1000.
+
+
+time complexity O(n)
+*/
 public class NextGreaterElementI {
 	/**
      * @param nums1: an array
@@ -36,15 +41,14 @@ public class NextGreaterElementI {
         // Write your code here   	
     	Map<Integer, Integer> map = new HashMap<>();
     	Stack<Integer> stack = new Stack<>();
-    	int len1 = nums1.length;
-    	int[] res = new int[len1];
+    	int[] res = new int[nums1.length];
     	for(int n : nums2){
     		while(!stack.isEmpty() && stack.peek() < n){
     			map.put(stack.pop(), n);
     		}
     		stack.push(n);
     	}
-    	for(int i = 0; i <= len1; i++){
+    	for(int i = 0; i <= nums1.length; i++){
     		res[i] = map.getOrDefault(nums1[i], -1);
     	}
     	return res;

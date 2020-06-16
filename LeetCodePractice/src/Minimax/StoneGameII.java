@@ -25,11 +25,11 @@ Constraints:
 public class StoneGameII {
 	int len;
 	int[] sufSum;
-	int[][] mem;
+	Integer[][] mem;
 	public int stoneGameII(int[] piles) {
         len = piles.length;
         sufSum = new int[len];
-        mem = new int[len][len];
+        mem = new Integer[len][len];
         sufSum[len - 1] = piles[len - 1];
         for(int i = len - 2; i >= 0; i--){
         	sufSum[i] = sufSum[i + 1] + piles[i];
@@ -44,14 +44,13 @@ public class StoneGameII {
 		if(2 * M + i >= len){
 			return sufSum[i];
 		}
-		if(mem[i][M] != 0){
+		if(mem[i][M] != null){
 			return mem[i][M];
 		}
 		int nextPlayerMin = Integer.MAX_VALUE; //the min value the next player can get
 		for(int x = 1; x <= 2 * M; x++){
 			nextPlayerMin = Math.min(nextPlayerMin, helper(piles, i + x, Math.max(M, x)));
 		}
-		mem[i][M] = sufSum[i] - nextPlayerMin;
-		return mem[i][M];
+		return mem[i][M] = sufSum[i] - nextPlayerMin;
 	}
 }

@@ -29,7 +29,7 @@ public class RandomPickIndex {
     
     public int pick(int target) {
     	int len = nums.length;
-    	int pos = -1, count = 1, probability;
+    	int pos = 0, count = 1, probability;
         for(int i = 0; i < len; i++){
         	if(target == nums[i]){
         		probability = random.nextInt(count);

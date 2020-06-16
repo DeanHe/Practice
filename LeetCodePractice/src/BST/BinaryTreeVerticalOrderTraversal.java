@@ -1,8 +1,11 @@
 package BST;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
-/*Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).
+/*
+Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).
 
 If two nodes are in the same row and column, the order should be from left to right.
 
@@ -30,7 +33,8 @@ Explanation:
    9   8
   /\  /\
  /  \/  \
- 4  01   7*/
+ 4  01   7
+ */
 public class BinaryTreeVerticalOrderTraversal {
 	/**
      * @param root: the root of tree
@@ -44,24 +48,21 @@ public class BinaryTreeVerticalOrderTraversal {
     	}
     	//column : List of Nodes
     	Map<Integer, List<Integer>> map = new HashMap<>();
-    	Queue<Integer> qCol = new LinkedList<>();
-    	Queue<TreeNode> qNode = new LinkedList<>();
-    	qCol.offer(0);
-    	qNode.offer(root);
-    	while(!qNode.isEmpty()){
-    		TreeNode cur = qNode.poll();
-    		int col = qCol.poll();
+    	Queue<Pair> queue = new LinkedList<>();
+    	queue.offer(new Pair(root, 0));
+    	while(!queue.isEmpty()){
+			Pair cur = queue.poll();
+			TreeNode node = cur.node;
+    		int col = cur.col;
     		if(!map.containsKey(col)){
     			map.put(col, new ArrayList<>());
     		}
-    		map.get(col).add(cur.val);
-    		if(cur.left != null){
-    			qNode.offer(cur.left);
-    			qCol.offer(col - 1);
+    		map.get(col).add(node.val);
+    		if(node.left != null){
+    			queue.offer(new Pair(node.left, col - 1));
     		}
-    		if(cur.right != null){
-    			qNode.offer(cur.right);
-    			qCol.offer(col + 1);
+    		if(node.right != null){
+    			queue.offer(new Pair(node.right, col + 1));
     		}
     	}
     	int minCol = Collections.min(map.keySet());
@@ -71,4 +72,13 @@ public class BinaryTreeVerticalOrderTraversal {
     	}
     	return res;
     }
+
+    class Pair {
+    	TreeNode node;
+    	int col;
+    	public Pair(TreeNode node, int col){
+    		this.node = node;
+    		this.col = col;
+		}
+	}
 }

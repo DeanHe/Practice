@@ -26,7 +26,7 @@ public class PermutationsII {
 			return res;
 		}
 		if (nums.length == 0) {
-			res.add(new ArrayList<Integer>());
+			res.add(new ArrayList<>());
 			return res;
 		}
 		Arrays.sort(nums);
@@ -39,7 +39,8 @@ public class PermutationsII {
 
 	private void dfs(List<List<Integer>> res, List<Integer> temp, int[] nums, boolean[] visited) {
 		if (temp.size() == nums.length) {
-			res.add(new ArrayList<Integer>(temp));
+			res.add(new ArrayList<>(temp));
+			return;
 		}
 		for (int i = 0; i < nums.length; i++) {
 			if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1] == false) {

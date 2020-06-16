@@ -34,7 +34,7 @@ public class GFSClient extends BaseGFSClient {
     public GFSClient(int chunkSize) {
         // initialize your data structure here
         this.chunkSize = chunkSize;
-        this.chunkNum = new HashMap<String, Integer>();
+        this.chunkNum = new HashMap<>();
     }
     
     // @param filename a file name

@@ -19,7 +19,8 @@ A solution set is:
 Notice
 All numbers (including target) will be positive integers.
 Elements in a combination must be in non-descending order.
-The solution set must not contain duplicate combinations.*/
+The solution set must not contain duplicate combinations.
+*/
 public class CombinationSumII {
 	/**
      * @param num: Given the candidate numbers

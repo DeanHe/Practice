@@ -15,7 +15,7 @@ public class GenerateParentheses {
      * @return: All combinations of well-formed parentheses
      */
 	public List<String> generateParenthesis(int n) {
-		List<String> res = new ArrayList<String>();
+		List<String> res = new ArrayList<>();
 		if (n < 1) {
 			return res;
 		}

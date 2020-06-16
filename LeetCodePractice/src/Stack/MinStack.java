@@ -3,8 +3,8 @@ package Stack;
 import java.util.*;
 // min stack is decreasing order
 public class MinStack {
-	Stack<Integer> realStack = new Stack<Integer>();
-	Stack<Integer> minStack = new Stack<Integer>();
+	Stack<Integer> realStack = new Stack<>();
+	Stack<Integer> minStack = new Stack<>();
 	
     public void push(int x) {
 	    if(minStack.isEmpty() || minStack.peek() >= x){

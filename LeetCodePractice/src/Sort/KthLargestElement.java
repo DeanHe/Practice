@@ -22,7 +22,7 @@ Notice
 You can swap elements in the array
 
 O(N) best case runtime or O(N ^ 2) worst case + O(1) memeory
-The smart approach is to use the selection algorithm (based on the partion method - the same one as used in quicksort).
+The smart approach is to use the selection algorithm (based on the partition method - the same one as used in quicksort).
 */
 public class KthLargestElement {
     /**
