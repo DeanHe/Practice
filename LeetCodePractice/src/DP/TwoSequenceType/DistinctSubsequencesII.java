@@ -1,8 +1,9 @@
-package DP;
+package DP.TwoSequenceType;
 
 import java.util.Arrays;
 
-/*Given a string S, count the number of distinct, non-empty subsequences of S .
+/*
+Given a string S, count the number of distinct, non-empty subsequences of S .
 
 Since the result may be large, return the answer modulo 10^9 + 7.
 
@@ -26,7 +27,8 @@ Note:
 
 S contains only lowercase letters.
 1 <= S.length <= 2000
-https://leetcode.com/problems/distinct-subsequences-ii/solution/*/
+https://leetcode.com/problems/distinct-subsequences-ii/solution/
+*/
 public class DistinctSubsequencesII {
 	public int distinctSubseqII(String S) {
 		int MOD = 1_000_000_007;

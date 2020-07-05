@@ -9,7 +9,7 @@ Input: "abca"
 Output: True
 Explanation: You could delete the character 'c'.*/
 public class ValidPalindromeII {
-	public boolean validPalindrome(String s) {
+    public boolean validPalindrome(String s) {
         for(int i = 0; i < s.length() / 2; i++){
             int j = s.length() - i - 1;
             if(s.charAt(i) != s.charAt(j)){

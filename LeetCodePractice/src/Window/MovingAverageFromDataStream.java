@@ -15,7 +15,8 @@ m.next(5) = (10 + 3 + 5) / 3 // return 6.00000
 */
 public class MovingAverageFromDataStream {
 	Queue<Integer> queue;
-	double sum, size;
+	double sum;
+	int size;
 	/*
 	 * @param size: An integer
 	 */public MovingAverageFromDataStream(int size) {

@@ -1,4 +1,4 @@
-package DP;
+package DP.TimeSequenceType;
 
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class LargestDivisibleSubset {
         int len = nums.length;
         int[] dp = new int[len]; // means max length of subset ending with nums[i]
         int[] pre = new int[len]; // the previous index of element i in the largestDivisibleSubset ends with element i
-        int maxLen = Integer.MIN_VALUE, endIndex = -1;
+        int maxLen = Integer.MIN_VALUE, endIdx = -1;
         Arrays.sort(nums);
         for(int i = 0; i < len; i++){
         	dp[i] = 1;
@@ -43,12 +43,12 @@ public class LargestDivisibleSubset {
         	}
         	if(dp[i] > maxLen){
         		maxLen = dp[i];
-        		endIndex = i;
+        		endIdx = i;
         	}
         }
-        while(endIndex != -1){
-        	res.add(0, nums[endIndex]);
-        	endIndex = pre[endIndex];
+        while(endIdx != -1){
+        	res.add(0, nums[endIdx]);
+        	endIdx = pre[endIdx];
         }
         return res;
     }

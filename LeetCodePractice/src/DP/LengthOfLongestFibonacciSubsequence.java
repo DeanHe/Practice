@@ -1,5 +1,6 @@
 package DP;
-/*A sequence X_1, X_2, ..., X_n is fibonacci-like if:
+/*
+A sequence X_1, X_2, ..., X_n is fibonacci-like if:
 
 n >= 3
 X_i + X_{i+1} = X_{i+2} for all i + 2 <= n
@@ -19,7 +20,8 @@ Input: [1,3,7,11,12,14,18]
 Output: 3
 Explanation:
 The longest subsequence that is fibonacci-like:
-[1,11,12], [3,11,14] or [7,11,18].*/
+[1,11,12], [3,11,14] or [7,11,18].
+*/
 import java.util.*;
 
 public class LengthOfLongestFibonacciSubsequence {

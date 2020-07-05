@@ -19,11 +19,11 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
 //This is an application of Hierholzer’s algorithm to find a Eulerian path, need to visit all directed edges in the graph.
 public class ReconstructItinerary {
 	Map<String, PriorityQueue<String>> graph = new HashMap<>();
-	List<String> path = new ArrayList<String>();
+	List<String> path = new ArrayList<>();
     public List<String> findItinerary(String[][] tickets) {
     	for(String[] itinerary : tickets){
     		if(graph.containsKey(itinerary[0])){
-    			graph.put(itinerary[0], new PriorityQueue<String>());
+    			graph.put(itinerary[0], new PriorityQueue<>());
     		}
     		graph.get(itinerary[0]).add(itinerary[1]);
     	}

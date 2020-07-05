@@ -21,7 +21,7 @@ Note:
 public class PartitionToKEqualSumSubsetsII {
 	int len, target, k;
 	boolean[] visited;
-	int[]nums, partSum;
+	int[]nums, subsetSum;
 	List<List<Integer>> res;
 
 	public List<List<Integer>> canPartitionKSubsets(int[] nums, int k) {
@@ -39,7 +39,7 @@ public class PartitionToKEqualSumSubsetsII {
 		for (int i = 0; i < k; i++) {
 			res.add(new ArrayList<>());
 		}
-		partSum = new int[k];
+		subsetSum = new int[k];
 		target = sum / k;
 		this.k = k;
 		dfs(0);
@@ -49,8 +49,8 @@ public class PartitionToKEqualSumSubsetsII {
 	private boolean dfs(int idx) {
 		boolean partEqual = true;
 		for (int i = 0; i < k; i++) {
-			partEqual = partEqual && (partSum[i] == target);
-			if (partSum[i] > target) {
+			partEqual = partEqual && (subsetSum[i] == target);
+			if (subsetSum[i] > target) {
 				return false;
 			}
 		}
@@ -59,16 +59,16 @@ public class PartitionToKEqualSumSubsetsII {
 		}
 		for (int i = idx; i < len; i++) {
 			for (int j = 0; j < k; j++) {
-				List<Integer> part = res.get(j);
+				List<Integer> subset = res.get(j);
 				if (!visited[i]) {
 					visited[i] = true;
-					part.add(nums[i]);
-					partSum[j] += nums[i];
+					subset.add(nums[i]);
+					subsetSum[j] += nums[i];
 					if (dfs(i + 1)) {
 						return true;
 					}
-					part.remove(part.size() - 1);
-					partSum[j] -= nums[i];
+					subset.remove(subset.size() - 1);
+					subsetSum[j] -= nums[i];
 					visited[i] = false;
 				}
 			}

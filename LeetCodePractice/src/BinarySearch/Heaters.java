@@ -53,4 +53,17 @@ public class Heaters {
         }
         return radius;
     }
+
+	public int findRadiusII(int[] houses, int[] heaters) {
+		int radius = Integer.MIN_VALUE, i = 0;
+		Arrays.sort(heaters);
+		Arrays.sort(houses);
+		for(int house : houses){
+			while(i + 1 < heaters.length && Math.abs(house - heaters[i]) >= Math.abs(house - heaters[i + 1])){
+				i++;
+			}
+			radius = Math.max(radius, Math.abs(house - heaters[i]));
+		}
+		return radius;
+	}
 }

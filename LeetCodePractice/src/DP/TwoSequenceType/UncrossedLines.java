@@ -1,4 +1,4 @@
-package DP;
+package DP.TwoSequenceType;
 /*We write the integers of A and B (in the order they are given) on two separate horizontal lines.
 Now, we may draw a straight line connecting two numbers A[i] and B[j] as long as A[i] == B[j], and the line we draw does not intersect any other connecting (non-horizontal) line.
 Return the maximum number of connecting lines we can draw in this way.

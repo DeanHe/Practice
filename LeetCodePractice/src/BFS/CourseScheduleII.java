@@ -27,9 +27,9 @@ public class CourseScheduleII {
 	 * @return the course order
 	 */
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
-		List<List<Integer>> graph = new ArrayList<List<Integer>>(numCourses);
+		List<List<Integer>> graph = new ArrayList<>(numCourses);
 		for (int i = 0; i < numCourses; i++) {
-			graph.add(new ArrayList<Integer>());
+			graph.add(new ArrayList<>());
 		}
 		int[] indegree = new int[numCourses];
 		for (int i = 0; i < prerequisites.length; i++) {

@@ -22,6 +22,8 @@ public class Solution {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String x = "/abcd/erf";
+		String[] xm = x.split("/", 1);
 		RearrangeStringkDistanceApart rearrangeStringkDistanceApart = new RearrangeStringkDistanceApart();
 		String res = rearrangeStringkDistanceApart.rearrangeString("aabbcc", 3);
 		System.out.println(res);

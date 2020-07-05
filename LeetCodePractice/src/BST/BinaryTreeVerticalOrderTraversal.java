@@ -40,6 +40,37 @@ public class BinaryTreeVerticalOrderTraversal {
      * @param root: the root of tree
      * @return: the vertical order traversal
      */
+	public List<List<Integer>> verticalOrder2(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<>();
+		if(root == null){
+			return res;
+		}
+		//column : List of Nodes
+		TreeMap<Integer, List<Integer>> map = new TreeMap<>();
+		Queue<Integer> cq = new LinkedList<>();
+		Queue<TreeNode> tq = new LinkedList<>();
+		tq.offer(root);
+		cq.offer(0);
+		while(!tq.isEmpty()){
+			TreeNode cur = tq.poll();
+			int col = cq.poll();
+			map.putIfAbsent(col, new ArrayList<>());
+			map.get(col).add(cur.val);
+			if(cur.left != null){
+				tq.offer(cur.left);
+				cq.offer(col - 1);
+			}
+			if(cur.right != null){
+				tq.offer(cur.right);
+				cq.offer(col + 1);
+			}
+		}
+		for(List<Integer> layer : map.values()){
+			res.add(layer);
+		}
+		return res;
+	}
+	//// version 2
     public List<List<Integer>> verticalOrder(TreeNode root) {
         // write your code here
     	List<List<Integer>> res = new ArrayList<>();
@@ -81,4 +112,5 @@ public class BinaryTreeVerticalOrderTraversal {
     		this.col = col;
 		}
 	}
+
 }

@@ -13,6 +13,17 @@ Write a function to compute the next state (after one update) of the board given
 The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously.
 
 how to do this without extra space cost
+
+analysis:
+we use 2 bits to store 2 states:
+[2nd bit, 1st bit] = [next state, current state]
+
+define state:
+0 rep dead, 1 pre live
+00 - previous dead next state dead - 0
+11 - previous live next state live - 3
+10 - previous dead next state live - 2
+01 - previous live next state dead - 1
 */
 public class GameOfLife {
 	/**
@@ -25,18 +36,17 @@ public class GameOfLife {
     	this.board = board;
         rows = board.length;
         cols = board[0].length;
-        //define state:
-        //00 - previous dead next state dead
-        //11 - previous live next state live
-        //10 - previous dead next state live
-        //01 - previous live next state dead
         for(int r = 0; r < rows; r++){
         	for(int c = 0; c < cols; c++){
-        		int lives = calculateLiveNeighbors(r, c);
-        		if(board[r][c] == 1 && (lives == 2 || lives == 3)){
-        			board[r][c] = 3; // live on
-        		}  else if(board[r][c] == 0 && lives == 3){
-        			board[r][c] = 2; // reborn
+        		int nbs = calculateLiveNeighbors(r, c);
+        		if(board[r][c] == 1){
+        			if(nbs == 2 || nbs == 3){
+						board[r][c] = 3; // live on
+					}
+        		}  else {
+        			if(nbs == 3) {
+						board[r][c] = 2; // reborn
+					}
         		}
         	}
         }
