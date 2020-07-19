@@ -29,7 +29,7 @@ public class ReverseWordsInaString {
     	StringBuilder sb = new StringBuilder();
     	for(int i = len - 1; i >= 0; i--){
     		arr[i] = arr[i].trim();
-    		if(arr[i].equals("")){
+    		if(!arr[i].equals("")){
     			sb.append(arr[i]);
         		sb.append(" ");
     		}

@@ -1,5 +1,6 @@
 package LinkedList;
-/*iven a non-negative integer represented as non-empty a singly linked list of digits, plus one to the integer.
+/*g
+iven a non-negative integer represented as non-empty a singly linked list of digits, plus one to the integer.
 
 You may assume the integer do not contain any leading zero, except the number 0 itself.
 
@@ -17,7 +18,8 @@ Example2
 Input: 9 -> 9 -> null
 Output: 1 -> 0 -> 0 -> null
 Explanation:
-99 + 1 = 100*/
+99 + 1 = 100
+*/
 public class PlusOneLinkedList {
 	/**
      * @param head: the first Node

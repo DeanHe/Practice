@@ -7,6 +7,11 @@ the order among letters are unknown to you.
 You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language.
 Derive the order of letters in this language.
 
+1.You may assume all letters are in lowercase.
+2.The dictionary is invalid, if a is prefix of b and b is appear before a.
+3.If the order is invalid, return an empty string.
+4.There may be multiple valid order of letters, return the smallest in normal lexicographical order
+
 Example
 Given the following words in dictionary,
 
@@ -18,6 +23,13 @@ Given the following words in dictionary,
   "rftt"
 ]
 The correct order is: "wertf"
+
+Explanation：
+from "wrt"and"wrf" ,we can get 't'<'f'
+from "wrt"and"er" ,we can get 'w'<'e'
+from "er"and"ett" ,we can get 'r'<'t'
+from "ett"and"rftt" ,we can get 'e'<'r'
+So return "wertf"
 
 Given the following words in dictionary,
 
@@ -43,13 +55,13 @@ public class AlienDictionary {
             return "";
         }
         Map<Character, Set<Character>> graph = new HashMap<>();
-        Map<Character, Integer> indegMap = new HashMap<>();
+        Map<Character, Integer> inDegree = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         //initialize degree map
         for(String word : words){
             char[] charArray = word.toCharArray();
             for(char c : charArray){
-                indegMap.put(c, 0);
+                inDegree.put(c, 0);
             }
         }
         //compare adjacent string & fill graph
@@ -61,18 +73,12 @@ public class AlienDictionary {
                 char cur_c = cur.charAt(j);
                 char post_c = post.charAt(j);
                 if(cur_c != post_c){
-                    if(!graph.containsKey(cur_c)){
-                        graph.put(cur_c, new HashSet<>());
-                    }
+                    graph.putIfAbsent(cur_c, new HashSet<>());
                     if(!graph.get(cur_c).contains(post_c)){
                     	graph.get(cur_c).add(post_c);
-                        indegMap.put(post_c, indegMap.get(post_c) + 1);
+                        inDegree.put(post_c, inDegree.get(post_c) + 1);
                     }
                     break;
-                } else {
-                    if(j + 1 == post.length() && j + 1 < cur.length()){
-                        return "";
-                    }
                 }
             }
         }
@@ -80,8 +86,8 @@ public class AlienDictionary {
         // as we should return the topo order with lexicographical order
         // we should use PriorityQueue instead of a FIFO Queue
         Queue<Character> pq = new PriorityQueue<>();
-        for(char c : indegMap.keySet()){
-            if(indegMap.get(c) == 0){
+        for(char c : inDegree.keySet()){
+            if(inDegree.get(c) == 0){
                 pq.offer(c);
             }
         }
@@ -91,11 +97,11 @@ public class AlienDictionary {
             if(graph.containsKey(c)){
                 Set<Character> neighbors = graph.get(c);
                 for(char nb : neighbors){
-                    int indeg = indegMap.get(nb);
-                    if(indeg > 0){
-                        indeg--;
-                        indegMap.put(nb, indeg);
-                        if(indeg == 0){
+                    int inDeg = inDegree.get(nb);
+                    if(inDeg > 0){
+                        inDeg--;
+                        inDegree.put(nb, inDeg);
+                        if(inDeg == 0){
                             pq.offer(nb);
                         }
                     }
@@ -104,7 +110,7 @@ public class AlienDictionary {
         }
         System.out.println(sb.toString());
         //avoid loops. only < possible -- eg: ["qd","ab"] res = qa
-        if(sb.length() != indegMap.size()){
+        if(sb.length() != inDegree.size()){
             return "";
         }
         return sb.toString();

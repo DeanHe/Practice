@@ -1,33 +1,22 @@
-import Array.CountTripletOfAscending;
-import Backtracking.PartitionToKEqualSumSubsetsII;
-import BinarySearch.FindKthMissingNumber;
-import DFS.DecompressByteArray;
-import DFS.GenerateRandomMaze;
-import DFS.ReorderRoutesToMakeAllPathsLeadToTheCityZero;
-import DP.ImplementDiff;
-import Scheduling.RearrangeStringkDistanceApart;
-import SweepLine.JobSchedule;
-import Trie.AutocompleteSystem;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeMap;
+import Math.OneDmineSweep;
 
 
 public class Solution {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        OneDmineSweep oneDmineSweep = new OneDmineSweep();
+        int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
+        //int[] S = {3, 5, 4, 3, 1};
+        int res = oneDmineSweep.getMaxValueOfMidH(S);
+        System.out.println(res);
+		/*
 		String x = "/abcd/erf";
 		String[] xm = x.split("/", 1);
 		RearrangeStringkDistanceApart rearrangeStringkDistanceApart = new RearrangeStringkDistanceApart();
 		String res = rearrangeStringkDistanceApart.rearrangeString("aabbcc", 3);
 		System.out.println(res);
-/*
+
 		String X = "XMJYAUZ";
 		String Y = "XMJAATZ";
 
@@ -86,5 +75,5 @@ public class Solution {
 		Arrays.stream(res).forEach(a -> System.out.println(a));*/
 
 
-	}
+    }
 }

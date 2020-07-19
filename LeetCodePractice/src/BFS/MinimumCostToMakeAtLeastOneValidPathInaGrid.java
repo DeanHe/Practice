@@ -3,6 +3,7 @@ package BFS;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.PriorityQueue;
 
 /*Given a m x n grid. Each cell of the grid has a sign pointing to the next cell you should visit if you are currently in this cell. The sign of grid[i][j] can be:
         1 which means go to the cell to the right. (i.e go from grid[i][j] to grid[i][j + 1])
@@ -81,6 +82,42 @@ public class MinimumCostToMakeAtLeastOneValidPathInaGrid {
                         } else {
                             deque.offerLast(new int[]{nb_r, nb_c});
                         }
+                    }
+                }
+            }
+        }
+        return cost[rows - 1][cols - 1];
+    }
+    // Dijkstra's in O(ElogV) ~ O(mn * log(mn))
+    public int minCostDijk(int[][] grid) {
+        int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int rows = grid.length, cols = grid[0].length;
+        int[][] cost = new int[rows][cols];
+        for(int[] row : cost){
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
+        pq.offer(new int[]{0, 0, 0});
+        while(!pq.isEmpty()){
+            int[] cur = pq.poll();
+            int r = cur[0];
+            int c = cur[1];
+            int dist = cur[2];
+            if(cost[r][c] != Integer.MAX_VALUE){
+                continue;
+            }
+            cost[r][c] = dist;
+            for(int i = 0; i < dirs.length; i++){
+                int[] dir = dirs[i];
+                int nb_r = r + dir[0];
+                int nb_c = c + dir[1];
+                if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols){
+                    int edge = 1;
+                    if(i == grid[r][c] - 1){
+                        edge = 0;
+                    }
+                    if(cost[nb_r][nb_c] == Integer.MAX_VALUE){
+                        pq.offer(new int[]{nb_r, nb_c, cost[r][c] + edge});
                     }
                 }
             }

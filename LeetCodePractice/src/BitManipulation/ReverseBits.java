@@ -20,7 +20,8 @@ In Java, the compiler represents the signed integers using 2's complement notati
  
 Follow up:
 
-If this function is called many times, how would you optimize it?*/
+If this function is called many times, how would you optimize it?
+*/
 public class   ReverseBits {
 	// you need treat n as an unsigned value
 	public int reverseBits(int n) {

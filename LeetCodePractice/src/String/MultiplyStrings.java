@@ -13,13 +13,12 @@ public class MultiplyStrings {
 			}
 		}
 		StringBuilder sb = new StringBuilder();
+		int carry = 0;
 		for (int i = temp.length - 1; i >= 0; i--) {
+			temp[i] += carry;
 			int digit = temp[i] % 10;
 			sb.insert(0, digit);
-			int carry = temp[i] / 10;
-			if (i > 0) {
-				temp[i - 1] += carry;
-			}
+			carry = temp[i] / 10;
 		}
 		while (sb.length() > 0 && sb.charAt(0) == '0') {
 			sb.deleteCharAt(0);

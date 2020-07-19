@@ -1,6 +1,7 @@
 package BinarySearch;
 
-/*Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+/*
+Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
 
 (i.e., [0,0,1,2,2,5,6] might become [2,5,6,0,0,1,2]).
 
@@ -17,11 +18,13 @@ Output: false
 Follow up:
 
 This is a follow up problem to Search in Rotated Sorted Array, where nums may contain duplicates.
-Would this affect the run-time complexity? How and why?*/
-/*The only difference is that due to the existence of duplicates, we can have nums[left] == nums[mid] and in that case, 
+Would this affect the run-time complexity? How and why?
+
+The only difference is that due to the existence of duplicates, we can have nums[left] == nums[mid] and in that case,
 the first half could be out of order (i.e. NOT in the ascending order, e.g. [3 1 2 3 3 3 3]) and we have to deal this case separately. 
 In that case, it is guaranteed that nums[right] also equals to nums[mid], so what we can do is to check if nums[mid]== nums[left] == nums[right] before the original logic, 
-and if so, we can move left and right both towards the middle by 1. and repeat.*/
+and if so, we can move left and right both towards the middle by 1. and repeat.
+*/
 public class SearchInRotatedSortedArrayII {
 	public boolean search(int[] nums, int target) {
 		if (nums == null || nums.length == 0) {
