@@ -86,9 +86,6 @@ public class IsGraphBipartite {
             queue.offer(i);
             while(!queue.isEmpty()){
                 int cur = queue.poll();
-                if(!group.containsKey(cur)){
-                    continue;
-                }
                 int color = group.get(cur);
                 for(int nb : graph[cur]){
                     if(!group.containsKey(nb)){

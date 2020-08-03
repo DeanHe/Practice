@@ -28,8 +28,7 @@ public class BestTimeToBuyAndSellStockWithCooldown {
 			//ex: buy, buy, buy, sell, rest, buy, buy
 			buy[i] = Math.max(buy[i - 1], rest[i - 1] - prices[i - 1]);
 			sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i - 1]);
-			rest[i] = Math.max(rest[i - 1], buy[i - 1]);
-			rest[i] = Math.max(rest[i], sell[i - 1]);
+			rest[i] = Math.max(Math.max(rest[i - 1], buy[i - 1]), sell[i - 1]);
 		}
 		int res = Math.max(sell[n], rest[n]);
 		return res;

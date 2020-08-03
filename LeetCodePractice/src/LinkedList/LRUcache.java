@@ -31,6 +31,7 @@ Design and implement a data structure for Least Recently Used (LRU) cache. It sh
         remove head.next when reach capacity
         move the node to tail.pre for get operation
         create private method insertBeforeTail
+        head save the oldest, tail save the most recent
 */
 public class LRUcache {
 	private class Node {

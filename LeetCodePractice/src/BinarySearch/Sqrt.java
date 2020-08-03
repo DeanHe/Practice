@@ -1,5 +1,6 @@
 package BinarySearch;
-/*mplement int sqrt(int x).
+/*
+mplement int sqrt(int x).
 
 Compute and return the square root of x.
 
@@ -13,7 +14,8 @@ sqrt(5) = 2
 sqrt(10) = 3
 
 Challenge
-O(log(x))*/
+O(log(x))
+*/
 public class Sqrt {
 	/**
      * @param x: An integer
@@ -39,9 +41,9 @@ public class Sqrt {
     		}
     	}
     	if(end * end <= x){
-    		return (int)end;
+    		return end;
     	} else {
-    		return (int)start;
+    		return start;
     	}
     }
 }

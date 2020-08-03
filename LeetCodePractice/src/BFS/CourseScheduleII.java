@@ -31,16 +31,16 @@ public class CourseScheduleII {
 		for (int i = 0; i < numCourses; i++) {
 			graph.add(new ArrayList<>());
 		}
-		int[] indegree = new int[numCourses];
+		int[] inDegree = new int[numCourses];
 		for (int i = 0; i < prerequisites.length; i++) {
 			int pre = prerequisites[i][1];
 			int post = prerequisites[i][0];
 			graph.get(pre).add(post);
-			indegree[post]++;
+			inDegree[post]++;
 		}
 		Queue<Integer> queue = new LinkedList<>();
-		for (int i = 0; i < indegree.length; i++) {
-			if (indegree[i] == 0) {
+		for (int i = 0; i < inDegree.length; i++) {
+			if (inDegree[i] == 0) {
 				queue.offer(i);
 			}
 		}
@@ -52,7 +52,7 @@ public class CourseScheduleII {
 			count++;
 			List<Integer> nbs = graph.get(course);
 			for (int nb : nbs) {
-				if (--indegree[nb] == 0) {
+				if (--inDegree[nb] == 0) {
 					queue.offer(nb);
 				}
 			}

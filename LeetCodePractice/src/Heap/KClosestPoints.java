@@ -2,7 +2,8 @@ package Heap;
 
 import java.util.*;
 
-/*Given some points and an origin point in two-dimensional space, find k points which are nearest to the origin.
+/*
+Given some points and an origin point in two-dimensional space, find k points which are nearest to the origin.
 Return these points sorted by distance, if they are same in distance, sorted by the x-axis, and if they are same in the x-axis, sorted by y-axis.
 
 Example
@@ -13,7 +14,14 @@ Output: [[1,1],[2,5],[4,4]]
 Example 2:
 
 Input: points = [[0,0],[0,9]], origin = [3, 1], k = 1
-Output: [[0,0]]*/
+Output: [[0,0]]
+analysis:
+maxHeap is O(NlogK)
+
+quick select is O(N)
+The advantage of this solution is it is very efficient.
+The disadvantage of this solution are it is neither an online solution nor a stable one. And the K elements closest are not sorted in ascending order.
+*/
 public class KClosestPoints {
 	/**
      * @param points: a list of points
@@ -21,38 +29,64 @@ public class KClosestPoints {
      * @param k: An integer
      * @return: the k closest points
      */
-    public Point[] kClosest(Point[] points, Point origin, int k) {
+    public int[][] kClosest(int[][] points, int k) {
         // write your code here
-    	final Point global_origin = origin;
-        PriorityQueue<Point> pq = new PriorityQueue<Point>(k, new Comparator<Point>(){
-                @Override
-                public int compare(Point a, Point b){
-                    int diff = getDistance(b, global_origin) - getDistance(a, global_origin);
-                    if(diff == 0){
-                        diff = b.x - a.x;
-                    }
-                    if(diff == 0){
-                        diff = b.y - a.y;
-                    }
-                    return diff;
+        int[][] res = new int[k][2];
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+                (a, b) -> {
+                    int dist_a = a[0] * a[0] + a[1] * a[1];
+                    int dist_b = b[0] * b[0] + b[1] * b[1];
+                    return dist_b - dist_a;
                 }
-            });
-        
-        for(int i = 0; i < points.length; i++){
-            pq.offer(points[i]);
+        );
+        for(int[] p : points){
+            pq.offer(p);
             if(pq.size() > k){
                 pq.poll();
             }
         }
-        k = pq.size();
-        Point[] res = new Point[k];
+        int i = pq.size() - 1;
         while(!pq.isEmpty()){
-            res[--k] = pq.poll();
+            res[i--] = pq.poll();
         }
         return res;
     }
-    
-    private int getDistance(Point a, Point b) {
-        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+
+    //quick select
+    public int[][] kClosestQS(int[][] points, int k) {
+        int start = 0, end = points.length - 1;
+        while(start < end){
+            int mid = partition(points, start, end);
+            if(mid == k - 1){
+                break;
+            } else if(mid < k - 1){
+                start = mid;
+            } else {
+                end = mid;
+            }
+        }
+        return Arrays.copyOfRange(points, 0, k);
+    }
+
+    private int partition(int[][] points, int start, int end) {
+        int[] pivot = points[end];
+        int i = start;
+        for(int j = start; j <= end; j++){
+            if(compare(points[i], pivot)){
+                swap(points, i++, j);
+            }
+        }
+        return i;
+    }
+
+    // point a is closer to origin or equal distance compare with point b
+    private boolean compare(int[] a, int[] b) {
+        return a[0] * a[0] + a[1] * a[1] <= b[0] * b[0] + b[1] * b[1];
+    }
+
+    private void swap(int[][] points, int i, int j) {
+        int[] temp = points[i];
+        points[i] = points[j];
+        points[j] = temp;
     }
 }

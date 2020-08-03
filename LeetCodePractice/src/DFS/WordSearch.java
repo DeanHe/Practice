@@ -4,6 +4,7 @@ package DFS;
 //The word can be constructed from letters of sequentially adjacent cell, 
 //where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
 public class WordSearch {
+    int[] dir = new int[]{0, 1, 0, -1, 0};
 	/**
      * @param board: A list of lists of character
      * @param word: A string
@@ -16,10 +17,10 @@ public class WordSearch {
         }
         int rows = board.length;
         int cols = board[0].length;
-        boolean[][] checked = new boolean[rows][cols];
+        boolean[][] visited = new boolean[rows][cols];
         for(int r = 0; r < rows; r++){
             for(int c = 0; c < cols; c++){
-                if(dfs(board, checked, word, 0, r, c)){
+                if(dfs(board, visited, word, 0, r, c)){
                     return true;
                 }
             }
@@ -27,28 +28,20 @@ public class WordSearch {
         return false;
     }
     
-    private boolean dfs(char[][] board, boolean[][] checked, String word, int count, int r, int c){
-        int rows = board.length;
-        int cols = board[0].length;
-        if(count == word.length()){
+    private boolean dfs(char[][] board, boolean[][] visited, String word, int pos, int r, int c){
+        int rows = board.length, cols = board[0].length;
+        if(pos == word.length()){
             return true;
         }
-        if(r < 0 || r >= rows || c < 0 || c >= cols){
-            return false;
+        if(r >= 0 && r < rows && c >= 0 && c < cols && !visited[r][c] && board[r][c] == word.charAt(pos)){
+            visited[r][c] = true;
+            for(int j = 0; j < dir.length - 1; j++){
+                if(dfs(board, visited, word, pos + 1, r + dir[j], c + dir[j + 1])){
+                    return true;
+                }
+            }
+            visited[r][c] = false;
         }
-        if(checked[r][c]){
-            return false;
-        }
-        if(word.charAt(count) != board[r][c]){
-        	return false;
-        }
-        checked[r][c] = true;
-        int[] direct = new int[]{0, 1, 0, -1, 0};
-        boolean ans = false;
-		for(int j = 0; j < direct.length - 1; j++){
-			ans  = ans || dfs(board, checked, word, count + 1, r + direct[j], c + direct[j + 1]);
-		}
-		checked[r][c] = false;
-		return ans;
+        return false;
     }
 }

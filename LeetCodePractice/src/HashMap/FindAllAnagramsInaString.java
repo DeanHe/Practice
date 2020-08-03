@@ -43,7 +43,7 @@ public class FindAllAnagramsInaString {
         int start = 0, end = 0, match = 0;
         while(end < s_len){
             int end_idx = s.charAt(end) - 'a';
-        	if(dict[end_idx] >= 1){
+        	if(dict[end_idx] > 0){
         		match++;
         	}
         	dict[end_idx]--;
@@ -53,10 +53,10 @@ public class FindAllAnagramsInaString {
         	}
         	if(end - start == p_len){
         	    int start_idx = s.charAt(start) - 'a';
-        		if(dict[start_idx] >= 0){
+                dict[start_idx]++;
+        		if(dict[start_idx] > 0){
         			match--;
         		}
-        		dict[start_idx]++;
         		start++;
         	}
         }
