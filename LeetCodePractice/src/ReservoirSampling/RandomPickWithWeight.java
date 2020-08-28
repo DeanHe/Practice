@@ -43,13 +43,13 @@ public class RandomPickWithWeight {
 	}
 
 	public int pickIndex() {
-		int idx = rand.nextInt(preSum[len - 1]) + 1;
+		int prob = rand.nextInt(preSum[len - 1]) + 1;
 		int start = 0, end = len - 1;
 		while (start < end) {
 			int mid = start + (end - start) / 2;
-			if (preSum[mid] == idx) {
+			if (preSum[mid] == prob) {
 				return mid;
-			} else if (preSum[mid] < idx) {
+			} else if (preSum[mid] < prob) {
 				start = mid + 1;
 			} else {
 				end = mid;

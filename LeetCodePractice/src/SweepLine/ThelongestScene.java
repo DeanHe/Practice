@@ -1,5 +1,7 @@
 package SweepLine;
 
+import SweepLine.Intervals.Interval;
+
 import java.util.*;
 /*
 A string, each character representing a scene. Between two identical characters is considered to be a continuous scene.

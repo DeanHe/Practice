@@ -1,4 +1,4 @@
-package TwoPointers;
+package TwoPointers.Window;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,36 +25,36 @@ public class MinimumWindowSubstring {
         Map<Character, Integer> map = new HashMap<>(); // character in t : count
         int slen = s.length();
         int tlen = t.length();
-        for(int i = 0; i < tlen; i++){
-        	char c = t.charAt(i);
+        for(char c : t.toCharArray()){
         	map.put(c, map.getOrDefault(c, 0) + 1);
         }
         int minLen = slen + 1; // handle res can be s case
-        int l = 0;
-        int match = 0;
-        for(int r = 0; r < slen; r++){
-        	char c_r = s.charAt(r);
-        	if(map.containsKey(c_r)){
-				if(map.get(c_r) > 0){ //attn
-					match++;
+        int start = 0, end = 0;
+        int counter = map.size();
+        while (end < slen){
+        	char end_c = s.charAt(end);
+        	if(map.containsKey(end_c)){
+        		map.put(end_c, map.get(end_c) - 1);
+        		if(map.get(end_c) == 0){
+        			counter--;
 				}
-        		map.put(c_r, map.get(c_r) - 1);
-        	}
-        	while (match == tlen) {
-				char c_l = s.charAt(l);
-				if(minLen > r - l + 1){
-					minLen = r - l + 1;
-					res = s.substring(l, r + 1);
-				}
-				if(map.containsKey(c_l)){
-					map.put(c_l, map.get(c_l) + 1); // compensate back the character left
-					if(map.get(c_l) > 0){ //attn
-						match--;
+			}
+        	end++;
+        	while(counter == 0){
+        		char start_c = s.charAt(start);
+        		if(map.containsKey(start_c)){
+        			map.put(start_c, map.get(start_c) + 1);
+        			if(map.get(start_c) > 0){
+        				counter++;
 					}
 				}
-				l++;
+        		if(minLen > end - start){
+        			minLen = end - start;
+        			res = s.substring(start, end);
+				}
+        		start++;
 			}
-        }
+		}
         return res;
     }
 }

@@ -23,7 +23,8 @@ Example3
 Input: s = "carerac"
 Output: True
 Explanation: 
-"carerac" --> "carerac"*/
+"carerac" --> "carerac"
+*/
 public class PalindromePermutation {
 	/**
      * @param s: the given string

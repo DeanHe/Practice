@@ -1,5 +1,6 @@
 package Backtracking;
-/*Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+/*
+Given a string containing only digits, restore it by returning all possible valid IP address combinations.
 
 (Your task is to add three dots to this string to make it a valid IP address. Return all possible IP address.)
 
@@ -14,7 +15,8 @@ Example 2:
 Input: "1116512311"
 Output: ["11.165.123.11","111.65.123.11"]
 Notice
-You can return all valid IP address in any order.*/
+You can return all valid IP address in any order.
+*/
 import java.util.*;
 
 public class RestoreIPAddresses {
@@ -62,10 +64,6 @@ public class RestoreIPAddresses {
 		    return s.equals("0");
 	    }
 	    int num = Integer.valueOf(s);
-	    if(num >= 0 && num <= 255){
-		    return true;
-	    } else {
-		    return false;
-	    }
+	    return num >= 0 && num <= 255;
     }
 }

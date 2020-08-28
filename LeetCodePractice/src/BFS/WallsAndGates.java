@@ -3,7 +3,8 @@ package BFS;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/*You are given a m x n 2D grid initialized with these three possible values.
+/*
+You are given a m x n 2D grid initialized with these three possible values.
 
 -1 - A wall or an obstacle.
 0 - A gate.
@@ -34,7 +35,8 @@ Example2
 Input:
 [[0,-1],[2147483647,2147483647]]
 Output:
-[[0,-1],[1,2]]*/
+[[0,-1],[1,2]]
+*/
 public class WallsAndGates {
 	/**
      * @param rooms: m x n 2D grid

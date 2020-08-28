@@ -1,5 +1,7 @@
 package SweepLine;
 
+import SweepLine.Intervals.Interval;
+
 import java.util.*;
 
 // given a text input string, and a list of interval to character mapping, for example:

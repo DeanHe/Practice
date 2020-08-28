@@ -34,6 +34,12 @@ Explanation:
   /\  /\
  /  \/  \
  4  01   7
+
+ From test case, the real requirement is:
+If two nodes have the same position,
+
+check the layer, the node on higher level(close to root) goes first
+if they also in the same level, order from small to large
  */
 public class BinaryTreeVerticalOrderTraversal {
 	/**
@@ -41,6 +47,47 @@ public class BinaryTreeVerticalOrderTraversal {
      * @return: the vertical order traversal
      */
 	public List<List<Integer>> verticalOrder2(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<>();
+		if(root == null){
+			return res;
+		}
+		//column : List of Nodes
+		TreeMap<Integer, List<Integer>> map = new TreeMap<>();
+		Queue<Integer> cq = new LinkedList<>();
+		Queue<TreeNode> tq = new LinkedList<>();
+		tq.offer(root);
+		cq.offer(0);
+		while(!tq.isEmpty()){
+			int size = tq.size();
+			Map<Integer,List<Integer>> level = new HashMap();
+			for(int i = 0; i < size; i++){
+				TreeNode cur = tq.poll();
+				int col = cq.poll();
+				level.putIfAbsent(col, new ArrayList<>());
+				level.get(col).add(cur.val);
+				if(cur.left != null){
+					tq.offer(cur.left);
+					cq.offer(col - 1);
+				}
+				if(cur.right != null){
+					tq.offer(cur.right);
+					cq.offer(col + 1);
+				}
+			}
+			for(int col : level.keySet()){
+				List<Integer> ls = level.get(col);
+				Collections.sort(ls);
+				map.putIfAbsent(col, new ArrayList<>());
+				map.get(col).addAll(ls);
+			}
+		}
+		for(List<Integer> slice : map.values()){
+			res.add(slice);
+		}
+		return res;
+	}
+	//version 3 without level sorting order
+	public List<List<Integer>> verticalOrder3(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<>();
 		if(root == null){
 			return res;
@@ -65,8 +112,8 @@ public class BinaryTreeVerticalOrderTraversal {
 				cq.offer(col + 1);
 			}
 		}
-		for(List<Integer> layer : map.values()){
-			res.add(layer);
+		for(List<Integer> slice : map.values()){
+			res.add(slice);
 		}
 		return res;
 	}

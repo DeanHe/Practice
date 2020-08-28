@@ -42,9 +42,7 @@ public class AddandSearchWord {
 	public void addWord(String word) {
 		// Write your code here
 		TrieNode p = root;
-		int len = word.length();
-		for (int i = 0; i < len; i++) {
-			char c = word.charAt(i);
+		for (char c : word.toCharArray()) {
 			int index = c - 'a';
 			if (p.arr[index] == null) {
 				p.arr[index] = new TrieNode();
@@ -58,21 +56,21 @@ public class AddandSearchWord {
 	// contain the dot character '.' to represent any one letter.
 	public boolean search(String word) {
 		// Write your code here
-		return dfsSearch(root, 0, word);
+		return dfs(root, 0, word.toCharArray());
 	}
 
-	private boolean dfsSearch(TrieNode root, int pos, String word) {
-		if (root.isEnd && pos == word.length()) {
+	private boolean dfs(TrieNode root, int pos, char[] word) {
+		if (root.isEnd && pos == word.length) {
 			return true;
 		}
-		if (pos >= word.length()) {
+		if (pos >= word.length) {
 			return false;
 		}
-		char c = word.charAt(pos);
+		char c = word[pos];
 		if (c == '.') {
 			for (TrieNode child : root.arr) {
 				if (child != null) {
-					if (dfsSearch(child, pos + 1, word)) {
+					if (dfs(child, pos + 1, word)) {
 						return true;
 					}
 				}
@@ -81,7 +79,7 @@ public class AddandSearchWord {
 			int idx = c - 'a';
 			TrieNode child = root.arr[idx];
 			if (child != null) {
-				return dfsSearch(child, pos + 1, word);
+				return dfs(child, pos + 1, word);
 			} 
 		}
 		return false;

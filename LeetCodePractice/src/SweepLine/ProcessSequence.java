@@ -1,5 +1,7 @@
 package SweepLine;
 
+import SweepLine.Intervals.Interval;
+
 import java.util.*;
 
 /*

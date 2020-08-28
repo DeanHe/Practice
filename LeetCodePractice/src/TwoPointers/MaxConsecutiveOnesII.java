@@ -1,5 +1,6 @@
 package TwoPointers;
-/*Given a binary array, find the maximum number of consecutive 1s in this array if you can flip at most one 0.
+/*
+Given a binary array, find the maximum number of consecutive 1s in this array if you can flip at most one 0.
 
 Example
 Example 1:
@@ -20,7 +21,8 @@ Example 2:
 	
 Notice
 The input array will only contain 0 and 1.
-The length of input array is a positive integer and will not exceed 10,000.*/
+The length of input array is a positive integer and will not exceed 10,000.
+*/
 public class MaxConsecutiveOnesII {
 	/**
      * @param nums: a list of integer

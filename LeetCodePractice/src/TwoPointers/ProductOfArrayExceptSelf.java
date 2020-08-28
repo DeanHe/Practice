@@ -12,7 +12,7 @@ Note: Please solve it without division and in O(n).
 Follow up:
 Could you solve it with constant space complexity? (The output array does not count as extra space for the purpose of space complexity analysis.)
 */
-public class ProductfArrayExceptSelf {
+public class ProductOfArrayExceptSelf {
     /**
      * @param nums: an array of integers
      * @return: the product of all the elements of nums except nums[i].

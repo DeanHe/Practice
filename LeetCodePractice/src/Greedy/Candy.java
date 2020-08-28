@@ -1,7 +1,8 @@
 package Greedy;
 
 import java.util.*;
-/*There are N children standing in a line. Each child is assigned a rating value.
+/*
+There are N children standing in a line. Each child is assigned a rating value.
 
 You are giving candies to these children subjected to the following requirements:
 
@@ -19,8 +20,9 @@ Example 2:
 Input: [1,2,2]
 Output: 4
 Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
-             The third child gets 1 candy because it satisfies the above two conditions.*/
+             The third child gets 1 candy because it satisfies the above two conditions.
 // https://leetcode.com/problems/candy/solution/
+*/
 public class Candy {
 	public int candy(int[] ratings) {
         int sum = 0;

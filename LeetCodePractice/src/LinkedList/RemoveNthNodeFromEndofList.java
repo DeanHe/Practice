@@ -1,5 +1,6 @@
 package LinkedList;
-/*Given a linked list, remove the n-th node from the end of list and return its head.
+/*
+Given a linked list, remove the n-th node from the end of list and return its head.
 
 Example:
 
@@ -12,7 +13,8 @@ Given n will always be valid.
 
 Follow up:
 
-Could you do this in one pass?*/
+Could you do this in one pass?
+*/
 // two pointer
 public class RemoveNthNodeFromEndofList {
 

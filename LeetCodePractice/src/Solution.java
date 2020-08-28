@@ -1,15 +1,17 @@
 import Math.OneDmineSweep;
+import Math.JosephusProblem;
 
 
 public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        OneDmineSweep oneDmineSweep = new OneDmineSweep();
+        //OneDmineSweep oneDmineSweep = new OneDmineSweep();
         int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
         //int[] S = {3, 5, 4, 3, 1};
-        int res = oneDmineSweep.getMaxValueOfMidH(S);
-        System.out.println(res);
+        //int res = oneDmineSweep.getMaxValueOfMidH(S);
+        JosephusProblem js = new JosephusProblem();
+        System.out.println(js.josephus(5,3));
 		/*
 		String x = "/abcd/erf";
 		String[] xm = x.split("/", 1);

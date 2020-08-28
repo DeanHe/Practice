@@ -1,5 +1,6 @@
 package Math;
-/*On an infinite plane, a robot initially stands at (0, 0) and faces north.  The robot can receive one of three instructions:
+/*
+On an infinite plane, a robot initially stands at (0, 0) and faces north.  The robot can receive one of three instructions:
 
 "G": go straight 1 unit;
 "L": turn 90 degrees to the left;
@@ -32,7 +33,11 @@ The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> ...
 Note:
 
 1 <= instructions.length <= 100
-instructions[i] is in {'G', 'L', 'R'}*/
+instructions[i] is in {'G', 'L', 'R'}
+
+analysis:
+The robot stays in the circle iff (looking at the final vector) it changes direction (ie. doesn't stay pointing north), or it moves 0.
+*/
 public class RobotBoundedInCircle {
 	public boolean isRobotBounded(String instructions) {
         int len = instructions.length();

@@ -27,7 +27,8 @@ Note:
 
 1 <= n <= 100
 Two functions won't start or end at the same time.
-Functions will always log when they exit.*/
+Functions will always log when they exit.
+*/
 public class ExclusiveTimeOfFunctions {
     public int[] exclusiveTime(int n, List<String> logs) {
         int[] res = new int[n];

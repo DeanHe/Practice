@@ -1,6 +1,7 @@
 package Backtracking;
 
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /*
 Design an Iterator class, which has:
@@ -29,27 +30,27 @@ Design an Iterator class, which has:
         It's guaranteed that all calls of the function next are valid.
 */
 public class CombinationIterator {
-    PriorityQueue<String> pq = new PriorityQueue<>();
+    Queue<String> q = new LinkedList<>();
     public CombinationIterator(String characters, int combinationLength) {
-
+        dfs(characters, combinationLength, new StringBuilder(),0);
     }
 
     public String next() {
-        return pq.poll();
+        return q.poll();
     }
 
     public boolean hasNext() {
-        return !pq.isEmpty();
+        return !q.isEmpty();
     }
 
-    private void dfs(StringBuilder sb, String str, int idx, int len){
+    private void dfs(String str, int len, StringBuilder sb, int idx){
         if(sb.length() == len){
-            pq.offer(sb.toString());
+            q.offer(sb.toString());
             return;
         }
         for(int i = idx; i < str.length(); i++) {
-            sb.append(str.charAt(idx));
-            dfs(sb, str, idx + 1, len);
+            sb.append(str.charAt(i));
+            dfs(str, len, sb, i + 1);
             sb.deleteCharAt(sb.length() - 1);
         }
     }

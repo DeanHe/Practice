@@ -8,6 +8,8 @@ Example
 Given intervals = [(0,30),(5,10),(15,20)], return 2.
 */
 
+import SweepLine.Intervals.Interval;
+
 import java.util.*;
 
 class Point {

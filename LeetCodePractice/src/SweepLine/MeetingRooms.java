@@ -8,6 +8,8 @@ Example
 Given intervals = [[0,30],[5,10],[15,20]], return false.
 */
 
+import SweepLine.Intervals.Interval;
+
 import java.util.*;
 
 public class MeetingRooms {

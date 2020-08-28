@@ -28,11 +28,11 @@ public class CombinationSumII {
      * @return: All the combinations that sum to target
      */
 	public List<List<Integer>> combinationSum2(int[] num, int target) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<List<Integer>> res = new ArrayList<>();
 		if (num.length == 0 || num == null) {
 			return res;
 		}
-		List<Integer> combination = new ArrayList<Integer>();
+		List<Integer> combination = new ArrayList<>();
 		Arrays.sort(num);
 		dfs(num, target, res, combination, 0);
 		return res;

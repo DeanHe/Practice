@@ -57,7 +57,13 @@ public class NonOverlappingIntervals {
 			return 0;
 		}
 		int nonOverlapCount = 1;
-		Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+		Arrays.sort(intervals, (a, b) -> {
+			if(a[0] != b[0]){
+				return a[0] - b[0];
+			} else {
+				return a[1] - b[1];
+			}
+		});
 		int minEnd = intervals[0][1];
 		for(int[] cur : intervals){
 			if(minEnd <= cur[0]){

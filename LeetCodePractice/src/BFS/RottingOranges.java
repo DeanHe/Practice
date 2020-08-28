@@ -3,7 +3,8 @@ package BFS;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/*n a given grid, each cell can have one of three values:
+/*
+n a given grid, each cell can have one of three values:
 
 the value 0 representing an empty cell;
 the value 1 representing a fresh orange;
@@ -30,7 +31,8 @@ Explanation:  Since there are already no fresh oranges at minute 0, the answer i
 Note:
 1 <= grid.length <= 10
 1 <= grid[0].length <= 10
-grid[i][j] is only 0, 1, or 2.*/
+grid[i][j] is only 0, 1, or 2.
+*/
 public class RottingOranges {
 	public int orangesRotting(int[][] grid) {
         int rows = grid.length;

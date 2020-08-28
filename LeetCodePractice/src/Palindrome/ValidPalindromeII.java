@@ -13,21 +13,26 @@ Explanation: You could delete the character 'c'.
 */
 public class ValidPalindromeII {
     public boolean validPalindrome(String s) {
-        int len = s.length();
-        for (int l = 0; l < len / 2; l++) {
-            int r = len - l - 1;
-            if (s.charAt(l) != s.charAt(r)) {
-                return isPalindromeRange(s, l + 1, r) || isPalindromeRange(s, l, r - 1);
+        char[] arr = s.toCharArray();
+        int len = arr.length, l = 0, r = len - 1;
+        while(l < r){
+            if(arr[l] != arr[r]){
+                return isPalindromeRange(arr, l + 1, r) || isPalindromeRange(arr, l, r - 1);
+            } else {
+                l++;
+                r--;
             }
         }
         return true;
     }
 
-    public boolean isPalindromeRange(String s, int l, int r) {
-        for (int i = l; i <= l + (r - l) / 2; i++) {
-            if (s.charAt(i) != s.charAt(r - i + l)) {
+    public boolean isPalindromeRange(char[] arr, int l, int r) {
+        while(l < r){
+            if(arr[l] != arr[r]){
                 return false;
             }
+            l++;
+            r--;
         }
         return true;
     }

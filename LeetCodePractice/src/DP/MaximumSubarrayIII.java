@@ -2,7 +2,8 @@ package DP;
 
 import java.util.*;
 
-/*Given an array of integers and a number k, find k non-overlapping subarrays which have the largest sum.
+/*
+Given an array of integers and a number k, find k non-overlapping subarrays which have the largest sum.
 
 The number in each subarray should be contiguous.
 

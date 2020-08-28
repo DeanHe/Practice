@@ -1,4 +1,4 @@
-package SweepLine;
+package SweepLine.Intervals;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -25,19 +25,17 @@ public class RussianDollEnvelopes {
 		if (envelopes == null || envelopes.length == 0 || envelopes[0] == null || envelopes[0].length != 2) {
 			return 0;
 		}
-		Arrays.sort(envelopes, new Comparator<int[]>() {
-			@Override
-			public int compare(int[] a, int[] b) {
-				if (a[0] != b[0]) {
-					return a[0] - b[0];
-				}
+		Arrays.sort(envelopes, (a, b) -> {
+			if(a[0] != b[0]){
+				return a[0] - b[0];
+			} else {
 				return a[1] - b[1];
 			}
 		});
 		int len = envelopes.length;
 		// mem[i] means longest increasing sequence ended with envelopes[i]
 		int[] dp = new int[len];
-		int maxOverlap = 1;
+		int res = 1;
 		for (int i = 0; i < len; i++) {
 			dp[i] = 1;
 			for (int j = 0; j < i; j++) {
@@ -45,8 +43,8 @@ public class RussianDollEnvelopes {
 					dp[i] = Math.max(dp[i], dp[j] + 1);
 				}
 			}
-			maxOverlap = Math.max(maxOverlap, dp[i]);
+			res = Math.max(res, dp[i]);
 		}
-		return maxOverlap;
+		return res;
 	}
 }
