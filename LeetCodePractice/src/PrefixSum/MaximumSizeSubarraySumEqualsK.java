@@ -34,16 +34,14 @@ public class MaximumSizeSubarraySumEqualsK {
         }
         int len = nums.length, preSum = 0, res = 0;
         Map<Integer, Integer> preSumFirstEnd = new HashMap<>();
-        preSumFirstEnd.put(preSum, -1);
-        for(int end = 0; end < len; end++){
-            preSum += nums[end];
-            if(!preSumFirstEnd.containsKey(preSum)){
-                preSumFirstEnd.put(preSum, end);
-            }
+        preSumFirstEnd.put(0, -1);
+        for(int i = 0; i < len; i++){
+            preSum += nums[i];
             if(preSumFirstEnd.containsKey(preSum - k)){
                 int firstEnd = preSumFirstEnd.get(preSum - k);
-                res = Math.max(res, end - firstEnd);
+                res = Math.max(res, i - firstEnd);
             }
+            preSumFirstEnd.putIfAbsent(preSum, i);
         }
         return res;
     }

@@ -31,16 +31,16 @@ public class LongestWellPerformingInterval {
         int len = hours.length;
         int res = 0;
         int sum = 0;
-        Map<Integer, Integer> visited = new HashMap<>(); // preSum :  preSum's first end index
+        Map<Integer, Integer> preSumFirstEnd = new HashMap<>(); // preSum :  preSum's first end index
         for(int i = 0; i < len; i++){
             sum += hours[i] > 8 ? 1 : -1;
             if(sum > 0) {
             	res = i + 1;
             } else {
-            	if(visited.containsKey(sum - 1)) {
-            		res = Math.max(res, i - visited.get(sum - 1));
+            	if(preSumFirstEnd.containsKey(sum - 1)) {
+            		res = Math.max(res, i - preSumFirstEnd.get(sum - 1));
             	}
-            	visited.putIfAbsent(sum, i);
+            	preSumFirstEnd.putIfAbsent(sum, i);
             }
         }
         return res;

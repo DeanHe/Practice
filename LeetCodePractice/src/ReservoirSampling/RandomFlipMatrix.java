@@ -27,6 +27,9 @@ Output: [null,[0,0],[0,1],null,[0,0]]
 Explanation of Input Syntax:
 
 The input is two lists: the subroutines called and their arguments. Solution's constructor has two arguments, n_rows and n_cols. flip and reset have no arguments. Arguments are always wrapped with a list, even if there aren't any.
+
+analysis:
+every repeated index map to pick total (last index)
 */
 public class RandomFlipMatrix {
 	int rows, cols, total;

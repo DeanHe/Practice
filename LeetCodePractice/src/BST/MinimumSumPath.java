@@ -13,16 +13,17 @@ public class MinimumSumPath {
         return ans;
     }
     private void dfs(TreeNode root, int sum){
-        if(root != null){
-            sum += root.val;
-            if(root.left == null && root.right == null){
-               if(sum < ans){
-                    ans =sum;
-                }
-                return;
+        if(root == null){
+            return;
+        }
+        sum += root.val;
+        if(root.left == null && root.right == null){
+            if(sum < ans){
+                ans =sum;
             }
-            dfs(root.left, sum);
-            dfs(root.right, sum);
-        } 
+            return;
+        }
+        dfs(root.left, sum);
+        dfs(root.right, sum);
     }
 }

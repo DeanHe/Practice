@@ -1,7 +1,5 @@
 package BitManipulation;
 
-import java.util.Arrays;
-
 /*
 Given a string s. An awesome substring is a non-empty substring of s such that we can make any number of swaps in order to make it palindrome.
 
@@ -34,29 +32,37 @@ Constraints:
 1 <= s.length <= 10^5
 s consists only of digits.
 
+analysis:
 similar to:
 1371. Find the Longest Substring Containing Vowels in Even Counts.
 
+two scenarios:
+1 all number appear even times, 2 one number appear odd times
+
+for case 1 if one state occur twice at [i, j] means all digits in s[i + 1, j] appear even times, res = j - i
+for case 2, we can flip
 as there are only 0-9 digits, there will be 2^10 states
+time complexity: O(10 * n)
+space complexity O(2^10) = O(1)
  */
 public class FindLongestAwesomeSubstring {
     public int longestAwesome(String s) {
-        int[] dp = new int[1024]; // dp[state] means the first position in s[:pos] of state
-        Arrays.fill(dp, -1);
-        dp[0] = 0;
+        Integer[] dp = new Integer[1024]; // dp[state] means the first position in s[:pos] of state
+        dp[0] = -1;
         int res = 0, state = 0;
-        for(int i = 0; i < s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             state ^= 1 << (c - '0');
-            for(int j = 0; j <= 9; j++){
-                if(dp[state ^ (1 << j)] >= 0){
-                    res  = Math.max(res, i + 1 - dp[state ^ (1 << j)]);
+            if (dp[state] != null) {  // case 1
+                res = Math.max(res, i - dp[state]);
+            }
+            for (int j = 0; j <= 9; j++) { // case 2
+                if (dp[state ^ (1 << j)] != null) {
+                    res = Math.max(res, i - dp[state ^ (1 << j)]);
                 }
             }
-            if(dp[state] >= 0){
-                res = Math.max(res, i + 1 - dp[state]);
-            } else {
-                dp[state] = i + 1;
+            if (dp[state] == null) {
+                dp[state] = i;
             }
         }
         return res;

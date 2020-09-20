@@ -17,49 +17,50 @@ The rectangle inside the matrix must have an area > 0.
 What if the number of rows is much larger than the number of columns?
 */
 public class MaxSumOfRectangleNoLargerThanK {
-	public int maxSumSubmatrix(int[][] matrix, int k) {
-        if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
-        	return 0;
+    public int maxSumSubmatrix(int[][] matrix, int k) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
         }
         int res = Integer.MIN_VALUE;
         boolean isRowLarger = false;
         int rows = matrix.length;
         int cols = matrix[0].length;
-        if(rows > cols){
-        	isRowLarger = true;
+        if (rows > cols) {
+            isRowLarger = true;
         }
         int m = Math.max(rows, cols);
         int n = Math.min(rows, cols);
-        for(int c = 0; c < n; c++){
-        	int[] arr = new int[m];
-        	for(int ct = c; ct >= 0; ct--){
-        		for(int r = 0; r < m; r++){
-        			if(isRowLarger){
-        				arr[r] += matrix[r][ct]; 
-        			} else {
-        				arr[r] += matrix[ct][r];
-        			}
-        		}
-        		int candidateMatrixSum = maximumSumOfSubarrayCloseToK(arr, k);
-        		res = Math.max(res, candidateMatrixSum);
-        	}
+        for (int c = 0; c < n; c++) {
+            int[] arr = new int[m];
+            for (int ct = c; ct >= 0; ct--) {
+                for (int r = 0; r < m; r++) {
+                    if (isRowLarger) {
+                        arr[r] += matrix[r][ct];
+                    } else {
+                        arr[r] += matrix[ct][r];
+                    }
+                }
+                int candidateMatrixSum = maximumSumOfSubarrayCloseToK(arr, k);
+                res = Math.max(res, candidateMatrixSum);
+            }
         }
         return res;
     }
-	private int maximumSumOfSubarrayCloseToK(int[] arr, int K){
-		TreeSet<Integer> set = new TreeSet<>();
-		set.add(0);
-		int len = arr.length;
-		int prefixSum = 0;
-		int res = Integer.MIN_VALUE;
-		for(int i = 0; i < len; i++){
-			prefixSum += arr[i];
-			Integer ceiling = set.ceiling(prefixSum - K);
-			if(ceiling != null){
-				res = Math.max(res, prefixSum -ceiling);
-			}
-			set.add(prefixSum);
-		}
-		return res;
-	}
+
+    private int maximumSumOfSubarrayCloseToK(int[] arr, int K) {
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(0);
+        int len = arr.length;
+        int prefixSum = 0;
+        int res = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            prefixSum += arr[i];
+            Integer ceiling = set.ceiling(prefixSum - K);
+            if (ceiling != null) {
+                res = Math.max(res, prefixSum - ceiling);
+            }
+            set.add(prefixSum);
+        }
+        return res;
+    }
 }

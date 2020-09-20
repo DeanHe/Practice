@@ -28,12 +28,12 @@ Example 5:
 Input: ["c==c","b==d","x!=z"]
 Output: true*/
 public class SatisfiabilityOfEqualityEquations {
-	private int[] id;
+	private int[] parent;
 	public boolean equationsPossible(String[] equations) {
 		//all lower case alphabet
-        id = new int[26];
+        parent = new int[26];
         for(int i = 0; i < 26; i++){
-        	id[i] = i;
+        	parent[i] = i;
         }
         for(String s : equations){
         	if(s.charAt(1) == '='){
@@ -53,12 +53,12 @@ public class SatisfiabilityOfEqualityEquations {
     }
 	private int find(int x){
 		int root = x;
-		while(root != id[root]){
-			root = id[root];
+		while(root != parent[root]){
+			root = parent[root];
 		}
-		while(id[x] != root){
-			int fa = id[x];
-			id[x] = root;
+		while(parent[x] != root){
+			int fa = parent[x];
+			parent[x] = root;
 			x = fa;
 		}
 		return root;
@@ -67,7 +67,7 @@ public class SatisfiabilityOfEqualityEquations {
 		int root_a = find(a);
 		int root_b = find(b);
 		if(root_a != root_b){
-			id[root_a] = root_b;
+			parent[root_a] = root_b;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 package Math;
+
 /*
 On an infinite plane, a robot initially stands at (0, 0) and faces north.  The robot can receive one of three instructions:
 
@@ -39,23 +40,21 @@ analysis:
 The robot stays in the circle iff (looking at the final vector) it changes direction (ie. doesn't stay pointing north), or it moves 0.
 */
 public class RobotBoundedInCircle {
-	public boolean isRobotBounded(String instructions) {
-        int len = instructions.length();
-        char[] arr = instructions.toCharArray();
-        int[][] dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    public boolean isRobotBounded(String instructions) {
+        int[] dirs = {0, 1, 0, -1, 0};
         int x = 0, y = 0, facing = 0;
-        for(int i = 0; i < len; i++){
-            if(arr[i] == 'L'){
-            	facing++;
-            	facing = (facing + 4) % 4;
-            } else if(arr[i] == 'R'){
-            	facing--;
-            	facing = (facing + 4) % 4;
-            } else if(arr[i] == 'G'){
-                x += dir[facing][0];
-                y += dir[facing][1];
+        for (char c : instructions.toCharArray()) {
+            if (c == 'L') {
+                facing--;
+                facing = (facing + 4) % 4;
+            } else if (c == 'R') {
+                facing++;
+                facing = (facing + 4) % 4;
+            } else if (c == 'G') {
+                x += dirs[facing];
+                y += dirs[facing + 1];
             }
         }
         return facing != 0 || (x == 0 && y == 0);
-	}
+    }
 }

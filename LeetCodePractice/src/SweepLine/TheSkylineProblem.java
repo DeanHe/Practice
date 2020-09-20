@@ -38,8 +38,8 @@ public class TheSkylineProblem {
         }
     }
 
-    public List<int[]> getSkyLine(int[][] buildings) {
-        List<int[]> res = new ArrayList<>();
+    public List<List<Integer>> getSkyLine(int[][] buildings) {
+        List<List<Integer>> res = new ArrayList<>();
         if (buildings == null || buildings.length == 0 || buildings[0].length == 0) {
             return res;
         }
@@ -69,15 +69,15 @@ public class TheSkylineProblem {
         for (Edge edge : axis) {
             if (edge.isStart) {
                 if (heightHeap.isEmpty() || edge.height > heightHeap.peek()) {
-                    res.add(new int[]{edge.x, edge.height});
+                    res.add(Arrays.asList(edge.x, edge.height));
                 }
                 heightHeap.offer(edge.height);
             } else {
                 heightHeap.remove(edge.height);
                 if (heightHeap.isEmpty()) {
-                    res.add(new int[]{edge.x, 0});
+                    res.add(Arrays.asList(edge.x, 0));
                 } else if (edge.height > heightHeap.peek()) {
-                    res.add(new int[]{edge.x, heightHeap.peek()});
+                    res.add(Arrays.asList(edge.x, heightHeap.peek()));
                 }
             }
         }

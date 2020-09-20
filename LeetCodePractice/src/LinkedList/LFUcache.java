@@ -5,21 +5,21 @@ import java.util.*;
 public class LFUcache {
 	 //min is used to track the least frequency of cache
     private int min = -1;
-    private int cap = 0;
+    private int cap;
     //key : value
-    private HashMap<Integer, Integer> valueHash = null;
+    private HashMap<Integer, Integer> valMap;
     // key : frequency
-    private HashMap<Integer, Integer> countHash = null;
+    private HashMap<Integer, Integer> freqMap;
     //frequency: list<key>
-    private HashMap<Integer, LinkedHashSet<Integer>> lists = null;
+    private HashMap<Integer, LinkedHashSet<Integer>> freqLists;
     // @param capacity, an integer
     public LFUcache(int capacity) {
         // Write your code here
         cap = capacity;
-        valueHash = new HashMap<>();
-        countHash = new HashMap<>();
-        lists = new HashMap<>();
-        lists.put(1, new LinkedHashSet<Integer>());
+        valMap = new HashMap<>();
+        freqMap = new HashMap<>();
+        freqLists = new HashMap<>();
+        freqLists.put(1, new LinkedHashSet<>());
     }
 
     // @param key, an integer
@@ -30,38 +30,36 @@ public class LFUcache {
         if(cap <= 0){
             return;
         }
-        if(valueHash.containsKey(key)){
-            valueHash.put(key, value);
+        if(valMap.containsKey(key)){
+            valMap.put(key, value);
             get(key);
             return;
         }
-        if(valueHash.size() >= cap){
-            int evit = lists.get(min).iterator().next();
-            lists.get(min).remove(evit);
-            valueHash.remove(evit);
-            countHash.remove(evit);
+        if(valMap.size() >= cap){
+            int evit = freqLists.get(min).iterator().next();
+            freqLists.get(min).remove(evit);
+            valMap.remove(evit);
+            freqMap.remove(evit);
         }
-        valueHash.put(key, value);
-        countHash.put(key, 1);
+        valMap.put(key, value);
+        freqMap.put(key, 1);
         min = 1;
-        lists.get(1).add(key);
+        freqLists.get(1).add(key);
     }
 
     public int get(int key) {
         // Write your code here
-        if(!valueHash.containsKey(key)){
+        if(!valMap.containsKey(key)){
             return -1;
         }
-        int count = countHash.get(key);
-        countHash.put(key, count + 1);
-        lists.get(count).remove(key);
-        if(count == min && lists.get(min).size() == 0){
+        int count = freqMap.get(key);
+        freqMap.put(key, count + 1);
+        freqLists.get(count).remove(key);
+        if(count == min && freqLists.get(min).isEmpty()){
             min++;
         }
-        if(!lists.containsKey(count + 1)){
-            lists.put(count + 1, new LinkedHashSet<Integer>());
-        }
-        lists.get(count + 1).add(key);
-        return valueHash.get(key);      
+        freqLists.putIfAbsent(count + 1, new LinkedHashSet<>());
+        freqLists.get(count + 1).add(key);
+        return valMap.get(key);
     }
 }

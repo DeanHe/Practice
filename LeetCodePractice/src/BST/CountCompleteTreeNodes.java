@@ -16,6 +16,10 @@ package BST;
         4  5 6
 
         Output: 6
+
+        time complexity: O(log(2N + 1) * log(2N + 1))
+        Binary Search on leaves = log(N + 1)
+        height = log(2N + 1)
 */
 
 public class CountCompleteTreeNodes {
@@ -23,10 +27,9 @@ public class CountCompleteTreeNodes {
         if (root == null) {
             return 0;
         }
-        int res = 0;
         int leftHeight = getLeftHeight(root.left);
         int rightHeight = getRightHeight(root.right);
-        if (leftHeight == rightHeight) {
+        if (leftHeight == rightHeight) { // forming a perfect binary tree
             return (2 << rightHeight) - 1;
         } else {
             return 1 + countNodes(root.left) + countNodes(root.right);

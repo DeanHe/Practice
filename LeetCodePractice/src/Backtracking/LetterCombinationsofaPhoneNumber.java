@@ -1,5 +1,6 @@
 package Backtracking;
-/*Given a digit string excluded '0' and '1', return all possible letter combinations that the number could represent.
+/*
+Given a digit string excluded '0' and '1', return all possible letter combinations that the number could represent.
 A mapping of digit to letters (just like on the telephone buttons) is given below.
 
 1	
@@ -22,13 +23,14 @@ Explanation:
 Example 2:
 
 Input: "5"
-Output: ["j", "k", "l"]*/
+Output: ["j", "k", "l"]
+*/
 import java.util.*;
 
 public class LetterCombinationsofaPhoneNumber {
 	String[] matches = { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
 	public List<String> letterCombinations(String digits) {
-		List<String> res = new ArrayList<String>();
+		List<String> res = new ArrayList<>();
 		if(digits == null || digits.length() == 0){
 		    return res;
 		}
@@ -39,13 +41,12 @@ public class LetterCombinationsofaPhoneNumber {
 
 	public void appendDigits(String digits, int i, String temp, List<String> res) {
 		if (i == digits.length()) {
-			res.add(temp.toString());
+			res.add(temp);
 			return;
 		}
 
 		String letters = matches[digits.charAt(i) - '2'];
-		for (int j = 0; j < letters.length(); j++) {
-			char c = letters.charAt(j);
+		for (char c : letters.toCharArray()) {
 			appendDigits(digits, i + 1, temp + c, res);
 		}
 	}

@@ -2,7 +2,8 @@ package BST;
 
 import java.security.spec.ECPrivateKeySpec;
 
-/*Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
+/*
+Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
 
 Basically, the deletion can be divided into two stages:
 
@@ -37,7 +38,8 @@ Another valid answer is [5,2,6,null,4,null,7].
    / \
   2   6
    \   \
-    4   7*/
+    4   7
+*/
 public class DeleteNodeInaBST {
 	public TreeNode deleteNode(TreeNode root, int key) {
 		if (root == null) {

@@ -3,7 +3,8 @@ package BST;
 import java.nio.file.Path;
 import java.util.*;
 
-/*Given a binary tree rooted at root, the depth of each node is the shortest distance to the root.
+/*
+Given a binary tree rooted at root, the depth of each node is the shortest distance to the root.
 
 A node is deepest if it has the largest depth possible among any node in the entire tree.
 
@@ -31,12 +32,13 @@ Both the input and output have TreeNode type.
 Note:
 
 The number of nodes in the tree will be between 1 and 500.
-The values of each node are unique.*/
+The values of each node are unique.
+*/
 public class SmallestSubtreeWithAllTheDeepestNodes {
 	public TreeNode subtreeWithAllDeepest(TreeNode root) {
 		Map<TreeNode, Integer> dist = new HashMap<>();
 		if (root == null) {
-			return root;
+			return null;
 		}
 		int leftDepth = maxDepth(root.left, dist);
 		int rightDepth = maxDepth(root.right, dist);

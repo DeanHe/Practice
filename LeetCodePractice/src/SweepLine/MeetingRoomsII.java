@@ -26,14 +26,14 @@ public class MeetingRoomsII {
     public int minMeetingRooms(Interval[] intervals) {
         int res = 0;
         TreeMap<Integer, Integer> axis = new TreeMap<>();
-        for(Interval interval : intervals){
-            axis.put(interval.start, axis.getOrDefault(interval.start, 0) + 1);
-            axis.put(interval.end, axis.getOrDefault(interval.end, 0) - 1);
+        for(Interval i : intervals){
+            axis.put(i.start, axis.getOrDefault(i.start, 0) + 1);
+            axis.put(i.end, axis.getOrDefault(i.end, 0) - 1);
         }
-        int preSum = 0;
+        int sum = 0;
         for(int tag : axis.keySet()){
-            preSum += axis.get(tag);
-            res = Math.max(res, preSum);
+            sum += axis.get(tag);
+            res = Math.max(res, sum);
         }
         return res;
     }

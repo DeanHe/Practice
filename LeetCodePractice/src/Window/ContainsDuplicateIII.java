@@ -2,7 +2,8 @@ package Window;
 
 import java.util.*;
 
-/*Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute difference between nums[i] and nums[j] is at most t and the absolute difference between i and j is at most k.
+/*
+Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute difference between nums[i] and nums[j] is at most t and the absolute difference between i and j is at most k.
 Example 1:
 
 Input: nums = [1,2,3,1], k = 3, t = 0
@@ -14,7 +15,13 @@ Output: true
 Example 3:
 
 Input: nums = [1,5,9,1,5,9], k = 2, t = 3
-Output: false*/
+Output: false
+
+analysis:
+maintaining the tree of size k will result in time complexity O(N lg K).
+In order to check if there exists any value of range abs(nums[i] - nums[j])
+to simple queries can be executed both of time complexity O(lg K)
+*/
 public class ContainsDuplicateIII {
 	// Balanced Binary Search Tree
 	public boolean containsNearbyAlmostDuplicateBST(int[] nums, int k, int t) {

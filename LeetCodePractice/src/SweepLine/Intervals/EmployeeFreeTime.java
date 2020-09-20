@@ -3,6 +3,7 @@ package SweepLine.Intervals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 /*
 We are given a list schedule of employees, which represents the working time for each employee.
@@ -38,11 +39,36 @@ public class EmployeeFreeTime {
         }
         Collections.sort(schedules, (a, b) -> a.start - b.start);
         int maxEnd = -1;
-        for(Interval interval : schedules){
-            if(maxEnd != -1 && maxEnd < interval.start){
-                res.add(new Interval(maxEnd, interval.start));
+        for(Interval cur : schedules){
+            if(maxEnd != -1 && maxEnd < cur.start){
+                res.add(new Interval(maxEnd, cur.start));
             }
-            maxEnd = Math.max(maxEnd, interval.end);
+            maxEnd = Math.max(maxEnd, cur.end);
+        }
+        return res;
+    }
+
+    public List<Interval> employeeFreeTimeII(List<List<Interval>> schedule) {
+        List<Interval> res = new ArrayList<>();
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        List<Interval> schedules = new ArrayList<>();
+        for(List<Interval> sch : schedule){
+            for(Interval i : sch){
+                map.put(i.start, map.getOrDefault(i.start, 0) + 1);
+                map.put(i.end, map.getOrDefault(i.end, 0) - 1);
+            }
+        }
+        int sum = 0, s = 0;
+        boolean freeTime = false;
+        for(int i : map.keySet()){
+            sum += map.get(i);
+            if(sum == 0){
+                s = i;
+                freeTime = true;
+            } else if(sum > 0 && freeTime){
+                res.add(new Interval(s, i));
+                freeTime = false;
+            }
         }
         return res;
     }

@@ -1,4 +1,4 @@
-package PrefixSum;
+package SweepLine;
 
 /*Assume you have an array of length n initialized with all 0's and are given k update operations.
 
@@ -25,8 +25,9 @@ After applying operation [1, 3, 2]:
 After applying operation [2, 4, 3]:
 [ 0, 2, 5, 5, 3 ]
 After applying operation [0, 2, -2]:
-[-2, 0, 3, 5, 3 ]*/
+[-2, 0, 3, 5, 3 ]
 // time complexity O(N)
+*/
 public class RangeAddition {
 	/**
      * @param length: the length of the array
@@ -35,7 +36,7 @@ public class RangeAddition {
      */
     public int[] getModifiedArray(int length, int[][] updates) {
         // Write your code here
-    	int[] prefixSum = new int[length];
+    	int[] preSum = new int[length];
     	int[] modify = new int[length];
     	for(int i = 0; i < updates.length; i++){
     		int start = updates[i][0];
@@ -46,10 +47,10 @@ public class RangeAddition {
     			modify[end + 1] -= change;
     		}
     	}
-    	prefixSum[0] = modify[0];
+    	preSum[0] = modify[0];
     	for(int i = 1; i < length; i++){
-    		prefixSum[i] = prefixSum[i - 1] + modify[i];
+    		preSum[i] = preSum[i - 1] + modify[i];
     	}
-    	return prefixSum;
+    	return preSum;
     }
 }

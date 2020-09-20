@@ -31,14 +31,14 @@ public class SubarraySumEqualsKII {
         int res = Integer.MAX_VALUE;
         int len = nums.length;
         int sum = 0;
-        Map<Integer, Integer> preSum = new HashMap<>();
-        preSum.put(0, -1);
+        Map<Integer, Integer> preSumIdx = new HashMap<>();
+        preSumIdx.put(0, -1);
         for (int i = 0; i < len; i++) {
             sum += nums[i];
-            if (preSum.containsKey(sum - k)) {
-                res = Math.min(res, i - preSum.get(sum - k) + 1);
+            if (preSumIdx.containsKey(sum - k)) {
+                res = Math.min(res, i - preSumIdx.get(sum - k));
             }
-            preSum.put(sum, i);
+            preSumIdx.put(sum, i);
         }
         return res;
     }

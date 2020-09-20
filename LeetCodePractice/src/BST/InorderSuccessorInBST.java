@@ -46,7 +46,7 @@ public class InorderSuccessorInBST {
     		}
     	}
     	if(root == null){
-    		return root;
+    		return null;
     	}
     	//root.val == p.val
     	root = root.right;

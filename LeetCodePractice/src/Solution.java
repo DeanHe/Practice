@@ -1,5 +1,15 @@
+import Contest.QueueRemovals;
 import Math.OneDmineSweep;
 import Math.JosephusProblem;
+import SweepLine.Intervals.EmployeeFreeTime;
+import SweepLine.Intervals.Interval;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 
 public class Solution {
@@ -7,11 +17,8 @@ public class Solution {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         //OneDmineSweep oneDmineSweep = new OneDmineSweep();
-        int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
-        //int[] S = {3, 5, 4, 3, 1};
-        //int res = oneDmineSweep.getMaxValueOfMidH(S);
-        JosephusProblem js = new JosephusProblem();
-        System.out.println(js.josephus(5,3));
+        //int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
+        int[] S = {1, 2, 2, 3, 4, 5};
 		/*
 		String x = "/abcd/erf";
 		String[] xm = x.split("/", 1);
@@ -75,7 +82,5 @@ public class Solution {
 		String[] res = be.expand(input);
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));*/
-
-
     }
 }

@@ -25,7 +25,8 @@ k = 2
 Output: 8
 Explanation: 4 + (3 + -2 + 3) = 8
 Notice
-The subarray should contain at least one number*/
+The subarray should contain at least one number
+*/
 public class MaximumSubarrayIII {
 	/**
 	 * @param nums:

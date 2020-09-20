@@ -75,13 +75,14 @@ import java.util.Map;
 public class UndergroundSystem {
     Map<Integer, Pair<String, Integer>> checkInMap;
     Map<String, Pair<Integer, Integer>> checkOutMap;
+
     public UndergroundSystem() {
         checkInMap = new HashMap<>();
         checkOutMap = new HashMap<>();
     }
 
     public void checkIn(int id, String stationName, int t) {
-        checkInMap.put(id,new Pair<>(stationName, t));
+        checkInMap.put(id, new Pair<>(stationName, t));
     }
 
     public void checkOut(int id, String stationName, int t) {

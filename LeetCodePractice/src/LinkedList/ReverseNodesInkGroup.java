@@ -41,16 +41,15 @@ public class ReverseNodesInkGroup {
         ListNode fakeHead = new ListNode(0);
         fakeHead.next = head;
         ListNode pre = fakeHead;
-        ListNode cur = head;
         int count = 0;
-        while(cur != null){
+        while(head != null){
             count++;
-            ListNode post = cur.next;
+            ListNode post = head.next;
             if(count == k){
                 pre = reverse(pre, post);
                 count = 0;
             }
-            cur = post;
+            head = post;
         }
         return fakeHead.next;
     }

@@ -27,13 +27,13 @@ public class MergeIntervals {
 		List<Interval> res = new ArrayList<>();
 		Interval pre = intervals.get(0);
 		for (int i = 1; i < intervals.size(); i++) {
-			Interval curr = intervals.get(i);
-			if (pre.end >= curr.start) {
-				Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
+			Interval cur = intervals.get(i);
+			if (pre.end >= cur.start) {
+				Interval merged = new Interval(pre.start, Math.max(pre.end, cur.end));
 				pre = merged;
 			} else {
 				res.add(pre);
-				pre = curr;
+				pre = cur;
 			}
 		}
 		res.add(pre);

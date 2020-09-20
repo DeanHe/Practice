@@ -1,4 +1,4 @@
-package Backtracking;
+package HashMap;
 
 import java.util.*;
 
@@ -12,7 +12,8 @@ Given pattern = "aaaa", str = "asdasdasdasd", return true.
 Given pattern = "aabb", str = "xyzabcxzyabc", return false.
 
 Notice
-You may assume both pattern and str contains only lowercase letters.*/
+You may assume both pattern and str contains only lowercase letters.
+*/
 public class WordPatternII {
 	/**
      * @param pattern: a string,denote pattern string

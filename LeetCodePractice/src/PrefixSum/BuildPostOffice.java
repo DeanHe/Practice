@@ -3,7 +3,8 @@ package PrefixSum;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/*Given a 2D grid, each cell is either an house 1 or empty 0 (the number zero, one), find the place to build a post office, the distance that post office to all the house sum is smallest. Return the smallest distance. Return -1 if it is not possible.
+/*
+Given a 2D grid, each cell is either an house 1 or empty 0 (the number zero, one), find the place to build a post office, the distance that post office to all the house sum is smallest. Return the smallest distance. Return -1 if it is not possible.
 
 Example
 Given a grid:
@@ -15,7 +16,8 @@ return 6. (Placing a post office at (1,1), the distance that post office to all 
 
 Notice
 You can pass through house and empty.
-You only build post office on an empty.*/
+You only build post office on an empty.
+*/
 public class BuildPostOffice {
 	/**
 	 * @param grid:

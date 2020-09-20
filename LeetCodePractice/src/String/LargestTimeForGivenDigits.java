@@ -24,7 +24,8 @@ A.length == 4
 0 <= A[i] <= 9
 
 The inner most loop at most iterates 4 * 4 * 4 = 64 times.
-A[i], A[j], A[k], & A[l] are the 4 elements of A, where i, j, k & l are the permutation of 0, 1, 2, & 3. Therefore, since i + j + k + l = 0 + 1 + 2 + 3 = 6, we have l = 6 - i - j - k.
+A[i], A[j], A[k], & A[l] are the 4 elements of A, where i, j, k & l are the permutation of index 0, 1, 2, & 3.
+Therefore, since index sum i + j + k + l = 0 + 1 + 2 + 3 = 6, we have l = 6 - i - j - k.
 */
 public class LargestTimeForGivenDigits {
 	public String largestTimeFromDigits(int[] A) {

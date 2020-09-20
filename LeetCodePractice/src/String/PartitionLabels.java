@@ -27,6 +27,7 @@ Notice
 1.S will have length in range [1, 500].
 2.S will consist of lowercase letters ('a' to 'z') only.
 
+tag: greedy
 find the last index of each letter in S first.
 iterate letter from start to last[start], and expand the partition to last[cur]
 */
@@ -47,7 +48,7 @@ public class PartitionLabels {
 			end = Math.max(end, last[S.charAt(i) - 'a']);
 			if(i == end){
 				res.add(end - start + 1);
-				start = i + 1;
+				start = end + 1;
 			}
 		}
     	return res;
