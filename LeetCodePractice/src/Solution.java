@@ -19,6 +19,7 @@ public class Solution {
         //OneDmineSweep oneDmineSweep = new OneDmineSweep();
         //int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
         int[] S = {1, 2, 2, 3, 4, 5};
+        System.out.println(1 << 12);
 		/*
 		String x = "/abcd/erf";
 		String[] xm = x.split("/", 1);
