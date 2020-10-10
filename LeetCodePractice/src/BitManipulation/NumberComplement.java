@@ -30,10 +30,9 @@ Given a positive integer, output its complement number. The complement strategy 
 
 public class NumberComplement {
     public int findComplement(int num) {
-        int sum = 0, i = 0;
+        int sum = 1;
         while(sum < num){
-            sum += Math.pow(2, i);
-            i++;
+            sum = sum * 2 + 1;
         }
         return sum - num;
     }

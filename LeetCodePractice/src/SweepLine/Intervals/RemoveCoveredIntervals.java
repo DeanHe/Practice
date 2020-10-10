@@ -19,16 +19,17 @@ import java.util.Arrays;
         0 <= intervals[i][0] < intervals[i][1] <= 10^5
         intervals[i] != intervals[j] for all i != j
 
-        we sort on left first. When left are same, we sort right in descending order.
+        analysis:
+        we sort on start first. When start are same, we sort end in descending order.
         Complexity: time O(NlogN), space O(N)
 */
 public class RemoveCoveredIntervals {
     public int removeCoveredIntervals(int[][] intervals) {
-        int res = 0, rightMost = 0;
+        int res = 0, endMost = 0;
         Arrays.sort(intervals, (a, b) -> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]);
-        for (int[] i : intervals) {
-            if (i[1] > rightMost) {
-                rightMost = i[1];
+        for (int[] interval : intervals) {
+            if (interval[1] > endMost) {
+                endMost = interval[1];
                 res++;
             }
         }

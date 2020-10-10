@@ -78,22 +78,16 @@ public class SerializeAndDeserializeBinaryTree {
         int i = 1;
         while(!q.isEmpty()){
             TreeNode cur = q.poll();
-            if(cur != null){
-                if(!array[i].equals("#")){
-                    cur.left = new TreeNode(Integer.parseInt(array[i]));
-                    q.offer(cur.left);
-                } else {
-                    cur.left = null;
-                }
-                i++;
-                if(!array[i].equals("#")){
-                    cur.right = new TreeNode(Integer.parseInt(array[i]));
-                    q.offer(cur.right);
-                } else {
-                    cur.right = null;
-                }
-                i++;
-            } 
+            if(!array[i].equals("#")){
+                cur.left = new TreeNode(Integer.parseInt(array[i]));
+                q.offer(cur.left);
+            }
+            i++;
+            if(!array[i].equals("#")){
+                cur.right = new TreeNode(Integer.parseInt(array[i]));
+                q.offer(cur.right);
+            }
+            i++;
         }
         return root;
     }
