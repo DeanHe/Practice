@@ -8,7 +8,11 @@ Output: "abc"
 Example 2:
 
 Input: "cbacdcbc"
-Output: "acdb"*/
+Output: "acdb"
+
+analysis:
+The runtime is O(26 * n) = O(n).
+*/
 public class RemoveDuplicateLetters {
 	public String removeDuplicateLetters(String s) {
 		if(s == null || s.length() <= 1){

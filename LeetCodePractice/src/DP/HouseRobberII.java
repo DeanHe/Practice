@@ -49,7 +49,7 @@ public class HouseRobberII {
     }
 
     private int helper(int[] nums, int start ,int end){
-        int len = nums.length, include = 0, exclude = 0;
+        int include = 0, exclude = 0;
         for(int i = start; i <= end; i++){
             int in = include, ex =exclude;
             include = ex + nums[i];
