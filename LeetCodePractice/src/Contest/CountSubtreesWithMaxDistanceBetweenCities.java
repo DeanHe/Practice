@@ -48,7 +48,6 @@ All pairs (ui, vi) are distinct.
  */
 public class CountSubtreesWithMaxDistanceBetweenCities {
     public int[] countSubgraphsForEachDiameter(int n, int[][] edges) {
-        List<List<Integer>> graph = new ArrayList<>();
         int[][] dist = new int[n][n];
         for (int i = 0; i < n; i++) {
             Arrays.fill(dist[i], Integer.MAX_VALUE);

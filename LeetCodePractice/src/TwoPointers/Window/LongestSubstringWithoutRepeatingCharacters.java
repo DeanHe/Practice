@@ -31,19 +31,19 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	 */
 	public int lengthOfLongestSubstring(String s) {
 		Map<Character, Integer> map = new HashMap<>();
-		int start = 0, end = 0, counter = 0, res = 0;
+		int start = 0, end = 0, dup = 0, res = 0;
 		while (end < s.length()) {
 			char end_c = s.charAt(end);
 			map.put(end_c, map.getOrDefault(end_c, 0) + 1);
-			if (map.get(end_c) > 1) {
-				counter++;
+			if (map.get(end_c) == 2) {
+				dup++;
 			}
 			end++;
-			while (counter > 0) {
+			while (dup > 0) {
 				char start_c = s.charAt(start);
 				map.put(start_c, map.get(start_c) - 1);
 				if (map.get(start_c) == 1) {
-					counter--;
+					dup--;
 				}
 				start++;
 			}

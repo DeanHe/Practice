@@ -30,7 +30,7 @@ public class PathInZigzagLabelledBinaryTree {
             res.addFirst(label);
             int parentLvlUpperBound = (1 << height) - 1;
             int parentLvlLowerBound = 1 <<(height - 1);
-            // The previous level is sorted in different order than current one.
+            // The pre level is sorted in different order than current one.
             //So the new label is adjusted accordingly
             label = parentLvlLowerBound + parentLvlUpperBound - label / 2;
             height--;

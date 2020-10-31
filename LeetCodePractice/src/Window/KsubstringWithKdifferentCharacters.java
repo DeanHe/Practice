@@ -6,12 +6,11 @@ Calculate the number of substrings of length K and containing K different charac
 Example
 String: "abcabc"
 K: 3
-
 Answer: 3
 substrings:  ["abc", "bca", "cab"]
+
 String: "abacab"
 K: 3
-
 Answer: 2
 substrings: ["bac", "cab"]
 */

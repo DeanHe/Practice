@@ -1,6 +1,10 @@
 package Dijkstra;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 /*
 You are given an undirected weighted graph of n nodes (0-indexed), represented by an edge list where edges[i] = [a, b] is an undirected edge connecting the nodes a and b with a probability of success of traversing that edge succProb[i].
@@ -48,16 +52,18 @@ public class PathWithMaximumProbability {
     class State {
         int node;
         double prob;
-        State(int node, double prob){
+
+        State(int node, double prob) {
             this.node = node;
             this.prob = prob;
         }
     }
+
     public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
         double res = 0;
         double[] dist = new double[n];
         Map<Integer, List<double[]>> graph = new HashMap<>();
-        for(int i = 0; i < edges.length; i++){
+        for (int i = 0; i < edges.length; i++) {
             int[] edge = edges[i];
             graph.putIfAbsent(edge[0], new ArrayList<>());
             graph.putIfAbsent(edge[1], new ArrayList<>());
@@ -66,14 +72,14 @@ public class PathWithMaximumProbability {
         }
         PriorityQueue<State> pq = new PriorityQueue<>((a, b) -> Double.compare(b.prob, a.prob));
         pq.offer(new State(start, 1.0));
-        while (!pq.isEmpty()){
+        while (!pq.isEmpty()) {
             State cur = pq.poll();
-            if(cur.prob > dist[cur.node]){
+            if (cur.prob > dist[cur.node]) {
                 dist[cur.node] = cur.prob;
-                for(double[] nb : graph.getOrDefault(cur.node, new ArrayList<>())){
-                    int nb_node = (int)nb[0];
+                for (double[] nb : graph.getOrDefault(cur.node, new ArrayList<>())) {
+                    int nb_node = (int) nb[0];
                     double nb_multiply = nb[1];
-                    if(dist[nb_node] < nb_multiply * cur.prob){
+                    if (dist[nb_node] < nb_multiply * cur.prob) {
                         pq.offer(new State(nb_node, nb_multiply * cur.prob));
                     }
                 }

@@ -43,7 +43,8 @@ Notice
 You may assume all letters are in lowercase.
 You may assume that if a is a prefix of b, then a must appear before b in the given dictionary.
 If the order is invalid, return an empty string.
-There may be multiple valid order of letters, return the smallest in lexicographical order*/
+There may be multiple valid order of letters, return the smallest in lexicographical orde
+r*/
 public class AlienDictionary {
 	/**
      * @param words: a list of words
@@ -59,8 +60,7 @@ public class AlienDictionary {
         StringBuilder sb = new StringBuilder();
         //initialize degree map
         for(String word : words){
-            char[] charArray = word.toCharArray();
-            for(char c : charArray){
+            for(char c : word.toCharArray()){
                 inDegree.put(c, 0);
             }
         }
@@ -69,7 +69,8 @@ public class AlienDictionary {
             String cur = words[i];
             String post = words[i + 1];
             int len = Math.min(cur.length(), post.length());
-            for(int j = 0; j < len; j++){
+            int j;
+            for(j = 0; j < len; j++){
                 char cur_c = cur.charAt(j);
                 char post_c = post.charAt(j);
                 if(cur_c != post_c){
@@ -79,6 +80,11 @@ public class AlienDictionary {
                         inDegree.put(post_c, inDegree.get(post_c) + 1);
                     }
                     break;
+                }
+            }
+            if(j == len){ // special case
+                if(words[i].length() > words[i + 1].length()){
+                    return "";
                 }
             }
         }
@@ -95,20 +101,14 @@ public class AlienDictionary {
             char c = pq.poll();
             sb.append(c);
             if(graph.containsKey(c)){
-                Set<Character> neighbors = graph.get(c);
-                for(char nb : neighbors){
-                    int inDeg = inDegree.get(nb);
-                    if(inDeg > 0){
-                        inDeg--;
-                        inDegree.put(nb, inDeg);
-                        if(inDeg == 0){
-                            pq.offer(nb);
-                        }
+                for(char nb : graph.get(c)){
+                    inDegree.put(nb, inDegree.getOrDefault(nb, 0) - 1);
+                    if(inDegree.get(nb) == 0){
+                        pq.offer(nb);
                     }
                 }
             }
         }
-        System.out.println(sb.toString());
         //avoid loops. only < possible -- eg: ["qd","ab"] res = qa
         if(sb.length() != inDegree.size()){
             return "";

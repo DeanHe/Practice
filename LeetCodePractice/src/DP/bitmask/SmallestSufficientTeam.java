@@ -36,26 +36,26 @@ public class SmallestSufficientTeam {
 		for(int i = 0; i < req_skils_len; i++) {
 			map.put(req_skills[i], i);
 		}
-		List<Integer>[] suff = new List[1 << req_skils_len]; // bitmask for all skills combination representation
-		suff[0] = new ArrayList<>();
+		List<Integer>[] states = new List[1 << req_skils_len]; // bitmask for all skills combination representation
+		states[0] = new ArrayList<>();
 		for(int i = 0; i < people_len; i++) {
 			int skillsPersonHave = 0;
 			List<String> person = people.get(i);
 			for(String skill : person) {
 				skillsPersonHave |= (1 << map.get(skill));
 			}
-			for(int cmb = 0; cmb < suff.length; cmb++) {
-				if(suff[cmb] == null) {
+			for(int cmb = 0; cmb < states.length; cmb++) {
+				if(states[cmb] == null) {
 					continue;
 				}
 				int newCmb = cmb | skillsPersonHave;
-				if(suff[newCmb] == null || suff[cmb].size() + 1 < suff[newCmb].size()) {
-					suff[newCmb] = new ArrayList<>(suff[cmb]);
-					suff[newCmb].add(i);
+				if(states[newCmb] == null || states[cmb].size() + 1 < states[newCmb].size()) {
+					states[newCmb] = new ArrayList<>(states[cmb]);
+					states[newCmb].add(i);
 				}
 			}
 		}
-		List<Integer> team = suff[(1 << req_skils_len) - 1];
+		List<Integer> team = states[(1 << req_skils_len) - 1];
 		int[] res = new int[team.size()];
 		for(int i = 0; i < team.size(); i++) {
 			res[i] = team.get(i);

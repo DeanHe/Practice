@@ -20,31 +20,26 @@ Example 3:
 Input: [-1, 3, 2, 0]
 Output: True
 
-Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].*/
+Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
+*/
 public class Pattern132 {
 	public boolean find132pattern(int[] nums) {
         if(nums == null || nums.length < 3){
             return false;
         }
-        int[] minArray = new int[nums.length];
-        minArray[0] = nums[0];
-        for(int i = 1; i < nums.length; i++){
-        	minArray[i] = Math.min(nums[i], minArray[i - 1]);
-        }
+        int max = Integer.MIN_VALUE;
         Stack<Integer> stack = new Stack<>();
         for(int i = nums.length - 1; i >= 0; i--){
-        	//make sure @3 > @1
-        	if(nums[i] > minArray[i]){
-        		//make sure @2 > @1
-        		if(!stack.isEmpty() && stack.peek() <= minArray[i]){
-        			stack.pop();
-        		}
-        		//make sure @2 < @3
-        		if(!stack.isEmpty() && stack.peek() < nums[i]){
-        			return true;
-        		}
-        		stack.push(nums[i]);
-        	}
+        	while(!stack.isEmpty() && nums[i] > stack.peek()) {
+                max = stack.pop();
+            }
+        	if(nums[i] > max){
+        	    stack.push(nums[i]);
+            }
+        	//@1 < @2
+        	if(nums[i] < max){
+        	    return true;
+            }
         }
         return false;
     }

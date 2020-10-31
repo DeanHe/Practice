@@ -10,7 +10,8 @@ Challenge
 O(nk) time.
 
 Notice
-You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).*/
+You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+*/
 public class BestTimeToBuyAndSellStockIV {
 	/**
      * @param K: An integer

@@ -6,6 +6,9 @@ Given an array of meeting time intervals consisting of start and end times [[s1,
 
 Example
 Given intervals = [(0,30),(5,10),(15,20)], return 2.
+
+analysis:
+use template of method one
 */
 
 import SweepLine.Intervals.Interval;

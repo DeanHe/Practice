@@ -2,7 +2,8 @@ package BFS;
 
 import java.util.*;
 
-/*Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.
+/*
+Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.
 How we serialize an undirected graph:http://www.lintcode.com/help/graph/
 Nodes are labeled uniquely.
 We use # as a separator for each node, and , as a separator for node label and each neighbor of the node.
@@ -20,44 +21,44 @@ Visually, the graph looks like the following:
      / \
      \_/
 Example
-return a deep copied graph.*/
+return a deep copied graph.
+*/
 public class CloneGraph {
-	class UndirectedGraphNode {
-		  int label;
-		  ArrayList<UndirectedGraphNode> neighbors;
-		  UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
+	class Node {
+		  int val;
+		  ArrayList<Node> neighbors;
+		  Node(int x) { val = x; neighbors = new ArrayList<Node>(); }
 	 };
 	/*
      * @param node: A undirected graph node
      * @return: A undirected graph node
      */
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+    public Node cloneGraph(Node node) {
         // write your code here
     	if(node == null){
     		return null;
     	}
-    	UndirectedGraphNode copyRoot = new UndirectedGraphNode(node.label);
+    	Node head = new Node(node.val);
     	// map between original node and copied node
-    	Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
-    	map.put(node, copyRoot);
-    	Queue<UndirectedGraphNode> queue = new LinkedList<>();
+    	Map<Node, Node> map = new HashMap<>();
+    	map.put(node, head);
+    	Queue<Node> queue = new LinkedList<>();
     	queue.offer(node);
     	while (!queue.isEmpty()) {
-			UndirectedGraphNode cur = queue.poll();
-			List<UndirectedGraphNode> cur_nbs = cur.neighbors;
-			for(UndirectedGraphNode cur_nb : cur_nbs){
-				UndirectedGraphNode cur_copy = map.get(cur);
-				UndirectedGraphNode cur_nb_copy = null;
-				if(!map.containsKey(cur_nb)){
-					cur_nb_copy = new UndirectedGraphNode(cur_nb.label);
-					map.put(cur_nb, cur_nb_copy);
-					queue.offer(cur_nb);
+			Node cur = queue.poll();
+			Node copy = map.get(cur);
+			for(Node nb : cur.neighbors){
+				Node nb_copy = null;
+				if(!map.containsKey(nb)){
+					nb_copy = new Node(nb.val);
+					map.put(nb, nb_copy);
+					queue.offer(nb);
 				} else {
-					cur_nb_copy = map.get(cur_nb);
+					nb_copy = map.get(nb);
 				}
-				cur_copy.neighbors.add(cur_nb_copy);
+				copy.neighbors.add(nb_copy);
 			}
 		}
-    	return copyRoot;
+    	return head;
     }
 }

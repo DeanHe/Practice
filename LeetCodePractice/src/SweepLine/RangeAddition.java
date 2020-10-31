@@ -1,5 +1,7 @@
 package SweepLine;
 
+import java.util.TreeMap;
+
 /*Assume you have an array of length n initialized with all 0's and are given k update operations.
 
 Each operation is represented as a triplet: [startIndex, endIndex, inc] which increments each element of subarray A[startIndex ... endIndex] (startIndex and endIndex inclusive) with inc.
@@ -36,21 +38,17 @@ public class RangeAddition {
      */
     public int[] getModifiedArray(int length, int[][] updates) {
         // Write your code here
-    	int[] preSum = new int[length];
-    	int[] modify = new int[length];
-    	for(int i = 0; i < updates.length; i++){
-    		int start = updates[i][0];
-    		int end = updates[i][1];
-    		int change = updates[i][2];
-    		modify[start] += change;
-    		if(end + 1 < length){
-    			modify[end + 1] -= change;
-    		}
-    	}
-    	preSum[0] = modify[0];
-    	for(int i = 1; i < length; i++){
-    		preSum[i] = preSum[i - 1] + modify[i];
-    	}
-    	return preSum;
+		TreeMap<Integer, Integer> axis = new TreeMap<>();
+		int[] res = new int[length];
+		for(int[] update : updates){
+			axis.put(update[0], axis.getOrDefault(update[0], 0) + update[2]);
+			axis.put(update[1] + 1, axis.getOrDefault(update[1] + 1, 0) - update[2]);
+		}
+		int preSum = 0;
+		for(int i = 0; i < length; i++){
+			preSum += axis.getOrDefault(i, 0);
+			res[i] = preSum;
+		}
+		return res;
     }
 }

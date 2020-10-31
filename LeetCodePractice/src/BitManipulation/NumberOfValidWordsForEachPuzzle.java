@@ -45,22 +45,20 @@ public class NumberOfValidWordsForEachPuzzle {
         List<Integer> res = new ArrayList<>();
         Map<Integer, Integer> wordMaskFreq = new HashMap<>(); // bitmask : count
         for (String w : words) {
-            char[] arr = w.toCharArray();
             int mask = 0;
-            for (int i = 0; i < arr.length; i++) {
-                mask |= 1 << (arr[i] - 'a');
+            for (char c : w.toCharArray()) {
+                mask |= 1 << (c - 'a');
             }
             wordMaskFreq.put(mask, wordMaskFreq.getOrDefault(mask, 0) + 1);
         }
         for (String puzzle : puzzles) {
-            char[] arr = puzzle.toCharArray();
             int puzzleMask = 0;
-            for (int i = 0; i < arr.length; i++) {
-                puzzleMask |= 1 << (arr[i] - 'a');
+            for (char c : puzzle.toCharArray()) {
+                puzzleMask |= 1 << (c - 'a');
             }
             int cnt = 0;
             int candidate = puzzleMask;
-            int first = 1 << (arr[0] - 'a');
+            int first = 1 << (puzzle.charAt(0) - 'a');
             while (candidate > 0) {
                 if ((candidate & first) == first && wordMaskFreq.containsKey(candidate)) {
                     cnt += wordMaskFreq.get(candidate);

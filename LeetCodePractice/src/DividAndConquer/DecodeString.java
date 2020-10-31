@@ -8,7 +8,8 @@ Example
 s = abc3[a] return abcaaa
 s = 3[abc] return abcabcabc
 s = 4[ac]dy, return acacacacdy
-s = 3[2[ad]3[pf]]xyz, return adadpfpfpfadadpfpfpfadadpfpfpfxyz*/
+s = 3[2[ad]3[pf]]xyz, return adadpfpfpfadadpfpfpfadadpfpfpfxyz
+*/
 public class DecodeString {
 	/**
      * @param s: an expression includes numbers, letters and brackets

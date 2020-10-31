@@ -9,18 +9,27 @@ Example 2:
 Input: [2,2,2,2,2]
 Output: 5
 Explanation: The length of longest continuous increasing subsequence is 1, and there are 5 subsequences' length is 1, so output 5.
-Note: Length of the given array will be not exceed 2000 and the answer is guaranteed to be fit in 32-bit signed int.*/
+Note: Length of the given array will be not exceed 2000 and the answer is guaranteed to be fit in 32-bit signed int.
+
+analysis:
+DP
+
+Complexity Analysis
+Time Complexity: O(N^2)
+where NN is the length of nums. There are two for-loops and the work inside is O(1)O(1).
+Space Complexity: O(N), the space used by lengths and counts.
+*/
 public class NumberOfLongestIncreasingSubsequence {
 	public int findNumberOfLIS(int[] nums) {
         int len = nums.length;
         //dp_longest[i] means LIS length ended with nums[i]
         int[] dp_longest = new int[len];
-      //dp_longest[i] means # of LIS ended with nums[i]
+      //dp_count[i] means # of LIS ended with nums[i]
         int[] dp_count = new int[len];
         for(int i = 0; i < len; i++){
         	dp_count[i] = 1;
         }
-        for(int i = 0; i < len; i++){
+        for(int i = 1; i < len; i++){
         	for(int j = 0; j < i; j++){
         		if(nums[i] > nums[j]){
         			if(dp_longest[i] == dp_longest[j] + 1){
@@ -42,7 +51,6 @@ public class NumberOfLongestIncreasingSubsequence {
         		res += dp_count[i];
         	}
         }
-        String s = 1 + "" + 2;
         return res;
     }
 }

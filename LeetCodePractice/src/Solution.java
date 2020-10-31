@@ -1,4 +1,5 @@
 import Contest.QueueRemovals;
+import DFS.LargestPerimeterIsland;
 import Math.OneDmineSweep;
 import Math.JosephusProblem;
 import SweepLine.Intervals.EmployeeFreeTime;
@@ -18,8 +19,10 @@ public class Solution {
         // TODO Auto-generated method stub
         //OneDmineSweep oneDmineSweep = new OneDmineSweep();
         //int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
-        int[] S = {1, 2, 2, 3, 4, 5};
-        System.out.println(1 << 12);
+        int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
+        LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();
+        int res = largestIsland.largestPerimeter(events);
+        System.out.println(res);
 		/*
 		String x = "/abcd/erf";
 		String[] xm = x.split("/", 1);

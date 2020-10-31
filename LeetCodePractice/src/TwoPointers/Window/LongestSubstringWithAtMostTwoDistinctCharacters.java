@@ -27,15 +27,12 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
         while (end < s.length()) {
             char end_c = s.charAt(end);
             map.put(end_c, map.getOrDefault(end_c, 0) + 1);
-            if (map.get(end_c) == 1) {
-                counter++;
-            }
             end++;
             while (counter > 2) {
                 char start_c = s.charAt(start);
                 map.put(start_c, map.get(start_c) - 1);
                 if (map.get(start_c) == 0) {
-                    counter--;
+                    map.remove(start_c);
                 }
                 start++;
             }

@@ -82,7 +82,7 @@ public class CourseSchedule {
 	}
 
 	private boolean dfs(List<List<Integer>> graph, boolean[] visited, int cur) {
-		// true- no cycle; fasle - with cycle
+		// true- no cycle; false - with cycle
 		if (visited[cur]) {
 			return false;
 		}

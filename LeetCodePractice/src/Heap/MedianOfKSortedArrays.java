@@ -35,7 +35,7 @@ public class MedianOfKSortedArrays {
 		if(N % 2 == 0){
 			// note that here need to have a new pq instance because once the first part use it 
 			// then the second part will keep use it but it's already modified.
-			return (find(nums, N / 2 - 1, new PriorityQueue<Node>(pq)) + find(nums, N / 2, pq)) / 2.0;
+			return (find(nums, N / 2 - 1, new PriorityQueue<>(pq)) + find(nums, N / 2, pq)) / 2.0;
 		} else {
 			return find(nums, N / 2, pq) / 1.0;
 		}

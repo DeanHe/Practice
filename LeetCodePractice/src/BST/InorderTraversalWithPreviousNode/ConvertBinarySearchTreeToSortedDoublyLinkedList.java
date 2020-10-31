@@ -1,11 +1,13 @@
-package BST;
+package BST.InorderTraversalWithPreviousNode;
+
+import BST.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /*
 Description
-Convert a BST to a sorted circular doubly-linked list in-place. Think of the left and right pointers as synonymous to the previous and next pointers in a doubly-linked list.
+Convert a BST to a sorted circular doubly-linked list in-place. Think of the left and right pointers as synonymous to the pre and next pointers in a doubly-linked list.
 
 Let's take the following BST as an example, it may help you understand the problem better:
 
@@ -48,33 +50,31 @@ public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
      * @param root: root of a tree
      * @return: head node of a doubly linked list
      */
-    private TreeNode head;
+    private TreeNode head, pre;
 
     public TreeNode treeToDoublyList(TreeNode root) {
         if (root == null) {
             return null;
         }
-        TreeNode tail = dfs(root, null);
-        head.left = tail;
-        tail.right = head;
+        inorder(root);
+        head.left = pre; // pre is at last node
+        pre.right = head;
         return head;
     }
 
-    private TreeNode dfs(TreeNode cur, TreeNode pre) {
-        if (cur == null) {
-            return pre;
+    private void inorder(TreeNode root) {
+        if (root == null) {
+            return;
         }
-        pre = dfs(cur.left, pre);
-        TreeNode temp = new TreeNode(cur.val);
+        inorder(root.left);
         if (pre != null) {
-            temp.left = pre;
-            pre.right = temp;
+            root.left = pre;
+            pre.right = root;
+        } else {
+            head = root;
         }
-        if (head == null) {
-            head = temp;
-        }
-        TreeNode post = dfs(cur.right, temp);
-        return post;
+        pre = root;
+        inorder(root.right);
     }
 
     // O(N) space complexity

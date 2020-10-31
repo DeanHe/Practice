@@ -47,15 +47,9 @@ public class CorporateFlightBookings {
             axis.put(end + 1, axis.getOrDefault(end + 1, 0) - seats);
         }
         int preSum = 0;
-        for(int tag : axis.keySet()){
-            axis.put(tag, axis.get(tag) + preSum);
-            preSum = axis.get(tag);
-        }
-        for(int i = 1; i <= n; i++){
-            Integer book = axis.floorKey(i);
-            if(book != null){
-                res[i - 1] = axis.get(book);
-            }
+        for(int i = 0; i < n; i++){
+            preSum += axis.getOrDefault(i + 1, 0);
+            res[i] = preSum;
         }
         return res;
     }

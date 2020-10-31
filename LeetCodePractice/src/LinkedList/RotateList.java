@@ -19,6 +19,9 @@ rotate 1 steps to the right: 2->0->1->NULL
 rotate 2 steps to the right: 1->2->0->NULL
 rotate 3 steps to the right: 0->1->2->NULL
 rotate 4 steps to the right: 2->0->1->NULL
+
+Time Complexity: O(N)
+Space Complexity: O(1)
  */
 public class RotateList {
     public ListNode rotateRight(ListNode head, int k) {
