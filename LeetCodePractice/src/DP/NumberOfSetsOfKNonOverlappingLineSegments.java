@@ -41,7 +41,31 @@ Constraints:
 
  */
 public class NumberOfSetsOfKNonOverlappingLineSegments {
+    int MOD = (int)(1e9 + 7);
+    Long[][] dp;
     public int numberOfSets(int n, int k) {
-        return -1;
+        // dp[i][j means # of ways to get k segment from n points
+        dp = new Long[n + 1][k + 1];
+        return (int)dfs(n, k);
+    }
+
+    private long dfs(int n, int k) {
+        if(k >= n){
+           return 0;
+        }
+        if(k == n - 1){
+            return 1;
+        }
+        if(k == 1){
+            return n * (n - 1) / 2;
+        }
+        if(dp[n][k] != null){
+            return dp[n][k];
+        }
+        long res = 0;
+        for(int i = 1; n - i >= k - 1; i++){
+            res = (res + i * dfs(n - i, k - 1)) % MOD;
+        }
+        return dp[n][k] = res;
     }
 }

@@ -1,6 +1,7 @@
 package BinarySearch;
 
-/*Given an array with positive and negative numbers, find the maximum average subarray which length should be greater or equal to given length k.
+/*
+Given an array with positive and negative numbers, find the maximum average subarray which length should be greater or equal to given length k.
 
 Example
 Example 1:
@@ -20,7 +21,8 @@ Input:
 Output:
 5.000
 Notice
-It's guaranteed that the size of the array is greater or equal to k.*/
+It's guaranteed that the size of the array is greater or equal to k.
+*/
 public class MaximumAverageSubarrayII {
 	/**
 	 * @param nums:

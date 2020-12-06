@@ -38,12 +38,20 @@ public class NumberOfEnclaves {
         rows = A.length;
         cols = A[0].length;
         for (int r = 0; r < rows; r++) {
-            dfs(A, r, 0);
-            dfs(A, r, cols - 1);
+            if(A[r][0] == 1){
+                dfs(A, r, 0);
+            }
+            if(A[r][cols - 1] == 1){
+                dfs(A, r, cols - 1);
+            }
         }
         for (int c = 0; c < cols; c++) {
-            dfs(A, 0, c);
-            dfs(A, rows - 1, c);
+            if(A[0][c] == 1){
+                dfs(A, 0, c);
+            }
+            if(A[rows - 1][c] == 1){
+                dfs(A, rows - 1, c);
+            }
         }
         int res = 0;
         for (int r = 0; r < rows; r++) {
@@ -57,10 +65,12 @@ public class NumberOfEnclaves {
     }
 
     private void dfs(int[][] A, int r, int c) {
-        if (r >= 0 && r < rows && c >= 0 && c < cols && A[r][c] == 1) {
-            A[r][c] = 0;
-            for (int i = 0; i < dirs.length - 1; i++) {
-                dfs(A, r + dirs[i], c + dirs[i + 1]);
+        A[r][c] = 0;
+        for (int i = 0; i < dirs.length - 1; i++) {
+            int nb_r = r + dirs[i];
+            int nb_c = c + dirs[i + 1];
+            if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && A[nb_r][nb_c] == 1) {
+                dfs(A, nb_r, nb_c);
             }
         }
     }

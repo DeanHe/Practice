@@ -14,13 +14,14 @@ Output: [1]
 Note:
 
 You may assume k is always valid, 1 ≤ k ≤ number of unique elements.
-Your algorithm's time complexity must be better than O(n log n), where n is the array's size.*/
+Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
+*/
 public class TopKFrequentElements {
 	public List<Integer> topKFrequent(int[] nums, int k) {
 		// count the frequency for each element
-		HashMap<Integer, Integer> map = new HashMap<>();
+		HashMap<Integer, Integer> freq = new HashMap<>();
 		for (int n : nums) {
-			map.put(n, map.getOrDefault(n, 0) + 1);
+			freq.put(n, freq.getOrDefault(n, 0) + 1);
 		}
 		// create a min heap
 		PriorityQueue<Pair> pq = new PriorityQueue<>(new Comparator<Pair>() {
@@ -29,7 +30,7 @@ public class TopKFrequentElements {
 			}
 		});
 		// maintain a heap of size k.
-		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+		for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
 			Pair temp = new Pair(entry.getKey(), entry.getValue());
 			pq.offer(temp);
 			if (pq.size() > k) {
@@ -44,6 +45,29 @@ public class TopKFrequentElements {
 		}
 		// reverse the order
 		Collections.reverse(res);
+		return res;
+	}
+
+	//bucket sort
+	public List<Integer> topKFrequent2(int[] nums, int k) {
+		List<Integer>[] buckets = new List[nums.length + 1];
+		Map<Integer, Integer> freq = new HashMap<>();
+		for(int n : nums){
+			freq.put(n, freq.getOrDefault(n, 0) + 1);
+		}
+		for(int key : freq.keySet()){
+			int frequency = freq.get(key);
+			if(buckets[frequency] == null){
+				buckets[frequency] = new ArrayList<>();
+			}
+			buckets[frequency].add(key);
+		}
+		List<Integer> res = new ArrayList<>();
+		for(int i = buckets.length - 1; i >= 0 && res.size() < k; i--){
+			if(buckets[i] != null){
+				res.addAll(buckets[i]);
+			}
+		}
 		return res;
 	}
 }

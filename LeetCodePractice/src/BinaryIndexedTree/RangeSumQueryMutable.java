@@ -36,8 +36,8 @@ public class RangeSumQueryMutable {
 	       }
 	    }
 	    
-	    public int sumRange(int left, int right) {
-	        return getPrefixSum(right) - getPrefixSum(left - 1);
+	    public int sumRange(int start, int end) {
+	    	return getPrefixSum(end) - getPrefixSum(start - 1);
 	    }
 	    
 	    private int getPrefixSum(int index) {

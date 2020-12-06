@@ -11,12 +11,30 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+        Pattern p = Pattern.compile("^\\s*\\w+(\\-\\w+)+:");
+        Matcher matcher = p.matcher("  Connector-2-T1: Add a SNS Edge component as a Lambda component");
+        if(matcher.find() && matcher.start() == 0) {
+            //get the MatchResult Object
+            int x =matcher.start();
+            String a = matcher.group(0);
+            String b = matcher.group(1);
+            MatchResult result = matcher.toMatchResult();
+
+            //Prints the offset after the last character matched.
+            System.out.println("First Capturing Group - Match String end(): "+result.end());
+        } else {
+            System.out.println("Not found");
+        }
+
         //OneDmineSweep oneDmineSweep = new OneDmineSweep();
         //int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
@@ -46,28 +64,7 @@ public class Solution {
 		int[][] events = {{8,9,5}, {9,12,4}, {12,14,2}, {8,12,7}, {13,16,3}, {14,15,4}};
 		int[][] logs = {{20190101,0,1}, {20190104,3,4}, {20190107,2,3}, {20190211,1,5}, {20190224,2,4}, {20190301,0,3}, {20190312,1,2}, {20190322,4,5}};
 		int res = mie.earliestAcq(logs, 6);
-*/
 
-		/*
-		// test for gossip
-		int[] move = {3,-4,6,-3};
-		GraphNode n0 = new GraphNode(0);
-		GraphNode n1 = new GraphNode(1);
-		GraphNode n2 = new GraphNode(2);
-		GraphNode n3 = new GraphNode(3);
-		GraphNode n4 = new GraphNode(4);
-		n0.neighbors.add(n1);
-		n0.neighbors.add(n2);
-		n1.neighbors.add(n0);
-		n1.neighbors.add(n3);
-		n2.neighbors.add(n0);
-		n2.neighbors.add(n4);
-		n3.neighbors.add(n1);
-		n4.neighbors.add(n2);
-		//  n4 - n2 - n0 - n1 -n3
-		Message msg = new Message(123);
-		n3.send(msg);
-		System.out.println(n3.canReach);
 
 		String[] sentences = {"i love you", "island","ironman", "i love leetcode"};
 		AutocompleteSystem cs = new AutocompleteSystem(sentences, cnt);
@@ -87,4 +84,5 @@ public class Solution {
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));*/
     }
+
 }

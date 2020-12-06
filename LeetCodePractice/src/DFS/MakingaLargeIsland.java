@@ -2,7 +2,8 @@ package DFS;
 
 import java.util.*;
 
-/*In a 2D grid of 0s and 1s, we change at most one 0 to a 1.
+/*
+In a 2D grid of 0s and 1s, we change at most one 0 to a 1.
 
 After, what is the size of the largest island? (An island is a 4-directionally connected group of 1s).
 
@@ -26,7 +27,8 @@ Explanation: Can't change any 0 to 1, only one island with area = 4.
 Notes:
 
 1 <= grid.length = grid[0].length <= 50.
-0 <= grid[i][j] <= 1.*/
+0 <= grid[i][j] <= 1.
+*/
 public class MakingaLargeIsland {
 	int rows, cols;
 	Map<Integer, Integer> area;

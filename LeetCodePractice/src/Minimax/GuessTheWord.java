@@ -73,4 +73,37 @@ public class GuessTheWord {
 		}
 		return matches;
 	}
+
+	//Count the Occurrence of Characters
+	//time complexity: O(N), space complexity: O(N)
+	public void findSecretWord2(String[] wordlist, Master master) {
+		int[][] cnt = new int[6][26];
+		for(String s : wordlist){
+			for(int i = 0; i < 6; i++){
+				cnt[i][s.charAt(i) - 'a']++;
+			}
+		}
+		for(int i = 0, score = 0; i < 10 && score < 6; i++){
+			int best = 0;
+			String cand = wordlist[0];
+			for(String s : wordlist){
+				int points = 0;
+				for(int j = 0; j < 6; j++){
+					points += cnt[j][s.charAt(j) - 'a'];
+				}
+				if(points > best){
+					cand = s;
+					best = points;
+				}
+			}
+			score = master.guess(cand);
+			List<String> ls = new ArrayList<>();
+			for(String s : wordlist){
+				if(match(s, cand) == score) {
+					ls.add(s);
+				}
+			}
+			wordlist = ls.toArray(new String[ls.size()]);
+		}
+	}
 }

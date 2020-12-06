@@ -38,10 +38,10 @@ public class CountOfSmallerNumberBeforeItself {
         bit = new int[len + 1];
         discretization(A);
         List<Integer> res = new ArrayList<>();
-        for(int i = 0; i < len; i++){
-            int count = getPreSum(A[i] - 1);
+        for(int n : A){
+            int count = getPreSum(n - 1);
             res.add(count);
-            update(A[i]);
+            update(n);
         }
         return res;
     }

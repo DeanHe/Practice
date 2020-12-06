@@ -24,7 +24,7 @@ Note: The length of each dimension in the given grid does not exceed 50.
 public class MaxAreaOfIsland {
 	int rows;
 	int cols;
-	int[] direct = { 0, 1, 0, -1, 0 };
+	int[] dirs = { 0, 1, 0, -1, 0 };
 	public int maxAreaOfIsland(int[][] grid) {
 		rows = grid.length;
 		cols = grid[0].length;
@@ -40,13 +40,14 @@ public class MaxAreaOfIsland {
 	}
 
 	private int dfs(int[][] grid, int r, int c) {
-		if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] == 0) {
-			return 0;
-		}
 		int res = 1;
 		grid[r][c] = 0;
-		for (int i = 0; i < direct.length - 1; i++) {
-			res += dfs(grid, r + direct[i], c + direct[i + 1]);
+		for (int i = 0; i < dirs.length - 1; i++) {
+			int nb_r = r + dirs[i];
+			int nb_c = c + dirs[i + 1];
+			if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && grid[nb_r][nb_c] == 1) {
+				res += dfs(grid, nb_r, nb_c);
+			}
 		}
 		return res;
 	}

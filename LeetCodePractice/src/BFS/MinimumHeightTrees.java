@@ -34,14 +34,19 @@ return [3, 4]
 Notice
 (1) According to the definition of tree on Wikipedia: a tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any connected graph without simple cycles is a tree.�
 
-(2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.*/
+(2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
+
+analysis:
+bfs
+time complexity: O(n)
+*/
 
 import java.util.*;
 
 public class MinimumHeightTrees {
 	public List<Integer> findMinHeightTrees(int n, int[][] edges) {
 		Map<Integer, ArrayList<Integer>> graph = new HashMap<>();
-		int[] degree = new int[n];
+		int[] indeg = new int[n];
 		List<Integer> res = new ArrayList<>();
 		if(n == 1){
 			res.add(0);
@@ -50,21 +55,17 @@ public class MinimumHeightTrees {
 		for(int[] edge : edges){
 			int node1 = edge[0];
 			int node2 = edge[1];
-			if(!graph.containsKey(node1)){
-				graph.put(node1, new ArrayList<>());
-			}
+			graph.putIfAbsent(node1, new ArrayList<>());
 			graph.get(node1).add(node2);
-			if(!graph.containsKey(node2)){
-				graph.put(node2, new ArrayList<>());
-			}
+			graph.putIfAbsent(node2, new ArrayList<>());
 			graph.get(node2).add(node1);
-			degree[node1]++;
-			degree[node2]++;
+			indeg[node1]++;
+			indeg[node2]++;
 		}
 		Queue<Integer> queue = new LinkedList<>();
 		//put leaf to queue
 		for(int i = 0; i < n; i++){
-			if(degree[i] == 1){
+			if(indeg[i] == 1){
 				queue.offer(i);
 			}
 		}
@@ -74,13 +75,13 @@ public class MinimumHeightTrees {
 			for(int i = 0; i < size; i++){
 				int leaf = queue.poll();
 				res.add(leaf);
-				degree[leaf]--;
+				indeg[leaf] = 0;
 				for(int nb : graph.get(leaf)){
-					if(degree[nb] == 0){
+					if(indeg[nb] == 0){
 						continue;
 					}
-					degree[nb]--;
-					if(degree[nb] == 1){
+					indeg[nb]--;
+					if(indeg[nb] == 1){
 						queue.offer(nb);
 					}
 				}

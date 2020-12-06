@@ -35,19 +35,19 @@ public class LongestSubstringWithAtLeastKRepeatingCharacters {
     }
 
     private int dfs(String s, int k, int unique) {
-        int res = 0, len = s.length(), start = 0, end = 0, numNoLessThanK = 0;
+        int res = 0, len = s.length(), start = 0, end = 0, cntGreaterThanK = 0;
         Map<Character, Integer> map = new HashMap<>();
         while(end < len){
             char c_end = s.charAt(end);
             map.put(c_end, map.getOrDefault(c_end, 0) + 1);
             if(map.get(c_end) == k){
-                numNoLessThanK++;
+                cntGreaterThanK++;
             }
             end++;
             while (map.size() > unique){
                 char c_start = s.charAt(start);
                 if(map.get(start) == k){
-                    numNoLessThanK--;
+                    cntGreaterThanK--;
                 }
                 map.put(c_start, map.get(c_start) - 1);
                 if(map.get(c_start) == 0){
@@ -55,7 +55,7 @@ public class LongestSubstringWithAtLeastKRepeatingCharacters {
                 }
                 start++;
             }
-            if(numNoLessThanK == unique){
+            if(cntGreaterThanK == unique){ // map.size() == unique == cntGreaterThanK
                 res = Math.max(res, end - start);
             }
         }
