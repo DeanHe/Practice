@@ -1,47 +1,24 @@
-import Contest.QueueRemovals;
-import DFS.LargestPerimeterIsland;
-import Math.OneDmineSweep;
-import Math.JosephusProblem;
-import SweepLine.Intervals.EmployeeFreeTime;
-import SweepLine.Intervals.Interval;
+import tiktok.IncrementalMemoryLeak;
+import tiktok.MinimumCharacterTransformation;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        Pattern p = Pattern.compile("^\\s*\\w+(\\-\\w+)+:");
-        Matcher matcher = p.matcher("  Connector-2-T1: Add a SNS Edge component as a Lambda component");
-        if(matcher.find() && matcher.start() == 0) {
-            //get the MatchResult Object
-            int x =matcher.start();
-            String a = matcher.group(0);
-            String b = matcher.group(1);
-            MatchResult result = matcher.toMatchResult();
+        MinimumCharacterTransformation m = new MinimumCharacterTransformation();
+        System.out.println(m.minCovert("abcd", "bcaa"));
+        /*
+        OneDmineSweep oneDmineSweep = new OneDmineSweep();
+        int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
 
-            //Prints the offset after the last character matched.
-            System.out.println("First Capturing Group - Match String end(): "+result.end());
-        } else {
-            System.out.println("Not found");
-        }
-
-        //OneDmineSweep oneDmineSweep = new OneDmineSweep();
-        //int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
         LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();
         int res = largestIsland.largestPerimeter(events);
         System.out.println(res);
-		/*
+
 		String x = "/abcd/erf";
 		String[] xm = x.split("/", 1);
 		RearrangeStringkDistanceApart rearrangeStringkDistanceApart = new RearrangeStringkDistanceApart();
@@ -76,13 +53,31 @@ public class Solution {
 		for(char c : test.toCharArray()){
 			List<String> res = cs.input(c);
 			System.out.println(res);
-		}*/
+		}
 
-/*		BraceExpansion be = new BraceExpansion();
+     	BraceExpansion be = new BraceExpansion();
 		String input = "{a,b,c}d{e,f}";
 		String[] res = be.expand(input);
 		int x = 0;
-		Arrays.stream(res).forEach(a -> System.out.println(a));*/
+		Arrays.stream(res).forEach(a -> System.out.println(a));
+
+
+
+		Pattern p = Pattern.compile("^\\s*\\w+(\\-\\w+)+:");
+        Matcher matcher = p.matcher("  Connector-2-T1: Add a SNS Edge component as a Lambda component");
+        if(matcher.find() && matcher.start() == 0) {
+            //get the MatchResult Object
+            int x =matcher.start();
+            String a = matcher.group(0);
+            String b = matcher.group(1);
+            MatchResult result = matcher.toMatchResult();
+
+            //Prints the offset after the last character matched.
+            System.out.println("First Capturing Group - Match String end(): "+result.end());
+        } else {
+            System.out.println("Not found");
+        }
+		*/
     }
 
 }
