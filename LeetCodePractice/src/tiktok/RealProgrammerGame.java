@@ -1,4 +1,7 @@
 package tiktok;
+
+import java.util.Arrays;
+
 /*
 Real Programmer Game (RPG) is about having a hero swinging sticks at a monster.
 The monster has N Health Points (НР). It
@@ -43,14 +46,28 @@ win = 50% aka 0.5.
 3.
  */
 public class RealProgrammerGame {
-    double calculateProbability(int n, int m, int k){
-        double[][] dp = new double[n + 1][k + 1];
-
-        for(int i = 1; i <= n; i++){
+    public double calculateProbability(int n, int m, int k){
+        double[][] dp = new double[n][k + 1];
+        dp[0][0] = 1.0;
+        for(int i = 1; i <= k; i++){
+            dp[0][i] = 1.0 / (m + 1) * dp[0][i - 1];
+        }
+        for(int i = 1; i < n; i++){
             for(int j = 1; j <= k; j++){
-
+                for(int c = 0; c <= m; c++){
+                    if(i >= c){
+                        dp[i][j] += 1.0 / (m + 1) * dp[i - c][j - 1];
+                    }
+                }
             }
         }
-        return 1.0;
+        double loss = 0;
+        for(int i = 0; i < n; i++){
+            loss += dp[i][k];
+        }
+        for(double[] arr : dp){
+            System.out.println(Arrays.toString(arr));
+        }
+        return 1 - loss;
     }
 }

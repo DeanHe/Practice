@@ -3,7 +3,8 @@ package Array;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], return its missing ranges.
+/*
+Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], return its missing ranges.
 
 Example
 Example 1
@@ -21,7 +22,8 @@ nums = [0, 1, 2, 3, 7], lower = 0 and upper = 7
 Output:
 ["4->6"]
 Explanation:
-in range[0,7],the missing range include range[4,6]*/
+in range[0,7],the missing range include range[4,6]
+*/
 public class MissingRanges {
 	/*
      * @param nums: a sorted integer array

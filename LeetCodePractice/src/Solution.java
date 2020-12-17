@@ -1,5 +1,9 @@
+import tiktok.FindMaximumSummationOfSubarray;
 import tiktok.IncrementalMemoryLeak;
 import tiktok.MinimumCharacterTransformation;
+import tiktok.RealProgrammerGame;
+import tiktok.SelectPairs;
+import tiktok.VersionControl;
 
 import java.util.Arrays;
 
@@ -8,8 +12,10 @@ public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        MinimumCharacterTransformation m = new MinimumCharacterTransformation();
-        System.out.println(m.minCovert("abcd", "bcaa"));
+        SelectPairs f = new SelectPairs();
+        int[] arr = {2, 7, 4, 1, 8, 1};
+        int res = f.calculate(arr);
+        System.out.println(res);
         /*
         OneDmineSweep oneDmineSweep = new OneDmineSweep();
         int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};

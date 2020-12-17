@@ -44,17 +44,17 @@ public class PlusOneLinkedList {
     	if(cur.val != 9){
     		cur.val++;
     		return dummyHead.next;
-    	} else {
-    		lastNotNine.val++;
-    		while(lastNotNine.next != null){
-    			lastNotNine = lastNotNine.next;
-    			lastNotNine.val = 0;
-    		}
-    		if(dummyHead.val != 0){
-    			return dummyHead;
-    		} else {
-    			return dummyHead.next;
-    		}
     	}
+    	//update lastNine instead
+		lastNotNine.val++;
+		while(lastNotNine.next != null){
+			lastNotNine = lastNotNine.next;
+			lastNotNine.val = 0;
+		}
+		if(dummyHead.val != 0){
+			return dummyHead;
+		} else {
+			return dummyHead.next;
+		}
     }
 }

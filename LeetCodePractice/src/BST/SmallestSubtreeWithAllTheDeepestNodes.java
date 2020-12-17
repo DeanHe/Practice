@@ -35,13 +35,13 @@ The number of nodes in the tree will be between 1 and 500.
 The values of each node are unique.
 */
 public class SmallestSubtreeWithAllTheDeepestNodes {
+	Map<TreeNode, Integer> dist = new HashMap<>();
 	public TreeNode subtreeWithAllDeepest(TreeNode root) {
-		Map<TreeNode, Integer> dist = new HashMap<>();
 		if (root == null) {
 			return null;
 		}
-		int leftDepth = maxDepth(root.left, dist);
-		int rightDepth = maxDepth(root.right, dist);
+		int leftDepth = distToEdge(root.left);
+		int rightDepth = distToEdge(root.right);
 		if (leftDepth == rightDepth) {
 			return root;
 		}
@@ -52,16 +52,14 @@ public class SmallestSubtreeWithAllTheDeepestNodes {
 		}
 	}
 
-	private int maxDepth(TreeNode root, Map<TreeNode, Integer> dist) {
+	private int distToEdge(TreeNode root) {
 		if (root == null) {
 			return 0;
 		}
 		if (dist.containsKey(root)) {
 			return dist.get(root);
 		}
-		int leftDepth = maxDepth(root.left, dist);
-		int rightDepth = maxDepth(root.right, dist);
-		int res = Math.max(leftDepth, rightDepth) + 1;
+		int res = Math.max(distToEdge(root.left), distToEdge(root.right)) + 1;
 		dist.put(root, res);
 		return res;
 	}

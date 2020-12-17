@@ -28,6 +28,10 @@ Notes:
 
 1 <= grid.length = grid[0].length <= 50.
 0 <= grid[i][j] <= 1.
+
+analysis:
+mark different island with different color
+for each 0 find its island neighbors and connect them all
 */
 public class MakingaLargeIsland {
 	int rows, cols;
