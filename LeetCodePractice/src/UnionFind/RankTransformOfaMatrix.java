@@ -115,32 +115,4 @@ public class RankTransformOfaMatrix {
         }
         return res;
     }
-
-    class UF {
-        private int[] parent;
-
-        public UF(int n){
-            parent = new int[n];
-            for(int i = 0; i < n; i++){
-                parent[i] = i;
-            }
-        }
-
-        public int findRoot(int x){
-            int root = x;
-            while(parent[root] != root){
-                root = parent[root];
-            }
-            return root;
-        }
-
-        public int[] union(int a, int b){
-            int root_a = findRoot(a);
-            int root_b = findRoot(b);
-            if(parent[root_a] != root_b){
-                parent[root_a] = root_b;
-            }
-            return new int[]{root_a, root_b};
-        }
-    }
 }

@@ -1,4 +1,9 @@
 package UnionFind;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 An undirected graph of n nodes is defined by edgeList, where edgeList[i] = [ui, vi, disi] denotes an edge between nodes ui and vi with distance disi. Note that there may be multiple edges between two nodes.
 
@@ -16,12 +21,13 @@ Output: [false,true]
 Explanation: The above figure shows the given graph. Note that there are two overlapping edges between 0 and 1 with distances 2 and 16.
 For the first query, between 0 and 1 there is no path where each distance is less than 2, thus we return false for this query.
 For the second query, there is a path (0 -> 1 -> 2) of two edges with distances less than 5, thus we return true for this query.
+
 Example 2:
 
 
 Input: n = 5, edgeList = [[0,1,10],[1,2,5],[2,3,9],[3,4,13]], queries = [[0,4,14],[1,4,13]]
 Output: [true,false]
-Exaplanation: The above figure shows the given graph.
+Explanation: The above figure shows the given graph.
 
 
 Constraints:
@@ -38,6 +44,25 @@ There may be multiple edges between two nodes.
  */
 public class CheckingExistenceOfEdgeLengthLimitedPaths {
     public boolean[] distanceLimitedPathsExist(int n, int[][] edgeList, int[][] queries) {
-
+        UF uf = new UF(n);
+        boolean[] res = new boolean[queries.length];
+        Map<String, Integer> idxMap = new HashMap<>();
+        for(int i = 0; i < queries.length; i++){
+            idxMap.put(Arrays.toString(queries[i]), i);
+        }
+        Arrays.sort(edgeList, (a, b) -> a[2] - b[2]);
+        Arrays.sort(queries, (a, b) -> a[2] - b[2]);
+        int i = 0;
+        for(int[] query : queries){
+            int p = query[0], q = query[1], limit = query[2];
+            while(i < edgeList.length && edgeList[i][2] < limit){
+                int u = edgeList[i][0];
+                int v = edgeList[i][1];
+                i++;
+                uf.union(u, v);
+            }
+            res[idxMap.get(Arrays.toString(query))] = uf.connected(p, q);
+        }
+        return res;
     }
 }
