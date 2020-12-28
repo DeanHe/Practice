@@ -51,9 +51,9 @@ public class JumpGameIV {
     public int minJumps(int[] arr) {
         int len  = arr.length;
         boolean[] visited = new boolean[len];
-        Map<Integer, Set<Integer>> valIdxmap = new HashMap<>();
+        Map<Integer, List<Integer>> valIdxMap = new HashMap<>();
         for(int i = 0; i < len; i++){
-            valIdxmap.computeIfAbsent(arr[i], x -> new HashSet<>()).add(i);
+            valIdxMap.computeIfAbsent(arr[i], x -> new LinkedList<>()).add(i);
         }
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(0);
@@ -66,7 +66,7 @@ public class JumpGameIV {
                 if(cur == len - 1){
                     return step;
                 }
-                Set<Integer> neighbors = valIdxmap.get(arr[cur]);
+                List<Integer> neighbors = valIdxMap.get(arr[cur]);
                 neighbors.add(cur - 1);
                 neighbors.add(cur + 1);
                 for(int nb : neighbors){
