@@ -36,7 +36,7 @@ public class IPO {
             while (!pqCap.isEmpty() && pqCap.peek()[0] <= W) {
                 pqPro.add(pqCap.poll());
             }
-            if (pqCap.isEmpty()) {
+            if (pqPro.isEmpty()) {
                 break;
             }
             W += pqPro.poll()[1];
