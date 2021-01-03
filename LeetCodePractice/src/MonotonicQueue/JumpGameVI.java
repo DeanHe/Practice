@@ -1,4 +1,4 @@
-package DP;
+package MonotonicQueue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

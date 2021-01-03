@@ -1,4 +1,4 @@
-package DP;
+package MonotonicQueue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -33,7 +33,7 @@ import java.util.Deque;
         We need to know the maximum in the window of size k.
         Use deque will be O(N)
 */
-public class ConstrainedSubsetSum {
+public class ConstrainedSubsequenceSum {
     public int constrainedSubsetSum(int[] nums, int k) {
         int res = Integer.MIN_VALUE, len = nums.length;
         //monotonic decreasing of dp value

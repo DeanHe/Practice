@@ -49,4 +49,35 @@ public class DecodeWays {
         }
         return dp[len];
     }
+
+    // dfs + memorization
+    public int numDecodingsDFS(String s) {
+        if (s == null && s.length() == 0) {
+            return 0;
+        }
+        int len = s.length();
+        Integer[] mem = new Integer[len];
+        return dfs(s, len - 1, mem);
+    }
+
+    private int dfs(String s, int i, Integer[] mem) {
+        if(i < 0){
+            return 1;
+        }
+        if(mem[i] != null){
+            return mem[i];
+        }
+        int res = 0;
+        int first = Integer.valueOf(s.substring(i, i + 1));
+        if (first >= 1 && first <= 9) {
+            res += dfs(s, i - 1, mem);
+        }
+        if(i >= 1){
+            int second = Integer.valueOf(s.substring(i - 1, i + 1));
+            if (second >= 10 && second <= 26) {
+                res += dfs(s, i - 2, mem);
+            }
+        }
+        return mem[i] = res;
+    }
 }

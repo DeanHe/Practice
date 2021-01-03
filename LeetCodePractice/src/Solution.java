@@ -6,6 +6,8 @@ import tiktok.SelectPairs;
 import tiktok.VersionControl;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Solution {
@@ -86,4 +88,30 @@ public class Solution {
 		*/
     }
 
+    /**
+            * @param s : A string
+     * @return : The length of the longest substring that contains at most k
+     * distinct characters.
+            */
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        int res = 0;
+        int len = s.length();
+        Map<Character, Integer> cnt = new HashMap<>();
+        int l = 0, r = 0;
+        while(r < len){
+            char rc = s.charAt(r);
+            cnt.put(rc, cnt.getOrDefault(rc, 0) + 1);
+            r++;
+            while(cnt.size() > k){
+                char lc = s.charAt(l);
+                cnt.put(lc, cnt.get(lc) - 1);
+                if(cnt.get(lc) == 0){
+                    cnt.remove(lc);
+                }
+                l++;
+            }
+            res = Math.max(res, r - l);
+        }
+        return res;
+    }
 }

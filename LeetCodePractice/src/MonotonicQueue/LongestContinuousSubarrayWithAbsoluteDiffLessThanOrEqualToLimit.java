@@ -1,4 +1,4 @@
-package Window;
+package MonotonicQueue;
 /*
         Given an array of integers nums and an integer limit, return the size of the longest continuous subarray such that the absolute difference between any two elements is less than or equal to limit.
 
@@ -39,7 +39,7 @@ package Window;
         0 <= limit <= 10^9
 
         similar:
-        ConstrainedSubsetSum
+        ConstrainedSubsequenceSum
 
         analysis:
         maintain monotonic increasing and decreasing queue for easily find max element and min element between window [l, r]

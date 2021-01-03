@@ -34,25 +34,25 @@ Given a binary tree where node values are digits from 1 to 9. A path in the bina
 */
 
 public class PseudoPalindromicPathsInaBinaryTree {
-    int count = 0;
     public int pseudoPalindromicPaths (TreeNode root) {
         int[] map = new int[10];
-        dfs(root, map);
-        return count;
+        return dfs(root, map);
     }
-    private void dfs(TreeNode node, int[] map){
+    private int dfs(TreeNode node, int[] map){
+        int res = 0;
         if(node == null){
-            return;
+            return res;
         }
         map[node.val - 1]++;
         if(node.left == null && node.right == null){
             if(isPalindrome(map)){
-                count++;
+                res++;
             }
         }
-        dfs(node.left, map);
-        dfs(node.right, map);
+        res += dfs(node.left, map);
+        res += dfs(node.right, map);
         map[node.val - 1]--;
+        return res;
     }
 
     private boolean isPalindrome(int[] map){

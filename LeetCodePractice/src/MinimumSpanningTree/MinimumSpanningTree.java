@@ -7,7 +7,7 @@ import javax.naming.spi.DirStateFactory.Result;
 
 /*
 Given a list of Connections, which is the Connection class (the city name at both ends of the edge and a cost between them),
-find some edges, connect all the cities and spend the least amount.
+
 Return the connects if can connect all the cities, otherwise return empty list.
 Example
 Given the connections = [Acity,Bcity,1], [Acity,Ccity,2], [Bcity,Ccity,3]

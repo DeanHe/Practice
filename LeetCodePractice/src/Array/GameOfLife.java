@@ -61,14 +61,14 @@ public class GameOfLife {
         }
         
     }
-    private int calculateLiveNeighbors(int r, int c){
+    private int calculateLiveNeighbors(int row, int col){
     	int lives = 0;
-    	for(int x = Math.max(0, r - 1); x <= Math.min(rows - 1, r + 1); x++){
-    		for(int y = Math.max(0, c - 1); y <= Math.min(cols - 1, c + 1); y++){
-    			if(x == r && y == c){
+    	for(int r = Math.max(0, row - 1); r <= Math.min(rows - 1, row + 1); r++){
+    		for(int c = Math.max(0, col - 1); c <= Math.min(cols - 1, col + 1); c++){
+    			if(r == row && c == col){
     				continue;
     			}
-    			lives += board[x][y] & 1;
+    			lives += board[r][c] & 1;
     		}
     	}
     	return lives;

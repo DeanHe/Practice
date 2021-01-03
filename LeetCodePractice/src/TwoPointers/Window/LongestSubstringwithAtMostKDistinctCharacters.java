@@ -23,29 +23,29 @@ import java.util.Map;
 
 public class LongestSubstringwithAtMostKDistinctCharacters {
     /**
-     * @param s : A string
+     * @param str : A string
      * @return : The length of the longest substring that contains at most k
      * distinct characters.
      */
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+    public int lengthOfLongestSubstringKDistinct(String str, int k) {
         // write your code here
         int res = 0;
-        int slen = s.length();
+        int len = str.length();
         Map<Character, Integer> map = new HashMap<>();
-        int start = 0, end = 0;
-        while(end < slen){
-            char end_c = s.charAt(end);
-            map.put(end_c, map.getOrDefault(end_c, 0) + 1);
-            end++;
+        int s = 0, e = 0;
+        while(e < len){
+            char ec = str.charAt(e);
+            map.put(ec, map.getOrDefault(ec, 0) + 1);
+            e++;
             while (map.size() > k){
-                char start_c = s.charAt(start);
-                map.put(start_c, map.get(start_c) - 1);
-                if(map.get(start_c) == 0){
-                    map.remove(start_c);
+                char sc = str.charAt(s);
+                map.put(sc, map.get(sc) - 1);
+                if(map.get(sc) == 0){
+                    map.remove(sc);
                 }
-                start++;
+                s++;
             }
-            res = Math.max(res, end - start);
+            res = Math.max(res, e - s);
         }
         return res;
     }
