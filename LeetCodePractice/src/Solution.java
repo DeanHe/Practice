@@ -88,30 +88,30 @@ public class Solution {
 		*/
     }
 
-    /**
-            * @param s : A string
-     * @return : The length of the longest substring that contains at most k
-     * distinct characters.
-            */
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        int res = 0;
-        int len = s.length();
-        Map<Character, Integer> cnt = new HashMap<>();
-        int l = 0, r = 0;
-        while(r < len){
-            char rc = s.charAt(r);
-            cnt.put(rc, cnt.getOrDefault(rc, 0) + 1);
-            r++;
-            while(cnt.size() > k){
-                char lc = s.charAt(l);
-                cnt.put(lc, cnt.get(lc) - 1);
-                if(cnt.get(lc) == 0){
-                    cnt.remove(lc);
-                }
-                l++;
-            }
-            res = Math.max(res, r - l);
+    public boolean canPartition(int[] nums) {
+        int len = nums.length, sum = 0, target = 0;
+        for(int n : nums){
+            sum += n;
         }
-        return res;
+        if(sum % 2 != 0){
+            return false;
+        }
+        target = sum / 2;
+        //d[i][j] means can select subset from nums[:i] to sum j
+        boolean[][] dp = new boolean[len + 1][target + 1];
+        dp[0][0] = true;
+        for(int i = 1; i <= len; i++){
+            dp[i][0] = true;
+        }
+        for(int i = 1; i <= len; i++){
+            for(int j = 1; j <= target; j++){
+                dp[i][j] = dp[i - 1][j];
+                if(nums[i - 1] <= j){
+                    dp[i][j] |= dp[i - 1][j - nums[i - 1]];
+                }
+
+            }
+        }
+        return dp[len][target];
     }
 }

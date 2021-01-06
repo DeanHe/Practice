@@ -56,10 +56,37 @@ public class PartitionEqualSubsetSum {
             for(int s = 1; s <= target; s++){
                 dp[i][s] = dp[i - 1][s];
                 if(s >= nums[i - 1]){
-                    dp[i][s] = dp[i][s] || dp[i - 1][s - nums[i - 1]];
+                    dp[i][s] |= dp[i - 1][s - nums[i - 1]];
                 }
             }
         }
         return dp[len][target];
+    }
+
+    //dfs slow
+    public boolean canPartitionII(int[] nums) {
+        int sum = 0;
+        for(int n : nums){
+            sum += n;
+        }
+        if(sum % 2 == 1){
+            return false;
+        }
+        return dfs(nums, 0, sum / 2);
+    }
+
+    private boolean dfs(int[] nums, int pos, int target){
+        if(target == 0){
+            return true;
+        }
+        if(target < 0){
+            return false;
+        }
+        for(int i = pos; i < nums.length; i++){
+            if(dfs(nums, i + 1, target - nums[i])){
+                return true;
+            }
+        }
+        return false;
     }
 }

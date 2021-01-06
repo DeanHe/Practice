@@ -28,32 +28,31 @@ package Backtracking;
 
         Note:
 
-        N is a positive integer and will not exceed 15.*/
+        N is a positive integer and will not exceed 15.
+        */
 public class BeautifulArrangement {
-    int N, res = 0;
 
     public int countArrangement(int N) {
-        this.N = N;
         if (N == 0) {
-            return res;
+            return 0;
         }
-        dfs(1, new boolean[N + 1]);
-        return res;
+        return dfs(N,1, new boolean[N + 1]);
     }
 
-    private void dfs(int pos, boolean[] visited) {
+    private int dfs(int N, int pos, boolean[] visited) {
         if (pos > N) {
-            res++;
-            return;
+            return 1;
         }
-        for (int i = 1; i <= N; i++) {
-            if (!visited[i]) {
-                if (i % pos == 0 || pos % i == 0) {
-                    visited[i] = true;
-                    dfs(pos + 1, visited);
-                    visited[i] = false;
+        int res = 0;
+        for (int n = 1; n <= N; n++) {
+            if (!visited[n]) {
+                if (n % pos == 0 || pos % n == 0) {
+                    visited[n] = true;
+                    res += dfs(N,pos + 1, visited);
+                    visited[n] = false;
                 }
             }
         }
+        return res;
     }
 }
