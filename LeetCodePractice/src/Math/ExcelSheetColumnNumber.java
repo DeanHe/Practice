@@ -22,7 +22,8 @@ Output: 28
 Example 3:
 
 Input: "ZY"
-Output: 701*/
+Output: 701
+*/
 public class ExcelSheetColumnNumber {
 	public int titleToNumber(String s) {
         int res = 0;

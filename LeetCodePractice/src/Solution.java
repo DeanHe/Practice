@@ -88,30 +88,40 @@ public class Solution {
 		*/
     }
 
-    public boolean canPartition(int[] nums) {
-        int len = nums.length, sum = 0, target = 0;
-        for(int n : nums){
-            sum += n;
+    public double findMedianSortedArrays(int A[], int B[]) {
+        int len = A.length + B.length;
+        if (len % 2 == 0) {
+            // even
+            return (findKth(A, 0, B, 0, len / 2) + findKth(A, 0, B, 0, len / 2 + 1)) / 2.0;
+        } else {
+            // odd
+            return findKth(A, 0, B, 0, len / 2 + 1);
         }
-        if(sum % 2 != 0){
-            return false;
-        }
-        target = sum / 2;
-        //d[i][j] means can select subset from nums[:i] to sum j
-        boolean[][] dp = new boolean[len + 1][target + 1];
-        dp[0][0] = true;
-        for(int i = 1; i <= len; i++){
-            dp[i][0] = true;
-        }
-        for(int i = 1; i <= len; i++){
-            for(int j = 1; j <= target; j++){
-                dp[i][j] = dp[i - 1][j];
-                if(nums[i - 1] <= j){
-                    dp[i][j] |= dp[i - 1][j - nums[i - 1]];
-                }
+    }
 
-            }
+    private double findKth(int[] A, int as, int[] B, int bs, int K) {
+        int alen = A.length, blen = B.length;
+        if(as >= alen){
+            return B[bs + K - 1];
+        } 
+        if(bs >= blen){
+            return A[as + K - 1];
         }
-        return dp[len][target];
+        if(K == 1){
+            return Math.min(A[as], B[bs]);
+        }
+        if(as + K / 2 - 1 < alen && bs + K / 2 - 1 < blen){
+            int ca = A[as + K / 2 - 1];
+            int cb = B[bs + K / 2 - 1];
+            if(ca < cb){
+                return findKth(A, as + K / 2, B, bs, K - K / 2);
+            } else {
+                return findKth(A, as, B, bs + K / 2, K - K / 2);
+            }
+        } else if(as + K / 2 - 1 < alen && bs + K / 2 - 1 >= blen){
+            return findKth(A, as + K / 2, B, bs, K - K / 2);
+        } else {
+            return findKth(A, as, B, bs + K / 2, K - K / 2);
+        }
     }
 }

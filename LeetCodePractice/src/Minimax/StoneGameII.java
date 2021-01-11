@@ -22,7 +22,7 @@ Constraints:
 1 <= piles.length <= 100
 1 <= piles[i] <= 10 ^ 4
 */
-public class StoneGameII {
+public class  StoneGameII {
 	int len;
 	int[] sufSum;
 	Integer[][] mem;

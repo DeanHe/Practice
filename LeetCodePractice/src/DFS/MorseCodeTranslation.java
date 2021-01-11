@@ -18,8 +18,10 @@ import java.util.*;
 public class MorseCodeTranslation {
 	public String translate(String code, Map<String, Character> map) {
 		StringBuilder sb = new StringBuilder();
-		dfs(code, map, sb);
-		return sb.toString();
+		if(dfs(code, map, sb)){
+			return sb.toString();
+		}
+		return "";
 	}
 
 	private boolean dfs(String code, Map<String, Character> map, StringBuilder sb) {

@@ -1,7 +1,9 @@
 package TwoPointers.Window;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /*
 Given a string, find the length of the longest substring without repeating characters.
@@ -30,24 +32,19 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	 * @return: an integer
 	 */
 	public int lengthOfLongestSubstring(String s) {
-		Map<Character, Integer> map = new HashMap<>();
-		int start = 0, end = 0, dup = 0, res = 0;
-		while (end < s.length()) {
-			char end_c = s.charAt(end);
-			map.put(end_c, map.getOrDefault(end_c, 0) + 1);
-			if (map.get(end_c) == 2) {
-				dup++;
-			}
-			end++;
-			while (dup > 0) {
-				char start_c = s.charAt(start);
-				map.put(start_c, map.get(start_c) - 1);
-				if (map.get(start_c) == 1) {
-					dup--;
-				}
+		int len = s.length();
+		int res = 0;
+		Set<Character> set = new HashSet<>();
+		int start = 0;
+		for(int end = 0; end < len; end++){
+			char ec = s.charAt(end);
+			while(set.contains(ec)){
+				char sc = s.charAt(start);
 				start++;
+				set.remove(sc);
 			}
-			res = Math.max(res, end - start);
+			set.add(ec);
+			res = Math.max(res, end - start + 1);
 		}
 		return res;
 	}

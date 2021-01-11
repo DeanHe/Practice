@@ -1,4 +1,5 @@
 package Minimax;
+
 /*Given an array of scores that are non-negative integers. Player 1 picks one of the numbers from either end of the array followed by the player 2 and then player 1 and so on. Each time a player picks a number, that number will not be available for the next player. This continues until all the scores have been chosen. The player with the maximum score wins.
 
 Given an array of scores, predict whether player 1 is the winner. You can assume each player plays to maximize his score.
@@ -21,45 +22,51 @@ Any scores in the given array are non-negative integers and will not exceed 10,0
 If the scores of both players are equal, then player 1 is still the winner.*/
 //https://leetcode.com/problems/predict-the-winner/discuss/96828/JAVA-9-lines-DP-solution-easy-to-understand-with-improvement-to-O(N)-space-complexity.
 public class PredictTheWinner {
-	public boolean PredictTheWinner(int[] nums) {
-		int len = nums.length;
-		//dp[i][j] saves how much more scores that the first-in-action player will get from i to j than the second player
-		int[][] dp = new int[len][len];
-		for(int i = 0; i < len; i++){
-			dp[i][i] = nums[i];
-		}
-		for(int l = 1; l < len; l++){
-			for(int i = 0; i + l < len; i++){
-				int j = i + l;
-				dp[i][j] = Math.max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]);
-			}
-		}
-		return dp[0][len - 1] >= 0;
+    public boolean PredictTheWinner(int[] nums) {
+        int len = nums.length;
+        //dp[i][j] saves how much more scores that the first-in-action player will get from i to j than the second player
+        int[][] dp = new int[len][len];
+        for (int i = 0; i < len; i++) {
+            dp[i][i] = nums[i];
+        }
+        for (int l = 1; l < len; l++) {
+            for (int i = 0; i + l < len; i++) {
+                int j = i + l;
+                dp[i][j] = Math.max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]);
+            }
+        }
+        return dp[0][len - 1] >= 0;
     }
-	
-	public boolean PredictTheWinner1D(int[] nums) {
-		int len = nums.length;
-		//dp[i] saves how much more scores that the first-in-action player will get from 0 to i than the second player
-		int[] dp = new int[len];
-		for(int r = len - 1; r >= 0; r--){
-			for(int c = r; c < len; c++){
-				if(r == c){
-					dp[c] = nums[r];
-				} else {
-					dp[c] = Math.max(nums[r] - dp[c], nums[c] - dp[c - 1]);
-				}
-			}
-		}
-		return dp[len - 1] >= 0;
+
+    public boolean PredictTheWinner1D(int[] nums) {
+        int len = nums.length;
+        //dp[i] saves how much more scores that the first-in-action player will get from 0 to i than the second player
+        int[] dp = new int[len];
+        for (int r = len - 1; r >= 0; r--) {
+            for (int c = r; c < len; c++) {
+                if (r == c) {
+                    dp[c] = nums[r];
+                } else {
+                    dp[c] = Math.max(nums[r] - dp[c], nums[c] - dp[c - 1]);
+                }
+            }
+        }
+        return dp[len - 1] >= 0;
     }
-	
-	public boolean PredictTheWinnerRecursion(int[] nums) {
-		return exceed(nums, 0, nums.length - 1) >= 0;
+
+    public boolean PredictTheWinnerRecursion(int[] nums) {
+        int len = nums.length;
+        Integer[][]  mem = new Integer[len][len];
+        return dfs(nums, mem, 0, nums.length - 1) >= 0;
     }
-	private int exceed(int[] nums, int start, int end){
-		if(start == end){
-			return nums[start];
-		}
-		return Math.max(nums[start] - exceed(nums, start + 1, end), nums[end] - exceed(nums, start, end - 1));
-	}
+
+    private int dfs(int[] nums, Integer[][] mem, int start, int end) {
+        if (start == end) {
+            return nums[start];
+        }
+        if(mem[start][end] != null){
+            return mem[start][end];
+        }
+        return mem[start][end] = Math.max(nums[start] - dfs(nums, mem,start + 1, end), nums[end] - dfs(nums, mem, start, end - 1));
+    }
 }

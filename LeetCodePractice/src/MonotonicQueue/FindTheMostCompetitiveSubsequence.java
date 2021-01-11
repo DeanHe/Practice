@@ -1,4 +1,4 @@
-package Stack;
+package MonotonicQueue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -7,7 +7,9 @@ Given an integer array nums and a positive integer k, return the most competitiv
 
 An array's subsequence is a resulting sequence obtained by erasing some (possibly zero) elements from the array.
 
-We define that a subsequence a is more competitive than a subsequence b (of the same length) if in the first position where a and b differ, subsequence a has a number less than the corresponding number in b. For example, [1,3,4] is more competitive than [1,3,5] because the first position they differ is at the final number, and 4 is less than 5.
+We define that a subsequence a is more competitive than a subsequence b (of the same length) if in the first position where a and b differ,
+subsequence a has a number less than the corresponding number in b.
+For example, [1,3,4] is more competitive than [1,3,5] because the first position they differ is at the final number, and 4 is less than 5.
 
 
 
@@ -36,7 +38,7 @@ public class FindTheMostCompetitiveSubsequence {
         Deque<Integer> deque = new ArrayDeque<>();
         int len = nums.length;
         for(int i = 0; i < len; i++){
-           while(!deque.isEmpty() && deque.peekLast() > nums[i] && deque.size() - 1 + len - i >= k){
+           while(!deque.isEmpty() && nums[i] < deque.peekLast() && deque.size() + len - 1 - i >= k){
                deque.pollLast();
            }
            if(deque.size() < k){

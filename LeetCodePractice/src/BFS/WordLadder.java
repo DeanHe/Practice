@@ -1,20 +1,35 @@
 package BFS;
-/*Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that:
+/*
+Given two words beginWord and endWord, and a dictionary wordList, return the length of the shortest transformation sequence from beginWord to endWord, such that:
 
-Only one letter can be changed at a time
-Each intermediate word must exist in the dictionary
-Example
-Given:
-start = "hit"
-end = "cog"
-dict = ["hot","dot","dog","lot","log"]
-As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
-return its length 5.
-
-Notice
+Only one letter can be changed at a time.
+Each transformed word must exist in the word list.
 Return 0 if there is no such transformation sequence.
-All words have the same length.
-All words contain only lowercase alphabetic characters.*/
+
+
+
+Example 1:
+
+Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+Output: 5
+Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", return its length 5.
+Example 2:
+
+Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]
+Output: 0
+Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
+
+
+Constraints:
+
+1 <= beginWord.length <= 100
+endWord.length == beginWord.length
+1 <= wordList.length <= 5000
+wordList[i].length == beginWord.length
+beginWord, endWord, and wordList[i] consist of lowercase English letters.
+beginWord != endWord
+All the strings in wordList are unique.
+*/
 
 import java.util.*;
 
@@ -22,22 +37,16 @@ public class WordLadder {
 	/**
      * @param start, a string
      * @param end, a string
-     * @param dict, a set of string
+     * @param wordList, a list of string
      * @return an integer
      */
-   public int ladderLength(String start, String end, Set<String> dict) {
-       // write your code here
-       if(dict == null || dict.isEmpty()){
-           return 0;
-       }
-       if(start.equals(end)){
-           return 1;
-       }
-       dict.add(end);
+   public int ladderLength(String start, String end, List<String> wordList) {
+       Set<String> dict = new HashSet<>(wordList);
        int dist = 1;
        HashSet<String> visited = new HashSet<>();
        Queue<String> queue = new LinkedList<>();
        queue.offer(start);
+       visited.add(start);
        while(!queue.isEmpty()){
            int size = queue.size();
            for(int i = 0; i < size; i++){
@@ -45,11 +54,11 @@ public class WordLadder {
                if(end.equals(cur)){
                    return dist;
                }
-               visited.add(cur);
-               ArrayList<String> neighbors = findNeighbors(cur, dict);
+               List<String> neighbors = findNeighbors(cur, dict);
                for(String nb : neighbors){
                    if(!visited.contains(nb)){
                        queue.offer(nb);
+                       visited.add(nb);
                    }
                }
            }
@@ -57,13 +66,13 @@ public class WordLadder {
        }
        return 0;
    }
-   private ArrayList<String> findNeighbors(String start, Set<String> dict){
-       ArrayList<String> res = new ArrayList<>();
-       int len = start.length();
+   private List<String> findNeighbors(String str, Set<String> dict){
+       List<String> res = new ArrayList<>();
+       int len = str.length();
        for(int i = 0; i < len; i++){
            for(char c = 'a'; c <= 'z'; c++){
-               if(c != start.charAt(i)){
-                   String temp = replace(start, i, c);
+               if(c != str.charAt(i)){
+                   String temp = replace(str, i, c);
                    if(dict.contains(temp)){
                        res.add(temp);
                    }
