@@ -39,7 +39,7 @@ public class ShortestSubarrayWithSumAtLeastK {
             preSum[i + 1] = preSum[i] + A[i];
         }
         for(int i = 0; i <= len; i++){
-            while(!deque.isEmpty() && preSum[deque.peekLast()] > preSum[i]){
+            while(!deque.isEmpty() && preSum[i] < preSum[deque.peekLast()]){
                 deque.pollLast();
             }
             while(!deque.isEmpty() && preSum[i] - preSum[deque.peekFirst()] >= K){

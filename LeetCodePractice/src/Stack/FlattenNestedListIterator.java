@@ -41,33 +41,29 @@ public class FlattenNestedListIterator {
 		Stack<NestedInteger> stack;
 		public NestedIterator(List<NestedInteger> nestedList) {
 			stack = new Stack<>();
-			// Initialize your data structure here
-			for(int i = 0; i < nestedList.size(); i++){
-				stack.push(nestedList.get(i));
-			}
+			prepareStack(nestedList);
 		}
 
 		// @return {boolean} true if the iteration has more element or false
 		@Override
 		public boolean hasNext() {
-			while(!stack.isEmpty()){
-				NestedInteger cur = stack.peek();
-				if(cur.isInteger()){
-					return true;
-				}
-				stack.pop();
-				List<NestedInteger> ls = cur.getList();
-				for(int i = ls.size() - 1; i >= 0; i--){
-					stack.push(ls.get(i));
-				}
+			while(!stack.isEmpty() && !stack.peek().isInteger()){
+				List<NestedInteger> ls = stack.pop().getList();
+				prepareStack(ls);
 			}
-			return false;
+			return !stack.isEmpty();
 		}
 
 		// @return {int} the next element in the iteration
 		@Override
 		public Integer next() {
 			return stack.pop().getInteger();
+		}
+
+		private void prepareStack(List<NestedInteger> nestedList){
+			for(int i = nestedList.size() - 1; i >= 0; i--){
+				stack.push(nestedList.get(i));
+			}
 		}
 		
 		public void remove() {

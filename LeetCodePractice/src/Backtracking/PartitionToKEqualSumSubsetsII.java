@@ -1,6 +1,7 @@
 package Backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -19,60 +20,47 @@ Note:
 0 < nums[i] < 10000.
 */
 public class PartitionToKEqualSumSubsetsII {
-	int len, target, k;
-	boolean[] visited;
-	int[]nums, subsetSum;
-	List<List<Integer>> res;
+    public List<List<Integer>> canPartitionKSubsets(int[] nums, int k) {
+        Arrays.sort(nums);
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        if (k <= 0 || sum % k != 0) {
+            return res;
+        }
+        for (int i = 0; i < k; i++) {
+            res.add(new ArrayList<>());
+        }
+        dfs(nums, new int[k], res, nums.length - 1, sum / k);
+        return res;
+    }
 
-	public List<List<Integer>> canPartitionKSubsets(int[] nums, int k) {
-		this.nums = nums;
-		int sum = 0;
-		len = nums.length;
-		visited = new boolean[len];
-		for (int i = 0; i < len; i++) {
-			sum += nums[i];
-		}
-		res = new ArrayList<>();
-		if (k <= 0 || sum % k != 0) {
-			return res;
-		}
-		for (int i = 0; i < k; i++) {
-			res.add(new ArrayList<>());
-		}
-		subsetSum = new int[k];
-		target = sum / k;
-		this.k = k;
-		dfs(0);
-		return res;
-	}
-
-	private boolean dfs(int idx) {
-		boolean partEqual = true;
-		for (int i = 0; i < k; i++) {
-			partEqual = partEqual && (subsetSum[i] == target);
-			if (subsetSum[i] > target) {
-				return false;
-			}
-		}
-		if (partEqual) {
-			return true;
-		}
-		for (int i = idx; i < len; i++) {
-			for (int j = 0; j < k; j++) {
-				List<Integer> subset = res.get(j);
-				if (!visited[i]) {
-					visited[i] = true;
-					subset.add(nums[i]);
-					subsetSum[j] += nums[i];
-					if (dfs(i + 1)) {
-						return true;
-					}
-					subset.remove(subset.size() - 1);
-					subsetSum[j] -= nums[i];
-					visited[i] = false;
-				}
-			}
-		}
-		return false;
-	}
+    private boolean dfs(int[] nums, int[] sums, List<List<Integer>> res, int pos, int target) {
+        if (pos == -1) {
+            for (int sum : sums) {
+                if (sum != target) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        for (int sum : sums) {
+            if (sum > target) {
+                return false;
+            }
+        }
+        for (int i = 0; i < sums.length; i++) {
+            sums[i] += nums[pos];
+            res.get(i).add(nums[pos]);
+            if (dfs(nums, sums, res, pos - 1, target)) {
+                return true;
+            }
+            sums[i] -= nums[pos];
+            int last = res.get(i).size() - 1;
+            res.get(i).remove(last);
+        }
+        return false;
+    }
 }

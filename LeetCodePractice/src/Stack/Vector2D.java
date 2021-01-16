@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-/*Implement an iterator to flatten a 2d vector.
+/*
+Implement an iterator to flatten a 2d vector.
 
 Example
 Example 1:
@@ -14,7 +15,8 @@ Output:[1,2,3,4,5,6]
 Example 2:
 
 Input:[[7,9],[5]]
-Output:[7,9,5]*/
+Output:[7,9,5]
+*/
 public class Vector2D implements Iterator<Integer> {
 	Stack<Integer> stack;
 	Stack<List<Integer>> listStack;

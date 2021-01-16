@@ -32,6 +32,11 @@ import java.util.Deque;
         solutions
         We need to know the maximum in the window of size k.
         Use deque will be O(N)
+
+        1 maintain deque in correct window size
+        2 get the valid max previous sum
+        3 maintain deque in descending order
+        4 push current idx to deque
 */
 public class ConstrainedSubsequenceSum {
     public int constrainedSubsetSum(int[] nums, int k) {
@@ -42,17 +47,19 @@ public class ConstrainedSubsequenceSum {
         int[] dp = new int[len];
         //dp[i] = nums[i] + Max(dp[i - k]...dp[i - 1])
         for (int i = 0; i < len; i++) {
-            if (i > k && deque.peekFirst() == i - k - 1) {
+            dp[i] = nums[i];
+            while (!deque.isEmpty() && i - deque.peekFirst() > k) {
                 deque.pollFirst();
             }
-            dp[i] = nums[i];
             if (!deque.isEmpty()) {
-                dp[i] += Math.max(0, dp[deque.peekFirst()]);
+                dp[i] += dp[deque.peekFirst()];
             }
             while (!deque.isEmpty() && dp[deque.peekLast()] < dp[i]) {
                 deque.pollLast();
             }
-            deque.offerLast(i);
+            if(dp[i] > 0){
+                deque.offerLast(i);
+            }
             res = Math.max(dp[i], res);
         }
         return res;

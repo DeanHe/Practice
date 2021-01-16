@@ -32,9 +32,9 @@ Constraints:
 */
 public class MaximumEqualFrequency {
 	public int maxEqualFreq(int[] nums) {
-		//element: freq
+		//element: cnt
 		Map<Integer, Integer> freqMap = new HashMap<>();
-		//freq: elements count of this freq
+		//cnt: elements count of this cnt
 		Map<Integer, Integer> freqCntMap = new HashMap<>();
         int res = 0;
         for(int i = 0; i < nums.length; i++) {

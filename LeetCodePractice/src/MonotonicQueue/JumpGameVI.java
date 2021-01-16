@@ -37,27 +37,26 @@ Constraints:
 
 analysis:
 sliding window,
-dp[i] means max score to start on nums[i]
+dp[i] means max score to start on nums[0] and ended on nums[i]
  */
 public class JumpGameVI {
     public int maxResult(int[] nums, int k) {
         int len = nums.length;
         int[] dp = new int[len];
         Deque<Integer> deque = new ArrayDeque<>();
-        for (int i = len - 1; i >= 0; i--) {
+        for (int i = 0; i < len; i++) {
             dp[i] = nums[i];
-            if (!deque.isEmpty()) {
+            if (!deque.isEmpty() && i - deque.peekFirst() > k) {
+                deque.pollFirst();
+            }
+            if(!deque.isEmpty()){
                 dp[i] += dp[deque.peekFirst()];
             }
             while (!deque.isEmpty() && dp[i] > dp[deque.peekLast()]) {
                 deque.pollLast();
             }
             deque.offerLast(i);
-            while (i + k <= deque.peekFirst()) {
-                deque.pollFirst();
-            }
-
         }
-        return dp[0];
+        return dp[len - 1];
     }
 }

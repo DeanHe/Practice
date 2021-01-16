@@ -53,28 +53,27 @@ public class FindMinimumTimeToFinishAllJobs {
 
     }
 
-    private void dfs(int[] jobs, int[] arr, int pos) {
+    private void dfs(int[] jobs, int[] sums, int pos) {
         if (pos == -1) {
             int maxSum = 0;
-            for (int sum : arr) {
+            for (int sum : sums) {
                 maxSum = Math.max(maxSum, sum);
             }
             res = Math.min(res, maxSum);
             return;
         }
-        for (int sum : arr) {
+        for (int sum : sums) {
             if (sum > res) {
                 return;
             }
         }
-        boolean res = false;
-        for (int i = 0; i < arr.length; i++) {
-            if (i > 0 && arr[i] == arr[i - 1]) {
+        for (int i = 0; i < sums.length; i++) {
+            if (i > 0 && sums[i] == sums[i - 1]) {
                 continue;
             }
-            arr[i] += jobs[pos];
-            dfs(jobs, arr, pos - 1);
-            arr[i] -= jobs[pos];
+            sums[i] += jobs[pos];
+            dfs(jobs, sums, pos - 1);
+            sums[i] -= jobs[pos];
         }
     }
 

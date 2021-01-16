@@ -1,5 +1,6 @@
-package Greedy;
-/*Given a string which contains only lowercase letters, remove duplicate letters so that every letter appear once and only once. You must make sure your result is the smallest in lexicographical order among all possible results.
+package Stack.MonotonicStack;
+/*
+Given a string which contains only lowercase letters, remove duplicate letters so that every letter appear once and only once. You must make sure your result is the smallest in lexicographical order among all possible results.
 
 Example 1:
 
@@ -12,6 +13,8 @@ Output: "acdb"
 
 analysis:
 The runtime is O(26 * n) = O(n).
+tag:greedy
+stack
 */
 public class RemoveDuplicateLetters {
 	public String removeDuplicateLetters(String s) {

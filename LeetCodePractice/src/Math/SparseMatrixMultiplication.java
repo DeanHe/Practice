@@ -30,7 +30,8 @@ Input:
 [[1,0],[0,1]]
 [[0,1],[1,0]]
 Output:
-[[0,1],[1,0]]*/
+[[0,1],[1,0]]
+*/
 public class SparseMatrixMultiplication {
 	/**
      * @param A: a sparse matrix

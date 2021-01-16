@@ -8,7 +8,6 @@ Gieve s = lintcode,
 dict = ["de", "ding", "co", "code", "lint"].
 
 A solution is ["lint code", "lint co de"].
-O(M * 2 ^ N) in the worse case scenario
 O(M * N ^ 2) worst case, where N is s length, and M is wordDict size
 */
 import java.util.*;

@@ -36,6 +36,8 @@ find if the array can be partitioned into two subsets such that the sum of eleme
         Partition to K Equal Sum Subsets
 */
 
+import java.util.Arrays;
+
 public class PartitionEqualSubsetSum {
     public boolean canPartition(int[] nums) {
         int len = nums.length, sum = 0, target = 0;
@@ -65,6 +67,7 @@ public class PartitionEqualSubsetSum {
 
     //dfs slow
     public boolean canPartitionII(int[] nums) {
+        Arrays.sort(nums);
         int sum = 0;
         for(int n : nums){
             sum += n;
@@ -72,20 +75,32 @@ public class PartitionEqualSubsetSum {
         if(sum % 2 == 1){
             return false;
         }
-        return dfs(nums, 0, sum / 2);
+        return dfs(nums, new int[2], nums.length - 1, sum / 2);
     }
 
-    private boolean dfs(int[] nums, int pos, int target){
-        if(target == 0){
+    private boolean dfs(int[] nums, int[] sums, int pos, int target){
+        if(pos == -1){
+            for(int sum : sums){
+                if(sum != target){
+                    return false;
+                }
+            }
             return true;
         }
-        if(target < 0){
-            return false;
+        for(int sum : sums){
+            if(sum > target){
+                return false;
+            }
         }
-        for(int i = pos; i < nums.length; i++){
-            if(dfs(nums, i + 1, target - nums[i])){
+        for(int i = 0; i < sums.length; i++){
+            if(i > 0 && sums[i] == sums[i - 1]){
+                continue;
+            }
+            sums[i] += nums[pos];
+            if(dfs(nums, sums, pos - 1, target)){
                 return true;
             }
+            sums[i] -= nums[pos];
         }
         return false;
     }
