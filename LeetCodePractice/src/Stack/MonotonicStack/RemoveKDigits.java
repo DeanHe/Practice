@@ -26,6 +26,8 @@ Explanation: Remove all the digits from the number and it is left with nothing w
 
 analysis:
 use a Monotonic increasing stack
+one can simply scan from left to right, and remove the first "peak" digit;
+the peak digit is larger than its right neighbor. One can repeat this procedure k times
 */
 public class RemoveKDigits {
 	public String removeKdigits(String num, int k) {
@@ -33,13 +35,12 @@ public class RemoveKDigits {
         if(k >= len){
         	return "0";
         }
-        //one can simply scan from left to right, and remove the first "peak" digit; 
-        //the peak digit is larger than its right neighbor. One can repeat this procedure k times
+
         Stack<Character> stack = new Stack<>();
         for(int i = 0; i < len; i++){
         	char cur = num.charAt(i);
         	//whenever meet a digit which is less than the previous digit, discard the previous one
-        	while(k > 0 && !stack.isEmpty() && stack.peek() > cur){
+        	while(k > 0 && !stack.isEmpty() && cur < stack.peek()){
         		stack.pop();
         		k--;
         	}

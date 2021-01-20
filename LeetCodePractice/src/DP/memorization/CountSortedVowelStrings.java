@@ -26,25 +26,28 @@ Output: 66045
 
 Constraints:
 
-1 <= n <= 50 
+1 <= n <= 50
+
+analysis:
+dp[n][i] means number of strings of length n using vowels up to i
  */
 public class CountSortedVowelStrings {
     public int countVowelStrings(int n) {
-        Integer[][] dp = new Integer[n + 1][5];
-        return dfs(n,0, dp);
+        Integer[][] dp = new Integer[n + 1][6];
+        return dfs(n,5, dp);
     }
 
     private int dfs(int n, int i, Integer[][] dp) {
         if(n == 0){
             return 1;
         }
-        if(i == 5){
+        if(i == 0){
             return 0;
         }
         if(dp[n][i] != null){
             return dp[n][i];
         }
-        int res = dfs(n, i + 1, dp); // skip vowel[i];
+        int res = dfs(n, i - 1, dp); // skip vowel[i];
         res += dfs(n - 1, i, dp); // take vowel[i];
         return dp[n][i] = res;
     }

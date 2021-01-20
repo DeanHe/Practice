@@ -38,14 +38,13 @@ Please do not use the built-in Deque library.
  */
 public class MyCircularDeque {
     int[] arr;
-    int capacity, cnt, front, last;
+    int cnt, front, last;
 
     /**
      * Initialize your data structure here. Set the size of the deque to be k.
      */
     public MyCircularDeque(int k) {
         arr = new int[k];
-        capacity = k;
         cnt = 0;
         front = 0;
         last = 1;
@@ -55,11 +54,11 @@ public class MyCircularDeque {
      * Adds an item at the front of Deque. Return true if the operation is successful.
      */
     public boolean insertFront(int value) {
-        if (cnt == capacity) {
+        if (cnt == arr.length) {
             return false;
         }
         arr[front] = value;
-        front = (front - 1 + capacity) % capacity;
+        front = (front - 1 + arr.length) % arr.length;
         cnt++;
         return true;
     }
@@ -68,11 +67,11 @@ public class MyCircularDeque {
      * Adds an item at the rear of Deque. Return true if the operation is successful.
      */
     public boolean insertLast(int value) {
-        if (cnt == capacity) {
+        if (cnt == arr.length) {
             return false;
         }
         arr[last] = value;
-        last = (last + 1) % capacity;
+        last = (last + 1) % arr.length;
         cnt++;
         return true;
     }
@@ -84,7 +83,7 @@ public class MyCircularDeque {
         if (cnt == 0) {
             return false;
         }
-        front = (front + 1) % capacity;
+        front = (front + 1) % arr.length;
         cnt--;
         return true;
     }
@@ -96,7 +95,7 @@ public class MyCircularDeque {
         if (cnt == 0) {
             return false;
         }
-        last = (last - 1 + capacity) % capacity;
+        last = (last - 1 + arr.length) % arr.length;
         cnt--;
         return true;
     }
@@ -108,7 +107,7 @@ public class MyCircularDeque {
         if (cnt == 0) {
             return -1;
         }
-        return arr[(front + 1) % capacity];
+        return arr[(front + 1) % arr.length];
     }
 
     /**
@@ -118,7 +117,7 @@ public class MyCircularDeque {
         if (cnt == 0) {
             return -1;
         }
-        return arr[(last - 1 + capacity) % capacity];
+        return arr[(last - 1 + arr.length) % arr.length];
     }
 
     /**
@@ -132,7 +131,7 @@ public class MyCircularDeque {
      * Checks whether the circular deque is full or not.
      */
     public boolean isFull() {
-        return cnt == capacity;
+        return cnt == arr.length;
     }
 }
 /**

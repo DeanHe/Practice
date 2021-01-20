@@ -21,6 +21,12 @@ Note:
 1 <= A.length <= 30000
 -10000 <= A[i] <= 10000
 2 <= K <= 10000
+
+analysis:
+A[i:j] % K == 0 means
+(preSum[j] - preSum[i - 1]) % K == 0
+preSum[j] % K == preSum[i - 1] % K
+means the remainder should be the same
  */
 public class SubarraySumsDivisibleByK {
     public int subarraysDivByK(int[] A, int K) {

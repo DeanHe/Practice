@@ -11,39 +11,31 @@ Example 2:
 Input:"aba"
 Output:"aba"
 Challenge
-O(n2) time is acceptable. Can you do it in O(n) time.*/
+O(n2) time is acceptable. Can you do it in O(n) time.
+*/
 public class LongestPalindromicSubstring {
+	int maxLen = 0, start = 0;
 	public String longestPalindrome(String s) {
-		int length = s.length();
-		int begin = 0;
-		int maxlen = 1;
-		boolean[][] table = new boolean[length][length];
-
-		for (int i = 0; i < length; i++) {
-			table[i][i] = true;
+		if(s == null || s.length() < 2){
+			return s;
 		}
-
-		for (int i = 0; i < length - 1; i++) {
-			if (s.charAt(i) == s.charAt(i + 1)) {
-				table[i][i + 1] = true;
-				maxlen = 2;
-				begin = i;
-			}
+		int len = s.length();
+		for(int i = 0; i < len - 1; i++){
+			expand(s, i, i);
+			expand(s, i, i + 1);
 		}
+		return s.substring(start, start + maxLen);
+	}
 
-		for (int len = 3; len <= length; len++) {
-			for (int i = 0; i + len - 1 < length; i++) {
-				int j = i + len - 1;
-				if (s.charAt(i) == s.charAt(j) && table[i + 1][j - 1]) {
-					table[i][j] = true;
-					if (len > maxlen) {
-						maxlen = len;
-						begin = i;
-					}
-				}
-			}
+	private void expand(String str, int l, int r){
+		int len = str.length();
+		while(l >= 0 && r < len && str.charAt(l) == str.charAt(r)){
+			l--;
+			r++;
 		}
-
-		return s.substring(begin, begin + maxlen);
+		if(r - l - 1 > maxLen){
+			maxLen = r - l - 1;
+			start = l + 1;
+		}
 	}
 }
