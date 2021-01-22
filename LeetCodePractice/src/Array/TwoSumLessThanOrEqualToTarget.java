@@ -2,8 +2,13 @@ package Array;
 
 import java.util.*;
 
+/*
+
 // https://www.lintcode.com/problem/two-sum-less-than-or-equal-to-target/description
-/*Given an array of integers, find how many pairs in the array such that their sum is less than or equal to a specific target number. Please return the number of pairs.*/
+
+Given an array of integers, find how many pairs in the array such that their sum is less than or equal to a specific target number.
+Please return the number of pairs.
+*/
 public class TwoSumLessThanOrEqualToTarget {
 	/**
      * @param nums: an array of integer

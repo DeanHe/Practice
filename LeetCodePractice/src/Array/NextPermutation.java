@@ -18,34 +18,35 @@ analysis:
 3.The last step is to make the remaining higher position part as small as possible, we just have to reversely sort the num[i,n-1]
  */
 public class NextPermutation {
-	public void nextPermutation(int[] num) {
-		if (num == null || num.length == 0) {
+	public void nextPermutation(int[] nums) {
+		if (nums == null || nums.length == 0) {
 			return;
 		}
+		int len = nums.length;
 		// step 1 Find the largest index k such that a[k] < a[k + 1]. If no such
 		// index exists, the permutation is the last permutation.
 		int idx = -1;
-		for (int i = num.length - 2; i >= 0; i--) {
-			if (num[i] < num[i + 1]) {
+		for (int i = len - 2; i >= 0; i--) {
+			if (nums[i] < nums[i + 1]) {
 				idx = i;
 				break;
 			}
 		}
 		if (idx == -1) {
-			reverse(num, 0, num.length - 1);
+			reverse(nums, 0, len - 1);
 			return;
 		}
 		// step 2 Find the smallest index l such that a[k] < a[l]. Since k + 1
 		// is such an index, l is well defined and satisfies k < l.
-		for (int i = num.length - 1; i >= 0; i--) {
-			if (num[idx] < num[i]) {
-				swap(num, i, idx);
+		for (int i = len - 1; i >= 0; i--) {
+			if (nums[idx] < nums[i]) {
+				swap(nums, i, idx);
 				break;
 			}
 		}
 		// step 3 Reverse the sequence from a[k + 1] up to and including the
 		// final element a[n]
-		reverse(num, idx + 1, num.length - 1);
+		reverse(nums, idx + 1, len - 1);
 	}
 
 	private void swap(int[] array, int i, int j) {
