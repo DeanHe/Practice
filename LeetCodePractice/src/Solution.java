@@ -88,40 +88,42 @@ public class Solution {
 		*/
     }
 
-    public double findMedianSortedArrays(int A[], int B[]) {
-        int len = A.length + B.length;
-        if (len % 2 == 0) {
-            // even
-            return (findKth(A, 0, B, 0, len / 2) + findKth(A, 0, B, 0, len / 2 + 1)) / 2.0;
-        } else {
-            // odd
-            return findKth(A, 0, B, 0, len / 2 + 1);
-        }
+    public int[] constructDistancedSequence(int n) {
+        int[] res = new int[2 * n - 1];
+        boolean[] visited = new boolean[n + 1];
+        dfs(res, visited, 0, n);
+        return res;
     }
 
-    private double findKth(int[] A, int as, int[] B, int bs, int K) {
-        int alen = A.length, blen = B.length;
-        if(as >= alen){
-            return B[bs + K - 1];
-        } 
-        if(bs >= blen){
-            return A[as + K - 1];
+    private boolean dfs(int[] res, boolean[] visited, int pos, int n) {
+        if (pos == res.length) {
+            return true;
         }
-        if(K == 1){
-            return Math.min(A[as], B[bs]);
-        }
-        if(as + K / 2 - 1 < alen && bs + K / 2 - 1 < blen){
-            int ca = A[as + K / 2 - 1];
-            int cb = B[bs + K / 2 - 1];
-            if(ca < cb){
-                return findKth(A, as + K / 2, B, bs, K - K / 2);
-            } else {
-                return findKth(A, as, B, bs + K / 2, K - K / 2);
-            }
-        } else if(as + K / 2 - 1 < alen && bs + K / 2 - 1 >= blen){
-            return findKth(A, as + K / 2, B, bs, K - K / 2);
+        if(res[pos] != 0){
+            return dfs(res, visited, pos + 1, n);
         } else {
-            return findKth(A, as, B, bs + K / 2, K - K / 2);
+            for (int i = 1; i <= n; i++) {
+                if(!visited[i]){
+                    visited[i] = true;
+                    res[pos] = i;
+                    if(i == 1){
+                        if(dfs(res, visited, pos + 1, n)){
+                            return true;
+                        }
+                    } else {
+                        if(pos + i < res.length && res[pos + i] == 0){
+                            res[pos + i] = i;
+                            if(dfs(res, visited, pos + 1, n)){
+                                return true;
+                            }
+                            res[pos + i] = 0;
+                        }
+                    }
+                    visited[i] = false;
+                    res[pos] = 0;
+                }
+            }
+            return false;
         }
     }
 }
