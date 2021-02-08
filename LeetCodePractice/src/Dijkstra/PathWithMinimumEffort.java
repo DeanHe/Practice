@@ -50,12 +50,7 @@ public class PathWithMinimumEffort {
     public int minimumEffortPath(int[][] heights) {
         int[] dirs = {0, 1, 0, -1, 0};
         int rows = heights.length, cols = heights[0].length;
-        int[][] dist = new int[rows][cols];
-        for(int r = 0; r < rows; r++){
-            for(int c = 0; c < cols; c++){
-                dist[r][c] = -1;
-            }
-        }
+        Integer[][] dist = new Integer[rows][cols];
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[2] - b[2]);
         pq.offer(new int[]{0, 0, 0});
         while(!pq.isEmpty()){
@@ -63,16 +58,15 @@ public class PathWithMinimumEffort {
             int r = cur[0];
             int c = cur[1];
             int d = cur[2];
-            if(dist[r][c] != -1){
-                continue;
-            }
-            dist[r][c] = d;
-            for(int i = 0; i < dirs.length - 1; i++){
-                int nb_r = r + dirs[i];
-                int nb_c = c + dirs[i + 1];
-                if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && dist[nb_r][nb_c] == -1){
-                    int[] nb = new int[]{nb_r, nb_c, Math.max(d, Math.abs(heights[r][c] - heights[nb_r][nb_c]))};
-                    pq.offer(nb);
+            if(dist[r][c] == null){
+                dist[r][c] = d;
+                for(int i = 0; i < dirs.length - 1; i++){
+                    int nb_r = r + dirs[i];
+                    int nb_c = c + dirs[i + 1];
+                    if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && dist[nb_r][nb_c] == null){
+                        int[] nb = new int[]{nb_r, nb_c, Math.max(d, Math.abs(heights[r][c] - heights[nb_r][nb_c]))};
+                        pq.offer(nb);
+                    }
                 }
             }
         }

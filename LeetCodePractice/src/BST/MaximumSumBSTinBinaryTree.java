@@ -1,5 +1,7 @@
 package BST;
-/*Given a binary tree root, the task is to return the maximum sum of all keys of any sub-tree which is also a Binary Search Tree (BST).
+/*
+1373
+Given a binary tree root, the task is to return the maximum sum of all keys of any sub-tree which is also a Binary Search Tree (BST).
 
         Assume a BST is defined as follows:
         The left subtree of a node contains only nodes with keys less than the node's key.
@@ -32,7 +34,11 @@ package BST;
         Constraints:
 
         Each tree has at most 40000 nodes..
-        Each node's value is between [-4 * 10^4 , 4 * 10^4].*/
+        Each node's value is between [-4 * 10^4 , 4 * 10^4].
+
+        analysis:
+        post oder traversal to carry BSTinfo object back to parent node
+*/
 public class MaximumSumBSTinBinaryTree {
     int maxSum = Integer.MIN_VALUE;
     public int maxSumBST(TreeNode root) {

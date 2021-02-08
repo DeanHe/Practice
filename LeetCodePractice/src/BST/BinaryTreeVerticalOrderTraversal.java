@@ -63,8 +63,7 @@ public class BinaryTreeVerticalOrderTraversal {
 			for(int i = 0; i < size; i++){
 				TreeNode cur = tq.poll();
 				int col = cq.poll();
-				level.putIfAbsent(col, new ArrayList<>());
-				level.get(col).add(cur.val);
+				level.computeIfAbsent(col, x -> new ArrayList<>()).add(cur.val);
 				if(cur.left != null){
 					tq.offer(cur.left);
 					cq.offer(col - 1);
@@ -77,8 +76,7 @@ public class BinaryTreeVerticalOrderTraversal {
 			for(int col : level.keySet()){
 				List<Integer> ls = level.get(col);
 				Collections.sort(ls);
-				map.putIfAbsent(col, new ArrayList<>());
-				map.get(col).addAll(ls);
+				map.computeIfAbsent(col, x -> new ArrayList<>()).addAll(ls);
 			}
 		}
 		for(List<Integer> slice : map.values()){

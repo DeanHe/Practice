@@ -1,8 +1,9 @@
-package Stack;
+package DesignDataStructure;
 
 import java.util.Stack;
 
 /*
+#1381
         Design a stack which supports the following operations.
         Implement the CustomStack class:
 
@@ -40,6 +41,10 @@ import java.util.Stack;
         1 <= k <= 1000
         0 <= val <= 100
         At most 1000 calls will be made to each method of increment, push and pop each separately.
+
+analysis:
+using preSum backward to lazy load INC when pop
+Time Complexity: O(1)
 */
 public class CustomStack {
     int maxSize;
@@ -61,6 +66,9 @@ public class CustomStack {
     public int pop() {
         if (!stack.empty()) {
             int idx = stack.size() - 1;
+            if(idx > 0){
+                inc[idx - 1] += inc[idx];
+            }
             int res = stack.pop() + inc[idx];
             inc[idx] = 0;
             return res;
@@ -70,9 +78,9 @@ public class CustomStack {
     }
 
     public void increment(int k, int val) {
-        int count = k > stack.size() ? stack.size() : k;
-        for (int i = 0; i < count; i++) {
-            inc[i] += val;
+        int idx = k > stack.size() ? stack.size() - 1 : k - 1;
+        if(idx >= 0){
+            inc[idx] += val;
         }
     }
 }

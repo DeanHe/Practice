@@ -1,43 +1,52 @@
   package BinarySearch;
 /*
-There is an integer array which has the following features:
+#162
+A peak element is an element that is strictly greater than its neighbors.
 
-The numbers in adjacent positions are different.
-A[0] < A[1] && A[A.length - 2] > A[A.length - 1].
-We define a position P is a peak if:
+Given an integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
 
-A[P] > A[P-1] && A[P] > A[P+1]
-Find a peak element in this array. Return the index of the peak.
+You may imagine that nums[-1] = nums[n] = -∞.
 
-It's guaranteed the array has at least one peak.
-The array may contain multiple peeks, find any of them.
-The array has at least 3 numbers in it.
-Have you met this question in a real interview?  
-Example
-Given [1, 2, 1, 3, 4, 5, 7, 6]
 
-Return index 1 (which is number 2) or 6 (which is number 7)
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
+Example 2:
+
+Input: nums = [1,2,1,3,5,6,4]
+Output: 5
+Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
+
+
+Constraints:
+
+1 <= nums.length <= 1000
+-2^31 <= nums[i] <= 2^31 - 1
+nums[i] != nums[i + 1] for all valid i.
 
 Challenge
 Time complexity O(logN).
 */
 public class FindPeakElement {
 	/**
-     * @param A: An integers array.
+     * @param nums: An integers array.
      * @return: return any of peek positions.
      */
-    public int findPeak(int[] A) {
-        int len = A.length;
+    public int findPeak(int[] nums) {
+        int len = nums.length;
         int start = 0, end = len - 1, mid;
         while(start + 1 < end){
         	mid = start + (end - start) / 2;
-        	if(A[mid] < A[mid + 1]){
+        	if(nums[mid] < nums[mid + 1]){
         		start = mid;
         	} else {
         		end = mid;
         	}
         }
-        if(A[start] < A[end]){
+        if(nums[start] < nums[end]){
         	return end;
         } else {
         	return start;

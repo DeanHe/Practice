@@ -1,23 +1,12 @@
-import tiktok.FindMaximumSummationOfSubarray;
-import tiktok.IncrementalMemoryLeak;
-import tiktok.MinimumCharacterTransformation;
-import tiktok.RealProgrammerGame;
-import tiktok.SelectPairs;
-import tiktok.VersionControl;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import Contest.ClosestSubsequenceSum;
 
 
 public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        SelectPairs f = new SelectPairs();
-        int[] arr = {2, 7, 4, 1, 8, 1};
-        int res = f.calculate(arr);
-        System.out.println(res);
+        ClosestSubsequenceSum il = new ClosestSubsequenceSum();
+        il.minAbsDifference(new int[]{1,2}, 1 );
         /*
         OneDmineSweep oneDmineSweep = new OneDmineSweep();
         int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
@@ -87,43 +76,41 @@ public class Solution {
         }
 		*/
     }
-
-    public int[] constructDistancedSequence(int n) {
-        int[] res = new int[2 * n - 1];
-        boolean[] visited = new boolean[n + 1];
-        dfs(res, visited, 0, n);
-        return res;
+    public void nextPermutation(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return;
+        }
+        int len = nums.length;
+        int idx = -1;
+        for(int i = len - 2; i >= 0; i--){
+            if(nums[i] < nums[i + 1]){
+                idx = i;
+                break;
+            }
+        }
+        if(idx == -1){
+            reverse(nums, 0, len - 1);
+        }
+        for(int i = len - 1; i >= 0; i--){
+            if(nums[idx] < nums[i]){
+                swap(nums, idx, i);
+                break;
+            }
+        }
+        reverse(nums, idx + 1, len - 1);
     }
 
-    private boolean dfs(int[] res, boolean[] visited, int pos, int n) {
-        if (pos == res.length) {
-            return true;
+    private void reverse(int[] nums, int s, int e){
+        while(s < e){
+            swap(nums, s, e);
+            s++;
+            e--;
         }
-        if(res[pos] != 0){
-            return dfs(res, visited, pos + 1, n);
-        } else {
-            for (int i = 1; i <= n; i++) {
-                if(!visited[i]){
-                    visited[i] = true;
-                    res[pos] = i;
-                    if(i == 1){
-                        if(dfs(res, visited, pos + 1, n)){
-                            return true;
-                        }
-                    } else {
-                        if(pos + i < res.length && res[pos + i] == 0){
-                            res[pos + i] = i;
-                            if(dfs(res, visited, pos + 1, n)){
-                                return true;
-                            }
-                            res[pos + i] = 0;
-                        }
-                    }
-                    visited[i] = false;
-                    res[pos] = 0;
-                }
-            }
-            return false;
-        }
+    }
+
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }

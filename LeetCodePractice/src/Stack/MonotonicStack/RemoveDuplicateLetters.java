@@ -1,8 +1,14 @@
 package Stack.MonotonicStack;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 /*
+#316
+
 Given a string which contains only lowercase letters, remove duplicate letters so that every letter appear once and only once.
 You must make sure your result is the smallest in lexicographical order among all possible results.
 
@@ -27,22 +33,20 @@ public class RemoveDuplicateLetters {
             return s;
         }
         Stack<Character> stack = new Stack<>();
-        int[] count = new int[26];
-        boolean[] visited = new boolean[26];
+        Map<Character, Integer> last = new HashMap<>();
+        Set<Character> visited = new HashSet<>();
         char[] arr = s.toCharArray();
-        for (char c : arr) {
-            count[c - 'a']++;
+        for (int i = 0; i < arr.length; i++) {
+            last.put(arr[i], i);
         }
-        for (char c : arr) {
-            int idx = c - 'a';
-            count[idx]--;
-            if (!visited[idx]) {
-                while (!stack.isEmpty() && c < stack.peek() && count[stack.peek() - 'a'] > 0) {
+        for (int i = 0; i < arr.length; i++) {
+            if (!visited.contains(arr[i])) {
+                while (!stack.isEmpty() && arr[i] < stack.peek() && i < last.get(stack.peek())) {
                     char pre_c = stack.pop();
-                    visited[pre_c - 'a'] = false;
+                    visited.remove(pre_c);
                 }
-                stack.push(c);
-                visited[idx] = true;
+                stack.push(arr[i]);
+                visited.add(arr[i]);
             }
         }
         StringBuilder sb = new StringBuilder();

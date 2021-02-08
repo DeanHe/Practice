@@ -42,9 +42,67 @@ Constraints:
 graph[i][j] != i
 graph[i] is unique.
 The mouse and the cat can always move.
+
+analysis:
+dfs + memo
+dp[m][c][s] means the mouse in position m, cat in position c at step s, what is final result
+
+There are  n nodes, so when after 2n steps if we still can't decide who wins, the chase game will continue for ever and return 0
+There are totally 2n* n * n = 2n^3 status, we may not reach every position. because we only can move along the graph's edges
+
+TC O(N ^ 3)
  */
 public class CatAndMouse {
+    int len;
     public int catMouseGame(int[][] graph) {
+        len = graph.length;
+        Integer[][][] dp = new Integer[len][len][2 * len];
+        return win(graph, dp, 0, 1, 2);
+    }
 
+    private int win(int[][] graph, Integer[][][] dp, int step, int mouse, int cat){
+        if(step == len * 2){
+            return 0;
+        }
+        if(mouse == cat){
+            return 2;
+        }
+        if(mouse == 0){
+            return 1;
+        }
+        if(dp[mouse][cat][step] != null){
+            return dp[mouse][cat][step];
+        }
+        if(step % 2 == 0){ // mouse turn
+            boolean canDraw = false;
+            for(int nb : graph[mouse]){
+                int res = win(graph, dp, step + 1, nb, cat);
+                if(res == 1){
+                    return dp[mouse][cat][step] = 1;
+                } else if(res == 0){
+                    canDraw = true;
+                }
+            }
+            if(canDraw){
+                return dp[mouse][cat][step] = 0;
+            }
+            return dp[mouse][cat][step] = 2;
+        } else { // cat turn
+            boolean canDraw = false;
+            for(int nb : graph[cat]){
+                if(nb != 0){
+                    int res = win(graph, dp, step + 1, mouse, nb);
+                    if(res == 2){
+                        return dp[mouse][cat][step] = 2;
+                    } else if(res == 0){
+                        canDraw = true;
+                    }
+                }
+            }
+            if(canDraw){
+                return dp[mouse][cat][step] = 0;
+            }
+            return dp[mouse][cat][step] = 1;
+        }
     }
 }

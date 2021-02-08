@@ -43,7 +43,7 @@ public class TrappingRainWaterII {
     	int rows = heights.length;
     	int cols = heights[0].length;
         boolean[][] visited = new boolean[rows][cols];
-        PriorityQueue<Cell> minHeap = new PriorityQueue<Cell>((a, b) -> {
+        PriorityQueue<Cell> minHeap = new PriorityQueue<>((a, b) -> {
         	return a.height - b.height;
         });
         // Initially, add all the Cells which are on borders to the queue.

@@ -36,10 +36,15 @@ Output: 3
 Constraints:
 
 n == nums.length
-2 <= n <= 105
-1 <= nums[i] <= 109
+2 <= n <= 10^5
+1 <= nums[i] <= 10^9
 
 analysis:
+observation:
+1 even number can't get bigger
+2  we can shrink the even number multiple times to get an odd number, after that, it wil become an even number
+
+solution: first making all numbers even, then shrink the biggest until it is odd
 time complexity: O(N * logM * logN)
 space: O(N)
  */

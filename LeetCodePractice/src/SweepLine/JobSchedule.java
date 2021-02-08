@@ -1,7 +1,11 @@
 package SweepLine;
 
 import java.util.*;
-
+/*
+Google interview
+assign jobs to machine, job has (jobId, startTime, endTime), each machine can only process one job concurrently,
+you need to add more machines when necessary. output the schedule
+ */
 public class JobSchedule {
 
     public void test(){

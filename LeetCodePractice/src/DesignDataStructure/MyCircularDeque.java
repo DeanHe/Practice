@@ -1,6 +1,8 @@
 package DesignDataStructure;
 
 /*
+#641
+
 Design your implementation of the circular double-ended queue (deque).
 
 Your implementation should support following operations:
@@ -38,7 +40,7 @@ Please do not use the built-in Deque library.
  */
 public class MyCircularDeque {
     int[] arr;
-    int cnt, front, last;
+    int cnt, s, e;
 
     /**
      * Initialize your data structure here. Set the size of the deque to be k.
@@ -46,8 +48,8 @@ public class MyCircularDeque {
     public MyCircularDeque(int k) {
         arr = new int[k];
         cnt = 0;
-        front = 0;
-        last = 1;
+        s = 0;
+        e = -1;
     }
 
     /**
@@ -57,9 +59,12 @@ public class MyCircularDeque {
         if (cnt == arr.length) {
             return false;
         }
-        arr[front] = value;
-        front = (front - 1 + arr.length) % arr.length;
+        s = (s - 1 + arr.length) % arr.length;
+        arr[s] = value;
         cnt++;
+        if(cnt == 1){ // reset end index
+            e = s;
+        }
         return true;
     }
 
@@ -67,11 +72,11 @@ public class MyCircularDeque {
      * Adds an item at the rear of Deque. Return true if the operation is successful.
      */
     public boolean insertLast(int value) {
-        if (cnt == arr.length) {
+        if (isFull()) {
             return false;
         }
-        arr[last] = value;
-        last = (last + 1) % arr.length;
+        e = (e + 1) % arr.length;
+        arr[e] = value;
         cnt++;
         return true;
     }
@@ -80,10 +85,10 @@ public class MyCircularDeque {
      * Deletes an item from the front of Deque. Return true if the operation is successful.
      */
     public boolean deleteFront() {
-        if (cnt == 0) {
+        if (isEmpty()) {
             return false;
         }
-        front = (front + 1) % arr.length;
+        s = (s + 1) % arr.length;
         cnt--;
         return true;
     }
@@ -92,10 +97,10 @@ public class MyCircularDeque {
      * Deletes an item from the rear of Deque. Return true if the operation is successful.
      */
     public boolean deleteLast() {
-        if (cnt == 0) {
+        if (isEmpty()) {
             return false;
         }
-        last = (last - 1 + arr.length) % arr.length;
+        e = (e - 1 + arr.length) % arr.length;
         cnt--;
         return true;
     }
@@ -104,20 +109,20 @@ public class MyCircularDeque {
      * Get the front item from the deque.
      */
     public int getFront() {
-        if (cnt == 0) {
+        if (isEmpty()) {
             return -1;
         }
-        return arr[(front + 1) % arr.length];
+        return arr[s];
     }
 
     /**
      * Get the last item from the deque.
      */
     public int getRear() {
-        if (cnt == 0) {
+        if (isEmpty()) {
             return -1;
         }
-        return arr[(last - 1 + arr.length) % arr.length];
+        return arr[e];
     }
 
     /**

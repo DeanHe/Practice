@@ -60,7 +60,7 @@ public class MaximumXORWithAnElementFromArray {
         }
         Arrays.sort(nums);
         Arrays.sort(queriesCopy, (a, b) -> a[1] - b[1]);
-        BinaryNode root = new BinaryNode();
+        BinaryTrieNode root = new BinaryTrieNode();
         int i = 0;
         for (int[] q : queriesCopy) {
             while (i < nums.length && nums[i] <= q[1]) {
@@ -72,20 +72,20 @@ public class MaximumXORWithAnElementFromArray {
         return res;
     }
 
-    private void insert(BinaryNode root, int num) {
-        BinaryNode cur = root;
+    private void insert(BinaryTrieNode root, int num) {
+        BinaryTrieNode cur = root;
         for (int i = 31; i >= 0; i--) {
             int bit = (num >> i) & 1;
             if (cur.arr[bit] == null) {
-                cur.arr[bit] = new BinaryNode();
+                cur.arr[bit] = new BinaryTrieNode();
             }
             cur = cur.arr[bit];
         }
     }
 
-    private int search(BinaryNode root, int num) {
+    private int search(BinaryTrieNode root, int num) {
         int sum = 0;
-        BinaryNode cur = root;
+        BinaryTrieNode cur = root;
         for (int i = 31; i >= 0; i--) {
             if(cur == null){
                 return -1;
@@ -100,13 +100,5 @@ public class MaximumXORWithAnElementFromArray {
             }
         }
         return sum;
-    }
-
-    private class BinaryNode {
-        BinaryNode[] arr;
-
-        public BinaryNode() {
-            arr = new BinaryNode[2];
-        }
     }
 }

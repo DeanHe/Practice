@@ -1,5 +1,6 @@
 package BitManipulation;
 /*
+#751ß
 Given a start IP address ip and a number of ips we need to cover n, return a representation of the range as a list (of smallest possible length) of CIDR blocks.
 A CIDR block is a string consisting of an IP, followed by a slash, and then the prefix length. For example: "123.45.67.89/20". That prefix length "20" represents the number of common prefix bits in the specified range.
 
@@ -34,7 +35,8 @@ but our answer was the shortest possible.
 
 Also note that a representation beginning with say, "255.0.0.7/30" would be incorrect,
 because it includes addresses like 255.0.0.4 = 11111111 00000000 00000000 00000100 
-that are outside the specified range.*/
+that are outside the specified range.
+*/
 
 import java.util.ArrayList;
 import java.util.List;
