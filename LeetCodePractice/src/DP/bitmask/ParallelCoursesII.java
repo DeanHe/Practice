@@ -78,9 +78,9 @@ public class ParallelCoursesII {
                 nextCourse++;
             }
             if (cur != state) { // find any next course this semester
-                int val = dfs(pre, dp, n, k, cur);
-                if (val != Integer.MAX_VALUE) {
-                    dp[state] = Math.min(dp[state], val + 1);
+                int semesters = dfs(pre, dp, n, k, cur);
+                if (semesters != Integer.MAX_VALUE) {
+                    dp[state] = Math.min(dp[state], semesters + 1);
                 }
             }
         }

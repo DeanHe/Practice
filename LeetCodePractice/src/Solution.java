@@ -1,16 +1,16 @@
 import Contest.ClosestSubsequenceSum;
+import DesignDataStructure.MinStackGeneric;
+import Dijkstra.PathWithMinimumChange;
 
 
 public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        ClosestSubsequenceSum il = new ClosestSubsequenceSum();
-        il.minAbsDifference(new int[]{1,2}, 1 );
-        /*
-        OneDmineSweep oneDmineSweep = new OneDmineSweep();
-        int[] S = {2, 6, 5, 6, 6, 6, 6, 6, 6, 6, 1};
 
+        PathWithMinimumChange p = new PathWithMinimumChange();
+        p.test();
+        /*
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
         LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();
         int res = largestIsland.largestPerimeter(events);
@@ -76,41 +76,24 @@ public class Solution {
         }
 		*/
     }
-    public void nextPermutation(int[] nums) {
-        if(nums == null || nums.length == 0){
-            return;
+    public int numDecodings(String s) {
+        if(s == null || s.length() == 0){
+            return 0;
         }
-        int len = nums.length;
-        int idx = -1;
-        for(int i = len - 2; i >= 0; i--){
-            if(nums[i] < nums[i + 1]){
-                idx = i;
-                break;
-            }
+        int len = s.length();
+        int[] dp = new int[len + 1];
+        dp[0] = 1;
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+        for(int i = 2; i <= len; i++){
+           int lastOne = Integer.parseInt(s.substring(i - 1, i));
+           int lastTwo = Integer.parseInt(s.substring(i - 2, i));
+           if(lastOne >= 1 && lastOne <= 9){
+               dp[i] += dp[i - 1];
+           }
+           if(lastTwo >= 10 && lastTwo <= 26){
+               dp[i] += dp[i - 2];
+           }
         }
-        if(idx == -1){
-            reverse(nums, 0, len - 1);
-        }
-        for(int i = len - 1; i >= 0; i--){
-            if(nums[idx] < nums[i]){
-                swap(nums, idx, i);
-                break;
-            }
-        }
-        reverse(nums, idx + 1, len - 1);
-    }
-
-    private void reverse(int[] nums, int s, int e){
-        while(s < e){
-            swap(nums, s, e);
-            s++;
-            e--;
-        }
-    }
-
-    private void swap(int[] nums, int i, int j){
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+        return dp[len];
     }
 }

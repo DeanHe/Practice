@@ -42,21 +42,21 @@ Node.random is null or pointing to a node in the linked list.
 Number of Nodes will not exceed 1000.
  */
 public class CopyListWithRandomPointer {
-	public RandomListNode copyRandomList(RandomListNode head) {
+	public Node copyRandomList(Node head) {
         if(head == null){
     		return null;
     	}
-    	RandomListNode preHead = new RandomListNode(0);
-    	RandomListNode cur = preHead;
+    	Node preHead = new Node(0);
+    	Node cur = preHead;
     	//origin node to copy node mapping ; visited
-    	HashMap<RandomListNode, RandomListNode> map = new HashMap<>();
+    	HashMap<Node, Node> map = new HashMap<>();
     	while(head != null){
-    	    RandomListNode copyHead;
+    	    Node copyHead;
     		// copy node
     		if(map.containsKey(head)){
     			copyHead = map.get(head);
     		} else {
-    			copyHead = new RandomListNode(head.label);
+    			copyHead = new Node(head.label);
     			map.put(head, copyHead);
     		}
     		//copy random link
@@ -64,7 +64,7 @@ public class CopyListWithRandomPointer {
     			if(map.containsKey(head.random)){
     				copyHead.random = map.get(head.random);
     			} else {
-    				copyHead.random = new RandomListNode(head.random.label);
+    				copyHead.random = new Node(head.random.label);
     				map.put(head.random, copyHead.random);
     			}
     		}
@@ -74,15 +74,15 @@ public class CopyListWithRandomPointer {
     	}
     	return preHead.next;
     }
-}
 
- //Definition for singly-linked list with a random pointer.
-class RandomListNode {
-	int label;
-	RandomListNode next, random;
+	//Definition for singly-linked list with a random pointer.
+	private class Node {
+		int label;
+		Node next, random;
 
-	RandomListNode(int x) {
-		this.label = x;
+		public Node(int x) {
+			this.label = x;
+		}
 	}
-};
+}
  

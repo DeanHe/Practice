@@ -47,6 +47,8 @@ Output:
  ["",  "3", "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]
  ["4", "",  "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]]
 Note: The height of binary tree is in the range of [1, 10].
+
+analysis: dfs divide and conquer
  */
 public class PrintBinaryTree {
     public List<List<String>> printTree(TreeNode root) {

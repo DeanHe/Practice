@@ -63,7 +63,6 @@ public class MinimumCostToConnectTwoGroupsOfPoints {
         bLen = cost.get(0).size();
         int[] minCostFromBtoA = new int[bLen];
         Arrays.fill(minCostFromBtoA, Integer.MAX_VALUE);
-        int res = 0;
         for (int b = 0; b < bLen; b++) {
             for (int a = 0; a < aLen; a++) {
                 minCostFromBtoA[b] = Math.min(minCostFromBtoA[b], cost.get(a).get(b));

@@ -40,13 +40,11 @@ Constraints:
 There are at most 25 cells containing gold.*/
 public class PathWithMaximumGold {
 	int res = 0, rows = 0, cols = 0;
-	boolean[][] visited;
 	int[] dirs = { 0, 1, 0, -1, 0 };
 
 	public int getMaximumGold(int[][] grid) {
 		rows = grid.length;
 		cols = grid[0].length;
-		visited = new boolean[rows][cols];
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				dfs(grid, r, c, 0);
@@ -56,14 +54,15 @@ public class PathWithMaximumGold {
 	}
 
 	private void dfs(int[][] grid, int r, int c, int sum) {
-		if (r < 0 || r >= rows || c < 0 || c >= cols || visited[r][c] || grid[r][c] == 0) {
+		if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] == 0) {
 			res = Math.max(res, sum);
 			return;
 		}
-		visited[r][c] = true;
+		int val = grid[r][c];
+		grid[r][c] = 0;
 		for (int i = 0; i < dirs.length - 1; i++) {
-			dfs(grid, r + dirs[i], c + dirs[i + 1], sum + grid[r][c]);
+			dfs(grid, r + dirs[i], c + dirs[i + 1], sum + val);
 		}
-		visited[r][c] = false;
+		grid[r][c] = val;
 	}
 }

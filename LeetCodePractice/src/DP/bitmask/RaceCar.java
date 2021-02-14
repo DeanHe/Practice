@@ -1,5 +1,6 @@
 package DP.bitmask;
-/*Your car starts at position 0 and speed +1 on an infinite number line.  (Your car can go into negative positions.)
+/*
+Your car starts at position 0 and speed +1 on an infinite number line.  (Your car can go into negative positions.)
 Your car drives automatically according to a sequence of instructions A (accelerate) and R (reverse).
 When you get an instruction "A", your car does the following: position += speed, speed *= 2.
 When you get an instruction "R", your car does the following: if your speed is positive then speed = -1 , otherwise speed = 1.  (Your position stays the same.)
@@ -19,7 +20,8 @@ target = 6
 Output: 5
 Explanation: 
 The shortest instruction sequence is "AAARA".
-Your position goes from 0->1->3->7->7->6.*/
+Your position goes from 0->1->3->7->7->6.
+*/
 public class RaceCar {
 	public int racecar(int target) {
         int[] dp = new int[target + 1];

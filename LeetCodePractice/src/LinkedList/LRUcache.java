@@ -82,10 +82,13 @@ public class LRUcache {
     // @return nothing
     public void set(int key, int value) {
         // write your code here
-        if(get(key) != -1){
+        if(map.containsKey(key)){
             //exist node
             Node n = map.get(key);
             n.val = value;
+            n.pre.next = n.next;
+            n.next.pre = n.pre;
+            insertBeforeTail(n);
         } else {
             // not exist node
             if(map.size() == capacity){
