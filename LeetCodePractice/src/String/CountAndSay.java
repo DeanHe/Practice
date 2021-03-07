@@ -1,5 +1,6 @@
 package String;
-/*The count-and-say sequence is the sequence of integers beginning as follows:
+/*
+The count-and-say sequence is the sequence of integers beginning as follows:
 
 1, 11, 21, 1211, 111221, ...
 
@@ -15,7 +16,8 @@ Example
 Given n = 5, return "111221".
 
 Notice
-The sequence of integers will be represented as a string.*/
+The sequence of integers will be represented as a string.
+*/
 public class CountAndSay {
 	public String countAndSay(int n) {
 		if (n <= 0) {
@@ -29,17 +31,17 @@ public class CountAndSay {
 		return result;
 	}
 
-	public String getSay(String string) {
-		StringBuilder temp = new StringBuilder();
-		int count = 1, len = string.length();
+	public String getSay(String s) {
+		StringBuilder sb = new StringBuilder();
+		int count = 1, len = s.length();
 		for (int i = 0; i < len; i++) {
-			if (i + 1 < len && string.charAt(i) == string.charAt(i + 1)) {
+			if (i + 1 < len && s.charAt(i) == s.charAt(i + 1)) {
 				count++;
 			} else {
-				temp.append(count).append(string.charAt(i));
+				sb.append(count).append(s.charAt(i));
 				count = 1;
 			}
 		}
-		return temp.toString();
+		return sb.toString();
 	}
 }
