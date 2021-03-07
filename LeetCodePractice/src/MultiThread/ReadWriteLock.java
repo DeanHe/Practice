@@ -50,7 +50,7 @@ public class ReadWriteLock {
                 if (readCnt == 1) {
                     writeLock();
                 }
-                readLock.unlock();
+                readUnlock();
                 return;
             }
             Thread.sleep(1);

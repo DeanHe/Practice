@@ -36,7 +36,7 @@ Note:
 connections[i][0] != connections[i][1]
 
 Analysis：
-2 methods Prim and Kruskal UN
+2 methods Prim and Kruskal UnionFind
 Try to connect cities with minimum cost, then find small cost edge first, if two cities connected by the edge do no have same ancestor, then union them.
 
 When number of unions equal to 1, all cities are connected.

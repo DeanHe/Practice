@@ -1,6 +1,5 @@
 package BST;
 
-import java.nio.file.Path;
 import java.util.*;
 
 /*
@@ -40,27 +39,27 @@ public class SmallestSubtreeWithAllTheDeepestNodes {
 		if (root == null) {
 			return null;
 		}
-		int leftDepth = distToEdge(root.left);
-		int rightDepth = distToEdge(root.right);
+		int leftDepth = depth(root.left);
+		int rightDepth = depth(root.right);
 		if (leftDepth == rightDepth) {
 			return root;
-		}
-		if (leftDepth > rightDepth) {
+		} else if (leftDepth > rightDepth) {
 			return subtreeWithAllDeepest(root.left);
 		} else {
 			return subtreeWithAllDeepest(root.right);
 		}
 	}
 
-	private int distToEdge(TreeNode root) {
+	private int depth(TreeNode root) {
 		if (root == null) {
 			return 0;
 		}
 		if (dist.containsKey(root)) {
 			return dist.get(root);
 		}
-		int res = Math.max(distToEdge(root.left), distToEdge(root.right)) + 1;
-		dist.put(root, res);
-		return res;
+		int l = depth(root.left);
+		int r = depth(root.right);
+		dist.put(root, Math.max(l, r) + 1);
+		return dist.get(root);
 	}
 }

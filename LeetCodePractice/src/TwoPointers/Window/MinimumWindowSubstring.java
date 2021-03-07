@@ -23,11 +23,10 @@ public class MinimumWindowSubstring {
         	return res;
         }
         Map<Character, Integer> map = new HashMap<>(); // character in t : count
+		for(char c : t.toCharArray()){
+			map.put(c, map.getOrDefault(c, 0) + 1);
+		}
         int slen = s.length();
-        int tlen = t.length();
-        for(char c : t.toCharArray()){
-        	map.put(c, map.getOrDefault(c, 0) + 1);
-        }
         int minLen = slen + 1; // handle res can be s case
         int start = 0, end = 0;
         int counter = map.size();
@@ -41,16 +40,16 @@ public class MinimumWindowSubstring {
 			}
         	end++;
         	while(counter == 0){
+				if(end - start < minLen){
+					minLen = end - start;
+					res = s.substring(start, end);
+				}
         		char start_c = s.charAt(start);
         		if(map.containsKey(start_c)){
         			map.put(start_c, map.get(start_c) + 1);
         			if(map.get(start_c) > 0){
         				counter++;
 					}
-				}
-        		if(minLen > end - start){
-        			minLen = end - start;
-        			res = s.substring(start, end);
 				}
         		start++;
 			}

@@ -34,7 +34,10 @@ graph[i] will not contain i or duplicate values.
 The graph is undirected: if any element j is in graph[i], then i will be in graph[j].
 */
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 
 public class IsGraphBipartite {
     int N;
@@ -73,26 +76,26 @@ public class IsGraphBipartite {
         }
         return true;
     }
-    
-	public boolean isBipartiteBFS(int[][] graph) {
+
+    public boolean isBipartiteBFS(int[][] graph) {
         int N = graph.length;
         Map<Integer, Integer> group = new HashMap<>();
         Queue<Integer> queue = new LinkedList<>();
-        for(int i = 0; i < N; i++){
-            if(group.containsKey(i)){
+        for (int i = 0; i < N; i++) {
+            if (group.containsKey(i)) {
                 continue;
             }
             group.put(i, 1);
             queue.offer(i);
-            while(!queue.isEmpty()){
+            while (!queue.isEmpty()) {
                 int cur = queue.poll();
                 int color = group.get(cur);
-                for(int nb : graph[cur]){
-                    if(!group.containsKey(nb)){
+                for (int nb : graph[cur]) {
+                    if (!group.containsKey(nb)) {
                         group.put(nb, -color);
                         queue.offer(nb);
                     } else {
-                        if(group.get(nb) == color){
+                        if (group.get(nb) == color) {
                             return false;
                         }
                     }
@@ -100,5 +103,45 @@ public class IsGraphBipartite {
             }
         }
         return true;
+    }
+
+    int[] parent;
+
+    public boolean isBipartiteUN(int[][] graph) {
+        parent = new int[graph.length];
+        for (int i = 0; i < graph.length; i++) {
+            parent[i] = i;
+        }
+        for (int i = 0; i < graph.length; i++) {
+            int[] nbs = graph[i];
+            for (int j = 0; j < nbs.length; j++) {
+                if (findRoot(i) == findRoot(nbs[j])) {
+                    return false;
+                }
+                merge(nbs[0], nbs[j]);
+            }
+        }
+        return true;
+    }
+
+    private int findRoot(int x) {
+        int root = x;
+        while (parent[root] != root) {
+            root = parent[root];
+        }
+        while (parent[x] != root) {
+            int fa = parent[x];
+            parent[x] = root;
+            x = fa;
+        }
+        return root;
+    }
+
+    private void merge(int a, int b) {
+        int root_a = findRoot(a);
+        int root_b = findRoot(b);
+        if (root_a != root_b) {
+            parent[root_a] = root_b;
+        }
     }
 }

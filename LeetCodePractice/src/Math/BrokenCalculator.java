@@ -1,5 +1,7 @@
 package Math;
-/*On a broken calculator that has a number showing on its display, we can perform two operations:
+/*
+#991
+On a broken calculator that has a number showing on its display, we can perform two operations:
 
 Double: Multiply the number on the display by 2, or;
 Decrement: Subtract 1 from the number on the display.
@@ -25,7 +27,11 @@ Explanation:  Use double, decrement and double {3 -> 6 -> 5 -> 10}.
 Example 4:
 Input: X = 1024, Y = 1
 Output: 1023
-Explanation: Use decrement operations 1023 times.*/
+Explanation: Use decrement operations 1023 times.
+
+analysis:
+instead of change on X, think of Changing on Y
+*/
 public class BrokenCalculator {
 	public int brokenCalc(int X, int Y) {
         int count = 0;

@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/*You have N gardens, labelled 1 to N.  In each garden, you want to plant one of 4 types of flowers.
+/*
+You have N gardens, labelled 1 to N.  In each garden, you want to plant one of 4 types of flowers.
 
 paths[i] = [x, y] describes the existence of a bidirectional path from garden x to garden y.
 
@@ -36,37 +37,37 @@ Note:
 1 <= N <= 10000
 0 <= paths.size <= 20000
 No garden has 4 or more paths coming into or leaving it.
-It is guaranteed an answer exists.*/
+It is guaranteed an answer exists.
+
+analysis:
+Greedily paint nodes one by one.
+Because there is no node that has more than 3 neighbors,
+always one possible color to choose.
+
+TC O(N)
+SC O(N)
+*/
 public class FlowerPlantingWithNoAdjacent {
-	public int[] gardenNoAdj(int N, int[][] paths) {
+	public int[] gardenNoAdj(int n, int[][] paths) {
 		Map<Integer, Set<Integer>> graph = new HashMap<>();
-		int len = paths.length;
-		for (int i = 0; i < len; i++) {
-			if (!graph.containsKey(paths[i][0])) {
-				graph.put(paths[i][0], new HashSet<>());
-			}
-			if (!graph.containsKey(paths[i][1])) {
-				graph.put(paths[i][1], new HashSet<>());
-			}
-			graph.get(paths[i][0]).add(paths[i][1]);
-			graph.get(paths[i][1]).add(paths[i][0]);
+		for (int[] path : paths) {
+			graph.computeIfAbsent(path[0] - 1, x -> new HashSet<>()).add(path[1] - 1);
+			graph.computeIfAbsent(path[1] - 1, x -> new HashSet<>()).add(path[0] - 1);
 		}
-		int[] res = new int[N];
-		for (int i = 1; i <= N; i++) {
-			Set<Integer> nbs = graph.get(i);
-			if (nbs == null) {
-				res[i - 1] = 1;
+		int[] res = new int[n];
+		for (int i = 0; i < n; i++) {
+			if (!graph.containsKey(i)) {
+				res[i] = 1;
 				continue;
 			}
-			for (int color = 1; color <= 4; color++) {
-				boolean colorUsed = false;
-				for (int nb : nbs) {
-					if (res[nb - 1] == color) {
-						colorUsed = true;
-					}
-				}
-				if (!colorUsed) {
-					res[i - 1] = color;
+			Set<Integer> nbs = graph.get(i);
+			int[] colors = new int[5];
+			for (int nb : nbs) {
+				colors[res[nb]] = 1;
+			}
+			for(int j = 4; j > 0; j--){
+				if(colors[j] == 0){
+					res[i] = j;
 					break;
 				}
 			}

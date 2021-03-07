@@ -1,8 +1,13 @@
-package Stack.MonotonicStack;
+package MonotonicQueue;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+
 
 /*
+#503
+
 Given a circular array (the next element of the last element is the first element of the array), print the Next Greater Number for every element. The Next Greater Number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, output -1 for this number.
 
 Example
@@ -22,6 +27,8 @@ The number 1 can't find next greater number.
 Notice
 The length of given array won't exceed 10000.
 
+analysis:
+loop from 0 -> 2 * len
 time complexity O(n)
 */
 public class NextGreaterElementII {
@@ -32,20 +39,16 @@ public class NextGreaterElementII {
     public int[] nextGreaterElements(int[] nums) {
     	int len = nums.length;
     	int[] res = new int[len]; 
-    	Stack<Integer> stack = new Stack<>();
-    	for(int i = len - 1; i >= 0; i--){
-    		stack.push(i);
-    	}
-    	for(int i = len - 1; i >= 0; i--){
-    		res[i] = -1;
-    		while(!stack.isEmpty() && nums[i] >= nums[stack.peek()]){
-    			stack.pop();
-    		}
-    		if(!stack.isEmpty()){
-    			res[i] = nums[stack.peek()];
-    		}
-    		stack.add(i);
-    	}
+    	Deque<Integer> deque = new ArrayDeque<>();
+		Arrays.fill(res, -1);
+		for(int i = 0; i < len * 2; i++){
+			int cur = i % len;
+			while(!deque.isEmpty() && nums[deque.peekLast()] < nums[cur]){
+				int idx = deque.pollLast();
+				res[idx] = nums[cur];
+			}
+			deque.offerLast(cur);
+		}
     	return res;
     }
 }

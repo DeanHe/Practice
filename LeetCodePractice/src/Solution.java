@@ -1,6 +1,10 @@
-import Contest.ClosestSubsequenceSum;
-import DesignDataStructure.MinStackGeneric;
-import Dijkstra.PathWithMinimumChange;
+import BFS.ArrangeObjectGoogle;
+import Trie.ShortEncodingOfWords;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class Solution {
@@ -8,8 +12,8 @@ public class Solution {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
-        PathWithMinimumChange p = new PathWithMinimumChange();
-        p.test();
+        ArrangeObjectGoogle a = new ArrangeObjectGoogle();
+        a.test();
         /*
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
         LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();
@@ -76,24 +80,27 @@ public class Solution {
         }
 		*/
     }
-    public int numDecodings(String s) {
-        if(s == null || s.length() == 0){
-            return 0;
+    public List<String> letterCasePermutation(String S) {
+        List<String> res = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        dfs(res, sb, 0, S);
+        return res;
+    }
+
+    private void dfs(List<String> res, StringBuilder sb, int i, String s) {
+        if(i == s.length()){
+            res.add(sb.toString());
+            return;
         }
-        int len = s.length();
-        int[] dp = new int[len + 1];
-        dp[0] = 1;
-        dp[1] = s.charAt(0) == '0' ? 0 : 1;
-        for(int i = 2; i <= len; i++){
-           int lastOne = Integer.parseInt(s.substring(i - 1, i));
-           int lastTwo = Integer.parseInt(s.substring(i - 2, i));
-           if(lastOne >= 1 && lastOne <= 9){
-               dp[i] += dp[i - 1];
-           }
-           if(lastTwo >= 10 && lastTwo <= 26){
-               dp[i] += dp[i - 2];
-           }
+        char c = s.charAt(i);
+        if(Character.isAlphabetic(c)){
+            dfs(res, sb.append(Character.toUpperCase(c)), i + 1, s);
+            sb.deleteCharAt(sb.length() - 1);
+            dfs(res, sb.append(Character.toLowerCase(c)), i + 1, s);
+            sb.deleteCharAt(sb.length() - 1);
+        } else {
+            dfs(res, sb.append(c), i + 1, s);
+            sb.deleteCharAt(sb.length() - 1);
         }
-        return dp[len];
     }
 }

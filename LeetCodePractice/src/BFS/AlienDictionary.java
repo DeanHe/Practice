@@ -2,6 +2,7 @@ package BFS;
 
 import java.util.*;
 /*
+#269
 There is a new alien language which uses the latin alphabet. However,
 the order among letters are unknown to you.
 You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language.
@@ -83,7 +84,7 @@ public class AlienDictionary {
                 }
             }
             if(j == len){ // special case
-                if(words[i].length() > words[i + 1].length()){
+                if(cur.length() > post.length()){
                     return "";
                 }
             }

@@ -64,13 +64,13 @@ public class SortCharactersByFrequency {
 	
 	public String frequencyBucketSort(String s) {
         StringBuilder sb = new StringBuilder();
-        HashMap<Character, Integer> map = new HashMap<>();
+        HashMap<Character, Integer> freqMap = new HashMap<>();
         char[] arr = s.toCharArray();
         for(char c : arr){
-        	map.put(c, map.getOrDefault(c, 0) + 1);
+        	freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
         }
         List<Character>[] bucket = new List[s.length() + 1];
-        for(Entry<Character, Integer> entry : map.entrySet()){
+        for(Entry<Character, Integer> entry : freqMap.entrySet()){
         	int freq = entry.getValue();
         	char c = entry.getKey();
         	if(bucket[freq] == null){

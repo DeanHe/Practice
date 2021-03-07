@@ -33,7 +33,7 @@ public class RedundantConnection {
         int len = edges.length;
         parent = new int[len + 1];
         size = new int[len + 1];
-        //init UN
+        //init UnionFind
         for (int i = 1; i <= len; i++) {
             parent[i] = i;
             size[i] = 1;

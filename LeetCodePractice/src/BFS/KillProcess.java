@@ -2,7 +2,8 @@ package BFS;
 
 import java.util.*;
 
-/*Given n processes, each process has a unique PID (process id) and its PPID (parent process id).
+/*
+Given n processes, each process has a unique PID (process id) and its PPID (parent process id).
 
 Each process only has one parent process, but may have one or more children processes. This is just like a tree structure. Only one process has PPID that is 0, which means this process has no parent process. All the PIDs will be distinct positive integers.
 
@@ -22,7 +23,8 @@ Explanation:
 Kill 5 will also kill 10.
 Notice
 The given kill id is guaranteed to be one of the given PIDs.
-n >= 1.*/
+n >= 1.
+*/
 public class KillProcess {
 	/**
      * @param pid: the process id

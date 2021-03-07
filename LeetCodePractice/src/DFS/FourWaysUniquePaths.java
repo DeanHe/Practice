@@ -1,5 +1,6 @@
 package DFS;
-/*A robot is located at the top-left corner of a m x n grid.
+/*
+A robot is located at the top-left corner of a m x n grid.
 
 The robot can move any direction at any point in time, but every grid can only be up to once. The robot is trying to reach the bottom-right corner of the grid.
 
@@ -7,7 +8,8 @@ How many possible unique paths are there?
 
 Example
 Given m = 2 and n = 3, return 4.
-Given m = 3 and n = 3, return 12.*/
+Given m = 3 and n = 3, return 12.
+*/
 public class FourWaysUniquePaths {
 	/**
      * @param m: the row

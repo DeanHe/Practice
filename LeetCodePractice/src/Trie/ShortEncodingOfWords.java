@@ -1,8 +1,12 @@
 package Trie;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-/*Given a list of words, we may encode it by writing a reference string S and a list of indexes A.
+/*
+#820
+
+Given a list of words, we may encode it by writing a reference string S and a list of indexes A.
 
 For example, if the list of words is ["time", "me", "bell"], we can write it as S = "time#bell#" and indexes = [0, 2, 5].
 
@@ -14,47 +18,50 @@ Example:
 
 Input: words = ["time", "me", "bell"]
 Output: 10
-Explanation: S = "time#bell#" and indexes = [0, 2, 5].*/
+Explanation: S = "time#bell#" and indexes = [0, 2, 5].
+
+analysis:
+Insert all reversed words to the trie.
+maintain the childCount to know which node is a leaf
+sum up all leaf's correspondent word's length
+*/
 
 public class ShortEncodingOfWords {
-	class TrieNode {
-		TrieNode[] children;
-		int childrenCount;
-		TrieNode() {
-			children = new TrieNode[26];
-			childrenCount = 0;
-		}
-		TrieNode get(char c){
-			if(children[c- 'a'] == null){
-				children[c- 'a'] = new TrieNode();
-				childrenCount++;
-			}
-			return children[c- 'a'];
-		}
-	}
-	//To find whether different words have the same suffix, let's put them backwards into a trie (prefix tree). 
-	//For example, if we have "time" and "me", we will put "emit" and "em" into our trie.
-	//After, the leaves of this trie (nodes with no children) represent words that have no suffix, 
-	//and we will count sum(word.length + 1 for word in words).
-	public int minimumLengthEncoding(String[] words) {
+    private class TrieNode {
+        TrieNode[] children;
+        boolean hasChild;
+
+        public TrieNode() {
+            children = new TrieNode[26];
+            hasChild = false;
+        }
+
+        public TrieNode get(char c) {
+            if (children[c - 'a'] == null) {
+                children[c - 'a'] = new TrieNode();
+                hasChild = true;
+            }
+            return children[c - 'a'];
+        }
+    }
+
+    public int minimumLengthEncoding(String[] words) {
         TrieNode root = new TrieNode();
-        Map<TrieNode, Integer> NodeWordIndex = new HashMap<>();
-        for(int i = 0; i < words.length; i++){
-        	String word = words[i];
-        	TrieNode cur = root;
-        	for(int j = word.length() - 1; j >= 0; j--){
-        		char c = word.charAt(j);
-        		cur = cur.get(c);
-        	}
-        	NodeWordIndex.put(cur, i);
+        Map<TrieNode, Integer> lenMap = new HashMap<>();
+        for (String word : words) {
+            TrieNode cur = root;
+            for (int j = word.length() - 1; j >= 0; j--) {
+                char c = word.charAt(j);
+                cur = cur.get(c);
+            }
+            lenMap.put(cur, word.length());
         }
-        int ans = 0;
-        for(TrieNode cur : NodeWordIndex.keySet()){
-        	if(cur.childrenCount == 0){
-        		String word = words[NodeWordIndex.get(cur)];
-        		ans += word.length() + 1;
-        	}
+        int res = 0;
+        for (TrieNode cur : lenMap.keySet()) {
+            if (!cur.hasChild) {
+                res += lenMap.get(cur) + 1;
+            }
         }
-        return ans;
+        return res;
     }
 }

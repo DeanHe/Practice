@@ -30,7 +30,6 @@ not typical Dijkstra case
 */
 
 public class CheapestFlightsWithinKStops {
-	// using Dijkstra algorithm
 	/**
      * @param n: # of cities
      * @param flights: a 2D array

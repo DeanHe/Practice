@@ -27,7 +27,7 @@ public class CloneGraph {
 	class Node {
 		  int val;
 		  ArrayList<Node> neighbors;
-		  Node(int x) { val = x; neighbors = new ArrayList<Node>(); }
+		  Node(int x) { val = x; neighbors = new ArrayList<>(); }
 	 };
 	/*
      * @param node: A undirected graph node

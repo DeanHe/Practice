@@ -20,7 +20,6 @@ public class MovingAverageFromDataStream {
 	/*
 	 * @param size: An integer
 	 */public MovingAverageFromDataStream(int size) {
-	        // do intialization if necessary
 		 queue = new LinkedList<>();
 		 sum = 0;
 		 this.size = size;
