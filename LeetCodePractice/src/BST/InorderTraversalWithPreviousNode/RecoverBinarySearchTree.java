@@ -26,7 +26,7 @@ Explanation: 2 cannot be in the right subtree of 3 because 2 < 3. Swapping 2 and
 Constraints:
 
 The number of nodes in the tree is in the range [2, 1000].
--231 <= Node.val <= 231 - 1
+-2^31 <= Node.val <= 2^31 - 1
 */
 public class RecoverBinarySearchTree {
 

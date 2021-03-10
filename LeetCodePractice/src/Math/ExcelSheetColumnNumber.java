@@ -28,13 +28,13 @@ public class ExcelSheetColumnNumber {
 	public int titleToNumber(String s) {
         int res = 0;
         int carry = 1;
-        int temp = 0;
+        int cur = 0;
         char[] arr = s.toCharArray();
         int len = arr.length;
         for(int i = len - 1; i >= 0; i--){
         	char c = arr[i];
-        	temp = c - 'A' + 1;
-        	res += temp * carry;
+            cur = c - 'A' + 1;
+        	res += cur * carry;
         	carry *= 26;
         }
         return res;

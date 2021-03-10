@@ -61,8 +61,7 @@ public class VerticalOrderTraversalOfaBinaryTree {
             for(int i = 0; i < size; i++){
                 TreeNode cur = tq.poll();
                 int col = cq.poll();
-                layer.putIfAbsent(col, new ArrayList<>());
-                layer.get(col).add(cur.val);
+                layer.computeIfAbsent(col, x -> new ArrayList<>()).add(cur.val);
                 if(cur.left != null){
                     tq.offer(cur.left);
                     cq.offer(col - 1);
@@ -73,10 +72,9 @@ public class VerticalOrderTraversalOfaBinaryTree {
                 }
             }
             for(int col : layer.keySet()){
-                map.putIfAbsent(col, new ArrayList<>());
                 List<Integer> ls = layer.get(col);
                 Collections.sort(ls);
-                map.get(col).addAll(ls);
+                map.computeIfAbsent(col, x -> new ArrayList<>()).addAll(ls);
             }
             layer.clear();
         }

@@ -1,7 +1,9 @@
 import BFS.ArrangeObjectGoogle;
 import Trie.ShortEncodingOfWords;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,5 +104,24 @@ public class Solution {
             dfs(res, sb.append(c), i + 1, s);
             sb.deleteCharAt(sb.length() - 1);
         }
+    }
+
+    public int shortestSubarray(int[] A, int K) {
+        int len = A.length, res =  Integer.MAX_VALUE;
+        Deque<Integer> deque = new ArrayDeque<>();
+        int[] preSum = new int[len + 1];
+        for(int i = 0; i < len; i++){
+            preSum[i + 1] = preSum[i] + A[i];
+        }
+        for(int i = 0; i <= len; i++){
+            while (!deque.isEmpty() && preSum[deque.peekLast()] > preSum[i]) {
+                deque.pollLast();
+            }
+            while(!deque.isEmpty() && preSum[i] - preSum[deque.peekFirst()] >= K){
+                res = Math.min(res, i - deque.pollFirst());
+            }
+            deque.offerLast(i);
+        }
+        return res != Integer.MAX_VALUE ? res : -1;
     }
 }

@@ -29,6 +29,10 @@ Note:
 1 <= A.length <= 50000
 -10 ^ 5 <= A[i] <= 10 ^ 5
 1 <= K <= 10 ^ 9
+
+analysis:
+preSum
+given [:end] preSum find the largest [:start] preSum such that [start + 1 : end] sum >= K
  */
 public class ShortestSubarrayWithSumAtLeastK {
     public int shortestSubarray(int[] A, int K) {

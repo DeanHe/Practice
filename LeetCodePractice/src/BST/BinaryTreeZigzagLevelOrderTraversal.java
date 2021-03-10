@@ -23,7 +23,7 @@ return its zigzag level order traversal as:
  */
 public class BinaryTreeZigzagLevelOrderTraversal {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<>();
         dfs(res, root, 0);
         return res;
     }
