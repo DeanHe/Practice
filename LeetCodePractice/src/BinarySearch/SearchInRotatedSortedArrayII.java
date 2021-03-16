@@ -25,7 +25,7 @@ the first half could be out of order (i.e. NOT in the ascending order, e.g. [3 1
 In that case, it is guaranteed that nums[right] also equals to nums[mid], so what we can do is to check if nums[mid]== nums[left] == nums[right] before the original logic, 
 and if so, we can move left and right both towards the middle by 1. and repeat.
 */
-public class SearchInRotatedSortedArrayII {
+public class   SearchInRotatedSortedArrayII {
 	public boolean search(int[] nums, int target) {
 		if (nums == null || nums.length == 0) {
 			return false;

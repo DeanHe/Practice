@@ -37,9 +37,9 @@ public class TaskScheduler {
                 maxDup = 1;
             }
         }
+        int remainTasks = tasks.length - maxCnt * maxDup;
         int partitionCnt = maxCnt - 1;
         int emptySlots = partitionCnt * (n - (maxDup - 1));
-        int remainTasks = tasks.length - maxCnt * maxDup;
         int idles = Math.max(0, emptySlots - remainTasks);
         return tasks.length + idles;
 

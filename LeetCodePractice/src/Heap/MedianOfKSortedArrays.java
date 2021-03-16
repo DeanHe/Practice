@@ -22,12 +22,11 @@ public class MedianOfKSortedArrays {
 			return a.val - b.val;
 		});
 		for(int r = 0; r < nums.length; r++){
-			if(nums[r].length == 0){
-				continue;
+			if(nums[r].length > 0){
+				Node cur = new Node(r, 0, nums[r][0]);
+				pq.offer(cur);
+				N += nums[r].length;
 			}
-			Node cur = new Node(r, 0, nums[r][0]);
-			pq.offer(cur);
-			N += nums[r].length;
 		}
 		if(N == 0){
 			return 0.0;

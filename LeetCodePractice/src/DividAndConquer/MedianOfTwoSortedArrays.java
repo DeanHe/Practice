@@ -1,5 +1,6 @@
 package DividAndConquer;
-/*There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays.
+/*
+There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays.
 
 Example
 Given A=[1,2,3,4,5,6] and B=[2,3,4,5], the median is 3.5.
@@ -7,10 +8,14 @@ Given A=[1,2,3,4,5,6] and B=[2,3,4,5], the median is 3.5.
 Given A=[1,2,3] and B=[4,5], the median is 3.
 
 Challenge
-The overall run time complexity should be O(log (m+n)).*/
+The overall run time complexity should be O(log (m+n)).
+*/
 public class MedianOfTwoSortedArrays {
+	int aLen, bLen;
 	public double findMedianSortedArrays(int A[], int B[]) {
-		int len = A.length + B.length;
+		aLen = A.length;
+		bLen = B.length;
+		int len = aLen + bLen;
 		if (len % 2 == 0) {
 			// even
 			return (findKth(A, 0, B, 0, len / 2) + findKth(A, 0, B, 0, len / 2 + 1)) / 2.0;
@@ -22,8 +27,6 @@ public class MedianOfTwoSortedArrays {
 
 	private double findKth(int[] A, int aStart, int[] B, int bStart, int K) {
 		// K is count start from 1
-		int aLen = A.length;
-		int bLen = B.length;
 		if (aStart >= aLen) {
 			return B[bStart + K - 1];
 		}

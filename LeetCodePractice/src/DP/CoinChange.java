@@ -35,17 +35,13 @@ public class CoinChange {
         // state transfer function
         for(int i = 1; i <= amount; i++){
         	dp[i] = Integer.MAX_VALUE;
-        	for(int j = 0; j < len; j++){
-        		if(i >= coins[j] && dp[i - coins[j]] != Integer.MAX_VALUE){
-        			dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+        	for(int val : coins){
+        		if(i >= val && dp[i - val] != Integer.MAX_VALUE){
+        			dp[i] = Math.min(dp[i], dp[i - val] + 1);
         		}
         	}
         }
-        if(dp[amount] == Integer.MAX_VALUE){
-        	return -1;
-        } else {
-        	return dp[amount];
-        }
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
     }
 
 }

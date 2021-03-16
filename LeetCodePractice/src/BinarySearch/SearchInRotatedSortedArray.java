@@ -23,6 +23,8 @@ solution:
 1 first check mid is in left monotone or right monotone
 2 check if target in range [start, mid] or [mid, end]
 3 otherwise move the opposite pointer
+
+double layer condition checking
 */
 public class SearchInRotatedSortedArray {
 	public int search(int[] A, int target) {

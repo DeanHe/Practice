@@ -33,7 +33,7 @@ public class SplitArrayWithEqualSum {
      * @param nums: a list of integer
      * @return: return a boolean
      */
-    public boolean     splitArray(List<Integer> nums) {
+    public boolean splitArray(List<Integer> nums) {
         // write your code here
         int len = nums.size();
         int[] preSum = new int[len];

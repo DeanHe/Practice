@@ -3,7 +3,8 @@ package DesignDataStructure;
 import java.util.HashSet;
 import java.util.Set;
 
-/*Given an equation, represented by words on left side and the result on right side.
+/*
+Given an equation, represented by words on left side and the result on right side.
 
         You need to check if the equation is solvable under the following rules:
 

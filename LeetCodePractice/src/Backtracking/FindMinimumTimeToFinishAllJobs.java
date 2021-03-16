@@ -29,11 +29,12 @@ The maximum working time is 11.
 Constraints:
 
 1 <= k <= jobs.length <= 12
-1 <= jobs[i] <= 107
+1 <= jobs[i] <= 10^7
 
 analysis:
 branch cutting tricks:
 1 it makes no difference if we assign job to any worker whose current workload are same.
+maintain sum array to track each worker's time
 2 reverse sort all the jobs so that we are more likely to exit earlier
 3 if any sum >= res, exit
 

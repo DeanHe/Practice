@@ -2,7 +2,10 @@ package Heap;
 
 import java.util.*;
 
-/*You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
+/*
+#373
+
+You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
 
 Define a pair (u,v) which consists of one element from the first array and one element from the second array.
 
@@ -24,7 +27,11 @@ Example 3:
 
 Input: nums1 = [1,2], nums2 = [3], k = 3
 Output: [1,3],[2,3]
-Explanation: All possible pairs are returned from the sequence: [1,3],[2,3]*/
+Explanation: All possible pairs are returned from the sequence: [1,3],[2,3]
+
+analysis:
+ Use min_heap to keep track on next minimum pair sum, and we only need to maintain K possible candidates in the data structure.
+*/
 public class FindKPairsWithSmallestSums {
 	public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
 		List<int[]> res = new ArrayList<>();

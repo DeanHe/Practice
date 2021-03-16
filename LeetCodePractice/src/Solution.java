@@ -1,12 +1,20 @@
 import BFS.ArrangeObjectGoogle;
+import BST.BinaryTreeMaximumPathSum;
+import BST.TreeNode;
+import LinkedList.ListNode;
+import SweepLine.Intervals.Interval;
 import Trie.ShortEncodingOfWords;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
+import java.util.TreeMap;
 
 
 public class Solution {
@@ -63,65 +71,40 @@ public class Solution {
 		String[] res = be.expand(input);
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));
-
-
-
-		Pattern p = Pattern.compile("^\\s*\\w+(\\-\\w+)+:");
-        Matcher matcher = p.matcher("  Connector-2-T1: Add a SNS Edge component as a Lambda component");
-        if(matcher.find() && matcher.start() == 0) {
-            //get the MatchResult Object
-            int x =matcher.start();
-            String a = matcher.group(0);
-            String b = matcher.group(1);
-            MatchResult result = matcher.toMatchResult();
-
-            //Prints the offset after the last character matched.
-            System.out.println("First Capturing Group - Match String end(): "+result.end());
-        } else {
-            System.out.println("Not found");
-        }
 		*/
     }
-    public List<String> letterCasePermutation(String S) {
-        List<String> res = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        dfs(res, sb, 0, S);
-        return res;
-    }
 
-    private void dfs(List<String> res, StringBuilder sb, int i, String s) {
-        if(i == s.length()){
-            res.add(sb.toString());
-            return;
+    public int search(int[] A, int target) {
+        if (A == null || A.length == 0) {
+            return -1;
         }
-        char c = s.charAt(i);
-        if(Character.isAlphabetic(c)){
-            dfs(res, sb.append(Character.toUpperCase(c)), i + 1, s);
-            sb.deleteCharAt(sb.length() - 1);
-            dfs(res, sb.append(Character.toLowerCase(c)), i + 1, s);
-            sb.deleteCharAt(sb.length() - 1);
-        } else {
-            dfs(res, sb.append(c), i + 1, s);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public int shortestSubarray(int[] A, int K) {
-        int len = A.length, res =  Integer.MAX_VALUE;
-        Deque<Integer> deque = new ArrayDeque<>();
-        int[] preSum = new int[len + 1];
-        for(int i = 0; i < len; i++){
-            preSum[i + 1] = preSum[i] + A[i];
-        }
-        for(int i = 0; i <= len; i++){
-            while (!deque.isEmpty() && preSum[deque.peekLast()] > preSum[i]) {
-                deque.pollLast();
+        int start = 0;
+        int end = A.length - 1;
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if(A[mid] == target){
+                return mid;
             }
-            while(!deque.isEmpty() && preSum[i] - preSum[deque.peekFirst()] >= K){
-                res = Math.min(res, i - deque.pollFirst());
+            if(A[start] < A[mid]){
+                if(A[start] <= target && target <= A[mid]){
+                    end = mid;
+                } else {
+                    start = mid;
+                }
+            } else {
+                if(A[mid] <= target && target <= A[end]){
+                    start = mid;
+                } else {
+                    end = mid;
+                }
             }
-            deque.offerLast(i);
         }
-        return res != Integer.MAX_VALUE ? res : -1;
+        if(A[start] == target){
+            return start;
+        }
+        if(A[end] == target){
+            return end;
+        }
+        return -1;
     }
 }

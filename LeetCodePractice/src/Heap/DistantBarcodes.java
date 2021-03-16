@@ -1,10 +1,10 @@
 package Heap;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 /*In a warehouse, there is a row of barcodes, where the i-th barcode is barcodes[i].
@@ -28,7 +28,8 @@ Note:
 1 <= barcodes.length <= 10000
 1 <= barcodes[i] <= 10000
 
-We want to always choose the most common or second most common element to write next. What data structure allows us to query this effectively?*/
+We want to always choose the most common or second most common element to write next. What data structure allows us to query this effectively?
+*/
 public class DistantBarcodes {
 	public int[] rearrangeBarcodes(int[] barcodes) {
 		int len = barcodes.length;
@@ -37,24 +38,18 @@ public class DistantBarcodes {
 		for (int n : barcodes) {
 			freq.put(n, freq.getOrDefault(n, 0) + 1);
 		}
-		PriorityQueue<Entry<Integer, Integer>> pq = new PriorityQueue<>(
-				(a, b) -> b.getValue() - a.getValue() == 0 ? a.getKey() - b.getKey() : b.getValue() - a.getValue());
-		pq.addAll(freq.entrySet());
+		List<Map.Entry<Integer, Integer>> ls = new ArrayList<>(freq.entrySet());
+		Collections.sort(ls, (a, b) -> b.getValue() - a.getValue() == 0 ? a.getKey() - b.getKey() : b.getValue() - a.getValue());
 		int i = 0;
-		while(!pq.isEmpty()){
-			int gap = 2;
-			List<Entry<Integer, Integer>> tempList = new ArrayList<>();
-			while(gap > 0 && !pq.isEmpty()){
-				Entry<Integer, Integer> cur = pq.poll();
-				res[i++] = cur.getKey();
-				cur.setValue(cur.getValue() - 1);
-				tempList.add(cur);
-				gap--;
-			}
-			for(Entry<Integer, Integer> saved : tempList){
-				if(saved.getValue() > 0){
-					pq.offer(saved);
+		for(Map.Entry<Integer, Integer> entry : ls){
+			int cnt = entry.getValue();
+			while(cnt > 0){
+				res[i] = entry.getKey();
+				i += 2;
+				if(i >= len){
+					i = 1;
 				}
+				cnt--;
 			}
 		}
 		return res;

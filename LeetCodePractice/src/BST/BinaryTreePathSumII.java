@@ -2,7 +2,9 @@ package BST;
 
 import java.util.*;
 
-/*Your are given a binary tree in which each node contains a value. Design an algorithm to get all paths which sum to a given value. The path does not need to start or end at the root or a leaf, but it must go in a straight line down.
+/*
+Your are given a binary tree in which each node contains a value. Design an algorithm to get all paths which sum to a given value.
+The path does not need to start or end at the root or a leaf, but it must go in a straight line down.
 
 Example
 Example 1:
@@ -34,7 +36,8 @@ The binary tree is like this:
   2   3
  /   
 4   
-for target 10, there is no way to reach it.*/
+for target 10, there is no way to reach it.
+*/
 public class BinaryTreePathSumII {
 	/*
      * @param root: the root of binary tree

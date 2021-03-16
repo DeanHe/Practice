@@ -50,34 +50,26 @@ public class InsertDeleteGetRandomO1DuplicatesAllowed {
 
     /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
     public boolean insert(int val) {
-        boolean contain = index.containsKey(val);
-        if(!contain){
+        if(!index.containsKey(val)){
             index.put(val, new LinkedHashSet<>());
         }
         index.get(val).add(ls.size());
         ls.add(val);
-        return !contain;
+        return index.get(val).size() == 1;
     }
 
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */
     public boolean remove(int val) {
-        boolean contain = index.containsKey(val);
-        if(!contain){
+        if(!index.containsKey(val) || index.get(val).size() == 0){
             return false;
         }
         int pos = index.get(val).iterator().next();
         index.get(val).remove(pos);
-        int last = ls.size() - 1;
-        int lastVal = ls.get(last);
-        if(pos != last){
-            ls.set(pos, lastVal);
-            index.get(lastVal).remove(last);
-            index.get(lastVal).add(pos);
-        }
-        ls.remove(last);
-        if(index.get(val).isEmpty()){
-            index.remove(val);
-        }
+        int lastVal = ls.get(ls.size() - 1);
+        ls.set(pos, lastVal);
+        index.get(lastVal).add(pos);
+        index.get(lastVal).remove(ls.size() - 1);
+        ls.remove(ls.size() - 1);
         return true;
     }
 

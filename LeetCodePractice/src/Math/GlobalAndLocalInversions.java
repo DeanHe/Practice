@@ -1,5 +1,6 @@
 package Math;
-/*We have some permutation A of [0, 1, ..., N - 1], where N is the length of A.
+/*
+We have some permutation A of [0, 1, ..., N - 1], where N is the length of A.
 
 The number of (global) inversions is the number of i < j with 0 <= i < j < N and A[i] > A[j].
 
@@ -21,7 +22,8 @@ Note:
 
 A will be a permutation of [0, 1, ..., A.length - 1].
 A will have length in range [1, 5000].
-The time limit for this problem has been reduced.*/
+The time limit for this problem has been reduced.
+*/
 public class GlobalAndLocalInversions {
 	public boolean isIdealPermutation(int[] A) {
         int preMax = 0;
