@@ -1,10 +1,6 @@
 package SweepLine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // given a text input string, and a list of interval to character mapping, for example:
 // string "Isomorphism" has following mapping:
@@ -22,60 +18,40 @@ import java.util.Set;
 // [8 - 10) -> d
 public class TextNormalization {
     public List<Span> normalize(List<Span> input) {
+        Map<Integer, Map<Character, Integer>> axis = new TreeMap<>();
         List<Span> res = new ArrayList<>();
-        List<Tick> axis = new ArrayList<>();
         for (Span span : input) {
-            Tick tick_start = new Tick(span.start);
-            Tick tick_end = new Tick(span.end);
-            for (String s : span.set) {
-                tick_start.set.add(s);
-                tick_end.set.add(s);
+            Map<Character, Integer> startMap = axis.computeIfAbsent(span.start, x -> new HashMap<>());
+            for(Character c : span.set){
+                startMap.put(c, startMap.getOrDefault(c, 0) + 1);
             }
-            axis.add(tick_start);
-            axis.add(tick_end);
+            Map<Character, Integer> endMap = axis.computeIfAbsent(span.end, x -> new HashMap<>());
+            for(Character c : span.set){
+                endMap.put(c, endMap.getOrDefault(c, 0) - 1);
+            }
         }
-        Collections.sort(axis, (a, b) -> a.x - b.x);
-        Tick pre = axis.get(0);
-        for (int i = 1; i < axis.size(); i++) {
-            Tick cur = axis.get(i);
-            Span span = new Span(pre.x, cur.x);
-            for (String s : pre.set) {
-                span.set.add(s);
-                if(cur.set.contains(s)){
-                    cur.set.remove(s);
-                } else {
-                    cur.set.add(s);
+        int pre = -1;
+        Map<Character, Integer> sum = new HashMap<>();
+        for(int tick : axis.keySet()){
+            Span cur = new Span(pre, tick);
+            Map<Character, Integer> tickMap = axis.get(tick);
+            for(char c : tickMap.keySet()){
+                sum.put(c, sum.getOrDefault(c, 0) + tickMap.get(c));
+                if(sum.get(c) > 0){
+                    cur.set.add(c);
                 }
             }
-            res.add(span);
-            pre = cur;
+            if(pre != -1){
+                res.add(cur);
+            }
+            pre = tick;
         }
         return res;
     }
 
-    public void test(){
-        List<Span> inputs = new ArrayList<>();
-        Span s1 = new Span(0, 3);
-        s1.set.add("a");
-        inputs.add(s1);
-        Span s2 = new Span(2, 7);
-        s2.set.add("b");
-        inputs.add(s2);
-        Span s3 = new Span(4, 8);
-        s3.set.add("c");
-        inputs.add(s3);
-        Span s4 = new Span(6, 10);
-        s4.set.add("d");
-        inputs.add(s4);
-        List<Span> res = normalize(inputs);
-        for (Span s : res) {
-            System.out.println(s);
-        }
-    }
-
     private class Span {
         int start, end;
-        Set<String> set;
+        Set<Character> set;
 
         public Span(int s, int e) {
             start = s;
@@ -86,8 +62,8 @@ public class TextNormalization {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            for (String name : set) {
-                sb.append(name + ",");
+            for (char c : set) {
+                sb.append(c + ",");
             }
             sb.deleteCharAt(sb.length() - 1);
             return String.format("(%s, %s) [%s]", start, end, sb.toString());
