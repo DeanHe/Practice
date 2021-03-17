@@ -46,10 +46,11 @@ public class CorporateFlightBookings {
             axis.put(start, axis.getOrDefault(start, 0) + seats);
             axis.put(end + 1, axis.getOrDefault(end + 1, 0) - seats);
         }
-        int preSum = 0;
         for(int i = 0; i < n; i++){
-            preSum += axis.getOrDefault(i + 1, 0);
-            res[i] = preSum;
+            if(i > 0){
+                res[i] = res[i - 1];
+            }
+            res[i] += axis.getOrDefault(i + 1, 0);
         }
         return res;
     }
