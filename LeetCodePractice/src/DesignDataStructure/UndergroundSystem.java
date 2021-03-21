@@ -71,6 +71,9 @@ import java.util.Map;
         All strings consist of uppercase, lowercase English letters and digits.
         1 <= stationName.length <= 10
         Answers within 10^-5 of the actual value will be accepted as correct.
+
+        analysis:
+        Nested HashMap
 */
 public class UndergroundSystem {
     Map<Integer, Pair<String, Integer>> checkInMap;

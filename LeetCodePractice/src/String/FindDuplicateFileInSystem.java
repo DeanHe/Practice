@@ -36,7 +36,7 @@ You may assume each given directory info represents a unique directory. Director
  
 
 Follow-up beyond contest:
-Imagine you are given a real file system, how will you search files? DFS or BFS?
+Imagine you are given a real file system, how will you search files? DFS or bfs?
 If the file content is very large (GB level), how will you modify your solution?
 If you can only read the file by 1kb each time, how will you modify your solution?
 What is the time complexity of your modified solution? What is the most time-consuming part and memory consuming part of it? How to optimize?

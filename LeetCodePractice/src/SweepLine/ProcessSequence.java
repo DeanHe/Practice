@@ -20,36 +20,59 @@ public class ProcessSequence {
 	 */
 	public List<Integer> numberOfProcesses(List<Interval> logs, List<Integer> queries) {
 		// Write your code here
-		List<Integer> ans = new ArrayList<>();
-		List<Integer> timeline = new ArrayList<>();
-		Map<Integer, Integer> tagToIdx = new HashMap<>();
+		List<Integer> res = new ArrayList<>();
+		List<Integer> axis = new ArrayList<>();
+		Map<Integer, Integer> idxMap = new HashMap<>();
 		for (Interval i : logs) {
-			timeline.add(i.start);
-			timeline.add(i.end);
-			timeline.add(i.end + 1);
+			axis.add(i.start);
+			axis.add(i.end + 1);
 		}
 		for (int q : queries) {
-			timeline.add(q);
+			axis.add(q);
 		}
-		Collections.sort(timeline);
+		Collections.sort(axis);
 		int index = 1;
-		for (int tag : timeline) {
-			if (!tagToIdx.containsKey(tag)) {
-				tagToIdx.put(tag, index);
+		for (int tick : axis) {
+			if (!idxMap.containsKey(tick)) {
+				idxMap.put(tick, index);
 				index++;
 			}
 		}
 		int[] preSum = new int[index + 1];
 		for (Interval i : logs) {
-			preSum[tagToIdx.get(i.start)]++;
-			preSum[tagToIdx.get(i.end + 1)]--;
+			preSum[idxMap.get(i.start)]++;
+			preSum[idxMap.get(i.end + 1)]--;
 		}
 		for (int i = 1; i <= index; i++) {
 			preSum[i] += preSum[i - 1];
 		}
 		for (int q : queries) {
-			ans.add(preSum[tagToIdx.get(q)]);
+			res.add(preSum[idxMap.get(q)]);
 		}
-		return ans;
+		return res;
+	}
+
+	public List<Integer> numberOfProcesses2(List<Interval> logs, List<Integer> queries) {
+		// Write your code here
+		List<Integer> res = new ArrayList<>();
+		TreeMap<Integer, Integer> axis = new TreeMap<>();
+		for (Interval i : logs) {
+			axis.put(i.start, axis.getOrDefault(i.start, 0 ) + 1);
+			axis.put(i.end + 1, axis.getOrDefault(i.end + 1, 0 ) - 1);
+		}
+		for (int q : queries) {
+			axis.putIfAbsent(q, 0);
+		}
+		for(int key : axis.keySet()){
+			Integer preKey = axis.lowerKey(key);
+			if(preKey != null){
+				int preVal = axis.get(preKey);
+				axis.put(key, axis.get(key) + preVal);
+			}
+		}
+		for (int q : queries) {
+			res.add(axis.get(q));
+		}
+		return res;
 	}
 }

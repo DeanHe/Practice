@@ -1,5 +1,7 @@
 package SweepLine;
 
+import sun.security.krb5.internal.Ticket;
+
 import java.util.*;
 /*
 Google interview
@@ -27,11 +29,11 @@ public class JobSchedule {
         int machineCnt = 0;
         PriorityQueue<Machine> machineQueue = new PriorityQueue<>(Comparator.comparingInt(Machine::getId));
         List<Pair> res = new ArrayList<>();
-        List<Tag> axis = new ArrayList<>();
+        List<Tick> axis = new ArrayList<>();
         Map<Job, Machine> map = new HashMap<>();
         for(Job job : jobs){
-            axis.add(new Tag(job.start, job, true));
-            axis.add(new Tag(job.end, job, false));
+            axis.add(new Tick(job.start, job, true));
+            axis.add(new Tick(job.end, job, false));
         }
         Collections.sort(axis, (a, b) -> {
             if(a.x != b.x){
@@ -44,28 +46,28 @@ public class JobSchedule {
                 }
             }
         });
-        for(Tag tag : axis){
-            if(tag.isStart){
+        for(Tick tick : axis){
+            if(tick.isStart){
                 if(machineQueue.isEmpty()){
                     machineCnt++;
                     machineQueue.offer(new Machine(machineCnt));
                 }
                 Machine m = machineQueue.poll();
-                res.add(new Pair(tag.job, m));
-                map.put(tag.job, m);
+                res.add(new Pair(tick.job, m));
+                map.put(tick.job, m);
             } else {
-                Machine m = map.get(tag.job);
+                Machine m = map.get(tick.job);
                 machineQueue.offer(m);
             }
         }
         return res;
     }
 
-    class Tag {
+    class Tick {
         int x;
         boolean isStart;
         Job job;
-        Tag(int x, Job job, boolean isStart){
+        Tick(int x, Job job, boolean isStart){
             this.x = x;
             this.job = job;
             this.isStart = isStart;

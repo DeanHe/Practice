@@ -1,20 +1,4 @@
-import BFS.ArrangeObjectGoogle;
-import BST.BinaryTreeMaximumPathSum;
-import BST.TreeNode;
-import LinkedList.ListNode;
-import SweepLine.Intervals.Interval;
-import Trie.ShortEncodingOfWords;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-import java.util.TreeMap;
+import bfs.ArrangeObjectGoogle;
 
 
 public class Solution {
@@ -74,37 +58,17 @@ public class Solution {
 		*/
     }
 
-    public int search(int[] A, int target) {
-        if (A == null || A.length == 0) {
-            return -1;
-        }
-        int start = 0;
-        int end = A.length - 1;
-        while (start + 1 < end) {
-            int mid = start + (end - start) / 2;
-            if(A[mid] == target){
-                return mid;
-            }
-            if(A[start] < A[mid]){
-                if(A[start] <= target && target <= A[mid]){
-                    end = mid;
-                } else {
-                    start = mid;
-                }
-            } else {
-                if(A[mid] <= target && target <= A[end]){
-                    start = mid;
-                } else {
-                    end = mid;
+    public int savePeople(int[] weights, int[] score, int load){
+        int len = weights.length;
+        int[][] dp = new int[len + 1][load + 1];
+        for(int i = 1; i < len; i++){
+            for(int j = 0; j <= load; j++){
+                dp[i][j] = dp[i - 1][j];
+                if(j >= weights[i - 1]){
+                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - weights[i - 1]] + score[j]);
                 }
             }
         }
-        if(A[start] == target){
-            return start;
-        }
-        if(A[end] == target){
-            return end;
-        }
-        return -1;
+        return dp[len][load];
     }
 }

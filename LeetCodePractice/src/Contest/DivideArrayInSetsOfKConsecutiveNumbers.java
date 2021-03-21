@@ -14,12 +14,12 @@ Example 1:
 
 Input: nums = [1,2,3,3,4,4,5,6], k = 4
 Output: true
-Explanation: Array can be divided into [1,2,3,4] and [3,4,5,6].
+Explanation: array can be divided into [1,2,3,4] and [3,4,5,6].
 Example 2:
 
 Input: nums = [3,2,1,2,3,4,3,4,5,9,10,11], k = 3
 Output: true
-Explanation: Array can be divided into [1,2,3] , [2,3,4] , [3,4,5] and [9,10,11].
+Explanation: array can be divided into [1,2,3] , [2,3,4] , [3,4,5] and [9,10,11].
 Example 3:
 
 Input: nums = [3,3,2,2,1,1], k = 3

@@ -66,7 +66,7 @@ public class CheapestFlightsWithinKStops {
     	return -1;
     }
 	
-	// using BFS
+	// using bfs
 	public int findCheapestPriceBFS(int n, int[][] flights, int src, int dst, int K) {
         int[] costs = new int[n];
         Arrays.fill(costs, Integer.MAX_VALUE);

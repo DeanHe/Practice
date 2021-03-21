@@ -41,7 +41,7 @@ Given the array houses and an integer k. where houses[i] is the location of the 
         1 <= n <= 100
         1 <= houses[i] <= 10^4
         1 <= k <= n
-        Array houses contain unique integers.
+        array houses contain unique integers.
 */
 
 import java.util.Arrays;

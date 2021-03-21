@@ -76,7 +76,7 @@ public class RemoveInvalidParentheses {
         sb.setLength(sbLen); // backtrack
     }
 
-    /* BFS */
+    /* bfs */
     public List<String> removeInvalidParenthesesBFS(String s) {
         List<String> res = new ArrayList<>();
         if(s == null){

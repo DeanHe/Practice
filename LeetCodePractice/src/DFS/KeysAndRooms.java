@@ -55,4 +55,21 @@ public class KeysAndRooms {
 			}
 		}
 	}
+
+	public boolean canVisitAllRoomsBFS(List<List<Integer>> rooms) {
+		Set<Integer> v = new HashSet<>();
+		v.add(0);
+		Queue<Integer> q = new LinkedList<>();
+		q.offer(0);
+		while(!q.isEmpty()){
+			int cur = q.poll();
+			for(int k : rooms.get(cur)){
+				if(!v.contains(k)){
+					q.offer(k);
+					v.add(k);
+				}
+			}
+		}
+		return v.size() == rooms.size();
+	}
 }

@@ -32,7 +32,7 @@ public class BoxStacking {
     type of boxes */
 	public static int maxStackHeight(Box[] arr, int n) {
 		Box[] rotation = new Box[n * 3];
-		/* New Array of boxes is created -  
+		/* New array of boxes is created -
         considering all 3 possible rotations,  
         with width always greater than equal 
         to width */

@@ -1,5 +1,6 @@
 package DP;
-/*Your are given an array of integers prices, for which the i-th element is the price of a given stock on day i; and a non-negative integer fee representing a transaction fee.
+/*
+Your are given an array of integers prices, for which the i-th element is the price of a given stock on day i; and a non-negative integer fee representing a transaction fee.
 You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction. You may not buy more than 1 share of a stock at a time (ie. you must sell the stock share before you buy again.)
 Return the maximum profit you can make.
 
@@ -16,15 +17,22 @@ Note:
 
 0 < prices.length <= 50000.
 0 < prices[i] < 50000.
-0 <= fee < 50000.*/
+0 <= fee < 50000.
+
+analysis:
+cash means your balance by selling stock on i day
+hold means your balance by holding stock on i day
+
+We can transform cash first without using temporary variables because selling and buying on the same day can't be better than just continuing to hold the stock.
+*/
 public class BestTimeToBuyAndSellStockWithTransactionFee {
 	public int maxProfit(int[] prices, int fee) {
         int len = prices.length;
-        int profit = 0, balance = -prices[0];
+        int cash = 0, hold = -prices[0];
         for(int i = 1; i < len; i++){
-            profit = Math.max(profit, prices[i] + balance - fee);
-            balance = Math.max(balance, profit - prices[i]);
+            cash = Math.max(cash, prices[i] + hold - fee);
+            hold = Math.max(hold, cash - prices[i]);
         }
-        return profit;
+        return cash;
     }
 }

@@ -2,7 +2,8 @@ package Contest;
 
 import java.util.*;
 
-/*Given a 2D grid of size n * m and an integer k. You need to shift the grid k times.
+/*
+Given a 2D grid of size n * m and an integer k. You need to shift the grid k times.
 
         In one shift operation:
 
