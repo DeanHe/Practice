@@ -1,4 +1,4 @@
-package BinarySearch;
+package binarySearch;
 
 /*
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
@@ -19,7 +19,7 @@ Input: [2,2,2,0,1]
 Output: 0
 Note:
 
-This is a follow up problem to Find Minimum in Rotated Sorted Array.
+This is a follow up problem to Find Minimum in Rotated Sorted array.
 Would allow duplicates affect the run-time complexity? How and why?
  */
 public class FindMinimumInRotatedSortedArrayII {

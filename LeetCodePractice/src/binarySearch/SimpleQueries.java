@@ -1,8 +1,9 @@
-package BinarySearch;
+package binarySearch;
 
 import java.util.Arrays;
 
-/*Give you two arrays, the first array may contains repeatable integers, The second array is a subset of the first array.The length of the returned array is the same as the second array. For each element a in the second array, how many numbers are in the first array <=a.
+/*
+Give you two arrays, the first array may contains repeatable integers, The second array is a subset of the first array.The length of the returned array is the same as the second array. For each element a in the second array, how many numbers are in the first array <=a.
 
 Example
 Example 1:
@@ -14,7 +15,8 @@ Example 2:
 
 Input: nums = [3, 1, 2, 3, 3, 1],sub = [1,3]
 Output：[2, 6] 
-Explanation：<=1 numbers are [1,1]，<=3 numbers are [1,1,2,3,3,3]*/
+Explanation：<=1 numbers are [1,1]，<=3 numbers are [1,1,2,3,3,3]
+*/
 public class SimpleQueries {
 	/**
 	 * @param nums:

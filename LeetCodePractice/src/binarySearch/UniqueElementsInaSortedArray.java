@@ -1,7 +1,7 @@
-package BinarySearch;
+package binarySearch;
 
 /*
-Count the unique elements in an Sorted Array.
+Count the unique elements in an Sorted array.
 
 Example:
 

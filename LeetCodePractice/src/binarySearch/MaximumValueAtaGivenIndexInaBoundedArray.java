@@ -1,4 +1,4 @@
-package Contest;
+package binarySearch;
 /*
 You are given three positive integers n, index and maxSum. You want to construct an array nums (0-indexed) that satisfies the following conditions:
 
