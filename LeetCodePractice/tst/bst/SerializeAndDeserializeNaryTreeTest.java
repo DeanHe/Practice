@@ -44,7 +44,7 @@ public class SerializeAndDeserializeNaryTreeTest {
         String input = snt.serialize(a);
         System.out.println(input);
 
-        NNode res = snt.deserialize(input);
-        Assert.assertTrue(res != null);
+        NNode root = snt.deserialize(input);
+        Assert.assertTrue(root != null);
     }
 }

@@ -34,14 +34,14 @@ public class  StoneGameII {
         for(int i = len - 2; i >= 0; i--){
         	sufSum[i] = sufSum[i + 1] + piles[i];
         }
-        return helper(piles, 0, 1);
+        return helper(0, 1);
     }
 	// the maximum gain for player on turn i and setting M
-	private int helper(int[] piles, int i, int M){
+	private int helper(int i, int M){
 		if(i == len){
 			return 0;
 		}
-		if(2 * M + i >= len){
+		if(i + 2 * M >= len){
 			return sufSum[i];
 		}
 		if(mem[i][M] != null){
@@ -49,7 +49,7 @@ public class  StoneGameII {
 		}
 		int nextPlayerMin = Integer.MAX_VALUE; //the min value the next player can get
 		for(int x = 1; x <= 2 * M; x++){
-			nextPlayerMin = Math.min(nextPlayerMin, helper(piles, i + x, Math.max(M, x)));
+			nextPlayerMin = Math.min(nextPlayerMin, helper(i + x, Math.max(M, x)));
 		}
 		return mem[i][M] = sufSum[i] - nextPlayerMin;
 	}

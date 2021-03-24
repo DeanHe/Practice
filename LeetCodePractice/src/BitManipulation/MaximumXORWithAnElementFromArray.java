@@ -33,6 +33,7 @@ Constraints:
 queries[i].length == 2
 0 <= nums[j], xi, mi <= 10^9
 
+tag: Trie
 analysis:
 similar to
 Checking Existence of Edge Length Limited Path

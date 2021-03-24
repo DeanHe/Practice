@@ -10,14 +10,14 @@ import java.util.*;
 
 public class IntervalSearch {
 	TreeMap<Integer, Set<Interval>> map;
-	int min = Integer.MAX_VALUE;
-	int max = Integer.MIN_VALUE;
+	int least = Integer.MAX_VALUE;
+	int most = Integer.MIN_VALUE;
 	public IntervalSearch(ArrayList<Interval> input){
 		map = new TreeMap<>();
 		ArrayList<Integer> axis = new ArrayList<>();
 		for(Interval interval : input){
-			min = Math.min(min, interval.start);
-			max = Math.max(max, interval.end);
+			least = Math.min(least, interval.start);
+			most = Math.max(most, interval.end);
 			axis.add(interval.start);
 			axis.add(interval.end);
 		}
@@ -32,7 +32,7 @@ public class IntervalSearch {
 		}
 	}
 	public Set<Interval> searchNum(int num){
-		if(num < min || num > max){
+		if(num < least || num > most){
 			return new HashSet<>();
 		}
 		int key = map.floorKey(num);

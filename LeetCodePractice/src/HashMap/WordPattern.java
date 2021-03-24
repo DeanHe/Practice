@@ -28,6 +28,10 @@ Input: pattern = "abba", str = "dog dog dog dog"
 Output: false
 Notes:
 You may assume pattern contains only lowercase letters, and str contains lowercase letters that may be separated by a single space.
+
+analysis:
+use a hashmap to save pattern char to match mapping
+use a set to save used match
  */
 public class WordPattern {
     public boolean wordPattern(String pattern, String str) {

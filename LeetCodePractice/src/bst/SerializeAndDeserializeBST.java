@@ -1,5 +1,7 @@
 package bst;
 /*
+#449
+
 Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
 Design an algorithm to serialize and deserialize a binary search tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary search tree can be serialized to a string and this string can be deserialized to the original tree structure.
 The encoded string should be as compact as possible.
@@ -7,10 +9,11 @@ Note: Do not use class member/global/static variables to store states. Your seri
 
 complexity requirement: O(N)
 
-sol:
+analysis:
 There is no need to use "#" or "null" in bst which makes it more compact!
 The reason is that we can reconstruct bst by only using preorder(/postorder/levelorder) traversal.
 However, in the binary tree situation, we need to use preorder(/postorder/levelorder) + inorder to reconstruct the tree. If we want to directly construct BT, we have to use "#" or "null".
+
 */
 
 import java.util.Arrays;
@@ -22,7 +25,7 @@ public class SerializeAndDeserializeBST {
     public String serialize(TreeNode root) {
         StringBuilder sb = new StringBuilder();
         serialize(root, sb);
-        return sb.toString();
+        return sb.substring(0, sb.length() - 1);
     }
 
     // Decodes your encoded data to tree.

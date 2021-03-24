@@ -4,6 +4,7 @@ import bst.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /*
 Description
@@ -42,6 +43,7 @@ Output: "left:1->3->2  right:1->2->3"
 
 https://www.lintcode.com/problem/convert-binary-search-tree-to-sorted-doubly-linked-list/description
 use inorder traversal
+O(N) space complexity
  */
 public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
 
@@ -50,15 +52,15 @@ public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
      * @param root: root of a tree
      * @return: head node of a doubly linked list
      */
-    private TreeNode head, pre;
+    private TreeNode head, tail;
 
     public TreeNode treeToDoublyList(TreeNode root) {
         if (root == null) {
             return null;
         }
         inorder(root);
-        head.left = pre; // pre is at last node
-        pre.right = head;
+        head.left = tail; // tail is at last node
+        tail.right = head;
         return head;
     }
 
@@ -67,43 +69,41 @@ public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
             return;
         }
         inorder(root.left);
-        if (pre != null) {
-            root.left = pre;
-            pre.right = root;
-        } else {
+        if(head == null){
             head = root;
         }
-        pre = root;
+        if (tail != null) {
+            root.left = tail;
+            tail.right = root;
+        }
+        tail = root;
         inorder(root.right);
     }
 
-    // O(N) space complexity
-    public TreeNode treeToDoublyListWithMemory(TreeNode root) {
+    public TreeNode treeToDoublyListIterative(TreeNode root) {
         if (root == null) {
             return null;
         }
-        List<TreeNode> ls = new ArrayList<>();
-        dfsWithMemory(root, ls);
-        TreeNode head = ls.get(0);
-        TreeNode tail = ls.get(ls.size() - 1);
+        Stack<TreeNode> st = new Stack<>();
+        while(root != null || !st.isEmpty()){
+            if(root != null){
+                st.push(root);
+                root = root.left;
+            } else {
+                root = st.pop();
+                if(head == null){
+                    head = root;
+                }
+                if (tail != null) {
+                    root.left = tail;
+                    tail.right = root;
+                }
+                tail = root;
+                root = root.right;
+            }
+        }
         head.left = tail;
         tail.right = head;
         return head;
-    }
-
-    private void dfsWithMemory(TreeNode root, List<TreeNode> ls) {
-        if (root == null) {
-            return;
-        }
-        dfsWithMemory(root.left, ls);
-        ls.add(root);
-        if (ls.size() >= 2) {
-            int size = ls.size();
-            TreeNode post = ls.get(size - 1);
-            TreeNode pre = ls.get(size - 2);
-            pre.right = post;
-            post.left = pre;
-        }
-        dfsWithMemory(root.right, ls);
     }
 }

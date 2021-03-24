@@ -31,25 +31,26 @@ Output: true
 
 Constraints:
 
-1 <= n <= 231 - 1
+1 <= n <= 2^31 - 1
  */
 public class NimGame {
     public boolean canWinNim(int n) {
-        Boolean[] dp = new Boolean[n + 1];
-        return dfs(dp, n);
+        Boolean[] mem = new Boolean[n + 1];
+        return dfs(mem, n);
     }
 
-    private boolean dfs(Boolean[] dp, int n) {
+    private boolean dfs(Boolean[] mem, int n) {
         if(n <= 0){
             return false;
         }
-        if(dp[n] != null){
-            return dp[n];
+        if(mem[n] != null){
+            return mem[n];
         }
-        boolean res = false;
         for(int i = 1; i <= 3; i++){
-            res |= !dfs(dp, n - i);
+            if(!dfs(mem, n - i)){
+                return mem[n] = true;
+            }
         }
-        return dp[n] = res;
+        return mem[n] = false;
     }
 }

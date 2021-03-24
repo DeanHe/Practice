@@ -27,12 +27,12 @@ Example 2:
 
 Input: nums = [1,2,3,4,5,6], requests = [[0,1]]
 Output: 11
-Explanation: A permutation with the max total sum is [6,5,4,3,2,1] with request sums [11].
+Explanation: A permutation with the most total sum is [6,5,4,3,2,1] with request sums [11].
 Example 3:
 
 Input: nums = [1,2,3,4,5,10], requests = [[0,2],[1,3],[1,1]]
 Output: 47
-Explanation: A permutation with the max total sum is [4,10,5,3,2,1] with request sums [19,18,10].
+Explanation: A permutation with the most total sum is [4,10,5,3,2,1] with request sums [19,18,10].
 
 
 Constraints:

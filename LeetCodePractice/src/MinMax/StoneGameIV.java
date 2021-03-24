@@ -54,10 +54,10 @@ public class StoneGameIV {
     Map<Integer, Boolean> mem = new HashMap<>();
     public boolean winnerSquareGame(int n) {
        mem.put(0, false);
-       return dfs(n);
+       return canWin(n);
     }
 
-    private boolean dfs(int n) {
+    private boolean canWin(int n) {
         if(mem.containsKey(n)){
             return mem.get(n);
         }
@@ -65,7 +65,7 @@ public class StoneGameIV {
         for(int i = 1; i <= sqrt_root; i++){
             // if there is any chance to make the opponent lose the game in the next round,
             // then the current player will win.
-            if(!dfs(n - i * i)){
+            if(!canWin(n - i * i)){
                 mem.put(n, true);
                 return true;
             }

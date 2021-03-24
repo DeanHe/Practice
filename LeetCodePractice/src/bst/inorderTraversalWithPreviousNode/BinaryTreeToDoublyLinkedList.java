@@ -19,8 +19,7 @@ The figure below shows the transformed bst. The solid line indicates the success
 */
 public class BinaryTreeToDoublyLinkedList {
 	
-	TreeNode head = null;
-	static TreeNode pre = null;
+	TreeNode head, tail;
 
 	public void printList(){
 		while(head != null){
@@ -34,13 +33,13 @@ public class BinaryTreeToDoublyLinkedList {
 			return;
 		}
 		convertToList(root.left);
-		if(pre == null){
+		if(tail == null){
 			head = root;
 		} else {
-			pre.right = root;
-			root.left =pre;
+			tail.right = root;
+			root.left = tail;
 		}
-		pre = root;
+		tail = root;
 		convertToList(root.right);
 	}
 }

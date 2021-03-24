@@ -30,6 +30,9 @@ Constraints:
 1 <= nums.length <= 50000
 1 <= nums[i] <= 10^5
 1 <= k <= nums.length
+
+analysis:
+two pointer, track for each odd # of nums[:i] ended with
 */
 public class CountNumberOfNiceSubarrays {
 	public int numberOfSubarrays(int[] nums, int k) {

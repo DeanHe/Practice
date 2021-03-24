@@ -21,21 +21,28 @@ Note:
 
 This is a follow up problem to Find Minimum in Rotated Sorted array.
 Would allow duplicates affect the run-time complexity? How and why?
+
+tag: divid and conquer
+TC O(lgN)
  */
 public class FindMinimumInRotatedSortedArrayII {
     public int findMin(int[] nums) {
-        int start = 0, end = nums.length - 1;
-        while(start < end){
-            int mid = start + (end - start) / 2;
-            if(nums[mid] > nums[end]){
-                start = mid + 1;
-            } else if(nums[mid] < nums[start]){
-                end = mid;
-                start++;
-            } else {
-                end--;
-            }
+        if(nums == null || nums.length == 0){
+            return 0;
         }
-        return nums[start];
+        int len = nums.length;
+        return helper(nums, 0, len - 1);
+
+    }
+
+    private int helper(int[] nums, int s, int e) {
+        if(s + 1 >= e){
+            return Math.min(nums[s], nums[e]);
+        }
+        if(nums[s] < nums[e]){
+            return nums[s];
+        }
+        int mid = s + (e - s) / 2;
+        return Math.min(helper(nums, s, mid - 1), helper(nums, mid, e));
     }
 }

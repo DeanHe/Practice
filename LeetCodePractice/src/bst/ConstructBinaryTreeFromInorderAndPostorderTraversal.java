@@ -6,6 +6,10 @@ import java.util.*;
 You may assume that duplicates do not exist in the tree.
 
 Given inorder [1,2,3] and postorder [1,3,2], return a tree:
+
+analysis:
+shift right subtree size
+TC O(N)
 */
 public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
 	

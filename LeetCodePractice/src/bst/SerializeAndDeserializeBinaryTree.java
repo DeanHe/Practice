@@ -2,6 +2,8 @@ package bst;
 
 import java.util.*;
 /*
+297
+
 Design an algorithm and write code to serialize and deserialize a binary tree. Writing the tree to a file is called 'serialization' and reading back from the file to reconstruct the exact same binary tree is 'deserialization'.
 
 Example
@@ -27,6 +29,9 @@ You can use other method to do serializaiton and deserialization.
 
 Notice
 There is no limit of how you deserialize or serialize a binary tree, LintCode will take your output of serialize as the input of deserialize, it won't check the result of serialize.
+
+analysis:
+use a Queue to store the pre-order traversal, use '#' for null node
 */
 
 public class SerializeAndDeserializeBinaryTree {
@@ -36,7 +41,6 @@ public class SerializeAndDeserializeBinaryTree {
      * to serialize a binary tree which denote by a root node to a string which
      * can be easily deserialized by your own "deserialize" method later.
      */
-	// pre-order
     public String serialize(TreeNode root) {
         // write your code here
         if(root == null){

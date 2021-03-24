@@ -1,6 +1,7 @@
-package Contest;
+package Heap;
 
 import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 /*
@@ -53,57 +54,43 @@ public class NumberOfOrdersInTheBacklog {
     int MOD =(int)(1e9 + 7);
     public int getNumberOfBacklogOrders(int[][] orders) {
         long res = 0;
-        TreeMap<Integer, Integer> buyLog = new TreeMap<>(Collections.reverseOrder());
-        TreeMap<Integer, Integer> sellLog = new TreeMap<>();
+        PriorityQueue<int[]> buyLog = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        PriorityQueue<int[]> sellLog = new PriorityQueue<>((a, b) -> a[0] - b[0]);
         for(int[] order : orders){
             int price = order[0];
             int cnt = order[1];
-            int originCnt = cnt;
             int operation = order[2];
             // buy
             if(operation == 0){
-                for(int p : sellLog.keySet()){
-                    if(price >= p){
-                        int c = sellLog.get(p);
-                        if(c == 0){
-                            continue;
-                        }
-                        if(c <= cnt){
-                            cnt -= c;
-                            sellLog.put(p, 0);
-                        } else {
-                            sellLog.put(p, c - cnt);
-                            cnt = 0;
-                            break;
-                        }
-                    }
+                while(!sellLog.isEmpty() && price >= sellLog.peek()[0] && cnt >= sellLog.peek()[1]){
+                    cnt -= sellLog.poll()[1];
+                }
+                if(!sellLog.isEmpty() && price >= sellLog.peek()[0] && cnt > 0){
+                    sellLog.peek()[1] -= cnt;
+                    cnt = 0;
                 }
                 if(cnt > 0){
-                    buyLog.put(price, buyLog.getOrDefault(price,0) + cnt);
+                    buyLog.offer(new int[]{price, cnt});
                 }
             } else {
                 // sell
-                for(int p : buyLog.keySet()){
-                    if(price <= p){
-                        int c = buyLog.get(p);
-                        if(c == 0){
-                            continue;
-                        }
-                        if(c <= cnt){
-                            cnt -= c;
-                            buyLog.put(p, 0);
-                        } else {
-                            buyLog.put(p, c - cnt);
-                            cnt = 0;
-                            break;
-                        }
-                    }
+                while(!buyLog.isEmpty() && price <= buyLog.peek()[0] && cnt >= buyLog.peek()[1]){
+                    cnt -= buyLog.poll()[1];
+                }
+                if(!buyLog.isEmpty() && price <= buyLog.peek()[0] && cnt > 0){
+                    buyLog.peek()[1] -= cnt;
+                    cnt = 0;
                 }
                 if(cnt > 0){
-                    sellLog.put(price, sellLog.getOrDefault(price,0) + cnt);
+                    sellLog.offer(new int[]{price, cnt});
                 }
             }
-            res = (res + 2 * cnt - originCnt);
+        }
+        for(int[] cur : buyLog){
+            res += cur[1];
+        }
+        for(int[] cur : sellLog){
+            res += cur[1];
         }
         return (int)(res % MOD);
     }

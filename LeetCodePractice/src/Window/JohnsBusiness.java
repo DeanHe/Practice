@@ -5,7 +5,8 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /*
-There are n cities on an axis, numbers from 0 ~ n - 1. John intends to do business in these n cities, He is interested in Armani's shipment. Each city has a price for these goods prices [i].
+There are n cities on an axis, numbers from 0 ~ n - 1. John intends to do business in these n cities, He is interested in Armani's shipment.
+Each city has a price for these goods prices [i].
 For city x, John can buy the goods from the city numbered from x - k to x + k, and sell them to city x. We want to know how much John can earn at most in each city?
 
 Example
@@ -35,30 +36,28 @@ public class JohnsBusiness {
      * @return: The ans array
      */
     public int[] business(int[] A, int k) {
-        Deque<Integer> deque = new LinkedList<>();
         int len = A.length;
         int[] res = new int[len];
-        for (int i = 0; i < len && i <= k; i++) {
-            while (!deque.isEmpty() && A[i] < deque.peekLast()) {
+        Deque<Integer> deque = new LinkedList<>();
+        for(int i = 0; i < len && i <= k; i++){
+            while(!deque.isEmpty() && A[i] < A[deque.peekLast()]){
                 deque.pollLast();
             }
-            deque.offerLast(A[i]);
+            deque.offerLast(i);
         }
-        for (int i = 0; i < len; i++) {
-            int start = i - k;
-            int end = i + k;
-            if (start > 0) {
-                if (A[start - 1] == deque.peekFirst()) {
-                    deque.pollFirst();
-                }
+        for(int i = 0; i < len; i++){
+            int s = i - k;
+            int e = i + k;
+            if(deque.peekFirst() == s - 1){
+                deque.pollFirst();
             }
-            if (end < len) {
-                while (!deque.isEmpty() && A[end] < deque.peekLast()) {
+            if(e < len){
+                while(!deque.isEmpty() && A[e] < A[deque.peekLast()]){
                     deque.pollLast();
                 }
-                deque.offerLast(A[end]);
+                deque.offerLast(e);
             }
-            res[i] = A[i] - deque.peekFirst();
+            res[i] = A[i] - A[deque.peekFirst()];
         }
         return res;
     }
