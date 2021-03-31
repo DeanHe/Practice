@@ -42,10 +42,9 @@ public class DiagonalTraverseII {
     public int[] findDiagonalOrder(List<List<Integer>> nums) {
         int size = 0, maxKey = 0, i = 0;
         Map<Integer, List<Integer>> diagonalMap = new HashMap<>();
-        for (int r = nums.size() - 1; r >= 0; r++) { // diagonals all start from last row
+        for (int r = nums.size() - 1; r >= 0; r--) { // diagonals all start from last row
             for (int c = 0; c < nums.get(r).size(); c++) {
-                diagonalMap.putIfAbsent(r + c, new ArrayList<>());
-                diagonalMap.get(r + c).add(nums.get(r).get(c));
+                diagonalMap.computeIfAbsent(r + c, x -> new ArrayList<>()).add(nums.get(r).get(c));
                 maxKey = Math.max(maxKey, r + c);
                 size++;
             }

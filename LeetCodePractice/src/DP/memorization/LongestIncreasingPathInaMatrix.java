@@ -25,7 +25,7 @@ Output: 4
 Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.*/
 /*To get max length of increasing sequences:
 
-Do DFS from every cell
+Do dfs from every cell
 Compare every 4 direction and skip cells that are out of boundary or smaller
 Get matrix max from every cell's max
 Use matrix[x][y] <= matrix[i][j] so we don't need a visited[m][n] array
@@ -45,7 +45,7 @@ public class LongestIncreasingPathInaMatrix {
 		int maxPath = 1;
 		rows = matrix.length;
 		cols = matrix[0].length;
-		int[][] mem = new int[rows][cols]; // mem[r][c] means the maximum path start from {r, c}
+		Integer[][] mem = new Integer[rows][cols]; // mem[r][c] means the maximum path start from {r, c}
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				int count = dfs(matrix, mem, r, c);
@@ -55,8 +55,8 @@ public class LongestIncreasingPathInaMatrix {
 		return maxPath;
 	}
 
-	private int dfs(int[][] matrix, int[][] mem, int r, int c) {
-		if (mem[r][c] != 0) {
+	private int dfs(int[][] matrix, Integer[][] mem, int r, int c) {
+		if (mem[r][c] != null) {
 			return mem[r][c];
 		}
 		int count = 1;

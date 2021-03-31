@@ -48,27 +48,28 @@ public class MaximizeScoreAfterNOperations {
     int len;
     public int maxScore(int[] nums) {
         len = nums.length;
-        int[][] mem = new int[len / 2 + 1][1 << len];
+        Integer[][] mem = new Integer[len / 2 + 1][1 << len];
         return dfs(mem, nums, 1, 0);
     }
 
-    private int dfs(int[][] mem, int[] nums, int op, int state) {
+    private int dfs(Integer[][] mem, int[] nums, int op, int state) {
         if(op > len / 2){
             return 0;
         }
-        if(mem[op][state] != 0){
+        if(mem[op][state] != null){
             return mem[op][state];
         }
+        int res = 0;
         for(int i = 0; i < len; i++){
             for(int j = i + 1; j < len; j++){
                 int pick = (1 << i) + (1 << j);
                 if((state & pick) == 0){
-                    mem[op][state] = Math.max(mem[op][state],
+                    res = Math.max(res,
                             op * gcd(nums[i], nums[j]) + dfs(mem, nums, op + 1, state + pick));
                 }
             }
         }
-        return mem[op][state];
+        return mem[op][state] = res;
     }
 
     private int gcd(int a, int b){

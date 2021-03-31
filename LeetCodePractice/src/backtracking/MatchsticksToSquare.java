@@ -23,7 +23,7 @@ The length of the given matchstick array will not exceed 15.
 
 time complexity: O(4^N)
 NP complete problem
-Naive DFS for small input size
+Naive dfs for small input size
  */
 public class MatchsticksToSquare {
     public boolean makesquare(int[] nums) {

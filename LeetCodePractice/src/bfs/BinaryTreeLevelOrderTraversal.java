@@ -25,7 +25,7 @@ public class BinaryTreeLevelOrderTraversal {
 	 *            The root of binary tree.
 	 * @return: Level order a list of lists of integer
 	 */
-	// DFS method
+	// dfs method
 	public ArrayList<ArrayList<Integer>> levelOrderDFS(TreeNode root) {
 		ArrayList<ArrayList<Integer>> res = new ArrayList<>();
 		helper(res, root, 0);

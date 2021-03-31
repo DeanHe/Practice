@@ -53,9 +53,15 @@ public class OptimizeWaterDistributionInaVillage {
 	}
 	
 	private int getRoot(int x) {
-        while(parent[x] != x){
-            x = parent[x];
+		int root = x;
+        while(parent[root] != root){
+			root = parent[root];
         }
-        return x;
+        while(parent[x] != root){
+        	int fa = parent[x];
+			parent[x] = root;
+			x = fa;
+		}
+        return root;
 	}
 }

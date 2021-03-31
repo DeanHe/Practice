@@ -33,22 +33,22 @@ Constraints:
 public class FillingBookcaseShelves {
 	public int minHeightShelves(int[][] books, int shelf_width) {
         int len = books.length;
-        int[] dp = new int[len + 1]; // mem[i] means the min height of put first i books on shelves
+        int[] dp = new int[len + 1]; // dp[i + 1] means the min height of put first i books on shelves
         dp[0] = 0;
-        for(int i = 1; i <= len; i++){
-        	int w = books[i - 1][0];
-        	int h = books[i - 1][1];
-        	dp[i] = dp[i - 1] + h; // put books[i] a new level
+        for(int i = 0; i < len; i++){
+        	int w = books[i][0];
+        	int h = books[i][1];
+        	dp[i + 1] = dp[i] + h; // put books[i] a new level
         	 // put books[i] on a previous level, while books[j : i] are on the same last level
-        	for(int j = i - 1; j > 0; j--){
-        		int wj = books[j - 1][0];
-        		int hj = books[j - 1][1];
+        	for(int j = i - 1; j >= 0; j--){
+        		int wj = books[j][0];
+        		int hj = books[j][1];
         		w += wj;
         		if(w > shelf_width){
         			break;
         		}
         		h = Math.max(h, hj);
-        		dp[i]  = Math.min(dp[i], dp[j - 1] + h);
+				dp[i + 1]  = Math.min(dp[i + 1], dp[j] + h);
         	}
         }
         return dp[len];

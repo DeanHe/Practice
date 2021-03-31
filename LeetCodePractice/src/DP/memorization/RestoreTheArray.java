@@ -35,7 +35,7 @@ The number of ways could be very large so return it modulo 10^9 + 7
         s consists of only digits and doesn't contain leading zeros.
         1 <= k <= 10^9.
 
-        DFS + Memorization
+        dfs + Memorization
         Complexity
 
         Time: O(n * log10(k)), where n <= 10^5 is the length of string s, k <= 10^9 => log10(k) <= 9

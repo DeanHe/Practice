@@ -29,6 +29,10 @@ Constraints:
 
 1 <= text.length <= 20000
 text consist of lowercase English characters only.
+
+hint:
+There are two cases: a block of characters, or two blocks of characters between one different character.
+By keeping a run-length encoded version of the string, we can easily check these cases.
 */
 
 public class SwapForLongestRepeatedCharacterSubstring {

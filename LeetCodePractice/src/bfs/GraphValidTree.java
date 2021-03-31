@@ -22,13 +22,13 @@ To check for a binary tree, additionally check if each vertex has at most 2 outg
 
 For an undirected graph:
 How to detect cycle?
-We can either use bfs or DFS. For every visited vertex ‘v’,
+We can either use bfs or dfs. For every visited vertex ‘v’,
 if there is an adjacent ‘u’ such that u is already visited and u is not parent of v,
 then there is a cycle in graph. If we don’t find such an adjacent for any vertex,
 we say that there is no cycle (See Detect cycle in an undirected graph for more details).
 
 How to check for connectivity?
-we can start bfs or DFS from any vertex and check if all vertices are reachable or not.
+we can start bfs or dfs from any vertex and check if all vertices are reachable or not.
 If all vertices are reachable, then graph is connected, otherwise not.
 */
 public class GraphValidTree {
@@ -73,7 +73,7 @@ public class GraphValidTree {
         return true;
     }
 
-    //DFS
+    //dfs
     public boolean validTreeDFS(int n, int[][] edges) {
         HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
         for (int i = 0; i < n; i++) {

@@ -61,17 +61,17 @@ public class MinimumSpanningTree {
 			parent[i] = i;
 		}
 		ArrayList<Connection> res = new ArrayList<>();
-		for (Connection c : connections) {
+		for (Connection con : connections) {
 			// check if the connection forms a cycle with the spanning tree
 			// formed so far.
 			// use union find to getRoot and union
-			int id1 = groupMap.get(c.city1);
-			int id2 = groupMap.get(c.city2);
+			int id1 = groupMap.get(con.city1);
+			int id2 = groupMap.get(con.city2);
 			int root1 = getRoot(id1, parent);
 			int root2 = getRoot(id2, parent);
 			if (root1 != root2) {
 				parent[root1] = root2;
-				res.add(c);
+				res.add(con);
 			}
 		}
 		if (res.size() != n - 1) {
@@ -80,10 +80,16 @@ public class MinimumSpanningTree {
 		return res;
 	}
 
-	private int getRoot(int i, int[] parent) {
-		while (parent[i] != i) {
-			i = parent[i];
+	private int getRoot(int x, int[] parent) {
+		int root = x;
+		while (parent[root] != root) {
+			root = parent[root];
 		}
-		return i;
+		while (parent[x] != root) {
+			int fa = parent[x];
+			root = parent[x];
+			x = fa;
+		}
+		return root;
 	}
 }

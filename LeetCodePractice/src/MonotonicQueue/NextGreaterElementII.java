@@ -44,8 +44,8 @@ public class NextGreaterElementII {
 		for(int i = 0; i < len * 2; i++){
 			int cur = i % len;
 			while(!deque.isEmpty() && nums[deque.peekLast()] < nums[cur]){
-				int idx = deque.pollLast();
-				res[idx] = nums[cur];
+				int pre = deque.pollLast();
+				res[pre] = nums[cur];
 			}
 			deque.offerLast(cur);
 		}

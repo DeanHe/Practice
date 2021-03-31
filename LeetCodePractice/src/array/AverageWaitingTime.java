@@ -39,10 +39,10 @@ arrival_i <= arrival_i+1
  */
 public class AverageWaitingTime {
     public double averageWaitingTime(int[][] customers) {
-        double waitingTime = 0, chefFree = 0;
+        double waitingTime = 0, chefAavailableTime = 0;
         for(int[] customer : customers){
-            chefFree = Math.max(chefFree, customer[0]) + customer[1];
-            waitingTime += chefFree - customer[0];
+            chefAavailableTime = Math.max(chefAavailableTime, customer[0]) + customer[1];
+            waitingTime += chefAavailableTime - customer[0];
         }
         return waitingTime / customers.length;
     }

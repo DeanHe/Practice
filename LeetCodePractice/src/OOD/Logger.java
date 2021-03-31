@@ -34,6 +34,7 @@ Design a logger system that receive stream of messages along with its timestamps
         logger.shouldPrintMessage(11,"foo"); returns true;
 */
 public class Logger {
+    final static int WINDOW = 10;
     Map<String, Integer> map;
 
     public Logger() {
@@ -46,7 +47,7 @@ public class Logger {
             return true;
         }
         int previousTimestamp = map.get(message);
-        if (timestamp - previousTimestamp >= 10) {
+        if (timestamp - previousTimestamp >= WINDOW) {
             map.put(message, timestamp);
             return true;
         }

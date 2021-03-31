@@ -30,8 +30,8 @@ public class PacificAtlanticWaterFlow {
 	int[] dirs = { 0, 1, 0, -1, 0 };
 	int rows, cols;
 
-	public List<int[]> pacificAtlantic(int[][] matrix) {
-		List<int[]> res = new ArrayList<>();
+	public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+		List<List<Integer>> res = new ArrayList<>();
 		if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
 			return res;
 		}
@@ -58,7 +58,7 @@ public class PacificAtlanticWaterFlow {
 		for(int r = 0; r < rows; r++) {
 			for(int c = 0; c < cols; c++) {
 				if(pacificVisited[r][c] && atlanticVisited[r][c]) {
-					res.add(new int[] {r, c});
+					res.add(Arrays.asList(r, c));
 				}
 			}
 		}

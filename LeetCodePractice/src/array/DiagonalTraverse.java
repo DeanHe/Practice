@@ -1,6 +1,7 @@
 package array;
 
-/*Given a matrix of M x N elements (M rows, N columns), return all elements of the matrix in diagonal order as shown in the below image.
+/*
+Given a matrix of M x N elements (M rows, N columns), return all elements of the matrix in diagonal order as shown in the below image.
 
 Example:
 
@@ -17,7 +18,8 @@ Explanation:
 
 Note:
 
-The total number of elements of the given matrix will not exceed 10,000.*/
+The total number of elements of the given matrix will not exceed 10,000.
+*/
 public class DiagonalTraverse {
     public int[] findDiagonalOrder(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {

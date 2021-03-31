@@ -32,7 +32,8 @@ Notice
 1.All elements in nums1 and nums2 are unique.
 2.The length of both nums1 and nums2 would not exceed 1000.
 
-
+maintain a decreasing deque
+use a map to track element : next greater element
 time complexity O(n)
 */
 public class NextGreaterElementI {

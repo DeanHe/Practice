@@ -9,7 +9,7 @@ Given a matrix, you can pick one element from each row,
 the score is the element value minus column idx difference between its index and previous row pick column index
 
 analysis:
-TC (O(M*N))
+TC (O(M * N))
 pre compute the preSum gain on previous row left[], right[]
  */
 public class MaxScoreOfMatrixGoogle {

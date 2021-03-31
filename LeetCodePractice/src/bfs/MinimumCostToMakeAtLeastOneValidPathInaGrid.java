@@ -88,7 +88,7 @@ public class MinimumCostToMakeAtLeastOneValidPathInaGrid {
         }
         return cost[rows - 1][cols - 1];
     }
-    // Dijkstra's in O(ElogV) ~ O(mn * log(mn))
+    // dijkstra's in O(ElogV) ~ O(mn * log(mn))
     public int minCostDijk(int[][] grid) {
         int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         int rows = grid.length, cols = grid[0].length;

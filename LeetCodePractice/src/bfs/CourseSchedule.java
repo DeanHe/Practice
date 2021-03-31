@@ -61,7 +61,7 @@ public class CourseSchedule {
 		return count == numCourses;
 	}
 
-	// DFS
+	// dfs
 	public boolean canFinishDFS(int numCourses, int[][] prerequisites) {
 		List<List<Integer>> graph = new ArrayList<>(numCourses);
 		boolean[] visited = new boolean[numCourses];

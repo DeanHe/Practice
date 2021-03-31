@@ -15,7 +15,7 @@ N objects 1 -> N in a 2-D grid. Given a set of rules as <first, second, left/rig
      one possible result:  ["*1*", "**2", "3**"], * is empty.
 
 analysis:
-topological sort
+2 dimension topological sort
  */
 public class ArrangeObjectGoogle {
     int N;
@@ -24,56 +24,42 @@ public class ArrangeObjectGoogle {
         this.N = N;
         int[][] res = new int[N][N];
         // oriented from left to right
-        int[] h_indeg = new int[N + 1];
-        Map<Integer, List<Integer>> h_graph = new HashMap<>();
+        int[] colIndeg = new int[N + 1];
+        Map<Integer, List<Integer>> rowGraph = new HashMap<>();
         // oriented from up to bottom
-        int[] v_indeg = new int[N + 1];
-        Map<Integer, List<Integer>> v_graph = new HashMap<>();
+        int[] rowIndeg = new int[N + 1];
+        Map<Integer, List<Integer>> colGraph = new HashMap<>();
         for (String[] rule : rules) {
             if (rule[2].equals("left")) {
                 int from = Integer.valueOf(rule[0]);
                 int to = Integer.valueOf(rule[1]);
-                h_graph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
-                h_indeg[to]++;
+                colGraph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
+                colIndeg[to]++;
             } else if (rule[2].equals("right")) {
                 int from = Integer.valueOf(rule[1]);
                 int to = Integer.valueOf(rule[0]);
-                h_graph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
-                h_indeg[to]++;
+                colGraph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
+                colIndeg[to]++;
             } else if (rule[2].equals("up")) {
                 int from = Integer.valueOf(rule[0]);
                 int to = Integer.valueOf(rule[1]);
-                v_graph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
-                v_indeg[to]++;
+                rowGraph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
+                rowIndeg[to]++;
             } else if (rule[2].equals("down")) {
                 int from = Integer.valueOf(rule[1]);
                 int to = Integer.valueOf(rule[0]);
-                v_graph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
-                v_indeg[to]++;
+                rowGraph.computeIfAbsent(from, x -> new ArrayList<>()).add(to);
+                rowIndeg[to]++;
             }
         }
-        List<Integer> h_topo = topologicalSort(h_indeg, h_graph);
-        List<Integer> v_topo = topologicalSort(h_indeg, h_graph);
+        List<Integer> colTopo = topologicalSort(colIndeg, colGraph);
+        List<Integer> rowTopo = topologicalSort(rowIndeg, rowGraph);
         for(int r = 0; r < N; r++){
-            int val = v_topo.get(r);
-            int c = h_topo.indexOf(val);
+            int val = rowTopo.get(r);
+            int c = colTopo.indexOf(val);
             res[r][c] = val;
         }
         return res;
-    }
-
-    public void test() {
-        List<String[]> rules = Arrays.asList(
-                new String[]{ "1", "3", "right" },
-                new String[]{ "2", "3", "right" },
-                new String[]{ "1", "2", "up" },
-                new String[]{ "1", "2", "left" },
-                new String[]{ "2", "3", "up" }
-                );
-        int[][] res = arange(3, rules);
-        for(int[] arr : res){
-            System.out.println(Arrays.toString(arr));
-        }
     }
 
     private List<Integer> topologicalSort(int[] indeg, Map<Integer, List<Integer>> graph) {

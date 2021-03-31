@@ -48,7 +48,7 @@ Constraints:
 1 <= n <= 10^5
 
 analysis:
-DFS + memorization
+dfs + memorization
  */
 public class StoneGameIV {
     Map<Integer, Boolean> mem = new HashMap<>();

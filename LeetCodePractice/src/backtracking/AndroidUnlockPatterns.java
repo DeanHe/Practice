@@ -70,8 +70,8 @@ public class AndroidUnlockPatterns {
     	if(steps == 1){
     		return 1;
     	}
+		int count = 0;
     	visited[curPos] = true;
-    	int count = 0;
     	for(int nextPos = 1; nextPos <= 9; nextPos++){
     		boolean validMove = skip[curPos][nextPos] == 0 || visited[skip[curPos][nextPos]];
     		if(!visited[nextPos] && validMove){

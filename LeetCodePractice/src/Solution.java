@@ -1,12 +1,16 @@
 import bfs.ArrangeObjectGoogle;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 
@@ -15,8 +19,6 @@ public class Solution {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
-        ArrangeObjectGoogle a = new ArrangeObjectGoogle();
-        a.test();
         /*
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
         LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();
@@ -69,39 +71,30 @@ public class Solution {
 
     }
 
-    public boolean wordPatternMatch(String pattern, String str) {
-        // write your code here
-        // char in pattern : word in str
-        Map<Character, String> map = new HashMap<>();
-        // matched word in str
-        Set<String> visited = new HashSet<>();
-        return dfs(pattern, str, map, visited);
-    }
-    private boolean dfs(String pattern, String str, Map<Character, String> map, Set<String> visited){
-        if(pattern.length() == 0){
-            return str.length() == 0;
+    public int maxEnvelopes(int[][] envelopes) {
+        if (envelopes == null || envelopes.length == 0 || envelopes[0] == null || envelopes[0].length != 2) {
+            return 0;
         }
-        char c = pattern.charAt(0);
-        if(map.containsKey(c)){
-            String match = map.get(c);
-            if(!str.startsWith(match)){
-                return false;
+        int len = envelopes.length, res = 0;
+        Arrays.sort(envelopes, (a, b) -> {
+            if(a[0] != b[0]){
+                return a[0] - b[0];
+            } else {
+                return a[1] - b[1];
             }
-            return dfs(pattern.substring(1), str.substring(match.length()), map, visited);
-        }
-        for(int i = 1; i <= str.length(); i++){
-            String match = str.substring(0, i);
-            if(!visited.contains(match)){
-                visited.add(match);
-                map.put(c, match);
-                if( dfs(pattern.substring(1), str.substring(match.length()), map, visited)){
-                    return true;
+        });
+
+        int[] dp = new int[len];
+        for(int i = 0; i < len; i++){
+            dp[i] = 1;
+            for(int j = 0; j < i; j++){
+                if(envelopes[i][0] > envelopes[j][0] && envelopes[i][1] > envelopes[j][1]){
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
-                map.remove(c);
-                visited.remove(match);
             }
+            res = Math.max(res, dp[i]);
         }
-        return false;
+        return res;
     }
 }
 
