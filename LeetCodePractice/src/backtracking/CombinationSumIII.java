@@ -26,17 +26,17 @@ public class CombinationSumIII {
         return res;
     }
 
-    private void dfs(int k, int n, int start, List<List<Integer>> res, List<Integer> ls) {
-        if (k < 0 || n < 0) {
+    private void dfs(int k, int target, int pos, List<List<Integer>> res, List<Integer> ls) {
+        if (k < 0 || target < 0) {
             return;
         }
-        if (n == 0 && k == 0) {
+        if (target == 0 && k == 0) {
             res.add(new ArrayList<>(ls));
             return;
         }
-        for (int i = start; i <= 9; i++) {
+        for (int i = pos; i <= 9; i++) {
             ls.add(i);
-            dfs(k - 1, n - i, i + 1, res, ls);
+            dfs(k - 1, target - i, i + 1, res, ls);
             ls.remove(ls.size() - 1);
         }
     }

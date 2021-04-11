@@ -12,6 +12,8 @@ Input:"aba"
 Output:"aba"
 Challenge
 O(n2) time is acceptable. Can you do it in O(n) time.
+
+TC(N^2)
 */
 public class LongestPalindromicSubstring {
 	int maxLen = 0, start = 0;

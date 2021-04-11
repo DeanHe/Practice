@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-Given an array of integers and an integer k, you need to find the minimum size of continuous subarrays whose sum equals to k, and return its length.
+Given an array of integers and an integer k, you need to find the minimum size of continuous subarrays whose sum equals to k,
+and return its length.
 
 if there are no such subarray, return -1.
 

@@ -8,57 +8,25 @@ Given target value is a floating point.
 You are guaranteed to have only one unique value in the bst that is closest to the target.
 */
 public class ClosestBinarySearchTreeValue {
-	
+	int res = 0;
+	double diff = Double.MAX_VALUE;
 	public int closestValue(TreeNode root, double target) {
-        // write your code here
-		if(root == null){
-			return 0;
-		}		
-		TreeNode lowerNode = lowerBound(root, target);
-		TreeNode upperNode = upperBound(root, target);
-		
-		if(lowerNode == null){
-			return upperNode.val;
-		}
-		if(upperNode == null){
-			return lowerNode.val;
-		}
-		if(target - lowerNode.val > upperNode.val - target){
-			return upperNode.val;
-		} else {
-			return lowerNode.val;
-		}
+		dfs(root, target);
+		return res;
     }
-	// find the node with the largest value that smaller than target
-	private TreeNode lowerBound(TreeNode root, double target) {
+
+    private void dfs(TreeNode root, double target) {
 		if(root == null){
-			return null;
+			return;
 		}
-		if(root.val >= target){
-			return lowerBound(root.left, target);
+		if(Math.abs(root.val - target) < diff){
+			res = root.val;
+			diff = Math.abs(root.val - target);
+		}
+		if(root.val > target){
+			closestValue(root.left, target);
 		} else {
-			TreeNode lowerNode = lowerBound(root.right, target);
-			if(lowerNode != null){
-				return lowerNode;
-			} else {
-				return root;
-			}
-		}
-	}
-	// find the node with the smallest value that greater than target
-	private TreeNode upperBound(TreeNode root, double target) {
-		if(root == null){
-			return null;
-		}
-		if(root.val < target){
-			return upperBound(root.right, target);
-		} else {
-			TreeNode upperNode = upperBound(root.left, target);
-			if(upperNode != null){
-				return upperNode;
-			} else {
-				return root;
-			}
+			closestValue(root.right, target);
 		}
 	}
 }

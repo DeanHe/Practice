@@ -9,6 +9,8 @@ The right subtree of a node contains only nodes with keys greater than the node'
 Both the left and right subtrees must also be binary search trees.
 */
 
+import java.util.Stack;
+
 public class ValidateBinarySearchTree {
 	
 	public boolean isValidBST(TreeNode root) {
@@ -28,4 +30,23 @@ public class ValidateBinarySearchTree {
         boolean right = isBSTHelper(root.right, root, maxNode);
         return left && right;
 	}
+
+    public boolean isValidBSTiterative(TreeNode root) {
+	    TreeNode pre = null;
+	    Stack<TreeNode> st = new Stack<>();
+	    while(root != null || !st.isEmpty()){
+	        if(root != null){
+	            st.push(root);
+	            root = root.left;
+            } else {
+                root = st.pop();
+	            if(pre != null && pre.val < root.val){
+	                return false;
+                }
+	            pre = root;
+	            root = root.right;
+            }
+        }
+	    return true;
+    }
 }

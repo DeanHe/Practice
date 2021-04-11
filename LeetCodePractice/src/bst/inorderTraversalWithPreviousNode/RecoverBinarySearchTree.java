@@ -3,7 +3,8 @@ package bst.inorderTraversalWithPreviousNode;
 import bst.TreeNode;
 
 /*
-You are given the root of a binary search tree (bst), where exactly two nodes of the tree were swapped by mistake. Recover the tree without changing its structure.
+You are given the root of a binary search tree (bst), where exactly two nodes of the tree were swapped by mistake.
+Recover the tree without changing its structure.
 
 Follow up: A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
 
@@ -27,6 +28,9 @@ Constraints:
 
 The number of nodes in the tree is in the range [2, 1000].
 -2^31 <= Node.val <= 2^31 - 1
+
+analysis:
+use the inorder traversal to find the two nodes out of order
 */
 public class RecoverBinarySearchTree {
 
@@ -49,7 +53,7 @@ public class RecoverBinarySearchTree {
     	if(first == null && root.val < pre.val){
     		first = pre;
     	}
-    	if(first !=  null && root.val < pre.val){
+    	if(first != null && root.val < pre.val){
     		second = root;
     	}
     	pre = root;

@@ -16,6 +16,8 @@ The figure below shows the circular doubly linked list for the bst above. The "h
 Specifically, we want to do the transformation in place. After the transformation, the left pointer of the tree node should point to its predecessor, and the right pointer should point to its successor. We should return the pointer to the first element of the linked list.
 
 The figure below shows the transformed bst. The solid line indicates the successor relationship, while the dashed line means the predecessor relationship.
+
+analysis:
 */
 public class BinaryTreeToDoublyLinkedList {
 	
@@ -33,9 +35,10 @@ public class BinaryTreeToDoublyLinkedList {
 			return;
 		}
 		convertToList(root.left);
-		if(tail == null){
+		if(head == null){
 			head = root;
-		} else {
+		}
+		if(tail != null){
 			tail.right = root;
 			root.left = tail;
 		}

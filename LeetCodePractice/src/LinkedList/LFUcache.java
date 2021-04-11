@@ -58,8 +58,7 @@ public class LFUcache {
         if(count == min && freqLists.get(min).isEmpty()){
             min++;
         }
-        freqLists.putIfAbsent(count + 1, new LinkedHashSet<>());
-        freqLists.get(count + 1).add(key);
+        freqLists.computeIfAbsent(count + 1, x -> new LinkedHashSet<>()).add(key);
         return valMap.get(key);
     }
 }

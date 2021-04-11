@@ -2,6 +2,8 @@ package backtracking;
 
 import java.util.Arrays;
 
+
+
 /*
 Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
 
@@ -15,6 +17,8 @@ Note:
 
 1 <= k <= len(nums) <= 16.
 0 < nums[i] < 10000.
+
+TC O(k * 2^N)
 */
 public class PartitionToKEqualSumSubsets {
 	public boolean canPartitionKSubsets(int[] nums, int k) {
@@ -28,32 +32,28 @@ public class PartitionToKEqualSumSubsets {
 			return false;
 		}
 		int target = sum / k;
-		return dfs(nums, new int[k],len - 1, target);
+		boolean[] visited = new boolean[len];
+		return dfs(nums, visited, k, len - 1, 0, target);
 	}
 
-	private boolean dfs(int[] nums, int[] sums, int pos, int target) {
-		if (pos == -1) {
-			for(int sum : sums){
-				if(sum != target){
-					return false;
-				}
-			}
+	private boolean dfs(int[] nums, boolean[] visited, int k, int pos, int sum, int target) {
+		if(sum > target){
+			return false;
+		}
+		if(k == 0){
 			return true;
 		}
-		for(int sum : sums){
-			if(sum > target){
-				return false;
-			}
+		if (sum == target) {
+			return dfs(nums, visited, k - 1, nums.length - 1, 0, target);
 		}
-		for (int i = 0; i < sums.length; i++) {
-			if(i > 0 && sums[i] == sums[i - 1]){
-				continue;
+		for(int i = pos; i >= 0; i--){
+			if(!visited[i]){
+				visited[i] = true;
+				if(dfs(nums, visited, k, i - 1, sum + nums[i], target)){
+					return true;
+				}
+				visited[i] = false;
 			}
-			sums[i] += nums[pos];
-			if(dfs(nums, sums, pos - 1, target)){
-				return true;
-			}
-			sums[i] -= nums[pos];
 		}
 		return false;
 	}

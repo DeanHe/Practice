@@ -25,20 +25,15 @@ public class OnesAndZeroes {
 	public int findMaxForm(String[] strs, int m, int n) {
         int size = strs.length;
         int[][][] dp = new int[size + 1][m + 1][n + 1];
-        for(int i = 0; i <= size; i++){
-        	int[] cnt = {0, 0};
-        	if(i > 0){
-        		String num = strs[i - 1];
-        		cnt = countOneAndZeros(num);
-        	}
+        for(int i = 0; i < size; i++){
+			String num = strs[i];
+			int[] cnt = countOneAndZeros(num);
         	for(int j = 0; j <= m; j++){
         		for(int k = 0; k <= n; k++){
-        			if(i > 0){
-        				dp[i][j][k] = dp[i - 1][j][k];
-        				if(j >= cnt[0] && k >= cnt[1]){
-        					dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - cnt[0]][k - cnt[1]] + 1);
-        				}
-        			}
+					dp[i + 1][j][k] = dp[i][j][k];
+					if(j >= cnt[0] && k >= cnt[1]){
+						dp[i + 1][j][k] = Math.max(dp[i][j][k], dp[i][j - cnt[0]][k - cnt[1]] + 1);
+					}
         		}
         	}
         }

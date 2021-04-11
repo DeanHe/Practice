@@ -20,7 +20,7 @@ public class BackpackIII {
             for (int j = 0; j <= m; ++j) {
                 dp[i][j] = dp[i - 1][j];
                 if (j >= A[i - 1])
-                    dp[i][j] = Math.max(dp[i][j - A[i - 1]] + V[i - 1], dp[i][j]);
+                    dp[i][j] = Math.max(dp[i][j], dp[i][j - A[i - 1]] + V[i - 1]);
             }
         return dp[n][m];
     }
@@ -29,7 +29,7 @@ public class BackpackIII {
     private String showSelection(int size, int[][] dp, int[] A) {
         String str = "";
         int temp = size;
-        for (int i = dp.length - 1; i >= 1; i--) {
+        for (int i = A.length; i >= 1; i--) {
             while (dp[i][temp]  > dp[i - 1][temp]) { // means item (i - 1) is picked
                 str += i - 1 + ",";
                 temp -= A[i - 1];

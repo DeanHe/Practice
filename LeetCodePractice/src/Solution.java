@@ -1,17 +1,14 @@
-import bfs.ArrangeObjectGoogle;
+import LinkedList.ListNode;
+import bst.TreeNode;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 
 public class Solution {
@@ -70,31 +67,37 @@ public class Solution {
 
 
     }
+    public int countDifferentSubsequenceGCDs(int[] nums) {
+        int len = nums.length;
+        Integer[] dp = new Integer[1 << len];
+        Set<Integer> res = new HashSet<>();
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < len; i++) {
+            dp[1 << i] = nums[i];
+            res.add(nums[i]);
+            q.offer(1 << i);
 
-    public int maxEnvelopes(int[][] envelopes) {
-        if (envelopes == null || envelopes.length == 0 || envelopes[0] == null || envelopes[0].length != 2) {
-            return 0;
         }
-        int len = envelopes.length, res = 0;
-        Arrays.sort(envelopes, (a, b) -> {
-            if(a[0] != b[0]){
-                return a[0] - b[0];
-            } else {
-                return a[1] - b[1];
-            }
-        });
-
-        int[] dp = new int[len];
-        for(int i = 0; i < len; i++){
-            dp[i] = 1;
-            for(int j = 0; j < i; j++){
-                if(envelopes[i][0] > envelopes[j][0] && envelopes[i][1] > envelopes[j][1]){
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
+        while(!q.isEmpty()){
+            int cur = q.poll();
+            for(int i = 0; i < len; i++) {
+                int next = cur | (1 << i);
+                if(dp[next] == null) {
+                    dp[next] = gcd(nums[i], dp[cur]);
+                    res.add(dp[next]);
+                    q.offer(next);
                 }
             }
-            res = Math.max(res, dp[i]);
         }
-        return res;
+        return res.size();
+    }
+
+    private int gcd(int a, int b){
+        if(a == 0){
+            return b;
+        }
+        return gcd(b % a, a);
     }
 }
+
 

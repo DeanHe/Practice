@@ -73,23 +73,18 @@ public class LowestCommonAncestorOfaBinaryTreeIII {
                 p = p.parent;
                 diff--;
             }
-            while (p != q) {
-                p = p.parent;
-                q = q.parent;
-            }
-            return p;
         } else {
             int diff = depth_q - depth_p;
             while (diff > 0) {
                 q = q.parent;
                 diff--;
             }
-            while (p != q) {
-                p = p.parent;
-                q = q.parent;
-            }
-            return p;
         }
+        while (p != q) {
+            p = p.parent;
+            q = q.parent;
+        }
+        return p;
     }
 
     private class Node {

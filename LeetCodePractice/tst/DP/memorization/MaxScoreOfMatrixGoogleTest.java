@@ -28,6 +28,6 @@ public class MaxScoreOfMatrixGoogleTest {
         int res2 = mg.getMaxScoreOfMatrixDP(matrix);
         System.out.println(res);
         System.out.println(res2);
-        Assert.assertTrue(res > 0);
+        Assert.assertEquals(res, res2);
     }
 }

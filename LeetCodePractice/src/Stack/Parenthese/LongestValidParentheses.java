@@ -14,6 +14,9 @@ Given a string containing just the characters '(' and ')', find the length of th
         Input: ")()())"
         Output: 4
         Explanation: The longest valid parentheses substring is "()()"
+
+analysis:
+DP
 */
 
 public class LongestValidParentheses {
@@ -37,20 +40,31 @@ public class LongestValidParentheses {
         }
         return maxans;
     }
-	//a dp array where ith element of dp represents the length of the longest valid substring ending at ith index
+	//dp[i] represents the length of the longest valid substring ending at s[:i]
 	public int longestValidParenthesesDP(String s) {
-        int maxans = 0;
-        int dp[] = new int[s.length()];
-        for (int i = 1; i < s.length(); i++) {
+        int res = 0, len = s.length();
+        int dp[] = new int[len];
+        for (int i = 1; i < len; i++) {
             if (s.charAt(i) == ')') {
                 if (s.charAt(i - 1) == '(') {
-                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
-                } else if (i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '(') {
-                    dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
+                    if(i == 1){
+                        dp[i] = 2;
+                    } else {
+                        dp[i] = dp[i - 2] + 2;
+                    }
+                } else { // s.charAt(i - 1) == ')'
+                    int preLeftIdx = i - dp[i - 1] - 1;
+                    if (preLeftIdx >= 0 && s.charAt(preLeftIdx) == '(') {
+                        dp[i] = dp[i - 1] + 2;
+                        if(preLeftIdx - 1 >= 0){
+                            dp[i] += dp[preLeftIdx - 1];
+                        }
+
+                    }
                 }
-                maxans = Math.max(maxans, dp[i]);
+                res = Math.max(res, dp[i]);
             }
         }
-        return maxans;
+        return res;
     }
 }

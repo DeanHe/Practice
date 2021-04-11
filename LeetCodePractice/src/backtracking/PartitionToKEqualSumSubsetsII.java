@@ -18,6 +18,9 @@ Note:
 
 1 <= k <= len(nums) <= 16.
 0 < nums[i] < 10000.
+
+analysis:
+TC O(k * 2^N)
 */
 public class PartitionToKEqualSumSubsetsII {
     public List<List<Integer>> canPartitionKSubsets(int[] nums, int k) {
@@ -30,36 +33,35 @@ public class PartitionToKEqualSumSubsetsII {
         if (k <= 0 || sum % k != 0) {
             return res;
         }
-        for (int i = 0; i < k; i++) {
+        for(int i = 0; i < k; i++){
             res.add(new ArrayList<>());
         }
-        dfs(nums, new int[k], res, nums.length - 1, sum / k);
+        boolean[] visited = new boolean[nums.length];
+        dfs(nums, visited, res, nums.length - 1, 0, sum / k, k);
         return res;
     }
 
-    private boolean dfs(int[] nums, int[] sums, List<List<Integer>> res, int pos, int target) {
-        if (pos == -1) {
-            for (int sum : sums) {
-                if (sum != target) {
-                    return false;
-                }
-            }
+    private boolean dfs(int[] nums, boolean[] visited, List<List<Integer>> res, int pos, int sum, int target, int k) {
+        if (sum > target) {
+            return false;
+        }
+        if (k == 0) {
             return true;
         }
-        for (int sum : sums) {
-            if (sum > target) {
-                return false;
-            }
+        if (sum == target) {
+            return dfs(nums, visited, res, nums.length - 1, 0, target, k - 1);
         }
-        for (int i = 0; i < sums.length; i++) {
-            sums[i] += nums[pos];
-            res.get(i).add(nums[pos]);
-            if (dfs(nums, sums, res, pos - 1, target)) {
-                return true;
+        for (int i = pos; i >= 0; i--) {
+            if (!visited[i]) {
+                visited[i] = true;
+                List<Integer> ls = res.get(k - 1);
+                ls.add(nums[i]);
+                if (dfs(nums, visited, res, i - 1, sum + nums[i], target, k)) {
+                    return true;
+                }
+                ls.remove(ls.size() - 1);
+                visited[i] = false;
             }
-            sums[i] -= nums[pos];
-            int last = res.get(i).size() - 1;
-            res.get(i).remove(last);
         }
         return false;
     }

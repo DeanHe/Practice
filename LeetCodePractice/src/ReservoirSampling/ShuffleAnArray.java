@@ -50,6 +50,7 @@ public class ShuffleAnArray {
     private int randRange(int min, int max){
     	return random.nextInt(max - min) + min;
     }
+
     private void swap(int[] arr, int i, int j){
     	int temp = arr[i];
     	arr[i] = arr[j];

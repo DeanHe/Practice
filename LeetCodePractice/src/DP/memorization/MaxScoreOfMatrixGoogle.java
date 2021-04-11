@@ -55,11 +55,11 @@ public class MaxScoreOfMatrixGoogle {
         for(int r = 1; r < rows; r++){
             Arrays.fill(left, Integer.MIN_VALUE);
             Arrays.fill(right, Integer.MIN_VALUE);
-            left[0] = mat[r][0];
+            left[0] = mat[r - 1][0];
             for(int c = 1; c < cols; c++){
                 left[c] = Math.max(left[c - 1], mat[r - 1][c] - c);
             }
-            right[cols - 1] = mat[r][cols - 1] + cols - 1;
+            right[cols - 1] = mat[r - 1][cols - 1] + cols - 1;
             for(int c = cols - 2; c >= 0; c--){
                 right[c] = Math.max(right[c + 1], mat[r - 1][c] + c);
             }

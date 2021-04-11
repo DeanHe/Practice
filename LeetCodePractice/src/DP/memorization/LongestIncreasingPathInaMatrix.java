@@ -48,8 +48,7 @@ public class LongestIncreasingPathInaMatrix {
 		Integer[][] mem = new Integer[rows][cols]; // mem[r][c] means the maximum path start from {r, c}
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
-				int count = dfs(matrix, mem, r, c);
-				maxPath = Math.max(maxPath, count);
+				maxPath = Math.max(maxPath, dfs(matrix, mem, r, c));
 			}
 		}
 		return maxPath;
@@ -64,8 +63,7 @@ public class LongestIncreasingPathInaMatrix {
 			int nb_r = r + direct[i];
 			int nb_c = c + direct[i + 1];
 			if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && matrix[nb_r][nb_c] > matrix[r][c]) {
-				int temp = 1 + dfs(matrix, mem, nb_r, nb_c);
-				count = Math.max(count, temp);
+				count = Math.max(count, 1 + dfs(matrix, mem, nb_r, nb_c));
 			}
 		}
 		return mem[r][c] = count;

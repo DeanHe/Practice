@@ -25,6 +25,12 @@ master.guess("abcczz") returns 4, because "abcczz" has 4 matches.
 We made 5 calls to master.guess and one of them was the secret, so we pass the test case.
 Note:  Any solutions that attempt to circumvent the judge will result in disqualification.
 
+analysis:
+calculate unique rank of each word
+guess the most common word m (word with lowest unique rank), and get its score
+from the pool, find all other words compare with m having the same match core as the guess score
+repeat the above process
+
 Time Complexity: O(N^2 log N), where N is the number of words, and assuming their length is O(1). Each call to solve is O(N^2)
 and the number of calls is bounded by O(logN).
 Space Complexity: O(N^2).
@@ -85,7 +91,7 @@ public class GuessTheWord {
 		}
 		for(int i = 0, score = 0; i < 10 && score < 6; i++){
 			int best = 0;
-			String cand = wordlist[0];
+			String cand = "";
 			for(String s : wordlist){
 				int points = 0;
 				for(int j = 0; j < 6; j++){

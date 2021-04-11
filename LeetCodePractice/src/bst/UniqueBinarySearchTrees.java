@@ -49,4 +49,26 @@ public class UniqueBinarySearchTrees {
     	}
     	return dp[n];
     }
+
+	public int numTreesII(int n) {
+		if(n < 0){
+			return 0;
+		}
+		Integer[] mem = new Integer[n + 1];
+		return dfs(n, mem);
+	}
+
+	private int dfs(int n, Integer[] mem) {
+    	if(mem[n] != null){
+    		return mem[n];
+		}
+    	if(n == 0 || n == 1){
+    		return mem[n] = 1;
+		}
+    	int res = 0;
+    	for(int i = 1; i <= n; i++){
+    		res += dfs(i - 1, mem) * dfs(n - i, mem);
+		}
+    	return mem[n] = res;
+	}
 }

@@ -3,7 +3,8 @@ package bst;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-/*Given a non-empty binary search tree and a target value, find k values in the bst that are closest to the target.
+/*
+Given a non-empty binary search tree and a target value, find k values in the bst that are closest to the target.
 
 Example
 Given root = {1}, target = 0.000000, k = 1, return [1].
@@ -14,7 +15,8 @@ Assume that the bst is balanced, could you solve it in less than O(n) runtime (w
 Notice
 Given target value is a floating point.
 You may assume k is always valid, that is: k ≤ total nodes.
-You are guaranteed to have only one unique set of k values in the bst that are closest to the target.*/
+You are guaranteed to have only one unique set of k values in the bst that are closest to the target.
+*/
 public class ClosestBinarySearchTreeValueII {
 	/**
      * @param root: the given bst
