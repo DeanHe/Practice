@@ -37,6 +37,12 @@ Note:
 All values will be in the range of [0, 1000].
 The number of operations will be in the range of [1, 1000].
 Please do not use the built-in Deque library.
+
+analysis:
+insertFront needs to move pointer s to the left
+deleteFront needs to move pointer s to the right
+insertLast needs to move pointer e to the right
+deleteLast needs to move pointer e to the left
  */
 public class MyCircularDeque {
     int[] arr;

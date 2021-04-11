@@ -44,6 +44,9 @@ Constraints:
 0 <= value <= 1000
 At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
 
+analysis:
+enqueue(offerLast) moves the pointer e
+dequeue(pollFirst) moves the pointer s
  */
 public class MyCircularQueue {
     int s, e, cnt;
