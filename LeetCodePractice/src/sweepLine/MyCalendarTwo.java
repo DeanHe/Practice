@@ -1,4 +1,4 @@
-package array;
+package sweepLine;
 
 import java.util.*;
 /*
