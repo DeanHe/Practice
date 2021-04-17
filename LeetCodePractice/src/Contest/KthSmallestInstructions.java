@@ -43,7 +43,7 @@ destination.length == 2
 1 <= k <= nCr(row + column, row), where nCr(a, b) denotes a choose b​​​​​.
 
 analysis:
-DP
+dp
  */
 public class KthSmallestInstructions {
     int rows, cols;

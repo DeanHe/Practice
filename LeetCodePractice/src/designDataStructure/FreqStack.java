@@ -7,7 +7,7 @@ import java.util.Stack;
 /*
 # 895
 
-implement FreqStack, a class which simulates the operation of a stack-like data structure.
+implement  FreqStack, a class which simulates the operation of a stack-like data structure.
 
 FreqStack has two functions:
 

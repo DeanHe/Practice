@@ -70,7 +70,7 @@ public class NumberOfSquarefulArrays {
         }
     }
 
-    // using DP
+    // using dp
     public int numSquarefulPermsDP(int[] A) {
         Arrays.sort(A);
         int len = A.length;

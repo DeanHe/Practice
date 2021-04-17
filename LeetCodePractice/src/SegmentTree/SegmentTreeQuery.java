@@ -32,7 +32,8 @@ For array [1, 4, 2, 3], the corresponding Segment Tree is :
 	   [0,0,max=1] [1,1,max=4] [2,2,max=2], [3,3,max=3]
 The maximum value of [2,3] interval is 3
 Notice
-It is much easier to understand this problem if you finished Segment Tree Build first.*/
+It is much easier to understand this problem if you finished Segment Tree Build first.
+*/
 
 public class SegmentTreeQuery {
 	/**
@@ -48,13 +49,11 @@ public class SegmentTreeQuery {
 		int mid = (root.start + root.end) / 2;
 		if (end <= mid) {
 			return query(root.left, start, end);
-		}
-		if (mid < start) {
+		} else if (mid < start) {
 			return query(root.right, start, end);
+		} else {
+			return query(root.left, start, mid) + query(root.right, mid + 1, end);
 		}
-		int left_max = query(root.left, start, mid);
-		int right_max = query(root.right, mid + 1, end);
-		return Math.max(left_max, right_max);
 	}
 	
 	class SegmentTreeNode {

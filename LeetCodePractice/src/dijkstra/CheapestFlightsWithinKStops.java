@@ -100,7 +100,7 @@ public class CheapestFlightsWithinKStops {
         }
     	return costs[dst] == Integer.MAX_VALUE ? -1 : costs[dst];
     }
-	// using DP
+	// using dp
 	public int findCheapestPriceDP(int n, int[][] flights, int src, int dst, int K) {
 		int[][] dp = new int[K + 2][n];
         for(int[] row : dp){

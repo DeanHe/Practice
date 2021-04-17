@@ -20,7 +20,7 @@ Input: arr = [1,5,7,8,5,3,4,2,1], difference = -2
 Output: 4
 Explanation: The longest arithmetic subsequence is [7,5,3,1].
 
-Math DP
+Math dp
 */
 public class LongestArithmeticSubsequenceOfGivenDifference {
 	public int longestSubsequence(int[] arr, int difference) {

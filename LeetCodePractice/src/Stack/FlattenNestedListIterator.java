@@ -43,7 +43,7 @@ public class FlattenNestedListIterator {
 		Stack<NestedInteger> stack;
 		public NestedIterator(List<NestedInteger> nestedList) {
 			stack = new Stack<>();
-			prepareStack(nestedList);
+			pushAll(nestedList);
 		}
 
 		// @return {boolean} true if the iteration has more element or false
@@ -51,7 +51,7 @@ public class FlattenNestedListIterator {
 		public boolean hasNext() {
 			while(!stack.isEmpty() && !stack.peek().isInteger()){
 				List<NestedInteger> ls = stack.pop().getList();
-				prepareStack(ls);
+				pushAll(ls);
 			}
 			return !stack.isEmpty();
 		}
@@ -62,8 +62,9 @@ public class FlattenNestedListIterator {
 			return stack.pop().getInteger();
 		}
 
-		private void prepareStack(List<NestedInteger> nestedList){
-			for(int i = nestedList.size() - 1; i >= 0; i--){
+		private void pushAll(List<NestedInteger> nestedList){
+			int len = nestedList.size();
+			for(int i = len - 1; i >= 0; i--){
 				stack.push(nestedList.get(i));
 			}
 		}

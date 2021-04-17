@@ -74,12 +74,10 @@ public class SegmentTreeQueryII {
 		int mid = (root.start + root.end) / 2;
 		if (end <= mid) {
 			return query(root.left, start, end);
-		}
-		if (mid < start) {
+		} else if (mid < start) {
 			return query(root.right, start, end);
+		} else {
+			return query(root.left, start, mid) + query(root.left, mid + 1, end);
 		}
-		int leftCount = query(root.left, start, mid);
-		int rightCount = query(root.left, mid + 1, end);
-		return rightCount + leftCount;
 	}
 }

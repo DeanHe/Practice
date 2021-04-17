@@ -2,7 +2,7 @@ package array;
 
 import java.util.*;
 
-import SweepLine.Intervals.Interval;
+import sweepLine.Intervals.Interval;
 
 /*Merge two sorted (ascending) lists of interval and return it as a new sorted list. The new sorted list should be made by splicing together the intervals of the two lists and sorted in ascending order.
 

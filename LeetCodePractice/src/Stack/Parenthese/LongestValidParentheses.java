@@ -16,7 +16,7 @@ Given a string containing just the characters '(' and ')', find the length of th
         Explanation: The longest valid parentheses substring is "()()"
 
 analysis:
-DP
+dp
 */
 
 public class LongestValidParentheses {
