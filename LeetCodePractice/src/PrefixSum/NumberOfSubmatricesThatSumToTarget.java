@@ -31,7 +31,13 @@ Note:
 -1000 <= matrix[i] <= 1000
 -10^8 <= target <= 10^8
 
+analysis:
+for each row calculate prefix sum
+to get sum from matrix[0][0] to matrix[r][c], use sum(preSum[:r][c])
+to get all submatrix sum, use two pointer on start_col and end_col for the submatrix, sum(preSum[:][start_col:end_col])
 similar to SubarraySumEqualsK
+
+TC(Rows * Cols ^ 2)
 */
 public class NumberOfSubmatricesThatSumToTarget {
 	public int numSubmatrixSumTarget(int[][] matrix, int target) {
@@ -48,19 +54,19 @@ public class NumberOfSubmatricesThatSumToTarget {
         	}
         }
         int res = 0;
-        for(int c = 0; c < cols; c++){
-        	for(int i = c; i < cols; i++){
-        		Map<Integer, Integer> counter = new HashMap<>();
-        		counter.put(0, 1);
+        for(int sc = 0; sc < cols; sc++){
+        	for(int ec = sc; ec < cols; ec++){
+        		Map<Integer, Integer> cntMap = new HashMap<>();
+        		cntMap.put(0, 1);
         		int cur = 0;
         		for(int r = 0; r < rows; r++){
-        			if(c == 0){
-            			cur += preSum[r][i];
+        			if(sc == 0){
+            			cur += preSum[r][ec];
             		} else {
-            			cur += preSum[r][i] - preSum[r][c - 1];
+            			cur += preSum[r][ec] - preSum[r][sc - 1];
             		}
-        			res += counter.getOrDefault(cur - target, 0);
-        			counter.put(cur, counter.getOrDefault(cur, 0) + 1);
+        			res += cntMap.getOrDefault(cur - target, 0);
+        			cntMap.put(cur, cntMap.getOrDefault(cur, 0) + 1);
         		}
         	}
         }
