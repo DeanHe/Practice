@@ -54,27 +54,23 @@ public class BestTimeToBuyAndSellStockIII {
 
     public int maxProfitDP(int[] prices) {
         int len = prices.length;
-        int[][] dp = new int[len][4];
-        /*
-        dp[i][0] means max profit gained by day i with hold first stock
-        dp[i][1] means max profit gained by day i with sold first stock
-        dp[i][2] means max profit gained by day i with hold second stock
-        dp[i][3] means max profit gained by day i with sold second stock
-         */
-        dp[0][0] = -prices[0];
-        dp[0][2] = Integer.MIN_VALUE;
+        int[] holdFirst = new int[len];
+        int[] soldFirst = new int[len];
+        int[] holdSecond = new int[len];
+        int[] soldSecond = new int[len];
+        holdFirst[0] = -prices[0];
+        holdSecond[0] = Integer.MIN_VALUE;
         for(int i = 1; i < len; i++){
-            dp[i][0] = Math.max(dp[i - 1][0], -prices[i]);
-            dp[i][1] = dp[i - 1][1];
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
-            dp[i][2] = Math.max(dp[i - 1][2], dp[i - 1][1] - prices[i]);
-            dp[i][3] = Math.max(dp[i - 1][3], dp[i - 1][2] + prices[i]);
+            holdFirst[i] = Math.max(holdFirst[i - 1], -prices[i]);
+            soldFirst[i] = Math.max(soldFirst[i - 1], holdFirst[i - 1] + prices[i]);
+            holdSecond[i] = Math.max(holdSecond[i - 1], soldFirst[i - 1] - prices[i]);
+            soldSecond[i] = Math.max(soldSecond[i - 1], holdSecond[i - 1] + prices[i]);
         }
         /*
         for(int[] arr : dp){
             System.out.println(Arrays.toString(arr));
         }
         */
-        return Math.max(dp[len - 1][1], dp[len - 1][3]);
+        return Math.max(soldFirst[len - 1], soldSecond[len - 1]);
     }
 }

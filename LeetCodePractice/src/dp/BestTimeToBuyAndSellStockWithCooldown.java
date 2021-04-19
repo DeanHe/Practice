@@ -19,19 +19,18 @@ public class BestTimeToBuyAndSellStockWithCooldown {
 			return 0;
 		}
 		int n = prices.length;
-		int[] buy = new int[n + 1];
-		int[] sell = new int[n + 1];
+		int[] hold = new int[n + 1];
+		int[] sold = new int[n + 1];
 		int[] rest = new int[n + 1];
-		buy[0] = Integer.MIN_VALUE;
-		for (int i = 1; i <= n; i++) {
-			// buy[i] means max profit when day i is in buy state, 
+		hold[0] = Integer.MIN_VALUE;
+		for (int i = 0; i < n; i++) {
+			// buy[i + 1] means max profit when day i is in buy state,
 			//ex: buy, buy, buy, sell, rest, buy, buy
-			buy[i] = Math.max(buy[i - 1], rest[i - 1] - prices[i - 1]);
-			sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i - 1]);
-			rest[i] = Math.max(Math.max(rest[i - 1], buy[i - 1]), sell[i - 1]);
+			hold[i + 1] = Math.max(hold[i], rest[i] - prices[i]);
+			sold[i + 1] = Math.max(sold[i], hold[i] + prices[i]);
+			rest[i + 1] = Math.max(Math.max(rest[i], hold[i]), sold[i]);
 		}
-		int res = Math.max(sell[n], rest[n]);
+		int res = Math.max(sold[n], rest[n]);
 		return res;
-
 	}
 }
