@@ -1,5 +1,6 @@
 package dp;
-/*Find the contiguous subarray within an array (containing at least one number) which has the largest product.
+/*
+Find the contiguous subarray within an array (containing at least one number) which has the largest product.
 
 Example
 Example 1:
@@ -9,7 +10,8 @@ Output:6
 Example 2:
 
 Input:[-1,2,4,1]
-Output:8*/
+Output:8
+*/
 public class MaximumProductSubarray {
 	/**
      * @param nums: An array of integers

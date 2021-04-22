@@ -46,7 +46,7 @@ relations[i][0] != relations[i][1]
 There are no repeated relations in the input.
 
 
-Solution 1. Greedy Algorithm with bfs.
+Solution 1. greedy Algorithm with bfs.
 
 Since we can take as many courses as we want, taking all courses that do not have outstanding prerequisites each semester must be one valid answer that gives a minimum number of semesters needed.
 

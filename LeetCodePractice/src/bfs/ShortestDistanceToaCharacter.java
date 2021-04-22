@@ -7,7 +7,8 @@ import java.util.Queue;
 /*
 #821
 
-Given a string s and a character c that occurs in s, return an array of integers answer where answer.length == s.length and answer[i] is the shortest distance from s[i] to the character c in s.
+Given a string s and a character c that occurs in s,
+return an array of integers answer where answer.length == s.length and answer[i] is the shortest distance from s[i] to the character c in s.
 
 Example 1:
 Input: s = "loveleetcode", c = "e"

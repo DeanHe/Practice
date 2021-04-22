@@ -2,7 +2,8 @@ package bfs;
 
 import java.util.*;
 
-/*Storekeeper is a game in which the player pushes boxes around in a warehouse trying to get them to target locations.
+/*
+Storekeeper is a game in which the player pushes boxes around in a warehouse trying to get them to target locations.
 
         The game is represented by a grid of size n*m, where each element is a wall, floor, or a box.
 
@@ -62,7 +63,8 @@ import java.util.*;
         1 <= grid.length <= 20
         1 <= grid[i].length <= 20
         grid contains only characters '.', '#',  'S' , 'T', or 'B'.
-        There is only one character 'S', 'B' and 'T' in the grid.*/
+        There is only one character 'S', 'B' and 'T' in the grid.
+*/
 public class MinimumMovesToMoveaBoxToTheirTargetLocation {
     private int[] dirs = {-1, 0, 1, 0, -1};
     public int minPushBox(char[][] grid) {

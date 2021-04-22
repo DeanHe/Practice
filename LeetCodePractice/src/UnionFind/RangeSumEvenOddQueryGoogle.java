@@ -30,7 +30,7 @@ public class RangeSumEvenOddQueryGoogle {
         if (isOdd) {
             // odd case query
             if (root_start == root_end) {
-                if((oddWithParent.get(start) ^ oddWithParent.get(end)) != true){
+                if((oddWithParent.get(start) ^ oddWithParent.get(end)) == false){
                     return false;
                 }
             } else {
@@ -40,7 +40,7 @@ public class RangeSumEvenOddQueryGoogle {
         } else {
             // even case query
             if (root_start == root_end) {
-                if((oddWithParent.get(start) ^ oddWithParent.get(end)) != false){
+                if((oddWithParent.get(start) ^ oddWithParent.get(end)) == true){
                     return false;
                 }
             } else {

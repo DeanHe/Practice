@@ -27,7 +27,7 @@ You may assume the interval's end point is always bigger than its start point.
 Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
 
 Actually, the problem is the same as "Given a collection of intervals, 
-find the maximum number of intervals that are non-overlapping." (the classic Greedy problem: Interval Scheduling). 
+find the maximum number of intervals that are non-overlapping." (the classic greedy problem: Interval Scheduling).
 With the solution to that problem, guess how do we get the minimum number of intervals to remove? : )
 */
 public class NonOverlappingIntervals {

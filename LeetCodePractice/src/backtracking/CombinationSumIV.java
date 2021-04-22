@@ -25,10 +25,40 @@ Therefore the output is 7.
 Follow up:
 What if negative numbers are allowed in the given array?
 How does it change the problem?
+can leads to infinite answers
+
 What limitation we need to add to the question to allow negative numbers?
+need to set limitation on length the nums array
+
+analysis:
+different order count as separate one
+
 */
 public class CombinationSumIV {
+	Integer[] mem;
 	public int combinationSum4(int[] nums, int target) {
+		mem = new Integer[target + 1];
+		return dfs(nums, target);
+	}
+
+	private int dfs(int[] nums, int target) {
+		if(target == 0){
+			return 1;
+		}
+		if(mem[target] != null){
+			return mem[target];
+		}
+		int res = 0;
+		for(int n : nums){
+			if(target >= n){
+				res += dfs(nums, target - n);
+			}
+		}
+		return mem[target] = res;
+	}
+
+
+	public int combinationSum4DP(int[] nums, int target) {
 		int len = nums.length;
 		int[] dp = new int[target + 1];
 		dp[0] = 1;
@@ -41,4 +71,6 @@ public class CombinationSumIV {
 		}
 		return dp[target];
 	}
+
+
 }

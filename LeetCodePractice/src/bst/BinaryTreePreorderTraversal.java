@@ -58,6 +58,5 @@ public class BinaryTreePreorderTraversal {
         res.add(root.val);
         helper(root.left, res);
         helper(root.right, res);
-        return;
     }
 }

@@ -46,7 +46,7 @@ Given a string s of lowercase letters, you need to find the maximum number of no
         s contains only lowercase English letters.
 
 analysis:
-Greedy
+greedy
 Notice that it's impossible for any two valid substrings to overlap unless one is inside another.
 We can start by finding the starting and ending index for each character.
 From these indices, we can form the substrings by expanding each character's range if necessary

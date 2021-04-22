@@ -35,7 +35,7 @@ Constraints:
 1 <= nums.length <= 2 * 10^4
 0 <= nums[i] <= 2^31 - 1
 
-analysis: Greedy + Trie
+analysis: greedy + Trie
 
 To make the XOR produce big value, the pair are at most 1's complement of each other
 for each num try to find its greedy XOR pair (by finding the 1's complement of this number

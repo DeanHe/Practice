@@ -6,7 +6,7 @@ a map is given for example: "a" maps to ".-", "b" maps to "-.", "c" maps to ".-.
 translate the code to alphabet string.
 
 test:
-		Map<String, Character> map = new HashMap<>();
+		Map<String, Character> map = new hashMap<>();
 		map.put(".-", 'a');
 		map.put("-.", 'b');
 		map.put(".-.", 'c');

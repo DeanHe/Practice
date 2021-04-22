@@ -73,7 +73,7 @@ import java.util.Map;
         Answers within 10^-5 of the actual value will be accepted as correct.
 
         analysis:
-        Nested HashMap
+        Nested hashMap
 */
 public class UndergroundSystem {
     Map<Integer, Pair<String, Integer>> checkInMap;

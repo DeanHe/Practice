@@ -28,7 +28,7 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
 //This is an application of Hierholzer’s algorithm to find a Eulerian path, need to visit all directed edges in the graph.
 
 analysis:
-Just Eulerian path. Greedy DFS, building the route backwards when retreating.
+Just Eulerian path. greedy DFS, building the route backwards when retreating.
 */
 public class ReconstructItinerary {
 	Map<String, PriorityQueue<String>> graph = new HashMap<>();

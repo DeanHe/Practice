@@ -24,7 +24,7 @@ Note:
 0 <= B[i] <= 10^9
 
 analysis:
-tag: Greedy
+tag: greedy
 should always first satisfy the biggest element of B, because they are the hardest to satisfy
 if the biggest element of A can not satisfy current value of B, nothing can satisfy
 use a pq to sort B from big to small.

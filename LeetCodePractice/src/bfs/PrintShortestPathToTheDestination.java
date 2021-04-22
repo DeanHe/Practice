@@ -4,7 +4,7 @@ import java.util.*;
 /*
 test:
 PrintShortestPathToTheDestination pst = new PrintShortestPathToTheDestination();
-Map<Integer, List<Integer>> graph = new HashMap<>();
+Map<Integer, List<Integer>> graph = new hashMap<>();
 graph.put(1, Arrays.asList(2, 3));
 graph.put(2, Arrays.asList(1, 6));
 graph.put(3, Arrays.asList(1, 4, 9));
