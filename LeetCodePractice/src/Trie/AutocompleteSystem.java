@@ -21,11 +21,11 @@ If less than 3 hot sentences exist, then just return as many as you can.
 When the input is a special character, it means the sentence ends, and in this case, you need to return an empty list.
 Your job is to implement the following functions:
 The constructor function:
-- AutocompleteSystem(String[] sentences, int[] times): This is the constructor.
+- AutocompleteSystem(string[] sentences, int[] times): This is the constructor.
 The input is historical data. Sentences is a string array consists of previously typed sentences.
 Times is the corresponding times a sentence has been typed. Your system should record these historical data.
 - Now, the user wants to input a new sentence. The following function will provide the next character the user types:
-List<String> input(char c): The input c is the next character typed by the user.
+List<string> input(char c): The input c is the next character typed by the user.
 The character will only be lower-case letters ('a' to 'z'), blank space (' ') or a special character ('#').
 Also, the previously typed sentence should be recorded in your system.
 The output will be the top 3 historical hot sentences that have prefix the same as the part of sentence already typed.
@@ -146,5 +146,5 @@ public class AutocompleteSystem {
 /**
  * Your AutocompleteSystem object will be instantiated and called as such:
  * AutocompleteSystem obj = new AutocompleteSystem(sentences, times);
- * List<String> param_1 = obj.input(c);
+ * List<string> param_1 = obj.input(c);
  */

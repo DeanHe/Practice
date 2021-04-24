@@ -32,7 +32,7 @@ The same letters are at least distance 2 from each other
 
 similar:
 task scheduler
-Reorganize String
+Reorganize string
 */
 public class RearrangeStringkDistanceApart {
     public String rearrangeString(String str, int k) {

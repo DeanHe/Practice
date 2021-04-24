@@ -19,7 +19,7 @@ package Stack.Parenthese;
         Note:
         The string size will be in the range [1, 100].
 
-    tag: String
+    tag: string
 */
 public class ValidParenthesisString {
     public boolean checkValidString(String s) {

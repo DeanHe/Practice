@@ -136,5 +136,5 @@ class ThroneInheritance {
  * ThroneInheritance obj = new ThroneInheritance(kingName);
  * obj.birth(parentName,childName);
  * obj.death(name);
- * List<String> param_3 = obj.getInheritanceOrder();
+ * List<string> param_3 = obj.getInheritanceOrder();
  */

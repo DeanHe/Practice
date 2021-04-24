@@ -6,12 +6,12 @@ a map is given for example: "a" maps to ".-", "b" maps to "-.", "c" maps to ".-.
 translate the code to alphabet string.
 
 test:
-		Map<String, Character> map = new hashMap<>();
+		Map<string, Character> map = new hashMap<>();
 		map.put(".-", 'a');
 		map.put("-.", 'b');
 		map.put(".-.", 'c');
 		MorseCodeTranslation morse = new MorseCodeTranslation();
-		String a = morse.translate(".-.-.-.", map);
+		string a = morse.translate(".-.-.-.", map);
 */
 import java.util.*;
 

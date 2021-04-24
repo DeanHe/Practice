@@ -48,16 +48,15 @@ public class MinimumRemoveToMakeValidParentheses {
 			if(c == '('){
 				stack.push(i);
 			} else if(c == ')'){
-				if(stack.isEmpty()){
-					arr[i] = '*'; // mark redundant ')'
-				} else {
+				if(!stack.isEmpty()){
 					stack.pop();
+				} else {
+					arr[i] = '*'; // mark redundant ')'
 				}
 			}
 		}
 		while(!stack.isEmpty()){
-			int i = stack.pop();
-			arr[i] = '*'; // mark redundant '('
+			arr[stack.pop()] = '*'; // mark redundant '('
 		}
 		StringBuilder sb = new StringBuilder();
 		for(char c : arr){

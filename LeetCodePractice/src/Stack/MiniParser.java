@@ -4,9 +4,9 @@ package Stack;
 Each element is either an integer, or a list -- whose elements may also be integers or other lists.
 Note: You may assume that the string is well-formed:
 
-String is non-empty.
-String does not contain white spaces.
-String contains only digits 0-9, [, - ,, ].
+string is non-empty.
+string does not contain white spaces.
+string contains only digits 0-9, [, - ,, ].
 Example 1:
 
 Given s = "324",

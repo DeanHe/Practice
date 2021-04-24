@@ -12,9 +12,9 @@ public class ReadAndWriteWithBlocksGoogle {
 
     byte[] read(int offset, int length){
         int start = offset;
-        int end = length - 1 + start;
-        int startBlockIdx = (start + BLOCK_SIZE - 1) / BLOCK_SIZE;
-        int endBlockIdx = (end + BLOCK_SIZE - 1) / BLOCK_SIZE;
+        int end = start + length - 1;
+        int startBlockIdx = start / BLOCK_SIZE;
+        int endBlockIdx = end / BLOCK_SIZE;
         int totalBlocks = endBlockIdx - startBlockIdx + 1;
         int startShift = start % BLOCK_SIZE;
         byte[] blocks = readBlocks(startBlockIdx, totalBlocks);

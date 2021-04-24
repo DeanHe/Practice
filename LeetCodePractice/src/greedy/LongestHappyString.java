@@ -26,7 +26,7 @@ package greedy;
         0 <= a, b, c <= 100
         a + b + c > 0
 
-Intuition: this is almost identical to 984. String Without AAA or BBB. We just need to ignore the smallest count in each round.
+Intuition: this is almost identical to 984. string Without AAA or BBB. We just need to ignore the smallest count in each round.
 Aassuming a >= b >= c: always try to add 'aa'. If a - 2 >= b, add 'b' (if not, the next round will add 'bb'). Repeat recursivelly for the remaining counts.
 
 In other words, we are greedily use two characters from the largest pile. We cusion these two characters with a character from the medium pile.

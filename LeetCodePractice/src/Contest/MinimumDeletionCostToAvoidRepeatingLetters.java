@@ -12,7 +12,7 @@ Example 1:
 
 Input: s = "abaac", cost = [1,2,3,4,5]
 Output: 3
-Explanation: Delete the letter "a" with cost 3 to get "abac" (String without two identical letters next to each other).
+Explanation: Delete the letter "a" with cost 3 to get "abac" (string without two identical letters next to each other).
 Example 2:
 
 Input: s = "abc", cost = [1,2,3]

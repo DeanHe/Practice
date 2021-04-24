@@ -72,7 +72,7 @@ public class BoxStacking {
 	}
 	
 	/* Driver program to test above function */
-    /*public static void main(String[] args) { 
+    /*public static void main(string[] args) {
           
         Box[] arr = new Box[4]; 
         arr[0] = new Box(4, 6, 7); 

@@ -134,6 +134,6 @@ public class AllOneDataStructure {
  * AllOne obj = new AllOne();
  * obj.inc(key);
  * obj.dec(key);
- * String param_3 = obj.getMaxKey();
- * String param_4 = obj.getMinKey();
+ * string param_3 = obj.getMaxKey();
+ * string param_4 = obj.getMinKey();
  */

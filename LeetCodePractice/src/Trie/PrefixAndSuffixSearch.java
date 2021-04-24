@@ -1,7 +1,7 @@
 package Trie;
 /*Given many words, words[i] has weight i.
 
-Design a class WordFilter that supports one function, WordFilter.f(String prefix, String suffix). It will return the word with given prefix and suffix with maximum weight. If no word exists, return -1.
+Design a class WordFilter that supports one function, WordFilter.f(string prefix, string suffix). It will return the word with given prefix and suffix with maximum weight. If no word exists, return -1.
 
 Examples:
 

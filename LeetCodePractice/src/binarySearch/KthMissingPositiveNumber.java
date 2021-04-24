@@ -9,6 +9,7 @@ Find the kth positive integer that is missing from this array.
 Example 1:
 
 Input: arr = [2,3,4,7,11], k = 5
+if no miss   [1,2,3,4,5]
 Output: 9
 Explanation: The missing positive integers are [1,5,6,8,9,10,12,13,...]. The 5th missing positive integer is 9.
 Example 2:
@@ -27,6 +28,12 @@ arr[i] < arr[j] for 1 <= i < j <= arr.length
 
 analysis:
 arr[i] - (i + 1) will be the count of number that missed.
+we compare the missing number count of arr[0:mid], with expect missing count k
+if # miss arr[0:mid] < k, indicate the missing number is in range arr[mid + 1:]
+if # miss arr[0:mid] >= k,  indicate the missing number is in range arr[:mid]
+
+TC O(logN)
+SC O(1)
  */
 public class KthMissingPositiveNumber {
     public int findKthPositive(int[] arr, int k) {
@@ -34,7 +41,8 @@ public class KthMissingPositiveNumber {
         int s = 0, e = len;
         while(s < e){
             int mid = (s + e) / 2;
-            if(arr[mid] - (mid + 1) < k){
+            int missCnt = arr[mid] - (mid + 1);
+            if(missCnt < k){
                 s = mid + 1;
             } else {
                 e = mid;

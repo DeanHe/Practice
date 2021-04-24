@@ -15,30 +15,31 @@ public class MinimumDistanceOfTwoCharacter2D {
         for(int r = 0; r < rows; r++){
             for(int c = 0; c < cols; c++){
                 if(matrix[r][c] == a){
-                    q.offer(new int[]{r, c, 0});
+                    q.offer(new int[]{r, c});
                     visited[r][c] = true;
                 }
             }
         }
+        int step = 0;
         while(!q.isEmpty()){
             int sz = q.size();
             for(int i = 0; i < sz; i++){
                 int[] cur = q.poll();
                 int r = cur[0];
                 int c = cur[1];
-                int dist = cur[2];
                 if(matrix[r][c] == b){
-                    return dist;
+                    return step;
                 }
                 for(int j = 0; j < dirs.length - 1; j++){
                     int nb_r = r + dirs[j];
                     int nb_c = c + dirs[j + 1];
                     if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && !visited[nb_r][nb_c]){
-                        q.offer(new int[]{nb_r, nb_c, dist + 1});
+                        q.offer(new int[]{nb_r, nb_c});
                         visited[nb_r][nb_c] = true;
                     }
                 }
             }
+            step++;
         }
         throw new Exception("not found");
     }

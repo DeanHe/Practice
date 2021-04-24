@@ -22,14 +22,14 @@ public class Solution {
         int res = largestIsland.largestPerimeter(events);
         System.out.println(res);
 
-		String x = "/abcd/erf";
-		String[] xm = x.split("/", 1);
+		string x = "/abcd/erf";
+		string[] xm = x.split("/", 1);
 		RearrangeStringkDistanceApart rearrangeStringkDistanceApart = new RearrangeStringkDistanceApart();
-		String res = rearrangeStringkDistanceApart.rearrangeString("aabbcc", 3);
+		string res = rearrangeStringkDistanceApart.rearrangeString("aabbcc", 3);
 		System.out.println(res);
 
-		String X = "XMJYAUZ";
-		String Y = "XMJAATZ";
+		string X = "XMJYAUZ";
+		string Y = "XMJAATZ";
 
 		ImplementDiff implementDiff = new ImplementDiff();
 		System.out.println(implementDiff.diff(X, Y));
@@ -46,21 +46,21 @@ public class Solution {
 		int res = mie.earliestAcq(logs, 6);
 
 
-		String[] sentences = {"i love you", "island","ironman", "i love leetcode"};
+		string[] sentences = {"i love you", "island","ironman", "i love leetcode"};
 		AutocompleteSystem cs = new AutocompleteSystem(sentences, cnt);
-		String test = "i a#";
+		string test = "i a#";
 		for(char c : test.toCharArray()){
-			List<String> res = cs.input(c);
+			List<string> res = cs.input(c);
 			System.out.println(res);
 		}
 		for(char c : test.toCharArray()){
-			List<String> res = cs.input(c);
+			List<string> res = cs.input(c);
 			System.out.println(res);
 		}
 
      	BraceExpansion be = new BraceExpansion();
-		String input = "{a,b,c}d{e,f}";
-		String[] res = be.expand(input);
+		string input = "{a,b,c}d{e,f}";
+		string[] res = be.expand(input);
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/

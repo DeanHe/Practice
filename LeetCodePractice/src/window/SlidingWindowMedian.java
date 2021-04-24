@@ -26,6 +26,14 @@ Therefore, return the median sliding window as [1,-1,-1,3,5,6].
 
 Note: 
 You may assume k is always valid, ie: k is always smaller than input array's size for non-empty array.
+
+analysis:
+remember add to the lower heap(maxHeap first). then pass one to the upper heap(minHeap),
+then make maxHeap.size() >= minHeap.size()
+
+Time Complexity
+Priority Queue would have been O(k) for remove(element) giving us an overall time complexity of O(nk)
+Using BST remove can be O(logK), which gives total O(nlogK)
 */
 public class SlidingWindowMedian {
 	PriorityQueue<Integer> minHeap = new PriorityQueue<>();

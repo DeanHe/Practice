@@ -7,7 +7,7 @@ import java.util.Random;
 /*
 Given a blacklist B containing unique integers from [0, N), write a function to return a uniform random integer from [0, N) which is NOT in B.
 
-Optimize it such that it minimizes the call to system’s Math.random().
+Optimize it such that it minimizes the call to system’s math.random().
 
 Note:
 

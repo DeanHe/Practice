@@ -41,7 +41,8 @@ The answer must be returned modulo 10^9 + 7.
 Constraints:
 
 1 <= d, f <= 30
-1 <= target <= 1000*/
+1 <= target <= 1000
+*/
 public class NumberOfDiceRollsWithTargetSum {
 	public int numRollsToTarget(int d, int f, int target) {
 		int mod = 1000000007;

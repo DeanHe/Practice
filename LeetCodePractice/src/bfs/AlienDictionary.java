@@ -44,7 +44,7 @@ Notice
 You may assume all letters are in lowercase.
 You may assume that if a is a prefix of b, then a must appear before b in the given dictionary.
 If the order is invalid, return an empty string.
-There may be multiple valid order of letters, return the smallest in lexicographical orde
+There may be multiple valid order of letters, return the smallest in lexicographical order
 r*/
 public class AlienDictionary {
 	/**

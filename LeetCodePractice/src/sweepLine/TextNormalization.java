@@ -21,36 +21,42 @@ please output the intervals without overlap and there correspondent characters, 
 */
 public class TextNormalization {
     public List<Span> normalize(List<Span> input) {
-        Map<Integer, Map<Character, Integer>> axis = new TreeMap<>();
+        TreeMap<Integer, Tick> axis = new TreeMap<>();
         List<Span> res = new ArrayList<>();
         for (Span span : input) {
-            Map<Character, Integer> startMap = axis.computeIfAbsent(span.start, x -> new HashMap<>());
-            for(Character c : span.set){
-                startMap.put(c, startMap.getOrDefault(c, 0) + 1);
-            }
-            Map<Character, Integer> endMap = axis.computeIfAbsent(span.end, x -> new HashMap<>());
-            for(Character c : span.set){
-                endMap.put(c, endMap.getOrDefault(c, 0) - 1);
-            }
+            Tick startTick = axis.computeIfAbsent(span.start, x -> new Tick());
+            startTick.set.addAll(span.set);
+            startTick.isStart = true;
+            Tick endTick = axis.computeIfAbsent(span.end, x -> new Tick());
+            endTick.set.addAll(span.set);
+            endTick.isStart = false;
         }
+        Tick carry = new Tick();
         int pre = -1;
-        Map<Character, Integer> sum = new HashMap<>();
-        for(int tick : axis.keySet()){
-            Span cur = new Span(pre, tick);
-            for(char c : sum.keySet()){
-                if(sum.get(c) > 0){
-                    cur.set.add(c);
-                }
-            }
-            Map<Character, Integer> tickMap = axis.get(tick);
-            for(char c : tickMap.keySet()){
-                sum.put(c, sum.getOrDefault(c, 0) + tickMap.get(c));
+        for(int t : axis.keySet()){
+            Span cur = new Span(pre, t);
+            cur.set.addAll(carry.set);
+            Tick tick = axis.get(t);
+            if(tick.isStart){
+                carry.set.addAll(tick.set);
+            } else {
+                carry.set.removeAll(tick.set);
             }
             if(pre != -1){
                 res.add(cur);
             }
-            pre = tick;
+            pre = t;
         }
         return res;
+    }
+
+    class Tick {
+        public Set<Character> set;
+        public boolean isStart;
+        public Tick(){
+            set = new HashSet<>();
+            isStart = false;
+        }
+
     }
 }
