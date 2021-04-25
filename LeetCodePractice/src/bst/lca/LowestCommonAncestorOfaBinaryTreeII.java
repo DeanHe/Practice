@@ -1,4 +1,6 @@
-package bst;
+package bst.lca;
+
+import bst.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

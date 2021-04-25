@@ -1,4 +1,7 @@
-package bst;
+package bst.lca;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /*
 Given two nodes of a binary tree p and q, return their lowest common ancestor (LCA).
@@ -48,6 +51,9 @@ move together until p and q meet, then it is the LCA
 
 TC O(N)
 SC O(1)
+
+approach 2:
+use a set to store all parent node, check any reoccurrence is result
  */
 public class LowestCommonAncestorOfaBinaryTreeIII {
     public Node lowestCommonAncestor(Node root, Node p, Node q) {
@@ -85,6 +91,24 @@ public class LowestCommonAncestorOfaBinaryTreeIII {
             q = q.parent;
         }
         return p;
+    }
+
+    public Node lowestCommonAncestor2(Node root, Node p, Node q) {
+        Set<Node> set = new HashSet<>();
+        while(true){
+            if(p != null && !set.add(p)){
+                return p;
+            }
+            if(q != null && !set.add(q)){
+                return q;
+            }
+            if(p != null){
+                p = p.parent;
+            }
+            if(q != null){
+               q = q.parent;
+            }
+        }
     }
 
     private class Node {
