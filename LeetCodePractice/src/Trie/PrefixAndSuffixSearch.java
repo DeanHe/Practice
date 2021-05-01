@@ -17,7 +17,18 @@ words has length in range [1, 15000].
 For each test case, up to words.length queries WordFilter.f may be made.
 words[i] has length in range [1, 10].
 prefix, suffix have lengths in range [0, 10].
-words[i] and prefix, suffix queries consist of lowercase letters only.*/
+words[i] and prefix, suffix queries consist of lowercase letters only.
+
+analysis
+Approach #3: Trie of Suffix Wrapped Words
+Intuition and Algorithm
+
+Consider the word 'apple'. For each suffix of the word, we could insert that suffix, followed by '#', followed by the word,
+all into the trie.
+
+For example, we will insert '#apple', 'e#apple', 'le#apple', 'ple#apple', 'pple#apple', 'apple#apple' into the trie.
+Then for a query like prefix = "ap", suffix = "le", we can find it by querying our trie for le#ap.
+*/
 
 public class PrefixAndSuffixSearch {
 	class WordFilter {
@@ -26,19 +37,18 @@ public class PrefixAndSuffixSearch {
 		public WordFilter(String[] words) {
 			root = new TrieNode();
 			int size = words.length;
-			for (int weight = 0; weight < size; weight++) {
-				String word = words[weight] + "{";
-				int len = word.length();
-				for (int i = 0; i <= len; i++) {
+			for (int idx = 0; idx < size; idx++) {
+				String pattern = words[idx] + "{" + words[idx];
+				for (int i = 0; i <= words[idx].length(); i++) {
 					TrieNode cur = root;
-					cur.weight = weight;
-					for (int j = i; j < 2 * len - 1; j++) {
-						int idx = word.charAt(j % len) - 'a';
-						if (cur.arr[idx] == null) {
-							cur.arr[idx] = new TrieNode();
+					cur.idx = idx;
+					for (int j = i; j < pattern.length(); j++) {
+						int k = pattern.charAt(j) - 'a';
+						if (cur.arr[k] == null) {
+							cur.arr[k] = new TrieNode();
 						}
-						cur = cur.arr[idx];
-						cur.weight = weight;
+						cur = cur.arr[k];
+						cur.idx = idx;
 					}
 				}
 			}
@@ -46,13 +56,14 @@ public class PrefixAndSuffixSearch {
 
 		public int f(String prefix, String suffix) {
 			TrieNode cur = root;
-			for (char c : (suffix + "{" + prefix).toCharArray()) {
+			String pattern = suffix + "{" + prefix;
+			for (char c : pattern.toCharArray()) {
 				if (cur.arr[c - 'a'] == null) {
 					return -1;
 				}
 				cur = cur.arr[c - 'a'];
 			}
-			return cur.weight;
+			return cur.idx;
 		}
 	}
 
@@ -64,12 +75,12 @@ public class PrefixAndSuffixSearch {
 
 	class TrieNode {
 		TrieNode[] arr;
-		int weight;
+		int idx;
 
 		public TrieNode() {
 			arr = new TrieNode[27]; // 'a' - 'z' and '{'. 'z' and '{' are
 									// neighbours in ASCII table
-			weight = 0;
+			idx = 0;
 		}
 	}
 }

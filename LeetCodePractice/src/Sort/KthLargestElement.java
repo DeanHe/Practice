@@ -21,8 +21,10 @@ O(n) time, O(1) extra memory.
 Notice
 You can swap elements in the array
 
-O(N) best case runtime or O(N ^ 2) worst case + O(1) memeory
+O(N) best case runtime or O(N ^ 2) worst case + O(1) memory
 The smart approach is to use the selection algorithm (based on the partition method - the same one as used in quicksort).
+
+approach2: bucket sort TC strictly O(N) SC O(N), sacrifice Space for Time
 */
 public class KthLargestElement {
     /**
