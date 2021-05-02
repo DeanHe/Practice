@@ -38,4 +38,24 @@ public class PascalsTriangleII {
         }
         return res;
     }
+
+    Integer[][] mem;
+    public List<Integer> getRow2(int rowIndex) {
+        List<Integer> res = new ArrayList<>();
+        mem = new Integer[rowIndex + 1][rowIndex + 1];
+        for(int k = 0; k <= rowIndex; k++){
+            res.add(nCk(rowIndex, k));
+        }
+        return res;
+    }
+
+    private Integer nCk(int n, int k) {
+        if(k == 0 || n == k){
+            return 1;
+        }
+        if(mem[n][k] != null){
+            return mem[n][k];
+        }
+        return mem[n][k] = nCk(n - 1, k - 1) + nCk(n - 1, k);
+    }
 }

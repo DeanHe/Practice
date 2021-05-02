@@ -35,7 +35,6 @@ If you couldn't get >= k pieces, return 0.
     public int woodCut(int[] L, int k) {
         // write your code here
         int start = 1, end = 0;
-        int res = 0;
         for (int l : L) {
             end = Math.max(end, l);
         }

@@ -34,6 +34,7 @@ public class BackspaceStringCompare {
     public boolean backspaceCompare(String S, String T) {
         return getStr(S).equals(getStr(T));
     }
+
     private String getStr(String s){
         int deletes = 0;
         char[] arr = s.toCharArray();

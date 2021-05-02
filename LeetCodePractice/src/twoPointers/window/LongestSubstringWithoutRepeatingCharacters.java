@@ -1,6 +1,8 @@
 package twoPointers.window;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /*
@@ -47,23 +49,22 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	}
 
 	public int lengthOfLongestSubstringII(String s) {
-		int len =s.length();
-		if(len == 0){
+		if(s == null || s.length() == 0){
 			return 0;
 		}
-		// map from character's ASCII to its last occured index
-		int[] freq = new int[256];
-		int maxLen = 0;
-		int l = 0;
-		int r = 0;
-		for(l = 0; l < len; l++){
-			while(r < len && freq[s.charAt(r)] == 0){
-				freq[s.charAt(r)]++;
-				maxLen = Math.max(maxLen, r - l + 1);
-				r++;
+		int res = 0, len = s.length(), start = 0, end = 0;
+		Map<Character, Integer> map = new HashMap<>();
+		while(end < len){
+			char ec = s.charAt(end);
+			if(map.containsKey(ec)){
+				if(start < map.get(ec) + 1){
+					start = map.get(ec) + 1;
+				}
 			}
-			freq[s.charAt(l)]--;
+			res = Math.max(res, end - start + 1);
+			map.put(ec, end);
+			end++;
 		}
-		return maxLen;
+		return res;
 	}
 }

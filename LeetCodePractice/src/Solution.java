@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -64,9 +65,27 @@ public class Solution {
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/
-
-
     }
+
+    public List<Integer> powerfulIntegers(int x, int y, int bound) {
+        Set<Integer> set = new HashSet<>();
+        for(int a = 1; a < bound; a *= x){
+            for(int b = 1; b < bound; b *= y){
+                if(a + b <= bound){
+                    set.add(a + b);
+                }
+                if(y == 1){
+                    break;
+                }
+            }
+            if(x == 1){
+                break;
+            }
+        }
+        List<Integer> res = new ArrayList<>(set);
+        return res;
+    }
+
     public int countDifferentSubsequenceGCDs(int[] nums) {
         int len = nums.length;
         Integer[] dp = new Integer[1 << len];

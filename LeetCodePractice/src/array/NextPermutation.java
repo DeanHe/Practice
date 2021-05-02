@@ -39,9 +39,9 @@ public class NextPermutation {
 			reverse(nums, 0, len - 1);
 			return;
 		}
-		// step 2 Find the smallest index l such that a[k] < a[l]. Since k + 1
+		// step 2 Find the largest index l such that a[k] < a[l]. Since k + 1
 		// is such an index, l is well defined and satisfies k < l.
-		for (int i = len - 1; i >= 0; i--) {
+		for (int i = len - 1; i > idx; i--) {
 			if (nums[idx] < nums[i]) {
 				swap(nums, i, idx);
 				break;

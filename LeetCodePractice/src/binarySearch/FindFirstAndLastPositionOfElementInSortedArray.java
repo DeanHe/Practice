@@ -38,9 +38,9 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
 					s = m;
 				}
 			} else if (nums[m] < target) {
-				s = m + 1;
+				s = m;
 			} else {
-				e = m - 1;
+				e = m;
 			}
 		}
 		if (leftward) {

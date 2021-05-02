@@ -16,13 +16,16 @@ Given a string containing just the characters '(' and ')', find the length of th
         Explanation: The longest valid parentheses substring is "()()"
 
 analysis:
-dp
+approach1: stack
+approach2: dp
+
+
 */
 
 public class LongestValidParentheses {
 	public int longestValidParentheses(String s) {
-        int maxans = 0;
-     // save '(' location
+        int res = 0;
+     // save '(' and unmatched ')' location
         Stack<Integer> stack = new Stack<>();
         stack.push(-1);
         for (int i = 0; i < s.length(); i++) {
@@ -33,12 +36,11 @@ public class LongestValidParentheses {
                 if (stack.empty()) {
                     stack.push(i);
                 } else {
-                	// 如果栈内仍有元素，则当前合法序列的长度为当前栈顶元素的位置下一位到当前元素的距离
-                    maxans = Math.max(maxans, i - stack.peek());
+                    res = Math.max(res, i - stack.peek());
                 }
             }
         }
-        return maxans;
+        return res;
     }
 	//dp[i] represents the length of the longest valid substring ending at s[:i]
 	public int longestValidParenthesesDP(String s) {
