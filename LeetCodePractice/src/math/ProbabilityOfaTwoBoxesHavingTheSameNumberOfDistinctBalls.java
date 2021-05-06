@@ -55,7 +55,8 @@ Answers within 10^-5 of the actual value will be accepted as correct.
  */
 public class ProbabilityOfaTwoBoxesHavingTheSameNumberOfDistinctBalls {
     public double getProbability(int[] balls) {
-
+        // todo
+        return -1;
     }
 }
 

@@ -1,4 +1,5 @@
 package contest;
+
 /*
 Bob is standing at cell (0, 0), and he wants to reach destination: (row, column). He can only travel right and down. You are going to help Bob by providing instructions for him to reach destination.
 
@@ -47,18 +48,54 @@ dp
  */
 public class KthSmallestInstructions {
     int rows, cols;
+    Integer[][] mem;
+    int[] destination;
+
     public String kthSmallestPath(int[] destination, int k) {
+        this.destination = destination;
+        rows = destination[0] + 1;
+        cols = destination[1] + 1;
+        mem = new Integer[rows + cols][rows + cols];
+        return dfs(0, 0, k);
+    }
+
+    private String dfs(int r, int c, int k) {
+        if (r == rows - 1 && c == cols - 1) {
+            return "";
+        }
+        if (r == rows - 1) {
+            return "H" + dfs(r, c + 1, k);
+        } else if (c == cols - 1) {
+            return "V" + dfs(r + 1, c, k);
+        } else if (k <= nCk(destination[0] + destination[1] - r - c - 1, destination[1] - c - 1)) {
+            return "H" + dfs(r, c + 1, k);
+        } else {
+            return "V" + dfs(r + 1, c, k - nCk(destination[0] + destination[1] - r - c - 1, destination[1] - c - 1));
+        }
+    }
+
+    private Integer nCk(int n, int k) {
+        if (k == 0 || n == k) {
+            return 1;
+        }
+        if (mem[n][k] != null) {
+            return mem[n][k];
+        }
+        return mem[n][k] = nCk(n - 1, k - 1) + nCk(n - 1, k);
+    }
+
+    public String kthSmallestPathII(int[] destination, int k) {
         rows = destination[0] + 1;
         cols = destination[1] + 1;
         // dp[r][c] means # of ways to reach destination {rows - 1, cols - 1} start from {r, c}
         int[][] dp = new int[rows][cols];
-        for(int r = rows - 1 ; r >= 0; r--){
-            for(int c = cols - 1; c >= 0; c--){
-                if(r == rows - 1 && c == cols - 1){
+        for (int r = rows - 1; r >= 0; r--) {
+            for (int c = cols - 1; c >= 0; c--) {
+                if (r == rows - 1 && c == cols - 1) {
                     dp[r][c] = 1;
-                } else if(r == rows - 1){
+                } else if (r == rows - 1) {
                     dp[r][c] = dp[r][c + 1];
-                } else if(c == cols - 1){
+                } else if (c == cols - 1) {
                     dp[r][c] = dp[r + 1][c];
                 } else {
                     dp[r][c] = dp[r + 1][c] + dp[r][c + 1];
@@ -74,21 +111,21 @@ public class KthSmallestInstructions {
     }
 
     private void dfs(StringBuilder sb, int[][] dp, int k, int r, int c) {
-        if(r == rows - 1){
-            while(c < cols - 1){
+        if (r == rows - 1) {
+            while (c < cols - 1) {
                 sb.append('H');
                 c++;
             }
             return;
         }
-        if(c == cols - 1){
-            while(r < rows - 1){
+        if (c == cols - 1) {
+            while (r < rows - 1) {
                 sb.append('V');
                 r++;
             }
             return;
         }
-        if(dp[r][c + 1] >= k){
+        if (dp[r][c + 1] >= k) {
             sb.append('H');
             dfs(sb, dp, k, r, c + 1);
         } else {

@@ -45,6 +45,11 @@ Constraints:
 1 <= k <= 1000
 num only consists of digits.
 
+analysis:
+first find the number after kth permutation
+second loop until find a different digit between after[i] and origin[i].
+then continue loop until find the matching digit of after[i] in origin[j]
+adjacent swap in origin [i:j] backwards
  */
 public class MinimumAdjacenSwapsToReachTheKthSmallestNumber {
     public int getMinSwaps(String num, int k) {

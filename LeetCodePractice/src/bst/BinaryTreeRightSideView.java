@@ -17,6 +17,11 @@ Explanation:
 2     3         <---
  \     \
   5     4       <---
+
+
+analysis:
+
+use an additional depth parameter to track the result list index, see if it is already filled
  */
 public class BinaryTreeRightSideView {
     public List<Integer> rightSideView(TreeNode root) {
