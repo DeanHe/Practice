@@ -33,23 +33,22 @@ package bst;
         Each node's value is between [1, 100].
 */
 public class LongestZigZagPathInaBinaryTree {
-    int res;
+    int res = 0;
     public int longestZigZag(TreeNode root) {
-        res = 0;
         dfs(root);
-        return res - 1;
+        return res == 0 ? 0 : res - 1;
     }
 
     private int[] dfs(TreeNode root){
         if(root == null){
-            int[] ans = {0, 0}; // left max path from root : right max path from root
+            int[] ans = new int[2]; // left max path from root : right max path from root
             return ans;
         }
         int[] cur = new int[2];
-        int[] left = dfs(root.left);
-        cur[0] = left[1] + 1;
-        int[] right = dfs(root.right);
-        cur[1] += right[0] + 1;
+        int[] l = dfs(root.left);
+        cur[0] = l[1] + 1;
+        int[] r = dfs(root.right);
+        cur[1] += r[0] + 1;
         res = Math.max(res, cur[0]);
         res = Math.max(res, cur[1]);
         return cur;

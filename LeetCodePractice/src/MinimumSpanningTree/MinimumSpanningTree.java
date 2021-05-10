@@ -45,7 +45,7 @@ public class MinimumSpanningTree {
 			}
 			return a.city1.compareTo(b.city1);
 		});
-		// city: group id in UnionFind
+		// city: group id in unionFind
 		Map<String, Integer> groupMap = new HashMap<>();
 		int n = 0;
 		for (Connection c : connections) {

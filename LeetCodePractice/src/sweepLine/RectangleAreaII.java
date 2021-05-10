@@ -30,7 +30,7 @@ import java.util.TreeMap;
         The total area covered by all rectangles will never exceed 2^63 - 1 and thus will fit in a 64-bit signed integer.
 
 analysis:
-1. Sort the points in x order
+1. sort the points in x order
 2. For the points in the same x, calculate the current y (like the meeting room problem).
 3. In the next x, calculate the area by preY * (curX - preX)
 

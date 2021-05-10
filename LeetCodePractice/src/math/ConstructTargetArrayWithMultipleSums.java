@@ -38,6 +38,15 @@ Given an array of integers target. From a starting array, A consisting of all 1'
         N == target.length
         1 <= target.length <= 5 * 10^4
         1 <= target[i] <= 10^9
+
+        hint:
+        Given that the sum is strictly increasing, the largest element in the target must be formed in the last step by adding the total sum in the previous step.
+        Thus, we can simulate the process in a reversed way.
+
+        Subtract the largest with the rest of the array, and put the new element into the array. Repeat until all elements become one
+
+        analysis:
+        TC O(NlogN)
 */
 public class ConstructTargetArrayWithMultipleSums {
     public boolean isPossible(int[] target) {

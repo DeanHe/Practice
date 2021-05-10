@@ -16,7 +16,7 @@ Output: 3
 Explanation: The maximum number of envelopes you can Russian doll is 3 ([2,3] => [5,4] => [6,7]).
 
 analysis:
-Sort the array. Ascend on width and ascend on height if width are same (because the requirement is strictly greater than).
+sort the array. Ascend on width and ascend on height if width are same (because the requirement is strictly greater than).
 Find the longest increasing subsequence (LIS) based on height.
 Since the width is increasing, we only need to consider height.
 

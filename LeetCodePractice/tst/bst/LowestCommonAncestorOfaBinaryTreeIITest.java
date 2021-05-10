@@ -1,5 +1,6 @@
 package bst;
 
+import bst.lca.LowestCommonAncestorOfaBinaryTreeII;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

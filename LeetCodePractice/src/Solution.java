@@ -67,55 +67,37 @@ public class Solution {
 		*/
     }
 
-    public List<Integer> powerfulIntegers(int x, int y, int bound) {
-        Set<Integer> set = new HashSet<>();
-        for(int a = 1; a < bound; a *= x){
-            for(int b = 1; b < bound; b *= y){
-                if(a + b <= bound){
-                    set.add(a + b);
-                }
-                if(y == 1){
-                    break;
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> res = new ArrayList<>();
+        if(s == null || s.length() == 0 || words == null || words.length == 0){
+            return res;
+        }
+        int singleLen = words[0].length();
+        int wordsLen = singleLen * words.length;
+        Map<String, Integer> wmap = new HashMap<>();
+        for(String w : words){
+            wmap.put(w, wmap.getOrDefault(w, 0) + 1);
+        }
+        HashMap<String, Integer>[] smap = new HashMap[singleLen];
+        for(int i = 0; i < singleLen; i++){
+            smap[i] = new HashMap<>();
+        }
+        for(int i = 0; i + singleLen <= s.length(); i++){
+            int idx = i % singleLen;
+            String sub = s.substring(i, i + singleLen);
+            smap[idx].put(sub, smap[idx].getOrDefault(sub, 0) + 1);
+            if(i >= wordsLen){
+                String head = s.substring(i - wordsLen, i - wordsLen + singleLen);
+                smap[idx].put(head, smap[idx].get(head) - 1);
+                if(smap[idx].get(head) == 0){
+                    smap[idx].remove(head);
                 }
             }
-            if(x == 1){
-                break;
+            if(wmap.equals(smap[idx])){
+                res.add(i - wordsLen + singleLen);
             }
         }
-        List<Integer> res = new ArrayList<>(set);
         return res;
-    }
-
-    public int countDifferentSubsequenceGCDs(int[] nums) {
-        int len = nums.length;
-        Integer[] dp = new Integer[1 << len];
-        Set<Integer> res = new HashSet<>();
-        Queue<Integer> q = new LinkedList<>();
-        for (int i = 0; i < len; i++) {
-            dp[1 << i] = nums[i];
-            res.add(nums[i]);
-            q.offer(1 << i);
-
-        }
-        while(!q.isEmpty()){
-            int cur = q.poll();
-            for(int i = 0; i < len; i++) {
-                int next = cur | (1 << i);
-                if(dp[next] == null) {
-                    dp[next] = gcd(nums[i], dp[cur]);
-                    res.add(dp[next]);
-                    q.offer(next);
-                }
-            }
-        }
-        return res.size();
-    }
-
-    private int gcd(int a, int b){
-        if(a == 0){
-            return b;
-        }
-        return gcd(b % a, a);
     }
 }
 

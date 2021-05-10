@@ -18,7 +18,7 @@ One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] 
 
 solution: 1. greedy
 2. template
-# Sort intervals/pairs in increasing order of the start position.
+# sort intervals/pairs in increasing order of the start position.
 # Scan the sorted intervals, and maintain an "active set" for overlapping intervals. At most times, we do not need to use an explicit set to store them. Instead, we just need to maintain several key parameters, e.g. the number of overlapping intervals (count), the minimum ending point among all overlapping intervals (minEnd).
 # If the interval that we are currently checking overlaps with the active set, which can be characterized by cur.start > minEnd, we need to renew those key parameters or change some states.
 # If the current interval does not overlap with the active set, we just drop current active set, record some parameters, and create a new active set that contains the current interval.

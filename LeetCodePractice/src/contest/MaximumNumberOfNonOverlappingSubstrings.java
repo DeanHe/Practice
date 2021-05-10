@@ -51,7 +51,7 @@ Notice that it's impossible for any two valid substrings to overlap unless one i
 We can start by finding the starting and ending index for each character.
 From these indices, we can form the substrings by expanding each character's range if necessary
 (if another character exists in the range with smaller/larger starting/ending index).
-Sort the valid substrings by length and greedily take those with the smallest length, discarding the ones that overlap those we took.
+sort the valid substrings by length and greedily take those with the smallest length, discarding the ones that overlap those we took.
 */
 public class MaximumNumberOfNonOverlappingSubstrings {
     public List<String> maxNumOfSubstrings(String s) {
