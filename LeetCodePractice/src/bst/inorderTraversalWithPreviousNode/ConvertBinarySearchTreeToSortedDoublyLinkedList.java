@@ -42,7 +42,8 @@ Input: {2,1,3}
 Output: "left:1->3->2  right:1->2->3"
 
 https://www.lintcode.com/problem/convert-binary-search-tree-to-sorted-doubly-linked-list/description
-use inorder traversal
+use inorder traversal,
+maintain head and tail two pointer, always append current node to right of tail
 O(N) space complexity
  */
 public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
