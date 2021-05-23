@@ -28,6 +28,10 @@ Note:
 0 <= A.length < 1000
 0 <= B.length < 1000
 0 <= A[i].start, A[i].end, B[i].start, B[i].end < 10^9
+
+analysis:
+maintain two pointers for the two input array, and the intersection bound
+move the pointer equals intersection end
 */
 public class IntervalListIntersections {
 	public int[][] intervalIntersection(int[][] A, int[][] B) {

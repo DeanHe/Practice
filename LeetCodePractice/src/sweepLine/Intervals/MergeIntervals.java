@@ -24,6 +24,9 @@ Constraints:
 1 <= intervals.length <= 10^4
 intervals[i].length == 2
 0 <= starti <= endi <= 10^4
+
+analysis:
+maintain a pre interval, add pre to result by comparing pre with cur
 */
 import java.util.*;
 
