@@ -1,4 +1,4 @@
-package Trie;
+package trie;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,8 +51,16 @@ There are no sentences that have prefix "i a".
 Operation: input('#')
 Output: []
 Explanation:
-The user finished the input, the sentence "i a" should be saved as a historical sentence in system. And the following input will be counted as a new search.
-Note: The input sentence will always start with a letter and end with '#', and only one blank space will exist between two words. The number of complete sentences that to be searched won't exceed 100. The length of each sentence including those in the historical data won't exceed 100. Please use double-quote instead of single-quote when you write test cases even for a character input. Please remember to RESET your class variables declared in class AutocompleteSystem, as static/class variables are persisted across multiple test cases. Please see here for more details.
+The user finished the input, the sentence "i a" should be saved as a historical sentence in system.
+And the following input will be counted as a new search.
+Note: The input sentence will always start with a letter and end with '#', and only one blank space will exist between two words.
+The number of complete sentences that to be searched won't exceed 100.
+The length of each sentence including those in the historical data won't exceed 100.
+Please use double-quote instead of single-quote when you write test cases even for a character input.
+Please remember to RESET your class variables declared in class AutocompleteSystem, as static/class variables are persisted across multiple test cases. Please see here for more details.
+
+analysis:
+in the TrieNode, maintain the sentence : count map, (sentence has the prefix to reach this TrieNode)
 */
 public class AutocompleteSystem {
     class Pair {
@@ -67,7 +75,6 @@ public class AutocompleteSystem {
     class TrieNode {
         Map<Character, TrieNode> children;
         Map<String, Integer> sentenceFreq;
-        boolean isEnd;
         private TrieNode(){
             children = new HashMap<>();
             sentenceFreq = new HashMap<>();
@@ -86,16 +93,14 @@ public class AutocompleteSystem {
     }
 
     public List<String> input(char c) {
-        List<String>  res = new ArrayList<>();
         if(c == '#'){
             add(sb.toString(), 1);
             sb.setLength(0);
             cur = root;
-            return res;
+            return new ArrayList<>();
         }
         sb.append(c);
-        cur.children.putIfAbsent(c, new TrieNode());
-        cur = cur.children.get(c);
+        cur =  cur.children.computeIfAbsent(c, x -> new TrieNode());
         return findTopK(cur, 3);
     }
 
@@ -106,11 +111,9 @@ public class AutocompleteSystem {
         TrieNode node = root;
         char[] arr = sentence.toCharArray();
         for(char c : arr){
-            node.children.putIfAbsent(c, new TrieNode());
-            node = node.children.get(c);
+            node =  node.children.computeIfAbsent(c, x -> new TrieNode());
             node.sentenceFreq.put(sentence, node.sentenceFreq.getOrDefault(sentence, 0) + count);
         }
-        node.isEnd = true;
     }
 
     private List<String> findTopK(TrieNode node, int k){

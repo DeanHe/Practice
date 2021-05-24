@@ -1,4 +1,4 @@
-package Trie;
+package trie;
 
 /*Design a data structure that supports the following two operations: addWord(word) and search(word)
 

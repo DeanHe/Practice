@@ -2,7 +2,8 @@ package dp;
 
 import java.util.Arrays;
 
-/*ou are given a series of video clips from a sporting event that lasted T seconds.  These video clips can be overlapping with each other and have varied lengths.
+/*
+You are given a series of video clips from a sporting event that lasted T seconds.  These video clips can be overlapping with each other and have varied lengths.
 
 Each video clip clips[i] is an interval: it starts at time clips[i][0] and ends at time clips[i][1].  We can cut these clips into segments freely: for example, a clip [0, 7] can be cut into segments [0, 1] + [1, 3] + [3, 7].
 
@@ -43,7 +44,17 @@ Note:
 
 1 <= clips.length <= 100
 0 <= clips[i][0], clips[i][1] <= 100
-0 <= T <= 100*/
+0 <= T <= 100
+
+analysis:
+approach 1
+dp[i][j] means minimum number of clips needed to cover range [i:j]
+TC O(N ^ 2)
+
+approach 2
+greedy
+TC O(N log N)
+*/
 public class VideoStitching {
 	public int videoStitching(int[][] clips, int T) {
 		int UPPER_BOUND = 101;
@@ -77,7 +88,7 @@ public class VideoStitching {
     }
 	public int videoStitchingByGreedy(int[][] clips, int T) {
 		int len = clips.length;
-		Arrays.sort(clips, (int[] a, int[] b) -> a[0] - b[0]);
+		Arrays.sort(clips, (a, b) -> a[0] - b[0]);
 		int i = 0, count = 0;
 		int end = 0;
 		while(i < len){

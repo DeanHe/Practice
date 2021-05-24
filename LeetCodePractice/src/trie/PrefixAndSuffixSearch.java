@@ -1,4 +1,4 @@
-package Trie;
+package trie;
 /*Given many words, words[i] has weight i.
 
 Design a class WordFilter that supports one function, WordFilter.f(string prefix, string suffix). It will return the word with given prefix and suffix with maximum weight. If no word exists, return -1.
@@ -20,7 +20,7 @@ prefix, suffix have lengths in range [0, 10].
 words[i] and prefix, suffix queries consist of lowercase letters only.
 
 analysis
-Approach #3: Trie of Suffix Wrapped Words
+Approach #3: trie of Suffix Wrapped Words
 Intuition and Algorithm
 
 Consider the word 'apple'. For each suffix of the word, we could insert that suffix, followed by '#', followed by the word,

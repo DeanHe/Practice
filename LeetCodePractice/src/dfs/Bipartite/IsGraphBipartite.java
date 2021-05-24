@@ -32,6 +32,11 @@ graph will have length in range [1, 100].
 graph[i] will contain integers in range [0, graph.length - 1].
 graph[i] will not contain i or duplicate values.
 The graph is undirected: if any element j is in graph[i], then i will be in graph[j].
+
+analysis:
+DFS: TC O(V + E), check if we can paint each node to 1 or -1
+UN: union all the neighbors of one node together, if node its self is in the same group of its neighbor (findRoot same) return false
+
 */
 
 import java.util.HashMap;

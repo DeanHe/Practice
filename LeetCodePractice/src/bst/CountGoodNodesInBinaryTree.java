@@ -38,8 +38,21 @@ The number of nodes in the binary tree is in the range [1, 10^5].
 Each node's value is between [-10^4, 10^4].
  */
 public class CountGoodNodesInBinaryTree {
+    int res = 0;
     public int goodNodes(TreeNode root) {
-        return -1;
+        dfs(root, Integer.MIN_VALUE);
+        return res;
+    }
+
+    private void dfs(TreeNode root, int preMax) {
+        if(root == null){
+            return;
+        }
+        if(root.val >= preMax){
+            res++;
+        }
+        dfs(root.left, Math.max(root.val, preMax));
+        dfs(root.right, Math.max(root.val, preMax));
     }
 }
 

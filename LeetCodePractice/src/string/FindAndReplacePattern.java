@@ -2,7 +2,8 @@ package string;
 
 import java.util.*;
 
-/*You have a list of words and a pattern, and you want to know which words in words matches the pattern.
+/*
+You have a list of words and a pattern, and you want to know which words in words matches the pattern.
 
 A word matches the pattern if there exists a permutation of letters p so that after replacing every letter x in the pattern with p(x), we get the desired word.
 
@@ -29,7 +30,8 @@ Explanation:
 All strings match.
 Notice
 1 <= words.length <= 501<=words.length<=50
-1 <= pattern.length = words[i].length <= 201<=pattern.length=words[i].length<=20*/
+1 <= pattern.length = words[i].length <= 201<=pattern.length=words[i].length<=20
+*/
 public class FindAndReplacePattern {
 	/**
      * @param words: word list
@@ -48,10 +50,9 @@ public class FindAndReplacePattern {
     }
     private int[] hash(String s){ 
     	Map<Character, Integer> map = new HashMap<>();
-    	char[] arr = s.toCharArray();
-    	int[] encode = new int[arr.length];
-    	for(int i = 0; i < arr.length; i++){
-    		char c = arr[i];
+    	int[] encode = new int[s.length()];
+    	for(int i = 0; i < s.length(); i++){
+    		char c = s.charAt(i);
     		map.putIfAbsent(c, map.size());
     		encode[i] = map.get(c);
     	}

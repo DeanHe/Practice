@@ -3,8 +3,10 @@ package dp.bitmask;
 import java.util.Arrays;
 
 /*
-Given an array A of strings, find any smallest string that contains each string in A as a substring.
-We may assume that no string in A is substring of another string in A.
+Given an array of strings words, return the smallest string that contains each string in words as a substring.
+If there are multiple valid strings of the smallest length, return any of them.
+
+You may assume that no string in words is a substring of another string in words.
  
 Example 1:
 
@@ -21,18 +23,20 @@ Note:
 
 1 <= A.length <= 12
 1 <= A[i].length <= 20
+words[i] consists of lowercase English letters.
+All the strings of words are unique.
 */
 public class FindTheShortestSuperstring {
-	public String shortestSuperstring(String[] A) {
-        int N = A.length;
+	public String shortestSuperstring(String[] words) {
+        int N = words.length;
         // preprocess append
         int[][] append = new int[N][N];
         for(int i = 0; i < N; i++){
         	for(int j = 0; j < N; j++){
-        		append[i][j] = getAppendLength(A[i], A[j]);
+        		append[i][j] = getAppendLength(words[i], words[j]);
         	}
         }
-        //mem[s][i] means minimum length of state s, ends with string A[i]
+        //mem[s][i] means minimum length of state s, ends with string words[i]
         int[][] dp = new int[1 << N][N];
         for(int[] rows : dp){
         	Arrays.fill(rows, Integer.MAX_VALUE);
@@ -42,10 +46,10 @@ public class FindTheShortestSuperstring {
         for(int[] rows : backNode){
         	Arrays.fill(rows, -1);
         }
-        // the last substring of superString from A, minLen of superString
+        // the last substring of superString from words, minLen of superString
         int last = -1, minLen = Integer.MAX_VALUE;
         for(int i = 0; i < N; i++){
-        	dp[1 << i][i] = A[i].length();
+        	dp[1 << i][i] = words[i].length();
         }
         for(int s = 1; s < (1 << N); s++){
         	for(int i = 0; i < N; i++){
@@ -70,9 +74,9 @@ public class FindTheShortestSuperstring {
         while(s > 0){
         	int pre = backNode[s][cur];
         	if(pre == -1){
-        		sb.insert(0, A[cur]);
+        		sb.insert(0, words[cur]);
         	} else {
-        		String appendPart = A[cur].substring(A[cur].length() - append[pre][cur]);
+        		String appendPart = words[cur].substring(words[cur].length() - append[pre][cur]);
         		sb.insert(0, appendPart);
         	}
         	s = s - (1 << cur);

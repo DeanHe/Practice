@@ -31,6 +31,9 @@ package bst;
 
         Each tree has at most 50000 nodes..
         Each node's value is between [1, 100].
+
+        TC O(N)
+        SC O(height)
 */
 public class LongestZigZagPathInaBinaryTree {
     int res = 0;

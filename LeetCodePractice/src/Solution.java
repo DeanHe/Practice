@@ -99,6 +99,37 @@ public class Solution {
         }
         return res;
     }
+
+    public int minSwaps(String s) {
+        int ones = 0, twos = 0;
+        for(char c : s.toCharArray()){
+            if(c == '1'){
+                ones++;
+            } else {
+                twos++;
+            }
+        }
+        if(Math.abs(ones - twos) > 1){
+            return -1;
+        }
+        int start0 = 0, start1 = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(i % 2 == 0){
+                if(s.charAt(i) == '1'){
+                    start1++;
+                } else {
+                    start0++;
+                }
+            } else {
+                if(s.charAt(i) == '1'){
+                    start0++;
+                } else {
+                    start1++;
+                }
+            }
+        }
+        return Math.min(start0, start1);
+    }
 }
 
 

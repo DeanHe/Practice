@@ -1,5 +1,6 @@
 package dp;
-/*Given a list of words, each word consists of English lowercase letters.
+/*
+Given a list of words, each word consists of English lowercase letters.
 
 Let's say word1 is a predecessor of word2 if and only if we can add exactly one letter anywhere in word1 to make it equal to word2.  For example, "abc" is a predecessor of "abac".
 
@@ -20,7 +21,10 @@ Note:
 
 1 <= words.length <= 1000
 1 <= words[i].length <= 16
-words[i] only consists of English lowercase letters.*/
+words[i] only consists of English lowercase letters.
+
+TC: O(N log N + N * len(word))
+*/
 
 import java.util.*;
 
@@ -28,21 +32,21 @@ public class LongestStringChain {
 	public int longestStrChain(String[] words) {
 		Arrays.sort(words, (a, b) -> a.length() - b.length());
 		// word : max steps to reach it
-        Map<String, Integer> dp = new HashMap<>();
+        Map<String, Integer> freq = new HashMap<>();
         for(String word : words){
-        	dp.put(word, 1);
+        	freq.put(word, 1);
         }
         int res = 1;
-        for(String word : words){
-        	int len = word.length();
+        for(String w : words){
+        	int len = w.length(), f = 1;
         	for(int i = 0; i < len; i++){
-        		String pre = word.substring(0, i) + word.substring(i + 1);
-        		if(dp.containsKey(pre)){
-        			int temp = Math.max(dp.get(word), dp.get(pre) + 1);
-        			dp.put(word, temp);
-        			res = Math.max(res, temp);
+        		String pre = w.substring(0, i) + w.substring(i + 1);
+        		if(freq.containsKey(pre)){
+        			f = Math.max(f, freq.get(pre) + 1);
         		}
         	}
+			freq.put(w, f);
+			res = Math.max(res, f);
         }
         return res;
     }

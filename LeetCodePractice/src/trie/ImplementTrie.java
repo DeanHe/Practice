@@ -1,7 +1,7 @@
-package Trie;
+package trie;
 /**
- * Your Trie object will be instantiated and called as such:
- * Trie trie = new Trie();
+ * Your trie object will be instantiated and called as such:
+ * trie trie = new trie();
  * trie.insert("lintcode");
  * trie.search("lint"); will return false
  * trie.startsWith("lint"); will return true

@@ -1,8 +1,7 @@
-package Trie;
+package trie;
 
-import java.util.*;
-
-/*Implement the StreamChecker class as follows:
+/*
+Implement the StreamChecker class as follows:
 
 StreamChecker(words): Constructor, init the data structure with the given words.
 query(letter): returns true if and only if for some k >= 1, the last k characters queried (in order from oldest to newest, including this letter just queried) spell one of the words in the given list.
@@ -28,48 +27,41 @@ Note:
 Words will only consist of lowercase English letters.
 Queries will only consist of lowercase English letters.
 The number of queries is at most 40000.
-
-using Queue instead of string buffer, queue store [lastMatch, root]
 */
-public class StreamOfCharactersII {
+public class StreamOfCharacters {
 
 	TrieNode root;
-	Queue<TrieNode> queue;
+	StringBuilder buffer;
 
-	public StreamOfCharactersII(String[] words) {
+	public StreamOfCharacters(String[] words) {
 		root = new TrieNode();
-		queue = new LinkedList<>();
+		buffer = new StringBuilder();
 		for (String word : words) {
-			insert(word);
+			reverseInsert(word);
 		}
-		queue.offer(root);
 	}
 
 	public boolean query(char letter) {
-		boolean found = false;
-		if(!queue.isEmpty()){
-			int len = queue.size();
-			for(int i = 0; i < len; i++){
-				TrieNode last = queue.poll();
-				int idx = letter - 'a';
-				if(last.arr[idx] != null){
-					queue.offer(last.arr[idx]);
-					if(last.arr[idx].isEnd) {
-						found = true;
-					}
-				}
-				if(last == root){
-					queue.offer(root);
-				}
+		buffer.append(letter);
+		TrieNode cur = root;
+		for (int i = buffer.length() - 1; i >= 0; i--) {
+			char c = buffer.charAt(i);
+			int idx = c - 'a';
+			if (cur.arr[idx] == null) {
+				return false;
+			}
+			cur = cur.arr[idx];
+			if (cur.isEnd) {
+				return true;
 			}
 		}
-		return found;
+		return false;
 	}
 
-	private void insert(String word) {
+	private void reverseInsert(String word) {
 		int len = word.length();
 		TrieNode cur = root;
-		for (int i = 0; i < len; i++ ) {
+		for (int i = len - 1; i >= 0; i--) {
 			int idx = word.charAt(i) - 'a';
 			if (cur.arr[idx] == null) {
 				cur.arr[idx] = new TrieNode();

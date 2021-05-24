@@ -32,6 +32,9 @@ Note:
 
 The number of nodes in the tree will be between 1 and 500.
 The values of each node are unique.
+
+TC O(N)
+SC O(N)
 */
 public class SmallestSubtreeWithAllTheDeepestNodes {
 	Map<TreeNode, Integer> dist = new HashMap<>();
@@ -61,5 +64,34 @@ public class SmallestSubtreeWithAllTheDeepestNodes {
 		int r = depth(root.right);
 		dist.put(root, Math.max(l, r) + 1);
 		return dist.get(root);
+	}
+
+	public TreeNode subtreeWithAllDeepest2(TreeNode root) {
+		return dfs(root).node;
+	}
+
+	private Result dfs(TreeNode root) {
+		if(root == null){
+			return new Result(root, 0);
+		}
+		Result l = dfs(root.left);
+		Result r = dfs(root.right);
+		if(l.depth == r.depth){
+			return new Result(root, l.depth + 1);
+		} else if(l.depth > r.depth){
+			return new Result(l.node, l.depth + 1);
+		} else {
+			return new Result(r.node, r.depth + 1);
+		}
+	}
+
+
+	class Result {
+		TreeNode node;
+		int depth;
+		public Result(TreeNode node, int depth){
+			this.node = node;
+			this.depth = depth;
+		}
 	}
 }
