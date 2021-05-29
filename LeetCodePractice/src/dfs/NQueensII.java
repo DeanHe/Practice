@@ -1,10 +1,10 @@
 package dfs;
+
 /*
 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
 Given an integer n, return the number of distinct solutions to the n-queens puzzle.
 
-Example:
-
+Example 1:
 Input: 4
 Output: 2
 Explanation: There are two distinct solutions to the 4-queens puzzle as shown below.
@@ -20,70 +20,56 @@ Explanation: There are two distinct solutions to the 4-queens puzzle as shown be
   ".Q.."]
 ]
 
-Follow up for N-Queens problem.
-Now, instead outputting board configurations, return the total number of distinct solutions.
-
-Example 1:
+Example 2:
 Input: n=1
 Output: 1
-Explanation:
-1:
-1
 
-Example 2:
-Input: n=4
-Output: 2
-Explanation:
-1:
-0 0 1 0
-1 0 0 0
-0 0 0 1
-0 1 0 0
-2:
-0 1 0 0 
-0 0 0 1
-1 0 0 0
-0 0 1 0
+Constraints:
+1 <= n <= 9
+
+Follow up for N-Queens problem.
+Now, instead outputting board configurations, return the total number of distinct solutions.
 */
 public class NQueensII {
-	/**
+    /**
      * Calculate the total number of distinct N-Queen solutions.
+     *
      * @param n: The number of queens.
      * @return: The total number of distinct solutions.
      */
-	int count = 0, n = 0;
     public int totalNQueens(int n) {
         //write your code here
-        this.n = n;
-        if(n < 1){
+        if (n < 1) {
             return 0;
         }
         int[] board = new int[n];
-        dfs(board,0);
-        return count;
-        
+        return dfs(board, 0, n);
+
     }
-    private void dfs(int[] board, int row){
-        if(n == row){
-            count++;
-            return;
+
+    private int dfs(int[] board, int r, int n) {
+        if (r == n) {
+            return 1;
         }
-        for(int c = 0; c < n; c++){
-            if(isValid(board, row, c)){
-                board[row] = c;
-                dfs(board, row + 1);
-                board[row] = 0;
+        int res = 0;
+        for (int c = 0; c < n; c++) {
+            if (isValid(board, r, c)) {
+                board[r] = c;
+                res += dfs(board, r + 1, n);
+                board[r] = 0;
             }
         }
+        return res;
     }
-    boolean isValid(int[] board, int row, int col){
-        for(int r = 0; r < row; r++){
-            if(board[r] == col){
-        		return false;
-        	}
-        	if(Math.abs(r - row) == Math.abs(board[r] - col)){
-        		return false;
-        	}
+
+    boolean isValid(int[] board, int row, int col) {
+        for (int r = 0; r < row; r++) {
+            if (board[r] == col) {
+                return false;
+            }
+            if (Math.abs(r - row) == Math.abs(board[r] - col)) {
+                return false;
+            }
         }
         return true;
     }

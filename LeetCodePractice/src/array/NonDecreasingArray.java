@@ -15,7 +15,7 @@ Explanation: You can't get a non-decreasing array by modify at most one element.
 Note: The n belongs to [1, 10,000].
 
 analysis:
-Greedy
+greedy
 Whenever we encounter a violation at a particular index i
 you need to think either increase nums[i] pr decrease nums[i - 1]
 */

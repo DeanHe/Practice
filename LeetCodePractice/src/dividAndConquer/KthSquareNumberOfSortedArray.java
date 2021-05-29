@@ -1,4 +1,4 @@
-package DividAndConquer;
+package dividAndConquer;
 /*
 return the Kth square number of a sorted array
 

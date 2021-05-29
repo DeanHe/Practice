@@ -1,4 +1,4 @@
-package DividAndConquer;
+package dividAndConquer;
 
 /*
 #215

@@ -1,4 +1,4 @@
-package DividAndConquer;
+package dividAndConquer;
 
 public class PowXN {
 	public double pow(double x, int n) {
