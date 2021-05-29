@@ -2,12 +2,17 @@ package Stack;
 
 import java.util.*;
 
-/*Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+/*
+Evaluate the value of an arithmetic expression in Reverse Polish Notation.
 Valid operators are +, -, *, /. Each operand may be an integer or another expression.
 http://en.wikipedia.org/wiki/Reverse_Polish_notation
 Example
 ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
-["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6*/
+["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
+
+analysis:
+first pop element is b
+*/
 public class EvaluateReversePolishNotation {
 	/**
 	 * @param tokens The Reverse Polish Notation

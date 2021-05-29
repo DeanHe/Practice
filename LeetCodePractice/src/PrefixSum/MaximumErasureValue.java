@@ -29,20 +29,23 @@ Constraints:
 1 <= nums.length <= 10^5
 1 <= nums[i] <= 10^4
 
+analysis:
+track the last duplicate element index, and use prefix Sum
+arraySum = preSum[i + 1] - preSum[lastDupIdx + 1]
  */
 public class MaximumErasureValue {
     public int maximumUniqueSubarray(int[] nums) {
         int res = 0, len = nums.length, lastDupIdx = -1;
         int[] preSum = new int[len + 1];
-        Map<Integer, Integer> unique = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i < len; i++){
             int cur = nums[i];
-            if(unique.containsKey(cur)){
-                lastDupIdx = Math.max(lastDupIdx, unique.get(cur));
+            if(map.containsKey(cur)){
+                lastDupIdx = Math.max(lastDupIdx, map.get(cur));
             }
             preSum[i + 1] = preSum[i] + cur;
             res = Math.max(res, preSum[i + 1] - preSum[lastDupIdx + 1]);
-            unique.put(cur, i);
+            map.put(cur, i);
         }
         return res;
     }

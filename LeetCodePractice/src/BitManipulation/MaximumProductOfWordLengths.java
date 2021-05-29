@@ -1,5 +1,6 @@
 package BitManipulation;
-/*Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
+/*
+Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
 Example 1:
 
 Input: ["abcw","baz","foo","bar","xtfn","abcdef"]
@@ -14,7 +15,10 @@ Example 3:
 
 Input: ["a","aa","aaa","aaaa"]
 Output: 0 
-Explanation: No such pair of words.*/
+Explanation: No such pair of words.
+
+TC O(N ^ 2)
+*/
 public class MaximumProductOfWordLengths {
 	public int maxProduct(String[] words) {
         int len = words.length;

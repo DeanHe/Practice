@@ -50,10 +50,24 @@ n == stones.length
 2 <= n <= 10^5
 -10^4 <= stones[i] <= 10^4
 
+analysis:
+Let dp[i] be the maximum score difference the current player can get when the game starts at i
+TC O(N)
  */
 public class StoneGameVIII {
     public int stoneGameVIII(int[] stones) {
-
+        int len = stones.length;
+        int[] preSum = new int[len];
+        preSum[0] = stones[0];
+        for(int i = 1; i < len; i++){
+            preSum[i] = stones[i] + preSum[i - 1];
+        }
+        int[] dp = new int[len];
+        dp[len - 1] = preSum[len - 1];
+        for(int i = len - 2; i >= 0; i--){
+            dp[i] = Math.max(preSum[i] - dp[i + 1], dp[i + 1]);
+        }
+        return dp[1];
     }
 }
 
