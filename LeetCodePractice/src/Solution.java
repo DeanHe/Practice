@@ -1,15 +1,5 @@
-import LinkedList.ListNode;
-import bst.TreeNode;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 
 
 public class Solution {
@@ -67,68 +57,75 @@ public class Solution {
 		*/
     }
 
-    public List<Integer> findSubstring(String s, String[] words) {
-        List<Integer> res = new ArrayList<>();
-        if(s == null || s.length() == 0 || words == null || words.length == 0){
-            return res;
-        }
-        int singleLen = words[0].length();
-        int wordsLen = singleLen * words.length;
-        Map<String, Integer> wmap = new HashMap<>();
-        for(String w : words){
-            wmap.put(w, wmap.getOrDefault(w, 0) + 1);
-        }
-        HashMap<String, Integer>[] smap = new HashMap[singleLen];
-        for(int i = 0; i < singleLen; i++){
-            smap[i] = new HashMap<>();
-        }
-        for(int i = 0; i + singleLen <= s.length(); i++){
-            int idx = i % singleLen;
-            String sub = s.substring(i, i + singleLen);
-            smap[idx].put(sub, smap[idx].getOrDefault(sub, 0) + 1);
-            if(i >= wordsLen){
-                String head = s.substring(i - wordsLen, i - wordsLen + singleLen);
-                smap[idx].put(head, smap[idx].get(head) - 1);
-                if(smap[idx].get(head) == 0){
-                    smap[idx].remove(head);
+    public String maxValue(String n, int x) {
+        StringBuilder sb = new StringBuilder(n);
+        int i;
+        if(sb.charAt(0) == '-'){
+            for(i = 1; i < sb.length(); i++){
+                if(sb.charAt(i) - '0' > x){
+                    sb.insert(i, x);
+                    break;
                 }
             }
-            if(wmap.equals(smap[idx])){
-                res.add(i - wordsLen + singleLen);
+        } else {
+            for(i = 0; i < sb.length(); i++){
+                if(sb.charAt(i) - '0' < x){
+                    sb.insert(i, x);
+                    break;
+                }
+            }
+        }
+        if(i == sb.length()){
+            sb.insert(i, x);
+        }
+        return sb.toString();
+    }
+
+    /*
+    [3,3,2]
+[1,2,3,2,1,2]
+[5,1,4,3,2]
+[2,1,2,4,5,2,1]
+Your answer
+[2,0,1,2,0,2]
+[1,4,3,2,0,4,1]
+     */
+    public int[] assignTasks(int[] servers, int[] tasks) {
+        int slen = servers.length, tlen = tasks.length;
+        for (int i = 0; i < tlen; i++) {
+            tasks[i] += i;
+        }
+        int[][] ls = new int[slen][3];
+        for (int i = 0; i < slen; i++) {
+            ls[i][0] = i;
+            ls[i][1] = servers[i];
+        }
+        Arrays.sort(ls, (a, b) -> a[1] - b[1]);
+        int[] res = new int[tlen];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+            // server idx : weight : free Time
+            if (a[2] != b[2]) {
+                return a[0] - b[0];
+            } else if (a[1] != b[1]) {
+                return a[1] - b[1];
+            } else {
+                return a[0] - b[0];
+            }
+        });
+        int i = 0;
+        for (int t = 0; t < tlen; t++) {
+            if (!pq.isEmpty() && pq.peek()[2] <= t) {
+                int[] cur = pq.poll();
+                res[t] = cur[0];
+                cur[2] = tasks[i];
+                pq.offer(cur);
+            } else {
+                res[t] = ls[i][0];
+                ls[i][2] = tasks[t];
+                pq.offer(ls[i++]);
             }
         }
         return res;
-    }
-
-    public int minSwaps(String s) {
-        int ones = 0, twos = 0;
-        for(char c : s.toCharArray()){
-            if(c == '1'){
-                ones++;
-            } else {
-                twos++;
-            }
-        }
-        if(Math.abs(ones - twos) > 1){
-            return -1;
-        }
-        int start0 = 0, start1 = 0;
-        for(int i = 0; i < s.length(); i++){
-            if(i % 2 == 0){
-                if(s.charAt(i) == '1'){
-                    start1++;
-                } else {
-                    start0++;
-                }
-            } else {
-                if(s.charAt(i) == '1'){
-                    start0++;
-                } else {
-                    start1++;
-                }
-            }
-        }
-        return Math.min(start0, start1);
     }
 }
 
