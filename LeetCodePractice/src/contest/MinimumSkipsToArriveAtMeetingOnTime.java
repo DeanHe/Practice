@@ -46,10 +46,46 @@ n == dist.length
 hint:
 Is there something you can keep track of from one road to another?
 How would knowing the start time for each state help us solve the problem?
+
+analysis:
+memorization
+mem[i][j] / speed means the minimum arrival time with i skip to reach stop.
+TC: O(N ^ 2)
+SC: O(N)
  */
 public class MinimumSkipsToArriveAtMeetingOnTime {
+    Long[][] mem;
+    int speed;
     public int minSkips(int[] dist, int speed, int hoursBefore) {
+        this.speed = speed;
+        int len = dist.length;
+        mem = new Long[len][len + 1];
+        for(int skip = 0; skip <= len; skip++){
+            if(dfs(dist, skip, len - 1) <= speed * hoursBefore){
+                return skip;
+            }
+        }
+        return -1;
+    }
 
+    private long dfs(int[] dist, int skip, int i){
+        if(i < 0){
+            return 0;
+        }
+        if(mem[i][skip] != null){
+            return mem[i][skip];
+        }
+        //not skip
+        long res = roundUp(dfs(dist, skip, i - 1) + dist[i]);
+        // skip
+        if(skip > 0){
+            res = Math.min(res, dfs(dist, skip - 1, i - 1) + dist[i]);
+        }
+        return mem[i][skip] = res;
+    }
+
+    private long roundUp(long n) {
+        return ((n + speed - 1) / speed) * speed;
     }
 }
 

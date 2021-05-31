@@ -6,6 +6,8 @@ import java.util.Arrays;
 #164
 Given an integer array nums, return the maximum difference between two successive elements in its sorted form. If the array contains less than two elements, return 0.
 
+You must write an algorithm that runs in linear time and uses linear extra space.
+
 
 
 Example 1:
@@ -19,14 +21,9 @@ Input: nums = [10]
 Output: 0
 Explanation: The array contains less than 2 elements, therefore return 0.
 
-
 Constraints:
-
 1 <= nums.length <= 10^4
 0 <= nums[i] <= 10^9
-
-
-Follow up: Could you solve it in linear time/space?
  */
 public class MaximumGap {
     public int maximumGap(int[] nums) {
@@ -35,9 +32,9 @@ public class MaximumGap {
         // get the max and min value of the array
         int least = nums[0];
         int most = nums[0];
-        for (int i : nums) {
-            least = Math.min(least, i);
-            most = Math.max(most, i);
+        for (int n : nums) {
+            least = Math.min(least, n);
+            most = Math.max(most, n);
         }
         // the minimum possible gap, ceiling of the integer division
         int gap = (int) Math.ceil((double) (most - least) / (nums.length - 1));
@@ -46,26 +43,26 @@ public class MaximumGap {
         Arrays.fill(bucketsMIN, Integer.MAX_VALUE);
         Arrays.fill(bucketsMAX, Integer.MIN_VALUE);
         // put numbers into buckets
-        for (int i : nums) {
-            if (i == least || i == most)
+        for (int n : nums) {
+            if (n == least || n == most)
                 continue;
-            int idx = (i - least) / gap; // index of the right position in the buckets
-            bucketsMIN[idx] = Math.min(i, bucketsMIN[idx]);
-            bucketsMAX[idx] = Math.max(i, bucketsMAX[idx]);
+            int idx = (n - least) / gap; // index of the right position in the buckets
+            bucketsMIN[idx] = Math.min(n, bucketsMIN[idx]);
+            bucketsMAX[idx] = Math.max(n, bucketsMAX[idx]);
         }
         // scan the buckets for the max gap
         int maxGap = Integer.MIN_VALUE;
-        int previous = least;
+        int pre = least;
         for (int i = 0; i < nums.length - 1; i++) {
             if (bucketsMIN[i] == Integer.MAX_VALUE && bucketsMAX[i] == Integer.MIN_VALUE)
                 // empty bucket
                 continue;
             // min value minus the previous value is the current gap
-            maxGap = Math.max(maxGap, bucketsMIN[i] - previous);
+            maxGap = Math.max(maxGap, bucketsMIN[i] - pre);
             // update previous bucket value
-            previous = bucketsMAX[i];
+            pre = bucketsMAX[i];
         }
-        maxGap = Math.max(maxGap, most - previous); // update the final max value gap
+        maxGap = Math.max(maxGap, most - pre); // update the final max value gap
         return maxGap;
     }
 }
