@@ -33,11 +33,13 @@ import java.util.PriorityQueue;
 
         similar to MinimumCostToHireKworkers, always sort by common multiply attribute first, but not the sum attribute.
         Then iterate each element common attribute, calculate its best result.
+
+        tag: sort + heap
 */
 public class MaximumPerformanceOfaTeam {
     public int maxPerformance(int n, int[] speed, int[] efficiency, int k) {
         final int MOD = (int) (1e9 + 7);
-        long maxPerf = 0, speedSum = 0;
+        long res = 0, speedSum = 0;
         Engineer[] engineers = new Engineer[n];
         for(int i = 0; i < n; i++){
             engineers[i] = new Engineer(speed[i], efficiency[i]);
@@ -51,9 +53,9 @@ public class MaximumPerformanceOfaTeam {
             }
             speedSum += eng.speed;
             pq.offer(eng);
-            maxPerf = Math.max(maxPerf, speedSum * eng.efficiency);
+            res = Math.max(res, speedSum * eng.efficiency);
         }
-        return (int)(maxPerf % MOD);
+        return (int)(res % MOD);
     }
 
     class Engineer {

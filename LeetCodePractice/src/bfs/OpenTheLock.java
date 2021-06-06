@@ -34,7 +34,7 @@ public class OpenTheLock {
 	public int openLock(String[] deadends, String target) {
         int step = 0;
         String start = "0000";
-        if(target == start){
+        if(target.equals(start)){
             return step;
         }
         HashSet<String> deadEnds= new HashSet<>(Arrays.asList(deadends));
@@ -43,8 +43,8 @@ public class OpenTheLock {
         }
         HashSet<String> visited = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
-        queue.offer(target);
-        visited.add(target);
+        queue.offer(start);
+        visited.add(start);
         while(!queue.isEmpty()){
         	int size = queue.size();
             for(int i = 0; i < size; i++){

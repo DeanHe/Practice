@@ -42,6 +42,8 @@ We calculate the current ratio * total quality = total wage for this group.
 We redo the process and we can find the minimum total wage.
 Because workers are sorted by ratio of wage/quality.
 For every ratio, we find the minimum possible total quality of K workers.
+
+tag: sort + heap
 */
 public class MinimumCostToHireKworkers {
 	public double mincostToHireWorkers(int[] quality, int[] wage, int K) {

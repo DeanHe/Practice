@@ -53,6 +53,8 @@ but when we backtrack to potentially remove a course, we'll want to sort the cou
 
 Time Complexity: O(N * log N) where N is the length of courses, due to both the sort and the priority queue / heap implementation
 Space Complexity: O(N) due to the priority queue / heap data
+
+tag: sort + heap
  */
 public class CourseScheduleIII {
     public int scheduleCourse(int[][] courses) {

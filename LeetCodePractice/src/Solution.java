@@ -1,5 +1,8 @@
 import java.util.Arrays;
+import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.TreeMap;
+import java.util.stream.IntStream;
 
 
 public class Solution {
@@ -57,73 +60,16 @@ public class Solution {
 		*/
     }
 
-    public String maxValue(String n, int x) {
-        StringBuilder sb = new StringBuilder(n);
-        int i;
-        if(sb.charAt(0) == '-'){
-            for(i = 1; i < sb.length(); i++){
-                if(sb.charAt(i) - '0' > x){
-                    sb.insert(i, x);
-                    break;
-                }
-            }
-        } else {
-            for(i = 0; i < sb.length(); i++){
-                if(sb.charAt(i) - '0' < x){
-                    sb.insert(i, x);
-                    break;
-                }
-            }
+    public int reductionOperations(int[] nums) {
+        TreeMap<Integer, Integer> treeMap = new TreeMap();
+        for(int n : nums){
+            treeMap.put(n, treeMap.getOrDefault(n, 0) + 1);
         }
-        if(i == sb.length()){
-            sb.insert(i, x);
-        }
-        return sb.toString();
-    }
-
-    /*
-    [3,3,2]
-[1,2,3,2,1,2]
-[5,1,4,3,2]
-[2,1,2,4,5,2,1]
-Your answer
-[2,0,1,2,0,2]
-[1,4,3,2,0,4,1]
-     */
-    public int[] assignTasks(int[] servers, int[] tasks) {
-        int slen = servers.length, tlen = tasks.length;
-        for (int i = 0; i < tlen; i++) {
-            tasks[i] += i;
-        }
-        int[][] ls = new int[slen][3];
-        for (int i = 0; i < slen; i++) {
-            ls[i][0] = i;
-            ls[i][1] = servers[i];
-        }
-        Arrays.sort(ls, (a, b) -> a[1] - b[1]);
-        int[] res = new int[tlen];
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
-            // server idx : weight : free Time
-            if (a[2] != b[2]) {
-                return a[0] - b[0];
-            } else if (a[1] != b[1]) {
-                return a[1] - b[1];
-            } else {
-                return a[0] - b[0];
-            }
-        });
+        int res = 0;
         int i = 0;
-        for (int t = 0; t < tlen; t++) {
-            if (!pq.isEmpty() && pq.peek()[2] <= t) {
-                int[] cur = pq.poll();
-                res[t] = cur[0];
-                cur[2] = tasks[i];
-                pq.offer(cur);
-            } else {
-                res[t] = ls[i][0];
-                ls[i][2] = tasks[t];
-                pq.offer(ls[i++]);
-            }
+        for(Map.Entry<Integer, Integer> entry : treeMap.entrySet()){
+            res += entry.getValue() * i;
+            i++;
         }
         return res;
     }

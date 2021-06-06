@@ -1,4 +1,4 @@
-package contest;
+package contest.binaryString;
 
 /*
 Given a binary string s, return the minimum number of character swaps to make it alternating, or -1 if it is impossible.

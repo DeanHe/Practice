@@ -49,6 +49,8 @@ Constraints:
 tasks.length == n
 1 <= n <= 10^5
 1 <= enqueueTimei, processingTimei <= 10^9
+
+tag: sort + heap
  */
 public class SingleThreadedCPU {
     public int[] getOrder(int[][] tasks) {

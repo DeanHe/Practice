@@ -42,6 +42,8 @@ queries[i].length == 2
 
 analysis:
 sort both queries and intervals, use PriorityQueue to save {interval_size, interval_end}, sort by interval_size
+
+tag: sort + heap
  */
 public class MinimumIntervalToIncludeEachQuery {
     public int[] minInterval(int[][] intervals, int[] queries) {

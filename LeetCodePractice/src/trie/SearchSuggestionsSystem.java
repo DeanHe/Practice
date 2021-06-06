@@ -1,6 +1,8 @@
 package trie;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /*
 Given an array of strings products and a string searchWord. We want to design a system that suggests at most three product names from products after each character of searchWord is typed. Suggested products should have common prefix with the searchWord. If there are more than three products with a common prefix return the three lexicographically minimums products.
@@ -55,41 +57,41 @@ public class SearchSuggestionsSystem {
     }
 
     private SearchNode root;
+
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
         root = new SearchNode();
-        for(String p : products){
+        for (String p : products) {
             insert(p);
         }
         return search(searchWord);
 
     }
-    private void insert(String word){
-        char[] arr = word.toCharArray();
+
+    private void insert(String word) {
         SearchNode cur = root;
-        for(char c : arr){
+        for (char c : word.toCharArray()) {
             int idx = c - 'a';
-            if(cur.arr[idx] == null){
+            if (cur.arr[idx] == null) {
                 cur.arr[idx] = new SearchNode();
             }
             cur = cur.arr[idx];
             cur.suggestions.add(word);
             Collections.sort(cur.suggestions);
-            if(cur.suggestions.size() > 3){
+            if (cur.suggestions.size() > 3) {
                 cur.suggestions.remove(cur.suggestions.size() - 1);
             }
         }
     }
 
-    private List<List<String>> search(String searchWord){
+    private List<List<String>> search(String searchWord) {
         List<List<String>> res = new ArrayList<>();
-        char[] charArr = searchWord.toCharArray();
         SearchNode cur = root;
-        for(char c : charArr){
+        for (char c : searchWord.toCharArray()) {
             int idx = c - 'a';
-            if(cur != null){
+            if (cur != null) {
                 cur = cur.arr[idx];
             }
-            if(cur != null){
+            if (cur != null) {
                 res.add(new ArrayList<>(cur.suggestions));
             } else {
                 res.add(new ArrayList<>());
