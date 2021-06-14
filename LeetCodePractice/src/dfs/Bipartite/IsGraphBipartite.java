@@ -34,7 +34,7 @@ graph[i] will not contain i or duplicate values.
 The graph is undirected: if any element j is in graph[i], then i will be in graph[j].
 
 analysis:
-DFS: TC O(V + E), check if we can paint each node to 1 or -1
+DFS: TC O(V + E), check if we can paint each node to 1 or -1 {same as BFS}
 UN: union all the neighbors of one node together, if node its self is in the same group of its neighbor (findRoot same) return false
 
 */
@@ -87,21 +87,20 @@ public class IsGraphBipartite {
         Map<Integer, Integer> group = new HashMap<>();
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < N; i++) {
-            if (group.containsKey(i)) {
-                continue;
-            }
-            group.put(i, 1);
-            queue.offer(i);
-            while (!queue.isEmpty()) {
-                int cur = queue.poll();
-                int color = group.get(cur);
-                for (int nb : graph[cur]) {
-                    if (!group.containsKey(nb)) {
-                        group.put(nb, -color);
-                        queue.offer(nb);
-                    } else {
-                        if (group.get(nb) == color) {
-                            return false;
+            if (!group.containsKey(i)) {
+                group.put(i, 1);
+                queue.offer(i);
+                while (!queue.isEmpty()) {
+                    int cur = queue.poll();
+                    int color = group.get(cur);
+                    for (int nb : graph[cur]) {
+                        if (!group.containsKey(nb)) {
+                            group.put(nb, -color);
+                            queue.offer(nb);
+                        } else {
+                            if (group.get(nb) == color) {
+                                return false;
+                            }
                         }
                     }
                 }
@@ -123,7 +122,7 @@ public class IsGraphBipartite {
                 if (findRoot(i) == findRoot(nb)) {
                     return false;
                 }
-                merge(nbs[0], nb);
+                union(nb, nbs[0]);
             }
         }
         return true;
@@ -142,7 +141,7 @@ public class IsGraphBipartite {
         return root;
     }
 
-    private void merge(int a, int b) {
+    private void union(int a, int b) {
         int root_a = findRoot(a);
         int root_b = findRoot(b);
         if (root_a != root_b) {

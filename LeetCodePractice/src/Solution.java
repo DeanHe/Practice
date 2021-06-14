@@ -1,8 +1,5 @@
-import java.util.Arrays;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.TreeMap;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.Stream;
 
 
 public class Solution {
@@ -72,6 +69,26 @@ public class Solution {
             i++;
         }
         return res;
+    }
+
+    public boolean makeEqual(String[] words) {
+        Map<Character, Integer> map = new HashMap<>();
+        for(String w : words){
+            for(char c : w.toCharArray()){
+                map.put(c, map.getOrDefault(c, 0) + 1);
+            }
+        }
+        for(Map.Entry e : map.entrySet()){
+            if(((int)e.getValue() % words.length) != 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean mergeTriplets(int[][] triplets, int[] target) {
+        int[] strings = Stream.of(1, 2, 3)
+                .toArray(x -> x);
     }
 }
 

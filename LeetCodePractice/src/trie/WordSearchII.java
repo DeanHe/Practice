@@ -1,9 +1,36 @@
 package trie;
 
 import java.util.*;
-//Given a matrix of lower alphabets and a dictionary. 
-//Find all words in the dictionary that can be found in the matrix. A word can start from any position in the matrix and go left/right/up/down to the adjacent position. 
-//One character only be used once in one word.
+/*
+Given an m x n board of characters and a list of strings words, return all words on the board.
+
+Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+
+
+
+Example 1:
+
+
+Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+Output: ["eat","oath"]
+Example 2:
+
+
+Input: board = [["a","b"],["c","d"]], words = ["abcb"]
+Output: []
+
+
+Constraints:
+
+m == board.length
+n == board[i].length
+1 <= m, n <= 12
+board[i][j] is a lowercase English letter.
+1 <= words.length <= 3 * 10^4
+1 <= words[i].length <= 10
+words[i] consists of lowercase English letters.
+All the strings of words are unique.
+ */
 public class WordSearchII {
 	/**
 	 * @param board:
@@ -15,10 +42,10 @@ public class WordSearchII {
 	HashSet<String> set = new HashSet<>();
 	int rows, cols;
 	int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
-	public ArrayList<String> wordSearchII(char[][] board, ArrayList<String> words) {
+	public List<String> findWords(char[][] board, String[] words) {
 		// write your code here
-		ArrayList<String> res = new ArrayList<>();
-		if (board == null || board.length == 0 || words == null || words.size() == 0) {
+		List<String> res = new ArrayList<>();
+		if (board == null || board.length == 0 || words == null || words.length == 0) {
 			return res;
 		}
 		Trie trie = new Trie();

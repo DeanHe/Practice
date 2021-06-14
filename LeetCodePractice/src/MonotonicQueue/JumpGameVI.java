@@ -46,7 +46,7 @@ public class JumpGameVI {
         Deque<Integer> deque = new ArrayDeque<>();
         for (int i = 0; i < len; i++) {
             dp[i] = nums[i];
-            if (!deque.isEmpty() && i - deque.peekFirst() > k) {
+            while (!deque.isEmpty() && i - deque.peekFirst() > k) {
                 deque.pollFirst();
             }
             if(!deque.isEmpty()){

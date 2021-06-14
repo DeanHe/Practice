@@ -6,42 +6,36 @@ Given [100, 4, 200, 1, 3, 2],
 The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
 
 Clarification
-Your algorithm should run in O(n) complexity.*/
+Your algorithm should run in O(n) complexity.
 
-import java.util.HashSet;
+*/
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LongestConsecutiveSequence {
 	/**
-     * @param num: A list of integers
+     * @param nums: A list of integers
      * @return: An integer
      */
-    public int longestConsecutive(int[] num) {
+    public int longestConsecutive(int[] nums) {
         // write your code here
-    	if(num == null || num.length  == 0){
-    		return 0;
-    	}
-    	int longest = 0;
-    	HashSet<Integer> set = new HashSet<>();
-    	for(int n : num){
-    		set.add(n);  		
-    	}
-    	for(int n : set){
-    		int count = 1;
-    		int down = n - 1;
-    		int up = n + 1;
-    		while(set.contains(down)){
-    			count++;
-    			set.remove(down);
-    			down--;
-    		}
-    		while(set.contains(up)){
-    			count++;
-    			set.remove(up);
-    			up++;
-    		}
-    		set.remove(n);
-    		longest = Math.max(longest, count);
-    	}
-    	return longest;
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
+		int res = 0;
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int n : nums) {
+			if (!map.containsKey(n)) {
+				int downCnt = map.getOrDefault(n - 1, 0);
+				int upCnt = map.getOrDefault(n + 1, 0);
+				int len = downCnt + upCnt + 1;
+				map.put(n, len);
+				res = Math.max(res, len);
+				map.put(n - downCnt, len);
+				map.put(n + upCnt, len);
+			}
+		}
+		return res;
     }
 }

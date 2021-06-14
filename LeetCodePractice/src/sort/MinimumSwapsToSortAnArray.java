@@ -1,4 +1,9 @@
 package sort;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 Given an array of n distinct elements, find the minimum number of swaps required to sort the array.
 
@@ -19,8 +24,32 @@ TC: O(n Log n)
 Auxiliary Space: O(n)
  */
 public class MinimumSwapsToSortAnArray {
-    public int minSwaps(int[] arr){
+    public int minSwaps(int[] arr) {
+        int len = arr.length, swap = 0;
+        int[] sorted = Arrays.copyOf(arr, arr.length);
+        Arrays.sort(sorted);
+        boolean[] visited = new boolean[len];
+        Map<Integer, Integer> valIdx = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            valIdx.put(sorted[i], i);
+        }
+        for (int i = 0; i < len; i++) {
+            if (!visited[i] && valIdx.get(arr[i]) != i) {
+                int cycleSize = dfs(arr, valIdx, visited, i);
+                if (cycleSize > 0) {
+                    swap += cycleSize - 1;
+                }
+            }
+        }
+        return swap;
+    }
 
+    private int dfs(int[] arr, Map<Integer, Integer> valIdx, boolean[] visited, int i) {
+        if (visited[i]) {
+            return 0;
+        }
+        visited[i] = true;
+        return 1 + dfs(arr, valIdx, visited, valIdx.get(arr[i]));
     }
 }
 
