@@ -24,13 +24,16 @@ The array [1,3,2] and [2,1,3] have exactly 1 inverse pair.
 
 Note:
 
-The integer n is in the range [1, 1000] and k is in the range [0, 1000].*/
-//https://leetcode.com/problems/k-inverse-pairs-array/discuss/104822/Python-Straightforward-with-Explanation
-//https://leetcode.com/problems/k-inverse-pairs-array/discuss/104815/Java-DP-O(nk)-solution
+The integer n is in the range [1, 1000] and k is in the range [0, 1000].
+
+analysis:
+https://leetcode.com/problems/k-inverse-pairs-array/discuss/104822/Python-Straightforward-with-Explanation
+https://leetcode.com/problems/k-inverse-pairs-array/discuss/104815/Java-DP-O(nk)-solution
+*/
 public class KInversePairsArray {
 
 	public int kInversePairs(int n, int k) {
-		int mod = 1000000007;
+		int mod = (int)(1e9 + 7);
 		if (k > n * (n - 1) / 2 || k < 0) {
 			return 0;
 		}

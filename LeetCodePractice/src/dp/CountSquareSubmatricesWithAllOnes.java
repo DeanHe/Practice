@@ -36,7 +36,9 @@ package dp;
         1 <= arr[0].length <= 300
         0 <= arr[i][j] <= 1
 
-        similar to MaximalSquare
+analysis:
+similar to MaximalSquare
+CountSubarraysWIthAllOnes
 */
 public class CountSquareSubmatricesWithAllOnes {
     public int countSquares(int[][] matrix) {

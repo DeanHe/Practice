@@ -1,9 +1,6 @@
 package designDataStructure;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.TreeMap;
 
@@ -53,37 +50,86 @@ Constraints:
 1 <= k*2 < m
 1 <= num <= 10^5
 At most 10^5 calls will be made to addElement and calculateMKAverage.
+
+analysis:TreeMap
  */
 public class MKAverage {
-    Queue<Integer> queue = new LinkedList<>();
-    int window, k, cnt = 0;
+    TreeMap<Integer, Integer> top = new TreeMap<>();
+    TreeMap<Integer, Integer> mid = new TreeMap<>();
+    TreeMap<Integer, Integer> bot = new TreeMap<>();
+    Queue<Integer> q = new LinkedList<>();
+    int m, k, topCnt, botCnt;
+    long midSum;
     public MKAverage(int m, int k) {
-        window = m;
+        this.m = m;
         this.k = k;
+        midSum = 0;
     }
 
     public void addElement(int num) {
-        if(cnt == window){
-            queue.poll();
-            cnt--;
+        // remove out of range item from map first
+        if(q.size() == m){
+            int pop = q.poll();
+            if(top.containsKey(pop)){
+                remove(top, pop);
+                topCnt--;
+            } else if(mid.containsKey(pop)){
+                remove(mid, pop);
+                midSum -= pop;
+            } else {
+                remove(bot, pop);
+                botCnt--;
+            }
         }
-        queue.offer(num);
-        cnt++;
+        q.offer(num);
+        midSum += num;
+        // insert to middle first
+        put(mid, num);
+        // move item from middle to top, to fill k slots
+        while(topCnt < k && !mid.isEmpty()){
+            topCnt++;
+            midSum -= mid.lastKey();
+            put(top, remove(mid, mid.lastKey()));
+        }
+        // balance middle and top
+        while(!mid.isEmpty() && !top.isEmpty() && top.firstKey() < mid.lastKey()){
+            midSum += top.firstKey();
+            put(mid, remove(top, top.firstKey()));
+            midSum -= mid.lastKey();
+            put(top, remove(mid, mid.lastKey()));
+        }
+        // move item from middle to bot, to fill k slots
+        while(botCnt < k && !mid.isEmpty()){
+            botCnt++;
+            midSum -= mid.firstKey();
+            put(bot, remove(mid, mid.firstKey()));
+        }
+        // balance middle and bot
+        while(!mid.isEmpty() && !bot.isEmpty() && mid.firstKey() < bot.lastKey()){
+            midSum += bot.lastKey();
+            put(mid, remove(bot, bot.lastKey()));
+            midSum -= mid.firstKey();
+            put(bot, remove(mid, mid.firstKey()));
+        }
     }
 
     public int calculateMKAverage() {
-        if(cnt < window){
-            return -1;
+        if(q.size() == m){
+            return (int)(midSum / (m - 2 * k));
         }
-        int remainCnt = window - k * 2;
-        int sum = 0;
-        List<Integer> ls = new ArrayList<>(queue);
-        System.out.println(ls);
-        Collections.sort(ls);
-        for(int i = 0; i < remainCnt; i++){
-            sum += ls.get(i + k);
+        return -1;
+    }
+
+    private void put(TreeMap<Integer, Integer> map, int target) {
+        map.put(target, map.getOrDefault(target, 0) + 1);
+    }
+
+    private int remove(TreeMap<Integer, Integer> map, int target){
+        map.put(target, map.get(target) - 1);
+        if(map.get(target) == 0){
+            map.remove(target);
         }
-        return sum / remainCnt;
+        return target;
     }
 }
 /**

@@ -24,7 +24,14 @@ Input:
 Output: [null,0,1,1,1,0]
 Explanation of Input Syntax:
 
-The input is two lists: the subroutines called and their arguments. Solution's constructor has one argument, the array w. pickIndex has no arguments. Arguments are always wrapped with a list, even if there aren't any.
+The input is two lists: the subroutines called and their arguments. Solution's constructor has one argument, the array w. pickIndex has no arguments.
+Arguments are always wrapped with a list, even if there aren't any.
+
+follow up:
+if we can change weights array ->
+Binary Indexed Tree can be used if the weights can be updated many times.
+Basically if we have the accumulative sum of weights for each index, pickIndex() is to find the first index
+which has greater accumulative sum than the random value in [0, total_weight_sum).
 */
 public class RandomPickWithWeight {
 
@@ -45,17 +52,20 @@ public class RandomPickWithWeight {
 	public int pickIndex() {
 		int prob = rand.nextInt(preSum[len - 1]) + 1;
 		int start = 0, end = len - 1;
-		while (start < end) {
+		while (start + 1 < end) {
 			int mid = start + (end - start) / 2;
 			if (preSum[mid] == prob) {
 				return mid;
 			} else if (preSum[mid] < prob) {
-				start = mid + 1;
+				start = mid;
 			} else {
 				end = mid;
 			}
 		}
-		return start;
+		if(preSum[start] == prob){
+			return start;
+		}
+		return end;
 	}
 }
 /**

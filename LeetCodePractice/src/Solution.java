@@ -1,5 +1,8 @@
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class Solution {
@@ -59,36 +62,16 @@ public class Solution {
 
     public int reductionOperations(int[] nums) {
         TreeMap<Integer, Integer> treeMap = new TreeMap();
-        for(int n : nums){
+        for (int n : nums) {
             treeMap.put(n, treeMap.getOrDefault(n, 0) + 1);
         }
         int res = 0;
         int i = 0;
-        for(Map.Entry<Integer, Integer> entry : treeMap.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
             res += entry.getValue() * i;
             i++;
         }
         return res;
-    }
-
-    public boolean makeEqual(String[] words) {
-        Map<Character, Integer> map = new HashMap<>();
-        for(String w : words){
-            for(char c : w.toCharArray()){
-                map.put(c, map.getOrDefault(c, 0) + 1);
-            }
-        }
-        for(Map.Entry e : map.entrySet()){
-            if(((int)e.getValue() % words.length) != 0){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean mergeTriplets(int[][] triplets, int[] target) {
-        int[] strings = Stream.of(1, 2, 3)
-                .toArray(x -> x);
     }
 }
 

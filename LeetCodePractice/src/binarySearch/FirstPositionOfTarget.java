@@ -25,7 +25,8 @@ Example 3:
 	Not exist 6 in array.
 
 Challenge
-If the count of numbers is bigger than 2^32, can your code work properly?*/
+If the count of numbers is bigger than 2^32, can your code work properly?
+*/
 public class FirstPositionOfTarget {
 	/**
      * @param nums: The integer array.
