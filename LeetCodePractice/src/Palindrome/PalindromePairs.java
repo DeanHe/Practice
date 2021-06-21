@@ -29,6 +29,7 @@ words[i] consists of lower-case English letters.
 
 analysis:
 approach 1: trie TC O(words.length * (avg word length) ^ 2)
+trie saves the reverse string of words
 */
 public class PalindromePairs {
 	class TrieNode {
