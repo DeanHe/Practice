@@ -67,6 +67,7 @@ public class BSTIteratorII {
     int idx;
     public BSTIteratorII(TreeNode root) {
         stack = new Stack<>();
+        pushAll(root);
         ls = new ArrayList<>();
         idx = -1;
     }
