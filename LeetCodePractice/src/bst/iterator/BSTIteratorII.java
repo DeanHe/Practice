@@ -2,6 +2,10 @@ package bst.iterator;
 
 import bst.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /*
 Implement the BSTIterator class that represents an iterator over the in-order traversal of a binary search tree (BST):
 
@@ -58,25 +62,43 @@ We can use another stack as a buffer to store numbers returned from calls to nex
 
  */
 public class BSTIteratorII {
-
+    Stack<TreeNode> stack;
+    List<Integer> ls;
+    int idx;
     public BSTIteratorII(TreeNode root) {
-
+        stack = new Stack<>();
+        ls = new ArrayList<>();
+        idx = -1;
     }
 
     public boolean hasNext() {
-        return false;
+        return !stack.isEmpty() || idx + 1 < ls.size();
     }
 
     public int next() {
-        return -1;
+        idx++;
+        if(idx == ls.size()){
+            TreeNode cur =stack.pop();
+            ls.add(cur.val);
+            pushAll(cur.right);
+        }
+        return ls.get(idx);
     }
 
     public boolean hasPrev() {
-        return false;
+        return idx - 1 >= 0;
     }
 
     public int prev() {
-        return -1;
+        idx--;
+        return ls.get(idx);
+    }
+
+    private void pushAll(TreeNode root){
+        while(root != null){
+            stack.push(root);
+            root = root.left;
+        }
     }
 }
 /**

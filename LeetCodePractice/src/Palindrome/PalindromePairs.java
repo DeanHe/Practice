@@ -30,6 +30,7 @@ words[i] consists of lower-case English letters.
 analysis:
 approach 1: trie TC O(words.length * (avg word length) ^ 2)
 trie saves the reverse string of words
+ref:http://www.allenlipeng47.com/blog/index.php/2016/03/15/palindrome-pairs/
 */
 public class PalindromePairs {
 	class TrieNode {
