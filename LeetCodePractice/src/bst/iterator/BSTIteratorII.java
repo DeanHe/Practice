@@ -64,19 +64,19 @@ public class BSTIteratorII {
     }
 
     public boolean hasNext() {
-
+        return false;
     }
 
     public int next() {
-
+        return -1;
     }
 
     public boolean hasPrev() {
-
+        return false;
     }
 
     public int prev() {
-
+        return -1;
     }
 }
 /**
