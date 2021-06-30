@@ -27,17 +27,27 @@ Note:
 1 <= A.length <= 20000
 0 <= K <= A.length
 A[i] is 0 or 1
+
+hint:
+One thing's for sure, we will only flip a zero if it extends an existing window of 1s. Otherwise, there's no point in doing it, right? Think Sliding Window!
+
+Since we know this problem can be solved using the sliding window construct, we might as well focus in that direction for hints. Basically,
+in a given window, we can never have > K zeros, right?
+
+We don't have a fixed size window in this case. The window size can grow and shrink depending upon the number of zeros we have (we don't actually have to flip the zeros here!).
+
+The way to shrink or expand a window would be based on the number of zeros that can still be flipped and so on.
 */
 public class MaxConsecutiveOnesIII {
-    public int longestOnes(int[] A, int K) {
+    public int longestOnes(int[] nums, int K) {
         int res  = 0, start = 0, zeroCnt = 0;
-        int len = A.length;
+        int len = nums.length;
         for(int end = 0; end < len; end++){
-        	if(A[end] == 0){
+        	if(nums[end] == 0){
         		zeroCnt++;
         	}
         	while(zeroCnt > K){
-        		if(A[start] == 0){
+        		if(nums[start] == 0){
         			zeroCnt--;
         		}
         		start++;

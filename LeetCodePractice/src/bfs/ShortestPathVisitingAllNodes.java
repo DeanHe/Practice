@@ -19,7 +19,8 @@ Explanation: One possible path is [0,1,4,2,3]
 
 Note:
 1 <= graph.length <= 12
-0 <= graph[i].length < graph.length*/
+0 <= graph[i].length < graph.length
+*/
 public class ShortestPathVisitingAllNodes {
 	public int shortestPathLength(int[][] graph) {
 		int N = graph.length;

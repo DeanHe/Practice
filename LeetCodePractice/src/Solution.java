@@ -1,7 +1,12 @@
+import bst.TreeNode;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.TreeMap;
 
 
@@ -60,19 +65,30 @@ public class Solution {
 		*/
     }
 
-    public int reductionOperations(int[] nums) {
-        TreeMap<Integer, Integer> treeMap = new TreeMap();
-        for (int n : nums) {
-            treeMap.put(n, treeMap.getOrDefault(n, 0) + 1);
+    int rows , cols;
+    public int[][] rotateGrid(int[][] grid, int k) {
+        rows = grid.length;
+        cols = grid[0].length;
+        int[][] res = new int[rows][cols];
+        int layers = Math.min(rows / 2, cols / 2);
+        for(int l = 0; l < layers; l++){
+            dfs(grid, res, l, k);
         }
-        int res = 0;
-        int i = 0;
-        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
-            res += entry.getValue() * i;
-            i++;
-        }
-        return res;
+        return grid;
     }
+
+    private void dfs(int[][] grid, int[][] res, int l, int k) {
+        int rs = rows - 2 * l;
+        int cs = cols - 2 * l;
+        int total = rs * 2 + cs * 2 - 4;
+        for(int i = 0; i < total; i++){
+            int j = (i + k) % total;
+            int r = i / (cols - l);
+            int c = i % (cols - l);
+            res[r][c] = grid[j / (cols - l)][j % (cols - l)];
+        }
+    }
+
 }
 
 

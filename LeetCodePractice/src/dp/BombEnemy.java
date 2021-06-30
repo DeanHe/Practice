@@ -31,8 +31,8 @@ public class BombEnemy {
                 // store it to avoid recompute
                 if(c == 0 || grid[r][c - 1] == 'W'){
                     rowCount = 0;
-                    for(int temp = c; temp < cols && grid[r][temp] != 'W'; temp++){
-                        if(grid[r][temp] == 'E'){
+                    for(int i = c; i < cols && grid[r][i] != 'W'; i++){
+                        if(grid[r][i] == 'E'){
                             rowCount++;
                         }
                     }
@@ -40,8 +40,8 @@ public class BombEnemy {
                 // start from solumn, count the enemies in the current col between two walls
                 if(r == 0 || grid[r - 1][c] == 'W'){
                     colCount[c] = 0;
-                    for(int temp = r; temp < rows && grid[temp][c] != 'W'; temp++){
-                        if(grid[temp][c] == 'E'){
+                    for(int i = r; i < rows && grid[i][c] != 'W'; i++){
+                        if(grid[i][c] == 'E'){
                             colCount[c]++;
                         }
                     }

@@ -15,6 +15,10 @@ To the right of 5 there are 2 smaller elements (2 and 1).
 To the right of 2 there is only 1 smaller element (1).
 To the right of 6 there is 1 smaller element (1).
 To the right of 1 there is 0 smaller element.
+
+analysis:
+discretization puts numbers of nums array in continuous rank without gap
+
 */
 public class CountOfSmallerNumbersAfterSelf {
 	/**
@@ -24,7 +28,6 @@ public class CountOfSmallerNumbersAfterSelf {
 	 */
 	int[] bit;
 	public List<Integer> countSmaller(int[] nums) {
-		// write your code here
 		List<Integer> res = new ArrayList<>();
 		if (nums == null || nums.length == 0) {
 			return res;
@@ -44,7 +47,7 @@ public class CountOfSmallerNumbersAfterSelf {
 	// this is nlogn
 	// sort the orignal arr and mapping the number to
 	// the order in the sorted arr;
-	// i.e: [1, 1000, -100, 10, 100] -> [2, 5, 1, 3, 4] , get rid of very large
+	// i.e: [1, 1000, -100, 10, 100] -> [1, 4, 0, 2, 3] , get rid of very large
 	// number or negative number
 	private void discretization(int[] nums) {
 		int[] sorted = nums.clone();

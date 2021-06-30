@@ -1,6 +1,6 @@
-package SegmentTree;
+package segmentTree;
 
-/*For an integer array (index from 0 to n-1, where n is the size of this array), in the corresponding SegmentTree, each node stores an extra attribute max to denote the maximum number in the interval of the array (index from start to end).
+/*For an integer array (index from 0 to n-1, where n is the size of this array), in the corresponding segmentTree, each node stores an extra attribute max to denote the maximum number in the interval of the array (index from start to end).
 
 Design a query method with three parameters root, start and end, find the maximum number in the interval [start, end] by the given root of segment tree.
 

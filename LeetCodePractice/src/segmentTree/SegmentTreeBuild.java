@@ -1,4 +1,4 @@
-package SegmentTree;
+package segmentTree;
 /*
 The structure of Segment Tree is a binary tree which each node has two attributes start and end denote an segment / interval.
 

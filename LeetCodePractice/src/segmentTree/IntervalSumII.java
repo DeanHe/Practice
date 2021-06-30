@@ -1,4 +1,4 @@
-package SegmentTree;
+package segmentTree;
 
 /*
 		Given an integer array in the construct method, implement two methods query(start, end) and modify(index, value):

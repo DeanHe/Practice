@@ -1,4 +1,4 @@
-package SegmentTree;
+package segmentTree;
 
 /*
 There are n cities on an axis, numbers from 0 ~ n - 1. John intends to do business in these n cities, He is interested in Armani's shipment. Each city has a price for these goods prices [i].

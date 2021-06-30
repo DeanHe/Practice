@@ -1,6 +1,10 @@
 package unionFind;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /*
 In this problem, a tree is an undirected graph that is connected and has no cycles.
@@ -25,6 +29,9 @@ Explanation: The given undirected graph will be like this:
 Note:
 The size of the input 2D-array will be between 3 and 1000.
 Every integer represented in the 2D-array will be between 1 and N, where N is the size of the input array.
+
+// analysis:
+DFS, before adding the edge, check if in the graph there is an existing path from edge[0] to edge[1]
 */
 public class RedundantConnection {
     private int[] parent, size;
@@ -78,33 +85,27 @@ public class RedundantConnection {
 
     //-----------------------------------------------------------------------------------------------------//
     public int[] findRedundantConnectionDFS(int[][] edges) {
-        HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
-        HashSet<Integer> visited = new HashSet<>();
+        Map<Integer, ArrayList<Integer>> graph = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
         for (int[] edge : edges) {
-            if (formCircle(edge[0], edge[1], graph, visited)) {
+            if (canReach(edge[0], edge[1], graph, visited)) {
                 return edge;
             }
-            if (!graph.containsKey(edge[0])) {
-                graph.put(edge[0], new ArrayList<>());
-            }
-            graph.get(edge[0]).add(edge[1]);
-            if (!graph.containsKey(edge[1])) {
-                graph.put(edge[1], new ArrayList<>());
-            }
-            graph.get(edge[1]).add(edge[0]);
+            graph.computeIfAbsent(edge[0], x -> new ArrayList<>()).add(edge[1]);
+            graph.computeIfAbsent(edge[1], x -> new ArrayList<>()).add(edge[0]);
         }
         return new int[]{-1, -1};
     }
 
-    private boolean formCircle(int cur, int target, HashMap<Integer, ArrayList<Integer>> graph, HashSet<Integer> visited) {
-        if (cur == target) {
+    private boolean canReach(int cur, int target, Map<Integer, ArrayList<Integer>> graph, Set<Integer> visited) {
+        if(cur == target){
             return true;
         }
         visited.add(cur);
-        if (graph.containsKey(cur) && graph.containsKey(target)) {
+        if(graph.containsKey(cur)){
             for (int nb : graph.get(cur)) {
                 if (!visited.contains(nb)) {
-                    if (formCircle(nb, target, graph, visited)) {
+                    if (canReach(nb, target, graph, visited)) {
                         visited.remove(cur);
                         return true;
                     }
