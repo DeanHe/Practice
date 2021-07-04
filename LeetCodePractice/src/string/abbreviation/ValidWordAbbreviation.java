@@ -1,5 +1,6 @@
 package string.abbreviation;
-/*Given a non-empty string word and an abbreviation abbr, return whether the string matches with the given abbreviation.
+/*
+Given a non-empty string word and an abbreviation abbr, return whether the string matches with the given abbreviation.
 
 A string such as "word" contains only the following valid abbreviations:
 
@@ -14,7 +15,8 @@ Example 2:
 Input : s = "apple", abbr = "a2e"
 Output : false
 Notice
-Notice that only the above abbreviations are valid abbreviations of the string word. Any other string is not a valid abbreviation of word.*/
+Notice that only the above abbreviations are valid abbreviations of the string word. Any other string is not a valid abbreviation of word.
+*/
 public class ValidWordAbbreviation {
 	/**
      * @param word: a non-empty string

@@ -35,6 +35,8 @@ Constraints:
 1 <= boxes[i] <= 100
 
 denote dp[i][j][k] means the points get by removing boxes[i:j] with k pre boxes of same color
+case 1: remove boxes[s] with subarray of its same color first
+case 2: remove boxes[s'] which is a different color first
  */
 public class RemoveBoxes {
     int len;

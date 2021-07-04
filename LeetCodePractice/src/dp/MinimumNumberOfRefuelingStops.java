@@ -39,7 +39,8 @@ Note:
 
 1 <= target, startFuel, stations[i][1] <= 10^9
 0 <= stations.length <= 500
-0 < stations[0][0] < stations[1][0] < ... < stations[stations.length-1][0] < target*/
+0 < stations[0][0] < stations[1][0] < ... < stations[stations.length-1][0] < target
+*/
 
 import java.util.Collections;
 import java.util.PriorityQueue;

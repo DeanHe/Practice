@@ -39,7 +39,8 @@ Every room is reachable from room 0 once all the rooms are built.
  */
 public class CountWaysToBuildRoomsInAnAntColony {
     public int waysToBuildRooms(int[] prevRoom) {
-
+        //todo
+        return -1;
     }
 }
 

@@ -15,6 +15,10 @@ Note:
 
 The rectangle inside the matrix must have an area > 0.
 What if the number of rows is much larger than the number of columns?
+
+analysis:
+similar to question: max subarray sum no more than k.
+TC  min(m,n)^2 * max(m,n) * log(max(m,n))
 */
 public class MaxSumOfRectangleNoLargerThanK {
     public int maxSumSubmatrix(int[][] matrix, int k) {
@@ -32,7 +36,7 @@ public class MaxSumOfRectangleNoLargerThanK {
         int n = Math.min(rows, cols);
         for (int c = 0; c < n; c++) {
             int[] arr = new int[m];
-            for (int ct = c; ct >= 0; ct--) {
+            for (int ct = c; ct < n; ct++) {
                 for (int r = 0; r < m; r++) {
                     if (isRowLarger) {
                         arr[r] += matrix[r][ct];
@@ -50,11 +54,10 @@ public class MaxSumOfRectangleNoLargerThanK {
     private int maximumSumOfSubarrayCloseToK(int[] arr, int K) {
         TreeSet<Integer> set = new TreeSet<>();
         set.add(0);
-        int len = arr.length;
         int prefixSum = 0;
         int res = Integer.MIN_VALUE;
-        for (int i = 0; i < len; i++) {
-            prefixSum += arr[i];
+        for (int n : arr) {
+            prefixSum += n;
             Integer ceiling = set.ceiling(prefixSum - K);
             if (ceiling != null) {
                 res = Math.max(res, prefixSum - ceiling);

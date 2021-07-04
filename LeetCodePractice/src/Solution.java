@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 public class Solution {
@@ -65,28 +66,50 @@ public class Solution {
 		*/
     }
 
-    int rows , cols;
-    public int[][] rotateGrid(int[][] grid, int k) {
-        rows = grid.length;
-        cols = grid[0].length;
-        int[][] res = new int[rows][cols];
-        int layers = Math.min(rows / 2, cols / 2);
-        for(int l = 0; l < layers; l++){
-            dfs(grid, res, l, k);
+    public int maxSumSubmatrix(int[][] matrix, int k) {
+        boolean isRowLarger = false;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        if(rows > cols){
+            isRowLarger = true;
         }
-        return grid;
+        int res = Integer.MIN_VALUE;
+        int m = Math.min(rows, cols);
+        int n = Math.max(rows, cols);
+        for(int c1 = 0; c1 < cols; c1++){
+            int[] arr = new int[rows];
+            for(int c2 = c1; c2 < cols; c2++){
+                for(int r = 0; r < rows; r++){
+                    arr[r] += matrix[r][c2];
+                }
+                res = Math.max(res, helper(arr, k));
+            }
+        }
+        return res;
     }
 
-    private void dfs(int[][] grid, int[][] res, int l, int k) {
-        int rs = rows - 2 * l;
-        int cs = cols - 2 * l;
-        int total = rs * 2 + cs * 2 - 4;
-        for(int i = 0; i < total; i++){
-            int j = (i + k) % total;
-            int r = i / (cols - l);
-            int c = i % (cols - l);
-            res[r][c] = grid[j / (cols - l)][j % (cols - l)];
+    private int helper(int[] preSum, int target){
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(0);
+        int sum = 0, res = Integer.MIN_VALUE;
+        for(int n : preSum){
+            sum += n;
+            Integer ceiling = set.ceiling(sum - target);
+            if(ceiling != null){
+                res = Math.max(res, sum - ceiling);
+            }
+            set.add(sum);
         }
+        return res;
+    }
+
+    public int[] buildArray(int[] nums) {
+        int len = nums.length;
+        int[] res = new int[len];
+        for(int i = 0; i < len; i++){
+            res[i] = nums[nums[i]];
+        }
+        return res;
     }
 
 }

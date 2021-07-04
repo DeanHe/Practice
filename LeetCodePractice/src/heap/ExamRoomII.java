@@ -2,7 +2,8 @@ package heap;
 
 import java.util.*;
 
-/*In an exam room, there are N seats in a single row, numbered 0, 1, 2, ..., N-1.
+/*
+In an exam room, there are N seats in a single row, numbered 0, 1, 2, ..., N-1.
 
 When a student enters the room, they must sit in the seat that maximizes the distance to the closest person.  If there are multiple such seats, they sit in the seat with the lowest number.  (Also, if no one is in the room, then the student sits at seat number 0.)
 
@@ -27,7 +28,8 @@ Note:
 
 1 <= N <= 10^9
 ExamRoom.seat() and ExamRoom.leave() will be called at most 10^4 times across all test cases.
-Calls to ExamRoom.leave(p) are guaranteed to have a student currently sitting in seat number p.*/
+Calls to ExamRoom.leave(p) are guaranteed to have a student currently sitting in seat number p.
+*/
 public class ExamRoomII {
     int N;
     TreeSet<Integer> students;
