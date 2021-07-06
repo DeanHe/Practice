@@ -21,29 +21,32 @@ Example 3:
 
 Input: A = [2,1,5,6,0,9,5,0,3,8], L = 4, M = 3
 Output: 31
-Explanation: One choice of subarrays is [5,6,0,9] with length 4, and [3,8] with length 3.*/
-// similar to Best Time To Buy and Sell Stock III
+Explanation: One choice of subarrays is [5,6,0,9] with length 4, and [3,8] with length 3.
+
+similar to Best Time To Buy and Sell Stock III
+*/
 public class MaximumSumOfTwoNonOverlappingSubarrays {
 	public int maxSumTwoNoOverlap(int[] A, int L, int M) {
         int len = A.length;
-        int[] preSum = new int[len];
+        int[] preSum = new int[len + 1];
         preSum[0] = A[0];
-        for(int i = 1; i < len; i++){
-            preSum[i] = preSum[i - 1] + A[i];
+        for(int i = 0; i < len; i++){
+            preSum[i + 1] = preSum[i] + A[i];
         }
-        int res = preSum[L + M - 1], Lmax = preSum[L - 1], Mmax = preSum[M - 1];
-        for(int i = L + M; i < len; i++){
-            // the largest subarray of length L before i - M position
-            Lmax = Math.max(Lmax, preSum[i - M] - preSum[i - M - L]); 
-            // the largest subarray of length M before i - L position
-            Mmax = Math.max(Mmax, preSum[i - L] - preSum[i - M - L]);
-            int tmp = Math.max(Lmax + preSum[i] - preSum[i - M], Mmax + preSum[i] - preSum[i - L]);
-            res = Math.max(res, tmp);
+        return Math.max(getMax(preSum, L, M), getMax(preSum, M, L));
+    }
+
+    private int getMax(int[] preSum, int L, int M) {
+        int res = 0;
+        int len = preSum.length;
+        for(int i = L + M, maxL = 0; i < len; i++){
+            maxL = Math.max(maxL, preSum[i - M] - preSum[i - M - L]);
+            res = Math.max(res, maxL + preSum[i] - preSum[i - M]);
         }
         return res;
     }
-	
-	// mimic best sell stock III
+
+    // mimic best sell stock III
 	public int maxSumTwoNoOverlapII(int[] A, int L, int M) {
 		int len = A.length;
         int[] preSum = new int[len + 1];
