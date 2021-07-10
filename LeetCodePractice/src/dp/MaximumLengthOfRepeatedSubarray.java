@@ -14,26 +14,24 @@ Note:
 
 1 <= len(A), len(B) <= 1000
 0 <= A[i], B[i] < 100
+
+Since a common subarray of A and B must start at some A[i] and B[j], let dp[i][j] be the longest common prefix of A[:i] and B[:j].
+Whenever A[i] == B[j], we know dp[i][j] = dp[i-1][j-1] + 1. Also, the answer is max(mem[i][j]) over all i, j.
+We can perform bottom-up dynamic programming to find the answer based on this recurrence.
+Our loop invariant is that the answer is already calculated correctly and stored in dp for any less i, j.
 */
-/*Since a common subarray of A and B must start at some A[i] and B[j], let mem[i][j] be the longest common prefix of A[i:] and B[j:]. Whenever A[i] == B[j], we know mem[i][j] = mem[i+1][j+1] + 1. Also, the answer is max(mem[i][j]) over all i, j.
-We can perform bottom-up dynamic programming to find the answer based on this recurrence. Our loop invariant is that the answer is already calculated correctly and stored in mem for any larger i, j.*/
 public class MaximumLengthOfRepeatedSubarray {
-	public int findLength(int[] A, int[] B) {
-        int res = 0;
-        int Alen = A.length;
-        int Blen = B.length;
-        //mem[i][j] means the largest common subarray starts from A[i:] and B[j:]
-        int[][] dp = new int[Alen + 1][Blen + 1];
-        for(int i = Alen - 1; i >= 0; i--){
-        	for(int j = Blen - 1; j >= 0; j--){
-        		if(A[i] == B[j]){
-        			dp[i][j] = dp[i + 1][j + 1] + 1;
-        			if(res < dp[i][j]){
-        				res = dp[i][j];
-        			}
-        		}
-        	}
-        }
-        return res;
-    }
+	public int findLength(int[] nums1, int[] nums2) {
+		int l1 = nums1.length, l2 = nums2.length,res = 0;
+		int[][] dp = new int[l1 + 1][l2 + 1];
+		for(int i = 0; i < l1; i++){
+			for(int j = 0; j < l2; j++){
+				if(nums1[i] == nums2[j]){
+					dp[i + 1][j + 1] = dp[i][j] + 1;
+				}
+				res = Math.max(dp[i + 1][j + 1], res);
+			}
+		}
+		return res;
+	}
 }

@@ -20,8 +20,11 @@ Output: [[0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],[0,0,0,0,
 Explanation:
 
 Note:
+1 <= N <= 20
 
-1 <= N <= 20*/
+TC : O(n 2^n)
+O(n) for cloning and O(2^n) possible trees.
+*/
 public class AllPossibleFullBinaryTrees {
 	Map<Integer, List<TreeNode>> cache = new HashMap<>();
 

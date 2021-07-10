@@ -1,7 +1,9 @@
 import bst.TreeNode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,52 +66,6 @@ public class Solution {
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/
-    }
-
-    public int maxSumSubmatrix(int[][] matrix, int k) {
-        boolean isRowLarger = false;
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        if(rows > cols){
-            isRowLarger = true;
-        }
-        int res = Integer.MIN_VALUE;
-        int m = Math.min(rows, cols);
-        int n = Math.max(rows, cols);
-        for(int c1 = 0; c1 < cols; c1++){
-            int[] arr = new int[rows];
-            for(int c2 = c1; c2 < cols; c2++){
-                for(int r = 0; r < rows; r++){
-                    arr[r] += matrix[r][c2];
-                }
-                res = Math.max(res, helper(arr, k));
-            }
-        }
-        return res;
-    }
-
-    private int helper(int[] preSum, int target){
-        TreeSet<Integer> set = new TreeSet<>();
-        set.add(0);
-        int sum = 0, res = Integer.MIN_VALUE;
-        for(int n : preSum){
-            sum += n;
-            Integer ceiling = set.ceiling(sum - target);
-            if(ceiling != null){
-                res = Math.max(res, sum - ceiling);
-            }
-            set.add(sum);
-        }
-        return res;
-    }
-
-    public int[] buildArray(int[] nums) {
-        int len = nums.length;
-        int[] res = new int[len];
-        for(int i = 0; i < len; i++){
-            res[i] = nums[nums[i]];
-        }
-        return res;
     }
 
 }

@@ -27,7 +27,7 @@ Constraints:
 analysis:
 approach 1:
 stack: Increasing stack, store the index
-dp[i]: Sum of minimum of all subarrays which end with A[i]
+dp[i]: Sum of minimum of all subarrays which end in idx i, A[:i]
 
 approach 2:
 use left[i] to track left side number of sub arrays with min element idx as A[i]

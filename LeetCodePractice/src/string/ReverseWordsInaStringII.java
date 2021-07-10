@@ -13,7 +13,8 @@ Example2
 Input: "a b c"
 Output: "c b a"
 Challenge
-Could you do it in-place without allocating extra space?*/
+Could you do it in-place without allocating extra space?
+*/
 public class ReverseWordsInaStringII {
 	/**
      * @param str: a string
@@ -34,10 +35,12 @@ public class ReverseWordsInaStringII {
     }
     
     private void swap(char[] s, int start, int end){
-    	for(int i = start; i <= (start + end) / 2; i++){
-    		char temp = s[i];
-    		s[i] = s[end + start - i];
-    		s[end + start - i] = temp;	
-    	}
+    	while(start < end){
+    		char c = s[start];
+    		s[start] = s[end];
+    		s[end] = c;
+    		start++;
+    		end--;
+		}
     }
 }
