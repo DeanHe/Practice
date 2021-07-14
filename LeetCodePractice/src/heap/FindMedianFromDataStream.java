@@ -38,7 +38,7 @@ If 99% of all integer numbers from the stream are between 0 and 100, how would y
 In this case, we need an integer array of length 100 and a hashmap for these numbers that are not in [0,100].
 
 analysis:
-first add to maxHeap then move from maxHeap to minHeap, then check
+first add to maxHeap (bottom one) then move from maxHeap to minHeap, then check
 TC O(log n) add, O(1) find
 */
 public class FindMedianFromDataStream {

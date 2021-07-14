@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -68,6 +70,29 @@ public class Solution {
 		*/
     }
 
+    public boolean isIsomorphic(String s, String t) {
+        int[] ms = new int[256];
+        int[] ts = new int[256];
+        for(int i = 0; i < s.length(); i++){
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            if(ms[sc] == 0){
+                ms[sc] = tc;
+            } else if(ms[sc] != tc){
+                return false;
+            }
+        }
+        for(int i = 0; i < t.length(); i++){
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            if(ts[tc] == 0){
+                ts[tc] = sc;
+            } else if(ts[tc] != sc){
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 

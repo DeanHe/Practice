@@ -84,18 +84,18 @@ public class LargestSumOfAverages {
             return 0;
         }
         int len = nums.length;
-        double[] sum = new double[len + 1];
-        for (int i = 1; i <= len; i++) {
-            sum[i] = sum[i - 1] + nums[i - 1];
+        double[] preSum = new double[len + 1];
+        for (int i = 0; i < len; i++) {
+            preSum[i + 1] = preSum[i] + nums[i];
         }
         double[] dp = new double[len];
         for (int i = 0; i < len; i++) {
-            dp[i] = (sum[len] - sum[i]) / (len - i);
+            dp[i] = (preSum[len] - preSum[i]) / (len - i);
         }
         for (int k = 0; k < K - 1; k++) {
             for (int i = 0; i < len; i++) {
                 for (int j = i + 1; j < len; j++) {
-                    dp[i] = Math.max(dp[i], dp[j] + (sum[j] - sum[i]) / (j - i));
+                    dp[i] = Math.max(dp[i], dp[j] + (preSum[j] - preSum[i]) / (j - i));
                 }
             }
         }

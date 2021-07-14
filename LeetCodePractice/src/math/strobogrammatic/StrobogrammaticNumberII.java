@@ -2,7 +2,8 @@ package math.strobogrammatic;
 
 import java.util.*;
 
-/*A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+/*
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
 Find all strobogrammatic numbers that are of length = n.
 
 Example
@@ -13,7 +14,8 @@ Output: ["11","69","88","96"]
 Example 2:
 
 Input: n = 1, 
-Output: ["0","1","8"]*/
+Output: ["0","1","8"]
+*/
 public class StrobogrammaticNumberII {
 	/**
 	 * @param n: the length of strobogrammatic number
@@ -24,17 +26,17 @@ public class StrobogrammaticNumberII {
 	public List<String> findStrobogrammatic(int n) {
 		// write your code here
 		N = n;
-		return helper(n);
+		return dfs(n);
 	}
 
-	private List<String> helper(int n) {
+	private List<String> dfs(int n) {
 		if (n == 0) {
-			return new ArrayList<String>(Arrays.asList(""));
+			return new ArrayList<>(Arrays.asList(""));
 		}
 		if (n == 1) {
-			return new ArrayList<String>(Arrays.asList("0", "1", "8"));
+			return new ArrayList<>(Arrays.asList("0", "1", "8"));
 		}
-		List<String> list = helper(n - 2);
+		List<String> list = dfs(n - 2);
 		List<String> res = new ArrayList<>();
 		for (String str : list) {
 			if (n != N) {
