@@ -1,8 +1,10 @@
 package backtracking;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.Assert;
+import org.junit.Assert;
+
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package binaryIndexedTree;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.Assert;
+import org.junit.Assert;
 
 /*
 		Given an integer array in the construct method, implement two methods query(start, end) and modify(index, value):

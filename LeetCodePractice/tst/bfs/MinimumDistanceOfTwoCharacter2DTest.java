@@ -2,7 +2,7 @@ package bfs;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.Assert;
+import org.junit.Assert;
 
 public class MinimumDistanceOfTwoCharacter2DTest {
     private MinimumDistanceOfTwoCharacter2D md;

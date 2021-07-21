@@ -2,7 +2,7 @@ package dp;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.Assert;
+import org.junit.Assert;
 
 /*
 Say you have an array for which the ith element is the price of a given stock on day i.

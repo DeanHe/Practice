@@ -2,7 +2,7 @@ package hashMap;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.Assert;
+import org.junit.Assert;
 
 public class DotProductOfVectorWithRepeatValuesTest {
     private DotProductOfVectorsWithRepeatValues dp;
