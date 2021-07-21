@@ -2,6 +2,7 @@ package dfs;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,22 +28,20 @@ public class EvaluateDivision {
     Map<String, Map<String, Double>> graph;
     Set<String> visited;
 
-    public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
         graph = new HashMap<>();
-        for (int i = 0; i < equations.length; i++) {
-            String[] eq = equations[i];
-            String u = eq[0];
-            String v = eq[1];
-            graph.putIfAbsent(u, new HashMap<>());
-            graph.get(u).put(v, values[i]);
-            graph.putIfAbsent(v, new HashMap<>());
-            graph.get(v).put(u, 1.0 / values[i]);
+        for (int i = 0; i < equations.size(); i++) {
+            List<String> eq = equations.get(i);
+            String u = eq.get(0);
+            String v = eq.get(1);
+            graph.computeIfAbsent(u, x -> new HashMap<>()).put(v, values[i]);
+            graph.computeIfAbsent(v, x -> new HashMap<>()).put(u, 1.0 / values[i]);
         }
-        double[] res = new double[queries.length];
-        for (int i = 0; i < queries.length; i++) {
-            String[] query = queries[i];
-            String start = query[0];
-            String end = query[1];
+        double[] res = new double[queries.size()];
+        for (int i = 0; i < queries.size(); i++) {
+            List<String> query = queries.get(i);
+            String start = query.get(0);
+            String end = query.get(1);
             res[i] = dfs(start, end, new HashSet<>());
         }
         return res;

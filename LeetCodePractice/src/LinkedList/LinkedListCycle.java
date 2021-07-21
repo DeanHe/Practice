@@ -16,10 +16,7 @@ public class LinkedListCycle {
      * @return: True if it has a cycle, or false
      */
     public boolean hasCycle(ListNode head) {
-        if(head == null){
-            return false;
-        }
-        ListNode fast = head.next;
+        ListNode fast = head;
         ListNode slow = head;
         while(fast != null && fast.next != null){
             fast = fast.next.next;

@@ -41,7 +41,6 @@ public class WordPattern {
             return false;
         }
         Map<Character, String> map = new HashMap<>();
-        Set<String> visited = new HashSet<>();
         for (int i = 0; i < strArr.length; i++) {
             char c = patternArr[i];
             String s = strArr[i];
@@ -50,11 +49,10 @@ public class WordPattern {
                     return false;
                 }
             } else {
-                if (visited.contains(s)) {
+                if (map.containsValue(s)) {
                     return false;
                 }
                 map.put(c, s);
-                visited.add(s);
             }
         }
         return true;
