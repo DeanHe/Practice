@@ -1,4 +1,4 @@
-package window;
+package twoPointers.window;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,28 +25,24 @@ Space Complexity: O(n).
 */
 public class SubarraysWithKDifferentIntegers {
 	public int subarraysWithKDistinct(int[] A, int K) {
-		Map<Integer, Integer> freq = new HashMap<>();
-        int res = 0, uniqueCnt = 0, preDupCnt = 0;
-        for(int l = 0, r = 0; r < A.length; r++){
-        	if(freq.getOrDefault(A[r], 0) == 0){
-        		uniqueCnt++;
-        	}
-        	freq.put(A[r], freq.getOrDefault(A[r], 0) + 1);
-        	if(uniqueCnt > K){
-        		freq.put(A[l], freq.get(A[l]) - 1);
-        		l++;
-        		uniqueCnt--;
-        		preDupCnt = 0;
-        	}
-        	while(freq.get(A[l]) > 1){
-        		freq.put(A[l], freq.get(A[l]) - 1);
-        		l++;
-        		preDupCnt++;
-        	}
-        	if(uniqueCnt == K){
-        		res += preDupCnt + 1;
-        	}
-        }
-        return res;
+		return subarraysWithAtMostKDistinct(A, K) - subarraysWithAtMostKDistinct(A, K - 1);
     }
+
+	private int subarraysWithAtMostKDistinct(int[] A, int K) {
+		Map<Integer, Integer> freq = new HashMap<>();
+		int res = 0, s = 0, e = 0;
+		while(e < A.length){
+			freq.put(A[e], freq.getOrDefault(A[e], 0) + 1);
+			while(freq.size() > K){
+				freq.put(A[s], freq.get(A[s]) - 1);
+				if(freq.get(A[s]) == 0){
+					freq.remove(A[s]);
+				}
+				s++;
+			}
+			res += e - s + 1;
+			e++;
+		}
+		return res;
+	}
 }
