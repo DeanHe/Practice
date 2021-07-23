@@ -14,6 +14,10 @@ Example:
 
 Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 8 -> 0 -> 7
+
+analysis:
+need to add node backwards the node at end has low digit, this leads to use stack
+insert calculated node to dummy.next
  */
 public class AddTwoNumbersII {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

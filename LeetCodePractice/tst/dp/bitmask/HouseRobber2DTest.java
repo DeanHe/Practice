@@ -1,11 +1,9 @@
 package dp.bitmask;
 
-import dp.memorization.MaxScoreOfMatrixGoogle;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 /*
 There are houses laid out on a NxN grid.
 Each house is known to contain some amount of valuables.

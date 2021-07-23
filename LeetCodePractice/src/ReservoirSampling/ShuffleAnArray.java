@@ -38,13 +38,13 @@ public class ShuffleAnArray {
     	if(nums == null){
     		return null;
     	}
-    	int[] temp = nums.clone();
-        int len = temp.length;
+    	int[] res = nums.clone();
+        int len = res.length;
         for(int i = 0; i < len; i++){
         	int index = randRange(i, len);
-        	swap(temp, i, index);
+        	swap(res, i, index);
         }
-        return temp;
+        return res;
     }
     
     private int randRange(int min, int max){

@@ -70,28 +70,18 @@ public class Solution {
 		*/
     }
 
-    public boolean isIsomorphic(String s, String t) {
-        int[] ms = new int[256];
-        int[] ts = new int[256];
-        for(int i = 0; i < s.length(); i++){
-            char sc = s.charAt(i);
-            char tc = t.charAt(i);
-            if(ms[sc] == 0){
-                ms[sc] = tc;
-            } else if(ms[sc] != tc){
-                return false;
+    public int canBeTypedWords(String text, String brokenLetters) {
+        String[] arr = text.split(" ");
+        int cnt = 0;
+        for(String s : arr){
+            for(char c : brokenLetters.toCharArray()){
+                if(s.contains(String.valueOf(c))){
+                    cnt++;
+                    break;
+                }
             }
         }
-        for(int i = 0; i < t.length(); i++){
-            char sc = s.charAt(i);
-            char tc = t.charAt(i);
-            if(ts[tc] == 0){
-                ts[tc] = sc;
-            } else if(ts[tc] != sc){
-                return false;
-            }
-        }
-        return true;
+        return arr.length - cnt;
     }
 }
 

@@ -23,6 +23,7 @@ On a 2D plane, we place stones at some integer coordinate points.  Each coordina
         1 <= stones.length <= 1000
         0 <= stones[i][j] < 10000
 
+        analysis:
         union and find functions have worst case O(N), amortize O(1)
         The whole union-find solution with path compression,
         has O(N) Time, O(N) Space
@@ -51,11 +52,11 @@ public class MostStonesRemovedWithSameRowOrColumn {
         return len - islands;
     }
 
-    private void union(int x, int y){
-        int x_root = findRoot(x);
-        int y_root = findRoot(y);
-        if(x_root != y_root){
-            parent[x_root] = y_root;
+    private void union(int a, int b){
+        int a_root = findRoot(a);
+        int b_root = findRoot(b);
+        if(a_root != b_root){
+            parent[a_root] = b_root;
         }
         return;
     }

@@ -38,19 +38,20 @@ public class ReverseNodesInkGroup {
         if(head == null || k == 1){
             return head;
         }
-        ListNode fakeHead = new ListNode(0);
-        fakeHead.next = head;
-        ListNode pre = fakeHead;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode post;
         int count = 0;
         while(head != null){
             count++;
-            ListNode post = head.next;
+            post = head.next;
             if(count == k){
                 pre = reverse(pre, post);
                 count = 0;
             }
             head = post;
         }
-        return fakeHead.next;
+        return dummy.next;
     }
 }

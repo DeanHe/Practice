@@ -15,6 +15,9 @@ Valid combinations are:
 Note:
 The length of the given array won't exceed 1000.
 The integers in the given array are in the range of [0, 1000].
+
+analysis:
+Time complexity : O(n^2). Loop of i and l, r will be executed O(n^2) times in total
  */
 public class ValidTriangleNumber {
     public int triangleNumber(int[] nums) {
