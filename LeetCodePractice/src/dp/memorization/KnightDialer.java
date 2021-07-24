@@ -50,12 +50,12 @@ public class KnightDialer {
     int MOD = (int)(1e9 + 7);
     long[][][] dp; // dp[k][r][c] means # of distinct number dialed after k hop ended in pad[r][c]
 
-    public int knightDialer(int N) {
+    public int knightDialer(int n) {
         long res = 0;
-        dp = new long[N + 1][4][3];
+        dp = new long[n + 1][4][3];
         for (int r = 0; r < 4; r++) {
             for (int c = 0; c < 3; c++) {
-                res = (res + dfs(r, c, N)) % MOD;
+                res = (res + dfs(r, c, n)) % MOD;
             }
         }
         return (int) res;
