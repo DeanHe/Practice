@@ -59,25 +59,25 @@ public class SubarraysWithKDifferentIntegers {
 
 	public int subarraysWithKDistinctOnePass(int[] A, int K) {
 		Map<Integer, Integer> map = new HashMap<>();
-		int res = 0, left = 0, uniqueCnt = 0, preDupCnt = 0;
-		for(int right = 0; right < A.length; right++){
-			if(map.getOrDefault(A[right], 0) == 0){
+		int res = 0, l = 0, uniqueCnt = 0, firstElementCnt = 0;
+		for(int r = 0; r < A.length; r++){
+			if(map.getOrDefault(A[r], 0) == 0){
 				uniqueCnt++;
 			}
-			map.put(A[right], map.getOrDefault(A[right], 0) + 1);
+			map.put(A[r], map.getOrDefault(A[r], 0) + 1);
 			if(uniqueCnt > K){
-				map.put(A[left], map.get(A[left]) - 1);
-				left++;
+				map.put(A[l], map.get(A[l]) - 1);
+				l++;
 				uniqueCnt--;
-				preDupCnt = 0;
+				firstElementCnt = 0;
 			}
-			while(map.get(A[left]) > 1){
-				map.put(A[left], map.get(A[left]) - 1);
-				left++;
-				preDupCnt++;
+			while(map.get(A[l]) > 1){
+				map.put(A[l], map.get(A[l]) - 1);
+				l++;
+				firstElementCnt++;
 			}
 			if(uniqueCnt == K){
-				res += preDupCnt + 1;
+				res += firstElementCnt + 1;
 			}
 		}
 		return res;

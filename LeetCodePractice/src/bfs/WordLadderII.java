@@ -23,34 +23,32 @@ import java.util.*;
 
 public class WordLadderII {
 	/**
-	 * @param start,
+	 * @param beginWord,
 	 *            a string
-	 * @param end,
+	 * @param endWord,
 	 *            a string
-	 * @param dict,
+	 * @param wordList,
 	 *            a set of string
 	 * @return a list of lists of string
 	 */
-	public List<List<String>> findLadders(String start, String end, Set<String> dict) {
-		// write your code here
-		List<List<String>> res = new ArrayList<List<String>>();
+	public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+		List<List<String>> res = new ArrayList<>();
 		// key: the to string, value: the from strings
-		Map<String, List<String>> graph = new HashMap<String, List<String>>();
+		Map<String, List<String>> graph = new HashMap<>();
 		// the smallest step from start to current node
 		Map<String, Integer> distance = new HashMap<>();
-		dict.add(start);
-		dict.add(end);
-		bfs(start, dict, graph, distance);
+		Set<String> dict = new HashSet<>(wordList);
+		bfs(beginWord, dict, graph, distance);
 		List<String> path = new ArrayList<>();
-		path.add(end);
-		dfs(end, start, graph, distance, res, path);
+		path.add(endWord);
+		dfs(endWord, beginWord, graph, distance, res, path);
 		return res;
 	}
 
 	private void bfs(String start, Set<String> dict, Map<String, List<String>> graph, Map<String, Integer> distance) {
 		// initial neighborsMap
 		for (String temp : dict) {
-			graph.put(temp, new ArrayList<String>());
+			graph.put(temp, new ArrayList<>());
 		}
 		distance.put(start, 0);
 
@@ -77,11 +75,11 @@ public class WordLadderII {
 			List<List<String>> res, List<String> path) {
 		if (current.equals(target)) {
 			Collections.reverse(path);
-			res.add(new ArrayList<String>(path));
+			res.add(new ArrayList<>(path));
 			Collections.reverse(path);
 			return;
 		}
-		List<String> neighbors = graph.get(current);
+		List<String> neighbors = graph.getOrDefault(current, new ArrayList<>());
 		for (String nb : neighbors) {
 			if (distance.containsKey(nb) && distance.get(current) == distance.get(nb) + 1) {
 				path.add(nb);
