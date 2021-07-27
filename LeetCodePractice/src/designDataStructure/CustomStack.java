@@ -19,7 +19,7 @@ import java.util.Stack;
         Output
         [null,null,null,2,null,null,null,null,null,103,202,201,-1]
         Explanation
-        CustomStack customStack = new CustomStack(3); // Stack is Empty []
+        CustomStack customStack = new CustomStack(3); // stack is Empty []
         customStack.push(1);                          // stack becomes [1]
         customStack.push(2);                          // stack becomes [1, 2]
         customStack.pop();                            // return 2 --> Return top of the stack 2, stack becomes [1]
@@ -31,7 +31,7 @@ import java.util.Stack;
         customStack.pop();                            // return 103 --> Return top of the stack 103, stack becomes [201, 202]
         customStack.pop();                            // return 202 --> Return top of the stack 102, stack becomes [201]
         customStack.pop();                            // return 201 --> Return top of the stack 101, stack becomes []
-        customStack.pop();                            // return -1 --> Stack is empty return -1.
+        customStack.pop();                            // return -1 --> stack is empty return -1.
 
 
         Constraints:

@@ -53,7 +53,7 @@ public class BoxStacking {
 		
 		/* Initialize msh values for all  
         indexes  
-        mem[i] --> Maximum possible Stack Height
+        mem[i] --> Maximum possible stack Height
                    with box i on top */
 		int[] dp = new int[3*n];
 		for(int i = 0; i < 3*n; i++){

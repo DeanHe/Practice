@@ -19,43 +19,55 @@ Note:
 The number of nodes in the given tree will be in the range [1, 1000].
 Every node has value 0.
 
-https://leetcode.com/problems/binary-tree-cameras/discuss/211180/JavaC%2B%2BPython-Greedy-DFS
+analysis: greedy
+
+Here is our greedy solution:
+
+Set cameras on all leaves' parents, thenremove all covered nodes.
+Repeat step 1 until all nodes are covered.
+
+TC O(N)
+SC O(logN)
+
+NOT_MONITORED = node is null or adjacent to node with MONITORED_WITHCAM
+MONITORED_NOCAM = node whose children are NOT_MONITORED
+MONITORED_WITHCAM = node whose any of the children is MONITORED_NOCAM
 */
 
 public class BinaryTreeCameras {
-	int camera = 0;
+	int cameras = 0;
+	static final int NOT_MONITORED = 0;
+	static final int MONITORED_NOCAM = 0;
+	static final int MONITORED_WITHCAM = 0;
     public int minCameraCover(TreeNode root) {
-        if(dfs(root) < 1){
-        	return camera + 1;
-        } else {
-        	return camera;
-        }
+        if(root == null){
+        	return 0;
+		}
+        int top = dfs(root);
+        if(top == NOT_MONITORED){
+        	return cameras + 1;
+		} else {
+        	return cameras;
+		}
     }
-    
-    //state 0: node itself should have camera
-    //state 1: node's parent should have camera
-    //state 2: node's parent should not have camera
+
     // child 0 -> parent 2; child 1 -> parent 0; child 2 -> parent 1
     private int dfs(TreeNode root){
-    	int left, right;
-    	if(root.left == null){
-    		left = 1;
-    	} else {
-    		left = dfs(root.left);
-    	}
-    	if(root.right == null){
-    		right = 1;
-    	} else {
-    		right = dfs(root.right);
-    	}
-    	if(left == 0 || right == 0){
-    		camera++;
-    		return 2;
-    	}
-    	if(left == 2 || right == 2){
-    		return 1;
-    	} 
-    	// if(left == 1 || right == 1)
-    	return 0;
+    	if(root == null){
+    		return MONITORED_NOCAM;
+		}
+    	int left = dfs(root.left);
+		int right = dfs(root.right);
+		if(left == MONITORED_NOCAM && right == MONITORED_NOCAM){
+			// leaf scenario
+			return NOT_MONITORED;
+		} else if(left == NOT_MONITORED || right == NOT_MONITORED){
+			// leaf parent scenario
+			cameras++;
+			return MONITORED_WITHCAM;
+		} else {
+			return MONITORED_NOCAM;
+		}
+
     }
 }

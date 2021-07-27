@@ -1,6 +1,6 @@
 package dfs;
 
-import Stack.NestedInteger;
+import stack.NestedInteger;
 
 import java.util.LinkedList;
 import java.util.List;

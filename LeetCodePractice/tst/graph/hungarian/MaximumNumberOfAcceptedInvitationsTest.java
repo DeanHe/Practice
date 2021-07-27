@@ -1,4 +1,12 @@
 package graph.hungarian;
+
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Arrays;
+
 /*
 There are m boys and n girls in a class attending an upcoming party.
 You are given an m x n integer matrix grid, where grid[i][j] equals 0 or 1.
@@ -30,34 +38,35 @@ grid.length == m
 grid[i].length == n
 1 <= m, n <= 200
 grid[i][j] is either 0 or 1.
-
-analysis:
-two path: pair or not left with no pair
  */
-public class MaximumNumberOfAcceptedInvitations {
-    int most;
-    public int maximumInvitations(boolean[][] grid) {
-        most = 0;
-        boolean[] visited = new boolean[grid.length];
-        dfs(grid, visited,0, 0);
-        return most;
+public class MaximumNumberOfAcceptedInvitationsTest {
+    private MaximumNumberOfAcceptedInvitations mn;
+
+    @Before
+    public void setup() {
+        mn = new MaximumNumberOfAcceptedInvitations();
     }
 
-    // match[j], for each record j in B set, it matches to a certain record in A set.
-    private void dfs(boolean[][] graph, boolean[] visited, int pos, int score) {
-        int res = 0;
-        if(pos == graph.length){
-            most = Math.max(most, score);
-            return;
-        }
-        dfs(graph, visited, pos + 1, score);
-        for (int j = 0; j < graph.length; j++) {
-            if (!graph[pos][j] || visited[j]) {
-                continue;
-            }
-            visited[j] = true;
-            dfs(graph, visited, pos + 1, score + 1);
-            visited[j] = false;
-        }
+    @Test
+    public void testCase1() {
+        boolean[][] gird = {
+                {true, true, true},
+                {true, false, true},
+                {false, false, true},
+        };
+        int res = mn.maximumInvitations(gird);
+        Assert.assertEquals(3, res);
+    }
+
+    @Test
+    public void testCase2() {
+        boolean[][] gird = {
+                {true, false, true, false},
+                {true, false, false, false},
+                {false, false, true, false},
+                {true, true, true, false},
+        };
+        int res = mn.maximumInvitations(gird);
+        Assert.assertEquals(3, res);
     }
 }

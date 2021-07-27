@@ -83,6 +83,24 @@ public class Solution {
         }
         return arr.length - cnt;
     }
+
+    public String maximumNumber(String num, int[] change) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0, j = 0; i < num.length(); i++){
+            int n = num.charAt(i) - '0';
+            if(n < change[n]){
+                for(j = i; j < num.length(); j++){
+                    n = num.charAt(j) - '0';
+                    if(n > change[n]){
+                        break;
+                    }
+                    sb.append(change[n]);
+                }
+                return num.substring(0, i) + sb.toString() + num.substring(j);
+            }
+        }
+        return num;
+    }
 }
 
 
