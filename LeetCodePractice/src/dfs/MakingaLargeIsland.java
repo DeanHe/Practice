@@ -58,7 +58,7 @@ public class MakingaLargeIsland {
 				if (grid[r][c] == 0) {
 					int total = 1;
 					Set<Integer> nbColorSet = new HashSet<>();
-					for (int i = 0; i < dirs.length - 1; i++) {
+					for (int i = 0; i + 1 < dirs.length; i++) {
 						nbColorSet.add(getColor(grid, r + dirs[i], c + dirs[i + 1]));
 					}
 					for (int color : nbColorSet) {
