@@ -17,7 +17,7 @@ The Manhattan distance between two points p_1 and p_2
 
 Return a vector ans of length NN, where ans_i
 ​i
-​​  is the index (0-indexed) of the bike that the ii-th worker is assigned to.
+​​  is the index (0-indexed) of the bike that the i-th worker is assigned to.
 
 0 <= workers[i][j],bikes[i][j] < 1000
 All worker and bike locations are distinct.

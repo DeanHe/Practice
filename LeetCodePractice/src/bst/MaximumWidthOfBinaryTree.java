@@ -78,15 +78,15 @@ public class MaximumWidthOfBinaryTree {
         map.put(root, 1);
         q.offer(root);
         while (!q.isEmpty()) {
-            int size = q.size();
+            int sz = q.size();
             int width = 0, l = 0, r = 0;
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < sz; i++) {
                 TreeNode cur = q.poll();
                 int idx = map.get(cur);
                 if (i == 0) {
                     l = idx;
                 }
-                if (i == size - 1) {
+                if (i == sz - 1) {
                     r = idx;
                 }
                 width = r - l + 1;

@@ -29,6 +29,7 @@ Words will only consist of lowercase English letters.
 Queries will only consist of lowercase English letters.
 The number of queries is at most 40000.
 
+analysis:
 using Queue instead of string buffer, queue store [lastMatch, root]
 */
 public class StreamOfCharactersII {
@@ -48,8 +49,8 @@ public class StreamOfCharactersII {
 	public boolean query(char letter) {
 		boolean found = false;
 		if(!queue.isEmpty()){
-			int len = queue.size();
-			for(int i = 0; i < len; i++){
+			int sz = queue.size();
+			for(int i = 0; i < sz; i++){
 				TrieNode last = queue.poll();
 				int idx = letter - 'a';
 				if(last.arr[idx] != null){

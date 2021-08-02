@@ -33,7 +33,7 @@ public class BraceExpansion {
         }
         product(s, 0, "");
         Collections.sort(res);
-        return res.toArray(new String[res.size()]);
+        return res.toArray(new String[0]);
     }
     private void product(String s, int pos, String temp){
         if(pos == s.length()){

@@ -27,6 +27,12 @@ Note:
 Words will only consist of lowercase English letters.
 Queries will only consist of lowercase English letters.
 The number of queries is at most 40000.
+
+hint:
+Put the words into a trie, and manage a set of pointers within that trie.
+
+analysis:
+Store the words in the trie with reverse order, and check the query string from the end
 */
 public class StreamOfCharacters {
 

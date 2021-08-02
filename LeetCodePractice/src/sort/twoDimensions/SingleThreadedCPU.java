@@ -51,6 +51,8 @@ tasks.length == n
 1 <= enqueueTimei, processingTimei <= 10^9
 
 tag: sort + heap
+analysis:
+sort the tasks by start time, using pq (sort by tasks end time) to maintain tasks ready to run
  */
 public class SingleThreadedCPU {
     public int[] getOrder(int[][] tasks) {

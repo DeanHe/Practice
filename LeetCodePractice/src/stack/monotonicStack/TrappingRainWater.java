@@ -48,13 +48,13 @@ public class TrappingRainWater {
     //space O(1)
     public int trapII(int[] height) {
         int res = 0, len = height.length;
-        int s = 0, e = len - 1, maxleft = 0, maxRight = 0;
+        int s = 0, e = len - 1, maxLeft = 0, maxRight = 0;
         while (s < e) {
             if (height[s] < height[e]) {
-                if (height[s] >= maxleft) {
-                    maxleft = height[s];
+                if (height[s] >= maxLeft) {
+                    maxLeft = height[s];
                 } else {
-                    res += maxleft - height[s];
+                    res += maxLeft - height[s];
                 }
                 s++;
             } else {

@@ -15,7 +15,7 @@ Notice
 You may assume k is always valid, 1 ≤ k ≤ bst's total elements.
 
 analysis:
-leverage inorder iterative traversal
+leverage in-order iterative traversal
 */
 public class KthSmallestElementInaBST {
 	/**
@@ -24,7 +24,6 @@ public class KthSmallestElementInaBST {
      * @return: the kth smallest element in bst
      */
     public int kthSmallest(TreeNode root, int k) {
-    	//Inorder traversal
     	if(root == null){
     		return -1;
     	}
