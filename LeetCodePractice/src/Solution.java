@@ -84,22 +84,24 @@ public class Solution {
         return arr.length - cnt;
     }
 
-    public String maximumNumber(String num, int[] change) {
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0, j = 0; i < num.length(); i++){
-            int n = num.charAt(i) - '0';
-            if(n < change[n]){
-                for(j = i; j < num.length(); j++){
-                    n = num.charAt(j) - '0';
-                    if(n > change[n]){
-                        break;
-                    }
-                    sb.append(change[n]);
-                }
-                return num.substring(0, i) + sb.toString() + num.substring(j);
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(root, targetSum, new ArrayList<>(), res);
+        return res;
+    }
+
+    private void dfs(TreeNode root, int targetSum, ArrayList<Integer> ls, List<List<Integer>> res) {
+        if(root == null){
+            return;
+        }
+        if(root.left == null && root.right == null){
+            if(targetSum == 0){
+                res.add(new ArrayList<>(ls));
             }
         }
-        return num;
+        ls.add(root.val);
+        dfs(root.left, targetSum - root.val, ls, res);
+        dfs(root.right, targetSum - root.val, ls, res);
     }
 }
 

@@ -48,12 +48,12 @@ public class PathSumII {
            return;
        }
        ls.add(root.val);
-       if(root.val == sum && root.left == null && root.right == null){
+       sum -= root.val;
+       if(sum == 0 && root.left == null && root.right == null){
            res.add(new ArrayList<>(ls));
-       } else {
-           dfs(res, ls, root.left, sum - root.val);
-           dfs(res, ls, root.right, sum - root.val);  
        }
+       dfs(res, ls, root.left, sum);
+       dfs(res, ls, root.right, sum);
        ls.remove(ls.size() - 1); 
    }
 }

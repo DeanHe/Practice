@@ -23,6 +23,10 @@ Note:
 1 <= words[i].length <= 16
 words[i] only consists of English lowercase letters.
 
+hint:
+Instead of adding a character, try deleting a character to form a chain in reverse.
+For each word in order of length, for each word2 which is word with one character removed, length[word2] = max(length[word2], length[word] + 1).
+
 TC: O(N log N + N * len(word))
 */
 
@@ -32,21 +36,21 @@ public class LongestStringChain {
 	public int longestStrChain(String[] words) {
 		Arrays.sort(words, (a, b) -> a.length() - b.length());
 		// word : max steps to reach it
-        Map<String, Integer> freq = new HashMap<>();
+        Map<String, Integer> dist = new HashMap<>();
         for(String word : words){
-        	freq.put(word, 1);
+        	dist.put(word, 1);
         }
         int res = 1;
         for(String w : words){
-        	int len = w.length(), f = 1;
+        	int len = w.length(), step = 1;
         	for(int i = 0; i < len; i++){
         		String pre = w.substring(0, i) + w.substring(i + 1);
-        		if(freq.containsKey(pre)){
-        			f = Math.max(f, freq.get(pre) + 1);
+        		if(dist.containsKey(pre)){
+        			step = Math.max(step, dist.get(pre) + 1);
         		}
         	}
-			freq.put(w, f);
-			res = Math.max(res, f);
+			dist.put(w, step);
+			res = Math.max(res, step);
         }
         return res;
     }
