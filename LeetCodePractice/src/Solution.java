@@ -1,25 +1,12 @@
-import bst.TreeNode;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-
+        //System.out.println(res);
         /*
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
         LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();
@@ -73,9 +60,9 @@ public class Solution {
     public int canBeTypedWords(String text, String brokenLetters) {
         String[] arr = text.split(" ");
         int cnt = 0;
-        for(String s : arr){
-            for(char c : brokenLetters.toCharArray()){
-                if(s.contains(String.valueOf(c))){
+        for (String s : arr) {
+            for (char c : brokenLetters.toCharArray()) {
+                if (s.contains(String.valueOf(c))) {
                     cnt++;
                     break;
                 }
@@ -84,24 +71,22 @@ public class Solution {
         return arr.length - cnt;
     }
 
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> res = new ArrayList<>();
-        dfs(root, targetSum, new ArrayList<>(), res);
-        return res;
-    }
-
-    private void dfs(TreeNode root, int targetSum, ArrayList<Integer> ls, List<List<Integer>> res) {
-        if(root == null){
-            return;
+    public int minStoneSum(int[] piles, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for (int n : piles){
+            pq.offer(n);
         }
-        if(root.left == null && root.right == null){
-            if(targetSum == 0){
-                res.add(new ArrayList<>(ls));
-            }
+        while(k > 0 && !pq.isEmpty()){
+            int top = pq.poll();
+            top -= top / 2;
+            pq.offer(top);
+            k--;
         }
-        ls.add(root.val);
-        dfs(root.left, targetSum - root.val, ls, res);
-        dfs(root.right, targetSum - root.val, ls, res);
+        int sum = 0;
+        while(!pq.isEmpty()){
+            sum += pq.poll();
+        }
+        return sum;
     }
 }
 

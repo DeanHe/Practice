@@ -49,8 +49,8 @@ public class MinimumKnightMoves {
         queue.offer(new int[]{0, 0});
         visited[0][0] = true;
         while(!queue.isEmpty()){
-            int size = queue.size();
-            for(int i = 0; i < size; i++){
+            int sz = queue.size();
+            for(int i = 0; i < sz; i++){
                 int[] cur = queue.poll();
                 if(cur[0] == x && cur[1] == y){
                     return step;

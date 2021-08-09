@@ -25,6 +25,11 @@ Note:
 1 <= stones.length <= 30
 1 <= stones[i] <= 100
 
+hint:
+Think of the final answer as a sum of weights with + or - sign symbols infront of each weight. Actually, all sums with 1 of each sign symbol are possible.
+Use dynamic programming: for every possible sum with N stones, those sums +x or -x is possible with N+1 stones, where x is the value of the newest stone.
+(This overcounts sums that are all positive or all negative, but those don't matter.)
+
 This question eaquals to partition an array into 2 subsets whose difference is minimal
 (1) S_big + S_small  = total
 (2) S_big - S_small = diff  

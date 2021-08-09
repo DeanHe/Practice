@@ -49,6 +49,7 @@ Constraints:
 public class KnightDialer {
     int MOD = (int)(1e9 + 7);
     long[][][] dp; // dp[k][r][c] means # of distinct number dialed after k hop ended in pad[r][c]
+    int[] dirs = {1, -2, -1, -2, 1, 2, -1, 2, 1};
 
     public int knightDialer(int n) {
         long res = 0;
@@ -73,14 +74,9 @@ public class KnightDialer {
             return dp[n][r][c];
         }
         long res = 0;
-        res = (res + dfs(r - 1, c - 2, n - 1)) % MOD;
-        res = (res + dfs(r - 2, c - 1, n - 1)) % MOD;
-        res = (res + dfs(r - 2, c + 1, n - 1)) % MOD;
-        res = (res + dfs(r - 1, c + 2, n - 1)) % MOD;
-        res = (res + dfs(r + 1, c + 2, n - 1)) % MOD;
-        res = (res + dfs(r + 2, c + 1, n - 1)) % MOD;
-        res = (res + dfs(r + 2, c - 1, n - 1)) % MOD;
-        res = (res + dfs(r + 1, c - 2, n - 1)) % MOD;
+        for(int i = 0; i + 1 < dirs.length; i++){
+            res = (res + dfs(r + dirs[i], c + dirs[i + 1], n - 1)) % MOD;
+        }
         return dp[n][r][c] = res;
     }
 }

@@ -1,19 +1,47 @@
 package backtracking;
 
 import java.util.*;
-/*Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+/*
+Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 
-The same repeated number may be chosen from C unlimited number of times.
+The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
 
-Example
-Given candidate set [2,3,6,7] and target 7, a solution set is:
+It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
 
-[7]
-[2, 2, 3]
-Notice
-All numbers (including target) will be positive integers.
-Elements in a combination must be in non-descending order.
-The solution set must not contain duplicate combinations.
+
+
+Example 1:
+
+Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Explanation:
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+Example 2:
+
+Input: candidates = [2,3,5], target = 8
+Output: [[2,2,2,2],[2,3,3],[3,5]]
+Example 3:
+
+Input: candidates = [2], target = 1
+Output: []
+Example 4:
+
+Input: candidates = [1], target = 1
+Output: [[1]]
+Example 5:
+
+Input: candidates = [1], target = 2
+Output: [[1,1]]
+
+
+Constraints:
+
+1 <= candidates.length <= 30
+1 <= candidates[i] <= 200
+All elements of candidates are distinct.
+1 <= target <= 500
 */
 public class CombinationSum {
 	/**
@@ -27,11 +55,11 @@ public class CombinationSum {
             return res;
         }
         Arrays.sort(candidates);
-        ArrayList<Integer> temp = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
         dfs(candidates, target, 0, temp, res);
         return res;
     }
-    private void dfs(int[] candidates, int target, int pos, ArrayList<Integer> temp, List<List<Integer>> res){
+    private void dfs(int[] candidates, int target, int pos, List<Integer> temp, List<List<Integer>> res){
         if(target < 0){
             return;
         }

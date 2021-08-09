@@ -30,9 +30,9 @@ grid[r][c] is 0 or 1
 */
 
 public class ShortestPathInBinaryMatrix {
-    private int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-
+    
     public int shortestPathBinaryMatrix(int[][] grid) {
+        int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
         int rows = grid.length;
         int cols = grid[0].length;
         if (grid[0][0] == 1 || grid[rows - 1][cols - 1] == 1) {
@@ -40,22 +40,22 @@ public class ShortestPathInBinaryMatrix {
         }
         int step = 1;
         boolean[][] visited = new boolean[rows][cols];
-        Queue<Point> queue = new LinkedList<>();
-        queue.offer(new Point(0, 0));
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0});
         visited[0][0] = true;
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                Point cur = queue.poll();
-                if (cur.x == rows - 1 && cur.y == cols - 1) {
+            int sz = queue.size();
+            for (int i = 0; i < sz; i++) {
+                int[] cur = queue.poll();
+                if (cur[0] == rows - 1 && cur[1] == cols - 1) {
                     return step;
                 }
                 for (int[] dir : dirs) {
-                    int nb_x = cur.x + dir[0];
-                    int nb_y = cur.y + dir[1];
+                    int nb_x = cur[0] + dir[0];
+                    int nb_y = cur[1] + dir[1];
                     if (nb_x >= 0 && nb_x < rows && nb_y >= 0 && nb_y < cols) {
                         if (grid[nb_x][nb_y] == 0 && !visited[nb_x][nb_y]) {
-                            queue.offer(new Point(nb_x, nb_y));
+                            queue.offer(new int[]{nb_x, nb_y});
                             visited[nb_x][nb_y] = true;
                         }
                     }

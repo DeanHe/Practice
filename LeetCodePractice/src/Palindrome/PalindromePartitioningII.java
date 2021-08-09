@@ -13,6 +13,10 @@ Explanation: The palindrome partitioning ["aa","b"] could be produced using 1 cu
 
 cut[i] is the minimum of cut[j - 1] + 1 (j <= i), if [j, i] is palindrome.
 If [j, i] is palindrome, [j + 1, i - 1] is palindrome, and c[j] == c[i].
+
+analysis:
+TC O(N^ 2) SC O(N)
+https://leetcode.com/problems/palindrome-partitioning-ii/discuss/42198/My-solution-does-not-need-a-table-for-palindrome-is-it-right-It-uses-only-O(n)-space.
 */
 public class PalindromePartitioningII {
 	public int minCut(String s) {
@@ -20,19 +24,26 @@ public class PalindromePartitioningII {
 			return 0;
 		}
 		int len = s.length();
-		boolean[][] isPalindrome = new boolean[len][len];
 		int[] dp = new int[len]; // dp[i] means minimum cut to make s[0:i] all palindrome partitions
 		for (int i = 0; i < len; i++) {
 			dp[i] = i;
-			for (int j = 0; j <= i; j++) {
-				if (s.charAt(j) == s.charAt(i) && (j + 1 > i - 1 || isPalindrome[j + 1][i - 1])) {
-					isPalindrome[j][i] = true;
-					if (j == 0) {
-						dp[i] = 0;
-					} else {
-						dp[i] = Math.min(dp[i], dp[j - 1] + 1);
-					}
+		}
+		for(int i = 0; i  < len; i++){
+			// CASE 1. odd len: center is at index mid, expand on both sides
+			for(int l = 0; i - l >= 0 && i + l < len && s.charAt(i - l) == s.charAt(i + l); l++){
+				int temp = 0;
+				if(i - l > 0){
+					temp = dp[i - l - 1] + 1;
 				}
+				dp[i + l] = Math.min(dp[i + l], temp);
+			}
+			// CASE 2: even len: center is between [mid-1,mid], expand on both sides
+			for(int l = 0; i - l - 1 >= 0 && i + l < len && s.charAt(i - l - 1) == s.charAt(i + l); l++){
+				int temp = 0;
+				if(i - l - 1 > 0){
+					temp = dp[i - l - 2] + 1;
+				}
+				dp[i + l] = Math.min(dp[i + l], temp);
 			}
 		}
 		return dp[len - 1];

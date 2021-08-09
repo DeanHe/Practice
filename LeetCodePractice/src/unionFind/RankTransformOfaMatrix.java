@@ -53,7 +53,7 @@ Constraints:
 m == matrix.length
 n == matrix[i].length
 1 <= m, n <= 500
--109 <= matrix[row][col] <= 109
+-109 <= matrix[row][col] <= 10^9
 
 Time O(NNlog(MN))
 Space O(MN)
@@ -62,57 +62,69 @@ public class RankTransformOfaMatrix {
     public int[][] matrixRankTransform(int[][] matrix) {
         int rows = matrix.length, cols = matrix[0].length;
         int[][] res = new int[rows][cols];
-        Map<Integer, Integer> nextRankForRows = new HashMap<>(); // For row x, nextRankForRows[x] is the next rank
-        Map<Integer, Integer> nextRankForCols = new HashMap<>(); // For col x, nextRankForCols[x] is the next rank
-        for(int r = 0; r < rows; r++)
-            nextRankForRows.put(r, 1);
-        for(int c = 0; c < cols; c++)
-            nextRankForCols.put(c, 1);
-        TreeMap<Integer, List<int[]>> map = new TreeMap<>();
+        int[] rank = new int[rows + cols];
+        TreeMap<Integer, List<int[]>> valMap = new TreeMap<>();
         for(int r = 0; r < rows; r++){
             for(int c = 0; c < cols; c++){
-                map.putIfAbsent(matrix[r][c], new ArrayList<>());
-                map.get(matrix[r][c]).add(new int[]{r, c});
+                valMap.computeIfAbsent(matrix[r][c], x-> new ArrayList<>()).add(new int[]{r, c});
             }
         }
-        for(int key : map.keySet()){
-            List<int[]> ls = map.get(key);
-            UF uf = new UF(ls.size());
-            for(int i = 0; i < ls.size(); i++){
-                for(int j = i + 1; j  < ls.size(); j++){
-                    int r1 = ls.get(i)[0];
-                    int c1 = ls.get(i)[1];
-                    int r2 = ls.get(j)[0];
-                    int c2 = ls.get(j)[1];
-                    if(r1 == r2 || c1 == c2){
-                        uf.union(i, j);
-                    }
-                }
+        for(int key : valMap.keySet()){
+            List<int[]> ls = valMap.get(key);
+            UF uf = new UF(rows + cols);
+            int[] rankCopy = rank.clone();
+            for(int[] cur : ls){
+                int r = cur[0];
+                int c = cur[1];
+                int[] root = uf.union(r, rows + c);
+                rankCopy[root[1]] = Math.max(rankCopy[root[0]], rankCopy[root[1]]);
             }
-            Map<Integer, List<int[]>> all = new HashMap<>();
-            for(int i = 0; i < ls.size(); i++){
-                int root = uf.findRoot(i);
-                all.putIfAbsent(root, new ArrayList<>());
-                all.get(root).add(ls.get(i));
-            }
-            for(int root : all.keySet()){
-                int m = 0; // m will be the rank we assign to this all unionList
-                List<int[]> sameRowOrCol = all.get(root);
-                for(int[] idx : sameRowOrCol){
-                    int r = idx[0];
-                    int c = idx[1];
-                    m = Math.max(m, Math.max(nextRankForRows.get(r), nextRankForCols.get(c)));
-                }
-                for(int[] idx : sameRowOrCol){
-                    int r = idx[0];
-                    int c = idx[1];
-                    res[r][c] = m;
-                    nextRankForRows.put(r, m + 1);
-                    nextRankForCols.put(c, m + 1);
-                }
-
+            for(int[] cur : ls){
+                int r = cur[0];
+                int c = cur[1];
+                int root = uf.findRoot(r);
+                res[r][c] = rankCopy[root] + 1;
+                rank[r] = rankCopy[root] + 1;
+                rank[rows + c] = rankCopy[root] + 1;
             }
         }
         return res;
+    }
+
+    private class UF {
+        private int[] parent;
+
+        public UF(int n){
+            parent = new int[n];
+            for(int i = 0; i < n; i++){
+                parent[i] = i;
+            }
+        }
+
+        public boolean connected(int a, int b){
+            return findRoot(a) == findRoot(b);
+        }
+
+        public int[] union(int a, int b){
+            int root_a = findRoot(a);
+            int root_b = findRoot(b);
+            if(root_a != root_b){
+                parent[root_a] = root_b;
+            }
+            return new int[]{root_a, root_b};
+        }
+
+        public int findRoot(int x){
+            int root = x;
+            while(parent[root] != root){
+                root = parent[root];
+            }
+            while(parent[x] != root){
+                int fa = parent[x];
+                parent[x] = root;
+                x = fa;
+            }
+            return root;
+        }
     }
 }
