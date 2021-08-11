@@ -12,7 +12,7 @@ it should consist of only Walls and Path
 I will post the answer with the solution so other people will be able to find this question.
  */
 
-import ReservoirSampling.ShuffleAnArray;
+import reservoirSampling.ShuffleAnArray;
 
 import java.util.Arrays;
 import java.util.Random;

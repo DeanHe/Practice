@@ -1,7 +1,5 @@
-package ReservoirSampling;
+package reservoirSampling;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 

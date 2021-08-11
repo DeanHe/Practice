@@ -1,4 +1,4 @@
-package ReservoirSampling;
+package reservoirSampling;
 
 import java.util.Random;
 

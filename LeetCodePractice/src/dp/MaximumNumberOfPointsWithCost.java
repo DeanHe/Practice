@@ -52,7 +52,7 @@ Try using dynamic programming.
 dp[i][j] is the maximum number of points you can have if points[i][j] is the most recent cell you picked.
 
 analysis:
-TC (O(M * N))
+TC O(M * N)
 pre compute the preSum gain on previous row left[], right[]
 
 Tag: Google Interview
@@ -96,7 +96,6 @@ public class MaximumNumberOfPointsWithCost {
         // row 0, init
         for(int c = 0; c < cols; c++){
             dp[0][c] = points[0][c];
-            System.out.println(dp[0][c]);
         }
 
         for(int r = 1; r < rows; r++){
@@ -113,7 +112,6 @@ public class MaximumNumberOfPointsWithCost {
             for(int c = 0; c < cols; c++){
                 dp[r][c] = Math.max(dp[r][c], points[r][c] - c + left[c]);
                 dp[r][c] = Math.max(dp[r][c], points[r][c] + c + right[c]);
-                System.out.println(dp[r][c]);
             }
 
         }

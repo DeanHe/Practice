@@ -1,6 +1,5 @@
-package ReservoirSampling;
+package reservoirSampling;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /*Given an array w of positive integers, where w[i] describes the weight of index i, write a function pickIndex which randomly picks an index in proportion to its weight.

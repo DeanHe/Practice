@@ -1,4 +1,8 @@
 package math;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 Uh-oh -- you've been cornered by one of Commander Lambdas elite bunny trainers! Fortunately, you grabbed a beam weapon from an abandoned storeroom while you were running through the station, so you have a chance to fight your way out. But the beam weapon is potentially dangerous to you as well as to the bunny trainers: its beams reflect off walls, meaning you'll have to be very careful where you shoot to avoid bouncing a shot toward yourself!
 
@@ -33,7 +37,91 @@ Output:
  */
 public class BringingaGunToaTrainerFightGoogle {
     public int solution(int[] dimensions, int[] your_position, int[] trainer_position, int distance) {
-        //Your code here
+        int x_max_rooms = distance / dimensions[0] + 1;
+        int y_max_rooms = distance / dimensions[1] + 1;
+        int dsq = distance * distance;
+        Map<String, Integer> candidates = new HashMap<>();
+        for (int i = -x_max_rooms; i <= x_max_rooms; i++) {
+            for (int j = -y_max_rooms; j <= y_max_rooms; j++) {
+                int[] reflected_trainer = getLocation(dimensions, trainer_position, i, j);
+                int d = dist(your_position, reflected_trainer);
+                if (d <= dsq) {
+                    String tan = angle(your_position, reflected_trainer);
+                    if (d < candidates.getOrDefault(tan, Integer.MAX_VALUE)) {
+                        candidates.put(tan, d);
+                    }
+                }
+            }
+        }
+        for (int i = -x_max_rooms; i <= x_max_rooms; i++) {
+            for (int j = -y_max_rooms; j <= y_max_rooms; j++) {
+                int[] reflected_you = getLocation(dimensions, your_position, i, j);
+                int d = dist(your_position, reflected_you);
+                if (d <= dsq) {
+                    String tan = angle(your_position, reflected_you);
+                    if (candidates.containsKey(tan) && d < candidates.get(tan)) {
+                        candidates.remove(tan);
+                    }
+                }
+            }
+        }
+        return candidates.size();
+    }
+
+    private int[] getLocation(int[] dimensions, int[] position, int x_room, int y_room) {
+        int x = project(dimensions[0], position[0], x_room);
+        int y = project(dimensions[1], position[1], y_room);
+        return new int[]{x, y};
+    }
+
+    private int project(int dimension, int pos, int room) {
+        if (room % 2 == 0) {
+            return room * dimension + pos;
+        } else {
+            return (room + 1) * dimension - pos;
+        }
+    }
+
+    private int dist(int[] start, int[] end) {
+        return (start[0] - end[0]) * (start[0] - end[0])
+                + (start[1] - end[1]) * (start[1] - end[1]);
+    }
+
+    private int gcd(int a, int b) {
+        while(b > 0){
+           int ta = a;
+           a = b;
+           b = ta % b;
+        }
+        return a;
+    }
+
+    private String angle(int[] start, int[] end) {
+        int x_diff = end[0] - start[0];
+        int y_diff = end[1] - start[1];
+        if(x_diff == 0 && y_diff == 0) {
+            return "0:0";
+        }
+        int x_sign = x_diff > 0 ? 1 : -1;
+        int y_sign = y_diff > 0 ? 1 : -1;
+        if (x_diff == 0) {
+            if (y_sign > 0) {
+                return "0:1";
+            } else {
+                return "0:-1";
+            }
+        } else if (y_diff == 0) {
+            if (x_sign > 0) {
+                return "1:0";
+            } else {
+                return "-1:0";
+            }
+        } else {
+            int x_diff_abs = Math.abs(x_diff);
+            int y_diff_abs = Math.abs(y_diff);
+            int common = gcd(x_diff_abs, y_diff_abs);
+            return (x_sign * x_diff_abs / common) + ":" + (y_sign * y_diff_abs / common);
+        }
     }
 }
 
