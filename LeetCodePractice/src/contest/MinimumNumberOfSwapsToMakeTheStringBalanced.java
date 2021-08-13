@@ -55,10 +55,7 @@ public class MinimumNumberOfSwapsToMakeTheStringBalanced {
                 }
             }
         }
-        if(left % 2 == 1){
-            return (left + 1) / 2;
-        }
-        return left / 2;
+        return (left + 1) / 2;
     }
 }
 

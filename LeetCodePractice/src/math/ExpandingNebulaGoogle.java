@@ -1,4 +1,13 @@
 package math;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /*
 You've escaped Commander Lambda's exploding space station along with numerous escape pods full of bunnies. But -- oh no! -- one of the escape pods has flown into a nearby nebula, causing you to lose track of it. You start monitoring the nebula, but unfortunately, just a moment too late to find where the pod went. However, you do find that the gas of the steadily expanding nebula follows a simple pattern, meaning that you should be able to determine the previous state of the gas and narrow down where you might find the pod.
 
@@ -46,10 +55,81 @@ Input:
 Solution.solution({{true, false, true, false, false, true, true, true}, {true, false, true, false, false, false, true, false}, {true, true, true, false, false, false, true, false}, {true, false, true, false, false, false, true, false}, {true, false, true, false, false, true, true, true}}
 Output:
     254
+
+analysis:
+Cellular Automaton
  */
 public class ExpandingNebulaGoogle {
-    public int solution(boolean[][] g){
-        return -1;
+    public int solution(boolean[][] g) {
+        g = transpose(g);
+        int rows = g.length, cols = g[0].length;
+        int[] nums = new int[rows];
+        for (int r = 0; r < rows; r++) {
+            nums[r] = binary(g[r]);
+        }
+        Map<Integer, Map<Integer, List<Integer>>> rules = build(nums, cols);
+        Map<Integer, Integer> preImage = new HashMap<>();
+        for (int n = 0; n < 1 << (cols + 1); n++) {
+            preImage.put(n, 1);
+        }
+        for (int n : nums) {
+            Map<Integer, Integer> next = new HashMap<>();
+            for (int first : preImage.keySet()) {
+                for (int second : rules.get(n).getOrDefault(first, new ArrayList<>())) {
+                    next.put(second, next.getOrDefault(second, 0) + preImage.get(first));
+                }
+            }
+            preImage = next;
+        }
+        int res = preImage.values().stream().mapToInt(n -> n).sum();
+        return res;
+    }
+
+    // as height size is way smaller than width size, rotate the matrix by height and width
+    private boolean[][] transpose(boolean[][] g) {
+        int rows = g.length, cols = g[0].length;
+        boolean[][] res = new boolean[cols][rows];
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                res[c][r] = g[r][c];
+            }
+        }
+        return res;
+    }
+
+    private int binary(boolean[] arr) {
+        int len = arr.length;
+        int res = 0;
+        for (int i = 0; i < len; i++) {
+            if (arr[i]) {
+                res |= 1 << (len - 1 - i);
+            }
+        }
+        return res;
+    }
+
+    private Map<Integer, Map<Integer, List<Integer>>> build(int[] nums, int len) {
+        Set<Integer> numSet = new HashSet<>();
+        Arrays.stream(nums).forEach(n -> numSet.add(n));
+        Map<Integer, Map<Integer, List<Integer>>> map = new HashMap<>();
+        for (int first = 0; first < 1 << (len + 1); first++) {
+            for (int second = 0; second < 1 << (len + 1); second++) {
+                int state = evolve(first, second, len);
+                if (numSet.contains(state)) {
+                    map.computeIfAbsent(state, x -> new HashMap<>())
+                            .computeIfAbsent(first, x -> new ArrayList<>()).add(second);
+                }
+            }
+        }
+        return map;
+    }
+
+    private int evolve(int first, int second, int len) {
+        int a = first & ~(1 << len);
+        int b = second & ~(1 << len);
+        int c = first >> 1;
+        int d = second >> 1;
+        return (a & ~b & ~c & ~d) | (~a & b & ~c & ~d) | (~a & ~b & c & ~d) | (~a & ~b & ~c & d);
     }
 }
 

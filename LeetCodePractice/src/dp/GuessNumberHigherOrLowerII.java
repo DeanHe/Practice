@@ -1,4 +1,5 @@
 package dp;
+
 /*
 We are playing the Guessing Game. The game will work as follows:
 
@@ -61,10 +62,30 @@ Take a small example (n = 3). What do you end up paying in the worst case?
 The purely recursive implementation of minimax would be worthless for even a small n. You MUST use dynamic programming.
 
 As a follow-up, how would you modify your code to solve the problem of minimizing the expected loss, instead of the worst-case loss?
+
+analysis:
+mem[i][j] means the minimum cost to guess out the correct number in range i to j, same as minCost(mem, i, j)
+x assumes to be the wrong guess
  */
 public class GuessNumberHigherOrLowerII {
     public int getMoneyAmount(int n) {
-        return -1;
+        int[][] mem = new int[n + 1][n + 1];
+        return minCost(mem, 1, n);
+    }
+
+    private int minCost(int[][] mem, int s, int e) {
+        if (s >= e) {
+            return 0;
+        }
+        if (mem[s][e] != 0) {
+            return mem[s][e];
+        }
+        int res = Integer.MAX_VALUE;
+        for (int x = s; x <= e; x++) {
+            int cost = x + Math.max(minCost(mem, s, x - 1), minCost(mem, x + 1, e));
+            res = Math.min(res, cost);
+        }
+        return mem[s][e] = res;
     }
 }
 

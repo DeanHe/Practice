@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class Solution {
@@ -87,6 +89,19 @@ public class Solution {
             sum += pq.poll();
         }
         return sum;
+    }
+
+    public int[] decompressRLElist(int[] nums) {
+        int len = nums.length;
+        List<Integer> ls = new ArrayList<>();
+        for(int i = 0; i < len; i += 2){
+            int f = nums[i];
+            int v = nums[i + 1];
+            for(int j = 0; j < f; j++){
+                ls.add(v);
+            }
+        }
+        return ls.stream().mapToInt(i -> i).toArray();
     }
 }
 

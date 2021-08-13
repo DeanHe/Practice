@@ -45,7 +45,7 @@ public class PaintFence {
     	diff[1] = k;
     	for(int i = 2; i <= n; i++){
     		same[i] = diff[i - 1];
-    		diff[i] = (diff[i - 1] + diff[i - 2]) * (k - 1);
+    		diff[i] = (diff[i - 1] + same[i - 1]) * (k - 1);
     	}
     	return same[n] + diff[n];
     }

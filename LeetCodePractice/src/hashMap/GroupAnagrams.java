@@ -30,8 +30,7 @@ public class GroupAnagrams {
             }
 
             String key = String.valueOf(cnt);
-            map.putIfAbsent(key, new ArrayList<>());
-            map.get(key).add(s);
+            map.computeIfAbsent(key, x -> new ArrayList<>()).add(s);
         }
         return new ArrayList<>(map.values());
     }

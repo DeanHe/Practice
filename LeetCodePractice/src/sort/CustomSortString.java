@@ -22,7 +22,11 @@ Note:
 
 order has length at most 26, and no character is repeated in order.
 str has length at most 200.
-order and str consist of lowercase letters only.
+order and str consist of lowercase letters only.a
+
+analysis:
+count letter in str first
+fulfill the order at first, then append the remaining
  */
 public class CustomSortString {
     public String customSortString(String order, String str) {
