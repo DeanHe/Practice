@@ -1,4 +1,5 @@
 package dp;
+
 /*
 There are a row of n houses, each house can be painted with one of the k colors.
  * The cost of painting each house with a certain color is different. 
@@ -18,54 +19,57 @@ Could you solve it in O(nk)?
 
 Notice
 All costs are positive integers.
+
+analysis:
+need to track previous minimum cost, previous second minimum cost, previous minimum cost's ending color
 */
 public class PaintHouseII {
-	/**
+    /**
      * @param costs: n x k cost matrix
      * @return: an integer, the minimum cost to paint all houses
      */
     public int minCostII(int[][] costs) {
         // write your code here
-    	int houses = costs.length;
-    	if(houses == 0){
-    		return 0;
-    	}
-    	int colors = costs[0].length;
-    	if(colors == 0){
-    		return 0;
-    	}
-    	int[][] dp = new int[houses][colors];
-    	// init
+        int houses = costs.length;
+        if (houses == 0) {
+            return 0;
+        }
+        int colors = costs[0].length;
+        if (colors == 0) {
+            return 0;
+        }
+        int[][] dp = new int[houses][colors];
+        // init
 
-    	// transfer func
-    	int mostMin = 0;
+        // transfer func
+        int mostMin = 0;
         int secondMostMin = 0;
         int preMostMinColor = -1;
-    
-    	for(int i = 1; i < houses; i++){
-    		int preMostMin = mostMin;
+
+        for (int i = 1; i < houses; i++) {
+            int preMostMin = mostMin;
             int preSecondMostMin = secondMostMin;
             int curMostMinColor = -1;
-            
+
             mostMin = Integer.MAX_VALUE;
             secondMostMin = Integer.MAX_VALUE;
-            for(int c =0; c < colors; c++){
-            	if(c == preMostMinColor){
-            		dp[i][c] = preSecondMostMin + costs[i][c];
-            	} else {
-            		dp[i][c] = preMostMin + costs[i][c];
-            	}
-            	
-            	if(mostMin <= dp[i][c]){
-            		secondMostMin = Math.min(secondMostMin, dp[i][c]);
-            	} else {
-            		secondMostMin = mostMin;
-            		mostMin = dp[i][c];
-            		curMostMinColor = c;
-            	}
+            for (int c = 0; c < colors; c++) {
+                if (c == preMostMinColor) {
+                    dp[i][c] = preSecondMostMin + costs[i][c];
+                } else {
+                    dp[i][c] = preMostMin + costs[i][c];
+                }
+
+                if (dp[i][c] < mostMin) {
+                    secondMostMin = mostMin;
+                    mostMin = dp[i][c];
+                    curMostMinColor = c;
+                } else {
+                    secondMostMin = Math.min(secondMostMin, dp[i][c]);
+                }
             }
             preMostMinColor = curMostMinColor;
-    	}
-    	return mostMin;
+        }
+        return mostMin;
     }
 }

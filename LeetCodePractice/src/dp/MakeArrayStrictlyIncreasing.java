@@ -1,10 +1,11 @@
 package dp;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-/*Given two integer arrays arr1 and arr2, return the minimum number of operations (possibly zero) needed to make arr1 strictly increasing.
+/*
+Given two integer arrays arr1 and arr2, return the minimum number of operations (possibly zero) needed to make arr1 strictly increasing.
 
 In one operation, you can choose two indices 0 <= i < arr1.length and 0 <= j < arr2.length and do the assignment arr1[i] = arr2[j].
 
@@ -32,63 +33,56 @@ Explanation: You can't make arr1 strictly increasing.
 Constraints:
 
 1 <= arr1.length, arr2.length <= 2000
-0 <= arr1[i], arr2[i] <= 10^9*/
+0 <= arr1[i], arr2[i] <= 10^9
+
+hint:
+The state would be the index in arr1 and the index of the previous element in arr2 after sorting it and removing duplicates.
+
+analysis:
+Similar to Longest Increasing Subsequence problem.
+dp[i] is hashmap contains <last number : replacement count> at step i
+*/
 public class MakeArrayStrictlyIncreasing {
-	public int makeArrayIncreasing(int[] arr1, int[] arr2) {
-		int kInf = 1_000_000;
-		// make arr2 sorted and unique
+    public int makeArrayIncreasing(int[] arr1, int[] arr2) {
         Arrays.sort(arr2);
-        List<Integer> temp2 = new ArrayList<Integer>();
-        for(int i = 0; i < arr2.length; i++){
-        	if(i + 1 < arr2.length && arr2[i] == arr2[i + 1]){
-        		continue;
-        	}
-        	temp2.add(arr2[i]);
+        Map<Integer, Integer> cntMap = new HashMap<>();
+        cntMap.put(-1, 0);
+        for (int a1 : arr1) {
+            Map<Integer, Integer> temp = new HashMap<>();
+            for (int n : cntMap.keySet()) {
+                int n_cnt = cntMap.get(n);
+                // no replace
+                if (a1 > n) {
+                    temp.put(a1, Math.min(temp.getOrDefault(a1, Integer.MAX_VALUE), n_cnt));
+                }
+                // replace a1 with next available number greater than n from arr2
+                int i = binarySearch(arr2, n);
+                if (i != arr2.length) {
+                    temp.put(arr2[i], Math.min(temp.getOrDefault(arr2[i], Integer.MAX_VALUE), n_cnt + 1));
+                }
+            }
+            cntMap = temp;
         }
-        int[] arr2unique = new int[temp2.size()];
-        for(int i = 0; i < temp2.size(); i++){
-        	arr2unique[i] = temp2.get(i);
+        int res = Integer.MAX_VALUE;
+        for (int n : cntMap.keySet()) {
+            res = Math.min(res, cntMap.get(n));
         }
-        arr2 = arr2unique;
-        //mem
-        int[] keep = new int[arr1.length];
-        int[][] swap = new int[arr1.length][arr2.length];
-        Arrays.fill(keep, kInf);
-        keep[0] = 0;
-        for(int[] arr : swap){
-        	Arrays.fill(arr, kInf);
+        if (res == Integer.MAX_VALUE) {
+            return -1;
         }
-        Arrays.fill(swap[0], 1);
-        for(int i = 1; i < arr1.length; i++){
-        	int min_keep = kInf;
-        	int min_swap = kInf;
-        	for(int j = 0; j < arr2.length; j++){
-        		//case 4: b[j] > b[k] always true
-        		if(j > 0){
-        			min_swap = Math.min(min_swap, swap[i - 1][j - 1] + 1);
-        		}
-        		//case 3: a[i] > b[j]
-        		if(arr1[i] > arr2[j]){
-        			min_keep = Math.min(min_keep, swap[i - 1][j]);
-        		}
-        		//case 1: a[i] > a[i - 1]
-        		if(arr1[i] > arr1[i - 1]){
-        			keep[i] = keep[i - 1];
-        		}
-        		//case 2: b[j] > a[i - 1]
-        		if(arr2[j] > arr1[i - 1]){
-        			swap[i][j] = keep[i - 1] + 1;
-        		}
-        		keep[i] = Math.min(keep[i], min_keep);
-        		swap[i][j] = Math.min(swap[i][j], min_swap);
-        	}
+        return res;
+    }
+
+    private int binarySearch(int[] nums, int target) {
+        int s = 0, e = nums.length - 1;
+        while (s <= e) {
+            int mid = s + (e - s) / 2;
+            if (nums[mid] <= target) {
+                s = mid + 1;
+            } else {
+                e = mid - 1;
+            }
         }
-        int resBySwap = kInf;
-        for(int i = 0; i < arr2.length; i++){
-        	resBySwap = Math.min(resBySwap, swap[arr1.length - 1][i]);
-        }
-        int resByKeep = keep[arr1.length - 1];
-        int res = Math.min(resByKeep, resBySwap);
-        return res >= kInf ? -1 : res;
+        return s;
     }
 }

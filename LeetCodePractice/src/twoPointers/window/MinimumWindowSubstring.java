@@ -6,10 +6,34 @@ import java.util.Map;
 /*
 Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 
-Example:
+Example 1:
 
-Input: S = "ADOBECODEBANC", T = "ABC"
+Input: s = "ADOBECODEBANC", t = "ABC"
 Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+
+Example 3:
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+
+Constraints:
+
+m == s.length
+n == t.length
+1 <= m, n <= 10^5
+s and t consist of uppercase and lowercase English letters.
+
+
+Follow up: Could you find an algorithm that runs in O(m + n) time?
 Note:
 
 If there is no such window in S that covers all characters in T, return the empty string "".

@@ -38,9 +38,15 @@ parent[0] == -1 indicating that 0 is the root node.
 0 <= parent[i] < n for all 0 < i < n
 0 <= node < n
 There will be at most 5*10^4 queries.
+
+analysis:
+dp[i][j] stores the node i 's (2^j) th ancestor
+
+TC
+O(log(max(K)) * number of node) for pre processing
+O(log(K)) for getKthAncestor (N times query).
  */
 public class TreeAncestor {
-    // dp[i][j] stores (2^j)th ancestor of node i
     int[][] dp = new int[50001][30];
     List<List<Integer>> tree = new ArrayList<>();
     public TreeAncestor(int n, int[] parent) {
@@ -60,17 +66,17 @@ public class TreeAncestor {
         dfs(0, new ArrayList<>());
     }
 
-    private void dfs(int cur, ArrayList<Integer> parentList) {
-        int i = 0, len = parentList.size();
+    private void dfs(int cur, ArrayList<Integer> ancestors) {
+        int i = 0, len = ancestors.size();
         while((1 << i) <= len){
-            dp[cur][i] = parentList.get(len - (1 << i));
+            dp[cur][i] = ancestors.get(len - (1 << i));
             i++;
         }
-        parentList.add(cur);
+        ancestors.add(cur);
         for(int child : tree.get(cur)){
-            dfs(child, parentList);
+            dfs(child, ancestors);
         }
-        parentList.remove(parentList.size() - 1);
+        ancestors.remove(ancestors.size() - 1);
     }
 
     public int getKthAncestor(int node, int k) {

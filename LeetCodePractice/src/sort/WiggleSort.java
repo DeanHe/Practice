@@ -1,5 +1,6 @@
 package sort;
-/*Given an unsorted array nums, reorder it in-place such that
+/*
+Given an unsorted array nums, reorder it in-place such that
 
 nums[0] <= nums[1] >= nums[2] <= nums[3]....
 Example
@@ -13,7 +14,8 @@ Example 2:
 Input: [1, 2, 3, 4]
 Output: 1， 3， 2， 4]
 Notice
-Please complete the problem in-place.*/
+Please complete the problem in-place.
+*/
 public class WiggleSort {
 	/*
      * @param nums: A list of integers

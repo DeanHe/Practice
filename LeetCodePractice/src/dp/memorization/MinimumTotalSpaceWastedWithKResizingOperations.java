@@ -43,11 +43,14 @@ Constraints:
 hint:
 Given a range, how can you find the minimum waste if you can't perform any resize operations?
 Can we build our solution using dynamic programming using the current index and the number of resizing operations performed as the states?
+
+analysis:
+TC: O(N ^ 2 * K)
+SC: O(N * K)
  */
 public class MinimumTotalSpaceWastedWithKResizingOperations {
     int len;
     Integer[][] mem;
-    int MAX = (int) (200 * 1e6);
 
     public int minSpaceWastedKResizing(int[] nums, int k) {
         len = nums.length;
@@ -59,13 +62,18 @@ public class MinimumTotalSpaceWastedWithKResizingOperations {
         if (pos == len) {
             return 0;
         }
-        if (k == -1) {
-            return MAX;
-        }
         if (mem[pos][k] != null) {
             return mem[pos][k];
         }
-        int res = MAX, most = 0, sum = 0;
+        if (k == 0) {
+            int most = 0, sum = 0;
+            for (int i = pos; i < len; i++) {
+                most = Math.max(most, nums[i]);
+                sum += nums[i];
+            }
+            return most * (len - pos) - sum;
+        }
+        int res = Integer.MAX_VALUE, most = 0, sum = 0;
         for (int i = pos; i < len; i++) {
             most = Math.max(most, nums[i]);
             sum += nums[i];

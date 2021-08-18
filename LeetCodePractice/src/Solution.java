@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class Solution {
@@ -91,17 +93,39 @@ public class Solution {
         return sum;
     }
 
-    public int[] decompressRLElist(int[] nums) {
-        int len = nums.length;
-        List<Integer> ls = new ArrayList<>();
-        for(int i = 0; i < len; i += 2){
-            int f = nums[i];
-            int v = nums[i + 1];
-            for(int j = 0; j < f; j++){
-                ls.add(v);
+    public String minWindow(String s, String t) {
+        String res = "";
+        int i = 0, j = 0, slen = s.length(), tlen = t.length(), minLen = slen + 1;
+        Map<Character, Integer> cnt = new HashMap<>();
+        for(char c : t.toCharArray()){
+            cnt.put(c, cnt.getOrDefault(c, 0) + 1);
+        }
+        int unique = cnt.size();
+        while(j < slen){
+            char c = s.charAt(j);
+            if(cnt.containsKey(c)){
+                cnt.put(c, cnt.get(c) - 1);
+                if(cnt.get(c) == 0){
+                    unique--;
+                }
+            }
+            j++;
+            while (unique == 0){
+                if(j - i < minLen){
+                    minLen = j - i;
+                    res = s.substring(i, j);
+                }
+                char ic = s.charAt(i);
+                if(cnt.containsKey(ic)){
+                    cnt.put(ic, cnt.get(ic) + 1);
+                    if(cnt.get(ic) == 1){
+                        unique++;
+                    }
+                }
+                i++;
             }
         }
-        return ls.stream().mapToInt(i -> i).toArray();
+        return res;
     }
 }
 

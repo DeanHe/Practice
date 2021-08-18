@@ -36,23 +36,26 @@ Constraints:
 
 The number of nodes in the binary tree is in the range [1, 10^5].
 Each node's value is between [-10^4, 10^4].
+
+hint:
+Use DFS (Depth First Search) to traverse the tree, and constantly keep track of the current path maximum.
  */
 public class CountGoodNodesInBinaryTree {
-    int res = 0;
     public int goodNodes(TreeNode root) {
-        dfs(root, Integer.MIN_VALUE);
-        return res;
+        return dfs(root, Integer.MIN_VALUE);
     }
 
-    private void dfs(TreeNode root, int preMax) {
+    private int dfs(TreeNode root, int preMax) {
+        int res = 0;
         if(root == null){
-            return;
+            return 0;
         }
         if(root.val >= preMax){
             res++;
         }
         dfs(root.left, Math.max(root.val, preMax));
         dfs(root.right, Math.max(root.val, preMax));
+        return res;
     }
 }
 

@@ -63,7 +63,7 @@ public class NumberOfAtoms {
         		}
         	} else {
         		int start = i;
-        		i++; // pass the first Cap letter
+        		i++; // pass the first Cap Letter
         		while(i < len && Character.isLowerCase(formula.charAt(i))){
         			i++;
         		}
