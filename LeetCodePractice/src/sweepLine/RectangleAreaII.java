@@ -30,16 +30,16 @@ import java.util.TreeMap;
         The total area covered by all rectangles will never exceed 2^63 - 1 and thus will fit in a 64-bit signed integer.
 
 analysis:
-1. sort the points in x order
-2. For the points in the same x, calculate the current y (like the meeting room problem).
-3. In the next x, calculate the area by preY * (curX - preX)
+1. sort the points by y order then x order
+2. For the points in the same y, calculate the current x interval sum (like the meeting room problem).
+3. In the next y, calculate the area by x_interval_sum * (y - pre_y)
 
 The complexity in the worst case is O(N ^ 2) (all the rectangles have the same x)
 */
 public class RectangleAreaII {
     public int rectangleArea(int[][] rectangles) {
         int MOD = (int) (1e9 + 7);
-        int res = 0;
+        long res = 0;
         List<Point> points = new ArrayList<>();
         for (int[] rect : rectangles) {
             int x1 = rect[0];
@@ -57,31 +57,25 @@ public class RectangleAreaII {
             }
             return a.y - b.y;
         });
-        TreeMap<Integer, Integer> xSpanMap = new TreeMap<>(); // x : isStart of x
-        int preXspan = -1, preY = -1;
-        for (int i = 0; i < points.size(); i++) {
-            Point p = points.get(i);
-            xSpanMap.put(p.x, xSpanMap.getOrDefault(p.x, 0) + p.isStart);
-            if (i == points.size() - 1 || points.get(i + 1).y > p.y) {
-                if (preXspan > 0 && preY >= 0) {
-                    res += ((long) preXspan * (p.y - preY)) % MOD;
-                    res %= MOD;
-                }
-                preY = p.y;
-                preXspan = getXspan(xSpanMap);
-            }
+        TreeMap<Integer, Integer> x_start_cnt = new TreeMap<>(); // x : number of isStart of x
+        int x_interval = 0, pre_y = points.get(0).y;
+        for (Point p : points) {
+            x_start_cnt.put(p.x, x_start_cnt.getOrDefault(p.x, 0) + p.isStart);
+            res += (long) x_interval * (p.y - pre_y);
+            pre_y = p.y;
+            x_interval = cal_x_interval(x_start_cnt);
         }
-        return res;
+        return (int) (res % MOD);
     }
 
-    private int getXspan(TreeMap<Integer, Integer> xSpanMap) {
-        int res = 0, preX = -1, sign = 0; // sign : whether to include by sum isStart
+    private int cal_x_interval(TreeMap<Integer, Integer> xSpanMap) {
+        int res = 0, pre_x = -1, sign = 0; // sign : whether to include by sum isStart
         for (Map.Entry<Integer, Integer> e : xSpanMap.entrySet()) {
-            if (preX >= 0 && sign > 0) {
-                res += e.getKey() - preX;
+            if (pre_x >= 0 && sign > 0) {
+                res += e.getKey() - pre_x;
             }
             sign += e.getValue();
-            preX = e.getKey();
+            pre_x = e.getKey();
         }
         return res;
     }
@@ -93,6 +87,48 @@ public class RectangleAreaII {
             this.x = x;
             this.y = y;
             this.isStart = isStart;
+        }
+    }
+
+    public int rectangleAreaDFS(int[][] rectangles) {
+        int MOD = (int) (1e9 + 7);
+        long res = 0;
+        List<int[]> rectLists = new ArrayList<>();
+        for (int[] r : rectangles) {
+            addRectangle(rectLists, r, 0);
+        }
+        for (int[] r : rectLists) {
+            int x1 = r[0], y1 = r[1], x2 = r[2], y2 = r[3];
+            res += (long) (x2 - x1) * (y2 - y1);
+        }
+        return (int) (res % MOD);
+    }
+
+    private void addRectangle(List<int[]> rectLists, int[] r, int idx) {
+        if (idx == rectLists.size()) {
+            rectLists.add(r);
+            return;
+        }
+        int[] exist_r = rectLists.get(idx);
+        int x1 = r[0], y1 = r[1], x2 = r[2], y2 = r[3];
+        int e_x1 = exist_r[0], e_y1 = exist_r[1], e_x2 = exist_r[2], e_y2 = exist_r[3];
+        // no overlap
+        if (x1 >= e_x2 || x2 <= e_x1 || y1 >= e_y2 || y2 <= e_y1) {
+            addRectangle(rectLists, r, idx + 1);
+            return;
+        }
+
+        if (x1 < e_x1) {
+            addRectangle(rectLists, new int[]{x1, y1, e_x1, y2}, idx + 1);
+        }
+        if (x2 > e_x2) {
+            addRectangle(rectLists, new int[]{e_x2, y1, x2, y2}, idx + 1);
+        }
+        if (y1 < e_y1) {
+            addRectangle(rectLists, new int[]{Math.max(x1, e_x1), y1, Math.min(x2, e_x2), e_y1}, idx + 1);
+        }
+        if (y2 > e_y2) {
+            addRectangle(rectLists, new int[]{Math.max(x1, e_x1), e_y2, Math.min(x2, e_x2), y2}, idx + 1);
         }
     }
 }

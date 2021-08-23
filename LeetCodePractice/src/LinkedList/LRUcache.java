@@ -1,6 +1,7 @@
 package LinkedList;
 
-import java.util.*;
+import java.util.HashMap;
+
 /*
 Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.
 
@@ -34,16 +35,18 @@ Design and implement a data structure for Least Recently Used (LRU) cache. It sh
         head save the oldest, tail save the most recent
 */
 public class LRUcache {
-	private class Node {
+    private class Node {
         Node pre;
         Node next;
         int val;
         int key;
-        public Node(int k, int v){
+
+        public Node(int k, int v) {
             key = k;
             val = v;
         }
     }
+
     private int capacity;
     private HashMap<Integer, Node> map = new HashMap<>();
     // point to the least recent one
@@ -58,16 +61,9 @@ public class LRUcache {
         this.capacity = capacity;
     }
 
-    private void insertBeforeTail(Node n){
-        tail.pre.next = n;
-        n.next = tail;
-        n.pre = tail.pre;
-        tail.pre = n;
-    }
-    
     // @return an integer
     public int get(int key) {
-        if(!map.containsKey(key)){
+        if (!map.containsKey(key)) {
             return -1;
         }
         Node n = map.get(key);
@@ -82,7 +78,7 @@ public class LRUcache {
     // @return nothing
     public void set(int key, int value) {
         // write your code here
-        if(map.containsKey(key)){
+        if (map.containsKey(key)) {
             //exist node
             Node n = map.get(key);
             n.val = value;
@@ -91,7 +87,7 @@ public class LRUcache {
             insertBeforeTail(n);
         } else {
             // not exist node
-            if(map.size() == capacity){
+            if (map.size() == capacity) {
                 // map full, need to remove least recent one
                 map.remove(head.next.key);
                 head.next = head.next.next;
@@ -103,5 +99,12 @@ public class LRUcache {
             //add to latest
             insertBeforeTail(n);
         }
+    }
+
+    private void insertBeforeTail(Node n) {
+        tail.pre.next = n;
+        n.next = tail;
+        n.pre = tail.pre;
+        tail.pre = n;
     }
 }

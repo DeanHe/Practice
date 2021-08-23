@@ -25,7 +25,6 @@ The disadvantage of this solution are it is neither an online solution nor a sta
 public class KClosestPoints {
 	/**
      * @param points: a list of points
-     * @param origin: a point
      * @param k: An integer
      * @return: the k closest points
      */

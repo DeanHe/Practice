@@ -42,6 +42,8 @@ n == grid[i].length
 1 <= m, n <= 100
 grid[i][j] is 1 or -1.
 
+hint:
+Traverse the path of the ball downwards until you reach the bottom or get stuck.
  */
 public class WhereWillTheBallFall {
     int rows, cols;

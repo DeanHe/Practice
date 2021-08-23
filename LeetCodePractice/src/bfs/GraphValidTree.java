@@ -2,7 +2,8 @@ package bfs;
 
 import java.util.*;
 
-/*Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
+/*
+Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
 
 Example
 Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
@@ -42,14 +43,13 @@ public class GraphValidTree {
         if (edges == null || edges.length != n - 1) {
             return false;
         }
-        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        Map<Integer, List<Integer>> g = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> list = new ArrayList<>();
-            map.put(i, list);
+            g.put(i, new ArrayList<>());
         }
         for (int i = 0; i < edges.length; i++) {
-            map.get(edges[i][0]).add(edges[i][1]);
-            map.get(edges[i][1]).add(edges[i][0]);
+            g.get(edges[i][0]).add(edges[i][1]);
+            g.get(edges[i][1]).add(edges[i][0]);
         }
         boolean[] visited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
@@ -57,8 +57,7 @@ public class GraphValidTree {
         visited[0] = true;
         while (!queue.isEmpty()) {
             int cur = queue.poll();
-            ArrayList<Integer> neighbors = map.get(cur);
-            for (int nb : neighbors) {
+            for (int nb : g.get(cur)) {
                 if (!visited[nb]) {
                     visited[nb] = true;
                     queue.offer(nb);
@@ -75,17 +74,16 @@ public class GraphValidTree {
 
     //dfs
     public boolean validTreeDFS(int n, int[][] edges) {
-        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        Map<Integer, List<Integer>> g = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            ArrayList<Integer> list = new ArrayList<>();
-            map.put(i, list);
+            g.put(i, new ArrayList<>());
         }
         for (int i = 0; i < edges.length; i++) {
-            map.get(edges[i][0]).add(edges[i][1]);
-            map.get(edges[i][1]).add(edges[i][0]);
+            g.get(edges[i][0]).add(edges[i][1]);
+            g.get(edges[i][1]).add(edges[i][0]);
         }
         boolean[] visited = new boolean[n];
-        if (!dfs(0, -1, map, visited)) {
+        if (!dfs(0, -1, g, visited)) {
             return false;
         }
         for (int i = 0; i < n; i++) {
@@ -96,13 +94,12 @@ public class GraphValidTree {
         return true;
     }
 
-    private boolean dfs(int cur, int parent, HashMap<Integer, ArrayList<Integer>> map, boolean[] visited) {
+    private boolean dfs(int cur, int parent, Map<Integer, List<Integer>> map, boolean[] visited) {
         if (visited[cur]) {
             return false;
         }
         visited[cur] = true;
-        ArrayList<Integer> neighbors = map.get(cur);
-        for (int nb : neighbors) {
+        for (int nb : map.get(cur)) {
             if (nb != parent && !dfs(nb, cur, map, visited)) {
                 return false;
             }

@@ -1,6 +1,7 @@
 package contest;
 
-/*In a gold mine grid of size m * n, each cell in this mine has an integer representing the amount of gold in that cell, 0 if it is empty.
+/*
+In a gold mine grid of size m * n, each cell in this mine has an integer representing the amount of gold in that cell, 0 if it is empty.
 
 Return the maximum amount of gold you can collect under the conditions:
 
@@ -37,32 +38,33 @@ Constraints:
 
 1 <= grid.length, grid[i].length <= 15
 0 <= grid[i][j] <= 100
-There are at most 25 cells containing gold.*/
+There are at most 25 cells containing gold.
+*/
 public class PathWithMaximumGold {
-	int res = 0, rows = 0, cols = 0;
-	int[] dirs = { 0, 1, 0, -1, 0 };
 
-	public int getMaximumGold(int[][] grid) {
-		rows = grid.length;
-		cols = grid[0].length;
-		for (int r = 0; r < rows; r++) {
-			for (int c = 0; c < cols; c++) {
-				dfs(grid, r, c, 0);
-			}
-		}
-		return res;
-	}
+    int[] dirs = {0, 1, 0, -1, 0};
 
-	private void dfs(int[][] grid, int r, int c, int sum) {
-		if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] == 0) {
-			res = Math.max(res, sum);
-			return;
-		}
-		int val = grid[r][c];
-		grid[r][c] = 0;
-		for (int i = 0; i < dirs.length - 1; i++) {
-			dfs(grid, r + dirs[i], c + dirs[i + 1], sum + val);
-		}
-		grid[r][c] = val;
-	}
+    public int getMaximumGold(int[][] grid) {
+        int res = 0, rows = grid.length, cols = grid[0].length;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                res = Math.max(res, dfs(grid, r, c, 0));
+            }
+        }
+        return res;
+    }
+
+    private int dfs(int[][] grid, int r, int c, int sum) {
+        int res = 0, rows = grid.length, cols = grid[0].length;
+        if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] == 0) {
+            return sum;
+        }
+        int val = grid[r][c];
+        grid[r][c] = 0;
+        for (int i = 0; i < dirs.length - 1; i++) {
+            res = Math.max(res, dfs(grid, r + dirs[i], c + dirs[i + 1], sum + val));
+        }
+        grid[r][c] = val;
+        return res;
+    }
 }

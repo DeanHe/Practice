@@ -28,7 +28,6 @@ public class CoinChange {
      * @return: the fewest number of coins that you need to make up
      */
     public int coinChange(int[] coins, int amount) {
-        int len = coins.length;
         int[] dp = new int[amount + 1];
         //initialization
         dp[0] = 0;

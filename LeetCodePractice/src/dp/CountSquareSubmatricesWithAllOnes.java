@@ -39,18 +39,25 @@ package dp;
 analysis:
 similar to MaximalSquare
 CountSubarraysWIthAllOnes
+
+analysis:
+dp[i][j] means the max side of square with bottom right at matrix[i][j];
+TC: O(M * N)
+SC: O(M * N)
 */
 public class CountSquareSubmatricesWithAllOnes {
     public int countSquares(int[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
         int res = 0;
-        int[][] dp = new int[rows][cols]; //mem[i][j] means the max side of square with bottom right at matrix[i][j];
+        int[][] dp = new int[rows][cols];
         for(int r = 0; r < rows; r++){
             dp[r][0] = matrix[r][0] == 1 ? 1 : 0;
+            res += dp[r][0];
         }
         for(int c = 0; c < cols; c++){
             dp[0][c] = matrix[0][c] == 1 ? 1 : 0;
+            res += dp[0][c];
         }
         for(int r = 1; r < rows; r++){
             for(int c = 1; c  < cols; c++){
@@ -59,10 +66,6 @@ public class CountSquareSubmatricesWithAllOnes {
                     temp = Math.min(temp, dp[r - 1][c]);
                     dp[r][c] = temp + 1;
                 }
-            }
-        }
-        for(int r = 0; r < rows; r++){
-            for(int c = 0; c  < cols; c++){
                 res += dp[r][c];
             }
         }
