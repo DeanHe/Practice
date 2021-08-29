@@ -40,12 +40,37 @@ n == tasks.length
 1 <= n <= 14
 1 <= tasks[i] <= 10
 max(tasks[i]) <= sessionTime <= 15
+
+hint:
+Try all possible ways of assignment.
+If we can store the assignments in form of a state then we can reuse that state and solve the problem in a faster way.
+
+dp[state][i] means minimum # of sessions needs for state and used i for current session
  */
 public class MinimumNumberOfWorkSessionsToFinishTheTasks {
     public int minSessions(int[] tasks, int sessionTime) {
         int n = tasks.length;
-        int states = 1 << n - 1;
-        int[] dp = new int[1 << n];
-        return dp[states];
+        Integer[][] dp = new Integer[1 << n][16];
+        return dfs(tasks, sessionTime, dp, n, 0, 0);
+    }
+
+    private int dfs(int[] tasks, int sessionTime, Integer[][] dp, int n, int state, int sum) {
+        if (state == (1 << n) - 1) {
+            return 1;
+        }
+        if (dp[state][sum] != null) {
+            return dp[state][sum];
+        }
+        int res = n;
+        for (int i = 0; i < n; i++) {
+            if ((state & (1 << i)) == 0) {
+                if (sum + tasks[i] <= sessionTime) {
+                    res = Math.min(res, dfs(tasks, sessionTime, dp, n, state | (1 << i), sum + tasks[i]));
+                } else {
+                    res = Math.min(res, 1 + dfs(tasks, sessionTime, dp, n, state | (1 << i), tasks[i]));
+                }
+            }
+        }
+        return dp[state][sum] = res;
     }
 }
