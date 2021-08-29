@@ -50,18 +50,17 @@ public class EmployeeFreeTime {
 
     public List<Interval> employeeFreeTimeII(List<List<Interval>> schedule) {
         List<Interval> res = new ArrayList<>();
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        List<Interval> schedules = new ArrayList<>();
+        TreeMap<Integer, Integer> axis = new TreeMap<>();
         for(List<Interval> sch : schedule){
             for(Interval i : sch){
-                map.put(i.start, map.getOrDefault(i.start, 0) + 1);
-                map.put(i.end, map.getOrDefault(i.end, 0) - 1);
+                axis.put(i.start, axis.getOrDefault(i.start, 0) + 1);
+                axis.put(i.end, axis.getOrDefault(i.end, 0) - 1);
             }
         }
         int sum = 0, s = 0;
         boolean freeTime = false;
-        for(int i : map.keySet()){
-            sum += map.get(i);
+        for(int i : axis.keySet()){
+            sum += axis.get(i);
             if(sum == 0){
                 s = i;
                 freeTime = true;

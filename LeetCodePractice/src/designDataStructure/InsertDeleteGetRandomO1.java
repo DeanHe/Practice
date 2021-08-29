@@ -35,6 +35,9 @@ randomSet.insert(2);
 
 // Since 2 is the only number in the set, getRandom always return 2.
 randomSet.getRandom();
+
+analysis:
+not allow duplicate
 */
 public class InsertDeleteGetRandomO1 {
 	ArrayList<Integer> ls;
@@ -64,12 +67,10 @@ public class InsertDeleteGetRandomO1 {
         }
         int pos = index.get(val);
         int last = ls.size() - 1;
-        if(pos != last){
-        	 int lastVal = ls.get(last);
-             ls.set(pos, lastVal);
-             index.put(lastVal, pos);
-        }
+        int lastVal = ls.get(last);
+        ls.set(pos, lastVal);
         ls.remove(last);
+        index.put(lastVal, pos);
         index.remove(val);
         return true;
     }

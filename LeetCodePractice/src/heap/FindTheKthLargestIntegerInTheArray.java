@@ -1,4 +1,7 @@
-package contest;
+package heap;
+
+import java.util.PriorityQueue;
+
 /*
 You are given an array of strings nums and an integer k. Each string in nums represents an integer without leading zeros.
 
@@ -37,50 +40,27 @@ Constraints:
 1 <= nums[i].length <= 100
 nums[i] consists of only digits.
 nums[i] will not have any leading zeros.
+
+analysis:
+same as KthLargestElementInAnArray, can use quick select
+
+heap TC:O(NlogK * M), where N is length of nums array, K <= N is the kth largest element need to output, M is length of each num.
+SC: O(K)
  */
 public class FindTheKthLargestIntegerInTheArray {
     public String kthLargestNumber(String[] nums, int k) {
-        int len = nums.length;
-        return helper(nums, 0, len - 1, len - k);
-    }
-
-    private String helper(String[] nums, int s, int e, int k){
-        if(s == e){
-           return nums[s];
-        }
-        int idx = partition(nums, s, e);
-        if(idx == k){
-            return nums[idx];
-        } else if(idx < k){
-            return helper(nums, idx + 1, e, k);
-        } else {
-            return helper(nums, s, idx - 1, k);
-        }
-    }
-
-    private int partition(String[] nums, int s, int e){
-        String pivot = nums[e];
-        int i = s;
-        for(int j = s; j < e; j++){
-            if(compare(nums[j], pivot) <= 0){
-                swap(nums, i, j);
-                i++;
+        PriorityQueue<String> pq = new PriorityQueue<>((a, b) -> {
+            if(a.length() != b.length()){
+                return a.length() - b.length();
+            }
+            return a.compareTo(b);
+        });
+        for(String n : nums){
+            pq.offer(n);
+            if(pq.size() > k){
+                pq.poll();
             }
         }
-        swap(nums, i, e);
-        return i;
-    }
-
-    private void swap(String[] nums, int i, int j){
-        String temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-
-    private int compare(String a, String b){
-        if(a.length() != b.length()){
-            return a.length() - b.length();
-        }
-        return a.compareTo(b);
+        return pq.peek();
     }
 }

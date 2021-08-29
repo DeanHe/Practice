@@ -45,30 +45,39 @@ import java.util.Arrays;
         ranges.length == n + 1
         0 <= ranges[i] <= 100
 
-        similar to VideoStitching
+hint:
+Create intervals of the area covered by each tap, sort intervals by the left end.
+
+We need to cover the interval [0, n].
+we can start with the first interval and out of all intervals that intersect with it we choose the one that covers the farthest point to the right.
+
+What if there is a gap between intervals that is not covered ? we should stop and return -1 as there is some interval that cannot be covered.
+analysis:
+greedy
+similar to VideoStitching
 */
 public class MinimumNumberOfTapsToOpenToWateraGarden {
     public int minTaps(int n, int[] ranges) {
         int len = ranges.length;
-        int[][] arr = new int[len][2];
+        int[][] intervals = new int[len][2];
         for(int i = 0; i < len; i++){
-            arr[i][0] = i - ranges[i];
-            arr[i][1] = i + ranges[i];
+            intervals[i][0] = i - ranges[i];
+            intervals[i][1] = i + ranges[i];
         }
-        Arrays.sort(arr, (int[] a, int[] b) -> a[0] - b[0]);
+        Arrays.sort(intervals, (int[] a, int[] b) -> a[0] - b[0]);
         int count = 0, end = 0, i = 0;
         while(i < len){
-            if(arr[i][0] > end){
+            if(intervals[i][0] > end){
                 return -1;
             }
-            int temp = end;
-            while(i < len && arr[i][0] <= end){
-                temp = Math.max(temp, arr[i][1]);
+            int mostRight = end;
+            while(i < len && intervals[i][0] <= end){
+                mostRight = Math.max(mostRight, intervals[i][1]);
                 i++;
             }
             count++;
-            end = temp;
-            if(end >= len - 1){
+            end = mostRight;
+            if(end >= n){
                 return count;
             }
         }

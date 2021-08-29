@@ -52,7 +52,8 @@ public class RandomPointInNonOverlappingRectangles {
     }
 
     public int[] pick() {
-        int idx = map.ceilingKey(rand.nextInt(sum) + 1);
+        int prob = rand.nextInt(sum) + 1;
+        int idx = map.ceilingKey(prob);
         return pickInRect(rects[map.get(idx)]);
     }
 

@@ -1,9 +1,12 @@
-package contest;
+package bfs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
-/*A company has n employees with a unique ID for each employee from 0 to n - 1. The head of the company has is the one with headID.
+/*
+A company has n employees with a unique ID for each employee from 0 to n - 1. The head of the company has is the one with headID.
         Each employee has one direct manager given in the manager array where manager[i] is the direct manager of the i-th employee, manager[headID] = -1. Also it's guaranteed that the subordination relationships have a tree structure.
         The head of the company wants to inform all the employees of the company of an urgent piece of news. He will inform his direct subordinates and they will inform their subordinates and so on until all employees know about the urgent news.
         The i-th employee needs informTime[i] minutes to inform all of his direct subordinates (i.e After informTime[i] minutes, all his direct subordinates can start spreading the news).
@@ -52,14 +55,19 @@ import java.util.List;
         informTime.length == n
         0 <= informTime[i] <= 1000
         informTime[i] == 0 if employee i has no subordinates.
-        It is guaranteed that all the employees can be informed.*/
+        It is guaranteed that all the employees can be informed.
+
+        hint:
+        The company can be represented as a tree, headID is always the root.
+        Store for each node the time needed to be informed of the news.
+        Answer is the max time a leaf node needs to be informed.
+
+        analysis:
+        bfs, tree structure is a directed graph, no need to have visited[] array check
+        */
 public class TimeNeededToInformAllEmployees {
-    int n;
-    List<Integer>[] graph;
-    int[] informTime;
     public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
-        this.n = n;
-        graph = new List[n];
+        List<Integer>[] graph = new List[n];
         for(int i = 0; i < n; i++){
             graph[i] = new ArrayList<>();
         }
@@ -69,16 +77,18 @@ public class TimeNeededToInformAllEmployees {
                 graph[magr].add(i);
             }
         }
-        this.informTime = informTime;
-        return dfs(headID);
+        Queue<Integer> q = new LinkedList<>();
+        int res = 0;
+        q.offer(headID);
+        while(!q.isEmpty()){
+            int cur = q.poll();
+            res = Math.max(res, informTime[cur]);
+            for(int nb : graph[cur]){
+                q.offer(nb);
+                informTime[nb] += informTime[cur];
+            }
+        }
+        return res;
     }
 
-    private int dfs(int head) {
-        int time = 0;
-        for(int nb : graph[head]){
-            time = Math.max(time, dfs(nb));
-        }
-        time += informTime[head];
-        return time;
-    }
 }

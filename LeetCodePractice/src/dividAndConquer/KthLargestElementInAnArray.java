@@ -18,6 +18,7 @@ Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
 
 analysis:
+quick select
  based on selection algorithm (based on the partition method - the same one as used in quicksort).
 O(N) best case / O(N^2) worst case running time + O(1) memory
  */

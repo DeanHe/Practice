@@ -5,7 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/*Given an undirected tree consisting of n vertices numbered from 1 to n. A frog starts jumping from the vertex 1. In one second, the frog jumps from its current vertex to another unvisited vertex if they are directly connected. The frog can not jump back to a visited vertex. In case the frog can jump to several vertices it jumps randomly to one of them with the same probability, otherwise, when the frog can not jump to any unvisited vertex it jumps forever on the same vertex.
+/*
+Given an undirected tree consisting of n vertices numbered from 1 to n. A frog starts jumping from the vertex 1. In one second, the frog jumps from its current vertex to another unvisited vertex if they are directly connected. The frog can not jump back to a visited vertex. In case the frog can jump to several vertices it jumps randomly to one of them with the same probability, otherwise, when the frog can not jump to any unvisited vertex it jumps forever on the same vertex.
         The edges of the undirected tree are given in the array edges, where edges[i] = [fromi, toi] means that exists an edge connecting directly the vertices fromi and toi.
         Return the probability that after t seconds the frog is on the vertex target.
 
@@ -32,7 +33,12 @@ import java.util.Queue;
         1 <= edges[i][0], edges[i][1] <= n
         1 <= t <= 50
         1 <= target <= n
-        Answers within 10^-5 of the actual value will be accepted as correct.*/
+        Answers within 10^-5 of the actual value will be accepted as correct.
+
+        hint:
+        Use a variation of DFS with parameters 'curent_vertex' and 'current_time'.
+        Update the probability considering to jump to one of the children vertices.
+        */
 public class FrogPositionAfterTseconds {
     public double frogPosition(int n, int[][] edges, int t, int target) {
         List<Integer>[] graph = new List[n + 1];
@@ -51,8 +57,8 @@ public class FrogPositionAfterTseconds {
         queue.offer(1);
         int cur, nb_cnt;
         while(!queue.isEmpty() && t > 0){
-            int size = queue.size();
-            for(int i = 0; i < size; i++){
+            int sz = queue.size();
+            for(int i = 0; i < sz; i++){
                 cur = queue.poll();
                 nb_cnt = 0;
                 for(int nb : graph[cur]){

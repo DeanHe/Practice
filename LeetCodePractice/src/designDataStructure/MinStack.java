@@ -23,14 +23,14 @@ Output
 [null,null,null,null,-3,null,0,-2]
 
 Explanation
-MinStack minStack = new MinStack();
-minStack.push(-2);
-minStack.push(0);
-minStack.push(-3);
-minStack.getMin(); // return -3
-minStack.pop();
-minStack.top();    // return 0
-minStack.getMin(); // return -2
+MinStack maxStack = new MinStack();
+maxStack.push(-2);
+maxStack.push(0);
+maxStack.push(-3);
+maxStack.getMin(); // return -3
+maxStack.pop();
+maxStack.top();    // return 0
+maxStack.getMin(); // return -2
 
 
 Constraints:

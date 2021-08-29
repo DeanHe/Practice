@@ -29,35 +29,43 @@ Constraints:
 
 1 <= startTime.length == endTime.length == profit.length <= 5 * 10^4
 1 <= startTime[i] < endTime[i] <= 10^9
-1 <= profit[i] <= 10^4*/
+1 <= profit[i] <= 10^4
+
+hint:
+Think on DP.
+Sort the elements by starting time, then define the dp[i] as the maximum profit taking elements from the suffix starting at i.
+Use binarySearch (lower_bound/upper_bound on C++) to get the next index for the DP transition.
+
+analysis:
+sort the jobs by end time
+
+*/
 public class MaximumProfitInJobScheduling {
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
         int len = startTime.length;
-        // mem[i] means max Profit can be accumulated from 0 : endTime[i]
-        int dp[] = new int[len];
         Job[] jobs = new Job[len];
         for(int i = 0; i < len; i++) {
         	jobs[i] = new Job(startTime[i], endTime[i], profit[i]);
         }
-        Arrays.sort(jobs, (a, b) -> a.end - b.end);
-        dp[0] = jobs[0].profit;
-        for(int i = 1; i < len; i++) {
-        	dp[i] = Math.max(dp[i - 1], jobs[i].profit);
-        	for(int j = i - 1; j >= 0; j--) {
-        		if(jobs[j].end <= jobs[i].start) {
-        			dp[i] = Math.max(dp[i], jobs[i].profit + dp[j]);
-        			break;
-        		}
-        	}
+        Arrays.sort(jobs, (a, b) -> a.endTime - b.endTime);
+        TreeMap<Integer, Integer> dp = new TreeMap<>();
+        dp.put(0, 0);
+        for(Job job : jobs) {
+        	int curProfit = dp.floorEntry(job.startTime).getValue() + job.profit;
+        	if(curProfit > dp.lastEntry().getValue()){
+        	    dp.put(job.endTime, curProfit);
+            }
         }
-        return dp[len - 1];
+        return dp.lastEntry().getValue();
     }
-    class Job {
-    	int start, end, profit;
-    	public Job(int s, int e, int p) {
-    		start = s;
-    		end = e;
-    		profit = p;
-    	}
+
+    private class Job {
+        int startTime, endTime, profit;
+
+        public Job(int startTime, int endTime, int profit){
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.profit = profit;
+        }
     }
 }

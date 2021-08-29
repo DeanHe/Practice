@@ -3,7 +3,8 @@ package Palindrome;
 import java.util.HashSet;
 import java.util.Set;
 
-/*Given a string, determine if a permutation of the string could form a palindrome.
+/*
+Given a string, determine if a permutation of the string could form a palindrome.
 
 Example
 Example1

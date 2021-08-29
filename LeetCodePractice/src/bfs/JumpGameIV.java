@@ -43,6 +43,12 @@ import java.util.Queue;
         Constraints:
         1 <= arr.length <= 5 * 10^4
         -10^8 <= arr[i] <= 10^8
+
+        hint:
+        Build a graph of n nodes where nodes are the indices of the array and edges for node i are nodes i+1, i-1, j where arr[i] == arr[j].
+        Start bfs from node 0 and keep distance, answer is the distance when you reach node n-1.
+
+
 */
 public class JumpGameIV {
     public int minJumps(int[] arr) {
@@ -57,8 +63,8 @@ public class JumpGameIV {
         visited[0] = true;
         int step = 0;
         while(!queue.isEmpty()){
-            int size = queue.size();
-            for(int i = 0; i < size; i++){
+            int sz = queue.size();
+            for(int i = 0; i < sz; i++){
                 int cur = queue.poll();
                 if(cur == len - 1){
                     return step;

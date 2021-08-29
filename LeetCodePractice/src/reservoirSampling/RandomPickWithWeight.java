@@ -1,6 +1,7 @@
 package reservoirSampling;
 
 import java.util.Random;
+import java.util.TreeMap;
 
 /*Given an array w of positive integers, where w[i] describes the weight of index i, write a function pickIndex which randomly picks an index in proportion to its weight.
 
@@ -65,6 +66,24 @@ public class RandomPickWithWeight {
 			return start;
 		}
 		return end;
+	}
+
+	//approach II using treeMap
+	TreeMap<Integer, Integer> tm = new TreeMap<>();
+	int sum = 0;
+	public void RandomPickWithWeightTM(int[] w) {
+		rand = new Random();
+		len = w.length;
+		for (int i = 0; i < len; i++) {
+			sum += w[i];
+			tm.put(sum, i);
+		}
+	}
+
+	public int pickIndexTM() {
+		int prob = rand.nextInt(sum) + 1;
+		int key = tm.ceilingKey(prob);
+		return tm.get(key);
 	}
 }
 /**

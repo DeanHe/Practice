@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class Solution {
 
     public static void main(String[] args) {
@@ -52,20 +58,7 @@ public class Solution {
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/
     }
-
-    public int canBeTypedWords(String text, String brokenLetters) {
-        String[] arr = text.split(" ");
-        int cnt = 0;
-        for (String s : arr) {
-            for (char c : brokenLetters.toCharArray()) {
-                if (s.contains(String.valueOf(c))) {
-                    cnt++;
-                    break;
-                }
-            }
-        }
-        return arr.length - cnt;
-    }
 }
+
 
 

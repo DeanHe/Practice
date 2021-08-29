@@ -61,17 +61,17 @@ public class MergeIntervals {
 			return intervals;
 		}
 		List<int[]> ls = new ArrayList<>();
-		TreeMap<Integer, Integer> map = new TreeMap<>();
+		TreeMap<Integer, Integer> axis = new TreeMap<>();
 		for(int[] i : intervals){
-			map.put(i[0], map.getOrDefault(i[0], 0) + 1);
-			map.put(i[1], map.getOrDefault(i[1], 0) - 1);
+			axis.put(i[0], axis.getOrDefault(i[0], 0) + 1);
+			axis.put(i[1], axis.getOrDefault(i[1], 0) - 1);
 		}
-		int cnt = 0, s = Integer.MAX_VALUE, e = Integer.MIN_VALUE;
-		for(int i : map.keySet()){
-			cnt += map.get(i);
+		int sum = 0, s = Integer.MAX_VALUE, e = Integer.MIN_VALUE;
+		for(int i : axis.keySet()){
+			sum += axis.get(i);
 			s = Math.min(s, i);
 			e = Math.max(e, i);
-			if(cnt == 0){
+			if(sum == 0){
 				ls.add(new int[]{s, e});
 				s = Integer.MAX_VALUE;
 				e = Integer.MIN_VALUE;

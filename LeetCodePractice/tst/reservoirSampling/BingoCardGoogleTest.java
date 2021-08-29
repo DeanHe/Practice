@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 public class BingoCardGoogleTest {
@@ -21,6 +22,19 @@ public class BingoCardGoogleTest {
         for(int[] row : board){
             System.out.println(Arrays.toString(row));
         }
+        System.out.println("------");
+    }
+
+    @Test
+    public void testCase2() {
+        List<int[][]> res = bc.bingoBoardFollowUp(5);
+        for(int[][] board : res){
+            for(int[] row : board){
+                System.out.println(Arrays.toString(row));
+            }
+            System.out.println("------");
+        }
+
     }
 }
 

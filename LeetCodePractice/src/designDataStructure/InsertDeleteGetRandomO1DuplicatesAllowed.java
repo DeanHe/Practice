@@ -35,8 +35,12 @@ collection.remove(1);
 
 // getRandom should return 1 and 2 both equally likely.
 collection.getRandom();
+
+analysis:
+remember both the list and HashMap needs to have remove and add operation
+LinkedHashSet for O(1) iteration over large items, an iterator over a normal Hashset is actually O(h/n) where h is the table capacity
  */
-public class InsertDeleteGetRandomO1DuplicatesAllowed {
+public class  InsertDeleteGetRandomO1DuplicatesAllowed {
 
     ArrayList<Integer> ls;
     HashMap<Integer, Set<Integer>> index;
@@ -64,18 +68,20 @@ public class InsertDeleteGetRandomO1DuplicatesAllowed {
             return false;
         }
         int pos = index.get(val).iterator().next();
+        int last = ls.size() - 1;
+        int lastVal = ls.get(last);
         index.get(val).remove(pos);
-        int lastVal = ls.get(ls.size() - 1);
-        ls.set(pos, lastVal);
         index.get(lastVal).add(pos);
-        index.get(lastVal).remove(ls.size() - 1);
-        ls.remove(ls.size() - 1);
+        index.get(lastVal).remove(last);
+        ls.set(pos, lastVal);
+        ls.remove(last);
         return true;
     }
 
     /** Get a random element from the collection. */
     public int getRandom() {
-        return ls.get(random.nextInt(ls.size()));
+        int idx = random.nextInt(ls.size());
+        return ls.get(idx);
     }
 }
 /**
