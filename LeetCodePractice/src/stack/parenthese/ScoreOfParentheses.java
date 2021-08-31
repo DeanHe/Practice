@@ -39,21 +39,18 @@ space Complexity: O(1)
  */
 public class ScoreOfParentheses {
     public int scoreOfParentheses(String s) {
-        int res = 0;
         Stack<Integer> stack = new Stack<>();
+        stack.push(0);
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
-                stack.push(1);
+                stack.push(0);
             } else {
                 int cur = stack.pop();
-                if(s.charAt(i - 1) == '('){
-                    cur += 1;
-                } else {
-                    cur *= 2;
-                }
+                int pre = stack.pop();
+                stack.push(pre + Math.max(2 * cur, 1));
             }
         }
-        return res;
+        return stack.pop();
     }
 
     public int scoreOfParenthesesII(String s) {

@@ -38,6 +38,10 @@ Constraints:
 
 1 <= s.length <= 10^5
 s[i] is one of  '(' , ')' and lowercase English letters.
+
+analysis:
+first pass mark all the invalid idx, use stack to help store the idx
+second pass remove though
 */
 public class MinimumRemoveToMakeValidParentheses {
 	public String minRemoveToMakeValid(String s) {
