@@ -29,6 +29,9 @@ package twoPointers;
         Follow up:
 
         Can you solve it in O(N) time and O(1) space?
+
+        analysis:
+        loop the string backward
 */
 public class BackspaceStringCompare {
     public boolean backspaceCompare(String S, String T) {

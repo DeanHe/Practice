@@ -64,6 +64,14 @@ Storekeeper is a game in which the player pushes boxes around in a warehouse try
         1 <= grid[i].length <= 20
         grid contains only characters '.', '#',  'S' , 'T', or 'B'.
         There is only one character 'S', 'B' and 'T' in the grid.
+
+        hint:
+        We represent the search state as (player_row, player_col, box_row, box_col).
+        You need to count only the number of pushes. Then inside of your BFS check if the box could be pushed (in any direction) given the current position of the player
+
+        analysis:
+        The max length of row/col is 20 as per the constraint. 20 can be represented in binary as 10100. So it takes just max 5 bits to represent any number less than or equal to 20.
+A 32-bit integer can be split into 4 groups of 8 bits each to represent the state of box and storekeeper as
 */
 public class MinimumMovesToMoveaBoxToTheirTargetLocation {
     private int[] dirs = {-1, 0, 1, 0, -1};
@@ -104,6 +112,7 @@ public class MinimumMovesToMoveaBoxToTheirTargetLocation {
                     continue;
                 }
                 if(nextPlayerX == cur.curBoxX && nextPlayerY == cur.curBoxY){
+                    // if storekeeper meet the box, then the box move in the same direction
                     int nextBoxX = cur.curBoxX + dirs[i];
                     int nextBoxY = cur.curBoxY + dirs[i + 1];
                     if(nextBoxX < 0 || nextBoxX >= rows || nextBoxY < 0 || nextBoxY >= cols || grid[nextBoxX][nextBoxY] == '#'){
@@ -116,6 +125,7 @@ public class MinimumMovesToMoveaBoxToTheirTargetLocation {
                     queue.offer(next);
                     dist.put(next, dist.get(cur) + 1);
                 } else {
+                    // if the storekeeper doesn't meet the box, the position of the box do not chang
                     GridState next = new GridState(cur.curBoxX, cur.curBoxY, nextPlayerX, nextPlayerY);
                     if(dist.containsKey(next) && dist.get(next) <= dist.get(cur)){
                         continue;

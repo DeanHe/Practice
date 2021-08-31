@@ -41,14 +41,10 @@ import java.util.Arrays;
         -1000 <= values[i] <= 1000
 */
 public class StoneGameIII {
-    int len;
-    int[] stoneVal, mem;
     public String stoneGameIII(int[] stoneValue) {
-        len = stoneValue.length;
-        stoneVal = stoneValue;
-        mem = new int[len];
-        Arrays.fill(mem, Integer.MIN_VALUE);
-        int score = dfs(0);
+        int len = stoneValue.length;
+        Integer[] dp = new Integer[len];
+        int score = dfs(stoneValue, dp, 0);
         if(score > 0){
             return "Alice";
         } else if(score == 0){
@@ -58,18 +54,19 @@ public class StoneGameIII {
         }
     }
     // dfs means the maximum relative score one can get start at index i of stones
-    private int dfs(int i){
+    private int dfs(int[] stoneValue, Integer[] dp, int i){
+        int len = stoneValue.length;
         if(i >= len){
             return 0;
         }
-        if(mem[i] != Integer.MIN_VALUE){
-            return mem[i];
+        if(dp[i] != null){
+            return dp[i];
         }
-        int sum = 0;
+        int res = Integer.MIN_VALUE, sum = 0;
         for(int j = 0; j < 3 && i + j < len; j++){
-            sum += stoneVal[i + j];
-            mem[i] = Math.max(mem[i], sum - dfs(i + j + 1));
+            sum += stoneValue[i + j];
+            res = Math.max(res, sum - dfs(stoneValue, dp,i + j + 1));
         }
-        return mem[i];
+        return dp[i] = res;
     }
 }
