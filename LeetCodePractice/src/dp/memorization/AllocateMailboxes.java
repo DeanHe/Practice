@@ -42,6 +42,9 @@ Given the array houses and an integer k. where houses[i] is the location of the 
         1 <= houses[i] <= 10^4
         1 <= k <= n
         array houses contain unique integers.
+
+        analysis:
+        convert house array to cost matrix between any two positions
 */
 
 import java.util.Arrays;
@@ -49,27 +52,25 @@ import java.util.Arrays;
 public class AllocateMailboxes {
     int UPPER_BOUND = 10000000;
     Integer[][] dp;
-    int[][] cost;
     int len, k;
     public int minDistance(int[] houses, int k) {
         this.k = k;
         this.len = houses.length;
         Arrays.sort(houses);
-        cost = new int[len][len];
+        int[][] cost = new int[len][len];
         dp = new Integer[len][k];
         for(int s = 0; s < len; s++){
-            for(int l = 0; s + l < len; l++){
-                int e = s + l;
+            for(int e = s; e < len; e++){
                 int median = houses[(s + e) / 2];
                 for(int i = s; i <= e; i++){
                     cost[s][e] += Math.abs(houses[i] - median);
                 }
             }
         }
-        return dfs(houses, 0, 0);
+        return dfs(cost, 0, 0);
     }
 
-    private int dfs(int[] houses, int cur, int group) {
+    private int dfs(int[][] cost, int cur, int group) {
         if(cur == len && group == k){
             return 0;
         }
@@ -81,7 +82,7 @@ public class AllocateMailboxes {
         }
         int res = UPPER_BOUND;
         for(int i = cur; i < len; i++){
-            res = Math.min(res, cost[cur][i] + dfs(houses, i + 1, group + 1));
+            res = Math.min(res, cost[cur][i] + dfs(cost, i + 1, group + 1));
         }
         return dp[cur][group] = res;
     }
