@@ -1,8 +1,12 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Solution {
 
@@ -57,6 +61,55 @@ public class Solution {
 		int x = 0;
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/
+    }
+    public int[] answerQueries(ArrayList<int[]> queries, int N){
+        int len = queries.size();
+        int[] res = new int[len];
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        for(int i = 0; i < len; i++){
+            int[] q = queries.get(i);
+            int op = q[0];
+            int n = q[1];
+            if(op == 1){
+                // set
+                treeSet.add(i);
+                res[i] = 2;
+            } else {
+                // get
+                if(treeSet.ceiling(i) != null){
+                     res[i] = 2;
+                } else {
+                    res[i] = -1;
+                }
+            }
+        }
+        return res;
+    }
+
+    public List<int[]> aboveAverageSubarrays(int[] A){
+        // O(N^2)
+        List<int[]> res = new ArrayList<>();
+        int len = A.length;
+        int[] preSum = new int[len + 1];
+        for(int i = 0; i < len; i++){
+            preSum[i + 1] = A[i] + preSum[i];
+        }
+        for(int s = 0; s < len; s++){
+            for(int e = s; e < len; e++){
+                int subSum = preSum[e + 1] - preSum[s];
+                double subAvg = subSum * 1.0 / (e - s + 1);
+                int remainCnt = len - (e - s + 1);
+                if(remainCnt == 0){
+                    res.add(new int[]{s, e});
+                } else {
+                    double remainAvg = (preSum[len] - subSum) * 1.0 / remainCnt;
+                    if(subAvg > remainAvg){
+                        res.add(new int[]{s, e});
+                    }
+                }
+            }
+        }
+        return res;
     }
 }
 

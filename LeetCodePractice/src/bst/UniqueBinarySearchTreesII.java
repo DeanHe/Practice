@@ -22,6 +22,9 @@ Output: [[1]]
 Constraints:
 
 1 <= n <= 8
+
+analysis:
+consider each number to be the root element, and iterate over possible leftSubTrees and possible rightSubTrees
  */
 public class UniqueBinarySearchTreesII {
 	/**
