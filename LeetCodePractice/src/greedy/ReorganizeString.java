@@ -23,31 +23,31 @@ public class ReorganizeString {
         int len = S.length();
         char[] res = new char[len];
         int[] cnt = new int[26];
-        int max = 0, maxIdx = 0;
+        int maxCnt = 0, maxLetterIdx = 0;
         for(char c : S.toCharArray()){
             int idx = c - 'a';
             cnt[idx]++;
-            if(cnt[idx] > max){
-                max = cnt[idx];
-                maxIdx = idx;
+            if(cnt[idx] > maxCnt){
+                maxCnt = cnt[idx];
+                maxLetterIdx = idx;
             }
         }
-        if(max > (len - 1) / 2){
+        if(maxCnt > (len + 1) / 2){
             return "";
         }
         int i = 0;
-        while(cnt[maxIdx] > 0){
-            res[i] = (char)('a' + maxIdx);
-            cnt[maxIdx]--;
+        while(cnt[maxLetterIdx] > 0){
+            res[i] = (char)('a' + maxLetterIdx);
+            cnt[maxLetterIdx]--;
             i += 2;
         }
-        for(int idx = 0; idx < cnt.length; idx++){
-            while(cnt[idx] > 0){
+        for(int j = 0; j < cnt.length; j++){
+            while(cnt[j] > 0){
                 if(i > len - 1){
                     i = 1;
                 }
-                res[i] = (char)('a' + idx);
-                cnt[idx]--;
+                res[i] = (char)('a' + j);
+                cnt[j]--;
                 i += 2;
             }
         }

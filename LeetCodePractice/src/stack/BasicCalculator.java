@@ -19,19 +19,19 @@ Example 3:
 
 Input: "(1+(4+5+2)-3)+(6+8)"
 Output: 23
+
+analysis:
+push previous res to stack when meet open parenthesis
+pop previous res to stack when meet close parenthesis
 */
 public class BasicCalculator {
 	public int calculate(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
 		}
+		int res = 0, cur = 0, sign = 1;
 		Stack<Integer> stack = new Stack<>();
-		int len = s.length();
-		int res = 0;
-		int cur = 0;
-		int sign = 1;
-		for (int i = 0; i < len; i++) {
-			char c = s.charAt(i);
+		for (char c : s.toCharArray()) {
 			if (Character.isDigit(c)) {
 				cur = cur * 10 + c - '0';
 			} else {

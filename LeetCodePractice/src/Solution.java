@@ -1,5 +1,6 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -108,6 +109,29 @@ public class Solution {
                     }
                 }
             }
+        }
+        return res;
+    }
+
+    public int numberOfWeakCharacters(int[][] properties) {
+        Arrays.sort(properties, (a, b) -> {
+            if(a[0] != b[0]){
+                return a[0] - b[0];
+            }
+            return a[1] - b[1];
+        });
+        int len = properties.length, res = 0;
+        Deque<int[]> deque = new ArrayDeque<>();
+        for(int i = 0; i < len; i++){
+           while(!deque.isEmpty() && deque.peekFirst()[0] < properties[i][0] && deque.peekFirst()[1] < properties[i][1]){
+               deque.pollFirst();
+               res++;
+           }
+            while(!deque.isEmpty() && deque.peekLast()[0] < properties[i][0] && deque.peekLast()[1] < properties[i][1]){
+                deque.pollLast();
+                res++;
+            }
+           deque.offerLast(properties[i]);
         }
         return res;
     }

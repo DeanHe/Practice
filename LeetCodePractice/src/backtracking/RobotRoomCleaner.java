@@ -63,21 +63,18 @@ public class RobotRoomCleaner {
         visited.add(r + ":" + c);
         robot.clean();
         for (int i = 0; i < dirs.length - 1; i++) {
-            if (robot.move()) {
-                int nb_r = r + dirs[facing];
-                int nb_c = c + dirs[facing + 1];
-                if (!visited.contains(nb_r + ":" + nb_c)) {
-                    dfs(nb_r, nb_c, facing, robot);
-                    backToPreviousPosition(robot);
-                }
+            int nb_facing = (facing + i) % dirs.length - 1;
+            int nb_r = r + dirs[nb_facing];
+            int nb_c = c + dirs[nb_facing + 1];
+            if (!visited.contains(nb_r + ":" + nb_c) && robot.move()) {
+                dfs(nb_r, nb_c, nb_facing, robot);
+                goBack(robot);
             }
-            facing++;
-            facing = facing % (dirs.length - 1);
             robot.turnRight();
         }
     }
 
-    private void backToPreviousPosition(Robot robot) {
+    private void goBack(Robot robot) {
         robot.turnRight();
         robot.turnRight();
         robot.move();

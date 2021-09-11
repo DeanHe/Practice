@@ -10,6 +10,8 @@ Example 2:
 Input: "abca"
 Output: True
 Explanation: You could delete the character 'c'.
+
+TC O(N)
 */
 public class ValidPalindromeII {
     public boolean validPalindrome(String s) {

@@ -40,6 +40,7 @@ All arithmetic subsequence slices are:
 [2,4,6,8,10]
 [2,6,10]
 
+analysis:
 We can define weak arithmetic subsequences as follows:
 
 Weak arithmetic subsequences are subsequences that consist of at least two elements and if the difference between any two consecutive elements is the same.
@@ -51,24 +52,26 @@ For any pair i, j (i != j), A[i] and A[j] can always form a weak arithmetic subs
 If we can append a new element to a weak arithmetic subsequence and keep it arithmetic, then the new subsequence must be an arithmetic subsequence.
 
 check leetcode solution
+
+mem[i].get(d) denotes the number of weak arithmetic subsequences that ends with A[i] and its common difference is d.
+
+TC: O(N ^ 2)
 */
 public class ArithmeticSlicesII {
-	public int numberOfArithmeticSlices(int[] A) {
-        int res = 0;
-        int len = A.length;
-        Map<Integer, Integer>[] dp = new Map[len]; //mem[i].get(d) denotes the number of weak arithmetic subsequences that ends with A[i] and its common difference is d.
+	public int numberOfArithmeticSlices(int[] nums) {
+		int res = 0, len = nums.length;
+        Map<Integer, Integer>[] dp = new Map[len];
         for(int i = 0; i < len; i++){
         	dp[i] = new HashMap<>();
         	for(int j = 0; j < i; j++){
-            	long diff = (long)A[i] - A[j];
+            	long diff = (long)nums[i] - nums[j];
             	if(diff <= Integer.MIN_VALUE || diff > Integer.MAX_VALUE){
             		continue;
             	}
             	int d = (int)diff;
-            	int c1 = dp[i].getOrDefault(d, 0);
-            	int c2 = dp[j].getOrDefault(d, 0);
-            	res += c2;
-            	dp[i].put(d, c1 + c2 + 1);
+            	int cnt = dp[j].getOrDefault(d, 0);
+            	res += cnt;
+            	dp[i].put(d, dp[i].getOrDefault(d, 0) + cnt + 1);
             }
         }
         return res;

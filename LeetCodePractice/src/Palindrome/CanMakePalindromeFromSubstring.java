@@ -2,7 +2,8 @@ package Palindrome;
 
 import java.util.*;
 
-/*Given a string s, we make queries on substrings of s.
+/*
+Given a string s, we make queries on substrings of s.
 
 For each query queries[i] = [left, right, k], we may rearrange the substring s[left], ..., s[right], and then choose up to k of them to replace with any lowercase English letter. 
 
@@ -29,7 +30,8 @@ Constraints:
 1 <= s.length, queries.length <= 10^5
 0 <= queries[i][0] <= queries[i][1] < s.length
 0 <= queries[i][2] <= s.length
-s only contains lowercase English letters.*/
+s only contains lowercase English letters.
+*/
 
 public class CanMakePalindromeFromSubstring {
 	public List<Boolean> canMakePaliQueries(String s, int[][] queries) {

@@ -21,7 +21,8 @@ Output: 0
 
 Constraints:
 
-0 <= n <= 5 * 106
+0 <= n <= 5 * 10^6
+O(N)
  */
 public class CountPrimes {
     public int countPrimes(int n) {

@@ -8,6 +8,9 @@ Example
 Given n = 3, a solution set is:
 
 "((()))", "(()())", "(())()", "()(())", "()()()"
+
+TC: O(2^N)
+SC: O(N)
 */
 public class GenerateParentheses {
 	/**

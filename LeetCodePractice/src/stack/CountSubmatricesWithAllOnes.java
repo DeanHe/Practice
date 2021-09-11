@@ -51,6 +51,7 @@ Output: 5
 analysis:
 similar to MaximalSquare
 
+TC: O(M*N)
 */
 public class CountSubmatricesWithAllOnes {
     public int countMatricies(int[][] matrix) {

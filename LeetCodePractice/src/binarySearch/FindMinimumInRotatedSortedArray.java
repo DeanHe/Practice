@@ -43,6 +43,10 @@ You can divide the search space into two and see which direction to go. Can you 
 
 All the elements to the left of inflection point > first element of the array.
 All the elements to the right of inflection point < first element of the array.
+
+analysis:
+binary search TC O(LogN)
+remove the sorted part in every recursion
  */
 public class FindMinimumInRotatedSortedArray {
 

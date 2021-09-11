@@ -26,6 +26,9 @@ Constraints:
 1 <= k <= 1000
 arr[i] < arr[j] for 1 <= i < j <= arr.length
 
+hint:
+Keep track of how many positive numbers are missing as you scan the array.
+
 analysis:
 arr[i] - (i + 1) will be the count of number that missed.
 we compare the missing number count of arr[0:mid], with expect missing count k

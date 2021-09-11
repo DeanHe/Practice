@@ -34,6 +34,10 @@ Given an array points containing the coordinates of points on a 2D plane, sorted
 
         hint:
         Use a priority queue to store for each point i, the tuple [yi-xi, xi]
+        Loop through the array and pop elements from the heap if the condition xj - xi > k, where j is the current index and i is the point on top the queue.
+
+        analysis:
+        for j > i, the equals turns to x_j + y_j  + y_i - x_i, which means we need to find the smallest qualified y_i - x_i
 */
 
 import java.util.PriorityQueue;

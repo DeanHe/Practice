@@ -40,6 +40,9 @@ Constraints:
 1 <= target.length <= 10^5
 1 <= target[i] <= 10^5
 
+hint:
+For a given range of values in target, an optimal strategy is to increment the entire range by the minimum value. The minimum in a range could be obtained with Range minimum query or Segment trees algorithm.
+
 analysis:
 Start with first position a[0]. We know that it will take overall a[0] operations to reach a[0] from 0.
 

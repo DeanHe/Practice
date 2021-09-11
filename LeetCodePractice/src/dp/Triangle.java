@@ -37,6 +37,8 @@ Follow up: Could you do this using only O(n) extra space, where n is the total n
 
 analysis:
 bottom up dp
+dp[i] means minimum sum path ended by current row and index i
+initialize by the last row
  */
 public class Triangle {
     public int minimumTotal(List<List<Integer>> triangle) {
