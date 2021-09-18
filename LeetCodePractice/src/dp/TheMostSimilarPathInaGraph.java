@@ -84,7 +84,7 @@ public class TheMostSimilarPathInaGraph {
         //transfer func
         for(int i = 1; i < len; i++){
             for(int j = 0; j < n; j++){
-                int editDist = names[j].equals(targetPath[i]) ? 0 : 1;
+                int editDist = targetPath[i].equals(names[j]) ? 0 : 1;
                 List<Integer> nbs = g.getOrDefault(j, new ArrayList<>());
                 int temp = Integer.MAX_VALUE, last = -1;
                 for(int nb : nbs){

@@ -43,6 +43,17 @@ Constraints:
 1 <= heights[i] <= 10^6
 0 <= bricks <= 10^9
 0 <= ladders <= heights.length
+
+hint:
+Assume the problem is to check whether you can reach the last building or not.
+You'll have to do a set of jumps, and choose for each one whether to do it using a ladder or bricks. It's always optimal to use ladders in the largest jumps.
+Iterate on the buildings, maintaining the largest #ladders jumps and the sum of the remaining ones so far, and stop whenever this sum exceeds #bricks.
+
+analysis:
+Greedy
+
+TC O(N log K)
+SC O(K)
  */
 public class FurthestBuildingYouCanReach {
     public int furthestBuilding(int[] heights, int bricks, int ladders) {

@@ -46,23 +46,25 @@ The original graph has no parallel edges.
 A reachable node is a node that can be travelled to using at most M moves starting from node 0.
 
 analysis:
+get all nodes can be reachable by node 0 by pq.
 Instead of maintaining a MinHeap which keeps track of shortest distances to the source, we maintain a MaxHeap that keeps track of maximum moves remained for each node.
+
+dist map saves remain move after stop
+Time Complexity: O(E log N),
 */
 public class ReachableNodesInSubdividedGraph {
-	public int reachableNodes(int[][] edges, int M, int N) {
+	public int reachableNodes(int[][] edges, int maxMoves, int n) {
 		Map<Integer, List<int[]>> graph = new HashMap<>();
 		Map<Integer, Integer> dist = new HashMap<>();
 		for(int[] edge : edges){
 			int start = edge[0];
 			int end = edge[1];
 			int travel = edge[2];
-			graph.putIfAbsent(start, new ArrayList<>());
-			graph.get(start).add(new int[]{end, travel});
-			graph.putIfAbsent(end, new ArrayList<>());
-			graph.get(end).add(new int[]{start, travel});
+			graph.computeIfAbsent(start, x -> new ArrayList<>()).add(new int[]{end, travel});
+			graph.computeIfAbsent(end, x -> new ArrayList<>()).add(new int[]{start, travel});
 		}
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]); // max heap
-		pq.offer(new int[]{0, M});
+		pq.offer(new int[]{0, maxMoves});
 		while(!pq.isEmpty()){
 			int[] cur = pq.poll();
 			int stop = cur[0];
@@ -71,15 +73,12 @@ public class ReachableNodesInSubdividedGraph {
 				continue;
 			}
 			dist.put(stop, remain);
-			if (graph.containsKey(stop)) {
-				List<int[]> neighbors = graph.get(stop);
-				for (int[] nb : neighbors) {
-					int nb_stop =nb[0];
-					int nb_travel = nb[1];
-					int remainMove = remain - nb_travel - 1;
-					if (!dist.containsKey(nb_stop) && remainMove >= 0) {
-						pq.offer(new int[]{nb_stop, remainMove});
-					}
+			for (int[] nb : graph.getOrDefault(stop, new ArrayList<>())) {
+				int nb_stop =nb[0];
+				int nb_travel = nb[1];
+				int remainMove = remain - nb_travel - 1;
+				if (!dist.containsKey(nb_stop) && remainMove >= 0) {
+					pq.offer(new int[]{nb_stop, remainMove});
 				}
 			}
 		}
@@ -88,7 +87,9 @@ public class ReachableNodesInSubdividedGraph {
 			int start = edge[0];
 			int end = edge[1];
 			int travel = edge[2];
+			//counting the reachable nodes lying on edge e from node start
 			int remainMove1 = dist.getOrDefault(start, 0);
+			//counting the reachable nodes lying on edge e from node end
 			int remainMove2 = dist.getOrDefault(end, 0);
 			res += Math.min(remainMove1 + remainMove2, travel);
 		}

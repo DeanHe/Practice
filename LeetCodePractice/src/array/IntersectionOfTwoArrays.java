@@ -2,7 +2,8 @@ package array;
 
 import java.util.Arrays;
 
-/*Given two arrays, write a function to compute their intersection.
+/*
+Given two arrays, write a function to compute their intersection.
 
 Example
 Example 1:
@@ -18,7 +19,8 @@ Can you implement it in three different algorithms?
 
 Notice
 Each element in the result must be unique.
-The order of the results needs to be ascending*/
+The order of the results needs to be ascending
+*/
 public class IntersectionOfTwoArrays {
 	/*
 	 * @param nums1: an integer array

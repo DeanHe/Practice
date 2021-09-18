@@ -21,6 +21,7 @@ Input:
 nums1 = [1, 1, 2], nums2 = [1]
 Output: 
 [1]
+
 Challenge
 What if the given array is already sorted? How would you optimize your algorithm?
 answer: use two pointer method
@@ -46,20 +47,20 @@ public class IntersectionOfTwoArraysII {
     	for(int n : nums1){
     		map.put(n, map.getOrDefault(n, 0) + 1);
     	}
-    	List<Integer> temp = new ArrayList<>();
+    	List<Integer> ls = new ArrayList<>();
     	for(int n : nums2){
     		if(map.containsKey(n)){
     			int count = map.get(n);
     			if(count > 0){
-    				temp.add(n);
+    				ls.add(n);
     			}
     			count--;
     			map.put(n, count);
     		}
     	}
-    	int[] res = new int[temp.size()];
-    	for(int i = 0; i < temp.size(); i++){
-    		res[i] = temp.get(i);
+    	int[] res = new int[ls.size()];
+    	for(int i = 0; i < ls.size(); i++){
+    		res[i] = ls.get(i);
     	}
     	return res;
     }
