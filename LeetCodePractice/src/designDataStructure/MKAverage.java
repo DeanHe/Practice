@@ -51,7 +51,12 @@ Constraints:
 1 <= num <= 10^5
 At most 10^5 calls will be made to addElement and calculateMKAverage.
 
+hint:
+1 At each query, try to save and update the sum of the elements needed to calculate MKAverage.
+2 You can use BSTs for fast insertion and deletion of the elements.
+
 analysis:TreeMap
+TC O(logN)
  */
 public class MKAverage {
     TreeMap<Integer, Integer> top = new TreeMap<>();
@@ -69,47 +74,47 @@ public class MKAverage {
     public void addElement(int num) {
         // remove out of range item from map first
         if(q.size() == m){
-            int pop = q.poll();
-            if(top.containsKey(pop)){
-                remove(top, pop);
+            int head = q.poll();
+            if(top.containsKey(head)){
+                remove(top, head);
                 topCnt--;
-            } else if(mid.containsKey(pop)){
-                remove(mid, pop);
-                midSum -= pop;
+            } else if(mid.containsKey(head)){
+                remove(mid, head);
+                midSum -= head;
             } else {
-                remove(bot, pop);
+                remove(bot, head);
                 botCnt--;
             }
         }
         q.offer(num);
         midSum += num;
         // insert to middle first
-        put(mid, num);
+        update(mid, num);
         // move item from middle to top, to fill k slots
         while(topCnt < k && !mid.isEmpty()){
-            topCnt++;
             midSum -= mid.lastKey();
-            put(top, remove(mid, mid.lastKey()));
+            update(top, remove(mid, mid.lastKey()));
+            topCnt++;
         }
         // balance middle and top
         while(!mid.isEmpty() && !top.isEmpty() && top.firstKey() < mid.lastKey()){
             midSum += top.firstKey();
-            put(mid, remove(top, top.firstKey()));
+            update(mid, remove(top, top.firstKey()));
             midSum -= mid.lastKey();
-            put(top, remove(mid, mid.lastKey()));
+            update(top, remove(mid, mid.lastKey()));
         }
         // move item from middle to bot, to fill k slots
         while(botCnt < k && !mid.isEmpty()){
-            botCnt++;
             midSum -= mid.firstKey();
-            put(bot, remove(mid, mid.firstKey()));
+            update(bot, remove(mid, mid.firstKey()));
+            botCnt++;
         }
         // balance middle and bot
         while(!mid.isEmpty() && !bot.isEmpty() && mid.firstKey() < bot.lastKey()){
             midSum += bot.lastKey();
-            put(mid, remove(bot, bot.lastKey()));
+            update(mid, remove(bot, bot.lastKey()));
             midSum -= mid.firstKey();
-            put(bot, remove(mid, mid.firstKey()));
+            update(bot, remove(mid, mid.firstKey()));
         }
     }
 
@@ -120,7 +125,7 @@ public class MKAverage {
         return -1;
     }
 
-    private void put(TreeMap<Integer, Integer> map, int target) {
+    private void update(TreeMap<Integer, Integer> map, int target) {
         map.put(target, map.getOrDefault(target, 0) + 1);
     }
 

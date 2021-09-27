@@ -4,9 +4,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /*
-Given a string s, a k duplicate removal consists of choosing k adjacent and equal letters from s and removing them causing the left and the right side of the deleted substring to concatenate together.
+Given a string s, a duplicate removal consists of choosing two or more adjacent and equal letters from s and removing them causing the left and the right side of the deleted substring to concatenate together.
 
-We repeatedly make k duplicate removals on s until we no longer can.
+We repeatedly make duplicate removals (k >=2) on s until we no longer can.
 
 Return the final string after all such duplicate removals have been made.
 
@@ -14,21 +14,21 @@ It is guaranteed that the answer is unique.
 
 Example 1:
 
-Input: s = "abcd", k = 2
+Input: s = "abcd"
 Output: "abcd"
 Explanation: There's nothing to delete.
 Example 2:
 
-Input: s = "deeedbbcccbdaa", k = 3
-Output: "aa"
+Input: s = "deeedbbcccbdaa"
+Output: "d"
 Explanation: 
 First delete "eee" and "ccc", get "ddbbbdaa"
 Then delete "bbb", get "dddaa"
 Finally delete "ddd", get "aa"
 Example 3:
 
-Input: s = "pbbcggttciiippooaais", k = 2
-Output: "ps"
+Input: s = "pbbcggttciiippooaais"
+Output: "s"
  
 Constraints:
 
@@ -40,18 +40,18 @@ analysis:
 TC O(N)
 SC O(N)
 */
-public class RemoveAllAdjacentDuplicatesInStringII {
-    public String removeDuplicates(String s, int k) {
+public class RemoveAllAdjacentDuplicatesInStringFb {
+    public String removeDuplicates(String s) {
         Deque<Letter> deque = new ArrayDeque<>();
         char[] arr = s.toCharArray();
         for (char c : arr) {
             if (!deque.isEmpty() && deque.peekLast().c == c) {
                 deque.peekLast().cnt++;
             } else {
+                if (!deque.isEmpty() && deque.peekLast().cnt > 1) {
+                    deque.pollLast();
+                }
                 deque.offerLast(new Letter(c, 1));
-            }
-            if (deque.peekLast().cnt == k) {
-                deque.pollLast();
             }
         }
         StringBuilder sb = new StringBuilder();

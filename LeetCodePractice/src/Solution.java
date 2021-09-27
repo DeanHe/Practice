@@ -5,6 +5,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -63,75 +64,38 @@ public class Solution {
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/
     }
-    public int[] answerQueries(ArrayList<int[]> queries, int N){
-        int len = queries.size();
-        int[] res = new int[len];
-        TreeSet<Integer> treeSet = new TreeSet<>();
-        for(int i = 0; i < len; i++){
-            int[] q = queries.get(i);
-            int op = q[0];
-            int n = q[1];
-            if(op == 1){
-                // set
-                treeSet.add(i);
-                res[i] = 2;
+    public int[] getOrder(int[][] tasks) {
+        int len = tasks.length;
+        int[][] ls = new int[len][3];
+        for (int i = 0; i < len; i++) {
+            ls[i][0] = i;
+            ls[i][1] = tasks[i][0];
+            ls[i][2] = tasks[i][1];
+        }
+        Arrays.sort(ls, (a, b) -> a[1] - b[1]);
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+            if (a[2] != b[2]) {
+                return a[2] - b[2];
             } else {
-                // get
-                if(treeSet.ceiling(i) != null){
-                     res[i] = 2;
-                } else {
-                    res[i] = -1;
-                }
-            }
-        }
-        return res;
-    }
-
-    public List<int[]> aboveAverageSubarrays(int[] A){
-        // O(N^2)
-        List<int[]> res = new ArrayList<>();
-        int len = A.length;
-        int[] preSum = new int[len + 1];
-        for(int i = 0; i < len; i++){
-            preSum[i + 1] = A[i] + preSum[i];
-        }
-        for(int s = 0; s < len; s++){
-            for(int e = s; e < len; e++){
-                int subSum = preSum[e + 1] - preSum[s];
-                double subAvg = subSum * 1.0 / (e - s + 1);
-                int remainCnt = len - (e - s + 1);
-                if(remainCnt == 0){
-                    res.add(new int[]{s, e});
-                } else {
-                    double remainAvg = (preSum[len] - subSum) * 1.0 / remainCnt;
-                    if(subAvg > remainAvg){
-                        res.add(new int[]{s, e});
-                    }
-                }
-            }
-        }
-        return res;
-    }
-
-    public int numberOfWeakCharacters(int[][] properties) {
-        Arrays.sort(properties, (a, b) -> {
-            if(a[0] != b[0]){
                 return a[0] - b[0];
             }
-            return a[1] - b[1];
         });
-        int len = properties.length, res = 0;
-        Deque<int[]> deque = new ArrayDeque<>();
-        for(int i = 0; i < len; i++){
-           while(!deque.isEmpty() && deque.peekFirst()[0] < properties[i][0] && deque.peekFirst()[1] < properties[i][1]){
-               deque.pollFirst();
-               res++;
-           }
-            while(!deque.isEmpty() && deque.peekLast()[0] < properties[i][0] && deque.peekLast()[1] < properties[i][1]){
-                deque.pollLast();
-                res++;
+        int[] res = new int[len];
+        int i = 0;
+        int j = 0;
+        int endTime = ls[j][1];
+        while(i < len){
+            while(j < len && ls[j][1] <= endTime){
+                pq.offer(ls[j]);
+                j++;
             }
-           deque.offerLast(properties[i]);
+            if(pq.isEmpty()){
+                endTime = ls[j][1];
+            } else {
+                int[] task = pq.poll();
+                res[i] = task[0];
+                endTime += task[2];
+            }
         }
         return res;
     }

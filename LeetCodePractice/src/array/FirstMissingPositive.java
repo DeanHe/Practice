@@ -13,6 +13,14 @@ Input:[3,4,-1,1]
 Output:2
 Challenge
 Your algorithm should run in O(n) time and uses constant space.
+
+hint:
+1 Think about how you would solve the problem in non-constant space. Can you apply that logic to the existing space?
+2 We don't care about duplicates or non-positive integers
+3 Remember that O(2n) = O(n)
+
+analysis:
+value to index mapping
 */
 public class FirstMissingPositive {
 	public int firstMissingPositive(int[] nums) {

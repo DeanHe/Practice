@@ -28,6 +28,10 @@ Constraints:
 arr[i] contains only lower case English letters.
 
 tag:bitmask
+
+analysis:
+1 can each string in arr if it has unique char, if so, use a mask represents it
+2 compare mask with all strings in dp, see if a new concatenation has unique char, if so add to dp
 */
 public class MaximumLengthOfaConcatenatedStringWithUniqueCharacters {
 	int res = 0;

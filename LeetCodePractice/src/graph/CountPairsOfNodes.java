@@ -39,6 +39,13 @@ Constraints:
 ui != vi
 1 <= queries.length <= 20
 0 <= queries[j] < edges.length
+
+hint:
+1 We want to count pairs (x,y) such that degree[x] + degree[y] - occurrences(x,y) > k
+2 Think about iterating on x, and counting the number of valid y to pair with x.
+3 You can consider at first that the (- occurrences(x,y)) isn't there, or it is 0 at first for all y. Count the valid y this way.
+4 Then you can iterate on the neighbors of x, let that neighbor be y, and update occurrences(x,y).
+5 When you update occurrences(x,y), the left-hand side decreases. Once it reaches k, then y is not valid for x anymore, so you should decrease the answer by 1.
  */
 public class CountPairsOfNodes {
     public int[] countPairs(int n, int[][] edges, int[] queries) {
@@ -55,13 +62,13 @@ public class CountPairsOfNodes {
             int key = e[0] * 20001 + e[1];
             common.put(key, common.getOrDefault(key, 0) + 1);
         }
-        int[] sorted = Arrays.copyOf(deg, deg.length);
-        Arrays.sort(sorted);
+        int[] sortedDeg = Arrays.copyOf(deg, deg.length);
+        Arrays.sort(sortedDeg);
         int[] res = new int[queries.length];
         for (int i = 0; i < queries.length; i++) {
             int query = queries[i];
             for (int l = 1, r = n; l < r; ) {
-                if (sorted[l] + sorted[r] > query) {
+                if (sortedDeg[l] + sortedDeg[r] > query) {
                     res[i] += r - l;
                     r--;
                 } else {

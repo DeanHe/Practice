@@ -34,8 +34,8 @@ The number of nodes in head is in the range [0, 2 * 10^4].
 -10^5 <= Node.val <= 10^5
 
 analysis:
-divide and conquer + find mid node of linkedList, use a slow_pre pointer
-
+divide and conquer + find mid node of linkedList, use a slow_pre pointer to break the list
+one side starts at head, one side starts at slow.next
 TC O(NlgN)
  */
 public class ConvertSortedListToBinarySearchTree {

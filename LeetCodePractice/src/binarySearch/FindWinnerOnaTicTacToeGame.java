@@ -1,5 +1,6 @@
 package binarySearch;
-/*Tic-tac-toe is played by two players A and B on a 3 x 3 grid.
+/*
+        Tic-tac-toe is played by two players A and B on a 3 x 3 grid.
 
         Here are the rules of Tic-Tac-Toe:
 
@@ -14,7 +15,6 @@ package binarySearch;
         Return the winner of the game if it exists (A or B), in case the game ends in a draw return "Draw", if there are still movements to play return "Pending".
 
         You can assume that moves is valid (It follows the rules of Tic-Tac-Toe), the grid is initially empty and A will play first.
-
 
 
         Example 1:
@@ -57,7 +57,12 @@ package binarySearch;
         moves[i].length == 2
         0 <= moves[i][j] <= 2
         There are no repeated elements on moves.
-        moves follow the rules of tic tac toe.*/
+        moves follow the rules of tic tac toe.
+
+        hint:
+        It's straightforward to check if A or B won or not, check for each row/column/diag if all the three are the same.
+        Then if no one wins, the game is a draw iff the board is full, i.e. moves.length = 9 otherwise is pending.
+*/
 
 public class FindWinnerOnaTicTacToeGame {
     public String tictactoe(int[][] moves) {
