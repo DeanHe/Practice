@@ -14,8 +14,10 @@ Given n will always be valid.
 Follow up:
 
 Could you do this in one pass?
+
+analysis:
+two pointer, use dummy node
 */
-// two pointer
 public class RemoveNthNodeFromEndofList {
 
 	public ListNode removeNthFromEnd(ListNode head, int n) {

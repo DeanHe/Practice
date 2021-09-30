@@ -20,6 +20,8 @@ Can you do it in O(n) time?
 Notice
 The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
 
+analysis:
+preSumIdx saves the first index i such that nums[:i] = target
 similar SubarraySumEqualsK
 */
 public class MaximumSizeSubarraySumEqualsK {
@@ -33,15 +35,15 @@ public class MaximumSizeSubarraySumEqualsK {
             return 0;
         }
         int len = nums.length, preSum = 0, res = 0;
-        Map<Integer, Integer> preSumFirstEnd = new HashMap<>();
-        preSumFirstEnd.put(0, -1);
+        Map<Integer, Integer> preSumIdx = new HashMap<>();
+        preSumIdx.put(0, -1);
         for(int i = 0; i < len; i++){
             preSum += nums[i];
-            if(preSumFirstEnd.containsKey(preSum - k)){
-                int firstEnd = preSumFirstEnd.get(preSum - k);
-                res = Math.max(res, i - firstEnd);
+            if(preSumIdx.containsKey(preSum - k)){
+                int end = preSumIdx.get(preSum - k);
+                res = Math.max(res, i - end);
             }
-            preSumFirstEnd.putIfAbsent(preSum, i);
+            preSumIdx.putIfAbsent(preSum, i);
         }
         return res;
     }

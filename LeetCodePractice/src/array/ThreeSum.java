@@ -17,6 +17,9 @@ A solution set is:
   [-1, 0, 1],
   [-1, -1, 2]
 ]
+
+analysis:
+TC O(N ^ 2)
  */
 public class ThreeSum {
 	public List<List<Integer>> threeSum(int[] nums) {

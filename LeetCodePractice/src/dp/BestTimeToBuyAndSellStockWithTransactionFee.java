@@ -20,6 +20,8 @@ Note:
 0 <= fee < 50000.
 
 analysis:
+each day there are two state holding a stock(hold) or doesn't have a stock (cash)
+
 cash means your balance by selling stock on i day
 hold means your balance by holding stock on i day
 
@@ -34,5 +36,17 @@ public class BestTimeToBuyAndSellStockWithTransactionFee {
             hold = Math.max(hold, cash - prices[i]);
         }
         return cash;
+    }
+
+    public int maxProfit2(int[] prices, int fee) {
+        int len = prices.length;
+        int[] hold = new int[len];
+        int[] cash = new int[len];
+        hold[0] = -prices[0];
+        for(int i = 1; i < len; i++){
+            hold[i] = Math.max(hold[i - 1], cash[i - 1] - prices[i]);
+            cash[i] = Math.max(cash[i - 1], hold[i - 1] + prices[i] - fee);
+        }
+        return Math.max(hold[len - 1], cash[len - 1]);
     }
 }

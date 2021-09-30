@@ -54,6 +54,7 @@ You can maintain a Heap of available Servers and a Heap of unavailable servers
 Note that the tasks will be processed in the input order so you just need to find the x-th server that will be available according to the rules
 
 analysis: two heaps
+maintain free servers and running servers
  */
 public class ProcessTasksUsingServers {
     public int[] assignTasks(int[] servers, int[] tasks) {
