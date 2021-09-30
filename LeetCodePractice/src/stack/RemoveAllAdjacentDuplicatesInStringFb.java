@@ -73,25 +73,4 @@ public class RemoveAllAdjacentDuplicatesInStringFb {
             this.cnt = freq;
         }
     }
-
-    //way 2
-    public String removeDuplicatesII(String s, int k) {
-        int len = s.length();
-        int[] count = new int[len];
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < len; i++) {
-            char c = s.charAt(i);
-            sb.append(c);
-            int last = sb.length() - 1;
-            if (last > 0 && sb.charAt(last - 1) == sb.charAt(last)) {
-                count[last] = 1 + count[last - 1];
-            } else {
-                count[last] = 1;
-            }
-            if (count[last] == k) {
-                sb.delete(sb.length() - k, sb.length());
-            }
-        }
-        return sb.toString();
-    }
 }
