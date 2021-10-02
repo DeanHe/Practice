@@ -1,7 +1,5 @@
 package OOD;
 
-import javafx.util.Pair;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,8 +74,15 @@ import java.util.Map;
         Nested hashMap
 */
 public class UndergroundSystem {
-    Map<Integer, Pair<String, Integer>> checkInMap;
-    Map<String, Pair<Integer, Integer>> checkOutMap;
+    private class Pair {
+       public String key, val;
+       public Pair(String k, String v){
+           this.key = k;
+           this.val = v;
+       }
+    }
+    Map<Integer, Pair> checkInMap;
+    Map<String, Pair> checkOutMap;
 
     public UndergroundSystem() {
         checkInMap = new HashMap<>();
@@ -85,21 +90,22 @@ public class UndergroundSystem {
     }
 
     public void checkIn(int id, String stationName, int t) {
-        checkInMap.put(id, new Pair<>(stationName, t));
+        checkInMap.put(id, new Pair(stationName, String.valueOf(t)));
     }
 
     public void checkOut(int id, String stationName, int t) {
-        Pair<String, Integer> checkInPair = checkInMap.get(id);
-        String route = checkInPair.getKey() + "_" + stationName;
-        int totalTime = t - checkInPair.getValue();
-        Pair<Integer, Integer> routePair = checkOutMap.getOrDefault(route, new Pair<>(0, 0));
-        checkOutMap.put(route, new Pair<>(routePair.getKey() + totalTime, routePair.getValue() + 1));
+        Pair checkInPair = checkInMap.get(id);
+        String route = checkInPair.key + "_" + stationName;
+        int totalTime = t - Integer.valueOf(checkInPair.val);
+        Pair routePair = checkOutMap.getOrDefault(route, new Pair("0", "0"));
+        checkOutMap.put(route, new Pair(String.valueOf(Integer.valueOf(routePair.key) + totalTime),
+                String.valueOf(Integer.valueOf(routePair.val) + 1)));
     }
 
     public double getAverageTime(String startStation, String endStation) {
         String route = startStation + "_" + endStation;
-        Pair<Integer, Integer> routePair = checkOutMap.get(route);
-        return 1.0 * routePair.getKey() / routePair.getValue();
+        Pair routePair = checkOutMap.get(route);
+        return 1.0 * Integer.valueOf(routePair.key) / Integer.valueOf(routePair.val);
     }
 }
 /**
