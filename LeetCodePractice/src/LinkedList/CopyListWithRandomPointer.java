@@ -40,23 +40,29 @@ Constraints:
 -10000 <= Node.val <= 10000
 Node.random is null or pointing to a node in the linked list.
 Number of Nodes will not exceed 1000.
+
+analysis:
+1 using hashMap save origin node to  copy
+SC O(N), TC O(N)
+2 modify the linked-list to connect original and copy
+SC O(1), TC O(N)
  */
 public class CopyListWithRandomPointer {
 	public Node copyRandomList(Node head) {
         if(head == null){
     		return null;
     	}
-    	Node preHead = new Node(0);
-    	Node cur = preHead;
+    	Node dummy = new Node(0);
+    	Node cur = dummy;
     	//origin node to copy node mapping ; visited
-    	HashMap<Node, Node> map = new HashMap<>();
+    	Map<Node, Node> map = new HashMap<>();
     	while(head != null){
     	    Node copyHead;
     		// copy node
     		if(map.containsKey(head)){
     			copyHead = map.get(head);
     		} else {
-    			copyHead = new Node(head.label);
+    			copyHead = new Node(head.val);
     			map.put(head, copyHead);
     		}
     		//copy random link
@@ -64,7 +70,7 @@ public class CopyListWithRandomPointer {
     			if(map.containsKey(head.random)){
     				copyHead.random = map.get(head.random);
     			} else {
-    				copyHead.random = new Node(head.random.label);
+    				copyHead.random = new Node(head.random.val);
     				map.put(head.random, copyHead.random);
     			}
     		}
@@ -72,16 +78,55 @@ public class CopyListWithRandomPointer {
     		cur = cur.next;
     	    head = head.next;
     	}
-    	return preHead.next;
+    	return dummy.next;
     }
+
+	public Node copyRandomListII(Node head) {
+		if(head == null){
+			return null;
+		}
+		Node cur = head, cur_post;
+		// First round: make copy of each node,
+		// and link them together side-by-side in a single list.
+		while(cur != null){
+			cur_post = cur.next;
+			Node copy = new Node(cur.val);
+			cur.next = copy;
+			copy.next = cur_post;
+			cur = cur_post;
+		}
+		// Second round: assign random pointers for the copy nodes.
+		cur = head;
+		while(cur != null){
+			if(cur.random != null){
+				cur.next.random = cur.random.next;
+			}
+			cur = cur.next.next;
+		}
+		// Third round: restore the original list, and extract the copy list.
+		cur = head;
+		Node dummy = new Node(0);
+		Node copy, copy_pre = dummy;
+		while(cur != null){
+			cur_post = cur.next.next;
+			// extract the copy
+			copy = cur.next;
+			copy_pre.next = copy;
+			copy_pre = copy;
+			// restore the original list
+			cur.next = cur_post;
+			cur = cur_post;
+		}
+		return dummy.next;
+	}
 
 	//Definition for singly-linked list with a random pointer.
 	private class Node {
-		int label;
+		int val;
 		Node next, random;
 
 		public Node(int x) {
-			this.label = x;
+			this.val = x;
 		}
 	}
 }

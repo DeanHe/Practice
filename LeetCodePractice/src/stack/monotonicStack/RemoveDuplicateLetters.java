@@ -24,8 +24,7 @@ Output: "acdb"
 analysis:
 maintain monotonic increasing stack of characters
 The runtime is O(26 * n) = O(n).
-tag:greedy
-stack
+tag:greedy; stack
 */
 public class RemoveDuplicateLetters {
     public String removeDuplicateLetters(String s) {
@@ -40,18 +39,20 @@ public class RemoveDuplicateLetters {
             last.put(arr[i], i);
         }
         for (int i = 0; i < arr.length; i++) {
-            if (!visited.contains(arr[i])) {
-                while (!stack.isEmpty() && arr[i] < stack.peek() && i < last.get(stack.peek())) {
+            char c = arr[i];
+            if (!visited.contains(c)) {
+                while (!stack.isEmpty() && c < stack.peek() && i < last.get(stack.peek())) {
                     char pre_c = stack.pop();
                     visited.remove(pre_c);
                 }
-                stack.push(arr[i]);
-                visited.add(arr[i]);
+                stack.push(c);
+                visited.add(c);
             }
         }
         StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.insert(0, stack.pop());
+        // this is FIFO
+        for(char c : stack){
+            sb.append(c);
         }
         return sb.toString();
     }
