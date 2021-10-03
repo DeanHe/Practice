@@ -67,7 +67,7 @@ public class PutBoxesIntoTheWareHouseIITest {
         int[] boxes = {1, 2, 3};
         int[] warehouse = {1, 2, 3, 4};
         int res = pb.maxBoxesInWarehouse(boxes, warehouse);
-        Assert.assertEquals(1, res);
+        Assert.assertEquals(3, res);
     }
 
     @Test
