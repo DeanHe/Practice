@@ -1,5 +1,6 @@
 package bitManipulation;
-/*Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+/*
+Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
 
 Example 1:
 
@@ -11,7 +12,8 @@ Input: [9,6,4,2,3,5,7,0,1]
 Output: 8
 Note:
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
-a ^ a = 0, 0 ^ b = b*/
+a ^ a = 0, 0 ^ b = b
+*/
 
 public class MissingNumber {
 	public int missingNumber(int[] nums) {
