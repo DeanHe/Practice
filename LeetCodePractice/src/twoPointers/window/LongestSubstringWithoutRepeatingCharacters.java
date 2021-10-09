@@ -53,16 +53,16 @@ public class LongestSubstringWithoutRepeatingCharacters {
 			return 0;
 		}
 		int res = 0, len = s.length(), start = 0, end = 0;
-		Map<Character, Integer> map = new HashMap<>();
+		Map<Character, Integer> lastIdx = new HashMap<>();
 		while(end < len){
 			char ec = s.charAt(end);
-			if(map.containsKey(ec)){
-				if(start < map.get(ec) + 1){
-					start = map.get(ec) + 1;
+			if(lastIdx.containsKey(ec)){
+				if(start < lastIdx.get(ec) + 1){
+					start = lastIdx.get(ec) + 1;
 				}
 			}
 			res = Math.max(res, end - start + 1);
-			map.put(ec, end);
+			lastIdx.put(ec, end);
 			end++;
 		}
 		return res;

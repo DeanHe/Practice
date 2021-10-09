@@ -20,15 +20,13 @@ Output:
  */
 public class FindAllDuplicatesInAnArray {
     public List<Integer> findDuplicates(int[] nums) {
-        int len = nums.length;
         List<Integer> res = new ArrayList<>();
-        for(int i = 0; i < len; i++){
-            int idx = Math.abs(nums[i]) - 1;
+        for(int n : nums){
+            int idx = Math.abs(n) - 1;
             if(nums[idx] < 0){
-                res.add(Math.abs(idx + 1));
+                res.add(idx + 1);
             }
-            nums[idx] = - nums[idx];
-            System.out.println(Arrays.toString(nums));
+            nums[idx] = -nums[idx];
         }
         return res;
     }

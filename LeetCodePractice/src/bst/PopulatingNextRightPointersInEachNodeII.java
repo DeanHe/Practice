@@ -33,6 +33,12 @@ Constraints:
 
 The number of nodes in the given tree is less than 6000.
 -100 <= node.val <= 100
+
+analysis:
+difference from I is that not given a perfect bst
+head refers to <head of the next level>
+cur refers to <current node of current level>
+pre refers to <the leading node on the next level>
  */
 import bst.PopulatingNextRightPointersInEachNode.Node;
 
@@ -40,30 +46,30 @@ public class PopulatingNextRightPointersInEachNodeII {
     public Node connect(Node root) {
         Node cur = root;
         Node head = null;
-        Node childCur = null;
+        Node pre = null;
         while (cur != null){
             while(cur != null){
                 if(cur.left != null){
-                    if(childCur != null){
-                        childCur.next = cur.left;
+                    if(pre != null){
+                        pre.next = cur.left;
                     } else {
                         head = cur.left;
                     }
-                    childCur = cur.left;
+                    pre = cur.left;
                 }
                 if(cur.right != null){
-                    if(childCur != null){
-                        childCur.next = cur.right;
+                    if(pre != null){
+                        pre.next = cur.right;
                     } else {
                         head = cur.right;
                     }
-                    childCur = cur.right;
+                    pre = cur.right;
                 }
                 cur = cur.next;
             }
             cur = head;
             head = null;
-            childCur = null;
+            pre = null;
         }
         return root;
     }
