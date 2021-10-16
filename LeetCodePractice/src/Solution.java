@@ -1,14 +1,4 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Solution {
 
@@ -95,6 +85,26 @@ public class Solution {
                 int[] task = pq.poll();
                 res[i] = task[0];
                 endTime += task[2];
+            }
+        }
+        return res;
+    }
+
+    public List<Integer> twoOutOfThree(int[] nums1, int[] nums2, int[] nums3) {
+        List<Integer> res = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int n : Arrays.stream(nums1).distinct().toArray()){
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+        for(int n : Arrays.stream(nums2).distinct().toArray()){
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+        for(int n : Arrays.stream(nums3).distinct().toArray()){
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+        for(int n : map.keySet()){
+            if(map.get(n) >= 2){
+                res.add(n);
             }
         }
         return res;

@@ -26,22 +26,21 @@ In the second pass, we divide all numbers into two groups, one with the above bi
 Two different numbers we need to find must fall into these two distinct groups. XOR numbers in each group, we can find a number in either group.
 */
 public class SingleNumberIII {
-	public List<Integer> singleNumberIII(int[] A) {
+	public int[] singleNumberIII(int[] nums) {
         int xor = 0, group0 = 0, group1 = 0;
-        for (int n : A) {
+        for (int n : nums) {
             xor ^= n;
         }
         
         int lastBit = xor & -xor; // last bit with 1 in xor
-        for (int n : A) {
+        for (int n : nums) {
             if ((lastBit & n) == 0) {
                 group0 ^= n;
             } else {
                 group1 ^= n;
             }
         }
-        
-        List<Integer> res = Arrays.asList(group0, group1);
-        return res;
+
+        return new int[]{group0, group1};
     }
 }

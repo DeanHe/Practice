@@ -1,5 +1,6 @@
 package string;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -59,9 +60,60 @@ Constraints:
 words[i] consists of only English letters and symbols.
 1 <= maxWidth <= 100
 words[i].length <= maxWidth
+
+analysis:
+Greedy
  */
 public class TextJustification {
     public List<String> fullJustify(String[] words, int maxWidth) {
+        int left = 0;
+        List<String> res = new ArrayList<>();
+        while (left < words.length) {
+            int right = findRight(left, words, maxWidth);
+            res.add(justify(left, right, words, maxWidth));
+            left = right + 1;
+        }
+        return res;
+    }
 
+    private int findRight(int left, String[] words, int maxWidth) {
+        int right = left;
+        int sum = words[right++].length();
+        while (right < words.length && (sum + 1 + words[right].length()) <= maxWidth) {
+            sum += 1 + words[right++].length();
+        }
+        return right - 1;
+    }
+
+    private String justify(int left, int right, String[] words, int maxWidth) {
+        if (left == right) {
+            return pad(words[left], maxWidth);
+        }
+        boolean isLastLine = right == words.length - 1;
+        int spaceCnt = right - left;
+        int totalSpace = maxWidth - wordsLength(left, right, words);
+        String space = isLastLine ? " " : blank(totalSpace / spaceCnt);
+        int remainder = isLastLine ? 0 : totalSpace % spaceCnt;
+        StringBuilder sb = new StringBuilder();
+        for (int i = left; i <= right; i++) {
+            sb.append(words[i]).append(space).append(remainder-- > 0 ? " " : "");
+        }
+        return pad(sb.toString().trim(), maxWidth);
+    }
+
+    private int wordsLength(int left, int right, String[] words) {
+        int res = 0;
+        for (int i = left; i <= right; i++) {
+            res += words[i].length();
+        }
+        return res;
+    }
+
+    private String pad(String str, int maxWidth) {
+        return str + blank(maxWidth - str.length());
+    }
+
+    private String blank(int len) {
+        return new String(new char[len]).replace('\0', ' ');
     }
 }

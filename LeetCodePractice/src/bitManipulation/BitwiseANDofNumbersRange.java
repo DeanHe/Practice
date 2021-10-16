@@ -1,30 +1,43 @@
 package bitManipulation;
 /*
-        Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive.
+Given two integers left and right that represent the range [left, right], return the bitwise AND of all numbers in this range, inclusive.
 
-        Example 1:
+Example 1:
 
-        Input: [5,7]
-        Output: 4
-        Example 2:
+Input: left = 5, right = 7
+Output: 4
+Example 2:
 
-        Input: [0,1]
-        Output: 0
+Input: left = 0, right = 0
+Output: 0
+Example 3:
 
-        solution:
-        In one word, this problem is asking us to find the common prefix of m and n 's binary code.
+Input: left = 1, right = 2147483647
+Output: 0
+
+
+Constraints:
+
+0 <= left <= right <= 2^31 - 1
+
+analysis:
+last bif of (odd & even number) is 0,
+so when m != n, there is at least one odd and even number, so the last bit is always 0
+
+solution:
+In one word, this problem is asking us to find the common prefix of m and n 's binary code.
 */
 public class BitwiseANDofNumbersRange {
     public int rangeBitwiseAnd(int m, int n) {
         if(m == 0){
             return 0;
         }
-        int rightShift = 0;
+        int shift = 0;
         while(m != n){
             m >>= 1;
             n >>= 1;
-            rightShift++;
+            shift++;
         }
-        return m << rightShift; // compensate back
+        return m << shift; // compensate back
     }
 }

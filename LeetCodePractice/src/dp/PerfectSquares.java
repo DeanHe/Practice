@@ -16,6 +16,9 @@ Example 2:
 Input: n = 13
 Output: 2
 Explanation: 13 = 4 + 9.
+
+Analysis:
+TC O(N^2)
 */
 public class PerfectSquares {
 	public int numSquares(int n) {
