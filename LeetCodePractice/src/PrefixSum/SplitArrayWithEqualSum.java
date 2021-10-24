@@ -27,6 +27,11 @@ Explanation: (1,3,5)
 Notice
 1.1 <= n <= 2000.
 2. Elements in the given array will be in range [-1,000,000, 1,000,000].
+
+analysis:
+preSum + hashmap
+TC O(N^2)
+SC O(N)
  */
 public class SplitArrayWithEqualSum {
     /**

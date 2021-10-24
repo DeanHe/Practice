@@ -25,6 +25,7 @@ n == height.length
 analysis:
 way 1: stack, maintain a monotonic decreasing stack
 two pointer solution: always move the pointer on the shorter building side
+TC O(N)
  */
 public class TrappingRainWater {
     public int trap(int[] height) {

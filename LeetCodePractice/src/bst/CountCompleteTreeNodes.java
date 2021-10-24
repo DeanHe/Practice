@@ -1,5 +1,6 @@
 package bst;
-/*Given a complete binary tree, count the number of nodes.
+/*
+Given a complete binary tree, count the number of nodes.
 
         Note:
 
@@ -17,9 +18,11 @@ package bst;
 
         Output: 6
 
-        time complexity: O(log(2N + 1) * log(2N + 1))
-        Binary Search on leaves = log(N + 1)
-        height = log(2N + 1)
+analysis:
+
+time complexity: O(log(2N + 1) * log(2N + 1))
+Binary Search on leaves = log(N + 1)
+height = log(2N + 1)
 */
 
 public class CountCompleteTreeNodes {

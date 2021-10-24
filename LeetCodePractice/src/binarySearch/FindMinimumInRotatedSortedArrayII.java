@@ -22,8 +22,8 @@ Note:
 This is a follow up problem to Find Minimum in Rotated Sorted array.
 Would allow duplicates affect the run-time complexity? How and why?
 
-tag: divid and conquer
-TC O(lgN)
+tag: divide and conquer
+TC O(logN)
  */
 public class FindMinimumInRotatedSortedArrayII {
     public int findMin(int[] nums) {

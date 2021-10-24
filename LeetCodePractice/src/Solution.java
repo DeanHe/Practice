@@ -109,6 +109,22 @@ public class Solution {
         }
         return res;
     }
+
+    public boolean areNumbersAscending(String s) {
+        int pre = 0;
+        for(String str : s.split(" ")){
+            try {
+               int cur = Integer.parseInt(str);
+               if(cur <= pre){
+                   return false;
+               }
+               pre = cur;
+            } catch (NumberFormatException e) {
+
+            }
+        }
+        return true;
+    }
 }
 
 
