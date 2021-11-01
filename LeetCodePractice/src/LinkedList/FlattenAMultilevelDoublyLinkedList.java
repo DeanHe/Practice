@@ -85,13 +85,13 @@ public class FlattenAMultilevelDoublyLinkedList {
                 continue;
             }
             /* CASE 2: got child, find the tail of the child and link it to p.next */
-            Node p = cur.child;
-            while(p.next != null){ // Find the tail of the child
-                p = p.next;
+            Node c = cur.child;
+            while(c.next != null){ // Find the tail of the child
+                c = c.next;
             }
-            p.next = cur.next; // Connect tail with cur.next, if it is not null
+            c.next = cur.next; // Connect tail with cur.next, if it is not null
             if(cur.next != null){
-                cur.next.prev = p;
+                cur.next.prev = c;
             }
             // Connect cur with cur.child, and remove cur.child
             cur.next = cur.child;

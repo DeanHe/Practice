@@ -1,7 +1,5 @@
 package dijkstra;
 
-import javafx.scene.layout.Priority;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

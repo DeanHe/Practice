@@ -62,7 +62,7 @@ public class MyCircularDeque {
      * Adds an item at the front of Deque. Return true if the operation is successful.
      */
     public boolean insertFront(int value) {
-        if (cnt == arr.length) {
+        if (isFull()) {
             return false;
         }
         s = (s - 1 + arr.length) % arr.length;

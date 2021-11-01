@@ -72,8 +72,8 @@ public class WildcardMatching {
 			}
 		}
 		/*
-		 * Transit function: -- If p.charAt(j - 1) != '*', then mem[i][j] = mem[i
-		 * - 1][j - 1] IFF s.charAt(i) == p.charAt(j) || p.charAt(j) == '?'
+		 * Transit function: -- If p.charAt(j - 1) != '*',
+		 * then mem[i][j] = mem[i - 1][j - 1] IFF s.charAt(i) == p.charAt(j) || p.charAt(j) == '?'
 		 *
 		 * If p.charAt(j - 1) == '*',
 		 * then -- mem[i][j] = mem[i - 1][j - 1] || // Match 1 character

@@ -36,7 +36,7 @@ public class RotateList {
         for (int i = 0; i < len - k % len; i++) {
             slow = slow.next;
         }
-        // rotate
+        // rotate: fast point at last node; slow point at pre of last k node
         fast.next = dummy.next;
         dummy.next = slow.next;
         slow.next = null;

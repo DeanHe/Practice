@@ -3,27 +3,40 @@ package stack;
 import java.util.Stack;
 
 /*
-implement a basic calculator to evaluate a simple expression string.
+Given a string s which represents an expression, evaluate this expression and return its value.
 
-The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer division should truncate toward zero.
+The integer division should truncate toward zero.
 
-You may assume that the given expression is always valid.
+You may assume that the given expression is always valid. All intermediate results will be in the range of [-231, 231 - 1].
 
-Example
+Note: You are not allowed to use any built-in function which evaluates strings as mathematical expressions, such as eval().
+
+
+
 Example 1:
 
-Input:
-"3+2*2"
-Output:
-7
+Input: s = "3+2*2"
+Output: 7
 Example 2:
 
-Input:
-" 3/2 "
-Output:
-1
-Notice
-Do not use the eval built-in library function.
+Input: s = " 3/2 "
+Output: 1
+Example 3:
+
+Input: s = " 3+5 / 2 "
+Output: 5
+
+
+Constraints:
+
+1 <= s.length <= 3 * 10^5
+s consists of integers and operators ('+', '-', '*', '/') separated by some number of spaces.
+s represents a valid expression.
+All the integers in the expression are non-negative integers in the range [0, 2^31 - 1].
+The answer is guaranteed to fit in a 32-bit integer.
+
+analysis:
+push to stack the previous operation value when meet a sign or end of string
 */
 public class BasicCalculatorII {
 	/**

@@ -9,6 +9,7 @@ A Range Module is a module that tracks ranges of numbers. Your task is to design
 addRange(int left, int right) Adds the half-open interval [left, right), tracking every real number in that interval. Adding an interval that partially overlaps with currently tracked numbers should add any numbers in the interval [left, right) that are not already tracked.
 queryRange(int left, int right) Returns true if and only if every real number in the interval [left, right) is currently being tracked.
 removeRange(int left, int right) Stops tracking every real number currently being tracked in the interval [left, right).
+
 Example 1:
 addRange(10, 20): null
 removeRange(14, 16): null
@@ -23,8 +24,12 @@ The total number of calls to addRange in a single test case is at most 1000.
 The total number of calls to queryRange in a single test case is at most 5000.
 The total number of calls to removeRange in a single test case is at most 1000.
 
+hint:
+1 Maintain a sorted set of disjoint intervals. addRange and removeRange can be performed with time complexity linear to the size of this set;
+queryRange can be performed with time complexity logarithmic to the size of this set.
+analysis:
 TreeMap<Integer, Integer>, key is the starting index and value is the ending index of the interval.
-Maintainence is done to make sure no overlap intervals exist in the Map.
+Maintenance is done to make sure no overlap intervals exist in the Map.
 */
 public class RangeModule {
 	/**
