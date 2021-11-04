@@ -40,11 +40,10 @@ public class FindTheCelebrity {
         	}
         }
         for(int i = 0; i < n; i++){
-        	if(celebrity != i && !knows(i, celebrity)){
-        		return -1;
-        	}
-        	if(celebrity != i && knows(celebrity, i)){
-        		return -1;
+        	if(celebrity != i){
+                if(!knows(i, celebrity) || knows(celebrity, i)){
+                    return -1;
+                }
         	}
         }
         return celebrity;

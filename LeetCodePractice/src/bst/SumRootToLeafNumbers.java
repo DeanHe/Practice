@@ -45,8 +45,7 @@ public class SumRootToLeafNumbers {
         if(root == null){
             return 0;
         }
-        cur *= 10;
-        cur += root.val;
+        cur = cur * 10 + root.val;
         if(root.left == null && root.right == null){
             return cur;
         }
