@@ -125,6 +125,34 @@ public class Solution {
         }
         return true;
     }
+
+    Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+    public long countVowels(String word) {
+        int len = word.length();
+        long res = 0;
+        long[] dp = new long[len + 1];
+        for(int i = 0; i < len; i++){
+            char c = word.charAt(i);
+            if(vowels.contains(c)){
+                dp[i + 1] = dp[i] + i + 1;
+            } else {
+                dp[i + 1] = dp[i];
+            }
+            res += dp[i + 1];
+        }
+        return res;
+    }
+
+    private boolean isVowelSub(String s){
+        Set<Character> visited = new HashSet<>();
+        for(char c : s.toCharArray()){
+            if(!vowels.contains(c)){
+                return false;
+            }
+            visited.add(c);
+        }
+        return visited.size() == 5;
+    }
 }
 
 

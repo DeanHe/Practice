@@ -42,8 +42,7 @@ public class SlidingWindowMedian {
         if(nums == null || nums.length == 0){
         	return new double[0];
         }
-        int resLen = nums.length - k + 1;
-        double[] res = new double[resLen];
+        double[] res = new double[nums.length - k + 1];
         for(int i = 0; i < nums.length; i++){
         	add(nums[i]);
         	if(i >= k - 1){
