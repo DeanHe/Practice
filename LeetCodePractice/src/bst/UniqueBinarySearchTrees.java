@@ -1,7 +1,8 @@
 package bst;
 
 /*
-Given n, how many structurally unique bst's (binary search trees) that store values 1 ... n?
+Given an integer n, return the number of structurally unique BST's (binary search trees)
+which has exactly n nodes of unique values from 1 to n.
 
 Example:
 
@@ -16,7 +17,7 @@ Given n = 3, there are a total of 5 unique bst's:
     /     /       \                 \
    2     1         2                 3
 
-
+analysis:
 Count[2] = Count[0] * Count[1]   (1 as root)
 + Count[1] * Count[0]  (2 as root)
 
@@ -29,6 +30,9 @@ the dp tranfer function is
 Count[i] = ∑ Count[0...k] * [ k+1....i]     0<= k < i-1
 when array is 1，2，3，4，.. i，.. n，the built bst has property below：
 when the tree root with i，the left subtree is built from [0, i-1]， the right subtree is built from [i + 1, n]
+
+Time Complexity: O(N * N/2) = O(N^2). --> We only traverse half of i for dp[i], as the DP equation is symmetrical.
+Space Complexity: O(N) --> Required for DP array.
 */
 public class UniqueBinarySearchTrees {
 	/**
