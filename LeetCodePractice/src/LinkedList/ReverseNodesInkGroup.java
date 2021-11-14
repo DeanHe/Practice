@@ -18,17 +18,6 @@ You may not alter the values in the list's nodes, only nodes itself may be chang
 */
 public class ReverseNodesInkGroup {
 
-	public ListNode reverse(ListNode pre, ListNode post){
-        ListNode last = pre.next;
-        ListNode cur = last.next;
-        while(cur != post){
-             last.next = cur.next;
-             cur.next = pre.next;
-             pre.next = cur;
-             cur = last.next;
-        }
-        return last;
-    }
 	/**
      * @param head a ListNode
      * @param k an integer
@@ -53,5 +42,17 @@ public class ReverseNodesInkGroup {
             head = post;
         }
         return dummy.next;
+    }
+
+    private ListNode reverse(ListNode pre, ListNode post){
+        ListNode last = pre.next;
+        ListNode cur = last.next;
+        while(cur != post){
+            last.next = cur.next;
+            cur.next = pre.next;
+            pre.next = cur;
+            cur = last.next;
+        }
+        return last;
     }
 }

@@ -19,7 +19,8 @@ Explanation: nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
 
 analysis:
 dp, divide and conquer, reverse step
-mem[l][r] means the max coins get from values[l:r
+mem[l][r] means the max coins get from values[l:r]
+the sub problem is calculated first, for each step only three balloons are left which are l..i..r
 pay attention to the 1*8*1 step above, which corresponds to values[l] * values[i] * values[r]
  */
 public class BurstBalloons {
@@ -31,7 +32,7 @@ public class BurstBalloons {
             values[i + 1] = nums[i];
         }
         values[0] = values[len + 1] = 1;
-        mem = new Integer[len + 2][len + 2];
+        mem = new Integer[values.length][values.length];
         return dfs(values, 0, len + 1);
     }
 

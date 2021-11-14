@@ -1,16 +1,30 @@
 package dp;
 /*
-Find the contiguous subarray within an array (containing at least one number) which has the largest product.
+Given an integer array nums, find a contiguous non-empty subarray within the array that has the largest product, and return the product.
 
-Example
+It is guaranteed that the answer will fit in a 32-bit integer.
+
+A subarray is a contiguous subsequence of the array.
+
+
+
 Example 1:
 
-Input:[2,3,-2,4]
-Output:6
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
 Example 2:
 
-Input:[-1,2,4,1]
-Output:8
+Input: nums = [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+
+
+Constraints:
+
+1 <= nums.length <= 2 * 10^4
+-10 <= nums[i] <= 10
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 */
 public class MaximumProductSubarray {
 	/**
@@ -20,19 +34,19 @@ public class MaximumProductSubarray {
     public int maxProduct(int[] nums) {
         // write your code here
     	int len = nums.length;
-    	int[] max = new int[len];
-    	int[] min = new int[len];
+    	int[] p = new int[len];
+    	int[] n = new int[len];
     	int res = Integer.MIN_VALUE;
     	for(int i = 0; i < len; i++){
-    		max[i] = nums[i];
-    		min[i] = nums[i];
+    		p[i] = nums[i];
+    		n[i] = nums[i];
     		if(i > 0){
-    			max[i] = Math.max(max[i], max[i - 1] * nums[i]);
-    			max[i] = Math.max(max[i], min[i - 1] * nums[i]);
-    			min[i] = Math.min(min[i], max[i - 1] * nums[i]);
-    			min[i] = Math.min(min[i], min[i - 1] * nums[i]);
+    			p[i] = Math.max(p[i], p[i - 1] * nums[i]);
+    			p[i] = Math.max(p[i], n[i - 1] * nums[i]);
+    			n[i] = Math.min(n[i], p[i - 1] * nums[i]);
+    			n[i] = Math.min(n[i], n[i - 1] * nums[i]);
     		}
-    		res = Math.max(max[i], res);
+    		res = Math.max(p[i], res);
     	}
     	return res;
     }

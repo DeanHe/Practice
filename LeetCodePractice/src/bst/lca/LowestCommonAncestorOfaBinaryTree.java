@@ -37,7 +37,7 @@ p != q
 p and q will exist in the tree.
 
 analysis:
-approach 1: template, dfs returns child information back to parent
+approach 1: template, dfs returns child information back to parent TC O(N)
 approach 2: dfs build parent map
 */
 public class LowestCommonAncestorOfaBinaryTree {

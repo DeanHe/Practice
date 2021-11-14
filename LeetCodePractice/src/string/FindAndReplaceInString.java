@@ -42,23 +42,26 @@ sources.length == indexes.length
 targets.length == indexes.length
 1 <= sources[i].length, targets[i].length <= 50
 sources[i] and targets[i] consist of only lowercase English letters.
+
+analysis:
+TC O(SN)
  */
 public class FindAndReplaceInString {
-    public String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+    public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
         Map<Integer, Integer> map = new HashMap<>();
-        for(int i = 0; i < indexes.length; i++){
-            if(S.startsWith(sources[i], indexes[i])){
-                map.put(indexes[i], i);
+        for(int i = 0; i < indices.length; i++){
+            if(s.startsWith(sources[i], indices[i])){
+                map.put(indices[i], i);
             }
         }
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < S.length();){
+        for(int i = 0; i < s.length();){
             if(map.containsKey(i)){
                 int idx = map.get(i);
                 sb.append(targets[idx]);
                 i += sources[idx].length();
             } else {
-                sb.append(S.charAt(i));
+                sb.append(s.charAt(i));
                 i++;
             }
         }

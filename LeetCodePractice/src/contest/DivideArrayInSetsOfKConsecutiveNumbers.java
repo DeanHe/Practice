@@ -34,6 +34,16 @@ Constraints:
 1 <= nums.length <= 10^5
 1 <= nums[i] <= 10^9
 1 <= k <= nums.length
+
+same as 846. Hand of Straights
+
+Hint:
+1 If the smallest number in the possible-to-split array is V, then numbers V+1, V+2, ... V+k-1 must contain there as well.
+2 You can iteratively find k sets and remove them from array until it becomes empty.
+3 Failure to do so would mean that array is unsplittable.
+
+analysis: greedy
+sort takes TC O(N log N)
 */
 public class DivideArrayInSetsOfKConsecutiveNumbers {
 	public boolean isPossibleDivide(int[] nums, int k) {

@@ -23,13 +23,13 @@ equations = [ ["a", "b"], ["b", "c"] ],
 values = [2.0, 3.0],
 queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ]. 
 The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.
+
+analysis:
+TC: O(V + E) which is same for any DFS over a graph algorithm
 */
 public class EvaluateDivision {
-    Map<String, Map<String, Double>> graph;
-    Set<String> visited;
-
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        graph = new HashMap<>();
+        Map<String, Map<String, Double>> graph = new HashMap<>();
         for (int i = 0; i < equations.size(); i++) {
             List<String> eq = equations.get(i);
             String u = eq.get(0);
@@ -42,12 +42,12 @@ public class EvaluateDivision {
             List<String> query = queries.get(i);
             String start = query.get(0);
             String end = query.get(1);
-            res[i] = dfs(start, end, new HashSet<>());
+            res[i] = dfs(start, end, graph, new HashSet<>());
         }
         return res;
     }
 
-    private double dfs(String start, String end, Set<String> visited) {
+    private double dfs(String start, String end, Map<String, Map<String, Double>> graph, Set<String> visited) {
         if (visited.contains(start)) {
             return -1.0;
         }
@@ -61,10 +61,10 @@ public class EvaluateDivision {
         Map<String, Double> neighbors = graph.get(start);
         double res = -1.0;
         for (String nb : neighbors.keySet()) {
-            double nb_val = graph.get(start).get(nb);
-            double next = dfs(nb, end, visited);
+            double multiple = graph.get(start).get(nb);
+            double next = dfs(nb, end, graph, visited);
             if (next != -1.0) {
-                res = nb_val * next;
+                res = multiple * next;
                 break;
             }
         }

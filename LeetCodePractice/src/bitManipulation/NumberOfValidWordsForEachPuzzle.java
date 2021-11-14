@@ -34,6 +34,11 @@ puzzles[i].length == 7
 words[i][j], puzzles[i][j] are English lowercase letters.
 Each puzzles[i] doesn't contain repeated characters.
 
+hint:
+1 Exploit the fact that the length of the puzzle is only 7.
+2 Use bit-masks to represent the word and puzzle strings.
+3 For each puzzle, count the number of words whose bit-mask is a sub-mask of the puzzle's bit-mask.
+
 analysis:
 use bitmask to represent each word word_bitmask, build map of word_bitmask : count
 use bitmask to represent each puzzle puzzle_bitmask, iterate each valid morph of puzzle_bitmask, check against freqMap

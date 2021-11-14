@@ -16,8 +16,8 @@ You may assume that next() calls will always be valid. That is, there will be at
 
 Constraints:
 
-The number of nodes in the tree is in the range [1, 105].
-0 <= Node.val <= 106
+The number of nodes in the tree is in the range [1, 10^5].
+0 <= Node.val <= 10^6
 At most 105 calls will be made to hasNext, and next.
 
 

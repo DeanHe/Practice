@@ -29,14 +29,7 @@ public class LongestPalindromicSubsequence {
         for (int i = 0; i < len; i++) {
             dp[i][i] = 1;
         }
-        for (int i = 0; i + 1 < len; i++) {
-            if (s.charAt(i) == s.charAt(i + 1)) {
-                dp[i][i + 1] = 2;
-            } else {
-                dp[i][i + 1] = 1;
-            }
-        }
-        for (int l = 3; l <= len; l++) {
+        for (int l = 2; l <= len; l++) {
             for (int i = 0; i + l - 1 < len; i++) {
                 int j = i + l - 1;
                 if (s.charAt(i) == s.charAt(j)) {
@@ -48,6 +41,31 @@ public class LongestPalindromicSubsequence {
             }
         }
         return dp[0][len - 1];
+    }
+
+    public int longestPalindromeSubseqDFS(String s) {
+        int len = s.length();
+        Integer[][] mem = new Integer[len][len]; // dp[i][j] means longest palindrome length in s[i:j]
+        return dfs(s, mem, 0, len - 1);
+    }
+
+    private int dfs(String str, Integer[][] mem, int s, int e) {
+        if (s > e) {
+            return 0;
+        }
+        if (mem[s][e] != null) {
+            return mem[s][e];
+        }
+        if (s == e) {
+            return mem[s][e] = 1;
+        }
+
+        if (str.charAt(s) == str.charAt(e)) {
+            mem[s][e] = dfs(str, mem, s + 1, e - 1) + 2;
+        } else {
+            mem[s][e] = Math.max(dfs(str, mem, s + 1, e), dfs(str, mem, s, e - 1));
+        }
+        return mem[s][e];
     }
 
     public int longestPalindromeSubseqII(String s) {

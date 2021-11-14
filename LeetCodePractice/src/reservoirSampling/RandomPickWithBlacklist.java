@@ -5,42 +5,46 @@ import java.util.Map;
 import java.util.Random;
 
 /*
-Given a blacklist B containing unique integers from [0, N), write a function to return a uniform random integer from [0, N) which is NOT in B.
+You are given an integer n and an array of unique integers blacklist. Design an algorithm to pick a random integer in the range [0, n - 1] that is not in blacklist. Any integer that is in the mentioned range and not in blacklist should be equally likely to be returned.
 
-Optimize it such that it minimizes the call to system’s math.random().
+Optimize your algorithm such that it minimizes the number of calls to the built-in random function of your language.
 
-Note:
+Implement the Solution class:
 
-1 <= N <= 1000000000
-0 <= B.length < min(100000, N)
-[0, N) does NOT include N. See interval notation.
+Solution(int n, int[] blacklist) Initializes the object with the integer n and the blacklisted integers blacklist.
+int pick() Returns a random integer in the range [0, n - 1] and not in blacklist.
+
+
 Example 1:
 
-Input:
-["Solution","pick","pick","pick"]
-[[1,[]],[],[],[]]
-Output: [null,0,0,0]
-Example 2:
+Input
+["Solution", "pick", "pick", "pick", "pick", "pick", "pick", "pick"]
+[[7, [2, 3, 5]], [], [], [], [], [], [], []]
+Output
+[null, 0, 4, 1, 6, 1, 0, 4]
 
-Input:
-["Solution","pick","pick","pick"]
-[[2,[]],[],[],[]]
-Output: [null,1,1,1]
-Example 3:
+Explanation
+Solution solution = new Solution(7, [2, 3, 5]);
+solution.pick(); // return 0, any integer from [0,1,4,6] should be ok. Note that for every call of pick,
+                 // 0, 1, 4, and 6 must be equally likely to be returned (i.e., with probability 1/4).
+solution.pick(); // return 4
+solution.pick(); // return 1
+solution.pick(); // return 6
+solution.pick(); // return 1
+solution.pick(); // return 0
+solution.pick(); // return 4
 
-Input:
-["Solution","pick","pick","pick"]
-[[3,[1]],[],[],[]]
-Output: [null,0,0,2]
-Example 4:
 
-Input:
-["Solution","pick","pick","pick"]
-[[4,[2]],[],[],[]]
-Output: [null,1,3,1]
-Explanation of Input Syntax:
+Constraints:
 
-The input is two lists: the subroutines called and their arguments. Solution's constructor has two arguments, N and the blacklist B. pick has no arguments. Arguments are always wrapped with a list, even if there aren't any.
+1 <= n <= 10^9
+0 <= blacklist.length <- min(10^5, n - 1)
+0 <= blacklist[i] < n
+All the values of blacklist are unique.
+At most 2 * 10^4 calls will be made to pick.
+
+analysis:
+use hashmap to map disallowed number(#N) to last N available numbers
  */
 public class RandomPickWithBlacklist {
     int validCnt;
