@@ -29,14 +29,15 @@ Note:
 A[i] is 0 or 1
 
 hint:
-One thing's for sure, we will only flip a zero if it extends an existing window of 1s. Otherwise, there's no point in doing it, right? Think Sliding Window!
-
-Since we know this problem can be solved using the sliding window construct, we might as well focus in that direction for hints. Basically,
+1 One thing's for sure, we will only flip a zero if it extends an existing window of 1s. Otherwise, there's no point in doing it, right? Think Sliding Window!
+2 Since we know this problem can be solved using the sliding window construct, we might as well focus in that direction for hints. Basically,
 in a given window, we can never have > K zeros, right?
+3 We don't have a fixed size window in this case. The window size can grow and shrink depending upon the number of zeros we have (we don't actually have to flip the zeros here!).
+4 The way to shrink or expand a window would be based on the number of zeros that can still be flipped and so on.
 
-We don't have a fixed size window in this case. The window size can grow and shrink depending upon the number of zeros we have (we don't actually have to flip the zeros here!).
-
-The way to shrink or expand a window would be based on the number of zeros that can still be flipped and so on.
+analysis:
+sliding window, check for each end index what is the maximum window size of {start, end}
+TC O(N)
 */
 public class MaxConsecutiveOnesIII {
     public int longestOnes(int[] nums, int K) {

@@ -97,8 +97,7 @@ public class BinaryTreeVerticalOrderTraversal {
 		while(!tq.isEmpty()){
 			TreeNode cur = tq.poll();
 			int col = cq.poll();
-			map.putIfAbsent(col, new ArrayList<>());
-			map.get(col).add(cur.val);
+			map.computeIfAbsent(col, x -> new ArrayList<>()).add(cur.val);
 			if(cur.left != null){
 				tq.offer(cur.left);
 				cq.offer(col - 1);

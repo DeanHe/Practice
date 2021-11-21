@@ -45,7 +45,7 @@ public class CountOfSmallerNumbersAfterSelf {
 	}
 
 	// this is nlogn
-	// sort the orignal arr and mapping the number to
+	// sort the original arr and mapping the number to
 	// the order in the sorted arr;
 	// i.e: [1, 1000, -100, 10, 100] -> [1, 4, 0, 2, 3] , get rid of very large
 	// number or negative number

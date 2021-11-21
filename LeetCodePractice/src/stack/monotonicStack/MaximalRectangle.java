@@ -42,10 +42,10 @@ public class MaximalRectangle {
     private int calMaxArea(int[] height) {
         int res = 0, len = height.length;
         Stack<Integer> stack = new Stack<>();
+        int h, w;
         for(int i = 0; i < len; i++){
             while(!stack.isEmpty() && height[i] <= height[stack.peek()]){
-                int h = height[stack.pop()];
-                int w = 0;
+                h = height[stack.pop()];
                 if(stack.isEmpty()){
                     w = i;
                 } else {
@@ -56,8 +56,7 @@ public class MaximalRectangle {
             stack.push(i);
         }
         while (!stack.isEmpty()) {
-            int h = height[stack.pop()];
-            int w = 0;
+            h = height[stack.pop()];
             if (stack.isEmpty()) {
                 w = len;
             } else {

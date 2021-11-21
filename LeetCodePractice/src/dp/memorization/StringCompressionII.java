@@ -37,13 +37,11 @@ Constraints:
 1 <= s.length <= 100
 0 <= k <= s.length
 s contains only lowercase English letters.
+
+analysis:
+mem[i][j][l][m] means min length of compressed string of s[i:] with last char is j and current run-length is l, and still can delete m chars
  */
 public class StringCompressionII {
-    // mem[i][j][l][m] means
-    //min length of compressed string of s[i:]
-    //last char is j
-    // current run-length is l
-    // still can delete m chars
     Integer[][][][] mem;
     int len;
     char[] arr;

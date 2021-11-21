@@ -20,6 +20,8 @@ import java.util.List;
         Example 2:
         Input: array =[3,4,5,8] queries =[2,4]
         Output:[0,1]
+
+        analysis: BIT both updates and query TC O(logN)
 */
 public class CountOfSmallerNumber {
     int[] bit;

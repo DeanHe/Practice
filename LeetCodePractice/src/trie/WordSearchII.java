@@ -45,7 +45,7 @@ public class WordSearchII {
      */
     Set<String> set = new HashSet<>();
     int rows, cols;
-    int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    int[] dirs = {0, 1, 0, -1, 0};
 
     public List<String> findWords(char[][] board, String[] words) {
         // write your code here
@@ -70,9 +70,6 @@ public class WordSearchII {
     }
 
     private void dfs(char[][] board, boolean[][] visited, int r, int c, Trie trie, String s) {
-        if (r < 0 || r >= rows || c < 0 || c >= cols) {
-            return;
-        }
         if (visited[r][c]) {
             return;
         }
@@ -84,8 +81,12 @@ public class WordSearchII {
             set.add(s);
         }
         visited[r][c] = true;
-        for (int i = 0; i < dirs.length; i++) {
-            dfs(board, visited, r + dirs[i][0], c + dirs[i][1], trie, s);
+        for (int i = 0; i + 1 < dirs.length; i++) {
+            int nb_r = r + dirs[i];
+            int nb_c = c + dirs[i + 1];
+            if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols){
+                dfs(board, visited, nb_r, nb_c, trie, s);
+            }
         }
         visited[r][c] = false;
     }

@@ -32,10 +32,10 @@ public class LargestRectangleInHistogram {
        int len = heights.length, maxRect = 0;
        //stack of index
        Stack<Integer> stack = new Stack<>();
+       int h, w;
        for (int i = 0; i < len; i++) {
            while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
-               int h = heights[stack.pop()];
-               int w = 0;
+               h = heights[stack.pop()];
                if(!stack.isEmpty()){
                    w = i - stack.peek() - 1;
                } else {
@@ -46,8 +46,7 @@ public class LargestRectangleInHistogram {
            stack.push(i);
        }
        while (!stack.isEmpty()) {
-           int h = heights[stack.pop()];
-           int w = 0;
+           h = heights[stack.pop()];
            if(!stack.isEmpty()){
                w =  len - stack.peek() - 1;
            } else {

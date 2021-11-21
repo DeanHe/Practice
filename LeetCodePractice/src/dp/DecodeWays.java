@@ -1,6 +1,7 @@
 package dp;
 
-/*A message containing letters from A-Z is being encoded to numbers using the following mapping:
+/*
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
 
 'A' -> 1
 'B' -> 2
@@ -17,7 +18,8 @@ Explanation: It could be decoded as AB (1 2) or L (12).
 Example 2:
 
 Input: "10"
-Output: 1*/
+Output: 1
+*/
 public class DecodeWays {
     /**
      * @param s: a string,  encoded message

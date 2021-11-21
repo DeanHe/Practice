@@ -36,6 +36,10 @@ s1, s2, and s3 consist of lowercase English letters.
 
 
 Follow up: Could you solve it using only O(s2.length) additional memory space?
+
+analysis:
+dp[i][j] represents if s3 is interleaving at (i+j) th position when s1 is at ith position, and s2 is at jth position.
+0th position means empty string.
  */
 public class InterleavingString {
     public boolean isInterleave(String s1, String s2, String s3) {

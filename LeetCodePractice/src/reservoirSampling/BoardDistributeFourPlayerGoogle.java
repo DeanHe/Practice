@@ -1,10 +1,6 @@
 package reservoirSampling;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 
 /*
@@ -31,7 +27,7 @@ public class BoardDistributeFourPlayerGoogle {
         g.get(begins[2]).add(size * (size - 1));
         g.get(begins[3]).add(size * size - 1);
         while (filled < size * size) {
-            for (int n : g.keySet()) {
+            for (int n : seeds) {
                 ArrayList<Integer> q = g.get(n);
                 List<Integer> taken = new ArrayList<>();
                 for (int idx : q) {

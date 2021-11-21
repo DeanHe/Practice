@@ -57,8 +57,8 @@ public class VerticalOrderTraversalOfaBinaryTree {
         tq.offer(root);
         cq.offer(0);
         while(!tq.isEmpty()){
-            int size =  tq.size();
-            for(int i = 0; i < size; i++){
+            int sz =  tq.size();
+            for(int i = 0; i < sz; i++){
                 TreeNode cur = tq.poll();
                 int col = cq.poll();
                 layer.computeIfAbsent(col, x -> new ArrayList<>()).add(cur.val);
