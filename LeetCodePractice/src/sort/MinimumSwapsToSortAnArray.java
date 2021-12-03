@@ -17,6 +17,7 @@ Explanation: Swap index 0 with 3 and 1 with 2 to
 Input: {1, 5, 4, 3, 2}
 Output: 2
 
+analysis:
 This can be easily done by visualizing the problem as a graph.
 We will have n nodes and an edge directed from node i to node j if the element at i’th index must be present at j’th index in the sorted array.
 

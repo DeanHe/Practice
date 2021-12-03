@@ -33,6 +33,8 @@ Constraints:
 
 The number of nodes in the given tree is less than 4096.
 -1000 <= node.val <= 1000
+
+analysis: BFS
  */
 import java.util.LinkedList;
 import java.util.Queue;

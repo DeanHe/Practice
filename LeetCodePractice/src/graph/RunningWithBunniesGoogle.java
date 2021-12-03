@@ -40,7 +40,6 @@ public class RunningWithBunniesGoogle {
     int V;
 
     public int[] solution(int[][] times, int times_limit) {
-        //​ ​Your​ ​code​ ​here
         V = times.length;
         if (V <= 2 || V != times[0].length) {
             return new int[]{};

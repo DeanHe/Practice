@@ -3,7 +3,8 @@ package sort;
 import java.util.Arrays;
 
 /*
-Given two arrays of positive integers boxes and warehouse representing the heights of some boxes of unit width, and the heights of n rooms in a warehouse, respectively. The warehouse’s rooms are labeled from 0 to n - 1 from left to right where warehouse[i] (0-indexed) is the height of the i-th room.
+Given two arrays of positive integers boxes and warehouse representing the heights of some boxes of unit width, and the heights of n rooms in a warehouse, respectively.
+The warehouse’s rooms are labeled from 0 to n - 1 from left to right where warehouse[i] (0-indexed) is the height of the i-th room.
 
 Boxes are put into the warehouse by the following rules:
 

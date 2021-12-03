@@ -9,8 +9,6 @@ import java.util.List;
 Given a nested list of integers, return the sum of all integers in the list weighted by their depth.
 Each element is either an integer, or a list -- whose elements may also be integers or other lists.
 
-Example
-
 Example 1:
 Input: the list [[1,1],2,[1,1]],
 Output: 10.

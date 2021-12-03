@@ -39,15 +39,16 @@ public class AllNodesDistanceKinBinaryTree {
         Queue<TreeNode> queue = new LinkedList<>();
         Set<TreeNode> visited = new HashSet<>();
         queue.offer(target);
+        visited.add(target);
         while (!queue.isEmpty()) {
             int len = queue.size();
             for (int i = 0; i < len; i++) {
                 TreeNode cur = queue.poll();
-                visited.add(cur);
                 List<TreeNode> neighbors = graph.get(cur);
                 for (TreeNode nb : neighbors) {
                     if (!visited.contains(nb)) {
                         queue.offer(nb);
+                        visited.add(nb);
                     }
                 }
             }
@@ -62,7 +63,7 @@ public class AllNodesDistanceKinBinaryTree {
         return res;
     }
 
-    void dfs(TreeNode cur, TreeNode parent, Map<TreeNode, List<TreeNode>> graph) {
+    private void dfs(TreeNode cur, TreeNode parent, Map<TreeNode, List<TreeNode>> graph) {
         if (cur == null) {
             return;
         }

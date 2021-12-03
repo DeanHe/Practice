@@ -32,6 +32,9 @@ import java.util.Arrays;
         n == satisfaction.length
         1 <= n <= 500
         -10^3 <= satisfaction[i] <= 10^3
+
+        analysis:
+        use another variable to accumulate the sum by each iteration
 */
 public class ReducingDishes {
     public int maxSatisfaction(int[] satisfaction) {

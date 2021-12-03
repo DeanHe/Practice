@@ -33,6 +33,7 @@ import java.util.Deque;
         We need to know the maximum in the window of size k.
         Use deque will be O(N)
 
+        analysis:
         1 maintain deque in correct window size
         2 get the valid max previous sum
         3 maintain deque in descending order

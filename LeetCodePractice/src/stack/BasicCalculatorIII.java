@@ -17,8 +17,8 @@ Example
 "2*(5+5*2)/3+(6/2+8)" = 21
 "(2+6* 3+5- (3*14/7+2)*5)+3"=-12
 
-solution:
-to use the interpreter
+analysis:
+use stack
 */
 public class BasicCalculatorIII {
 	/**

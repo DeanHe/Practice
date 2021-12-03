@@ -10,33 +10,24 @@ Given an integer n, return the minimum possible number of boxes touching the flo
 
 
 Example 1:
-
-
-
 Input: n = 3
 Output: 3
 Explanation: The figure above is for the placement of the three boxes.
 These boxes are placed in the corner of the room, where the corner is on the left side.
+
 Example 2:
-
-
-
 Input: n = 4
 Output: 3
 Explanation: The figure above is for the placement of the four boxes.
 These boxes are placed in the corner of the room, where the corner is on the left side.
+
 Example 3:
-
-
-
 Input: n = 10
 Output: 6
 Explanation: The figure above is for the placement of the ten boxes.
 These boxes are placed in the corner of the room, where the corner is on the back side.
 
-
 Constraints:
-
 1 <= n <= 10^9
  */
 public class BuildingBoxes {

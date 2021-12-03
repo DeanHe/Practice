@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.TreeMap;
 
-/*N cars are going to the same destination along a one lane road.  The destination is target miles away.
+/*
+N cars are going to the same destination along a one lane road.  The destination is target miles away.
 Each car i has a constant speed speed[i] (in miles per hour), and initial position position[i] miles towards the target along the road.
 A car can never pass another car ahead of it, but it can catch up to it, and drive bumper to bumper at the same speed.
 The distance between these two cars is ignored - they are assumed to have the same position.
@@ -29,7 +30,8 @@ Note:
 0 < target <= 10 ^ 6
 0 < speed[i] <= 10 ^ 6
 0 <= position[i] < target
-All initial positions are different.*/
+All initial positions are different.
+*/
 public class CarFleet {
 	class Car {
 		int pos;

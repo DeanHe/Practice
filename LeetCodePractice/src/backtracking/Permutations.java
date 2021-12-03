@@ -51,8 +51,8 @@ public class Permutations {
     			visited[i] = true;
     			temp.add(nums[i]);
     			dfs(res, temp, nums, visited);
-    			visited[i] = false;
     			temp.remove(temp.size() - 1);
+                visited[i] = false;
     		}
     	}
     }

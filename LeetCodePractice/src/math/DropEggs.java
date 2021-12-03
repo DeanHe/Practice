@@ -2,15 +2,15 @@ package math;
 /*
 You're given two eggs, Find k while minimize the number of drops for the worst case. Return the number of drops in the worst case.
 
-        Example
-        Example 1:
 
+        Example 1:
         Input: 100
         Output: 14
-        Example 2:
 
+        Example 2:
         Input: 10
         Output: 4
+
         Clarification
         For n = 10, a naive way to find k is drop egg from 1st floor, 2nd floor ... kth floor. But in this worst case (k = 10), you have to drop 10 times.
 

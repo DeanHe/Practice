@@ -15,25 +15,25 @@ public class InsertInterval {
 	/**
      * Insert newInterval into intervals.
      * @param intervals: Sorted interval list.
-     * @param insert: A new interval.
+     * @param newInterval: A new interval.
      * @return: A new sorted interval list.
      */
 
-    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval insert) {
+    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
         ArrayList<Interval> result = new ArrayList<>();
         int insertPos = 0;
         for(Interval i : intervals){
-            if(i.end < insert.start){
+            if(i.end < newInterval.start){
                 result.add(i);
                 insertPos++;
-            } else if(insert.end < i.start){
+            } else if(newInterval.end < i.start){
                 result.add(i);
             } else {
-                insert.start = Math.min(i.start, insert.start);
-                insert.end = Math.max(i.end, insert.end);
+                newInterval.start = Math.min(i.start, newInterval.start);
+                newInterval.end = Math.max(i.end, newInterval.end);
             }
         }
-        result.add(insertPos, insert);
+        result.add(insertPos, newInterval);
         return result;
     }
 }

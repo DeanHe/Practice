@@ -77,8 +77,7 @@ public class CampusBikes {
             buckets[dist].add(i);
         }
         for(int dist = 0; dist < 2000; dist++){
-            for(int i = 0; i < buckets[dist].size(); i++){
-                int pairIdx = buckets[dist].get(i);
+            for(int pairIdx : buckets[dist]){
                 int[] pair = pairs[pairIdx];
                 int worker = pair[1];
                 int bike = pair[2];

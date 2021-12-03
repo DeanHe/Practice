@@ -142,33 +142,6 @@ public class Solution {
         }
         return res;
     }
-
-    private boolean isVowelSub(String s){
-        Set<Character> visited = new HashSet<>();
-        for(char c : s.toCharArray()){
-            if(!vowels.contains(c)){
-                return false;
-            }
-            visited.add(c);
-        }
-        return visited.size() == 5;
-    }
-
-    public int wateringPlants(int[] plants, int capacity) {
-        int res = 0, len = plants.length, vol = capacity;
-        for(int i = 0; i < len;){
-            int p = plants[i];
-            if(vol >= p){
-                vol -= p;
-                res++;
-                i++;
-            } else {
-                vol = capacity;
-                res += i * 2;
-            }
-        }
-        return res;
-    }
 }
 
 

@@ -3,8 +3,8 @@ package sort;
 import java.util.Arrays;
 
 /*
-Given two arrays of positive integers boxes and warehouse representing the heights of some boxes of unit width, and the heights of n rooms in a warehouse, respectively. The warehouse's rooms are labeled from 0 to n - 1 from left to right where warehouse[i] (0-indexed) is the height of the ith room.
-
+Given two arrays of positive integers boxes and warehouse representing the heights of some boxes of unit width, and the heights of n rooms in a warehouse, respectively.
+The warehouse's rooms are labeled from 0 to n - 1 from left to right where warehouse[i] (0-indexed) is the height of the ith room.
 Boxes are put into the warehouse by the following rules:
 
 Boxes can't be piled up.
@@ -12,8 +12,6 @@ You can rearrange the order of the boxes.
 Boxes can only be pushed into the warehouse from left to right only.
 If the height of some room in the warehouse is less than the height of a box, then the box will be stopped before that room, so are the boxes behind it.
 Return the maximum number of boxes you can put into the warehouse.
-
-
 
 Example 1:
 Input: boxes = [4,3,4,1], warehouse = [5,3,3,4,1]
@@ -40,12 +38,13 @@ Example 4:
 Input: boxes = [4,5,6], warehouse = [3,3,3,3,3]
 Output: 0
 
-
 Constraints:
-
 n == warehouse.length
 1 <= boxes.length, warehouse.length <= 10^5
 1 <= boxes[i], warehouse[i] <= 10^9
+
+analysis:
+sort boxes and greedy push to warehouse
  */
 public class PutBoxesIntoTheWareHouseI {
     public int maxBoxesInWarehouse(int[] boxes, int[] warehouse){

@@ -2,18 +2,15 @@ package dp;
 
 /*
 Given strings S and T, find the minimum (contiguous) substring W of S, so that T is a subsequence of W.
-
         If there is no such window in S that covers all characters in T, return the empty string "".
         If there are multiple such minimum-length windows, return the one with the smallest starting index.
 
-        Example
         Example 1:
-
         Input：S="jmeqksfrsdcmsiwvaovztaqenprpvnbstl"，T="u"
         Output：""
         Explanation： unable to match
-        Example 2:
 
+        Example 2:
         Input：S = "abcdebdde"， T = "bde"
         Output："bcde"
         Explanation："bcde" is the answer and "deb" is not a smaller window because the elements of T in the window must occur in order.
@@ -37,7 +34,7 @@ public class MinimumWindowSubsequence {
      */
     public String minWindow(String s, String t) {
         String res = "";
-        int sLen = s.length(), tLen = t.length(), minLen = sLen, start = -1;
+        int sLen = s.length(), tLen = t.length(), minLen = sLen;
         Integer[][] dp = new Integer[sLen + 1][tLen + 1]; // mem[i + 1][j + 1] means the start position of s[:i] contains sequence of t[:j]
         // init
         for (int i = 0; i < sLen; i++) {

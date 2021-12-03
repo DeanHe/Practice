@@ -38,7 +38,6 @@ public class SlidingWindowMaximum {
         int[] res = new int[nums.length - k + 1];
         Deque<Integer> deque = new ArrayDeque<>();
         for(int i = 0; i < nums.length; i++){
-            int startIdx = i - k + 1;
             while(!deque.isEmpty() && i - deque.peekFirst() >= k){
                 deque.pollFirst();
             }
@@ -46,6 +45,7 @@ public class SlidingWindowMaximum {
                 deque.pollLast();
             }
             deque.offerLast(i);
+            int startIdx = i - k + 1;
             if(startIdx >= 0){
                 res[startIdx] = nums[deque.peekFirst()];
             }
