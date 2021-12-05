@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /*
-You are given n​​​​​​ tasks labeled from 0 to n - 1 represented by a 2D integer array tasks, where tasks[i] = [enqueueTimei, processingTimei] means that the i​​​​​​th​​​​ task will be available to process at enqueueTimei and will take processingTimei to finish processing.
+You are given n tasks labeled from 0 to n - 1 represented by a 2D integer array tasks,
+where tasks[i] = [enqueueTimei, processingTimei] means that the i task will be available to process at enqueueTimei and will take processingTimei to finish processing.
 
 You have a single-threaded CPU that can process at most one task at a time and will act in the following way:
 

@@ -54,41 +54,6 @@ public class Solution {
 		Arrays.stream(res).forEach(a -> System.out.println(a));
 		*/
     }
-    public int[] getOrder(int[][] tasks) {
-        int len = tasks.length;
-        int[][] ls = new int[len][3];
-        for (int i = 0; i < len; i++) {
-            ls[i][0] = i;
-            ls[i][1] = tasks[i][0];
-            ls[i][2] = tasks[i][1];
-        }
-        Arrays.sort(ls, (a, b) -> a[1] - b[1]);
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
-            if (a[2] != b[2]) {
-                return a[2] - b[2];
-            } else {
-                return a[0] - b[0];
-            }
-        });
-        int[] res = new int[len];
-        int i = 0;
-        int j = 0;
-        int endTime = ls[j][1];
-        while(i < len){
-            while(j < len && ls[j][1] <= endTime){
-                pq.offer(ls[j]);
-                j++;
-            }
-            if(pq.isEmpty()){
-                endTime = ls[j][1];
-            } else {
-                int[] task = pq.poll();
-                res[i] = task[0];
-                endTime += task[2];
-            }
-        }
-        return res;
-    }
 
     public List<Integer> twoOutOfThree(int[] nums1, int[] nums2, int[] nums3) {
         List<Integer> res = new ArrayList<>();
@@ -141,6 +106,40 @@ public class Solution {
             res += dp[i + 1];
         }
         return res;
+    }
+
+
+    public int[] findEvenNumbers(int[] digits) {
+        int[] map = new int[10];
+        for(int n : digits){
+            map[n]++;
+        }
+        List<Integer> res = new ArrayList<>();
+        for(int n = 100; n < 1000; n++){
+            if(n % 2 == 0){
+                if(isValid(map, n)){
+                    res.add(n);
+                }
+            }
+        }
+        int[] arr = new int[res.size()];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = res.get(i);
+        }
+        return arr;
+    }
+
+    private boolean isValid(int[] map, int n){
+        int[] copy = map.clone();
+        while(n > 0){
+            int d = n % 10;
+            copy[d]--;
+            if(copy[d] < 0){
+                return false;
+            }
+            n /= 10;
+        }
+        return true;
     }
 }
 
