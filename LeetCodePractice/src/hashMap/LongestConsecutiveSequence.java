@@ -9,6 +9,8 @@ The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.
 Clarification
 Your algorithm should run in O(n) complexity.
 
+analysis:
+hashmap save [number : longest sequence length the number belongs]
 */
 
 import java.util.HashMap;

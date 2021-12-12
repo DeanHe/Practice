@@ -18,13 +18,14 @@ Constraints:
 
 The number of nodes in the tree is in the range [1, 10^5].
 0 <= Node.val <= 10^6
-At most 105 calls will be made to hasNext, and next.
+At most 10^5 calls will be made to hasNext, and next.
 
 
 Follow up:
-
 Could you implement next() and hasNext() to run in average O(1) time and use O(h) memory, where h is the height of the tree?
 
+analysis:
+help method pushAll reaches the leftmost leaf
  */
 public class BSTpostOrderIterator {
     Stack<TreeNode> stack;

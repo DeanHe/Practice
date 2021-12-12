@@ -42,10 +42,7 @@ public class MyHashMap {
         ListNode pre = find(nodes[i], key);
         if(pre.next == null){
             pre.next = new ListNode(key, value);
-        } else {
-            pre.next.val = value;
         }
-
     }
 
     /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
@@ -71,6 +68,7 @@ public class MyHashMap {
         }
     }
 
+    // find index of node which contains key
     private int idx(int key){
         return Integer.hashCode(key) % nodes.length;
     }

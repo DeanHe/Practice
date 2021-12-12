@@ -3,22 +3,18 @@ package heap;
 import java.util.PriorityQueue;
 
 /*
-You are given two 0-indexed integer arrays servers and tasks of lengths n​​​​​​ and m​​​​​​ respectively. servers[i] is the weight of the i​​​​​​th​​​​ server, and tasks[j] is the time needed to process the j​​​​​​th​​​​ task in seconds.
+You are given two 0-indexed integer arrays servers and tasks of lengths n and m respectively. servers[i] is the weight of the ith server, and tasks[j] is the time needed to process the jth task in seconds.
 
-You are running a simulation system that will shut down after all tasks are processed. Each server can only process one task at a time. You will be able to process the jth task starting from the jth second beginning with the 0th task at second 0. To process task j, you assign it to the server with the smallest weight that is free, and in case of a tie, choose the server with the smallest index. If a free server gets assigned task j at second t,​​​​​​ it will be free again at the second t + tasks[j].
+You are running a simulation system that will shut down after all tasks are processed. Each server can only process one task at a time.
+You will be able to process the jth task starting from the jth second beginning with the 0th task at second 0. To process task j, you assign it to the server with the smallest weight that is free, and in case of a tie, choose the server with the smallest index.
+If a free server gets assigned task j at second t, it will be free again at the second t + tasks[j].
 
 If there are no free servers, you must wait until one is free and execute the free tasks as soon as possible. If multiple tasks need to be assigned, assign them in order of increasing index.
-
 You may assign multiple tasks at the same second if there are multiple free servers.
-
-Build an array ans​​​​ of length m, where ans[j] is the index of the server the j​​​​​​th task will be assigned to.
-
-Return the array ans​​​​.
-
-
+Build an array ans of length m, where ans[j] is the index of the server the jth task will be assigned to.
+Return the array ans.
 
 Example 1:
-
 Input: servers = [3,3,2], tasks = [1,2,3,2,1,2]
 Output: [2,2,0,2,1,2]
 Explanation: Events in chronological order go as follows:
@@ -28,8 +24,8 @@ Explanation: Events in chronological order go as follows:
 - At second 3, server 2 becomes free. Task 3 is added and processed using server 2 until second 5.
 - At second 4, task 4 is added and processed using server 1 until second 5.
 - At second 5, all servers become free. Task 5 is added and processed using server 2 until second 7.
-Example 2:
 
+Example 2:
 Input: servers = [5,1,4,3,2], tasks = [2,1,2,4,5,2,1]
 Output: [1,4,1,4,1,3,2]
 Explanation: Events in chronological order go as follows:
@@ -51,7 +47,8 @@ tasks.length == m
 
 hint:
 You can maintain a Heap of available Servers and a Heap of unavailable servers
-Note that the tasks will be processed in the input order so you just need to find the x-th server that will be available according to the rules
+Note that the tasks will be processed in the input order
+so you just need to find the x-th server that will be available according to the rules
 
 analysis: two heaps
 maintain free servers and running servers

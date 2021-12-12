@@ -32,6 +32,9 @@ if we can change weights array ->
 Binary Indexed Tree can be used if the weights can be updated many times.
 Basically if we have the accumulative sum of weights for each index, pickIndex() is to find the first index
 which has greater accumulative sum than the random value in [0, total_weight_sum).
+
+analysis:
+prefix Sum + binary search
 */
 public class RandomPickWithWeight {
 

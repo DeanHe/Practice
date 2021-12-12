@@ -1,4 +1,4 @@
-package binarySearch;
+package OOD.TicTacToe;
 /*
         Tic-tac-toe is played by two players A and B on a 3 x 3 grid.
 

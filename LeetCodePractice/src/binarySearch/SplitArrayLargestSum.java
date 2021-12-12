@@ -13,16 +13,22 @@ Examples:
 Input:
 nums = [7,2,5,10,8]
 m = 2
-
 Output:
 18
-
 Explanation:
 There are four ways to split nums into two subarrays.
 The best way is to split it into [7,2,5] and [10,8],
 where the largest sum among the two subarrays is only 18.
 
+Example 2:
+Input: nums = [1,2,3,4,5], m = 2
+Output: 9
 
+Example 3:
+Input: nums = [1,4,4], m = 3
+Output: 4
+
+analysis:
 The answer is between maximum value of input array numbers and sum of those numbers.
 Use binary search to approach the correct answer. We have l = max number of array; r = sum of all numbers in the array;Every time we do mid = (l + r) / 2;
 Use greedy to narrow down left and right boundaries in binary search.

@@ -31,6 +31,8 @@ hint:
 1 The shortest path between any two nodes in a tree must pass through their Lowest Common Ancestor (LCA). The path will travel upwards from node s to the LCA and then downwards from the LCA to node t.
 2 Find the path strings from root → s, and root → t. Can you use these two strings to prepare the final answer?
 3 Remove the longest common prefix of the two path strings to get the path LCA → s, and LCA → t. Each step in the path of LCA → s should be reversed as 'U'.
+
+tag: google
  */
 public class StepByStepDirectionsFromaBinaryTreeNodeToAnother {
     String ss, sd;

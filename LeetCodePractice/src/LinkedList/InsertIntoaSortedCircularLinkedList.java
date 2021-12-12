@@ -48,10 +48,10 @@ Space: O(1).
  */
 public class InsertIntoaSortedCircularLinkedList {
     public ListNode insert(ListNode head, int x) {
-        ListNode res = new ListNode(x);
+        ListNode node = new ListNode(x);
         if(head == null){
-            res.next = res;
-            return res;
+            node.next = node;
+            return node;
         }
         ListNode cur = head;
         while (cur != null && cur.next != null) {
@@ -70,8 +70,8 @@ public class InsertIntoaSortedCircularLinkedList {
             }
             cur = cur.next;
         }
-        res.next = cur.next;
-        cur.next = res;
+        node.next = cur.next;
+        cur.next = node;
         return head;
     }
 }

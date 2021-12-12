@@ -1,4 +1,4 @@
-package OOD;
+package OOD.TicTacToe;
 /*
 Design a Tic-tac-toe game that is played between two players on a n x n grid.
 You may assume the following rules:
@@ -49,8 +49,19 @@ Could you do better than O(n2) per move() operation?
 Hint:
 Could you trade extra space such that move() operation can be done in O(1)?
 You need two arrays: int rows[n], int cols[n], plus two variables: diagonal, anti_diagonal.
+
 Solution:
 Use addtional arrays rows[n], cols[n] and two varialbes diagonal, anti_diagonal to mark the number of Xs and Os.
+
+Google question:
+Rules: After a player places three marks on the board, for all following moves, he/she needs to remove the oldest move first and then make the new move.
+	Q1: Define your own data structure to represent the state of the game. Use it for the rest of the problem.
+	answer: using an array of length rows[3] + cols[3] + diag[1] + antidiag[1] + turn[1]
+	Q2: Give a state of the current game and a proposed move, check whether this move is allowed or not.
+	answer:
+	Q3: Give a state of the current game, return the next move to guarantee a win if possible, otherwise just return any move. The win-or-not can be checked by a given API. Win(state)
+	Q4: Give a state of the current game, return the next move to guarantee a win if possible. If not possible, return the move so that the next player cannot win in the next step.
+
  */
 
 public class TicTacToe {

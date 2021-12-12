@@ -1,6 +1,6 @@
 package bitManipulation;
 /*
-Given 3*n + 1 non-negative integer, every numbers occurs triple times except one, find it.
+Given 3*n + 1 non-negative integer, every number occurs triple times except one, find it.
 
 Given a non-empty array of integers, every element appears three times except for one, which appears exactly once. Find that single one.
 
@@ -17,7 +17,13 @@ Example 1:
 Example 2:
 	Input: [2,1,2,2]
 	Output:  1
-	
+
+Constraints:
+
+1 <= nums.length <= 3 * 10^4
+-231 <= nums[i] <= 2^31 - 1
+Each element in nums appears exactly three times except for one element which appears once.
+
 Challenge
 One-pass, constant extra space.
 */

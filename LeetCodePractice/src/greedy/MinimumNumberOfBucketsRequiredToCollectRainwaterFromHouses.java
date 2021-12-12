@@ -52,16 +52,40 @@ Thus, 0 buckets are needed.
 Constraints:
 
 1 <= street.length <= 10^5
-street[i] is either'H' or '.'.
+street[i] is either 'H' or '.'.
 
 hint:
 1 When is it impossible to collect the rainwater from all the houses?
 2 When one or more houses do not have an empty space adjacent to it.
 3 Assuming the rainwater from all previous houses is collected. If there is a house at index i and you are able to place a bucket at index i - 1 or i + 1, where should you put it?
 4 It is always better to place a bucket at index i + 1 because it can collect the rainwater from the next house as well.
+
+analysis:
+Continue if we already have a bucket on the left.
+Place a bucket on the right, if possible.
+Place a bucket on the left, if we can.
+We are unable to collect water, return -1.
  */
 public class MinimumNumberOfBucketsRequiredToCollectRainwaterFromHouses {
     public int minimumBuckets(String street) {
-        return -1;
+        int len = street.length(), res = 0;
+        char[] arr = street.toCharArray();
+        for(int i = 0; i < len; i++){
+            if(arr[i] == 'H'){
+                if(i > 0 && arr[i - 1] == 'B'){
+                    continue;
+                }
+                if(i + 1 < len && arr[i + 1]== '.'){
+                    res++;
+                    arr[i + 1] = 'B';
+                } else if(i > 0 && arr[i - 1] == '.'){
+                    res++;
+                    arr[i - 1] = 'B';
+                } else {
+                    return -1;
+                }
+            }
+        }
+        return res;
     }
 }

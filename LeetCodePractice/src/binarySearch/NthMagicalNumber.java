@@ -22,17 +22,51 @@ Note:
 
 1 <= N <= 10^9
 2 <= A <= 40000
-2 <= B <= 40000*/
+2 <= B <= 40000
+
+analysis:
+Math; binary search
+*/
 public class NthMagicalNumber {
-	public int nthMagicalNumber(int N, int A, int B) {
-        long leastCommonMultiple = A * B / greateCommonDivisor(A, B);
-        return (int) leastCommonMultiple;
-    }
-	private int greateCommonDivisor(int A, int B) {
-		if(B == 0){
-			return A;
+	int MOD = (int) (1e9 + 7);
+
+	public int nthMagicalNumber(int n, int a, int b) {
+		if (b < a) {
+			return nthMagicalNumber(n, b, a);
+		}
+		long s = 0, e = Long.MAX_VALUE;
+		while (s < e) {
+			long mid = s + (e - s) / 2;
+			if (check(a, b, mid) < n) {
+				s = mid + 1;
+			} else {
+				e = mid;
+			}
+		}
+		return (int) (s % MOD);
+	}
+
+	private long check(int a, int b, long mid) {
+		long cnt = 0;
+		int lcm = leastCommonMultiple(a, b);
+		cnt += (mid / a);
+		if (lcm != b) {
+			cnt += (mid / b);
+			cnt -= (mid / lcm);
+		}
+		return cnt;
+	}
+
+	private int leastCommonMultiple(int a, int b) {
+		long leastCommonMultiple = a * b / greatestCommonDivisor(a, b);
+		return (int) leastCommonMultiple;
+	}
+
+	private int greatestCommonDivisor(int a, int b) {
+		if (b == 0) {
+			return a;
 		} else {
-			return greateCommonDivisor(B, A % B);
+			return greatestCommonDivisor(b, a % b);
 		}
 	}
 }

@@ -45,13 +45,13 @@ Therefore, you can't travel around the circuit once no matter where you start.
  */
 public class GasStation {
 	public int canCompleteCircuit(int[] gas, int[] cost) {
-	    int totoalDiff = 0, len = gas.length;
+	    int totalDiff = 0, len = gas.length;
 	    int[] diff = new int[len];
         for(int i = 0; i < len; i++){
         	diff[i] = gas[i] - cost[i];
-        	totoalDiff += diff[i];
+        	totalDiff += diff[i];
         }
-        if(totoalDiff < 0){
+        if(totalDiff < 0){
         	return -1;
         }
 		// definitely has a result station

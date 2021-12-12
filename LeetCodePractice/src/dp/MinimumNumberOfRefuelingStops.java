@@ -1,5 +1,6 @@
 package dp;
-/*A car travels from a starting position to a destination which is target miles east of the starting position.
+/*
+A car travels from a starting position to a destination which is target miles east of the starting position.
 
 Along the way, there are gas stations.  Each station[i] represents a gas station that is station[i][0] miles east of the starting position, and has station[i][1] liters of gas.
 
@@ -40,54 +41,61 @@ Note:
 1 <= target, startFuel, stations[i][1] <= 10^9
 0 <= stations.length <= 500
 0 < stations[0][0] < stations[1][0] < ... < stations[stations.length-1][0] < target
+
+analysis:
+mem[t] means the furthest distance that we can get with t times of refueling.
+the maximum distance can go is the sum of fueling
+
+approach1: dp TC O(N^2)
+approach2: priorityQueue TC O(N log N)
 */
 
 import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class MinimumNumberOfRefuelingStops {
-	public int minRefuelStops(int target, int startFuel, int[][] stations) {
-		// mem[t] means the furthest distance that we can get with t times of
-		// refueling.
-		long[] dp = new long[stations.length + 1];
-		dp[0] = startFuel;
-		for (int k = 0; k < stations.length; k++) {
-			for (int i = k; i >= 0; i--) {
-				if (dp[i] >= stations[k][0]) {
-					dp[i + 1] = Math.max(dp[i + 1], dp[i] + stations[k][1]);
-				}
-			}
-		}
-		for (int i = 0; i <= dp.length; i++) {
-			if (dp[i] >= target) {
-				return i;
-			}
-		}
-		return -1;
-	}
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        long[] dp = new long[stations.length + 1];
+        dp[0] = startFuel;
+        for (int i = 0; i < stations.length; i++) {
+            for (int j = i; j >= 0; j--) {
+                if (dp[j] >= stations[i][0]) {
+                    dp[j + 1] = Math.max(dp[j + 1], dp[j] + stations[i][1]);
+                }
+            }
+        }
+        for (int i = 0; i <= dp.length; i++) {
+            if (dp[i] >= target) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
-	/*
-	 * i is the index of next stops to refuel. res is the times that we have
-	 * refeuled. pq is a priority queue that we store all available gas.
-	 * 
-	 * We initial res = 0 and in every loop:
-	 * 
-	 * We add all reachable stop to priority queue. We pop out the largest gas
-	 * from pq and refeul once. If we can't refuel, means that we can not go
-	 * forward and return -1
-	 */ public int minRefuelStopsWithPriorityQueue(int target, int startFuel, int[][] stations) {
-		PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-		int times, i = 0, cur = startFuel;
-		for (times = 0; cur < target; times++) {
-			while (i < stations.length && cur >= stations[i][0]) {
-				pq.offer(stations[i][1]);
-				i++;
-			}
-			if (pq.isEmpty()) {
-				return -1;
-			}
-			cur += pq.poll();
-		}
-		return times;
-	}
+    /*
+     * i is the index of next stops to refuel. res is the times that we have
+     * refeuled. pq is a priority queue that we store all available gas.
+     *
+     * We initial res = 0 and in every loop:
+     *
+     * We add all reachable stop to priority queue. We pop out the largest gas
+     * from pq and refeul once. If we can't refuel, means that we can not go
+     * forward and return -1
+     */
+    public int minRefuelStopsWithPriorityQueue(int target, int startFuel, int[][] stations) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int times = 0, i = 0, cur = startFuel;
+        while (cur < target) {
+            while (i < stations.length && cur >= stations[i][0]) {
+                pq.offer(stations[i][1]);
+                i++;
+            }
+            if (pq.isEmpty()) {
+                return -1;
+            }
+            cur += pq.poll();
+            times++;
+        }
+        return times;
+    }
 }

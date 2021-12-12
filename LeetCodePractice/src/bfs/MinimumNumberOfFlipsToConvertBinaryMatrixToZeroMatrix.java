@@ -42,7 +42,8 @@ hint:
 1 Flipping same index two times is like not flipping it at all. Each index can be flipped one time. Try all possible combinations. O(2^(n*m)).
 
 analysis:
-bitmask
+bitmask bfs
+TC: O(m * n * 2 ^ (m * n)), SC: O(2 ^ (m * n)).
 */
 public class MinimumNumberOfFlipsToConvertBinaryMatrixToZeroMatrix {
     public int minFlips(int[][] mat) {

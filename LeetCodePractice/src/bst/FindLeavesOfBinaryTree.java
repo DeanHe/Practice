@@ -28,6 +28,9 @@ Now removing the leaf [2] would result in this tree:
 Now removing the leaf [1] would result in the empty tree:
           []
 Returns [4, 5, 3], [2], [1].
+
+analysis:
+get max depth from each node
  */
 public class FindLeavesOfBinaryTree {
     public List<List<Integer>> findLeaves(TreeNode root) {

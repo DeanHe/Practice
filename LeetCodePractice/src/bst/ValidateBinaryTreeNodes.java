@@ -31,8 +31,10 @@ import java.util.Set;
         -1 <= leftChild[i], rightChild[i] <= n - 1
 
 analysis:
-build indeg map, the root should be the only one with indeg 0
-dfs from the root, should visit all nodes only once without cycle
+build indeg map,
+1 the root should be the only one with indeg 0
+2 other node should have in degree == 1
+3 dfs from the root, should visit all nodes only once without cycle
 */
 public class ValidateBinaryTreeNodes {
     public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {

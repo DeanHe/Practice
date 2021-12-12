@@ -108,38 +108,24 @@ public class Solution {
         return res;
     }
 
-
-    public int[] findEvenNumbers(int[] digits) {
-        int[] map = new int[10];
-        for(int n : digits){
-            map[n]++;
+    public int countPoints(String rings) {
+        Set[] sets = new Set[10];
+        for(int i = 0; i < 10; i++){
+            sets[i] = new HashSet<Character>();
         }
-        List<Integer> res = new ArrayList<>();
-        for(int n = 100; n < 1000; n++){
-            if(n % 2 == 0){
-                if(isValid(map, n)){
-                    res.add(n);
-                }
+        char[] arr = rings.toCharArray();
+        for(int i = 0; i < arr.length; i += 2){
+            char c = arr[i];
+            int g = arr[i + 1] - '0';
+            sets[g].add(c);
+        }
+        int res = 0;
+        for(int i = 0; i < 10; i++){
+            if(sets[i].size() == 3){
+                res++;
             }
         }
-        int[] arr = new int[res.size()];
-        for(int i = 0; i < arr.length; i++){
-            arr[i] = res.get(i);
-        }
-        return arr;
-    }
-
-    private boolean isValid(int[] map, int n){
-        int[] copy = map.clone();
-        while(n > 0){
-            int d = n % 10;
-            copy[d]--;
-            if(copy[d] < 0){
-                return false;
-            }
-            n /= 10;
-        }
-        return true;
+        return res;
     }
 }
 

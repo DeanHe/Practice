@@ -52,9 +52,7 @@ public class AccountsMerge {
 		}
 		for (List<String> acct : accounts) {
 			String root = findRoot(acct.get(1));
-			if (!group.containsKey(root)) {
-				group.put(root, new TreeSet<>());
-			}
+			group.putIfAbsent(root, new TreeSet<>());
 			for (int i = 1; i < acct.size(); i++) {
 				group.get(root).add(acct.get(i));
 			}

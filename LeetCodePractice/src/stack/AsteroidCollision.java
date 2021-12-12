@@ -46,7 +46,7 @@ We can use a stack called res to efficiently simulate the collisions. We can ite
 
 1. If res is empty, we push that asteroid into it regardless of directions. Because negative asteroids will be part of the final result while positive asteroids may interact with future negative asteroids.
 2. If the asteroid is positive, push it into res. It will never interact with existing asteroids in res but may interact with future negative asteroids.
-3. If the asteroid is negative, we need to simulating the collision process by repeatedly popping the positive asteroids from the top of the stack and compare to see which asteroid survives the collision. We may or may not need to push the negative asteroid to res depending on the value of the positive asteroids it encounters. Push the negative asteroid if it survives all the collisions.
+3. If the asteroid is negative, we need to simulate the collision process by repeatedly popping the positive asteroids from the top of the stack and compare to see which asteroid survives the collision. We may or may not need to push the negative asteroid to res depending on the value of the positive asteroids it encounters. Push the negative asteroid if it survives all the collisions.
 
 */
 public class AsteroidCollision {

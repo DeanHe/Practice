@@ -17,18 +17,28 @@ Explanation:
 The five different ways are listed below, different letters indicates different tiles:
 XYZ XXZ XYY XXY XYY
 XYZ YYZ XZZ XYY XXY
+
+Constraints:
+1 <= n <= 1000
+
+analysis:
 https://www.youtube.com/watch?v=S-fUTfqrdq8
+dp[i][0]: ways to cover i cols, both rows of i-th col are covered
+dp[i][1]:  ways to cover i cols, only top row of i-th col is covered
+dp[i][2]:  ways to cover i cols, only bottom row of i-th col is covered
+
+TC O(N) SC(N)
 */
 public class DominoAndTrominoTiling {
 	public int numTilings(int N) {
-		int mod = 1000000007;
+		int MOD = (int)(1e9 + 7);
 		long[][] dp = new long[N + 1][3];
 		dp[0][0] = 1;
 		dp[1][0] = 1;
 		for(int i = 2; i <= N; i++){
-			dp[i][0] = (dp[i - 1][0] + dp[i - 2][0] + dp[i - 1][1] + dp[i - 1][2]) % mod;
-			dp[i][1] = (dp[i - 1][2] + dp[i - 2][0]) % mod;
-			dp[i][2] = (dp[i - 1][1] + dp[i - 2][0]) % mod;
+			dp[i][0] = (dp[i - 1][0] + dp[i - 2][0] + dp[i - 1][1] + dp[i - 1][2]) % MOD;
+			dp[i][1] = (dp[i - 1][2] + dp[i - 2][0]) % MOD;
+			dp[i][2] = (dp[i - 1][1] + dp[i - 2][0]) % MOD;
 		}
 		return (int)dp[N][0];
 	}
