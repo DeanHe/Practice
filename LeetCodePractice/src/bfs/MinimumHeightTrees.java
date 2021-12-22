@@ -53,14 +53,12 @@ public class MinimumHeightTrees {
 			return res;
 		}
 		for(int[] edge : edges){
-			int node1 = edge[0];
-			int node2 = edge[1];
-			graph.putIfAbsent(node1, new ArrayList<>());
-			graph.get(node1).add(node2);
-			graph.putIfAbsent(node2, new ArrayList<>());
-			graph.get(node2).add(node1);
-			indeg[node1]++;
-			indeg[node2]++;
+			int a = edge[0];
+			int b = edge[1];
+			graph.computeIfAbsent(a, x -> new ArrayList<>()).add(b);
+			graph.computeIfAbsent(b, x -> new ArrayList<>()).add(a);
+			indeg[a]++;
+			indeg[b]++;
 		}
 		Queue<Integer> queue = new LinkedList<>();
 		//put leaf to queue
@@ -71,8 +69,8 @@ public class MinimumHeightTrees {
 		}
 		while(!queue.isEmpty()){
 			res.clear();
-			int size = queue.size();
-			for(int i = 0; i < size; i++){
+			int sz = queue.size();
+			for(int i = 0; i < sz; i++){
 				int leaf = queue.poll();
 				res.add(leaf);
 				indeg[leaf] = 0;

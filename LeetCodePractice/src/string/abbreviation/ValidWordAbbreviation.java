@@ -38,11 +38,11 @@ public class ValidWordAbbreviation {
     			if(t[j] == '0'){
     				return false;
     			}
-    			int val = 0;
+    			int cnt = 0;
     			while(j < aLen && Character.isDigit(t[j])){
-    				val = val * 10 + t[j++] - '0';
+    				cnt = cnt * 10 + t[j++] - '0';
     			}
-    			i += val;
+    			i += cnt;
     		} else {
     			if(s[i] != t[j]){
     				return false;

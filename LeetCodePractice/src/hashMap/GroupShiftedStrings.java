@@ -18,10 +18,7 @@ public class GroupShiftedStrings {
 		HashMap<String, List<String>> map = new HashMap<>();
 		for(String s : strings){
 			String key = shiftBacktoStart(s);
-			if(!map.containsKey(key)){
-				map.put(key, new ArrayList<>());
-			}
-			map.get(key).add(s);
+			map.computeIfAbsent(key, x -> new ArrayList<>()).add(s);
 		}
 		for(List<String> list : map.values()){
 			Collections.sort(list);

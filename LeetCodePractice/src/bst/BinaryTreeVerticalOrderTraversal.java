@@ -36,6 +36,8 @@ Explanation:
  From test case, the real requirement is:
 If two nodes have the same position,
 
+analysis:
+bfs
 check the layer, the node on higher level(close to root) goes first
 if they also in the same level, order from small to large
  */
@@ -56,9 +58,9 @@ public class BinaryTreeVerticalOrderTraversal {
 		tq.offer(root);
 		cq.offer(0);
 		while(!tq.isEmpty()){
-			int size = tq.size();
+			int sz = tq.size();
 			Map<Integer,List<Integer>> level = new HashMap();
-			for(int i = 0; i < size; i++){
+			for(int i = 0; i < sz; i++){
 				TreeNode cur = tq.poll();
 				int col = cq.poll();
 				level.computeIfAbsent(col, x -> new ArrayList<>()).add(cur.val);

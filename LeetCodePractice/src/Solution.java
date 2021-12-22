@@ -127,6 +127,27 @@ public class Solution {
         }
         return res;
     }
+
+    public int findTheLongestSubstring(String S) {
+        Map<Character, Integer> mask = new HashMap<>();
+        for(char c = 'a', i = 0; c <= 'z'; c++, i++){
+            mask.put(c, 1 << i);
+        }
+        Map<Integer, Integer> stateToIdx = new HashMap<>();
+        stateToIdx.put(0, -1);
+        int maxLen = 0, state = 0, len = S.length();
+        char[] arr = S.toCharArray();
+        for(int i = 0; i < len; i++){
+            char c = arr[i];
+            if(mask.containsKey(c)){
+                int bitToFlip = mask.get(c);
+                state ^= bitToFlip;
+            }
+            stateToIdx.putIfAbsent(state, i);
+            maxLen = Math.max(maxLen, i - stateToIdx.get(state));
+        }
+        return maxLen;
+    }
 }
 
 

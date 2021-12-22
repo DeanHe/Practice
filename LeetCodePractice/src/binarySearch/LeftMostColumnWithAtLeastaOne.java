@@ -4,15 +4,14 @@ In a binary matrix (all elements are 0 and 1), every row is sorted in ascending 
 Find the leftmost column index with a 1 in it.
 
 Example 1:
-
 Input:
 [[0, 0, 0, 1],
  [0, 0, 1, 1],
  [0, 1, 1, 1],
  [0, 0, 0, 0]]
 Output: 1
-Example 2:
 
+Example 2:
 Input:
 [[0, 0, 0, 0],
  [0, 0, 0, 0],
