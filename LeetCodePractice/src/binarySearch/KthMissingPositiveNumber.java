@@ -31,6 +31,7 @@ if # miss arr[0:mid] >= k,  indicate the missing number is in range arr[:mid]
 
 TC O(logN)
 SC O(1)
+similar to MissingElementInSortedArray
  */
 public class KthMissingPositiveNumber {
     public int findKthPositive(int[] arr, int k) {

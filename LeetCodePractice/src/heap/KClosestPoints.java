@@ -54,14 +54,14 @@ public class KClosestPoints {
     //quick select
     public int[][] kClosestQS(int[][] points, int k) {
         int start = 0, end = points.length - 1;
-        while(start < end){
+        while(start <= end){
             int mid = partition(points, start, end);
             if(mid == k - 1){
                 break;
             } else if(mid < k - 1){
-                start = mid;
+                start = mid + 1;
             } else {
-                end = mid;
+                end = mid - 1;
             }
         }
         return Arrays.copyOfRange(points, 0, k);
@@ -70,11 +70,12 @@ public class KClosestPoints {
     private int partition(int[][] points, int start, int end) {
         int[] pivot = points[end];
         int i = start;
-        for(int j = start; j <= end; j++){
-            if(compare(points[i], pivot)){
+        for(int j = start; j < end; j++){
+            if(compare(points[j], pivot)){
                 swap(points, i++, j);
             }
         }
+        swap(points, i, end);
         return i;
     }
 

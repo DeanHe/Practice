@@ -19,8 +19,10 @@ Given a complete binary tree, count the number of nodes.
         Output: 6
 
 analysis:
-
-time complexity: O(log(2N + 1) * log(2N + 1))
+case 1: left subtree height equals right subtree height -> left subtree is complete tree
+case 2: left subtree height not equals right subtree height -> right subtree is complete tree
+T(n) = T(n / 2) + theta(log(n))
+time complexity: O(log(n)^2)
 Binary Search on leaves = log(N + 1)
 height = log(2N + 1)
 */
@@ -30,28 +32,19 @@ public class CountCompleteTreeNodes {
         if (root == null) {
             return 0;
         }
-        int leftHeight = getLeftHeight(root.left);
-        int rightHeight = getRightHeight(root.right);
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
         if (leftHeight == rightHeight) { // forming a perfect binary tree
-            return (2 << rightHeight) - 1;
+            return (1 << leftHeight) + countNodes(root.right);
         } else {
-            return 1 + countNodes(root.left) + countNodes(root.right);
+            return (1 << (leftHeight - 1)) + countNodes(root.left);
         }
     }
 
-    private int getLeftHeight(TreeNode root) {
+    private int getHeight(TreeNode root) {
         int res = 0;
         while(root != null){
             root = root.left;
-            res++;
-        }
-        return res;
-    }
-
-    private int getRightHeight(TreeNode root) {
-        int res = 0;
-        while(root != null){
-            root = root.right;
             res++;
         }
         return res;

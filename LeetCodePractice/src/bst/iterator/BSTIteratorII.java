@@ -51,9 +51,9 @@ bSTIterator.prev(); // state becomes [3, 7, 9, 15, 20], return 9
 
 Constraints:
 
-The number of nodes in the tree is in the range [1, 105].
-0 <= Node.val <= 106
-At most 105 calls will be made to hasNext, next, hasPrev, and prev.
+The number of nodes in the tree is in the range [1, 10^5].
+0 <= Node.val <= 10^6
+At most 10^5 calls will be made to hasNext, next, hasPrev, and prev.
 
 Hints
 The inorder traversal of a BST gives us the elements in a sorted order.

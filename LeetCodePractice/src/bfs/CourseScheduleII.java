@@ -37,9 +37,12 @@ ai != bi
 All the pairs [ai, bi] are distinct.
 
 hint:
-This problem is equivalent to finding the topological order in a directed graph. If a cycle exists, no topological ordering exists and therefore it will be impossible to take all courses.
-Topological Sort via DFS - A great video tutorial (21 minutes) on Coursera explaining the basic concepts of Topological Sort.
-Topological sort could also be done via BFS.
+1 This problem is equivalent to finding the topological order in a directed graph. If a cycle exists, no topological ordering exists and therefore it will be impossible to take all courses.
+2 Topological Sort via DFS - A great video tutorial (21 minutes) on Coursera explaining the basic concepts of Topological Sort.
+3 Topological sort could also be done via BFS.
+
+analysis:
+TC O(n)
 */
 
 public class CourseScheduleII {
@@ -51,15 +54,12 @@ public class CourseScheduleII {
 	 * @return the course order
 	 */
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
-		List<List<Integer>> graph = new ArrayList<>(numCourses);
-		for (int i = 0; i < numCourses; i++) {
-			graph.add(new ArrayList<>());
-		}
+		Map<Integer, List<Integer>> graph = new HashMap<>();
 		int[] inDegree = new int[numCourses];
 		for (int i = 0; i < prerequisites.length; i++) {
 			int pre = prerequisites[i][1];
 			int post = prerequisites[i][0];
-			graph.get(pre).add(post);
+			graph.computeIfAbsent(pre, x -> new ArrayList<>()).add(post);
 			inDegree[post]++;
 		}
 		Queue<Integer> queue = new LinkedList<>();
@@ -74,7 +74,7 @@ public class CourseScheduleII {
 			int course = queue.poll();
 			res[cnt] = course;
 			cnt++;
-			List<Integer> nbs = graph.get(course);
+			List<Integer> nbs = graph.getOrDefault(course, new ArrayList<>());
 			for (int nb : nbs) {
 				if (--inDegree[nb] == 0) {
 					queue.offer(nb);

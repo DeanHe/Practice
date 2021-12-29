@@ -11,7 +11,6 @@ The CPU is single threaded which means that only one function is being executed 
 Return the exclusive time of each function, sorted by their function id.
 
 Example 1:
-
 Input:
 n = 2
 logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
@@ -24,7 +23,6 @@ So function 0 spends 2 + 1 = 3 units of total time executing, and function 1 spe
  
 
 Note:
-
 1 <= n <= 100
 Two functions won't start or end at the same time.
 Functions will always log when they exit.

@@ -31,19 +31,19 @@ iterate letter from start to last[start], and expand the partition to last[cur]
 */
 public class PartitionLabels {
 	/**
-     * @param S: a string
+     * @param s: a string
      * @return: a list of integers representing the size of these parts
      */
-    public List<Integer> partitionLabels(String S) {
+    public List<Integer> partitionLabels(String s) {
     	List<Integer> res = new ArrayList<>();
-    	int len = S.length();
+    	int len = s.length();
     	int[] last = new int[26];
     	for(int i = 0; i < len; i++){
-    		last[S.charAt(i) - 'a'] = i;
+    		last[s.charAt(i) - 'a'] = i;
     	}
     	int start = 0, end = 0;
     	for(int i = 0; i < len; i++){
-			end = Math.max(end, last[S.charAt(i) - 'a']);
+			end = Math.max(end, last[s.charAt(i) - 'a']);
 			if(i == end){
 				res.add(end - start + 1);
 				start = end + 1;

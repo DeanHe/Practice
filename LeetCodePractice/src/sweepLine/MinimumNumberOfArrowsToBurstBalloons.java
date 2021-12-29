@@ -24,51 +24,46 @@ solution: 1. greedy
 # If the current interval does not overlap with the active set, we just drop current active set, record some parameters, and create a new active set that contains the current interval.
 */
 public class MinimumNumberOfArrowsToBurstBalloons {
-	/**
+    /**
      * @param points: a 2D array
      * @return: the minimum number of arrows that must be shot to burst all balloons
      */
     public int findMinArrowShots(int[][] points) {
-		if(points == null || points.length == 0){
-			return 0;
-		}
-        Arrays.sort(points, new Comparator<int[]>() {
-
-			@Override
-			public int compare(int[] o1, int[] o2) {
-				if(o1[1] == o2[1]){
-					return o1[0] - o2[0];
-				}
-				return o1[1] - o2[1];
-			}
-        	
-		});
+        if (points == null || points.length == 0) {
+            return 0;
+        }
+        Arrays.sort(points, (a, b) -> {
+            if (a[1] != b[1]) {
+                return a[1] - b[1];
+            }
+            return a[0] - b[0];
+        });
         int len = points.length, count = 1;
         int preEnd = points[0][1];
-        for(int i = 1; i < len; i++){
-        	if(points[i][0] > preEnd){
-        		count++;
-        		preEnd = points[i][1];
-        	} 
+        for (int i = 1; i < len; i++) {
+            if (points[i][0] > preEnd) {
+                count++;
+                preEnd = points[i][1];
+            }
         }
         return count;
     }
 
-	public int findMinArrowShots2(int[][] points) {
-		if(points == null || points.length == 0){
-			return 0;
-		}
-		Arrays.sort(points, Comparator.comparingInt(a -> a[0]));
-		int count = 1;
-		int minEnd = points[0][1];
-		for(int i = 1; i < points.length; i++){
-			if(points[i][0] > minEnd){
-				count++;
-				minEnd = points[i][1];
-			} else {
-				minEnd = Math.min(minEnd, points[i][1]);
-			}
-		}
-		return count;
-	}
+    public int findMinArrowShots2(int[][] points) {
+        if (points == null || points.length == 0) {
+            return 0;
+        }
+        Arrays.sort(points, Comparator.comparingInt(a -> a[0]));
+        int count = 1;
+        int minEnd = points[0][1];
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] > minEnd) {
+                count++;
+                minEnd = points[i][1];
+            } else {
+                minEnd = Math.min(minEnd, points[i][1]);
+            }
+        }
+        return count;
+    }
 }

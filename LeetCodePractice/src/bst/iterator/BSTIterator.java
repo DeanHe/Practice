@@ -14,11 +14,7 @@ Notice that by initializing the pointer to a non-existent smallest number, the f
 
 You may assume that next() calls will always be valid. That is, there will be at least a next number in the in-order traversal when next() is called.
 
-
-
 Example 1:
-
-
 Input
 ["BSTIterator", "next", "next", "hasNext", "next", "hasNext", "next", "hasNext", "next", "hasNext"]
 [[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []]
@@ -37,18 +33,16 @@ bSTIterator.hasNext(); // return True
 bSTIterator.next();    // return 20
 bSTIterator.hasNext(); // return False
 
-
 Constraints:
-
-The number of nodes in the tree is in the range [1, 105].
-0 <= Node.val <= 106
-At most 105 calls will be made to hasNext, and next.
-
+The number of nodes in the tree is in the range [1, 10^5].
+0 <= Node.val <= 10^6
+At most 10^5 calls will be made to hasNext, and next.
 
 Follow up:
-
 Could you implement next() and hasNext() to run in average O(1) time and use O(h) memory, where h is the height of the tree?
 
+analysis:
+in order traverse
  */
 public class BSTIterator {
     Stack<TreeNode> stack;

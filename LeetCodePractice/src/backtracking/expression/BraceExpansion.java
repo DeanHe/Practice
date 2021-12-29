@@ -27,27 +27,29 @@ A string S represents a list of words.
 */
 public class BraceExpansion {
     List<String> res = new ArrayList<>();
+
     public String[] expand(String s) {
-        if(s == null || s.length() == 0){
+        if (s == null || s.length() == 0) {
             return new String[0];
         }
         product(s, 0, "");
         Collections.sort(res);
         return res.toArray(new String[0]);
     }
-    private void product(String s, int pos, String temp){
-        if(pos == s.length()){
+
+    private void product(String s, int pos, String temp) {
+        if (pos == s.length()) {
             res.add(temp);
             return;
         }
         char c = s.charAt(pos);
-        if(c == '{'){
+        if (c == '{') {
             int end = pos + 1;
-            while(s.charAt(end) != '}'){
+            while (s.charAt(end) != '}') {
                 end++;
             }
             String[] pool = s.substring(pos + 1, end).split(",");
-            for(String letter : pool){
+            for (String letter : pool) {
                 product(s, end + 1, temp + letter);
             }
         } else {

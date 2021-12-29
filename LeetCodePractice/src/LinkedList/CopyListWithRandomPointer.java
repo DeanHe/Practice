@@ -57,24 +57,24 @@ public class CopyListWithRandomPointer {
     	//origin node to copy node mapping ; visited
     	Map<Node, Node> map = new HashMap<>();
     	while(head != null){
-    	    Node copyHead;
+    	    Node copy;
     		// copy node
     		if(map.containsKey(head)){
-    			copyHead = map.get(head);
+    			copy = map.get(head);
     		} else {
-    			copyHead = new Node(head.val);
-    			map.put(head, copyHead);
+    			copy = new Node(head.val);
+    			map.put(head, copy);
     		}
     		//copy random link
     		if(head.random != null){
     			if(map.containsKey(head.random)){
-    				copyHead.random = map.get(head.random);
+    				copy.random = map.get(head.random);
     			} else {
-    				copyHead.random = new Node(head.random.val);
-    				map.put(head.random, copyHead.random);
+    				copy.random = new Node(head.random.val);
+    				map.put(head.random, copy.random);
     			}
     		}
-    		cur.next = copyHead;
+    		cur.next = copy;
     		cur = cur.next;
     	    head = head.next;
     	}

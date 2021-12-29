@@ -58,7 +58,7 @@ public class GasStation {
 		int sum = 0, res = 0;
 		for(int i = 0; i < len; i++){
 			sum += diff[i];
-			// the totalDiff > 0, so the sum of[res, 0] must > 0
+			// since totalDiff > 0, so the sum of[res, 0] must > 0
 			if(sum < 0){
 				res = i + 1;
 				sum = 0;

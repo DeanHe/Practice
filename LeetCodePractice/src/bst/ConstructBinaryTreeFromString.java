@@ -1,13 +1,9 @@
 package bst;
 /*
-
 You need to construct a binary tree from a string consisting of parenthesis and integers.
-
 The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
-
 You always start to construct the left child node of the parent first if it exists.
 
-Example
 Example 1:
 
 Input: "-4(2(3)(1))(6(5))"
@@ -28,10 +24,10 @@ The output is look like this:
      1
     /
   -1
+
 Notice
 There will only be '(', ')', '-' and '0' ~ '9' in the input string.
 An empty tree is represented by "" instead of "()".
-
  */
 public class ConstructBinaryTreeFromString {
     /**
@@ -57,12 +53,11 @@ public class ConstructBinaryTreeFromString {
                 cnt++;
             } else if(s.charAt(j) == ')'){
                 cnt--;
-                if(cnt == 0){
-                    j++;
-                    break;
-                }
             }
             j++;
+            if(cnt == 0){
+                break;
+            }
         }
         root.left = str2tree(s.substring(i, j));
         root.right = str2tree(s.substring(j));

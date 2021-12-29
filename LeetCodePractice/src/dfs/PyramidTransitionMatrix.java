@@ -2,7 +2,8 @@ package dfs;
 
 import java.util.*;
 
-/*We are stacking blocks to form a pyramid. Each block has a color which is a one letter string, like `'Z'`.
+/*
+We are stacking blocks to form a pyramid. Each block has a color which is a one letter string, like `'Z'`.
 For every block of color `C` we place not in the bottom row, we are placing it on top of a left block of color `A` and right block of color `B`. We are allowed to place the block there only if `(A, B, C)` is an allowed triple.
 We start with a bottom row of bottom, represented as a single string. We also start with a list of allowed triples allowed. Each allowed triple is represented as a string of length 3.
 Return true if we can build the pyramid all the way to the top, otherwise false.
@@ -28,7 +29,9 @@ Note that there could be allowed triples (A, B, C) and (A, B, D) with C != D.
 Note:
 bottom will be a string with length in range [2, 8].
 allowed will have length in range [0, 200].
-Letters in all strings will be chosen from the set {'A', 'B', 'C', 'D', 'E', 'F', 'G'}.*/
+Letters in all strings will be chosen from the set {'A', 'B', 'C', 'D', 'E', 'F', 'G'}.
+
+*/
 public class PyramidTransitionMatrix {
 	Map<String, List<String>> map = new HashMap<>();
 	public boolean pyramidTransition(String bottom, List<String> allowed) {

@@ -3,8 +3,6 @@ package dp;
 Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
 Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
-
-
 Example 1:
 Input: s = "leetcode", wordDict = ["leet","code"]
 Output: true
@@ -20,9 +18,7 @@ Example 3:
 Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
 Output: false
 
-
 Constraints:
-
 1 <= s.length <= 300
 1 <= wordDict.length <= 1000
 1 <= wordDict[i].length <= 20
@@ -30,6 +26,7 @@ s and wordDict[i] consist of only lowercase English letters.
 All the strings of wordDict are unique.
 
 analysis:
+dp[i] means s[:i] can break
 TC: O(N ^ 2)
 */
 import java.util.*;
@@ -40,8 +37,6 @@ public class WordBreak {
      * @param dict: A dictionary of words dict
      */
     public boolean wordBreak(String s, Set<String> dict) {
-        // write your code here
-        //dp[i] means s[:i] can break
         if(s == null || s.length() == 0){
             return true;
         }
@@ -53,10 +48,7 @@ public class WordBreak {
         boolean[] dp = new boolean[slen + 1];
         dp[0] = true;
         for(int i = 1; i <= slen; i++){
-            for(int j = 0; j < i; j++){
-                if(i - j > maxLen){
-                    j = i - maxLen;
-                }
+            for(int j = i - 1; j >= Math.max(0, i - maxLen); j--){
                 if(dp[j]){
                     if(dict.contains(s.substring(j, i))){
                         dp[i] = true;

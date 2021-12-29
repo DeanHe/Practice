@@ -2,49 +2,45 @@ package array;
 
 /*
 A matrix is Toeplitz if every diagonal from top-left to bottom-right has the same element.
+Now given an M x N matrix, return True if and only if the matrix is Toeplitz.
 
-        Now given an M x N matrix, return True if and only if the matrix is Toeplitz.
+Example 1:
+Input:
+matrix = [
+[1,2,3,4],
+[5,1,2,3],
+[9,5,1,2]
+]
+Output: True
+Explanation:
+In the above grid, the diagonals are:
+"[9]", "[5, 5]", "[1, 1, 1]", "[2, 2, 2]", "[3, 3]", "[4]".
+In each diagonal all elements are the same, so the answer is True.
 
+Example 2:
+Input:
+matrix = [
+[1,2],
+[2,2]
+]
+Output: False
+Explanation:
+The diagonal "[1, 2]" has different elements.
 
-        Example 1:
+Note:
+matrix will be a 2D array of integers.
+matrix will have a number of rows and columns in range [1, 20].
+matrix[i][j] will be integers in range [0, 99].
 
-        Input:
-        matrix = [
-        [1,2,3,4],
-        [5,1,2,3],
-        [9,5,1,2]
-        ]
-        Output: True
-        Explanation:
-        In the above grid, the diagonals are:
-        "[9]", "[5, 5]", "[1, 1, 1]", "[2, 2, 2]", "[3, 3]", "[4]".
-        In each diagonal all elements are the same, so the answer is True.
-        Example 2:
+hint: Check whether each value is equal to the value of it's top-left neighbor.
 
-        Input:
-        matrix = [
-        [1,2],
-        [2,2]
-        ]
-        Output: False
-        Explanation:
-        The diagonal "[1, 2]" has different elements.
+Follow up:
 
-        Note:
+1, What if the matrix is stored on disk, and the memory is limited such that you can only load at most one row of the matrix into the memory at once?
+2, What if the matrix is so large that you can only load up a partial row into the memory at once?
 
-        matrix will be a 2D array of integers.
-        matrix will have a number of rows and columns in range [1, 20].
-        matrix[i][j] will be integers in range [0, 99].
-
-        hint: Check whether each value is equal to the value of it's top-left neighbor.
-
-        Follow up:
-
-        1, What if the matrix is stored on disk, and the memory is limited such that you can only load at most one row of the matrix into the memory at once?
-        2, What if the matrix is so large that you can only load up a partial row into the memory at once?
-
-        For the follow-up 2, we can only load a partial row at one time. We could split the whole matrix vertically into several sub-matrices,
-        while each sub-matrix should have one column overlapped. We repeat the same method in follow-up 1 for each sub-matrix.
+For the follow-up 2, we can only load a partial row at one time. We could split the whole matrix vertically into several sub-matrices,
+while each sub-matrix should have one column overlapped. We repeat the same method in follow-up 1 for each sub-matrix.
 
 For example:
 
