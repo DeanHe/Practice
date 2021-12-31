@@ -3,31 +3,30 @@ package Palindrome;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/*Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.
+/*
+Given a string s, return all the palindromic permutations (without duplicates) of it.
+Return an empty list if no palindromic permutation could be form.
 
 Example
 Given s = "aabb", return ["abba","baab"].
-Given s = "abc", return [].*/
+Given s = "abc", return [].
+*/
 public class PalindromePermutationII {
 	/**
      * @param s: the given string
      * @return: all the palindromic permutations (without duplicates) of it
      */
     public List<String> generatePalindromes(String s) {
-        // write your code here
     	List<String> res = new ArrayList<>();
     	// count of character and appearance
-    	HashMap<Character, Integer> map = new HashMap<>();
+    	Map<Character, Integer> freq = new HashMap<>();
     	int odd = 0;
     	for(int i = 0; i < s.length(); i++){
     		char c = s.charAt(i);
-    		if(map.containsKey(c)){
-    			map.put(c, map.get(c) + 1);
-    		} else {
-    			map.put(c, 1);
-    		}
-    		if(map.get(c) % 2 == 0){
+			freq.put(c, freq.getOrDefault(c, 0) + 1);
+    		if(freq.get(c) % 2 == 0){
     			odd += -1;
     		} else {
     			odd += 1;
@@ -38,11 +37,11 @@ public class PalindromePermutationII {
     		return res;
     	}
     	String evenStr = "", charInMid = "";
-    	for(char c : map.keySet()){
-    		if(map.get(c) % 2 == 1){
+    	for(char c : freq.keySet()){
+    		if(freq.get(c) % 2 == 1){
     			charInMid += c;
     		}
-    		for(int i = 0; i < map.get(c) / 2; i++){
+    		for(int i = 0; i < freq.get(c) / 2; i++){
     			evenStr += c;
     		}
     	}

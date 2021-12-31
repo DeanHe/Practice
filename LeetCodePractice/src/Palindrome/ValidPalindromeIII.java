@@ -17,7 +17,6 @@ s has only lowercase English letters.
 1 <= k <= s.length
 
 Notes:
-
 The key to this question is how to convert the question to an equivalent one.
 If we have another string, t, which is just the string s in the reverse order, then this question becomes relevant to the longest common sequence.
 If the length of lcs is no smaller than (len - k), it is true.
@@ -34,12 +33,14 @@ public class ValidPalindromeIII {
         return s.length() - cnt <= k;
     }
 
-    private String reverse(String s){
-        int len = s.length();
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < len; i++){
-            sb.append(s.charAt(len - 1 - i));
+    private String reverse(String str){
+        int s = 0, e = str.length() - 1;
+        char[] arr = str.toCharArray();
+        while(s < e){
+           char tmp = arr[s];
+           arr[s] = arr[e];
+           arr[e] = tmp;
         }
-        return sb.toString();
+        return String.valueOf(arr);
     }
 }

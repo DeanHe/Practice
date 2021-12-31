@@ -22,7 +22,6 @@ Example 3:
 Input: start = "AAAAACCC", end = "AACCCCCC", bank = ["AAAACCCC","AAACCCCC","AACCCCCC"]
 Output: 3
 
-
 Constraints:
 start.length == 8
 end.length == 8

@@ -30,7 +30,6 @@ wordDictionary.search("b.."); // return True
 
 
 Constraints:
-
 1 <= word.length <= 500
 word in addWord consists lower-case English letters.
 word in search consist of  '.' or lower-case English letters.

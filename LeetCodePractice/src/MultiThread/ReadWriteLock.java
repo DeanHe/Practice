@@ -1,9 +1,11 @@
 package MultiThread;
 
 /*
-The idea is, that multiple threads can read from a shared resource without causing concurrency errors. The concurrency errors first occur when reads and writes to a shared resource occur concurrently, or if multiple writes take place concurrently.
+The idea is, that multiple threads can read from a shared resource without causing concurrency errors. The concurrency errors first occur when reads and writes to a shared resource occur concurrently,
+or if multiple writes take place concurrently.
 
-In this text I only cover Java's built-in ReadWriteLock. If you want to read more about the theory behind the implemenation of a ReadWriteLock, you can read it in my text on Read Write Locks in my Java Concurrency tutorial.
+In this text I only cover Java's built-in ReadWriteLock. If you want to read more about the theory behind the implementation of a ReadWriteLock,
+you can read it in my text on Read Write Locks in my Java Concurrency tutorial.
 
 ReadWriteLock Locking Rules
 The rules by which a thread is allowed to lock the ReadWriteLock either for reading or writing the guarded resource, are as follows:
@@ -20,17 +22,17 @@ ReadWriteLock readWriteLock = new ReadWriteLock();
 
 readWriteLock.readLock();
 
-    // multiple readers can enter this section
-    // if not locked for writing, and not writers waiting
-    // to lock for writing.
+// multiple readers can enter this section
+// if not locked for writing, and not writers waiting
+// to lock for writing.
 
 readWriteLock.readUnlock();
 
 
 readWriteLock.writeLock();
 
-    // only one writer can enter this section,
-    // and only if no threads are currently reading.
+// only one writer can enter this section,
+// and only if no threads are currently reading.
 
 readWriteLock.writeUnlock();
  */

@@ -120,6 +120,7 @@ public class AlienDictionaryGoogle {
                     }
                 }
                 dfs(res, graph, inDegree, sb);
+                //compensate back
                 if(graph.containsKey(c)){
                     for(char nb : graph.get(c)){
                         inDegree.put(nb, inDegree.getOrDefault(nb, 0) + 1);

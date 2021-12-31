@@ -37,7 +37,6 @@ analysis:
 prefix Sum + binary search
 */
 public class RandomPickWithWeight {
-
 	int[] preSum;
 	Random rand;
 	int len;

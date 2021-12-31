@@ -23,7 +23,6 @@ Given two numbers, hour and minutes. Return the smaller angle (in sexagesimal un
         Output: 0
 
         Constraints:
-
         1 <= hour <= 12
         0 <= minutes <= 59
         Answers within 10^-5 of the actual value will be accepted as correct.

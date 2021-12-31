@@ -1,6 +1,7 @@
 package bfs;
 
 import java.util.*;
+
 /*
 #269
 There is a new alien language which uses the latin alphabet. However,
@@ -47,44 +48,44 @@ If the order is invalid, return an empty string.
 There may be multiple valid order of letters, return the smallest in lexicographical order
 r*/
 public class AlienDictionary {
-	/**
+    /**
      * @param words: a list of words
      * @return: a string which is correct order
      */
     public String alienOrder(String[] words) {
         // Write your code here
-        if(words == null || words.length == 0){
+        if (words == null || words.length == 0) {
             return "";
         }
         Map<Character, Set<Character>> graph = new HashMap<>();
         Map<Character, Integer> inDegree = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         //initialize degree map
-        for(String word : words){
-            for(char c : word.toCharArray()){
+        for (String word : words) {
+            for (char c : word.toCharArray()) {
                 inDegree.put(c, 0);
             }
         }
         //compare adjacent string & fill graph
-        for(int i = 0; i < words.length - 1; i++){
+        for (int i = 0; i < words.length - 1; i++) {
             String cur = words[i];
             String post = words[i + 1];
             int len = Math.min(cur.length(), post.length());
             int j;
-            for(j = 0; j < len; j++){
+            for (j = 0; j < len; j++) {
                 char cur_c = cur.charAt(j);
                 char post_c = post.charAt(j);
-                if(cur_c != post_c){
+                if (cur_c != post_c) {
                     graph.putIfAbsent(cur_c, new HashSet<>());
-                    if(!graph.get(cur_c).contains(post_c)){
-                    	graph.get(cur_c).add(post_c);
+                    if (!graph.get(cur_c).contains(post_c)) {
+                        graph.get(cur_c).add(post_c);
                         inDegree.put(post_c, inDegree.get(post_c) + 1);
                     }
                     break;
                 }
             }
-            if(j == len){ // special case
-                if(cur.length() > post.length()){
+            if (j == len) { // special case
+                if (cur.length() > post.length()) {
                     return "";
                 }
             }
@@ -93,25 +94,25 @@ public class AlienDictionary {
         // as we should return the topo order with lexicographical order
         // we should use PriorityQueue instead of a FIFO Queue
         Queue<Character> pq = new PriorityQueue<>();
-        for(char c : inDegree.keySet()){
-            if(inDegree.get(c) == 0){
+        for (char c : inDegree.keySet()) {
+            if (inDegree.get(c) == 0) {
                 pq.offer(c);
             }
         }
-        while(!pq.isEmpty()){
+        while (!pq.isEmpty()) {
             char c = pq.poll();
             sb.append(c);
-            if(graph.containsKey(c)){
-                for(char nb : graph.get(c)){
+            if (graph.containsKey(c)) {
+                for (char nb : graph.get(c)) {
                     inDegree.put(nb, inDegree.getOrDefault(nb, 0) - 1);
-                    if(inDegree.get(nb) == 0){
+                    if (inDegree.get(nb) == 0) {
                         pq.offer(nb);
                     }
                 }
             }
         }
         //avoid loops. only < possible -- eg: ["qd","ab"] res = qa
-        if(sb.length() != inDegree.size()){
+        if (sb.length() != inDegree.size()) {
             return "";
         }
         return sb.toString();

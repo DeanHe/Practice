@@ -15,16 +15,6 @@ import sweepLine.Intervals.Interval;
 
 import java.util.*;
 
-class Point {
-    int time;
-    boolean isStart;
-
-    public Point(int time, boolean isStart) {
-        this.time = time;
-        this.isStart = isStart;
-    }
-}
-
 public class MeetingRoomsII {
     public int minMeetingRooms(Interval[] intervals) {
         int res = 0;
@@ -70,5 +60,15 @@ public class MeetingRoomsII {
             ans = Math.max(ans, count);
         }
         return ans;
+    }
+
+    private class Point {
+        int time;
+        boolean isStart;
+
+        public Point(int time, boolean isStart) {
+            this.time = time;
+            this.isStart = isStart;
+        }
     }
 }
