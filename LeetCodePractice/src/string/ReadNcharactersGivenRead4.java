@@ -7,6 +7,10 @@ The return value is the actual number of characters read. For example, it return
 By using the read4 API, implement the function int read(char *buf, int n) that reads n characters from the file.
 
 The read function will only be called once for each test case.
+
+analysis:
+scenario 1: input is end of file
+secnario 2: temp will be fully copy over
 */
 public class ReadNcharactersGivenRead4 extends Reader4 {
 	/**

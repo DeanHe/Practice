@@ -24,10 +24,10 @@ time complexity: O(N)
 space complexity: O(N)
 */
 public class RemoveAllAdjacentDuplicatesInString {
-	public String removeDuplicates(String S) {
+	public String removeDuplicates(String str) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < S.length(); i++){
-            char c = S.charAt(i);
+        for(int i = 0; i < str.length(); i++){
+            char c = str.charAt(i);
             int len = sb.length();
             if(len > 0 && sb.charAt(len - 1) == c){
                 sb.deleteCharAt(len - 1);

@@ -2,20 +2,25 @@ package dp;
 /*
 Given n balloons, indexed from 0 to n-1.
 Each balloon is painted with a number on it represented by array nums.
-You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.
+You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins.
+Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.
 
 Find the maximum coins you can collect by bursting the balloons wisely.
 
 Note:
-
 You may imagine nums[-1] = nums[n] = 1. They are not real therefore you can not burst them.
 0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100
-Example:
 
-Input: [3,1,5,8]
+Example 1:
+Input: nums = [3,1,5,8]
 Output: 167
-Explanation: nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
-             coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
+Explanation:
+nums = [3,1,5,8] --> [3,5,8] --> [3,8] --> [8] --> []
+coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167
+
+Example 2:
+Input: nums = [1,5]
+Output: 10
 
 analysis:
 dp, divide and conquer, reverse step
@@ -36,18 +41,18 @@ public class BurstBalloons {
         return dfs(values, 0, len + 1);
     }
 
-    private int dfs(int[] values, int l, int r){
-        if(l + 1 == r){
+    private int dfs(int[] values, int s, int e){
+        if(s + 1 == e){
             return 0;
         }
-        if(mem[l][r] != null){
-            return mem[l][r];
+        if(mem[s][e] != null){
+            return mem[s][e];
         }
         int res = Integer.MIN_VALUE;
-        for(int i = l + 1; i <= r - 1; i++){
+        for(int i = s + 1; i <= e - 1; i++){
             res = Math.max(res,
-                    dfs(values, l, i) + values[l] * values[i] * values[r] + dfs(values, i, r));
+                    dfs(values, s, i) + values[s] * values[i] * values[e] + dfs(values, i, e));
         }
-        return mem[l][r] = res;
+        return mem[s][e] = res;
     }
 }

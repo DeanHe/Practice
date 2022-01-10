@@ -27,6 +27,7 @@ s contains only lowercase English letters.
 
 analysis:
 DFS
+TC O(N ^ 2)
 */
 public class PalindromePartitioning {
 	public List<List<String>> partition(String s) {

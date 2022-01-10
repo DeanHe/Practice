@@ -46,7 +46,7 @@ Output: ["0"]
 Constraints:
 
 0 <= nums.length <= 20
--231 <= nums[i] <= 231 - 1
+-2^31 <= nums[i] <= 2^31 - 1
 All the values of nums are unique.
 
  */
@@ -60,18 +60,18 @@ public class SummaryRanges {
     	int len = nums.length;
     	List<String> res = new ArrayList<>();
     	for(int start = 0; start < len;){
-    		String temp = "";
+    		StringBuilder sb = new StringBuilder();
     		int end = start + 1;
     		int cur = nums[start];
-    		temp += cur;
+    		sb.append(cur);
     		while(end < len && cur + 1 == nums[end]){
     			end++;
     			cur++;
     		}
     		if(end > start + 1){
-    			temp += "->" + cur;
+				sb.append("->" + cur);
     		}
-    		res.add(temp);
+    		res.add(sb.toString());
     		start = end;
     	}
     	return res;

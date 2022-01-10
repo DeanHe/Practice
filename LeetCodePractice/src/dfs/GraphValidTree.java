@@ -6,7 +6,11 @@ You can assume that no duplicate edges will appear in edges. Since all edges are
 [0, 1] is the same as [1, 0] and thus will not appear together in edges.
 Example
 Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
-Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.*/
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+
+analysis:
+TC O(E)
+*/
 import java.util.*;
 
 public class GraphValidTree {
@@ -43,9 +47,8 @@ public class GraphValidTree {
 			if (visited[nb]) {
 				if (nb != parent) {
 					return true;
-				} else {
-					continue;
 				}
+				continue;
 			}
 			if (findCycle(nb, cur)) {
 				return true;

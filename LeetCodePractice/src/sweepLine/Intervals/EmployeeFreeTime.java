@@ -27,6 +27,8 @@ Also, we wouldn't include intervals like [5, 5] in our answer, as they have zero
 Note:
 schedule and schedule[i] are lists with lengths in range [1, 50].
 0 <= schedule[i].start < schedule[i].end <= 10^8.
+
+TC O(N log N)
  */
 public class EmployeeFreeTime {
     public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
@@ -57,15 +59,15 @@ public class EmployeeFreeTime {
                 axis.put(i.end, axis.getOrDefault(i.end, 0) - 1);
             }
         }
-        int sum = 0, s = 0;
+        int sum = 0, pre = 0;
         boolean freeTime = false;
         for(int i : axis.keySet()){
             sum += axis.get(i);
             if(sum == 0){
-                s = i;
+                pre = i;
                 freeTime = true;
             } else if(sum > 0 && freeTime){
-                res.add(new Interval(s, i));
+                res.add(new Interval(pre, i));
                 freeTime = false;
             }
         }

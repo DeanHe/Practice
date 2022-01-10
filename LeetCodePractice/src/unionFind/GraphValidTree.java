@@ -6,14 +6,18 @@ You can assume that no duplicate edges will appear in edges. Since all edges are
 [0, 1] is the same as [1, 0] and thus will not appear together in edges.
 Example
 Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
-Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.*/
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+
+analysis:
+TC O(E)
+*/
 
 public class GraphValidTree {
 	// map of node and its parent
 	private int[] parent;
 
 	// find the root of x and compress the path
-	int compressed_find(int x) {
+	int find(int x) {
 		int root = x;
 		while (root != parent[root]) {
 			root = parent[root];
@@ -28,8 +32,8 @@ public class GraphValidTree {
 	}
 
 	void union(int a, int b) {
-		int root_a = compressed_find(a);
-		int root_b = compressed_find(b);
+		int root_a = find(a);
+		int root_b = find(b);
 		if (root_a != root_b) {
 			parent[root_a] = root_b;
 		}
@@ -40,14 +44,13 @@ public class GraphValidTree {
 		for (int i = 0; i < n; i++) {
 			parent[i] = i;
 		}
-		// Write your code here
 		if (n - 1 != edges.length) {
 			return false;
 		}
 
 		for (int i = 0; i < edges.length; i++) {
 			// check if there is cycle
-			if (compressed_find(edges[i][0]) == compressed_find(edges[i][1])) {
+			if (find(edges[i][0]) == find(edges[i][1])) {
 				return false;
 			}
 			union(edges[i][0], edges[i][1]);

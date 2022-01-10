@@ -4,6 +4,10 @@ public class Solution {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+        Solution sol = new Solution();
+        String[] input1 = {"3234.html", "xys.html", "7hsaa.html"};
+        String[] input2 = {"3234.html", "sdhsfjdsh.html", "xys.html", "7hsaa.html"};
+        System.out.println(sol.longestContinuousCommonHistory(input1, input2));
         //System.out.println(res);
         /*
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
@@ -75,78 +79,28 @@ public class Solution {
         return res;
     }
 
-    public boolean areNumbersAscending(String s) {
-        int pre = 0;
-        for(String str : s.split(" ")){
-            try {
-               int cur = Integer.parseInt(str);
-               if(cur <= pre){
-                   return false;
-               }
-               pre = cur;
-            } catch (NumberFormatException e) {
-
+    public List<String> longestContinuousCommonHistory(String[] input1, String[] input2){
+        List<String> res = new ArrayList<>();
+        int[][] dp = new int[input1.length + 1][input2.length + 1];
+        int most = 0, last1 = -1, last2 = -1;
+        for(int i = 0; i < input1.length; i++){
+            for(int j  = 0; j < input2.length; j++){
+                if(input1[i].equals(input2[j])){
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
+                    if(most < dp[i + 1][j + 1]){
+                        most = dp[i + 1][j + 1];
+                        last1 = i;
+                        last2 = j;
+                    }
+                }
             }
         }
-        return true;
-    }
-
-    Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
-    public long countVowels(String word) {
-        int len = word.length();
-        long res = 0;
-        long[] dp = new long[len + 1];
-        for(int i = 0; i < len; i++){
-            char c = word.charAt(i);
-            if(vowels.contains(c)){
-                dp[i + 1] = dp[i] + i + 1;
-            } else {
-                dp[i + 1] = dp[i];
-            }
-            res += dp[i + 1];
+        while(last1 >= 0 && last2 >= 0 && input1[last1].equals(input2[last2])){
+            res.add(0, input1[last1]);
+            last1--;
+            last2--;
         }
         return res;
-    }
-
-    public int countPoints(String rings) {
-        Set[] sets = new Set[10];
-        for(int i = 0; i < 10; i++){
-            sets[i] = new HashSet<Character>();
-        }
-        char[] arr = rings.toCharArray();
-        for(int i = 0; i < arr.length; i += 2){
-            char c = arr[i];
-            int g = arr[i + 1] - '0';
-            sets[g].add(c);
-        }
-        int res = 0;
-        for(int i = 0; i < 10; i++){
-            if(sets[i].size() == 3){
-                res++;
-            }
-        }
-        return res;
-    }
-
-    public int findTheLongestSubstring(String S) {
-        Map<Character, Integer> mask = new HashMap<>();
-        for(char c = 'a', i = 0; c <= 'z'; c++, i++){
-            mask.put(c, 1 << i);
-        }
-        Map<Integer, Integer> stateToIdx = new HashMap<>();
-        stateToIdx.put(0, -1);
-        int maxLen = 0, state = 0, len = S.length();
-        char[] arr = S.toCharArray();
-        for(int i = 0; i < len; i++){
-            char c = arr[i];
-            if(mask.containsKey(c)){
-                int bitToFlip = mask.get(c);
-                state ^= bitToFlip;
-            }
-            stateToIdx.putIfAbsent(state, i);
-            maxLen = Math.max(maxLen, i - stateToIdx.get(state));
-        }
-        return maxLen;
     }
 }
 

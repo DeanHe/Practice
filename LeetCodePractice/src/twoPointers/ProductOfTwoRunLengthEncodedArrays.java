@@ -20,27 +20,18 @@ Return the product of encoded1 and encoded2.
 Note: Compression should be done such that the run-length encoded array has the minimum possible length.
 
 Example 1:
-
 Input: encoded1 = [[1,3],[2,3]], encoded2 = [[6,3],[3,3]]
-
 Output: [[6,6]]
-
 Explanation: encoded1 expands to [1,1,1,2,2,2] and encoded2 expands to [6,6,6,3,3,3].
-
 prodNums = [6,6,6,6,6,6], which is compressed into the run-length encoded array [[6,6]].
 
 Example 2:
-
 Input: encoded1 = [[1,3],[2,1],[3,2]], encoded2 = [[2,3],[3,3]]
-
 Output: [[2,3],[6,1],[9,2]]
-
 Explanation: encoded1 expands to [1,1,1,2,3,3] and encoded2 expands to [2,2,2,3,3,3].
-
 prodNums = [2,2,2,6,9,9], which is compressed into the run-length encoded array [[2,3],[6,1],[9,2]].
 
 Constraints:
-
 1 <= encoded1.length, encoded2.length <= 10^5
 encoded1[i].length == 2
 encoded2[j].length == 2

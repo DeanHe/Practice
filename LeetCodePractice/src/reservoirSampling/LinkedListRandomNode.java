@@ -27,8 +27,8 @@ public class LinkedListRandomNode {
 
 	/**
 	 * @param head
-	 *            The linked list's head. Note that the head is guaranteed to be
-	 *            not null, so it contains at least one node.
+	 * The linked list's head. Note that the head is guaranteed to be
+	 * not null, so it contains at least one node.
 	 */
 	public LinkedListRandomNode(ListNode head) {
 		random = new Random();
