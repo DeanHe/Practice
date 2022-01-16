@@ -45,14 +45,14 @@ public class ReorderList {
     }
 
     private ListNode reverse(ListNode head) {
-        ListNode preHead = new ListNode(0);
+        ListNode dummy = new ListNode(0);
         ListNode post = null;
         while (head != null) {
             post = head.next;
-            head.next = preHead.next;
-            preHead.next = head;
+            head.next = dummy.next;
+            dummy.next = head;
             head = post;
         }
-        return preHead.next;
+        return dummy.next;
     }
 }

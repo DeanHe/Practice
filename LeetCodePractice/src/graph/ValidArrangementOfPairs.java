@@ -59,28 +59,28 @@ Space Complexity: O(m+n)
 public class ValidArrangementOfPairs {
     public int[][] validArrangement(int[][] pairs) {
         int len = pairs.length;
-        Map<Integer, Integer> indeg = new HashMap<>();
-        Map<Integer, Integer> outdeg = new HashMap<>();
-        Map<Integer, Queue<Integer>> outgraph = new HashMap<>();
+        Map<Integer, Integer> inDeg = new HashMap<>();
+        Map<Integer, Integer> outDeg = new HashMap<>();
+        Map<Integer, Queue<Integer>> graph = new HashMap<>();
         for(int[] p : pairs){
             int from = p[0];
             int to = p[1];
-            indeg.put(to, indeg.getOrDefault(to, 0) + 1);
-            outdeg.put(from, outdeg.getOrDefault(from, 0) + 1);
-            outgraph.computeIfAbsent(from, x -> new LinkedList<>()).add(to);
+            inDeg.put(to, inDeg.getOrDefault(to, 0) + 1);
+            outDeg.put(from, outDeg.getOrDefault(from, 0) + 1);
+            graph.computeIfAbsent(from, x -> new LinkedList<>()).add(to);
         }
         int start = -1;
-        for(int i : outgraph.keySet()){
-            if(outdeg.get(i) - indeg.getOrDefault(i, 0) == 1){
+        for(int i : graph.keySet()){
+            if(outDeg.get(i) - inDeg.getOrDefault(i, 0) == 1){
                 start = i;
             }
             if(start == -1){
                 // exists Eulerian Circuit -> can start at any node
-                start = outdeg.keySet().stream().findFirst().get();
+                start = outDeg.keySet().stream().findFirst().get();
             }
         }
         List<int[]> ls = new ArrayList<>();
-        dfs(ls, start, outgraph, 0);
+        dfs(ls, start, graph);
         Collections.reverse(ls);
         int[][] res = new int[len][2];
         for(int i = 0; i < len; i++){
@@ -89,12 +89,12 @@ public class ValidArrangementOfPairs {
         return res;
     }
 
-    private void dfs(List<int[]> ls, int from, Map<Integer, Queue<Integer>> graph, int idx) {
+    private void dfs(List<int[]> ls, int from, Map<Integer, Queue<Integer>> graph) {
         Queue<Integer> nbs = graph.getOrDefault(from, new LinkedList<>());
         while(!nbs.isEmpty()){
             // remove after visited
             int to = nbs.poll();
-            dfs(ls, to, graph, idx + 1);
+            dfs(ls, to, graph);
             // postorder
             ls.add(new int[]{from, to});
         }

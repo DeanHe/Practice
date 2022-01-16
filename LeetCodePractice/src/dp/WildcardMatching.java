@@ -58,7 +58,6 @@ public class WildcardMatching {
 	 * @return: A boolean
 	 */
 	public boolean isMatch(String s, String p) {
-		// write your code here
 		int sLen = s.length();
 		int pLen = p.length();
 		// where mem[i][j] means the first i characters in string s matches the

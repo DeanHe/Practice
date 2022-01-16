@@ -6,31 +6,20 @@ public class StringToIntegeratoi {
 			return 0;
 		}
 		str = str.trim();
-		char flag = '+';
-
-		int i = 0;
-		if (str.charAt(0) == '-') {
-			flag = '-';
-			i++;
-		} else if (str.charAt(0) == '+') {
+		int i = 0, sign = 1, res = 0;
+		if (i < str.length() && (str.charAt(i) == '-' || str.charAt(i) == '+')) {
+			sign =  str.charAt(i) == '+' ? 1 : -1;
 			i++;
 		}
-		double result = 0;
 
 		while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
-			result = 10 * result + (str.charAt(i) - '0');
+			int digit = str.charAt(i) - '0';
+			if(Integer.MAX_VALUE / 10 < res || Integer.MAX_VALUE / 10 == res && Integer.MAX_VALUE % 10 < digit){
+				return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+			}
+			res = 10 * res + (str.charAt(i) - '0');
 			i++;
 		}
-		if (flag == '-') {
-			result = -result;
-		}
-		if (result > Integer.MAX_VALUE) {
-			return Integer.MAX_VALUE;
-		}
-		if (result < Integer.MIN_VALUE) {
-			return Integer.MIN_VALUE;
-		}
-
-		return (int) result;
+		return res * sign;
 	}
 }

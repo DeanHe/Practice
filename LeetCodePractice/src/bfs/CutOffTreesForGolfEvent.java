@@ -90,8 +90,8 @@ public class CutOffTreesForGolfEvent {
 		queue.offer(start);
 		visited[start[0]][start[1]] = true;
 		while (!queue.isEmpty()) {
-			int len = queue.size();
-			for(int i = 0; i < len; i++) {
+			int sz = queue.size();
+			for(int i = 0; i < sz; i++) {
 				int[] cur = queue.poll();
 				if (cur[0] == target[0] && cur[1] == target[1]) {
 					return step;
