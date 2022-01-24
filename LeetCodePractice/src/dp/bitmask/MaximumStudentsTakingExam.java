@@ -5,47 +5,47 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
-Given a m * n matrix seats  that represent seats distributions in a classroom. If a seat is broken, it is denoted by '#' character otherwise it is denoted by a '.' character.
-        Students can see the answers of those sitting next to the left, right, upper left and upper right, but he cannot see the answers of the student sitting directly in front or behind him. Return the maximum number of students that can take the exam together without any cheating being possible..
-        Students must be placed in seats in good condition.
+Given a m * n matrix seats that represent seats distributions in a classroom. If a seat is broken, it is denoted by '#' character otherwise it is denoted by a '.' character.
+Students can see the answers of those sitting next to the left, right, upper left and upper right, but he cannot see the answers of the student sitting directly in front or behind him. Return the maximum number of students that can take the exam together without any cheating being possible..
+Students must be placed in seats in good condition.
 
-        Example 1:
-        Input: seats = [["#",".","#","#",".","#"],
-        [".","#","#","#","#","."],
-        ["#",".","#","#",".","#"]]
-        Output: 4
-        Explanation: Teacher can place 4 students in available seats so they don't cheat on the exam.
+Example 1:
+Input: seats = [["#",".","#","#",".","#"],
+[".","#","#","#","#","."],
+["#",".","#","#",".","#"]]
+Output: 4
+Explanation: Teacher can place 4 students in available seats so they don't cheat on the exam.
 
-        Example 2:
-        Input: seats = [[".","#"],
-        ["#","#"],
-        ["#","."],
-        ["#","#"],
-        [".","#"]]
-        Output: 3
-        Explanation: Place all students in available seats.
+Example 2:
+Input: seats = [[".","#"],
+["#","#"],
+["#","."],
+["#","#"],
+[".","#"]]
+Output: 3
+Explanation: Place all students in available seats.
 
-        Example 3:
-        Input: seats = [["#",".",".",".","#"],
-        [".","#",".","#","."],
-        [".",".","#",".","."],
-        [".","#",".","#","."],
-        ["#",".",".",".","#"]]
-        Output: 10
-        Explanation: Place students in available seats in column 1, 3 and 5.
+Example 3:
+Input: seats = [["#",".",".",".","#"],
+[".","#",".","#","."],
+[".",".","#",".","."],
+[".","#",".","#","."],
+["#",".",".",".","#"]]
+Output: 10
+Explanation: Place students in available seats in column 1, 3 and 5.
 
-        Constraints:
-        seats contains only characters '.' and'#'.
-        m == seats.length
-        n == seats[i].length
-        1 <= m <= 8
-        1 <= n <= 8
+Constraints:
+seats contains only characters '.' and'#'.
+m == seats.length
+n == seats[i].length
+1 <= m <= 8
+1 <= n <= 8
 
-        tag:bitmask
+tag:bitmask
 */
 public class MaximumStudentsTakingExam {
     int rows, cols, totalState;
-    int[][] memo;
+    Integer[][] memo;
     //mask represents occupancy status for a row, for example 100001 means 1st and 6th seats are taken
     //use backtrack to get all combination of seat assignment for a row based on previous row's mask
     List<Integer> masks;
@@ -55,10 +55,7 @@ public class MaximumStudentsTakingExam {
         cols = seats[0].length;
         totalState = 1 << cols;
         // mem[i][j] stores the max student count for row range in [i, RowCount - 1] when the previous row's mask is j
-        memo = new int[rows][totalState];
-        for (int[] row : memo) {
-            Arrays.fill(row, -1);
-        }
+        memo = new Integer[rows][totalState];
         return getMax(seats, 0, 0);
     }
 
@@ -66,7 +63,7 @@ public class MaximumStudentsTakingExam {
         if (r == rows) {
             return 0;
         }
-        if (memo[r][preMask] != -1) {
+        if (memo[r][preMask] != null) {
             return memo[r][preMask];
         }
         masks = new ArrayList<>();

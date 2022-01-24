@@ -14,6 +14,7 @@ Output: 2
 Explanation: 
 The shortest instruction sequence is "AA".
 Your position goes from 0->1->3.
+
 Example 2:
 Input: 
 target = 6

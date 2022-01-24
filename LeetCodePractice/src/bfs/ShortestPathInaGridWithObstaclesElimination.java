@@ -26,7 +26,6 @@ The shortest path with one obstacle elimination at position (3,2) is 6. Such pat
 
 
 Example 2:
-
 Input:
 grid =
 [[0,1,1],

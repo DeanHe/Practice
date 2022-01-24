@@ -46,5 +46,6 @@ public class MinimumInsertionsToBalanceaParenthesesString {
     public int minInsertions(String s) {
         int res = 0;
         Stack<Integer> st = new Stack<>();
+        return -1;
     }
 }

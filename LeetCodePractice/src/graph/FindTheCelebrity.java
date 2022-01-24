@@ -22,8 +22,9 @@ There will be exactly one celebrity if he/she is in the party.
 Return the celebrity's label if there is a celebrity in the party. If there is no celebrity, return -1.
 
 analysis:
+two pointer
 if A knows B, then A can't be celebrity, discard A, and B may be celebrity.
-if A doesn't B, then B can't be celebrity, discard B, and A may be celebrity.
+if A doesn't know B, then B can't be celebrity, discard B, and A may be celebrity.
 
 complexity O(N)
 */
@@ -33,11 +34,13 @@ public class FindTheCelebrity {
      * @return the celebrity's label or -1
      */
     public int findCelebrity(int n) {
-        int celebrity = 0;
-        for(int i = 1; i < n; i++){
-        	if(knows(celebrity, i)){
-        		celebrity = i;
-        	}
+        int celebrity = 0, s = 0, e = n - 1;
+        while(s < e){
+            if(knows(s, e)){
+                s++;
+            } else {
+                e--;
+            }
         }
         for(int i = 0; i < n; i++){
         	if(celebrity != i){

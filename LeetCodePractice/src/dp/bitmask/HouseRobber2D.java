@@ -36,11 +36,11 @@ public class HouseRobber2D {
         if(mem[r][state] != null){
             return mem[r][state];
         }
-        List<Integer> neighbors = new ArrayList<>();
-        dfs(neighbors, state,0, 0);
+        List<Integer> masks = new ArrayList<>();
+        dfs(masks, state,0, 0);
         int res = 0;
-        for(int nb : neighbors){
-            res = Math.max(res, sum(nums, r, nb) + getMax(nums, r + 1, nb));
+        for(int m : masks){
+            res = Math.max(res, sum(nums, r, m) + getMax(nums, r + 1, m));
         }
         return mem[r][state] = res;
     }
@@ -50,7 +50,9 @@ public class HouseRobber2D {
             res.add(cur);
             return;
         }
+        // not take this house
         dfs(res, preState, c + 1, cur);
+        // take
         if((preState & (1 << c)) == 0
                 && (c == 0 || (cur & (1 << (c - 1))) == 0)
                 && (c == cols - 1 || (cur & (1 << (c + 1))) == 0)
