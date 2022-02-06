@@ -1,5 +1,8 @@
 package bitManipulation.binaryTrieNode;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /*
 Given an integer array nums, return the maximum result of nums[i] XOR nums[j], where 0 ≤ i ≤ j < n.
 
@@ -45,7 +48,25 @@ time complexity: O(31*n)
 space complexity: O(31*n)
  */
 public class MaximumXORofTwoNumbersInAnArray {
-    public int findMaximumXOR(int[] nums) {
+    public int findMaximumXOR(int[] nums){
+        int res = 0, mask = 0;
+        for(int i = 31; i >= 0; i--){
+            mask = mask | (1 << i);
+            Set<Integer> prefixes = new HashSet<>();
+            for(int n : nums){
+                prefixes.add(n & mask);
+            }
+            int candidate = res | (1 << i);
+            for(int prefix : prefixes){
+                if(prefixes.contains(prefix ^ candidate)){
+                    res = candidate;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+    public int findMaximumXORtrie(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }

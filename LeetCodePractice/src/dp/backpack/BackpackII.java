@@ -14,7 +14,6 @@ public class BackpackII {
 	 * @return: The maximum value
 	 */
 	public int backPackII(int m, int[] A, int[] V) {
-		// write your code here
 		int len = A.length;
 		int[][] dp = new int[len + 1][m + 1];
 		// initializaiton

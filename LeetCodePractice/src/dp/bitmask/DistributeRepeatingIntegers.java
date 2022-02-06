@@ -32,15 +32,18 @@ Example 4:
 Input: nums = [1,1,2,3], quantity = [2,2]
 Output: false
 Explanation: Although the 0th customer could be given [1,1], the 1st customer cannot be satisfied.
-Example 5:
 
+Example 5:
 Input: nums = [1,1,1,1,1], quantity = [2,3]
 Output: true
 Explanation: The 0th customer is given [1,1], and the 1st customer is given [1,1,1].
 
+hint:
+1 Count the frequencies of each number. For example, if nums = [4,4,5,5,5], frequencies = [2,3].
+2 Each customer wants all of their numbers to be the same. This means that each customer will be assigned to one number.
+3 Use dynamic programming. Iterate through the numbers' frequencies, and choose some subset of customers to be assigned to this number.
 
 Constraints:
-
 n == nums.length
 1 <= n <= 10^5
 1 <= nums[i] <= 1000
@@ -84,7 +87,7 @@ public class DistributeRepeatingIntegers {
             if(state == (state & next)){
                 int sum = 0;
                 for(int i = 0; i < quantity.length; i++){
-                    if((state & (1 << i)) == 0 && (next & (1 << i)) == (1 << i)){
+                    if(((state >> i) & 1) == 0){
                         sum += quantity[i];
                     }
                 }

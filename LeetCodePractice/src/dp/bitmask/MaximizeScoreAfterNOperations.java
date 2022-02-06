@@ -12,22 +12,19 @@ Return the maximum score you can receive after performing n operations.
 
 The function gcd(x, y) is the greatest common divisor of x and y.
 
-
-
 Example 1:
-
 Input: nums = [1,2]
 Output: 1
 Explanation: The optimal choice of operations is:
 (1 * gcd(1, 2)) = 1
-Example 2:
 
+Example 2:
 Input: nums = [3,4,6,8]
 Output: 11
 Explanation: The optimal choice of operations is:
 (1 * gcd(3, 6)) + (2 * gcd(4, 8)) = 3 + 8 = 11
-Example 3:
 
+Example 3:
 Input: nums = [1,2,3,4,5,6]
 Output: 14
 Explanation: The optimal choice of operations is:
@@ -35,10 +32,13 @@ Explanation: The optimal choice of operations is:
 
 
 Constraints:
-
 1 <= n <= 7
 nums.length == 2 * n
 1 <= nums[i] <= 10^6
+
+hint:
+1 Find every way to split the array until n groups of 2. Brute force recursion is acceptable.
+2 Calculate the gcd of every pair and greedily multiply the largest gcds.
 
 analysis:
 TC O(n^2 * 2^n)
@@ -62,10 +62,9 @@ public class MaximizeScoreAfterNOperations {
         int res = 0;
         for(int i = 0; i < len; i++){
             for(int j = i + 1; j < len; j++){
-                int pick = (1 << i) + (1 << j);
+                int pick = (1 << i) | (1 << j);
                 if((state & pick) == 0){
-                    res = Math.max(res,
-                            op * gcd(nums[i], nums[j]) + dfs(mem, nums, op + 1, state + pick));
+                    res = Math.max(res, op * gcd(nums[i], nums[j]) + dfs(mem, nums, op + 1, state | pick));
                 }
             }
         }

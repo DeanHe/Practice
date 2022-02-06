@@ -32,6 +32,9 @@ Output:
 
 Challenge
 Can you do it without recursion?
+
+analysis:
+TC: O(N!) SC O(N^2)
 */
 public class NQueens {
 	/**

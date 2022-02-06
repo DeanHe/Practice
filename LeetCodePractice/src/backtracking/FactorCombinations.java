@@ -2,7 +2,8 @@ package backtracking;
 
 import java.util.*;
 
-/*Numbers can be regarded as product of its factors. For example,
+/*
+Numbers can be regarded as product of its factors. For example,
 
 8 = 2 x 2 x 2;
   = 2 x 4.
@@ -20,7 +21,8 @@ Output : 2 2 3
 Write a function that takes an integer n and return all possible combinations of its factors.
 Note:
 You may assume that n is always positive.
-Factors should be greater than 1 and less than n.*/
+Factors should be greater than 1 and less than n.
+*/
 public class FactorCombinations {
 	public List<List<Integer>> getFactors(int n) {
 		List<List<Integer>> res = new ArrayList<>();

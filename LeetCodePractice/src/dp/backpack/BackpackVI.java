@@ -23,18 +23,16 @@ The possible combination ways are:
 (3, 1)
 
 Note that different sequences are counted as different combinations.
-
 Therefore the output is 7.
- 
 
 Follow up:
 What if negative numbers are allowed in the given array?
 How does it change the problem?
 What limitation we need to add to the question to allow negative numbers?
 
-
 analysis:
 different order count as separate one
+same as BackpackIV
 */
 public class BackpackVI {
     /**

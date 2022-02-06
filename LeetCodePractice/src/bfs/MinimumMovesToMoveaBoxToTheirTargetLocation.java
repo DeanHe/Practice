@@ -4,73 +4,68 @@ import java.util.*;
 
 /*
 Storekeeper is a game in which the player pushes boxes around in a warehouse trying to get them to target locations.
+The game is represented by a grid of size n*m, where each element is a wall, floor, or a box.
+Your task is move the box 'B' to the target position 'T' under the following rules:
 
-        The game is represented by a grid of size n*m, where each element is a wall, floor, or a box.
+Player is represented by character 'S' and can move up, down, left, right in the grid if it is a floor (empy cell).
+Floor is represented by character '.' that means free cell to walk.
+Wall is represented by character '#' that means obstacle  (impossible to walk there).
+There is only one box 'B' and one target cell 'T' in the grid.
+The box can be moved to an adjacent free cell by standing next to the box and then moving in the direction of the box. This is a push.
+The player cannot walk through the box.
+Return the minimum number of pushes to move the box to the target. If there is no way to reach the target, return -1.
 
-        Your task is move the box 'B' to the target position 'T' under the following rules:
+Example 1:
+Input: grid = [
+["#","#","#","#","#","#"],
+["#","T","#","#","#","#"],
+["#",".",".","B",".","#"],
+["#",".","#","#",".","#"],
+["#",".",".",".","S","#"],
+["#","#","#","#","#","#"]]
+Output: 3
+Explanation: We return only the number of times the box is pushed.
 
-        Player is represented by character 'S' and can move up, down, left, right in the grid if it is a floor (empy cell).
-        Floor is represented by character '.' that means free cell to walk.
-        Wall is represented by character '#' that means obstacle  (impossible to walk there).
-        There is only one box 'B' and one target cell 'T' in the grid.
-        The box can be moved to an adjacent free cell by standing next to the box and then moving in the direction of the box. This is a push.
-        The player cannot walk through the box.
-        Return the minimum number of pushes to move the box to the target. If there is no way to reach the target, return -1.
+Example 2:
+Input: grid = [
+["#","#","#","#","#","#"],
+["#","T","#","#","#","#"],
+["#",".",".","B",".","#"],
+["#","#","#","#",".","#"],
+["#",".",".",".","S","#"],
+["#","#","#","#","#","#"]]
+Output: -1
 
-        Example 1:
+Example 3:
+Input: grid = [
+["#","#","#","#","#","#"],
+["#","T",".",".","#","#"],
+["#",".","#","B",".","#"],
+["#",".",".",".",".","#"],
+["#",".",".",".","S","#"],
+["#","#","#","#","#","#"]]
+Output: 5
+Explanation:  push the box down, left, left, up and up.
 
-        Input: grid = [
-        ["#","#","#","#","#","#"],
-        ["#","T","#","#","#","#"],
-        ["#",".",".","B",".","#"],
-        ["#",".","#","#",".","#"],
-        ["#",".",".",".","S","#"],
-        ["#","#","#","#","#","#"]]
-        Output: 3
-        Explanation: We return only the number of times the box is pushed.
-        Example 2:
+Example 4:
+Input: grid = [
+["#","#","#","#","#","#","#"],
+["#","S","#",".","B","T","#"],
+["#","#","#","#","#","#","#"]]
+Output: -1
 
-        Input: grid = [
-        ["#","#","#","#","#","#"],
-        ["#","T","#","#","#","#"],
-        ["#",".",".","B",".","#"],
-        ["#","#","#","#",".","#"],
-        ["#",".",".",".","S","#"],
-        ["#","#","#","#","#","#"]]
-        Output: -1
-        Example 3:
+Constraints:
+1 <= grid.length <= 20
+1 <= grid[i].length <= 20
+grid contains only characters '.', '#',  'S' , 'T', or 'B'.
+There is only one character 'S', 'B' and 'T' in the grid.
 
-        Input: grid = [
-        ["#","#","#","#","#","#"],
-        ["#","T",".",".","#","#"],
-        ["#",".","#","B",".","#"],
-        ["#",".",".",".",".","#"],
-        ["#",".",".",".","S","#"],
-        ["#","#","#","#","#","#"]]
-        Output: 5
-        Explanation:  push the box down, left, left, up and up.
-        Example 4:
+hint:
+We represent the search state as (player_row, player_col, box_row, box_col).
+You need to count only the number of pushes. Then inside of your BFS check if the box could be pushed (in any direction) given the current position of the player
 
-        Input: grid = [
-        ["#","#","#","#","#","#","#"],
-        ["#","S","#",".","B","T","#"],
-        ["#","#","#","#","#","#","#"]]
-        Output: -1
-
-
-        Constraints:
-
-        1 <= grid.length <= 20
-        1 <= grid[i].length <= 20
-        grid contains only characters '.', '#',  'S' , 'T', or 'B'.
-        There is only one character 'S', 'B' and 'T' in the grid.
-
-        hint:
-        We represent the search state as (player_row, player_col, box_row, box_col).
-        You need to count only the number of pushes. Then inside of your BFS check if the box could be pushed (in any direction) given the current position of the player
-
-        analysis:
-        The max length of row/col is 20 as per the constraint. 20 can be represented in binary as 10100. So it takes just max 5 bits to represent any number less than or equal to 20.
+analysis:
+The max length of row/col is 20 as per the constraint. 20 can be represented in binary as 10100. So it takes just max 5 bits to represent any number less than or equal to 20.
 A 32-bit integer can be split into 4 groups of 8 bits each to represent the state of box and storekeeper as
 */
 public class MinimumMovesToMoveaBoxToTheirTargetLocation {

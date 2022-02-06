@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-Given a node structure, preorder traversal for the tree, can use recursion and stack, must use while loop
+Given a node structure, preorder traversal for the tree, can not use recursion and stack, must use while loop
  */
 public class PreOrderSpecialGoogle {
 

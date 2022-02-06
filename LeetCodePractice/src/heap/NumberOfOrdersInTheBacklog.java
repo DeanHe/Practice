@@ -15,11 +15,7 @@ If the order is a buy order, you look at the sell order with the smallest price 
 Vice versa, if the order is a sell order, you look at the buy order with the largest price in the backlog. If that buy order's price is larger than or equal to the current sell order's price, they will match and be executed, and that buy order will be removed from the backlog. Else, the sell order is added to the backlog.
 Return the total amount of orders in the backlog after placing all the orders from the input. Since this number can be large, return it modulo 10^9 + 7.
 
-
-
 Example 1:
-
-
 Input: orders = [[10,5,0],[15,2,1],[25,1,1],[30,4,0]]
 Output: 6
 Explanation: Here is what happens with the orders:

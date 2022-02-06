@@ -2,15 +2,13 @@ package string;
 
 /*
 Given two strings S and T, determine if they are both one edit distance apart.
-
 Have you met this question in a real interview?  
-Example
-Example 1:
 
+Example 1:
 Input: s = "aDb", t = "adb" 
 Output: true
-Example 2:
 
+Example 2:
 Input: s = "ab", t = "ab" 
 Output: false
 Explanation:

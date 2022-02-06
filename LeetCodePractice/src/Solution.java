@@ -102,6 +102,67 @@ public class Solution {
         }
         return res;
     }
+
+    public int[] sortEvenOdd(int[] nums) {
+        int len = nums.length;
+        int[] res = new int[len];
+        List<Integer> odd = new ArrayList<>();
+        List<Integer> even = new ArrayList<>();
+        for(int i = 0; i < len; i++){
+            if(i % 2 == 0){
+                even.add(nums[i]);
+            } else {
+                odd.add(nums[i]);
+            }
+        }
+        Collections.sort(even);
+        Collections.sort(odd, Collections.reverseOrder());
+        int o = 0, e = 0;
+        for(int i = 0; i < len; i++){
+            if(i % 2 == 0){
+                res[i] = even.get(e++);
+            } else {
+                res[i] = odd.get(o++);
+            }
+        }
+        return res;
+    }
+
+    public long smallestNumber(long num) {
+        int[] cnt = new int[10];
+        boolean positive = num >= 0;
+        num = Math.abs(num);
+        while(num > 0){
+            int d = (int)(num % 10);
+            cnt[d]++;
+            num /= 10;
+        }
+        long res = 0;
+        if(positive){
+            for(int d = 1; d <= 9; d++){
+                if(cnt[d] > 0){
+                    cnt[d]--;
+                    res = d;
+                    break;
+                }
+            }
+            for(int d = 0; d <= 9; d++){
+                while(cnt[d] > 0){
+                    res = res * 10 + d;
+                    cnt[d]--;
+                }
+            }
+            return res;
+        } else {
+            for(int d = 9; d >= 0; d--){
+                while(cnt[d] > 0){
+                    res = res * 10 + d;
+                    cnt[d]--;
+                }
+            }
+            return -res;
+        }
+    }
 }
 
 

@@ -20,11 +20,9 @@ Example 3:
 Input: nums = [7,7,7,7,7,7,7]
 Output: 1
 
-
 Constraints:
 1 <= nums.length <= 2500
 -104 <= nums[i] <= 10^4
-
 
 Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?
 Clarification

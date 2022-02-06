@@ -29,12 +29,14 @@ Example 4:
 Input: values = [9,8,8,7,6], labels = [0,0,0,1,1], num_wanted = 3, use_limit = 2
 Output: 24
 Explanation: The subset chosen is the first, second, and fourth item.
- 
 
 Note:
 1 <= values.length == labels.length <= 20000
 0 <= values[i], labels[i] <= 20000
 1 <= num_wanted, use_limit <= values.length
+
+analysis:
+track each label usage
 */
 public class LargestValuesFromLabels {
 	public int largestValsFromLabels(int[] values, int[] labels, int num_wanted, int use_limit) {
@@ -45,7 +47,7 @@ public class LargestValuesFromLabels {
             labelUsage.putIfAbsent(labels[i], 0);
             pairs.add(new Pair(values[i], labels[i]));
         }
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.val - a.val);
         pq.addAll(pairs);
         int res = 0;
         while(num_wanted > 0 && !pq.isEmpty()){

@@ -14,20 +14,15 @@ and each point in the second group must be connected to at least one point in th
 
 Return the minimum cost it takes to connect the two groups.
 
-
-
 Example 1:
-
-
 Input: cost = [[15, 96], [36, 2]]
 Output: 17
 Explanation: The optimal way of connecting the groups is:
 1--A
 2--B
 This results in a total cost of 17.
+
 Example 2:
-
-
 Input: cost = [[1, 3, 5], [4, 1, 1], [1, 5, 3]]
 Output: 4
 Explanation: The optimal way of connecting the groups is:
@@ -38,11 +33,10 @@ Explanation: The optimal way of connecting the groups is:
 This results in a total cost of 4.
 Note that there are multiple points connected to point 2 in the first group and point A in the second group.
 This does not matter as there is no limit to the number of points that can be connected. We only care about the minimum total cost.
-Example 3:
 
+Example 3:
 Input: cost = [[2, 5, 1], [3, 4, 7], [8, 1, 2], [6, 2, 4], [3, 8, 8]]
 Output: 10
-
 
 Constraints:
 
@@ -52,6 +46,9 @@ size2 == cost[i].length
 size1 >= size2
 0 <= cost[i][j] <= 100
 
+hint:
+1 Each point on the left would either be connected to exactly point already connected to some left node, or a subset of the nodes on the right which are not connected to any node
+2 Use dynamic programming with bit masking, where the state will be (number of points assigned in first group, bitmask of points assigned in second group).
 analysis:
 use mask to track which element is group2 (or b) is connected
 1 calculate min cost from group2 to group1 for each node in group2
@@ -83,7 +80,7 @@ public class MinimumCostToConnectTwoGroupsOfPoints {
         if (a == aLen) {
             int res = 0;
             for (int b = 0; b < bLen; b++) {
-                if ((mask & (1 << b)) == 0) {
+                if (((mask >> b) & 1) == 0) {
                     res += minCostFromBtoA[b];
                 }
             }

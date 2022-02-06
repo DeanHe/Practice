@@ -33,6 +33,8 @@ The key is to cache the distance because it's highly possible to revisit a cell
 
 analysis:
 dfs + memorization
+
+TC: O(rows * cols)
 */
 public class LongestIncreasingPathInaMatrix {
 	int rows, cols;

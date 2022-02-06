@@ -25,11 +25,7 @@ public class BackpackV {
         }
         int len = nums.length;
         int[][] dp = new int[len + 1][target + 1];
-        dp[0][0] = 1; // 
-        for (int j = 1; j <= target; j++) {
-            dp[0][j] = 0;
-        }
-
+        dp[0][0] = 1;
         for (int i = 1; i <= len; i++) {
             for  (int j = 0; j <= target; j++) {
                 dp[i][j] = dp[i - 1][j]; // means how many ways to pick from A[0:i] to sum to j

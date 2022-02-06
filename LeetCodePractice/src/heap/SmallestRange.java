@@ -4,9 +4,7 @@ import java.util.*;
 /*
 You have k lists of sorted integers in ascending order. Find the smallest range that includes at least one number from each of the k lists.
 
-Example
 Example 1:
-
 Input:[[4,10,15,24,26], [0,9,12,20], [5,18,22,30]]
 Output: [20,24]
 Explanation: 
@@ -23,7 +21,7 @@ public class SmallestRange {
 	public int[] smallestRange(List<List<Integer>> nums) {
         int rows = nums.size();
         int[] next = new int[rows];
-        int rangeLow = 0, rangeHigh = Integer.MAX_VALUE, localMin = 0, localMax =Integer.MIN_VALUE;
+        int low = 0, high = Integer.MAX_VALUE, localMin = 0, localMax =Integer.MIN_VALUE;
         // min queue store list index order
         PriorityQueue<Integer> minQueue = new PriorityQueue<>(rows, (i, j) -> nums.get(i).get(next[i]) - nums.get(j).get(next[j]));
         for(int r = 0; r < rows; r++){
@@ -35,9 +33,9 @@ public class SmallestRange {
             int listIdx = minQueue.poll();
             localMin = nums.get(listIdx).get(next[listIdx]);
             next[listIdx]++;
-            if((localMax - localMin) < (rangeHigh - rangeLow)){
-                rangeHigh = localMax;
-                rangeLow = localMin;
+            if((localMax - localMin) < (high - low)){
+                high = localMax;
+                low = localMin;
             }
             if(next[listIdx] == nums.get(listIdx).size()){
                 break;
@@ -45,6 +43,6 @@ public class SmallestRange {
             minQueue.offer(listIdx);
             localMax = Math.max(localMax, nums.get(listIdx).get(next[listIdx])); 
         }
-        return new int[] {rangeLow, rangeHigh};
+        return new int[] {low, high};
     }
 }

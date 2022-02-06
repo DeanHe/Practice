@@ -9,6 +9,7 @@ By using the read4 API, implement the function int read(char *buf, int n) that r
 The read function will only be called once for each test case.
 
 analysis:
+maintain variable eof, total
 scenario 1: input is end of file
 secnario 2: temp will be fully copy over
 */

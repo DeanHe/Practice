@@ -12,7 +12,6 @@ Define a pair (u,v) which consists of one element from the first array and one e
 Find the k pairs (u1,v1),(u2,v2) ...(uk,vk) with the smallest sums.
 
 Example 1:
-
 Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
 Output: [[1,2],[1,4],[1,6]] 
 Explanation: The first 3 pairs are returned from the sequence: 

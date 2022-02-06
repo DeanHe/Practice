@@ -1,4 +1,4 @@
-package contest;
+package bitManipulation;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -81,7 +81,7 @@ public class MaximumGoodPeopleBasedOnStatements {
 
     public int maximumGood(int[][] statements) {
         n = statements.length;
-        int res = 1;
+        int res = 0;
         for (int mask = 0; mask < (1 << n); mask++) {
             if (isValid(mask, statements)) {
                 res = Math.max(res, Integer.bitCount(mask));
@@ -92,10 +92,10 @@ public class MaximumGoodPeopleBasedOnStatements {
 
     private boolean isValid(int mask, int[][] statements) {
         for (int i = 0; i < n; i++) {
-            boolean good = ((1 << i) & mask) == 1 << i;
+            boolean good = ((mask >> i) & 1) == 1;
             if (good) {
                 for (int j = 0; j < n; j++) {
-                    boolean nb = ((1 << j) & mask) == 1 << j;
+                    boolean nb = ((mask >> j) & 1) == 1;
                     if (statements[i][j] == 1) {
                         if (!nb) {
                             return false;

@@ -2,7 +2,8 @@ package heap;
 
 import java.util.PriorityQueue;
 
-/*A sorted list A contains 1, plus some number of primes.  Then, for every p < q in the list, we consider the fraction p/q.
+/*
+A sorted list A contains 1, plus some number of primes.  Then, for every p < q in the list, we consider the fraction p/q.
 
 What is the K-th smallest fraction considered?  Return your answer as an array of ints, where answer[0] = p and answer[1] = q.
 
@@ -20,9 +21,10 @@ Note:
 
 A will have length between 2 and 2000.
 Each A[i] will be between 1 and 30000.
-K will be between 1 and A.length * (A.length - 1) / 2.*/
+K will be between 1 and A.length * (A.length - 1) / 2.
 
-/*This solution probably doesn't have the best runtime but it's really simple and easy to understand.
+analysis:
+This solution probably doesn't have the best runtime but it's really simple and easy to understand.
 Says if the list is [1, 7, 23, 29, 47], we can easily have this table of relationships
 
 1/47  < 1/29    < 1/23 < 1/7
@@ -30,7 +32,9 @@ Says if the list is [1, 7, 23, 29, 47], we can easily have this table of relatio
 23/47 < 23/29
 29/47
 So now the problem becomes "find the kth smallest element of (n-1) sorted list"
-Following is my implementation using PriorityQueue, running time is O(nlogn) O(max(n,k) * logn), space is O(n):*/
+Following is my implementation using PriorityQueue,
+running time is O(nlogn) O(max(n,k) * logn), space is O(n):
+*/
 
 public class KthSmallestPrimeFraction {
 	public int[] kthSmallestPrimeFraction(int[] A, int K) {

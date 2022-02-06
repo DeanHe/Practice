@@ -8,15 +8,13 @@ import java.util.Map;
 /*
 Given two arrays, write a function to compute their intersection.
 
-Example
 Example1
-
 Input: 
 nums1 = [1, 2, 2, 1], nums2 = [2, 2]
 Output: 
 [2, 2]
-Example2
 
+Example2
 Input: 
 nums1 = [1, 1, 2], nums2 = [1]
 Output: 
@@ -43,19 +41,19 @@ public class IntersectionOfTwoArraysII {
      * @return: an integer array
      */
     public int[] intersection(int[] nums1, int[] nums2) {
-    	Map<Integer, Integer> map = new HashMap<>();
+    	Map<Integer, Integer> freq = new HashMap<>();
     	for(int n : nums1){
-    		map.put(n, map.getOrDefault(n, 0) + 1);
+    		freq.put(n, freq.getOrDefault(n, 0) + 1);
     	}
     	List<Integer> ls = new ArrayList<>();
     	for(int n : nums2){
-    		if(map.containsKey(n)){
-    			int count = map.get(n);
+    		if(freq.containsKey(n)){
+    			int count = freq.get(n);
     			if(count > 0){
     				ls.add(n);
     			}
     			count--;
-    			map.put(n, count);
+    			freq.put(n, count);
     		}
     	}
     	int[] res = new int[ls.size()];

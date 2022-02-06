@@ -24,6 +24,12 @@ Constraints:
 Elements of req_skills and people[i] are (respectively) distinct.
 req_skills[i][j], people[i][j][k] are lowercase English letters.
 It is guaranteed a sufficient team exists.
+
+hint:
+1 Do a bitmask DP.
+2 For each person, for each set of skills, we can update our understanding of a minimum set of people needed to perform this set of skills.
+
+TC O(N^2)
 */
 
 public class SmallestSufficientTeam {
@@ -34,26 +40,25 @@ public class SmallestSufficientTeam {
 		for(int i = 0; i < req_skils_len; i++) {
 			map.put(req_skills[i], i);
 		}
-		List<Integer>[] states = new List[1 << req_skils_len]; // bitmask for all skills combination representation
-		states[0] = new ArrayList<>();
+		List<Integer>[] masks = new List[1 << req_skils_len]; // bitmask for all skills combination representation
+		masks[0] = new ArrayList<>();
 		for(int i = 0; i < people_len; i++) {
 			int skillsPersonHave = 0;
 			List<String> person = people.get(i);
 			for(String skill : person) {
 				skillsPersonHave |= (1 << map.get(skill));
 			}
-			for(int cmb = 0; cmb < states.length; cmb++) {
-				if(states[cmb] == null) {
-					continue;
-				}
-				int newCmb = cmb | skillsPersonHave;
-				if(states[newCmb] == null || states[cmb].size() + 1 < states[newCmb].size()) {
-					states[newCmb] = new ArrayList<>(states[cmb]);
-					states[newCmb].add(i);
+			for(int cmb = 0; cmb < masks.length; cmb++) {
+				if(masks[cmb] != null) {
+					int newCmb = cmb | skillsPersonHave;
+					if(masks[newCmb] == null || masks[cmb].size() + 1 < masks[newCmb].size()) {
+						masks[newCmb] = new ArrayList<>(masks[cmb]);
+						masks[newCmb].add(i);
+					}
 				}
 			}
 		}
-		List<Integer> team = states[(1 << req_skils_len) - 1];
+		List<Integer> team = masks[(1 << req_skils_len) - 1];
 		int[] res = new int[team.size()];
 		for(int i = 0; i < team.size(); i++) {
 			res[i] = team.get(i);

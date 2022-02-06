@@ -19,11 +19,9 @@ p: maximum runtime for Pigeon in an hour
 1 <= tasks[i] <= 100
 1 <= p <= 10^3
 
-​​
 Every task can be processed only once.
-Example
-Example 1
 
+Example 1
 Input:
 4
 [2,4,4,5]
@@ -33,8 +31,8 @@ Output:
 10
 Explanation:
 You can run No.0 No.1 and No.2 task. It will cost 2 * (2 + 2 + 3) = 14 minutes and get 2 + 4 + 4 = 10 weight.
-Example 2
 
+Example 2
 Input:
 3
 [3,2,2]

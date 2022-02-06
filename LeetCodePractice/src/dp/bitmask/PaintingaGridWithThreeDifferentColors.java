@@ -26,6 +26,10 @@ Constraints:
 1 <= m <= 5
 1 <= n <= 1000
 
+hint:
+1 Represent each colored column by a bitmask based on each cell color.
+2 Use bitmasks DP with state (currentCell, prevColumn).
+
 analysis:
 similar to NumberOfWaysToPaintNby3Grid
 use 2 bits to represent a color {1, 2, 3}
@@ -33,6 +37,9 @@ use bitmask to represent previous column state, and current column state
 2 layer of dfs
 
 Try colors c range [1, 2, 3]
+
+TC: O(N * 3^M * 2^M), where N refers to columns, M refers to rows
+SC: O(N * 4^M)
  */
 public class PaintingaGridWithThreeDifferentColors {
     int MOD = (int)(1e9 + 7);

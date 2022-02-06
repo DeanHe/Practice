@@ -1,6 +1,7 @@
 package bitManipulation;
 
-/*Reverse bits of a given 32 bits unsigned integer.
+/*
+Reverse bits of a given 32 bits unsigned integer.
 
 Example 1:
 
@@ -19,8 +20,9 @@ Note that in some languages such as Java, there is no unsigned integer type. In 
 In Java, the compiler represents the signed integers using 2's complement notation. Therefore, in Example 2 above the input represents the signed integer -3 and the output represents the signed integer -1073741825.
  
 Follow up:
-
 If this function is called many times, how would you optimize it?
+
+TC O(N)
 */
 public class   ReverseBits {
 	// you need treat n as an unsigned value

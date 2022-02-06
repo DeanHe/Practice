@@ -36,7 +36,9 @@ Notice
 The read function may be called multiple times.
 
 analysis:
-The difference between Read N Characters Given Read4 is that we need to save the status of the internal buffer if we haven't read all characters from it.
+The difference between Read N Characters Given Read4 is that
+we need to save the status of the internal buffer if we haven't read all characters from it.
+maintain variable start, end;
 */
 public class ReadNcharactersGivenRead4II extends Reader4 {
 	/**

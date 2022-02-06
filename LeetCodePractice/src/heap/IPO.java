@@ -23,6 +23,11 @@ Note:
 You may assume all numbers in the input are non-negative integers.
 The length of Profits array and Capital array will not exceed 50,000.
 The answer is guaranteed to fit in a 32-bit signed integer.
+
+analysis:
+first put all projects in capital pool.
+pick the projects with capital <= W, move to profit pool for evaluation.
+pick the one with max profit and add to result.
  */
 public class IPO {
     public int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) {
