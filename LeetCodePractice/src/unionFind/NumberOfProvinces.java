@@ -9,16 +9,11 @@ You are given an n x n matrix isConnected where isConnected[i][j] = 1 if the ith
 
 Return the total number of provinces.
 
-
-
 Example 1:
-
-
 Input: isConnected = [[1,1,0],[1,1,0],[0,0,1]]
 Output: 2
+
 Example 2:
-
-
 Input: isConnected = [[1,0,0],[0,1,0],[0,0,1]]
 Output: 3
 
@@ -60,6 +55,7 @@ public class NumberOfProvinces {
         while(parent[x] != root){
             int fa = parent[x];
             parent[x] = root;
+            x = fa;
         }
         return root;
     }

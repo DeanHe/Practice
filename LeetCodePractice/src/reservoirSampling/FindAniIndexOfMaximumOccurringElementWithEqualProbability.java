@@ -26,18 +26,18 @@ All outputs above have equal probability.
 public class FindAniIndexOfMaximumOccurringElementWithEqualProbability {
     public int findRandomIndexOfMax(int arr[]){
         Random rand = new Random();
-        Map<Integer, Integer> map = new HashMap<>();
-        int maxVal = 0, maxFreq = 0;
+        Map<Integer, Integer> freq = new HashMap<>();
+        int target = 0, maxFreq = 0;
         for(int n : arr){
-            map.put(n, map.getOrDefault(n, 0) + 1);
-            if(map.get(n) > maxFreq){
-                maxFreq = map.get(n);
-                maxVal = n;
+            freq.put(n, freq.getOrDefault(n, 0) + 1);
+            if(freq.get(n) > maxFreq){
+                maxFreq = freq.get(n);
+                target = n;
             }
         }
         int res = 0, count = 1;
         for(int i = 0; i < arr.length; i++){
-            if(arr[i] == maxVal){
+            if(arr[i] == target){
                 int prob = rand.nextInt(count);
                 if(prob == 0){
                     res = i;

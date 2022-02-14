@@ -85,15 +85,15 @@ public class CopyListWithRandomPointer {
 		if(head == null){
 			return null;
 		}
-		Node cur = head, cur_post;
+		Node cur = head, post;
 		// First round: make copy of each node,
-		// and link them together side-by-side in a single list.
+		// and link origin -> copy together side-by-side in a single list.
 		while(cur != null){
-			cur_post = cur.next;
+			post = cur.next;
 			Node copy = new Node(cur.val);
 			cur.next = copy;
-			copy.next = cur_post;
-			cur = cur_post;
+			copy.next = post;
+			cur = post;
 		}
 		// Second round: assign random pointers for the copy nodes.
 		cur = head;
@@ -106,16 +106,16 @@ public class CopyListWithRandomPointer {
 		// Third round: restore the original list, and extract the copy list.
 		cur = head;
 		Node dummy = new Node(0);
-		Node copy, copy_pre = dummy;
+		Node copy, pre = dummy;
 		while(cur != null){
-			cur_post = cur.next.next;
+			post = cur.next.next;
 			// extract the copy
 			copy = cur.next;
-			copy_pre.next = copy;
-			copy_pre = copy;
+			pre.next = copy;
+			pre = copy;
 			// restore the original list
-			cur.next = cur_post;
-			cur = cur_post;
+			cur.next = post;
+			cur = post;
 		}
 		return dummy.next;
 	}

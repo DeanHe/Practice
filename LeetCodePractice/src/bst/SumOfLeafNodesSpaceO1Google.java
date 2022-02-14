@@ -1,6 +1,7 @@
 package bst;
 
-/*Given a binary tree, find the sum of all leaf nodes.Use O(1) space.
+/*
+Given a binary tree, find the sum of all leaf nodes.Use O(1) space.
 
 Example
 Example 1:

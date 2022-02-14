@@ -27,13 +27,13 @@ public class ShortestPathWithGasFillGoogle {
                 return step;
             }
             for(int nb : g.get(id)){
-                if(gasStations.contains(nb)){
-                    if(!visited[nb][n - 1]){
-                        visited[nb][n - 1] = true;
-                        pq.offer(new int[]{nb, step + 2, n - 1});
-                    }
-                }
                 if(gas > 0){
+                    if(gasStations.contains(nb)){
+                        if(!visited[nb][n]){
+                            visited[nb][n] = true;
+                            pq.offer(new int[]{nb, step + 2, n});
+                        }
+                    }
                     if(!visited[nb][gas - 1]){
                         visited[nb][gas - 1] = true;
                         pq.offer(new int[]{nb, step + 1, gas - 1});

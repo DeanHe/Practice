@@ -22,8 +22,6 @@ It is guaranteed that answer is unique under the given rules.
 
 
 Example 1:
-
-
 Input: matrix = [[1,2],[3,4]]
 Output: [[1,2],[2,3]]
 Explanation:
@@ -49,11 +47,10 @@ Output: [[5,1,4],[1,2,3],[6,3,1]]
 
 
 Constraints:
-
 m == matrix.length
 n == matrix[i].length
 1 <= m, n <= 500
--109 <= matrix[row][col] <= 10^9
+-10^9 <= matrix[row][col] <= 10^9
 
 Time O(NNlog(MN))
 Space O(MN)

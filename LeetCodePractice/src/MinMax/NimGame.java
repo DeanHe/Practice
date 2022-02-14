@@ -8,10 +8,7 @@ On each turn, the person whose turn it is will remove 1 to 3 stones from the hea
 The one who removes the last stone is the winner.
 Given n, the number of stones in the heap, return true if you can win the game assuming both you and your friend play optimally, otherwise return false.
 
-
-
 Example 1:
-
 Input: n = 4
 Output: false
 Explanation: These are the possible outcomes:
@@ -19,12 +16,12 @@ Explanation: These are the possible outcomes:
 2. You remove 2 stones. Your friend removes 2 stones, including the last stone. Your friend wins.
 3. You remove 3 stones. Your friend removes the last stone. Your friend wins.
 In all outcomes, your friend wins.
-Example 2:
 
+Example 2:
 Input: n = 1
 Output: true
-Example 3:
 
+Example 3:
 Input: n = 2
 Output: true
 

@@ -16,7 +16,6 @@ int pick() Returns a random integer in the range [0, n - 1] and not in blacklist
 
 
 Example 1:
-
 Input
 ["Solution", "pick", "pick", "pick", "pick", "pick", "pick", "pick"]
 [[7, [2, 3, 5]], [], [], [], [], [], [], []]
@@ -49,22 +48,22 @@ use hashmap to map disallowed number(#N) to last N available numbers
 public class RandomPickWithBlacklist {
     int validCnt;
     Random random;
-    Map<Integer, Integer> blackMap;
+    Map<Integer, Integer> blockMap;
 
-    public RandomPickWithBlacklist(int N, int[] blacklist) {
+    public RandomPickWithBlacklist(int n, int[] blacklist) {
         random = new Random();
-        blackMap = new HashMap<>();
-        for (int n : blacklist) {
-            blackMap.put(n, -1);
+        blockMap = new HashMap<>();
+        for (int num : blacklist) {
+            blockMap.put(num, -1);
         }
-        validCnt = N - blackMap.size();
-        int last = N - 1;
-        for (int n : blacklist) {
-            if (n < validCnt) { //re-mapping
-                while (blackMap.containsKey(last)) {
+        validCnt = n - blockMap.size();
+        int last = n - 1;
+        for (int num : blacklist) {
+            if (num < validCnt) { //re-mapping
+                while (blockMap.containsKey(last)) {
                     last--;
                 }
-                blackMap.put(n, last);
+                blockMap.put(num, last);
                 last--;
             }
         }
@@ -72,8 +71,8 @@ public class RandomPickWithBlacklist {
 
     public int pick() {
         int p = random.nextInt(validCnt);
-        if (blackMap.containsKey(p)) {
-            return blackMap.get(p);
+        if (blockMap.containsKey(p)) {
+            return blockMap.get(p);
         }
         return p;
     }

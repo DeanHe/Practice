@@ -36,7 +36,7 @@ public class PathWithMaximumMinimumValue {
         int cols = A[0].length;
         int res = A[0][0];
         boolean[][] visited = new boolean[rows][cols];
-        // r : c : val
+        // r : c -> val
         PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> A[b[0]][b[1]] -  A[a[0]][a[1]]);
         maxHeap.offer(new int[]{0, 0});
         while (!maxHeap.isEmpty()) {

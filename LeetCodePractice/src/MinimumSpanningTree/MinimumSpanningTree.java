@@ -46,27 +46,23 @@ public class MinimumSpanningTree {
 			return a.city1.compareTo(b.city1);
 		});
 		// city: group id in unionFind
-		Map<String, Integer> groupMap = new HashMap<>();
+		Map<String, Integer> cityToIdx = new HashMap<>();
 		int n = 0;
 		for (Connection c : connections) {
-			if (!groupMap.containsKey(c.city1)) {
-				groupMap.put(c.city1, n++);
-			}
-			if (!groupMap.containsKey(c.city2)) {
-				groupMap.put(c.city2, n++);
-			}
+			cityToIdx.putIfAbsent(c.city1, n++);
+			cityToIdx.putIfAbsent(c.city2, n++);
 		}
 		int[] parent = new int[n];
 		for (int i = 0; i < n; i++) {
 			parent[i] = i;
 		}
-		ArrayList<Connection> res = new ArrayList<>();
+		List<Connection> res = new ArrayList<>();
 		for (Connection con : connections) {
 			// check if the connection forms a cycle with the spanning tree
 			// formed so far.
 			// use union find to getRoot and union
-			int id1 = groupMap.get(con.city1);
-			int id2 = groupMap.get(con.city2);
+			int id1 = cityToIdx.get(con.city1);
+			int id2 = cityToIdx.get(con.city2);
 			int root1 = getRoot(id1, parent);
 			int root2 = getRoot(id2, parent);
 			if (root1 != root2) {

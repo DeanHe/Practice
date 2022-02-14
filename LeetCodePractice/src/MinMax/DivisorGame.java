@@ -11,12 +11,11 @@ Also, if a player cannot make a move, they lose the game.
 Return True if and only if Alice wins the game, assuming both players play optimally.
 
 Example 1:
-
 Input: 2
 Output: true
 Explanation: Alice chooses 1, and Bob has no more moves.
-Example 2:
 
+Example 2:
 Input: 3
 Output: false
 Explanation: Alice chooses 1, Bob chooses 1, and Alice has no more moves.
@@ -31,22 +30,20 @@ public class DivisorGame {
 		Boolean[] mem = new Boolean[N + 1];
         return canWin(mem, N);
     }
-    private boolean canWin(Boolean[] mem, int N){
-    	if(N == 1){
+    private boolean canWin(Boolean[] mem, int n){
+    	if(n == 1){
     		return false;
 		}
-    	if(mem[N] != null){
-    		return mem[N];
+    	if(mem[n] != null){
+    		return mem[n];
     	}
-    	boolean res = false;
-    	for(int i = 1; i < N / 2; i++){
-    		if(N % i == 0){
-    			if(!canWin(mem, N - i)){
-					res = true;
-					break;
+    	for(int i = 1; i < n / 2; i++){
+    		if(n % i == 0){
+    			if(!canWin(mem, n - i)){
+					return mem[n] = true;
     			}
     		}
     	}
-    	return mem[N] = res;
+    	return mem[n] = false;
     }
 }

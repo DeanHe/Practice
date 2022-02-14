@@ -6,28 +6,28 @@ import java.util.Queue;
 /*
 Design an Iterator class, which has:
 
-        A constructor that takes a string characters of sorted distinct lowercase English letters and a number combinationLength as arguments.
-        A function next() that returns the next combination of length combinationLength in lexicographical order.
-        A function hasNext() that returns True if and only if there exists a next combination.
+A constructor that takes a string characters of sorted distinct lowercase English letters and a number combinationLength as arguments.
+A function next() that returns the next combination of length combinationLength in lexicographical order.
+A function hasNext() that returns True if and only if there exists a next combination.
 
 
-        Example:
+Example:
 
-        CombinationIterator iterator = new CombinationIterator("abc", 2); // creates the iterator.
+CombinationIterator iterator = new CombinationIterator("abc", 2); // creates the iterator.
 
-        iterator.next(); // returns "ab"
-        iterator.hasNext(); // returns true
-        iterator.next(); // returns "ac"
-        iterator.hasNext(); // returns true
-        iterator.next(); // returns "bc"
-        iterator.hasNext(); // returns false
+iterator.next(); // returns "ab"
+iterator.hasNext(); // returns true
+iterator.next(); // returns "ac"
+iterator.hasNext(); // returns true
+iterator.next(); // returns "bc"
+iterator.hasNext(); // returns false
 
 
-        Constraints:
+Constraints:
 
-        1 <= combinationLength <= characters.length <= 15
-        There will be at most 10^4 function calls per test.
-        It's guaranteed that all calls of the function next are valid.
+1 <= combinationLength <= characters.length <= 15
+There will be at most 10^4 function calls per test.
+It's guaranteed that all calls of the function next are valid.
 
 hint:
 1 Generate all combinations as a preprocessing.
@@ -53,7 +53,7 @@ public class CombinationIterator {
         }
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < charactersLength; i++){
-            if((mask & (1 << (charactersLength - i - 1))) == (1 << (charactersLength - i - 1))){
+            if((1 & (mask >> i)) == 1){
                 sb.append(characters.charAt(i));
             }
         }

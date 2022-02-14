@@ -77,7 +77,7 @@ public class SegmentTreeQueryII {
 		} else if (mid < start) {
 			return query(root.right, start, end);
 		} else {
-			return query(root.left, start, mid) + query(root.left, mid + 1, end);
+			return query(root.left, start, mid) + query(root.right, mid + 1, end);
 		}
 	}
 }

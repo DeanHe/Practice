@@ -68,7 +68,6 @@ public class AlienDictionaryGoogle {
         }
         Map<Character, Set<Character>> graph = new HashMap<>();
         Map<Character, Integer> inDegree = new HashMap<>();
-        StringBuilder sb = new StringBuilder();
         //initialize degree map
         for(String word : words){
             for(char c : word.toCharArray()){

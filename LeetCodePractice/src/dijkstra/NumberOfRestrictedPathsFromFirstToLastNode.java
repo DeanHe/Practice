@@ -15,13 +15,10 @@ A path from node start to node end is a sequence of nodes [z0, z1, z2, ..., zk] 
 The distance of a path is the sum of the weights on the edges of the path. Let distanceToLastNode(x) denote the shortest distance of a path between node n and node x.
 A restricted path is a path that also satisfies that distanceToLastNode(zi) > distanceToLastNode(zi+1) where 0 <= i <= k-1.
 
-Return the number of restricted paths from node 1 to node n. Since that number may be too large, return it modulo 109 + 7.
-
+Return the number of restricted paths from node 1 to node n. Since that number may be too large, return it modulo 10^9 + 7.
 
 
 Example 1:
-
-
 Input: n = 5, edges = [[1,2,3],[1,3,3],[2,3,1],[1,4,2],[5,2,2],[3,5,1],[5,4,10]]
 Output: 3
 Explanation: Each circle contains the node number in black and its distanceToLastNode value in blue. The three restricted paths are:
@@ -29,17 +26,14 @@ Explanation: Each circle contains the node number in black and its distanceToLas
 2) 1 --> 2 --> 3 --> 5
 3) 1 --> 3 --> 5
 Example 2:
-
-
 Input: n = 7, edges = [[1,3,1],[4,1,2],[7,3,4],[2,5,3],[5,6,1],[6,7,2],[7,5,3],[2,6,4]]
 Output: 1
 Explanation: Each circle contains the node number in black and its distanceToLastNode value in blue. The only restricted path is 1 --> 3 --> 7.
 
 
 Constraints:
-
-1 <= n <= 2 * 104
-n - 1 <= edges.length <= 4 * 104
+1 <= n <= 2 * 10^4
+n - 1 <= edges.length <= 4 * 10^4
 edges[i].length == 3
 1 <= ui, vi <= n
 ui != vi
@@ -53,6 +47,7 @@ calculate shortest dist map from all node to end
  */
 public class NumberOfRestrictedPathsFromFirstToLastNode {
     int MOD = (int) (1e9 + 7);
+
     public int countRestrictedPaths(int n, int[][] edges) {
         Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
         for (int[] e : edges) {
@@ -61,26 +56,24 @@ public class NumberOfRestrictedPathsFromFirstToLastNode {
         }
         int[] cnt = new int[n + 1];
         cnt[n] = 1;
-        int[] dist = new int[n + 1];
-        Arrays.fill(dist, -1);
+        Integer[] dist = new Integer[n + 1];
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
         pq.offer(new int[]{n, 0});
         while (!pq.isEmpty()) {
             int[] cur = pq.poll();
             int i = cur[0];
             int d = cur[1];
-            if (dist[i] != -1) {
-                continue;
-            }
-            dist[i] = d;
-            if (graph.containsKey(i)) {
-                Map<Integer, Integer> nbs = graph.get(i);
-                for (int nb : nbs.keySet()) {
-                    if (dist[nb] == -1) {
-                        pq.offer(new int[]{nb, d + nbs.get(nb)});
-                    } else {
-                        if(dist[i] > dist[nb]){
-                            cnt[i] = (cnt[i] + cnt[nb]) % MOD;
+            if (dist[i] == null) {
+                dist[i] = d;
+                if (graph.containsKey(i)) {
+                    Map<Integer, Integer> nbs = graph.get(i);
+                    for (int nb : nbs.keySet()) {
+                        if (dist[nb] == null) {
+                            pq.offer(new int[]{nb, d + nbs.get(nb)});
+                        } else {
+                            if (dist[i] > dist[nb]) {
+                                cnt[i] = (cnt[i] + cnt[nb]) % MOD;
+                            }
                         }
                     }
                 }

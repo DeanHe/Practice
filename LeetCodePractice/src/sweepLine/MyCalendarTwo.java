@@ -35,27 +35,27 @@ In calls to MyCalendar.book(start, end), start and end are integers in the range
  */
 public class MyCalendarTwo {
     int maxOverlap = 2;
-    TreeMap<Integer, Integer> map;
+    TreeMap<Integer, Integer> axis;
 
     MyCalendarTwo() {
-        map = new TreeMap<>();
+        axis = new TreeMap<>();
     }
 
     public boolean book(int start, int end) {
-        map.put(start, map.getOrDefault(start, 0) + 1);
-        map.put(start, map.getOrDefault(start, 0) - 1);
+        axis.put(start, axis.getOrDefault(start, 0) + 1);
+        axis.put(end, axis.getOrDefault(end, 0) - 1);
         int overlap = 0;
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+        for(Map.Entry<Integer, Integer> entry : axis.entrySet()){
             overlap += entry.getValue();
             if(overlap > maxOverlap){
                 // revert book change
-                map.put(start, map.get(start) - 1);
-                if(map.get(start) == 0){
-                    map.remove(start);
+                axis.put(start, axis.get(start) - 1);
+                if(axis.get(start) == 0){
+                    axis.remove(start);
                 }
-                map.put(end, map.get(end) - 1);
-                if(map.get(end) == 0){
-                    map.remove(end);
+                axis.put(end, axis.get(end) + 1);
+                if(axis.get(end) == 0){
+                    axis.remove(end);
                 }
                 return false;
             }

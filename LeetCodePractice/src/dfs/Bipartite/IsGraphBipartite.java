@@ -60,10 +60,7 @@ public class IsGraphBipartite {
                 }
             }
         }
-        if (group.size() != N) {
-            return false;
-        }
-        return true;
+        return group.size() == N;
     }
 
     private boolean dfs(int idx, int color) {

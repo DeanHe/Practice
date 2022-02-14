@@ -1,4 +1,6 @@
 package MinMax;
+
+import java.util.*;
 /*This problem is an interactive problem new to the LeetCode platform.
 
 We are given a word list of unique words, each word is 6 letters long, and one word in this list is chosen as secret.
@@ -36,11 +38,9 @@ and the number of calls is bounded by O(logN).
 Space Complexity: O(N^2).
 */
 
-import java.util.*;
-
 public class GuessTheWord {
 	public void findSecretWord(String[] wordlist, Master master) {
-		HashMap<String, Integer> uniqueLevel = new HashMap<>();
+		Map<String, Integer> uniqueLevel = new HashMap<>();
 		for (String w1 : wordlist) {
 			for (String w2 : wordlist) {
 				if (match(w1, w2) == 0) {
@@ -50,19 +50,19 @@ public class GuessTheWord {
 		}
 		for (int i = 0, score = 0; i < 10 && score < 6; i++) {
 			// the least unique word
-			String minimax_str = "";
+			String commonStr = "";
 			int minimax_count = 1000;
 			for (String w : wordlist) {
 				// System.out.println(w + ":" + uniqueLevel.getOrDefault(w, 0));
 				if (uniqueLevel.getOrDefault(w, 0) < minimax_count) {
-					minimax_str = w;
+					commonStr = w;
 					minimax_count = uniqueLevel.getOrDefault(w, 0);
 				}
 			}
-			score = master.guess(minimax_str);
+			score = master.guess(commonStr);
 			List<String> ls = new ArrayList<>();
 			for (String w : wordlist) {
-				if (match(w, minimax_str) == score) {
+				if (match(w, commonStr) == score) {
 					ls.add(w);
 				}
 			}

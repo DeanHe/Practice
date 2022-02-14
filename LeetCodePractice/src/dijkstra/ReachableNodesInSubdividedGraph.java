@@ -22,14 +22,12 @@ Now, you start at node 0 from the original graph, and in each move, you travel a
 Return how many nodes you can reach in at most M moves.
 
 Example 1:
-
 Input: edges = [[0,1,10],[0,2,1],[1,2,2]], M = 6, N = 3
 Output: 13
 Explanation: 
 The nodes that are reachable in the final graph after M = 6 moves are indicated below.
 
 Example 2:
-
 Input: edges = [[0,1,4],[1,2,6],[0,2,8],[1,3,1]], M = 10, N = 4
 Output: 23
  
@@ -50,7 +48,8 @@ get all nodes can be reachable by node 0 by pq.
 Instead of maintaining a MinHeap which keeps track of shortest distances to the source, we maintain a MaxHeap that keeps track of maximum moves remained for each node.
 
 dist map saves remain move after stop
-Time Complexity: O(E log N),
+Time Complexity: O(E log N), where EE is the length of edges.
+SC: O(E)
 */
 public class ReachableNodesInSubdividedGraph {
 	public int reachableNodes(int[][] edges, int maxMoves, int n) {
@@ -69,16 +68,15 @@ public class ReachableNodesInSubdividedGraph {
 			int[] cur = pq.poll();
 			int stop = cur[0];
 			int remain = cur[1];
-			if(dist.containsKey(stop)){
-				continue;
-			}
-			dist.put(stop, remain);
-			for (int[] nb : graph.getOrDefault(stop, new ArrayList<>())) {
-				int nb_stop =nb[0];
-				int nb_travel = nb[1];
-				int remainMove = remain - nb_travel - 1;
-				if (!dist.containsKey(nb_stop) && remainMove >= 0) {
-					pq.offer(new int[]{nb_stop, remainMove});
+			if(!dist.containsKey(stop)){
+				dist.put(stop, remain);
+				for (int[] nb : graph.getOrDefault(stop, new ArrayList<>())) {
+					int nb_stop =nb[0];
+					int nb_travel = nb[1];
+					int remainMove = remain - nb_travel - 1;
+					if (!dist.containsKey(nb_stop) && remainMove >= 0) {
+						pq.offer(new int[]{nb_stop, remainMove});
+					}
 				}
 			}
 		}

@@ -6,9 +6,12 @@ import java.util.Map;
 /*
 #Google
 
-Assume an array A, at first, you have no information about A. there will be some queris <start, end, odd/even> in sequence. each query means: A[start:end+1] is odd/even. Detect the first conflict.
-     Example:  <2, 14, odd>, <8, 14, even>, <2, 7, even>. when first and second comes in, we know 2->7 has to be odd-even=odd.
-     but when the third comes in, it is even (conflict with existing information about A)
+Assume an array A, at first, you have no information about A. there will be some queris <start, end, odd/even> in sequence.
+each query means: A[start:end+1] is odd/even. Detect the first conflict.
+
+Example:
+<2, 14, odd>, <8, 14, even>, <2, 7, even>. when first and second comes in, we know 2->7 has to be odd-even=odd.
+but when the third comes in, it is even (conflict with existing information about A)
 
 analysis:
 maintain another map track the odd property between element and root, update this map via findRoot method

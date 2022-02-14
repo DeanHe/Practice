@@ -14,10 +14,7 @@ The score difference between Alice and Bob is (Alice's score - Bob's score). Ali
 
 Given an integer array stones of length n where stones[i] represents the value of the ith stone from the left, return the score difference between Alice and Bob if they both play optimally.
 
-
-
 Example 1:
-
 Input: stones = [-1,2,-3,4,-5]
 Output: 5
 Explanation:
@@ -26,8 +23,8 @@ Explanation:
 - Bob removes the first 2 stones, adds 2 + (-5) = -3 to his score, and places a stone of value -3 on
   the left. stones = [-3].
 The difference between their scores is 2 - (-3) = 5.
-Example 2:
 
+Example 2:
 Input: stones = [7,-6,5,10,5,-2,-6]
 Output: 13
 Explanation:

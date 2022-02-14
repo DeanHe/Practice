@@ -15,10 +15,7 @@ Return a boolean array result, where each result[j] is true if the jth friend re
 
 Note: If uj and vj are already direct friends, the request is still successful.
 
-
-
 Example 1:
-
 Input: n = 3, restrictions = [[0,1]], requests = [[0,2],[2,1]]
 Output: [true,false]
 Explanation:

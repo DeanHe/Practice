@@ -34,27 +34,27 @@ Explanation of Input Syntax:
 The input is two lists: the subroutines called and their arguments. Solution's constructor has one argument, the array of rectangles rects. pick has no arguments. Arguments are always wrapped with a list, even if there aren't any.
  */
 public class RandomPointInNonOverlappingRectangles {
-    TreeMap<Integer, Integer> map;
+    TreeMap<Integer, Integer> preSum;
     int[][] rects;
     int sum;
     Random rand;
     public RandomPointInNonOverlappingRectangles(int[][] rects) {
         rand = new Random();
         this.rects = rects;
-        map = new TreeMap<>();
+        preSum = new TreeMap<>();
         sum = 0;
         for(int i = 0; i < rects.length; i++){
             int[] rect = rects[i];
             // total points in the rect
             sum += (rect[2] - rect[0] + 1) * (rect[3] - rect[1] + 1);
-            map.put(sum, i);
+            preSum.put(sum, i);
         }
     }
 
     public int[] pick() {
         int prob = rand.nextInt(sum) + 1;
-        int idx = map.ceilingKey(prob);
-        return pickInRect(rects[map.get(idx)]);
+        int idx = preSum.ceilingKey(prob);
+        return pickInRect(rects[preSum.get(idx)]);
     }
 
     private int[] pickInRect(int[] rect){

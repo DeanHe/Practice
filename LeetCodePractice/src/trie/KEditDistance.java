@@ -3,16 +3,16 @@ package trie;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Given a set of strings which just has lower case letters and a target string, output all the strings for each the edit distance with the target no greater than k.
+/*
+Given a set of strings which just has lower case letters and a target string, output all the strings for each the edit distance with the target no greater than k.
 
 You have the following 3 operations permitted on a word:
 
 Insert a character
 Delete a character
 Replace a character
-Example
-Example 1:
 
+Example 1:
 Given words = `["abc", "abd", "abcd", "adc"]` and target = `"ac"`, k = `1`
 Return `["abc", "adc"]`
 Input:
@@ -38,7 +38,8 @@ Explanation:
 "acc" turns "c" into "b"
 "abcd" remove "d"
 "ade" turns "d" into "b" turns "e" into "c"
-"abbcd" gets rid of "b" and "d"*/
+"abbcd" gets rid of "b" and "d"
+*/
 public class KEditDistance {
 	/**
      * @param words: a set of stirngs

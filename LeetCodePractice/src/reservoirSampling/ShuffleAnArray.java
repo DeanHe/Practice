@@ -19,6 +19,9 @@ solution.reset();
 
 // Returns the random shuffling of array [1,2,3].
 solution.shuffle();
+
+analysis:
+Fisher–Yates shuffle
 */
 public class ShuffleAnArray {
 	private int[] nums;

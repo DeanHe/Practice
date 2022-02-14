@@ -11,6 +11,8 @@ Example:
 Input: nums = [-2,5,-1], lower = -2, upper = 2,
 Output: 3 
 Explanation: The three ranges are : [0,0], [2,2], [0,2] and their respective sums are: -2, -1, 2.
+
+TC: O(NlogN)
 */
 public class CountOfRangeSum {
 	public int countRangeSum(int[] nums, int lower, int upper) {
@@ -33,15 +35,15 @@ public class CountOfRangeSum {
 		int mid = start + (end - start) / 2;
 		int count = countWhileMergeSort(preSum, start, mid, temp, lower, upper)
 				+ countWhileMergeSort(preSum, mid + 1, end, temp, lower, upper);
-		int left = start, right = start;
+		int l = start, r = start;
 		for (int i = mid + 1; i <= end; i++) {
-			while (left <= mid && preSum[i] - preSum[left] > upper) {
-				left++;
+			while (l <= mid && preSum[i] - preSum[l] > upper) {
+				l++;
 			}
-			while (right <= mid && preSum[i] - preSum[right] >= lower) {
-				right++;
+			while (r <= mid && preSum[i] - preSum[r] >= lower) {
+				r++;
 			}
-			count += right - left;
+			count += r - l;
 		}
 		merge(preSum, start, mid, end, temp);
 		return count;

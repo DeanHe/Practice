@@ -6,15 +6,11 @@ The robot can only move either down or right at any point in time. The robot is 
 
 show all cells' visit probability, consider all paths are equally weighted
 
-
-
 Example 1:
-
-
 Input: m = 3, n = 7
 Output: 28
-Example 2:
 
+Example 2:
 Input: m = 3, n = 2
 Output: 3
 Explanation:

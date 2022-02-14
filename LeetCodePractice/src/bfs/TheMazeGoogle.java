@@ -66,7 +66,7 @@ public class TheMazeGoogle {
                 if (cost[nb_r][nb_c] == null || cost[r][c] + 1 < cost[nb_r][nb_c]) {
                     queue.offer(new int[]{nb_r, nb_c});
                     cost[nb_r][nb_c] = cost[r][c] + 1;
-                    System.out.println(nb_r + ":" + nb_c + ":" + cost[nb_r][nb_c]);
+                    //System.out.println(nb_r + ":" + nb_c + ":" + cost[nb_r][nb_c]);
                 }
             }
         }

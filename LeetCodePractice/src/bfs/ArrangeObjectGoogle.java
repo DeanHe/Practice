@@ -10,9 +10,9 @@ import java.util.Queue;
 
 /*
 N objects 1 -> N in a 2-D grid. Given a set of rules as <first, second, left/right/up/down> (the first is on left/right/up/down of the second).
-     Return any one of possible arrangement of those N objects.
-     Example: N=3, <1, 3, right>, <2, 3, right>, <1, 2, up>, <1, 2, left>, <2, 3, up>.
-     one possible result:  ["*1*", "**2", "3**"], * is empty.
+Return any one of possible arrangement of those N objects.
+Example: N=3, <1, 3, right>, <2, 3, right>, <1, 2, up>, <1, 2, left>, <2, 3, up>.
+one possible result:["*1*", "**2", "3**"], * is empty.
 
 analysis:
 2 dimension topological sort

@@ -23,6 +23,7 @@ Notice
 
 analysis:
 dist map track shortest dist from node i to K
+TC O(V + ElogE)
 */
 
 import java.util.*;
@@ -32,13 +33,13 @@ public class NetworkDelayTime {
 	/**
 	 * @param times:
 	 *            a 2D array
-	 * @param N:
+	 * @param n:
 	 *            an integer, # of network nodes, labelled 1 to N
-	 * @param K:
+	 * @param k:
 	 *            an integer, we send a signal from a certain node K
 	 * @return: how long will it take for all nodes to receive the signal
 	 */
-	public int networkDelayTime(int[][] times, int N, int K) {
+	public int networkDelayTime(int[][] times, int n, int k) {
 		// Write your code here
 		Map<Integer, List<int[]>> graph = new HashMap<>();
 		Map<Integer, Integer> dist = new HashMap<>();
@@ -49,11 +50,10 @@ public class NetworkDelayTime {
 			graph.computeIfAbsent(start, x -> new ArrayList<>()).add(new int[]{end, travel});
 		}
 
-		PriorityQueue<int[]> pq = new PriorityQueue<>(N, (a, b) -> a[1] - b[1]);
+		PriorityQueue<int[]> pq = new PriorityQueue<>(n, (a, b) -> a[1] - b[1]);
 		int res = 0;
-		int[] start = new int[]{K, 0};
+		int[] start = new int[]{k, 0};
 		pq.offer(start);
-		// dijkstra's Algorithm
 		while (!pq.isEmpty()) {
 			int[] cur = pq.poll();
 			int stop = cur[0];
@@ -75,7 +75,7 @@ public class NetworkDelayTime {
 			}
 		}
 
-		if (dist.size() != N) {
+		if (dist.size() != n) {
 			return -1;
 		}
 		return res;

@@ -3,10 +3,7 @@ package unionFind;
 
 Return true if and only if it is possible to assign integers to variable names so as to satisfy all the given equations.
 
- 
-
 Example 1:
-
 Input: ["a==b","b!=a"]
 Output: false
 Explanation: If we assign say, a = 1 and b = 1, then the first equation is satisfied, but not the second.  There is no way to assign the variables to satisfy both equations.
@@ -26,7 +23,11 @@ Output: false
 Example 5:
 
 Input: ["c==c","b==d","x!=z"]
-Output: true*/
+Output: true
+
+analysis:
+TC O(N)
+*/
 public class SatisfiabilityOfEqualityEquations {
 	private int[] parent;
 	public boolean equationsPossible(String[] equations) {

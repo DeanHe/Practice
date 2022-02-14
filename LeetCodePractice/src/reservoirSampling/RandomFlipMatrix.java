@@ -2,7 +2,10 @@ package reservoirSampling;
 
 import java.util.*;
 
-/*You are given the number of rows n_rows and number of columns n_cols of a 2D binary matrix where all values are initially 0. Write a function flip which chooses a 0 value uniformly at random, changes it to 1, and then returns the position [row.id, col.id] of that value. Also, write a function reset which sets all values back to 0. Try to minimize the number of calls to system's math.random() and optimize the time and space complexity.
+/*
+You are given the number of rows n_rows and number of columns n_cols of a 2D binary matrix where all values are initially 0.
+Write a function flip which chooses a 0 value uniformly at random, changes it to 1, and then returns the position [row.id, col.id] of that value.
+Also, write a function reset which sets all values back to 0. Try to minimize the number of calls to system's math.random() and optimize the time and space complexity.
 
 Note:
 
@@ -28,11 +31,12 @@ The input is two lists: the subroutines called and their arguments. Solution's c
 
 analysis:
 every repeated index map to pick total (last index)
+TC: O(1)
 */
 public class RandomFlipMatrix {
 	int rows, cols, total;
 	Random random;
-	Map<Integer, Integer> map;
+	Map<Integer, Integer> fallback;
 
 	public RandomFlipMatrix(int n_rows, int n_cols) {
 		random = new Random();
@@ -40,20 +44,21 @@ public class RandomFlipMatrix {
 		cols = n_cols;
 		total = rows * cols;
 		// random pick : its fall back value if conflict
-		map = new HashMap<>();
+		fallback = new HashMap<>();
 	}
 
 	public int[] flip() {
 		int rand = random.nextInt(total);
 		total--;
-		int idx = map.getOrDefault(rand, rand);
-		map.put(rand, map.getOrDefault(total, total));
+		int idx = fallback.getOrDefault(rand, rand);
+		// swap - put total at index that we generated
+		fallback.put(rand, fallback.getOrDefault(total, total));
 		return new int[] { idx / cols, idx % cols };
 	}
 
 	public void reset() {
 		total = rows * cols;
-		map.clear();
+		fallback.clear();
 	}
 }
 /**

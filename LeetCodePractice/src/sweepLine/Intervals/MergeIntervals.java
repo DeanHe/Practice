@@ -27,6 +27,8 @@ intervals[i].length == 2
 
 analysis:
 maintain a pre interval, add pre to result by comparing pre with cur
+
+TC: O(NlogN)
 */
 import java.util.*;
 

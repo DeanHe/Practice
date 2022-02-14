@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 /*
-There is a country of n cities numbered from 0 to n - 1 where all the cities are connected by bi-directional roads. The roads are represented as a 2D integer array edges where edges[i] = [xi, yi, timei] denotes a road between cities xi and yi that takes timei minutes to travel. There may be multiple roads of differing travel times connecting the same two cities, but no road connects a city to itself.
+There is a country of n cities numbered from 0 to n - 1 where all the cities are connected by bi-directional roads. The roads are represented as a 2D integer array edges where edges[i] = [xi, yi, timei] denotes a road between cities xi and yi that takes timei minutes to travel.
+ There may be multiple roads of differing travel times connecting the same two cities, but no road connects a city to itself.
 
 Each time you pass through a city, you must pay a passing fee. This is represented as a 0-indexed integer array passingFees of length n where passingFees[j] is the amount of dollars you must pay when you pass through city j.
 
@@ -54,6 +55,8 @@ You need to find the shortest path in the new graph.
 analysis:
 use min heap depends on cost, but dont have a minCost map as some minCost may exceed maxTime
 maintain a minTime map, and in this map, each stop arrival time should only decrease
+
+TC O(V + E log E)
  */
 public class MinimumCostToReachDestinationInTime {
     public int minCost(int maxTime, int[][] edges, int[] passingFees) {
@@ -87,6 +90,47 @@ public class MinimumCostToReachDestinationInTime {
                 int nb_cost = cost + passingFees[nb_node];
                 pq.offer(new int[]{nb_node, nb_cost, nb_time});
             }
+        }
+        return -1;
+    }
+
+    public int minCost2(int maxTime, int[][] edges, int[] passingFees) {
+        int len = passingFees.length;
+        int[] minTime = new int[len];
+        Arrays.fill(minTime, Integer.MAX_VALUE);
+        int[] minCost = new int[len];
+        Arrays.fill(minCost, Integer.MAX_VALUE);
+        Map<Integer, List<int[]>> graph = new HashMap<>();
+        for(int[] e : edges){
+            graph.computeIfAbsent(e[0], x -> new ArrayList<>()).add(new int[]{e[1], e[2]});
+            graph.computeIfAbsent(e[1], x -> new ArrayList<>()).add(new int[]{e[0], e[2]});
+        }
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        // node, total fees till here, time spend till here
+        pq.offer(new int[]{0, passingFees[0], 0});
+        while(!pq.isEmpty()){
+            int[] cur = pq.poll();
+            int node = cur[0];
+            int cost = cur[1];
+            int time = cur[2];
+            if(time > maxTime){
+                continue;
+            }
+            if(cost < minCost[node] && time < minTime[node]){
+                minCost[node] = cost;
+                minTime[node] = time;
+            } else if(time < minTime[node]){
+                minTime[node] = time;
+            }
+            for(int[] nb : graph.getOrDefault(node, new ArrayList<>())){
+                int nb_node = nb[0];
+                int nb_time = time + nb[1];
+                int nb_cost = cost + passingFees[nb_node];
+                pq.offer(new int[]{nb_node, nb_cost, nb_time});
+            }
+        }
+        if(minCost[len - 1] != Integer.MAX_VALUE && minTime[len - 1] <= maxTime){
+            return minCost[len - 1];
         }
         return -1;
     }

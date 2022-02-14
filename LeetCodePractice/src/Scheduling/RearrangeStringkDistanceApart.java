@@ -33,6 +33,8 @@ The same letters are at least distance 2 from each other
 similar:
 task scheduler
 Reorganize string
+
+TC: O(N log N)
 */
 public class RearrangeStringkDistanceApart {
     public String rearrangeString(String str, int k) {

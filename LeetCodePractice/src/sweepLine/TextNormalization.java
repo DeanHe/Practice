@@ -36,16 +36,16 @@ public class TextNormalization {
         for(int t : axis.keySet()){
             Span cur = new Span(pre, t);
             cur.set.addAll(carry.set);
+            if(pre != -1){
+                res.add(cur);
+            }
+            pre = t;
             Tick tick = axis.get(t);
             if(tick.isStart){
                 carry.set.addAll(tick.set);
             } else {
                 carry.set.removeAll(tick.set);
             }
-            if(pre != -1){
-                res.add(cur);
-            }
-            pre = t;
         }
         return res;
     }

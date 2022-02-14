@@ -7,11 +7,11 @@ public class LFUcache {
     private int min = -1;
     private int cap;
     //key : value
-    private HashMap<Integer, Integer> valMap;
+    private Map<Integer, Integer> valMap;
     // key : frequency
-    private HashMap<Integer, Integer> freqMap;
+    private Map<Integer, Integer> freqMap;
     //frequency: list<key>
-    private HashMap<Integer, LinkedHashSet<Integer>> freqLists;
+    private Map<Integer, LinkedHashSet<Integer>> freqLists;
     // @param capacity, an integer
     public LFUcache(int capacity) {
         // Write your code here

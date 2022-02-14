@@ -5,6 +5,9 @@ import java.util.Arrays;
 /*
 Given there is a bottle with 100 whole pills, you eat half pill per day.
 return the probability of given whole and half pills occurrence.
+
+analysis:
+dp[i][j] means probability of having i whole pills and j half pills
  */
 public class EatPillsGoogle {
     double[][] dp = new double[101][101];

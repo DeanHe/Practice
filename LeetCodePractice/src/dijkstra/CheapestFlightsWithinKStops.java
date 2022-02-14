@@ -27,6 +27,7 @@ There will not be any duplicated flights or self cycles.
 
 analysis:
 not typical dijkstra case
+TC O(n^k * k * log(n^k))
 */
 
 public class CheapestFlightsWithinKStops {
@@ -35,10 +36,10 @@ public class CheapestFlightsWithinKStops {
      * @param flights: a 2D array
      * @param src: a integer
      * @param dst: a integer
-     * @param K: a integer represents up to k stops
+     * @param k: a integer represents up to k stops
      * @return: return a integer
      */
-	public int findCheapestPriceDijk(int n, int[][] flights, int src, int dst, int K) {
+	public int findCheapestPriceDijk(int n, int[][] flights, int src, int dst, int k) {
         int[][] graph = new int[n][n];
         for(int[] f : flights){
             graph[f[0]][f[1]] = f[2];
@@ -51,7 +52,7 @@ public class CheapestFlightsWithinKStops {
         	int city = temp[0];
         	int price = temp[1];
             int stop = temp[2];
-            if(stop <= K){
+            if(stop <= k){
             	if(city == dst){
             		return price;
             	}
@@ -83,8 +84,8 @@ public class CheapestFlightsWithinKStops {
                 break;
             }
             int[] costSnapShot = Arrays.copyOf(costs, costs.length);
-            int size = queue.size();
-            for(int i = 0; i < size; i++){
+            int sz = queue.size();
+            for(int i = 0; i < sz; i++){
                 int city = queue.poll();      
         	    for(int nb = 0; nb < graph[city].length; nb++){
         		    if(graph[city][nb] > 0){
@@ -119,6 +120,5 @@ public class CheapestFlightsWithinKStops {
         	}
         }
         return dp[K + 1][dst] == Integer.MAX_VALUE ? -1 : dp[K + 1][dst];
-        
     }
 }

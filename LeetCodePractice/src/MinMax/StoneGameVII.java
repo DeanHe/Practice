@@ -9,10 +9,7 @@ Bob found that he will always lose this game (poor Bob, he always loses), so he 
 
 Given an array of integers stones where stones[i] represents the value of the ith stone from the left, return the difference in Alice and Bob's score if they both play optimally.
 
-
-
 Example 1:
-
 Input: stones = [5,3,1,4,2]
 Output: 6
 Explanation:
@@ -22,14 +19,13 @@ Explanation:
 - Bob removes 1 and gets 4 points. Alice = 18, Bob = 12, stones = [4].
 - Alice removes 4 and gets 0 points. Alice = 18, Bob = 12, stones = [].
 The score difference is 18 - 12 = 6.
-Example 2:
 
+Example 2:
 Input: stones = [7,90,5,1,100,10,10,2]
 Output: 122
 
 
 Constraints:
-
 n == stones.length
 2 <= n <= 1000
 1 <= stones[i] <= 1000

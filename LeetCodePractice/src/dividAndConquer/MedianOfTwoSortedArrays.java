@@ -25,29 +25,29 @@ public class MedianOfTwoSortedArrays {
 		}
 	}
 
-	private double findKth(int[] A, int aStart, int[] B, int bStart, int K) {
+	private double findKth(int[] A, int ai, int[] B, int bi, int K) {
 		// K is count start from 1
-		if (aStart >= aLen) {
-			return B[bStart + K - 1];
+		if (ai >= aLen) {
+			return B[bi + K - 1];
 		}
-		if (bStart >= bLen) {
-			return A[aStart + K - 1];
+		if (bi >= bLen) {
+			return A[ai + K - 1];
 		}
 		if (K == 1) {
-			return Math.min(A[aStart], B[bStart]);
+			return Math.min(A[ai], B[bi]);
 		}
-		if (aStart + K / 2 - 1 < aLen && bStart + K / 2 - 1 < bLen) {
-			int candA = A[aStart + K / 2 - 1];
-			int candB = B[bStart + K / 2 - 1];
+		if (ai + K / 2 - 1 < aLen && bi + K / 2 - 1 < bLen) {
+			int candA = A[ai + K / 2 - 1];
+			int candB = B[bi + K / 2 - 1];
 			if (candA < candB) {
-				return findKth(A, aStart + K / 2, B, bStart, K - K / 2);
+				return findKth(A, ai + K / 2, B, bi, K - K / 2);
 			} else {
-				return findKth(A, aStart, B, bStart + K / 2, K - K / 2);
+				return findKth(A, ai, B, bi + K / 2, K - K / 2);
 			}
-		} else if (aStart + K / 2 - 1 < aLen && bStart + K / 2 - 1 >= bLen) {
-			return findKth(A, aStart + K / 2, B, bStart, K - K / 2);
+		} else if (ai + K / 2 - 1 < aLen && bi + K / 2 - 1 >= bLen) {
+			return findKth(A, ai + K / 2, B, bi, K - K / 2);
 		} else {
-			return findKth(A, aStart, B, bStart + K / 2, K - K / 2);
+			return findKth(A, ai, B, bi + K / 2, K - K / 2);
 		}
 	}
 }
