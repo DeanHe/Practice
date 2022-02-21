@@ -1,9 +1,9 @@
 package math;
 
-/*Write a program to check whether a given number is an ugly number`.
+/*
+Write a program to check whether a given number is an ugly number`.
 Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. For example, 6, 8 are ugly while 14 is not ugly since it includes another prime factor 7.
 
-Example
 Example 1:
 
 Input: num = 8 
@@ -17,7 +17,8 @@ Output: false
 Explanation:
 14=2*7 
 Notice
-Note that 1 is typically treated as an ugly number.*/
+Note that 1 is typically treated as an ugly number.
+*/
 public class UglyNumber {
 	/**
 	 * @param num:

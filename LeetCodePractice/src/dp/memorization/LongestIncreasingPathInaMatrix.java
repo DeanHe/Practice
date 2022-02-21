@@ -44,16 +44,16 @@ public class LongestIncreasingPathInaMatrix {
 		if (matrix == null || matrix.length == 0) {
 			return 0;
 		}
-		int maxPath = 1;
+		int res = 1;
 		rows = matrix.length;
 		cols = matrix[0].length;
 		Integer[][] mem = new Integer[rows][cols]; // mem[r][c] means the maximum path start from {r, c}
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
-				maxPath = Math.max(maxPath, dfs(matrix, mem, r, c));
+				res = Math.max(res, dfs(matrix, mem, r, c));
 			}
 		}
-		return maxPath;
+		return res;
 	}
 
 	private int dfs(int[][] matrix, Integer[][] mem, int r, int c) {

@@ -1,4 +1,5 @@
 package sort;
+
 /*
 Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
 
@@ -19,18 +20,18 @@ bucket sort
 public class Hindex {
     public int hIndex(int[] citations) {
         int n = citations.length;
-        int[] buckets = new int[n+1];
-        for(int c : citations) {
-            if(c >= n) {
+        int[] buckets = new int[n + 1];
+        for (int c : citations) {
+            if (c >= n) {
                 buckets[n]++;
             } else {
                 buckets[c]++;
             }
         }
         int count = 0;
-        for(int i = n; i >= 0; i--) {
+        for (int i = n; i >= 0; i--) {
             count += buckets[i];
-            if(count >= i) {
+            if (count >= i) {
                 return i;
             }
         }

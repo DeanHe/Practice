@@ -24,7 +24,6 @@ Explanation:
 The shortest path without eliminating any obstacle is 10.
 The shortest path with one obstacle elimination at position (3,2) is 6. Such path is (0,0) -> (0,1) -> (0,2) -> (1,2) -> (2,2) -> (3,2) -> (4,2).
 
-
 Example 2:
 Input:
 grid =
@@ -67,7 +66,7 @@ public class ShortestPathInaGridWithObstaclesElimination {
                 int r = cur[0];
                 int c = cur[1];
                 int obs = cur[2];
-                if (cur[0] == rows - 1 && cur[1] == cols - 1) {
+                if (r == rows - 1 && c == cols - 1) {
                     return step;
                 }
                 for (int j = 0; j < dirs.length - 1; j++) {

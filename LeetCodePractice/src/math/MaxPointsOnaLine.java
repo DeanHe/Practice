@@ -20,6 +20,9 @@ Constraints:
 points[i].length == 2
 -10^4 <= xi, yi <= 10^4
 All the points are unique.
+
+analysis:
+map stores x_diff:<y_diff, cnt> for a given point
  */
 public class MaxPointsOnaLine {
     public int maxPoints(int[][] points) {

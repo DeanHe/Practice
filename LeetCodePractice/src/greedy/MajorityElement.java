@@ -24,19 +24,16 @@ public class MajorityElement {
      * @param nums: a list of integers
      * @return: find a  majority number
      */
-    public int majorityNumber(ArrayList<Integer> nums) {
-        // write your code
-        int len = nums.size();
+    public int majorityNumber(int[] nums) {
+        int len = nums.length, res = 0, count = 0;
         if(len == 1){
-            return nums.get(0);
+            return nums[0];
         }
-        int res = 0;
-        int count = 0;
         for(int i = 0; i < len; i++){
             if(count == 0){
-                res = nums.get(i);
+                res = nums[i];
                 count++;
-            } else if(res != nums.get(i)){
+            } else if(res != nums[i]){
                 count--;
             } else {
                 //res equals nums.get(i)

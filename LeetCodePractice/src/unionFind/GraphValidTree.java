@@ -1,6 +1,7 @@
 package unionFind;
 
-/*Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), 
+/*
+Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes),
 write a function to check whether these edges make up a valid tree.
 You can assume that no duplicate edges will appear in edges. Since all edges are undirected, 
 [0, 1] is the same as [1, 0] and thus will not appear together in edges.
@@ -13,8 +14,25 @@ TC O(E)
 */
 
 public class GraphValidTree {
-	// map of node and its parent
 	private int[] parent;
+	public boolean validTree(int n, int[][] edges) {
+		parent = new int[n];
+		for (int i = 0; i < n; i++) {
+			parent[i] = i;
+		}
+		if (n - 1 != edges.length) {
+			return false;
+		}
+
+		for (int i = 0; i < edges.length; i++) {
+			// check if there is cycle
+			if (find(edges[i][0]) == find(edges[i][1])) {
+				return false;
+			}
+			union(edges[i][0], edges[i][1]);
+		}
+		return true;
+	}
 
 	// find the root of x and compress the path
 	int find(int x) {
@@ -37,24 +55,5 @@ public class GraphValidTree {
 		if (root_a != root_b) {
 			parent[root_a] = root_b;
 		}
-	}
-
-	public boolean validTree(int n, int[][] edges) {
-		parent = new int[n];
-		for (int i = 0; i < n; i++) {
-			parent[i] = i;
-		}
-		if (n - 1 != edges.length) {
-			return false;
-		}
-
-		for (int i = 0; i < edges.length; i++) {
-			// check if there is cycle
-			if (find(edges[i][0]) == find(edges[i][1])) {
-				return false;
-			}
-			union(edges[i][0], edges[i][1]);
-		}
-		return true;
 	}
 }

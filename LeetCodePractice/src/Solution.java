@@ -1,3 +1,5 @@
+import designDataStructure.iterators.PairIterator;
+
 import java.util.*;
 
 public class Solution {
@@ -162,6 +164,23 @@ public class Solution {
             }
             return -res;
         }
+    }
+
+    public long coutPairs(int[] nums, int k) {
+        int preCnt = 0;
+        long res = 0;
+        for(int i = 0; i < nums.length; i++){
+            int n = nums[i];
+            if(n % k == 0){
+                if(i > 0){
+                    res += i;
+                }
+                preCnt++;
+            } else {
+                res += preCnt;
+            }
+        }
+        return res;
     }
 }
 

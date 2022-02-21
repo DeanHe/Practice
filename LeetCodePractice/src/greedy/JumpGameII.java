@@ -28,4 +28,20 @@ public class JumpGameII {
         }
         return step;
     }
+
+    public int jump2(int[] A) {
+        if(A == null || A.length == 0){
+            return 0;
+        }
+        int len = A.length, step = 0, maxReach = 0, end = 0, i = 0;
+        while(i < len){
+            while(i <= end){
+                maxReach = Math.max(maxReach, i + A[i]);
+                i++;
+            }
+            step++;
+            end = maxReach;
+        }
+        return step;
+    }
 }

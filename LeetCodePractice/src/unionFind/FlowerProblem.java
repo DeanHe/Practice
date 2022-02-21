@@ -7,6 +7,7 @@ Given an array flowers consists of number from 1 to N. Each number in the array 
 For example, flowers[i] = x means that the unique flower that blooms at day i will be at position x, where i and x will be in the range from 1 to N.
 Given a parameter m, and find the last day of m group flowering at the same time(each group has at least k plots)
 If there isn't such day, output -1.
+
 Example
 input:
 flowerbed = [1,3,2]
@@ -37,8 +38,8 @@ public class FlowerProblem {
             parent[i] = -1;
         }
         this.k = k;
-        for (int i = 0; i < len; i++) {
-            int spot = flowers[i] - 1;
+        for (int day = 0; day < len; day++) {
+            int spot = flowers[day] - 1;
             parent[spot] = spot;
             size[spot] = 1;
             if (k <= 1) {
@@ -51,7 +52,7 @@ public class FlowerProblem {
                 union(spot + 1, spot);
             }
             if (count >= m) {
-                lastDay = i + 1;
+                lastDay = day + 1;
             }
         }
         return lastDay;
@@ -85,6 +86,7 @@ public class FlowerProblem {
                 }
             }
             size[root_b] += size[root_a];
+            size[root_a] = 0;
         }
     }
 }

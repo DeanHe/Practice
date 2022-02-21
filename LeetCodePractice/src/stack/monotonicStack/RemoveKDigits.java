@@ -24,6 +24,11 @@ Input: num = "10", k = 2
 Output: "0"
 Explanation: Remove all the digits from the number and it is left with nothing which is 0.
 
+Constraints:
+1 <= k <= num.length <= 10^5
+num consists of only digits.
+num does not have any leading zeros except for the zero itself.
+
 analysis:
 use a Monotonic increasing stack
 one can simply scan from left to right, and remove the first "peak" digit;
@@ -37,14 +42,13 @@ public class RemoveKDigits {
         }
 
         Stack<Character> stack = new Stack<>();
-        for(int i = 0; i < len; i++){
-        	char cur = num.charAt(i);
+        for(char c : num.toCharArray()){
         	//whenever meet a digit which is less than the previous digit, discard the previous one
-        	while(k > 0 && !stack.isEmpty() && cur < stack.peek()){
+        	while(k > 0 && !stack.isEmpty() && c < stack.peek()){
         		stack.pop();
         		k--;
         	}
-        	stack.push(cur);
+        	stack.push(c);
         }
         while(k > 0){
         	stack.pop();

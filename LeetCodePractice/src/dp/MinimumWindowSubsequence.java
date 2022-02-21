@@ -2,29 +2,32 @@ package dp;
 
 /*
 Given strings S and T, find the minimum (contiguous) substring W of S, so that T is a subsequence of W.
-        If there is no such window in S that covers all characters in T, return the empty string "".
-        If there are multiple such minimum-length windows, return the one with the smallest starting index.
+If there is no such window in S that covers all characters in T, return the empty string "".
+If there are multiple such minimum-length windows, return the one with the smallest starting index.
 
-        Example 1:
-        Input：S="jmeqksfrsdcmsiwvaovztaqenprpvnbstl"，T="u"
-        Output：""
-        Explanation： unable to match
+Example 1:
+Input：S="jmeqksfrsdcmsiwvaovztaqenprpvnbstl"，T="u"
+Output：""
+Explanation： unable to match
 
-        Example 2:
-        Input：S = "abcdebdde"， T = "bde"
-        Output："bcde"
-        Explanation："bcde" is the answer and "deb" is not a smaller window because the elements of T in the window must occur in order.
-        Notice
-        All the strings in the input will only contain lowercase letters.
-        The length of S will be in the range [1, 20000].
-        The length of T will be in the range [1, 100].
+Example 2:
+Input：S = "abcdebdde"， T = "bde"
+Output："bcde"
+Explanation："bcde" is the answer and "deb" is not a smaller window because the elements of T in the window must occur in order.
+Notice
+All the strings in the input will only contain lowercase letters.
+The length of S will be in the range [1, 20000].
+The length of T will be in the range [1, 100].
 
-        solution:
-        different from MinimumWindowSubstring by requiring the T sequence match
+solution:
+different from MinimumWindowSubstring by requiring the T sequence match
 
-        mem[i + 1][j + 1] = k, i为S的index，j为T的index，k为以[0,i]，[0,j]这2段substring最小的起点在s上
-        if s[j] == t[i], mem[i][j] hen can reuse mem[i - 1][j - 1] as start position
-        if s[j] ！= t[i]，then can reuse mem[i][j - 1]
+mem[i + 1][j + 1] = k, i为S的index，j为T的index，k为以[0,i]，[0,j]这2段substring最小的起点在s上
+if s[j] == t[i], mem[i][j] hen can reuse mem[i - 1][j - 1] as start position
+if s[j] ！= t[i]，then can reuse mem[i][j - 1]
+
+analysis:
+TC O(S*T)
 */
 public class MinimumWindowSubsequence {
     /**

@@ -5,23 +5,20 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
-        Give you an integer array (index from 0 to n-1, where n is the size of this array,
-        value from 0 to 10000) and an query list.
-        For each query, give you an integer, return the number of element in the array that are smaller than the given integer.
-        We suggest you finish problem Segment Tree Build and Segment Tree Query II first.
+Give you an integer array (index from 0 to n-1, where n is the size of this array, value from 0 to 10000) and an query list.
+For each query, give you an integer, return the number of element in the array that are smaller than the given integer.
+We suggest you finish problem Segment Tree Build and Segment Tree Query II first.
 
-        Have you met this question in a real interview?
+Have you met this question in a real interview?
+Example 1:
+Input: array =[1,2,7,8,5] queries =[1,8,5]
+Output:[0,4,2]
 
-        Example
-        Example 1:
-        Input: array =[1,2,7,8,5] queries =[1,8,5]
-        Output:[0,4,2]
+Example 2:
+Input: array =[3,4,5,8] queries =[2,4]
+Output:[0,1]
 
-        Example 2:
-        Input: array =[3,4,5,8] queries =[2,4]
-        Output:[0,1]
-
-        analysis: BIT both updates and query TC O(logN)
+analysis: BIT both updates and query TC O(logN)
 */
 public class CountOfSmallerNumber {
     int[] bit;

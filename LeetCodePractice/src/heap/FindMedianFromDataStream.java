@@ -39,6 +39,8 @@ In this case, we need an integer array of length 100 and a hashmap for these num
 
 analysis:
 first add to maxHeap (bottom one) then move from maxHeap to minHeap, then check
+making sure bottom one size >= top one
+
 TC O(log n) add, O(1) find
 */
 public class FindMedianFromDataStream {

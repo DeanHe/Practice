@@ -27,16 +27,17 @@ answer: use circular buffer
  */
 public class HitCounter {
     int[] last, hits;
+    final int FIVE_MINUTES = 300;
     /** Initialize your data structure here. */
     public HitCounter() {
-        last = new int[300];
-        hits = new int[300];
+        last = new int[FIVE_MINUTES];
+        hits = new int[FIVE_MINUTES];
     }
 
     /** Record a hit.
      @param timestamp - The current timestamp (in seconds granularity). */
     public void hit(int timestamp) {
-        int i = timestamp % 300;
+        int i = timestamp % FIVE_MINUTES;
         if(last[i] != timestamp){
             last[i] = timestamp;
             hits[i] = 1;
@@ -50,7 +51,7 @@ public class HitCounter {
     public int getHits(int timestamp) {
         int res = 0;
         for(int i = 0; i < hits.length; i++){
-            if(last[i] > timestamp - 300){
+            if(last[i] > timestamp - FIVE_MINUTES){
                 res += hits[i];
             }
         }

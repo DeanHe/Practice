@@ -18,7 +18,6 @@ Employee 1 has importance value 5, and he has two dir subordinates: employee 2 a
  
 
 Note:
-
 One employee has at most one dir leader and may have several subordinates.
 The maximum number of employees won't exceed 2000.
 */

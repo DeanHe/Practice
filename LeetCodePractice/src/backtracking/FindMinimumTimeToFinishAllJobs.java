@@ -39,6 +39,7 @@ maintain sum array to track each worker's time
 3 if any sum >= res, exit
 
 similar to partition-to-k-equal-sum-subsets
+TC O(k^n)
  */
 public class FindMinimumTimeToFinishAllJobs {
     int res = Integer.MAX_VALUE;

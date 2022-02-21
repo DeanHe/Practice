@@ -10,8 +10,6 @@ A confusing number is a number that when rotated 180 degrees becomes a different
 
 Given a positive integer N, return the number of confusing numbers between 1 and N inclusive.
 
-
-
 Example 1:
 
 Input: 20
@@ -31,9 +29,7 @@ Output: 19
 Explanation:
 The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].
 
-
 Note:
-
 1 <= N <= 10^9
  */
 public class ConfusingNumberII {
@@ -63,11 +59,11 @@ public class ConfusingNumberII {
     }
 
     private boolean isConfusingNumber(Map<Integer, Integer> map, long n) {
-        long src = n, des = 0;
+        long src = n, rev = 0;
         while(n > 0){
-            des = des * 10 + map.get((int)(n % 10));
+            rev = rev * 10 + map.get((int)(n % 10));
         }
-        return des != src;
+        return rev != src;
     }
 }
 

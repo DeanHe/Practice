@@ -32,7 +32,7 @@ public class LoggerRateLimiter {
     /** Initialize your data structure here. */
 
     // last message print time
-    private HashMap<String, Integer> messagePrintTime = new HashMap<String, Integer>();
+    private HashMap<String, Integer> messagePrintTime = new HashMap<>();
 
     public LoggerRateLimiter() {
     }

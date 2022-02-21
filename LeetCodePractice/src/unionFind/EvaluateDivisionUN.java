@@ -41,15 +41,15 @@ public class EvaluateDivisionUN {
 			String nu = queries.get(i).get(0);
 			String de = queries.get(i).get(1);
 			if (!parent.containsKey(nu) || !parent.containsKey(de)) {
+				String startRoot = findRoot(nu);
+				String endRoot = findRoot(de);
+				if (!startRoot.equals(endRoot)) {
+					res[i] = -1.0;
+				} else {
+					res[i] = dist.get(nu) / dist.get(de);
+				}
+			}	else {
 				res[i] = -1.0;
-				continue;
-			}
-			String startRoot = findRoot(nu);
-			String endRoot = findRoot(de);
-			if (!startRoot.equals(endRoot)) {
-				res[i] = -1.0;
-			} else {
-				res[i] = dist.get(nu) / dist.get(de);
 			}
 		}
 		return res;

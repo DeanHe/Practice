@@ -43,8 +43,8 @@ dp[i][j] represents if s3 is interleaving at (i+j) th position when s1 is at ith
  */
 public class InterleavingString {
     public boolean isInterleave(String s1, String s2, String s3) {
-        int l1 = s1.length(), l2 = s2.length();
-        if (l1 + l2 != s3.length()) {
+        int l1 = s1.length(), l2 = s2.length(), l3 = s3.length();
+        if (l1 + l2 != l3) {
             return false;
         }
         boolean[][] dp = new boolean[l1 + 1][l2 + 1];

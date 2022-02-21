@@ -23,7 +23,6 @@ When we erase the brick at (1, 0), the brick at (1, 1) has already disappeared d
  
 
 Note:
-
 The number of rows and columns in the grid will be in the range [1, 200].
 The number of erasures will not exceed the area of the grid.
 It is guaranteed that each erasure will be different from any other erasure, and located inside the grid.
@@ -45,9 +44,9 @@ public class BricksFallingWhenHit {
         parent = new int[rows * cols + 1];
         size = new int[rows * cols + 1];
         int[] res = new int[hits.length];
-        Arrays.fill(size, 1);
         for (int i = 0; i < parent.length; i++) {
             parent[i] = i;
+            size[i] = 1;
         }
         // Mark cells to hit as 2.
         for (int[] hit : hits) {
