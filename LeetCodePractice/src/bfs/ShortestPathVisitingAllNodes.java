@@ -20,43 +20,38 @@ Explanation: One possible path is [0,1,4,2,3]
 Note:
 1 <= graph.length <= 12
 0 <= graph[i].length < graph.length
+
+analysis:
+bfs
+DP dist[i][state] means the shortest steps to reach state with last node in i
+TC: O(N * 2^N)
 */
 public class ShortestPathVisitingAllNodes {
 	public int shortestPathLength(int[][] graph) {
 		int N = graph.length;
-		int[][] dist = new int[N][1 << N];
-		for (int[] row : dist) {
-			Arrays.fill(row, Integer.MAX_VALUE);
-		}
-		Queue<State> queue = new LinkedList<>();
+		Integer[][] dist = new Integer[N][1 << N];
+		Queue<int[]> queue = new LinkedList<>();
 		for (int i = 0; i < N; i++) {
-			queue.offer(new State(i, 1 << i));
+			queue.offer(new int[]{i, 1 << i});
 			dist[i][1 << i] = 0;
 		}
 		while (!queue.isEmpty()) {
-			State state = queue.poll();
-			int step = dist[state.cur][state.visited];
-			if (state.visited == (1 << N) - 1) {
+			int[] cur = queue.poll();
+			int node = cur[0];
+			int state = cur[1];
+			int step = dist[cur[0]][state];
+			if (state == (1 << N) - 1) {
 				return step;
 			}
-			int[] neighbors = graph[state.cur];
+			int[] neighbors = graph[node];
 			for (int nb : neighbors) {
-				int nb_visited = state.visited | 1 << nb;
-				if (step + 1 < dist[nb][nb_visited]) {
-					dist[nb][nb_visited] = step + 1;
-					queue.offer(new State(nb, nb_visited));
+				int nb_state = state| 1 << nb;
+				if (dist[nb][nb_state] == null || step + 1 < dist[nb][nb_state]) {
+					dist[nb][nb_state] = step + 1;
+					queue.offer(new int[]{nb, nb_state});
 				}
 			}
 		}
 		throw null;
-	}
-
-	private class State {
-		int cur, visited;
-
-		public State(int c, int v) {
-			cur = c;
-			visited = v;
-		}
 	}
 }

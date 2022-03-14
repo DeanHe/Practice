@@ -40,7 +40,7 @@ public class EvaluateDivisionUN {
 		for (int i = 0; i < queries.size(); i++) {
 			String nu = queries.get(i).get(0);
 			String de = queries.get(i).get(1);
-			if (!parent.containsKey(nu) || !parent.containsKey(de)) {
+			if (parent.containsKey(nu) && parent.containsKey(de)) {
 				String startRoot = findRoot(nu);
 				String endRoot = findRoot(de);
 				if (!startRoot.equals(endRoot)) {

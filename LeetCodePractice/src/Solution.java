@@ -182,6 +182,39 @@ public class Solution {
         }
         return res;
     }
+
+    public int prefixCount(String[] words, String pref) {
+        int res = 0;
+        for(String w : words){
+            if(w.startsWith(pref)){
+                res++;
+            }
+        }
+        return res;
+    }
+
+    public long minimalKSum(int[] nums, int k) {
+        Arrays.sort(nums);
+        long res = 0;
+        int pre = 1;
+        for(int n : nums){
+            if(n == pre){
+                continue;
+            }
+            int cnt = n - pre - 1;
+            if(k > cnt){
+                res += (pre + n) * cnt / 2;
+                k -= cnt;
+                pre = n;
+            } else {
+                break;
+            }
+        }
+        if(k > 0){
+            res += (pre + pre + k + 1) * k / 2;
+        }
+        return res;
+    }
 }
 
 

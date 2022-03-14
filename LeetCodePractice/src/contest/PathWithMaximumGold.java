@@ -39,6 +39,10 @@ Constraints:
 1 <= grid.length, grid[i].length <= 15
 0 <= grid[i][j] <= 100
 There are at most 25 cells containing gold.
+
+analysis:
+backtracking
+TC: O(3^k), where k <= 25 is the number of cells that have gold.
 */
 public class PathWithMaximumGold {
 

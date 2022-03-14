@@ -1,6 +1,7 @@
 package OOD;
 
 /*
+Token Bucket
 usage:
 
 if(rateLimiter.tryAcquire(1)){
@@ -26,7 +27,7 @@ public class RateLimiter {
     }
 
     public synchronized boolean tryAcquire(int permits){
-        refill();
+        refillToken();
         if(currentBucketSize > permits){
             currentBucketSize -= permits;
             return true;
@@ -34,7 +35,7 @@ public class RateLimiter {
         return false;
     }
 
-    private void refill(){
+    private void refillToken(){
         long now = System.nanoTime();
         double permitsToAdd = (now - lastRefillTimestamp) * permitsPerSecond / 1e9;
         currentBucketSize = Math.min(maxBucketSize, currentBucketSize + permitsToAdd);

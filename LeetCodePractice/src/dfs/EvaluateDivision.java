@@ -60,8 +60,9 @@ public class EvaluateDivision {
         visited.add(start);
         Map<String, Double> neighbors = graph.get(start);
         double res = -1.0;
-        for (String nb : neighbors.keySet()) {
-            double multiple = graph.get(start).get(nb);
+        for (Map.Entry<String, Double> entry : neighbors.entrySet()) {
+            String nb = entry.getKey();
+            double multiple = entry.getValue();
             double next = dfs(nb, end, graph, visited);
             if (next != -1.0) {
                 res = multiple * next;

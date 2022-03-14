@@ -38,18 +38,18 @@ mainly to speed up for follow up question
  */
 public class IsSubsequence {
     public boolean isSubsequence(String s, String t) {
-        Map<Character, List<Integer>> map = new HashMap<>();
+        Map<Character, List<Integer>> charToIdx = new HashMap<>();
         for(int i = 0; i < t.length(); i++){
             char c = t.charAt(i);
-            map.computeIfAbsent(c, x -> new ArrayList<>()).add(i);
+            charToIdx.computeIfAbsent(c, x -> new ArrayList<>()).add(i);
         }
         int prev = -1;
         for(int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
-            if(!map.containsKey(c)){
+            if(!charToIdx.containsKey(c)){
                 return false;
             }
-            List<Integer> ls = map.get(c);
+            List<Integer> ls = charToIdx.get(c);
             prev = binarySearch(ls, prev);
             if(prev == -1){
                 return false;

@@ -26,53 +26,54 @@ Notice
 You may assume the interval's end point is always bigger than its start point.
 Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
 
+analysis:
+The heuristic is: always pick the interval with the earliest end time.
 Actually, the problem is the same as "Given a collection of intervals, 
 find the maximum number of intervals that are non-overlapping." (the classic greedy problem: Interval Scheduling).
 With the solution to that problem, guess how do we get the minimum number of intervals to remove? : )
+
 */
 public class NonOverlappingIntervals {
-	
-	/**
+
+    /**
      * @param intervals: a collection of intervals
      * @return: the minimum number of intervals you need to remove
      */
     public int eraseOverlapIntervals(int[][] intervals) {
-    	if(intervals.length == 0){
-    		return 0;
-    	}
-		int nonOverlapCount = 1;
+        int overlap = 0;
         Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
-        int preEnd = intervals[0][1];
-        for(int[] cur : intervals){
-        	if(preEnd <= cur[0]){
-        		nonOverlapCount++;
-        		preEnd = cur[1];
-        	}
+        int preEnd = Integer.MIN_VALUE;
+        for (int[] cur : intervals) {
+            if (cur[0] < preEnd) {
+                overlap++;
+            } else {
+                preEnd = cur[1];
+            }
         }
-		return intervals.length - nonOverlapCount;
+        return overlap;
     }
 
-	public int eraseOverlapIntervals2(int[][] intervals) {
-		if(intervals.length == 0){
-			return 0;
-		}
-		int nonOverlapCount = 1;
-		Arrays.sort(intervals, (a, b) -> {
-			if(a[0] != b[0]){
-				return a[0] - b[0];
-			} else {
-				return a[1] - b[1];
-			}
-		});
-		int minEnd = intervals[0][1];
-		for(int[] cur : intervals){
-			if(minEnd <= cur[0]){
-				nonOverlapCount++;
-				minEnd = cur[1];
-			} else {
-				minEnd = Math.min(minEnd, cur[1]);
-			}
-		}
-		return intervals.length - nonOverlapCount;
-	}
+    public int eraseOverlapIntervals2(int[][] intervals) {
+        if (intervals.length == 0) {
+            return 0;
+        }
+        int nonOverlapCount = 1;
+        Arrays.sort(intervals, (a, b) -> {
+            if (a[0] != b[0]) {
+                return a[0] - b[0];
+            } else {
+                return a[1] - b[1];
+            }
+        });
+        int minEnd = intervals[0][1];
+        for (int[] cur : intervals) {
+            if (minEnd <= cur[0]) {
+                nonOverlapCount++;
+                minEnd = cur[1];
+            } else {
+                minEnd = Math.min(minEnd, cur[1]);
+            }
+        }
+        return intervals.length - nonOverlapCount;
+    }
 }

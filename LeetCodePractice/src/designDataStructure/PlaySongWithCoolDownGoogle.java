@@ -8,6 +8,7 @@ Implement the class:
 - PlayList(int[] songs, int k): initialize the playlist.
 - GetSong(): provide a song that is not played in the recent k times.
 
+require GetSong in O(1) time complexity
 analysis:
 maintain pointer p which loops at right side of songs: [n - k : n - 1]
  */
