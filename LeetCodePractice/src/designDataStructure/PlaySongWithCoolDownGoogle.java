@@ -13,20 +13,20 @@ analysis:
 maintain pointer p which loops at right side of songs: [n - k : n - 1]
  */
 public class PlaySongWithCoolDownGoogle {
-    int len, k, p;
+    int len, k, p, bound;
     Random rand;
     int[] songs;
     public void playList(int[] songs, int k) {
         len = songs.length;
         this.k = k;
         p = len - 1;
+        bound = len - k;
         this.songs = songs;
         rand = new Random();
         shuffle(songs);
     }
 
     public int getSong() {
-        int bound = len - k;
         int pick = rand.nextInt(bound);
         int song = songs[pick];
         swap(pick, p--);
