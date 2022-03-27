@@ -1,8 +1,4 @@
-package contest;
-
-import java.util.Arrays;
-
-/*
+"""
 The numeric value of a lowercase character is defined as its position (1-indexed) in the alphabet, so the numeric value of a is 1, the numeric value of b is 2, the numeric value of c is 3, and so on.
 
 The numeric value of a string consisting of lowercase characters is defined as the sum of its characters' numeric values. For example, the numeric value of the string "abe" is equal to 1 + 2 + 5 = 8.
@@ -33,19 +29,16 @@ analysis:
 maximize the 'a' at beginning and 'z' at end
 time complexity: O(n)
 space complexity: O(1)
- */
-public class SmallestStringWithAGivenNumericValue {
-    public String getSmallestString(int n, int k) {
-        char[] arr = new char[n];
-        Arrays.fill(arr, 'a');
-        k -= n;
-        int i = n - 1;
-        while(k > 0){
-            int val = Math.min(k, 25);
-            k -= val;
-            arr[i] = (char)(arr[i] + val);
-            i--;
-        }
-        return String.valueOf(arr);
-    }
-}
+"""
+
+
+class SmallestStringWithAGivenNumericValue:
+    def getSmallestString(self, n: int, k: int) -> str:
+        res, i = ['a'] * n, n - 1
+        k -= n
+        while k > 0:
+            val = min(k, 25)
+            res[i] = chr(ord(res[i]) + val)
+            k -= val
+            i -= 1
+        return ''.join(res)

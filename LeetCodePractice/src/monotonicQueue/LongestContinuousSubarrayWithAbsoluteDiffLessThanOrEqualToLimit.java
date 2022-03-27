@@ -36,9 +36,8 @@ Constraints:
 0 <= limit <= 10^9
 
 hint:
-Use a sliding window approach keeping the maximum and minimum value using a data structure like a multiset from STL in C++.
-
-More specifically, use the two pointer technique, moving the right pointer as far as possible to the right until the subarray is not valid (maxValue - minValue > limit),
+1 Use a sliding window approach keeping the maximum and minimum value using a data structure like a multiset from STL in C++.
+2 More specifically, use the two pointer technique, moving the right pointer as far as possible to the right until the subarray is not valid (maxValue - minValue > limit),
 then moving the left pointer until the subarray is valid again (maxValue - minValue <= limit). Keep repeating this process.
 
 similar:
@@ -47,6 +46,8 @@ ConstrainedSubsequenceSum
 analysis:
 maintain monotonic increasing and decreasing queue for easily find max element and min element between window [l, r]
 need to satisfy max - min <= limit for the window [l, r]
+
+TC: O(N)
 */
 
 import java.util.ArrayDeque;

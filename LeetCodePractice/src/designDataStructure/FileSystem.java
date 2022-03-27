@@ -49,28 +49,29 @@ public class FileSystem {
 
     File root = null;
 
-    public FileSystem(){
+    public FileSystem() {
         root = new File();
     }
+
     public List<String> ls(String path) {
         String[] dirs = path.split("/");
         File cur = root;
         List<String> res = new ArrayList<>();
         String filename = "";
-        for(String dir : dirs){
-            if(dir.length() == 0){
+        for (String dir : dirs) {
+            if (dir.length() == 0) {
                 continue;
             }
-            if(!cur.children.containsKey(dir)){
+            if (!cur.children.containsKey(dir)) {
                 return res;
             }
             cur = cur.children.get(dir);
             filename = dir;
         }
-        if(cur.isFile){
+        if (cur.isFile) {
             res.add(filename);
         } else {
-            for(String dir : cur.children.keySet()){
+            for (String dir : cur.children.keySet()) {
                 res.add(dir);
             }
         }
@@ -81,11 +82,11 @@ public class FileSystem {
     public void mkdir(String path) {
         String[] dirs = path.split("/");
         File cur = root;
-        for(String dir : dirs){
-            if(dir.length() == 0){
+        for (String dir : dirs) {
+            if (dir.length() == 0) {
                 continue;
             }
-            if(!cur.children.containsKey(dir)){
+            if (!cur.children.containsKey(dir)) {
                 File f = new File();
                 cur.children.put(dir, f);
             }
@@ -96,11 +97,11 @@ public class FileSystem {
     public void addContentToFile(String filePath, String content) {
         String[] dirs = filePath.split("/");
         File cur = root;
-        for(String dir : dirs){
-            if(dir.length() == 0){
+        for (String dir : dirs) {
+            if (dir.length() == 0) {
                 continue;
             }
-            if(!cur.children.containsKey(dir)){
+            if (!cur.children.containsKey(dir)) {
                 File f = new File();
                 cur.children.put(dir, f);
             }
@@ -113,11 +114,11 @@ public class FileSystem {
     public String readContentFromFile(String filePath) {
         String[] dirs = filePath.split("/");
         File cur = root;
-        for(String dir : dirs){
-            if(dir.length() == 0){
+        for (String dir : dirs) {
+            if (dir.length() == 0) {
                 continue;
             }
-            if(!cur.children.containsKey(dir)){
+            if (!cur.children.containsKey(dir)) {
                 File f = new File();
                 cur.children.put(dir, f);
             }

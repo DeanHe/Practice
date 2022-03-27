@@ -2,7 +2,8 @@ package window;
 
 import java.util.PriorityQueue;
 
-/*Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.
+/*
+Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.
 
 Examples: 
 [2,3,4] , the median is 3
@@ -26,6 +27,15 @@ Therefore, return the median sliding window as [1,-1,-1,3,5,6].
 
 Note: 
 You may assume k is always valid, ie: k is always smaller than input array's size for non-empty array.
+
+Constraints:
+1 <= k <= nums.length <= 10^5
+-2^31 <= nums[i] <= 2^31 - 1
+
+hint:
+1 The simplest of solutions comes from the basic idea of finding the median given a set of numbers. We know that by definition, a median is the center element (or an average of the two center elements). Given an unsorted list of numbers, how do we find the median element? If you know the answer to this question, can we extend this idea to every sliding window that we come across in the array?
+2 Is there a better way to do what we are doing in the above hint? Don't you think there is duplication of calculation being done there? Is there some sort of optimization that we can do to achieve the same result? This approach is merely a modification of the basic approach except that it simply reduces duplication of calculations once done.
+3 The third line of thought is also based on this same idea but achieving the result in a different way. We obviously need the window to be sorted for us to be able to find the median. Is there a data-structure out there that we can use (in one or more quantities) to obtain the median element extremely fast, say O(1) time while having the ability to perform the other operations fairly efficiently as well?
 
 analysis:
 remember add to the lower heap(maxHeap first). then pass one to the upper heap(minHeap),
