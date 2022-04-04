@@ -24,6 +24,12 @@ Input:
   [9,10,11,12]
 ]
 Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
+Constraints:
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 10
+-100 <= matrix[i][j] <= 100
 */
 public class SpiralMatrix {
 	public List<Integer> spiralOrder(int[][] matrix) {
@@ -39,12 +45,10 @@ public class SpiralMatrix {
         		for(int c = c1; c <= c2; c++){
         			res.add(matrix[r1][c]);
         		}
-        		break;
         	} else if(c1 == c2){
         		for(int r = r1; r <= r2; r++){
         			res.add(matrix[r][c1]);
         		}
-        		break;
         	} else {
         		// process a circle
         		// on top - moving right

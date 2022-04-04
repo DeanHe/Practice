@@ -9,8 +9,18 @@ public class Solution {
         Solution sol = new Solution();
         String[] input1 = {"3234.html", "xys.html", "7hsaa.html"};
         String[] input2 = {"3234.html", "sdhsfjdsh.html", "xys.html", "7hsaa.html"};
-        System.out.println(sol.longestContinuousCommonHistory(input1, input2));
-        //System.out.println(res);
+        //String command = "git log -1 5710e3dc6d654ed49d8012c318d9b21542e09487 --pretty='format:%s %n %h, %an, %ad'";
+        String command = "git commit -am 'abcd efsg'";
+        int first = command.indexOf("'");
+        String[] res = command.substring(0, first).split(" ");
+        if (first > 0) {
+            if (command.charAt(first - 1) == ' ') {
+                res = Arrays.copyOf(res, res.length + 1);
+            }
+            res[res.length - 1] += command.substring(first);
+        }
+        //System.out.println(sol.longestContinuousCommonHistory(input1, input2));
+        System.out.println(Arrays.toString(res));
         /*
         int[][] events = {{1, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {0, 1, 0, 1, 1}};
         LargestPerimeterIsland largestIsland = new LargestPerimeterIsland();

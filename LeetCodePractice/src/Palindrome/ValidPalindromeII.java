@@ -18,11 +18,11 @@ public class ValidPalindromeII {
         char[] arr = s.toCharArray();
         int len = arr.length, l = 0, r = len - 1;
         while(l < r){
-            if(arr[l] != arr[r]){
-                return isPalindromeRange(arr, l + 1, r) || isPalindromeRange(arr, l, r - 1);
-            } else {
+            if(arr[l] == arr[r]){
                 l++;
                 r--;
+            } else {
+                return isPalindromeRange(arr, l + 1, r) || isPalindromeRange(arr, l, r - 1);
             }
         }
         return true;

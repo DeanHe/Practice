@@ -47,7 +47,7 @@ class SplitArrayLargestSum(object):
         """
         s, e, = max(nums), sum(nums)
         while s + 1 < e:
-            mid = s + (e - s) / 2
+            mid = s + (e - s) // 2
             if self.countValidGroups(nums, mid) <= m:
                 e = mid
             else:
