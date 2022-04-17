@@ -41,16 +41,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class TopKFrequentWords {
-    private class Pair {
-        String word;
-        int freq;
-
-        Pair(String word, int freq) {
-            this.word = word;
-            this.freq = freq;
-        }
-    }
-
     /**
      * @param words an array of string
      * @param k     an integer
@@ -65,22 +55,21 @@ public class TopKFrequentWords {
         for (String word : words) {
             freq.put(word, freq.getOrDefault(word, 0) + 1);
         }
-        PriorityQueue<Pair> Q = new PriorityQueue<>(k, (a, b) -> {
-            if (a.freq != b.freq) {
-                return a.freq - b.freq;
+        PriorityQueue<String> pq = new PriorityQueue<>(k, (a, b) -> {
+            if (freq.get(a) != freq.get(b)) {
+                return freq.get(a) - freq.get(b);
             } else {
-                return b.word.compareTo(a.word);
+                return b.compareTo(a);
             }
         });
         for (String word : freq.keySet()) {
-            Pair newPair = new Pair(word, freq.get(word));
-            Q.add(newPair);
-            if (Q.size() > k) {
-                Q.poll();
+            pq.add(word);
+            if (pq.size() > k) {
+                pq.poll();
             }
         }
         for (int i = 0; i < k; i++) {
-            res.add(Q.poll().word);
+            res.add(pq.poll());
         }
         Collections.reverse(res);
         return res;

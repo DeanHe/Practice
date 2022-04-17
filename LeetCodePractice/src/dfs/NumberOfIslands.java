@@ -91,14 +91,13 @@ public class NumberOfIslands {
 		for (int r = 0; r < rows; r++) {
 			for (int c = 0; c < cols; c++) {
 				if (grid[r][c]) {
-					int temp1 = r * cols + c;
-					int temp2 = 0;
+					int id1 = r * cols + c;
 					for(int i = 0; i < direct.length - 1; i++){
 						int nb_r = r + direct[i];
 						int nb_c = c + direct[i + 1];
 						if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols && grid[nb_r][nb_c]){
-							temp2 = nb_r * cols + nb_c;
-							unionFind.union(temp1, temp2);
+							int id2 = nb_r * cols + nb_c;
+							unionFind.union(id1, id2);
 						}
 					}
 				}

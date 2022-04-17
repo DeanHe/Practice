@@ -42,7 +42,7 @@ public class InMemoryFileSystem {
             this.isDir = isDir;
             this.name = name;
             children = new ArrayList<>();
-            content = new String("");
+            content = "";
         }
     }
 
@@ -73,8 +73,8 @@ public class InMemoryFileSystem {
 
     public void addContentToFile(String filePath, String content) {
         File f = getAndCreate(filePath, false);
-        String contentnew = new String(f.content + content);
-        f.content = contentnew;
+        String str = f.content + content;
+        f.content = str;
     }
 
     public String readContentFromFile(String filePath) {
