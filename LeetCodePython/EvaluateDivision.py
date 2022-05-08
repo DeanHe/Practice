@@ -40,7 +40,8 @@ queries[i].length == 2
 Ai, Bi, Cj, Dj consist of lower case English letters and digits.
 """
 from collections import deque
-class EvaluateDivision(object):
+class EvaluateDivision:
+
     def calcEquation(self, equations, values, queries):
         """
         :type equations: List[List[str]]

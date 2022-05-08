@@ -20,7 +20,7 @@ Output: 2
 
 Constraints:
 
-1 <= s.length <= 5 * 104
+1 <= s.length <= 5 * 10^4
 1 <= words.length <= 5000
 1 <= words[i].length <= 50
 s and words[i] consist of only lowercase English letters.

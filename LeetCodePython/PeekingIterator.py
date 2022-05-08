@@ -1,8 +1,4 @@
-package designDataStructure.iterators;
-
-import java.util.Iterator;
-
-/*
+"""
 Design an iterator that supports the peek operation on an existing iterator in addition to the hasNext and the next operations.
 
 Implement the PeekingIterator class:
@@ -44,41 +40,55 @@ hint:
 2 Is one variable sufficient? Why or why not?
 3 Test your design with call order of peek() before next() vs next() before peek().
 4 For a clean implementation, check out Google's guava library source code.
- */
-public class PeekingIterator implements Iterator<Integer> {
-    Iterator<Integer> it;
-    Integer cur;
+"""
 
-    public PeekingIterator(Iterator<Integer> iterator) {
-        // initialize any member here.
-        it = iterator;
-        if (it.hasNext()) {
-            cur = it.next();
-        } else {
-            cur = null;
-        }
-    }
 
-    // Returns the next element in the iteration without advancing the iterator.
-    public Integer peek() {
-        return cur;
-    }
+# Below is the interface for Iterator, which is already defined for you.
+#
+class Iterator:
 
-    // hasNext() and next() should behave the same as in the Iterator interface.
-    // Override them if needed.
-    @Override
-    public Integer next() {
-        Integer res = cur;
-        if (it.hasNext()) {
-            cur = it.next();
-        } else {
-            cur = null;
-        }
-        return res;
-    }
+    def __init__(self, nums):
+        return
 
-    @Override
-    public boolean hasNext() {
-        return cur != null;
-    }
-}
+    def hasNext(self):
+        return
+
+    def next(self):
+        return
+
+
+class PeekingIterator:
+    def __init__(self, iterator):
+        """
+        Initialize your data structure here.
+        :type iterator: Iterator
+        """
+        self.iter = iterator
+        self.cur = self.iter.next() if self.iter.hasNext() else None
+
+    def peek(self):
+        """
+        Returns the next element in the iteration without advancing the iterator.
+        :rtype: int
+        """
+        return self.cur
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        res = self.cur
+        self.cur = self.iter.next() if self.iter.hasNext() else None
+        return res
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        return self.cur is not None
+
+# Your PeekingIterator object will be instantiated and called as such:
+# iter = PeekingIterator(Iterator(nums))
+# while iter.hasNext():
+#     val = iter.peek()   # Get the next element but not advance the iterator.
+#     iter.next()         # Should return the same value as [val].

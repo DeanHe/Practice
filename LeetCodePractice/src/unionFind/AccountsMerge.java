@@ -19,6 +19,9 @@ Note:
 The length of accounts will be in the range [1, 1000].
 The length of accounts[i] will be in the range [1, 10].
 The length of accounts[i][j] will be in the range [1, 30].
+
+hint:
+1 For every pair of emails in the same account, draw an edge between those emails. The problem is about enumerating the connected components of this graph.
 */
 
 import java.util.*;

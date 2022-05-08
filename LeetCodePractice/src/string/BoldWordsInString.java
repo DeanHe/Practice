@@ -1,5 +1,6 @@
 package string;
-/*Given a set of keywords words and a string S, make all appearances of all keywords in S bold. Any letters between <b> and </b> tags become bold.
+/*
+Given a set of keywords words and a string S, make all appearances of all keywords in S bold. Any letters between <b> and </b> tags become bold.
 
 The returned string should use the least number of tags possible, and of course the tags should form a valid combination.
 
@@ -10,7 +11,8 @@ Note:
 words has length in range [0, 50].
 words[i] has length in range [1, 10].
 S has length in range [0, 500].
-All characters in words[i] and S are lowercase letters.*/
+All characters in words[i] and S are lowercase letters.
+*/
 public class BoldWordsInString {
 	public String boldWords(String[] words, String s) {
 		int len = s.length();

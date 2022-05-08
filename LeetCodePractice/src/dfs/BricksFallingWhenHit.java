@@ -20,10 +20,8 @@ hits = [[1,1],[1,0]]
 Output: [0,0]
 Explanation: 
 When we erase the brick at (1, 0), the brick at (1, 1) has already disappeared due to the last move. So each erasure will cause no bricks dropping.  Note that the erased brick (1, 0) will not be counted as a dropped brick.
- 
 
 Note:
-
 The number of rows and columns in the grid will be in the range [1, 200].
 The number of erasures will not exceed the area of the grid.
 It is guaranteed that each erasure will be different from any other erasure, and located inside the grid.
@@ -38,7 +36,7 @@ public class BricksFallingWhenHit {
         rows = grid.length;
         cols = grid[0].length;
         int len = hits.length;
-        // remove the brick at the each hit
+        // remove the brick at each hit
         for (int i = 0; i < len; i++) {
             int[] hit = hits[i];
             int hit_r = hit[0];

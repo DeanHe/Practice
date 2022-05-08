@@ -44,8 +44,7 @@ public class ShortestDistancefromAllBuildings {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 if (grid[r][c] == 1) {
-                    boolean[][] visited = new boolean[rows][cols];
-                    bfs(r, c, grid, visited);
+                    bfs(r, c, grid, new boolean[rows][cols]);
                     buildingCount++;
                 }
             }

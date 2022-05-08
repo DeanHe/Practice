@@ -24,6 +24,9 @@ The third event can be booked, as the first event takes every time less than 20,
 Note:
 The number of calls to MyCalendar.book per test case will be at most 1000.
 In calls to MyCalendar.book(start, end), start and end are integers in the range [0, 10^9].
+
+hint:
+1 Store the events as a sorted list of intervals. If none of the events conflict, then the new event can be added.
  */
 public class MyCalendar {
 	TreeMap<Integer, Integer> map;

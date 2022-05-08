@@ -1,4 +1,5 @@
 package array;
+
 /*
 #581
 
@@ -28,20 +29,25 @@ Constraints:
  */
 public class ShortestUnsortedContinuousSubarray {
     public int findUnsortedSubarray(int[] nums) {
-        int len = nums.length, s = -1, e = -1, most = nums[0], least = nums[len - 1];
-        for(int i = 1; i < len; i++){
-            most = Math.max(most, nums[i]);
-            least = Math.min(least, nums[len - 1 - i]);
-            if(nums[i] < most){
+        int len = nums.length, e = 0, s = len - 1, pre = nums[0];
+        for (int i = 1; i < len; i++) {
+            if (nums[i] < pre) {
                 e = i;
-            }
-            if(nums[len - 1 - i] > least){
-                s = len - 1 - i;
+            } else {
+                pre = nums[i];
             }
         }
-        if(e == -1){
-            return 0;
+        pre = nums[len - 1];
+        for (int i = len - 1; i >= 0; i--) {
+            if (pre < nums[i]) {
+                s = i;
+            } else {
+                pre = nums[i];
+            }
         }
-        return e - s + 1;
+        if (e != 0) {
+            return e - s + 1;
+        }
+        return 0;
     }
 }

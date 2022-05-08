@@ -48,11 +48,11 @@ public class MyCalendarThree {
 		int max_overlap = 0;
 		map.put(start, map.getOrDefault(start, 0) + 1);
 		map.put(end, map.getOrDefault(end, 0) - 1);
-		int temp = 0;
+		int sum = 0;
 		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-			temp += entry.getValue();
-			if (temp > max_overlap) {
-				max_overlap = temp;
+			sum += entry.getValue();
+			if (sum > max_overlap) {
+				max_overlap = sum;
 			}
 		}
 		return max_overlap;

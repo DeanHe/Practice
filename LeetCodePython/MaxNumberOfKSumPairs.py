@@ -1,9 +1,4 @@
-package hashMap;
-
-import java.util.HashMap;
-import java.util.Map;
-
-/*
+"""
 You are given an integer array nums and an integer k.
 
 In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.
@@ -34,17 +29,15 @@ hint:
 1 The abstract problem asks to count the number of disjoint pairs with a given sum k.
 2 For each possible value x, it can be paired up with k - x.
 3 The number of such pairs equals to min(count(x), count(k-x)), unless that x = k / 2, where the number of such pairs will be floor(count(x) / 2).
- */
-public class MaxNumberOfKSumPairs {
-    public int maxOperations(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int n : nums){
-            map.put(n, map.getOrDefault(n, 0) + 1);
-        }
-        int res = 0;
-        for(int n : map.keySet()) {
-            res += Math.min(map.get(n), map.getOrDefault(k - n, 0));
-        }
-        return res / 2;
-    }
-}
+"""
+import collections
+from typing import List
+
+
+class MaxNumberOfKSumPairs:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        cnt = collections.Counter(nums)
+        res = 0
+        for n in cnt:
+            res += min(cnt[n], cnt[k - n])
+        return res // 2

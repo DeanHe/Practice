@@ -1,6 +1,7 @@
 package dp;
 
-/*Given an array arr that is a permutation of [0, 1, ..., arr.length - 1], we split the array into some number of "chunks" (partitions), and individually sort each chunk.  After concatenating them, the result equals the sorted array.
+/*
+Given an array arr that is a permutation of [0, 1, ..., arr.length - 1], we split the array into some number of "chunks" (partitions), and individually sort each chunk.  After concatenating them, the result equals the sorted array.
 
 What is the most number of chunks we could have made?
 
@@ -21,10 +22,13 @@ However, splitting into [1, 0], [2], [3], [4] is the highest number of chunks po
 Note:
 
 arr will have length in range [1, 10].
-arr[i] will be a permutation of [0, 1, ..., arr.length - 1].*/
+arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
 
-//https://leetcode.com/problems/max-chunks-to-make-sorted/discuss/113528/Simple-Java-O(n)-Solution-with-detailed-explanation
-// huahua
+analysis
+https://leetcode.com/problems/max-chunks-to-make-sorted/discuss/113528/Simple-Java-O(n)-Solution-with-detailed-explanation
+
+*/
+
 public class MaxChunksToMakeSorted {
 	public int maxChunksToSorted(int[] arr) {
 		int ans = 0, max = 0, len = arr.length;

@@ -1,5 +1,6 @@
 package bfs;
-/*Given two words (start and end), and a dictionary, find all shortest transformation sequence(s) from start to end, such that:
+/*
+Given two words (start and end), and a dictionary, find all shortest transformation sequence(s) from start to end, such that:
 
 Only one letter can be changed at a time
 Each intermediate word must exist in the dictionary
@@ -17,7 +18,8 @@ Return
 ]
 Notice
 All words have the same length.
-All words contain only lowercase alphabetic characters.*/
+All words contain only lowercase alphabetic characters.
+*/
 
 import java.util.*;
 
