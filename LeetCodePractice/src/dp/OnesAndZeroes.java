@@ -18,9 +18,12 @@ Input: array = {"10", "0", "1"}, m = 1, n = 1
 Output: 2
 
 Explanation: You could form "10", but then you'd have nothing left. Better form "0" and "1".
+
+analysis:
+This problem is a typical 0-1 knapsack problem, we need to pick several strings in provided strings to get the maximum number of strings using limited number 0 and 1. We can create a three dimensional array, in which mem[i][j][k] means the maximum number of strings we can get from the first i argument strs using limited j number of '0's and k number of '1's.
+For mem[i][j][k], we can get it by fetching the current string i or discarding the current string, which would result in mem[i][j][k] = mem[i-1][j-numOfZero(strs[i])][i-numOfOnes(strs[i])] and mem[i][j][k] = mem[i-1][j][k]; We only need to treat the larger one in it as the largest number for mem[i][j][k].
+
 */
-/*This problem is a typical 0-1 knapsack problem, we need to pick several strings in provided strings to get the maximum number of strings using limited number 0 and 1. We can create a three dimensional array, in which mem[i][j][k] means the maximum number of strings we can get from the first i argument strs using limited j number of '0's and k number of '1's.
-For mem[i][j][k], we can get it by fetching the current string i or discarding the current string, which would result in mem[i][j][k] = mem[i-1][j-numOfZero(strs[i])][i-numOfOnes(strs[i])] and mem[i][j][k] = mem[i-1][j][k]; We only need to treat the larger one in it as the largest number for mem[i][j][k].*/
 public class OnesAndZeroes {
 	public int findMaxForm(String[] strs, int m, int n) {
         int size = strs.length;
@@ -32,7 +35,7 @@ public class OnesAndZeroes {
         		for(int k = 0; k <= n; k++){
 					dp[i + 1][j][k] = dp[i][j][k];
 					if(j >= cnt[0] && k >= cnt[1]){
-						dp[i + 1][j][k] = Math.max(dp[i][j][k], dp[i][j - cnt[0]][k - cnt[1]] + 1);
+						dp[i + 1][j][k] = Math.max(dp[i + 1][j][k], dp[i][j - cnt[0]][k - cnt[1]] + 1);
 					}
         		}
         	}

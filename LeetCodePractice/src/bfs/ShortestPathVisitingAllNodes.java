@@ -39,7 +39,7 @@ public class ShortestPathVisitingAllNodes {
 			int[] cur = queue.poll();
 			int node = cur[0];
 			int state = cur[1];
-			int step = dist[cur[0]][state];
+			int step = dist[node][state];
 			if (state == (1 << N) - 1) {
 				return step;
 			}

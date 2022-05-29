@@ -2,20 +2,18 @@ package segmentTree;
 
 import java.util.*;
 /*
-        Given an integer array(index from 0to n-1,where n is the size of this array),and an query list.Each query has two integers[start,end].For each query,calculate the minimum number between index start and end in the given array,return the result list.
+Given an integer array(index from 0to n-1,where n is the size of this array),and an query list.Each query has two integers[start,end].For each query,calculate the minimum number between index start and end in the given array,return the result list.
 
-        Example
-        Example 1:
+Example 1:
+Input:array:[1,2,7,8,5],queries:[(1,2),(0,4),(2,4)].Output:[2,1,5]
+Example 2:
 
-        Input:array:[1,2,7,8,5],queries:[(1,2),(0,4),(2,4)].Output:[2,1,5]
-        Example 2:
+Input:array:[4,5,7,1],queries:[(1,2),(1,3)].Output:[5,1]
+Challenge
+O(logN)time for each query
 
-        Input:array:[4,5,7,1],queries:[(1,2),(1,3)].Output:[5,1]
-        Challenge
-        O(logN)time for each query
-
-        Notice
-        We suggest you finish problem Segment Tree Build,Segment Tree Query and Segment Tree Modify first.
+Notice
+We suggest you finish problem Segment Tree Build,Segment Tree Query and Segment Tree Modify first.
 */
 public class IntervalMinimumNumber {
     class Interval {
