@@ -71,9 +71,9 @@ class SegmentTree:
                 node.most = val
                 return node
             node = Node(l, r)
-            mid = l + (r - l) // 2
-            node.left = Node(l, mid)
-            node.right = Node(mid + 1, r)
+            mid = (l + r) // 2
+            node.left = build(l, mid)
+            node.right = build(mid + 1, r)
             node.most = max(node.left.most, node.right.most)
             node.total = node.left.total + node.right.total
             return node
@@ -101,7 +101,7 @@ class SegmentTree:
     def query_most(self, k, max_rows, seats):
 
         def query_helper(node):
-            if node.start == node.right:
+            if node.start == node.end:
                 # check if the row number is less than maxRow and the number of remains seats is greater or equal than k
                 if node.end > max_rows or node.total < k:
                     return []
@@ -134,7 +134,6 @@ class SegmentTree:
 class BookMyShow:
 
     def __init__(self, n: int, m: int):
-        self.rows = n
         self.cols = m
         self.seg = SegmentTree(0, n - 1, m)
         # record remain seats at each row
