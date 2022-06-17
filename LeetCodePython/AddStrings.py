@@ -39,9 +39,9 @@ class AddStrings(object):
         while num1 or num2:
             n1 = n2 = 0
             if num1:
-                n1 = ord(num1.pop()) - ord('0')
+                n1 = int(num1.pop())
             if num2:
-                n2 = ord(num2.pop()) - ord('0')
+                n2 = int(num2.pop())
             tmp = n1 + n2 + carry
             res.append(tmp % 10)
             carry = tmp // 10

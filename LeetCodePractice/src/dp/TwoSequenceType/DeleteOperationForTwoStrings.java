@@ -40,7 +40,7 @@ public class DeleteOperationForTwoStrings {
         int[][] dp = new int[m + 1][n + 1];
         //mem[i][j] means the LCS length formed by A[:i] and B[:j]
         for (int i = 0; i < m; i++) {
-            for (int j = 0; j <= n; j++) {
+            for (int j = 0; j < n; j++) {
                 if (word1.charAt(i) == word2.charAt(j)) {
                     dp[i + 1][j + 1] = dp[i][j] + 1;
                 } else {

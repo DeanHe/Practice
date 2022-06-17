@@ -37,7 +37,7 @@ class Solution(object):
         """
         if not head or not head.next:
             return head
-        dummy =ListNode(0)
+        dummy = ListNode(0)
         dummy.next = head
         sz = 0
         slow, fast = dummy, dummy
