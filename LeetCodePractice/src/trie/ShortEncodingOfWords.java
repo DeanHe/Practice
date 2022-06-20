@@ -24,6 +24,8 @@ analysis:
 Insert all reversed words to the trie.
 maintain the childCount to know which node is a leaf
 sum up all leaf's correspondent word's length
+
+TC: O(multiply of len(word))
 */
 
 public class ShortEncodingOfWords {
