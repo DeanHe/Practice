@@ -29,9 +29,9 @@ n consists of only digits.
 n does not contain any leading zeros and represents a positive integer.
 
 hint:
-Think about if the input was only one digit. Then you need to add up as many ones as the value of this digit.
-If the input has multiple digits, then you can solve for each digit independently, and merge the answers to form numbers that add up to that input.
-Thus the answer is equal to the max digit.
+1 Think about if the input was only one digit. Then you need to add up as many ones as the value of this digit.
+2 If the input has multiple digits, then you can solve for each digit independently, and merge the answers to form numbers that add up to that input.
+3 Thus the answer is equal to the max digit.
  */
 public class PartitioningIntoMinimumNumberOfDeciBinaryNumbers {
     public int minPartitions(String n) {

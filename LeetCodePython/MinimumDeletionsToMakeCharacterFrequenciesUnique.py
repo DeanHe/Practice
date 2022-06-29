@@ -41,9 +41,7 @@ class MinimumDeletionsToMakeCharacterFrequenciesUnique(object):
         :rtype: int
         """
         res, freq, appeared = 0, {}, set()
-        #freq = collections.Counter(s)
-        for c in s:
-            freq[c] = freq.get(c, 0) + 1
+        freq = collections.Counter(s)
         for _, cnt in freq.items():
             while cnt in appeared:
                 cnt -= 1

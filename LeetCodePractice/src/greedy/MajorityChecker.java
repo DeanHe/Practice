@@ -39,7 +39,7 @@ Constraints:
 0 <= left <= right < arr.length
 threshold <= right - left + 1
 2 * threshold > right - left + 1
-At most 104 calls will be made to query.
+At most 10^4 calls will be made to query.
 
 hint:
 What's special about a majority element ?
