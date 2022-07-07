@@ -55,7 +55,7 @@ public class CountSquareSubmatricesWithAllOnes {
             dp[r][0] = matrix[r][0] == 1 ? 1 : 0;
             res += dp[r][0];
         }
-        for(int c = 0; c < cols; c++){
+        for(int c = 1; c < cols; c++){
             dp[0][c] = matrix[0][c] == 1 ? 1 : 0;
             res += dp[0][c];
         }

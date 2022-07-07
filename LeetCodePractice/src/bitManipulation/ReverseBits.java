@@ -24,7 +24,7 @@ If this function is called many times, how would you optimize it?
 
 TC O(N)
 */
-public class   ReverseBits {
+public class ReverseBits {
 	// you need treat n as an unsigned value
 	public int reverseBits(int n) {
 		int res = 0;
