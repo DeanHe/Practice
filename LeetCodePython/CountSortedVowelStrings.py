@@ -33,7 +33,7 @@ from functools import lru_cache
 class CountSortedVowelStrings:
     def countVowelStrings(self, n: int) -> int:
 
-        @lru_cache
+        @lru_cache(None)
         def dfs(remain, choices):
             if remain == 0:
                 return 1

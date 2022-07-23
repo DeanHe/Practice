@@ -3,10 +3,9 @@ package stack;
 import java.util.Stack;
 
 /*
-Given a m * n matrix of ones and zeros, return how many sub matrices have all ones.
+Given an m * n matrix of ones and zeros, return how many submatrices have all ones.
 
 Example 1:
-
 Input: mat = [[1,0,1],
               [1,1,0],
               [1,1,0]]
@@ -18,8 +17,8 @@ There are 3 rectangles of side 2x1.
 There is 1 rectangle of side 2x2.
 There is 1 rectangle of side 3x1.
 Total number of rectangles = 6 + 2 + 3 + 1 + 1 = 13.
-Example 2:
 
+Example 2:
 Input: mat = [[0,1,1,0],
               [0,1,1,1],
               [1,1,1,0]]
@@ -33,8 +32,8 @@ There are 2 rectangles of side 2x2.
 There are 2 rectangles of side 3x1.
 There is 1 rectangle of side 3x2.
 Total number of rectangles = 8 + 5 + 2 + 4 + 2 + 2 + 1 = 24.
-Example 3:
 
+Example 3:
 Input: mat = [[1,1,1,1,1,1]]
 Output: 21
 Example 4:
@@ -42,11 +41,10 @@ Example 4:
 Input: mat = [[1,0,1],[0,1,0],[1,0,1]]
 Output: 5
 
-        Constraints:
-
-        1 <= arr.length <= 300
-        1 <= arr[0].length <= 300
-        0 <= arr[i][j] <= 1
+Constraints:
+1 <= arr.length <= 300
+1 <= arr[0].length <= 300
+0 <= arr[i][j] <= 1
 
 analysis:
 similar to MaximalSquare
@@ -54,7 +52,7 @@ similar to MaximalSquare
 TC: O(M*N)
 */
 public class CountSubmatricesWithAllOnes {
-    public int countMatricies(int[][] matrix) {
+    public int numSubmat(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return 0;
         }

@@ -37,6 +37,9 @@ Constraints:
 
 analysis:
 sliding window,
+At every index i we want to pick the maximum result from i+1 to i+k and add nums[i] to it
+A maximum from i+1 to i+k can be found in O(1) time using a mono queue.
+
 dp[i] means max score to start on nums[0] and ended on nums[i]
  */
 public class JumpGameVI {
