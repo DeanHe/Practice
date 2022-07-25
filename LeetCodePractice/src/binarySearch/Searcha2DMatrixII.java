@@ -23,8 +23,12 @@ Input:
       [3, 5, 9, 10]
     ]
     target = 3
-Output:2*/
+Output:2
 // https://www.lintcode.com/problem/search-a-2d-matrix-ii/description
+
+analysis:
+TC: O(rows + cols)
+ */
 public class Searcha2DMatrixII {
 	/**
      * @param matrix: A list of lists of integers
