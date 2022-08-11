@@ -56,24 +56,24 @@ class WordDictionary:
         cur.isWord = True
 
     def search(self, word: str) -> bool:
-        cur = self.root
-        self.res = False
-        self.dfs(cur, word)
-        return self.res
+        return self.dfs(self.root, word)
 
-    def dfs(self, node, word):
+    def dfs(self, node, word) -> bool:
         if not word:
             if node.isWord:
-                self.res = True
-            return
-        if word[0] == ".":
-            for n in node.children.values():
-                self.dfs(n, word[1:])
+                return True
+            return False
+
+        c = word[0]
+        if c == ".":
+            for nb in node.children:
+                if self.dfs(node.children[nb], word[1:]):
+                    return True
+            return False
         else:
-            node = node.children.get(word[0])
-            if not node:
-                return
-            self.dfs(node, word[1:])
+            if c not in node.children:
+                return False
+            return self.dfs(node.children[c], word[1:])
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()

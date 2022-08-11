@@ -109,8 +109,7 @@ public class AutocompleteSystem {
             return;
         }
         TrieNode node = root;
-        char[] arr = sentence.toCharArray();
-        for(char c : arr){
+        for(char c : sentence.toCharArray()){
             node =  node.children.computeIfAbsent(c, x -> new TrieNode());
             node.sentenceFreq.put(sentence, node.sentenceFreq.getOrDefault(sentence, 0) + count);
         }

@@ -7,13 +7,11 @@ import java.util.Queue;
 import java.util.Set;
 
 /*
-his is an interactive problem.
+This is an interactive problem.
 
 You are given a robot in a hidden grid, and it wants to go to a target cell in this grid. The grid is of size m x n, and each cell in the grid can be empty or blocked. It is guaranteed that the start point and the robot’s destination are different, and neither of them is blocked.
 
 You want to find the robot’s minimum distance to the target cell. However, you do not know the grid’s dimensions, or the starting point of the robot, or its target destination. You are only allowed to ask queries to your GridMaster object.
-
-
 
 You are given a class GridMaster which you can call the following functions from:
 
@@ -99,8 +97,8 @@ public class ShortestPathInaHiddenGrid {
     }
 
     static final int MAX = 500;
-    char[] directionsChar = {'U', 'L', 'D', 'R'};
-    int[][] directionsArr = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+    char[] dirChar = {'U', 'L', 'D', 'R'};
+    int[][] dirs = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
     boolean flag = false;
 
     public int findShortestPath(GridMaster master) {
@@ -119,14 +117,14 @@ public class ShortestPathInaHiddenGrid {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 int[] cell = queue.poll();
-                int row = cell[0], column = cell[1];
-                if (grid[row][column] == 2)
+                int r = cell[0], c = cell[1];
+                if (grid[r][c] == 2)
                     return distance;
-                for (int[] directionArr : directionsArr) {
-                    int newRow = row + directionArr[0], newColumn = column + directionArr[1];
-                    if (!visited2[newRow][newColumn] && grid[newRow][newColumn] != 0) {
-                        visited2[newRow][newColumn] = true;
-                        queue.offer(new int[]{newRow, newColumn});
+                for (int[] d : dirs) {
+                    int nb_r = r + d[0], nb_c = c + d[1];
+                    if (!visited2[nb_r][nb_c] && grid[nb_r][nb_c] != 0) {
+                        visited2[nb_r][nb_c] = true;
+                        queue.offer(new int[]{nb_r, nb_c});
                     }
                 }
             }
@@ -135,23 +133,23 @@ public class ShortestPathInaHiddenGrid {
         return -1;
     }
 
-    public void dfs(int row, int column, Set<String> visited, int[][] grid, GridMaster master) {
-        grid[row][column] = 1;
+    public void dfs(int r, int c, Set<String> visited, int[][] grid, GridMaster master) {
+        grid[r][c] = 1;
         if (master.isTarget()) {
-            grid[row][column] = 2;
+            grid[r][c] = 2;
             flag = true;
         }
         for (int i = 0; i < 4; i++) {
-            char directionChar = directionsChar[i];
-            char oppositeDirectionChar = directionsChar[(i + 2) % 4];
-            int[] directionArr = directionsArr[i];
-            int newRow = row + directionArr[0], newColumn = column + directionArr[1];
-            String newStr = Arrays.toString(new int[]{newRow, newColumn});
-            if (!visited.contains(newStr) && master.canMove(directionChar)) {
-                visited.add(newStr);
-                master.move(directionChar);
-                dfs(newRow, newColumn, visited, grid, master);
-                master.move(oppositeDirectionChar);
+            char direction = dirChar[i];
+            char opposite_direction = dirChar[(i + 2) % 4];
+            int[] d = dirs[i];
+            int nb_r = r + d[0], nb_c = c + d[1];
+            String loc = Arrays.toString(new int[]{nb_r, nb_c});
+            if (!visited.contains(loc) && master.canMove(direction)) {
+                visited.add(loc);
+                master.move(direction);
+                dfs(nb_r, nb_c, visited, grid, master);
+                master.move(opposite_direction);
             }
         }
     }

@@ -51,7 +51,6 @@ public class Bitset {
     int size;
     Set<Integer> ones;
     Set<Integer> zeros;
-    boolean flip;
 
     public Bitset(int size) {
         this.size = size;
@@ -60,39 +59,26 @@ public class Bitset {
         for (int i = 0; i < size; i++) {
             zeros.add(i);
         }
-        flip = false;
     }
 
     public void fix(int idx) {
-        if (!flip) {
-            ones.add(idx);
-            zeros.remove(idx);
-        } else {
-            ones.remove(idx);
-            zeros.add(idx);
-        }
+        ones.add(idx);
+        zeros.remove(idx);
     }
 
     public void unfix(int idx) {
-        if (!flip) {
-            ones.remove(idx);
-            zeros.add(idx);
-        } else {
-            ones.add(idx);
-            zeros.remove(idx);
-        }
+        ones.remove(idx);
+        zeros.add(idx);
     }
 
     public void flip() {
-        flip = !flip;
+        Set<Integer> tmp = ones;
+        ones = zeros;
+        zeros = tmp;
     }
 
     public boolean all() {
-        if (!flip) {
-            return ones.size() == size;
-        } else {
-            return zeros.size() == size;
-        }
+        return ones.size() == size;
     }
 
     public boolean one() {
@@ -100,30 +86,16 @@ public class Bitset {
     }
 
     public int count() {
-        if (!flip) {
-            return ones.size();
-        } else {
-            return zeros.size();
-        }
+        return ones.size();
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (!flip) {
-            for (int i = 0; i < size; i++) {
-                if (ones.contains(i)) {
-                    sb.append(1);
-                } else {
-                    sb.append(0);
-                }
-            }
-        } else {
-            for (int i = 0; i < size; i++) {
-                if (zeros.contains(i)) {
-                    sb.append(1);
-                } else {
-                    sb.append(0);
-                }
+        for (int i = 0; i < size; i++) {
+            if (ones.contains(i)) {
+                sb.append(1);
+            } else {
+                sb.append(0);
             }
         }
         return sb.toString();
