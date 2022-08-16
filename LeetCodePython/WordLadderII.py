@@ -40,6 +40,7 @@ class WordLadderII:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         wordList = set(wordList)
         layer = {}
+        # word: paths ends with word
         layer[beginWord] = [[beginWord]]
         while layer:
             next = collections.defaultdict(list)
@@ -49,9 +50,9 @@ class WordLadderII:
                 else:
                     for i in range(len(word)):
                         for c in 'abcdefghijklmnopqrstuvwxyz':
-                            new_word = word[:i] + c + word[i + 1:]
-                            if new_word in wordList:
-                                next[new_word] += [exist + [new_word] for exist in layer[word]]
+                            nb = word[:i] + c + word[i + 1:]
+                            if nb in wordList:
+                                next[nb] += [path + [nb] for path in layer[word]]
             wordList -= set(next.keys())
             layer = next
         return []
