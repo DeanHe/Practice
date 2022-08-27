@@ -45,20 +45,20 @@ import collections
 class FreqStack:
 
     def __init__(self):
-        self.freq = collections.defaultdict(int)
+        self.cnt = collections.defaultdict(int)
         self.group = collections.defaultdict(list)
-        self.max_freq = 0
+        self.max_cnt = 0
 
     def push(self, val: int) -> None:
-        self.freq[val] += 1
-        self.max_freq = max(self.max_freq, self.freq[val])
-        self.group[self.freq[val]].append(val)
+        self.cnt[val] += 1
+        self.max_cnt = max(self.max_cnt, self.cnt[val])
+        self.group[self.cnt[val]].append(val)
 
     def pop(self) -> int:
-        res = self.group[self.max_freq].pop()
-        self.freq[res] -= 1
-        if not self.group[self.max_freq]:
-            self.max_freq -= 1
+        res = self.group[self.max_cnt].pop()
+        self.cnt[res] -= 1
+        if not self.group[self.max_cnt]:
+            self.max_cnt -= 1
         return res
 
 

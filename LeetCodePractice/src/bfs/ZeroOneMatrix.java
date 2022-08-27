@@ -30,6 +30,9 @@ n == mat[i].length
 1 <= m * n <= 10^4
 mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
+
+TC: O(rows * cols)
+SC: O(rows * cols)
  */
 public class ZeroOneMatrix {
     public int[][] updateMatrix(int[][] mat) {

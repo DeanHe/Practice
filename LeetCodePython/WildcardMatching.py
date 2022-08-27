@@ -32,7 +32,7 @@ p contains only lowercase English letters, '?' or '*'.
 class WildcardMatching:
     def isMatch(self, s: str, p: str) -> bool:
         s_len, p_len = len(s), len(p)
-        dp = [[False for _ in range(p_len + 1)] for _ in range(s_len + 1)]
+        dp = [[False] * (p_len + 1) for _ in range(s_len + 1)]
         dp[0][0] = True
         for i in range(1, p_len + 1):
             if p[i - 1] == '*':
