@@ -1,6 +1,4 @@
-package bst;
-
-/*
+"""
 Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
 
 Return the number of good nodes in the binary tree.
@@ -31,31 +29,28 @@ Input: root = [1]
 Output: 1
 Explanation: Root is considered as good.
 
-
 Constraints:
-
 The number of nodes in the binary tree is in the range [1, 10^5].
 Each node's value is between [-10^4, 10^4].
+"""
 
-hint:
-Use DFS (Depth First Search) to traverse the tree, and constantly keep track of the current path maximum.
- */
-public class CountGoodNodesInBinaryTree {
-    public int goodNodes(TreeNode root) {
-        return dfs(root, Integer.MIN_VALUE);
-    }
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
-    private int dfs(TreeNode root, int preMax) {
-        if(root == null){
-            return 0;
-        }
-        int res = 0;
-        if(root.val >= preMax){
-            res++;
-        }
-        res += dfs(root.left, Math.max(root.val, preMax));
-        res += dfs(root.right, Math.max(root.val, preMax));
-        return res;
-    }
-}
+class CountGoodNodesInBinaryTree:
+    def goodNodes(self, root: TreeNode) -> int:
 
+        def dfs(cur, pre_max):
+            if not cur:
+                return 0
+            res = 0
+            if cur.val >= pre_max:
+                res += 1
+            res += dfs(cur.left, max(pre_max, cur.val))
+            res += dfs(cur.right, max(pre_max, cur.val))
+            return res
+
+        return dfs(root, float('-inf'))

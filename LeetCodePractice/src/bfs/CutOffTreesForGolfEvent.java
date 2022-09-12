@@ -48,6 +48,9 @@ Output: 6
 Explanation: You started from the point (0,0) and you can cut off the tree in (0,0) directly without walking.
 
 Hint: size of the given matrix will not exceed 50x50.
+
+TC: O(rows^2 * cols^2)
+SC: O(rows * cols)
 */
 public class CutOffTreesForGolfEvent {
 	int rows, cols;
