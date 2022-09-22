@@ -30,6 +30,7 @@ The number of nodes in the list is in the range [0, 5 * 10^4].
 
 analysis:
 merge sort
+TC O(N log N)
  */
 public class SortList {
     public ListNode sortList(ListNode head) {
