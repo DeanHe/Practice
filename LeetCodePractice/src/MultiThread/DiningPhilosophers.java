@@ -1,4 +1,9 @@
 package MultiThread;
+
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /*
 Five silent philosophers sit at a round table with bowls of spaghetti. Forks are placed between each pair of adjacent philosophers.
 
@@ -36,8 +41,13 @@ Constraints:
 1 <= n <= 60
  */
 public class DiningPhilosophers {
-    public DiningPhilosophers() {
+    private Lock[] forks = new Lock[5];
+    private Semaphore semaphore = new Semaphore(4);
 
+    public DiningPhilosophers() {
+        for(int i = 0; i < 5; i++){
+            forks[i] = new ReentrantLock();
+        }
     }
 
     // call the run() method of any runnable to execute its code
@@ -47,6 +57,24 @@ public class DiningPhilosophers {
                            Runnable eat,
                            Runnable putLeftFork,
                            Runnable putRightFork) throws InterruptedException {
+        int leftFork = philosopher;
+        int rightFork = (philosopher + 4) % 5;
+        semaphore.acquire();
+        pickFork(leftFork, pickLeftFork);
+        pickFork(rightFork, pickRightFork);
+        eat.run();
+        putFork(leftFork, putLeftFork);
+        putFork(rightFork, putRightFork);
+        semaphore.release();
+    }
 
+    private void pickFork(int id, Runnable pick){
+        forks[id].lock();
+        pick.run();
+    }
+
+    private void putFork(int id, Runnable put){
+        put.run();
+        forks[id].unlock();
     }
 }

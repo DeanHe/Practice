@@ -20,7 +20,7 @@ Note:
 
 1 <= A.length <= 100.
 1 <= A[i] <= 10000.
-1 <= K <= numsß∑.length.
+1 <= K <= nums.length.
 Answers within 10^-6 of the correct answer will be accepted as correct.
 
 analysis:

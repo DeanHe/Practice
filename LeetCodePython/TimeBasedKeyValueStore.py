@@ -43,7 +43,7 @@ class TimeMap:
         self.map = collections.defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        self.map[key].append([timestamp, value])
+        self.map[key].append((timestamp, value))
 
     def get(self, key: str, timestamp: int) -> str:
         arr = self.map[key]

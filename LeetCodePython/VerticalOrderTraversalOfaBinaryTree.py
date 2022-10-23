@@ -51,7 +51,7 @@ class TreeNode:
 class VerticalOrderTraversalOfaBinaryTree:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
         g = collections.defaultdict(list)
-        q = collections.deque((root, 0))
+        q = collections.deque([(root, 0)])
         while q:
             sz = len(q)
             column_nodes = collections.defaultdict(list)

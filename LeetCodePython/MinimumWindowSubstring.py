@@ -41,9 +41,9 @@ import collections
 class MinimumWindowSubstring:
     def minWindow(self, s: str, t: str) -> str:
         cnt = collections.Counter(t)
-        l, r, s_list, cnt_size, least, res = 0, 0, list(s), len(cnt), len(s) + 1, ''
+        l, r, cnt_size, least, res = 0, 0, len(cnt), len(s) + 1, ''
         while r < len(s):
-            sr = s_list[r]
+            sr = s[r]
             if sr in cnt:
                 cnt[sr] -= 1
                 if cnt[sr] == 0:
@@ -52,8 +52,8 @@ class MinimumWindowSubstring:
             while cnt_size == 0:
                 if r - l < least:
                     least = r - l
-                    res = ''.join(s_list[l:r])
-                sl = s_list[l]
+                    res = s[l:r]
+                sl = s[l]
                 if sl in cnt:
                     cnt[sl] += 1
                     if cnt[sl] == 1:

@@ -33,6 +33,7 @@ public class IntersectionOfThreeSortedArrays {
         int i = 0, j = 0;
         while(i < arr1.length && j < arr2.length){
             if(arr1[i] == arr2[j]){
+                ls.add(arr1[i]);
                 i++;
                 j++;
             } else if(arr1[i] < arr2[j]){

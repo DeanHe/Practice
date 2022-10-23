@@ -1,4 +1,4 @@
-/*
+"""
 You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
 
 Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule.
@@ -16,25 +16,19 @@ Constraints:
 flowerbed[i] is 0 or 1.
 There are no two adjacent flowers in flowerbed.
 0 <= n <= flowerbed.length
- */
-package greedy;
+"""
+from typing import List
 
-public class CanPlaceFlowers {
-	public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        int len = flowerbed.length, cnt = 0;
-        for(int i = 0; i < len; i++){
-            int pre = i - 1;
-            int next = i + 1;
-            if((pre < 0 || flowerbed[pre] == 0) && (next >= len || flowerbed[next] == 0)){
-                if(flowerbed[i] == 0){
-                    flowerbed[i] = 1;
-                    cnt++;
-                }
-            }
-            if(cnt >= n){
-                return true;
-            }
-        }
-        return false;
-    }
-}
+
+class CanPlaceFlowers:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        cnt = 0
+        for i in range(len(flowerbed)):
+            pre, nxt = i - 1, i + 1
+            if (pre < 0 or flowerbed[pre] == 0) and (nxt >= len(flowerbed) or flowerbed[nxt] == 0):
+                if flowerbed[i] == 0:
+                    flowerbed[i] = 1
+                    cnt += 1
+            if cnt >= n:
+                return True
+        return False

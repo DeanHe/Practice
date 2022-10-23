@@ -1,7 +1,4 @@
-package sweepLine;
-
-import java.util.*;
-/*
+"""
 A k-booking happens when k events have some non-empty intersection (i.e., there is some time that is common to all k events.)
 
 You are given some events [start, end), after each given event, return an integer k representing the maximum k-booking between all the previous events.
@@ -29,37 +26,34 @@ myCalendarThree.book(5, 15); // return 3, The remaining events cause the maximum
 myCalendarThree.book(5, 10); // return 3
 myCalendarThree.book(25, 55); // return 3
 
-
 Constraints:
-
 0 <= start < end <= 10^9
 At most 400 calls will be made to book.
 
-tag: sweep line
- */
-public class MyCalendarThree {
-	TreeMap<Integer, Integer> map;
+hints:
+1 Treat each interval [start, end) as two events "start" and "end", and process them in sorted order.
 
-	public MyCalendarThree() {
-		map = new TreeMap<>();
-	}
+analysis:
+sweep line
+"""
+import collections
 
-	public int book(int start, int end) {
-		int max_overlap = 0;
-		map.put(start, map.getOrDefault(start, 0) + 1);
-		map.put(end, map.getOrDefault(end, 0) - 1);
-		int sum = 0;
-		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-			sum += entry.getValue();
-			if (sum > max_overlap) {
-				max_overlap = sum;
-			}
-		}
-		return max_overlap;
-	}
-}
-/**
- * Your MyCalendarThree object will be instantiated and called as such:
- * MyCalendarThree obj = new MyCalendarThree();
- * int param_1 = obj.book(start,end);
- */
+
+class MyCalendarThree:
+
+    def __init__(self):
+        self.axis = collections.defaultdict(int)
+
+    def book(self, start: int, end: int) -> int:
+        total = res = 0
+        self.axis[start] += 1
+        self.axis[end] -= 1
+        for n in sorted(self.axis.keys()):
+            total += self.axis[n]
+            res = max(res, total)
+        return res
+
+
+# Your MyCalendarThree object will be instantiated and called as such:
+# obj = MyCalendarThree()
+# param_1 = obj.book(start,end)
