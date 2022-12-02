@@ -66,6 +66,7 @@ public class MaximumLengthOfaConcatenatedStringWithUniqueCharacters {
 		return true;
 	}
 
+	// solution 2
 	public int maxLengthBitMask(List<String> arr) {
 		List<Integer> dp = new ArrayList<>(); // save all unique concatenation candidates
 		dp.add(0);

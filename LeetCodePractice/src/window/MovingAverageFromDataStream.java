@@ -2,9 +2,9 @@ package window;
 
 import java.util.*;
 
-/*Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.
+/*
+Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.
 
-Example
 Example 1:
 
 MovingAverage m = new MovingAverage(3);
