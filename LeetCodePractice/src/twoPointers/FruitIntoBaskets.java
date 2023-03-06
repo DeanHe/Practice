@@ -34,7 +34,6 @@ Explanation: We can collect [1,2,1,1,2].
 If we started at the first tree or the eighth tree, we would only collect 4 fruits.
 
 Note:
-
 1 <= tree.length <= 40000
 0 <= tree[i] < tree.length
 */

@@ -1,12 +1,5 @@
-package contest;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
-
-/*
+"""
 You are given a 0-indexed integer array tasks, where tasks[i] represents the difficulty level of a task. In each round, you can complete either 2 or 3 tasks of the same difficulty level.
-
 Return the minimum rounds required to complete all the tasks, or -1 if it is not possible to complete all the tasks.
 
 Example 1:
@@ -27,33 +20,17 @@ Explanation: There is only 1 task of difficulty level 2, but in each round, you 
 Constraints:
 1 <= tasks.length <= 10^5
 1 <= tasks[i] <= 10^9
+"""
+from collections import Counter
+from typing import List
 
-hint:
-1 Which data structure can you use to store the number of tasks of each difficulty level?
-2 For any particular difficulty level, what can be the optimal strategy to complete the tasks using minimum rounds?
-3 When can we not complete all tasks of a difficulty level?
 
-analysis:
-If freq = 1, not possible, return -1
-If freq = 2, needs one 2-tasks
-If freq = 3, needs one 3-tasks
-If freq = 3k, freq = 3 * k, needs k batches.
-If freq = 3k + 1, freq = 3 * (k - 1) + 2 + 2, needs k + 1 batches.
-If freq = 3k + 2, freq = 3 * k + 2, needs k + 1 batches.
- */
-public class MinimumRoundsToCompleteAllTasks {
-    public int minimumRounds(int[] tasks) {
-        Map<Integer, Integer> cntMap = new HashMap<>();
-        int res = 0;
-        for (int t : tasks) {
-            cntMap.put(t, cntMap.getOrDefault(t, 0) + 1);
-        }
-        for (int cnt : cntMap.values()) {
-            if (cnt == 1) {
-                return -1;
-            }
-            res += (cnt + 2) / 3;
-        }
-        return res;
-    }
-}
+class MinimumRoundsToCompleteAllTasks:
+    def minimumRounds(self, tasks: List[int]) -> int:
+            res = 0
+            cnt = Counter(tasks)
+            for freq in cnt.values():
+                if freq == 1:
+                    return -1
+                res += (freq + 2) // 3
+            return res

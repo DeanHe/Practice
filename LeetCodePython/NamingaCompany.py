@@ -41,6 +41,10 @@ hint:
 2 Group ideas that share the same suffix (all characters except the first) together and notice that a pair of ideas from the same group is invalid. What about pairs of ideas from different groups?
 3 The first letter of the idea in the first group must not be the first letter of an idea in the second group and vice versa.
 4 We can efficiently count the valid pairings for an idea if we already know how many ideas starting with a letter x are within a group that does not contain any ideas with starting letter y for all letters x and y.
+
+analysis:
+Let n be the number of words in ideas and m be the average length of a word.
+Time complexity: O(n⋅m)
 """
 from typing import List
 
@@ -48,12 +52,14 @@ from typing import List
 class NamingaCompany:
     def distinctNames(self, ideas: List[str]) -> int:
         res = 0
-        ls = [set() for _ in range(26)]
+        initial_groups = [set() for _ in range(26)]
         for w in ideas:
-            ls[ord(w[0]) - ord('a')].add(w[1:])
+            first_letter_idx = ord(w[0]) - ord('a')
+            initial_groups[first_letter_idx].add(w[1:])
         for i in range(25):
             for j in range(i + 1, 26):
-                overlap = len(ls[i] & ls[j])
-                res += 2 * (len(ls[i]) - overlap) * (len(ls[j]) - overlap)
+                # Get the number of mutual suffixes.
+                overlap = len(initial_groups[i] & initial_groups[j])
+                res += 2 * (len(initial_groups[i]) - overlap) * (len(initial_groups[j]) - overlap)
         return res
 

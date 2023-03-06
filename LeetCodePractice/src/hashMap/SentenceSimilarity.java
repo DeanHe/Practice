@@ -14,7 +14,6 @@ Also, a word is always similar with itself. For example, the sentences words1 = 
 Finally, sentences can only be similar if they have the same number of words. So a sentence like words1 = ["great"] can never be similar to words2 = ["doubleplus","good"].
 
 Note:
-
 The length of words1 and words2 will not exceed 1000.
 The length of pairs will not exceed 2000.
 The length of each pairs[i] will be 2.
@@ -33,22 +32,24 @@ import java.util.Set;
 
 public class SentenceSimilarity {
     public boolean areSentencesSimilar(String[] words1, String[] words2, String[][] pairs) {
-        if(words1.length != words2.length){
+        if (words1.length != words2.length) {
             return false;
         }
+
         Map<String, Set<String>> similarWords = new HashMap<>();
-        for(String[] pair : pairs){
+        for (String[] pair : pairs) {
             similarWords.computeIfAbsent(pair[0], x -> new HashSet<>()).add(pair[1]);
             similarWords.computeIfAbsent(pair[1], x -> new HashSet<>()).add(pair[0]);
         }
-        for(int i = 0; i < words1.length; i++){
-            if(words1[i].equals(words2[i])){
+
+        for (int i = 0; i < words1.length; i++) {
+            if (words1[i].equals(words2[i])) {
                 continue;
             }
-            if(!similarWords.containsKey(words1[i])){
+            if (!similarWords.containsKey(words1[i])) {
                 return false;
             }
-            if(!similarWords.get(words1[i]).contains(words2[i])){
+            if (!similarWords.get(words1[i]).contains(words2[i])) {
                 return false;
             }
         }

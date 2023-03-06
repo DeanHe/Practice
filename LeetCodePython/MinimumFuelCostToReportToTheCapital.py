@@ -58,7 +58,7 @@ track the number of people that reach each node and divide that by the number of
 this indicates number of cars required to take people pass this node
 TC: O(N)
 """
-import collections
+from collections import defaultdict, deque
 import math
 from typing import List
 
@@ -79,8 +79,37 @@ class Solution:
             self.res += int(math.ceil(people / seats)) if cur else 0
             return people
 
-        dfs(0, 0)
+        dfs(0, -1)
         return self.res
+
+    def minimumFuelCostBFS(self, roads: List[List[int]], seats: int) -> int:
+        res = 0
+        cities = len(roads) + 1
+        representatives = [1] * cities
+        graph = defaultdict(list)
+        degree = [0] * cities
+        for a, b in roads:
+            graph[a].append(b)
+            graph[b].append(a)
+            degree[a] += 1
+            degree[b] += 1
+        q = deque()
+        for i in range(1, cities):
+            if degree[i] == 1:
+                q.append(i)
+        while q:
+            cur = q.popleft()
+            res += math.ceil(representatives[cur] / seats)
+            for nb in graph[cur]:
+                degree[nb] -= 1
+                representatives[nb] += representatives[cur]
+                if degree[nb] == 1 and nb != 0:
+                    q.append(nb)
+        return res
+
+
+
+
 
 
 

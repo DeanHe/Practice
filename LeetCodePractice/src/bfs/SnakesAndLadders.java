@@ -1,5 +1,6 @@
 package bfs;
-/*On an N x N board, the numbers from 1 to N*N are written boustrophedonically starting from the bottom left of the board, 
+/*
+On an N x N board, the numbers from 1 to N*N are written boustrophedonically starting from the bottom left of the board,
 and alternating direction each row.  For example, for a 6 x 6 board, the numbers are written as follows:
 You start on square 1 of the board (which is always in the last row and first column).  Each move, starting from square x, consists of the following:
 
@@ -10,7 +11,8 @@ A board square on row r and column c has a "snake or ladder" if board[r][c] != -
 Note that you only take a snake or ladder at most once per move: if the destination to a snake or ladder is the start of another snake or ladder, you do not continue moving.  
 (For example, if the board is `[[4,-1],[-1,3]]`, and on the first move your destination square is `2`, then you finish your first move at `3`, because you do not continue moving to `4`.)
 
-Return the least number of moves required to reach square N*N.  If it is not possible, return -1.*/
+Return the least number of moves required to reach square N*N.  If it is not possible, return -1.
+*/
 import java.util.*;
 
 public class SnakesAndLadders {

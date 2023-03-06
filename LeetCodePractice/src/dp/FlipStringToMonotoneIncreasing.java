@@ -26,7 +26,7 @@ Constraints:
 s[i] is either '0' or '1'.
 
 analysis:
-dp[i] means minimum # of flips to make A[:i] montone and A[i] is 0.
+dp0[i] means minimum # of flips to make A[:i] monotone and A[i] is 0.
 */
 public class FlipStringToMonotoneIncreasing {
 	public int minFlipsMonoIncr(String s) {

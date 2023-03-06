@@ -1,5 +1,5 @@
 """
-You are given n tasks labeled from 0 to n - 1 represented by a 2D integer array tasks, where tasks[i] = [enqueueTimei, processingTimei] means that the i​​​​​​th​​​​ task will be available to process at enqueueTimei and will take processingTimei to finish processing.
+You are given n tasks labeled from 0 to n - 1 represented by a 2D integer array tasks, where tasks[i] = [enqueueTimei, processingTimei] means that the ith task will be available to process at enqueueTimei and will take processingTimei to finish processing.
 
 You have a single-threaded CPU that can process at most one task at a time and will act in the following way:
 
@@ -38,8 +38,8 @@ Explanation: The events go as follows:
 
 Constraints:
 tasks.length == n
-1 <= n <= 105
-1 <= enqueueTimei, processingTimei <= 109
+1 <= n <= 10^5
+1 <= enqueueTimei, processingTimei <= 10^9
 
 hint:
 1 To simulate the problem we first need to note that if at any point in time there are no enqueued tasks we need to wait to the smallest enqueue time of a non-processed element

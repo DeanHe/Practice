@@ -41,6 +41,8 @@ public class CheapestFlightsWithinKStops {
      */
 	public int findCheapestPriceDijk(int n, int[][] flights, int src, int dst, int k) {
         int[][] graph = new int[n][n];
+        int[] stops = new int[n];
+        Arrays.fill(stops, Integer.MAX_VALUE);
         for(int[] f : flights){
             graph[f[0]][f[1]] = f[2];
         }
@@ -51,17 +53,19 @@ public class CheapestFlightsWithinKStops {
             int[] temp = pq.poll();
         	int city = temp[0];
         	int price = temp[1];
-            int stop = temp[2];
-            if(stop <= k){
-            	if(city == dst){
-            		return price;
-            	}
-            	for(int nb = 0; nb < graph[city].length; nb++){
-            		if(graph[city][nb] > 0){
-            			// is valid nb
-            			pq.offer(new int[]{nb, graph[city][nb] + price, stop + 1});
-            		}
-            	}
+            int step = temp[2];
+            if(step > stops[city] || step > k){
+            	continue;
+            }
+            stops[city] = step;
+            if(city == dst){
+                return price;
+            }
+            for(int nb = 0; nb < graph[city].length; nb++){
+                if(graph[city][nb] > 0){
+                    // is valid nb
+                    pq.offer(new int[]{nb, graph[city][nb] + price, step + 1});
+                }
             }
         }
     	return -1;
