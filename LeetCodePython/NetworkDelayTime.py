@@ -25,7 +25,8 @@ ui != vi
 All the pairs (ui, vi) are unique. (i.e., no multiple edges.)
 
 hint:
-1 We visit each node at some time, and if that time is better than the fastest time we've reached this node, we travel along outgoing edges in sorted order. Alternatively, we could use Dijkstra's algorithm.
+1 We visit each node at some time, and if that time is better than the fastest time we've reached this node, we travel along outgoing edges in sorted order. Alternatively, we could use
+Dijkstra's algorithm.
 """
 import collections
 import heapq
