@@ -27,6 +27,8 @@ Constraints:
 hint:
 1 Use dynamic programming.
 2 The state would be the index in arr1 and the index of the previous element in arr2 after sorting it and removing duplicates.
+
+dp[i] = j means the number is i, and it takes j minimum operations to get to i
 """
 import bisect
 import collections
@@ -42,6 +44,7 @@ class MakeArrayStrictlyIncreasing:
             for key in dp:
                 if key < n:
                     tmp[n] = min(tmp[n], dp[key])
+                # find the idx of smallest value in arr2 that is greater than prev(key)
                 idx = bisect.bisect_right(arr2, key)
                 if idx < len(arr2):
                     tmp[arr2[idx]] = min(tmp[arr2[idx]], dp[key] + 1)

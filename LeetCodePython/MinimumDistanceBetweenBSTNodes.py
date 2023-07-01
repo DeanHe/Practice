@@ -34,18 +34,18 @@ class MinimumDistanceBetweenBSTNodes:
         self.res = float('inf')
         self.prev = None
 
-        def dfs(cur):
+        def inorder(cur):
             if not cur:
-                return self.res
+                return
 
-            dfs(cur.left)
+            inorder(cur.left)
 
             if self.prev:
                 self.res = min(self.res, cur.val - self.prev.val)
             self.prev = cur
 
-            dfs(cur.right)
+            inorder(cur.right)
 
-        dfs(root)
+        inorder(root)
         return self.res
 

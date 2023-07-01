@@ -26,25 +26,36 @@ It can be shown that there is no distribution with an unfairness less than 7.
 
 Constraints:
 2 <= cookies.length <= 8
-1 <= cookies[i] <= 105
+1 <= cookies[i] <= 10^5
 2 <= k <= cookies.length
+
+analysis:
+backtracking + early stop
+TC: O(k^n) where n is the length of cookies
+SC: O(k + n)
 """
 from typing import List
 
 
 class FairDistributionOfCookies:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
-        total = sum(cookies)
+        distrib = [0] * k
+        n = len(cookies)
 
-        def dfs(pos, sums):
-            if pos == len(cookies):
-                return max(sums)
+        def dfs(pos, zero_cnt):
+            # If there are not enough cookies remaining for children who do not have cookies, return `float('inf')`
+            # as it leads to an invalid distribution.
+            if n - pos < zero_cnt:
+                return float('inf')
+            if pos == n:
+                return max(distrib)
             res = float('inf')
             for i in range(k):
-                if sums[i] < total / k:
-                    sums[i] += cookies[pos]
-                    res = min(res, dfs(pos + 1, sums))
-                    sums[i] -= cookies[pos]
+                zero_cnt -= int(distrib[i] == 0)
+                distrib[i] += cookies[pos]
+                res = min(res, dfs(pos + 1, zero_cnt))
+                distrib[i] -= cookies[pos]
+                zero_cnt += int(distrib[i] == 0)
             return res
 
-        return dfs(0, [0] * k)
+        return dfs(0, k)
