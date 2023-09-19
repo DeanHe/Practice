@@ -39,8 +39,8 @@ class FindTheDuplicateNumber:
         while slow != fast:
             fast = nums[nums[fast]]
             slow = nums[slow]
-        fast = nums[0]
-        while nums[slow] != fast:
+        slow = 0
+        while slow != fast:
             fast = nums[fast]
             slow = nums[slow]
-        return fast
+        return slow

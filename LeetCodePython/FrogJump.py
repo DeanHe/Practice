@@ -5,27 +5,24 @@ Given a list of stones' positions (in units) in sorted ascending order, determin
 
 If the frog's last jump was k units, its next jump must be either k - 1, k, or k + 1 units. The frog can only jump in the forward direction.
 
-
-
 Example 1:
-
 Input: stones = [0,1,3,5,6,8,12,17]
 Output: true
 Explanation: The frog can jump to the last stone by jumping 1 unit to the 2nd stone, then 2 units to the 3rd stone, then 2 units to the 4th stone, then 3 units to the 6th stone, 4 units to the 7th stone, and 5 units to the 8th stone.
-Example 2:
 
+Example 2:
 Input: stones = [0,1,2,3,4,8,9,11]
 Output: false
 Explanation: There is no way to jump to the last stone as the gap between the 5th and 6th stone is too large.
 
 
 Constraints:
-
 2 <= stones.length <= 2000
-0 <= stones[i] <= 231 - 1
+0 <= stones[i] <= 2^31 - 1
 stones[0] == 0
 stones is sorted in a strictly increasing order.
 """
+
 
 class FrogJump(object):
     def canCross(self, stones):
@@ -37,11 +34,11 @@ class FrogJump(object):
         available_steps[stones[0]].add(1)
         for stone in stones:
             for k in available_steps[stone]:
-                reach = k + stone
-                if reach in available_steps:
-                    nxt = available_steps[reach]
+                nb = k + stone
+                if nb in available_steps:
+                    nb_steps = available_steps[nb]
                     if k - 1 > 0:
-                        nxt.add(k - 1)
-                    nxt.add(k)
-                    nxt.add(k + 1)
+                        nb_steps.add(k - 1)
+                    nb_steps.add(k)
+                    nb_steps.add(k + 1)
         return len(available_steps[stones[-1]]) > 0

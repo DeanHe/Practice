@@ -42,7 +42,7 @@ TC: O(N log N)
 from typing import List
 
 
-class Solution:
+class PutMarblesInBags:
     def putMarbles(self, weights: List[int], k: int) -> int:
         n = len(weights)
         if n == k or k == 1:

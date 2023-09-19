@@ -24,7 +24,7 @@ Output: -1
 Explanation: Even if you activate all the four taps you cannot water the whole garden.
 
 Constraints:
-1 <= n <= 104
+1 <= n <= 10^4
 ranges.length == n + 1
 0 <= ranges[i] <= 100
 

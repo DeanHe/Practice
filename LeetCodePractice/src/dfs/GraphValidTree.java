@@ -43,16 +43,13 @@ public class GraphValidTree {
 	}
 
 	private boolean findCycle(int cur, int parent) {
+		if (visited[cur]) {
+			return true;
+		}
 		visited[cur] = true;
 		for (int nb : graph.get(cur)) {
-			if (visited[nb]) {
-				if (nb != parent) {
-					return true;
-				}
-			} else {
-				if (findCycle(nb, cur)) {
-					return true;
-				}
+			if (nb != parent && findCycle(nb, cur)) {
+				return true;
 			}
 		}
 		return false;

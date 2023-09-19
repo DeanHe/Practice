@@ -5,10 +5,7 @@ Count all valid pickup/delivery possible sequences such that delivery(i) is alwa
 
 Since the answer may be too large, return it modulo 10^9 + 7.
 
-
-
 Example 1:
-
 Input: n = 1
 Output: 1
 Explanation: Unique order (P1, D1), Delivery 1 always is after of Pickup 1.
@@ -26,6 +23,10 @@ Output: 90
 
 Constraints:
 1 <= n <= 500
+
+analysis:
+DP
+1 Use the permutation and combination theory to add one (P, D) pair each time until n pairs.
 """
 class CountAllValidPickupAndDeliveryOptions(object):
     def countOrders(self, n):
