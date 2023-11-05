@@ -21,10 +21,13 @@ Input: pref = [13]
 Output: [13]
 Explanation: We have pref[0] = arr[0] = 13.
 
-
 Constraints:
 1 <= pref.length <= 10^5
 0 <= pref[i] <= 10^6
+
+hints:
+1 Consider the following equation: x ^ a = b. How can you find x?
+2 Notice that arr[i] ^ pref[i-1] = pref[i]. This is the same as the previous equation.
 
 analysis:
 tag: xor bit manipulation

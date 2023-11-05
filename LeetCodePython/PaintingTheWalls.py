@@ -25,6 +25,9 @@ cost.length == time.length
 hints:
 1 Can we break the problem down into smaller subproblems and use DP?
 2 Paid painters will be used for a maximum of N/2 units of time. There is no need to use paid painter for a time greater than this.
+
+analysis:
+TC: O(N^2)
 """
 from functools import cache
 from typing import List

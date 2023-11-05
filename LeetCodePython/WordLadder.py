@@ -26,6 +26,10 @@ wordList[i].length == beginWord.length
 beginWord, endWord, and wordList[i] consist of lowercase English letters.
 beginWord != endWord
 All the words in wordList are unique.
+
+anlaysis:
+BFS
+TC: O(M^2 * N) M is the word character length, N is th wordlist length
 """
 import collections
 from typing import List
@@ -45,4 +49,31 @@ class WordLadder:
                     if nb in wordList:
                         wordList.remove(nb)
                         queue.append((nb, l + 1))
+        return 0
+
+    def ladderLengthBidirectionBFS(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordList = set(wordList)
+        if endWord not in wordList:
+            return 0
+        visited = set()
+        begin_set = {beginWord}
+        end_set = {endWord}
+        step = 1
+        while begin_set and end_set:
+            next_set = set()
+            for w in begin_set:
+                if w in end_set:
+                    return step
+                visited.add(w)
+                for i in range(len(w)):
+                    for c in 'abcdefghijklmnopqrstuvwxyz':
+                        nb = w[:i] + c + w[i + 1:]
+                        if nb in wordList and nb not in visited:
+                            next_set.add(nb)
+            if len(end_set) < len(next_set):
+                begin_set = end_set
+                end_set = next_set
+            else:
+                begin_set = next_set
+            step += 1
         return 0

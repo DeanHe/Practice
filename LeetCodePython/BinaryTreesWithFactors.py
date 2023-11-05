@@ -17,8 +17,14 @@ Explanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5]
 
 Constraints:
 1 <= arr.length <= 1000
-2 <= arr[i] <= 109
+2 <= arr[i] <= 10^9
 All the values of arr are unique.
+
+analysis:
+DP
+
+dp[i] means # of binary tree formed by arr[i] as root
+for each number i in arr, check every number j which i is divisible by j and i//j in arr
 """
 from typing import List
 

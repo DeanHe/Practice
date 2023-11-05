@@ -34,6 +34,7 @@ hint:
 analysis:
 0:a, 1:e, 2:i, 3:o, 4:u
 dp[i][j] denotes # of path ends with vowel[j]
+TC: O(N)
 """
 
 class CountVowelsPermutation:
