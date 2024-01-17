@@ -48,13 +48,13 @@ from typing import List
 
 class MinimumTimeToMakeRopeColorful:
     def minCost(self, colors: str, neededTime: List[int]) -> int:
-        res = max_cost = cost_sum = 0
+        res = group_max_cost = group_cost_sum = 0
         for i, c in enumerate(colors):
             if i > 0 and colors[i - 1] != colors[i]:
-                res += cost_sum - max_cost
-                max_cost = cost_sum = 0
-            cost_sum += neededTime[i]
-            max_cost = max(max_cost, neededTime[i])
-        res += cost_sum - max_cost
+                res += group_cost_sum - group_max_cost
+                group_max_cost = group_cost_sum = 0
+            group_cost_sum += neededTime[i]
+            group_max_cost = max(group_max_cost, neededTime[i])
+        res += group_cost_sum - group_max_cost
         return res
 

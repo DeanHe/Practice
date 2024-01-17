@@ -35,10 +35,10 @@ from typing import List
 class LongestIncreasingSubsequence:
     def lengthOfLIS(self, nums: List[int]) -> int:
         dp = []
-        for i in range(len(nums)):
-            idx = bisect_left(dp, nums[i])
+        for num in nums:
+            idx = bisect_left(dp, num)
             if idx == len(dp):
-                dp.append(nums[i])
+                dp.append(num)
             else:
-                dp[idx] = nums[i]
+                dp[idx] = num
         return len(dp)

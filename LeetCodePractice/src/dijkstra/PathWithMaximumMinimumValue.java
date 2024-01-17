@@ -1,5 +1,6 @@
 package dijkstra;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /*
@@ -34,25 +35,30 @@ public class PathWithMaximumMinimumValue {
         int[] dirs = {0, 1, 0, -1, 0};
         int rows = A.length;
         int cols = A[0].length;
-        int res = A[0][0];
-        boolean[][] visited = new boolean[rows][cols];
+        int[][] dist = new int[rows][cols];
+        for(int[] row : dist){
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+
         // r : c -> val
-        PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> A[b[0]][b[1]] -  A[a[0]][a[1]]);
-        maxHeap.offer(new int[]{0, 0});
+        PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> b[2] - a[2]);
+        maxHeap.offer(new int[]{0, 0, A[0][0]});
         while (!maxHeap.isEmpty()) {
             int[] cur = maxHeap.poll();
             int r = cur[0];
             int c = cur[1];
-            visited[r][c] = true;
-            res = Math.min(res, A[r][c]);
-            if (r == rows - 1 && c == cols - 1) {
-                return res;
-            }
-            for (int i = 0; i < dirs.length - 1; i++) {
-                int nb_r = r + dirs[i];
-                int nb_c = c + dirs[i + 1];
-                if (nb_r < rows && nb_r >= 0 && nb_c < cols && nb_c >= 0 && !visited[nb_r][nb_c]) {
-                    maxHeap.offer(new int[]{nb_r, nb_c});
+            int d = cur[2];
+            if (dist[r][c] == Integer.MAX_VALUE){
+                dist[r][c] = d;
+                if (r == rows - 1 && c == cols - 1) {
+                    return d;
+                }
+                for (int i = 0; i < dirs.length - 1; i++) {
+                    int nb_r = r + dirs[i];
+                    int nb_c = c + dirs[i + 1];
+                    if (nb_r < rows && nb_r >= 0 && nb_c < cols && nb_c >= 0 && dist[nb_r][nb_c] == Integer.MAX_VALUE) {
+                        maxHeap.offer(new int[]{nb_r, nb_c, Math.min(d, A[nb_r][nb_c])});
+                    }
                 }
             }
         }

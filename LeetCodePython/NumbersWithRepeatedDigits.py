@@ -9,7 +9,7 @@ Explanation: The only positive number (<= 20) with at least 1 repeated digit is 
 Example 2:
 Input: n = 100
 Output: 10
-Explanation: The positive numbers (<= 100) with atleast 1 repeated digit are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
+Explanation: The positive numbers (<= 100) with at least 1 repeated digit are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
 
 Example 3:
 Input: n = 1000

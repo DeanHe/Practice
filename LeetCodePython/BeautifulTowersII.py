@@ -60,7 +60,7 @@ class BeautifulTowersI:
         sz = len(maxHeights)
         left, right, st = [0] * sz, [0] * sz, []
         for i in range(sz):
-            while st and maxHeights[st[-1]] > maxHeights[i]:
+            while st and maxHeights[i] < maxHeights[st[-1]]:
                 st.pop()
             if not st:
                 left[i] = maxHeights[i] * (i + 1)

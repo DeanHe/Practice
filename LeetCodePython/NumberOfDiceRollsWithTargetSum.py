@@ -32,16 +32,17 @@ hint:
 class NumberOfDiceRollsWithTargetSum:
     def numRollsToTarget(self, n: int, k: int, target: int) -> int:
         mem = {}
+        MOD = 10 ** 9 + 7
 
         def dfs(d, total):
             if d == 0:
-                return 0 if total > 0 else 1
+                return 1 if total == 0 else 0
             if (d, total) in mem:
                 return mem[(d, total)]
             res = 0
-            for i in range(max(0, total - k), total):
-                res += dfs(d - 1, i)
+            for i in range(1, k + 1):
+                res += dfs(d - 1, total - i)
             mem[(d, total)] = res
             return res
 
-        return dfs(n, target) % (10 ** 9 + 7)
+        return dfs(n, target) % MOD

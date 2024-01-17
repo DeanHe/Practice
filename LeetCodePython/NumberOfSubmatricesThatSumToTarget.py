@@ -25,8 +25,11 @@ Constraints:
 -1000 <= matrix[i] <= 1000
 -10^8 <= target <= 10^8
 
-Using a 2D prefix sum, we can query the sum of any submatrix in O(1) time. Now for each (r1, r2), we can find the largest sum of a submatrix that uses every row in [r1, r2] in linear time using a sliding window.
+Using a 2D prefix sum, we can query the sum of any submatrix in O(1) time.
+Now for each (r1, r2), we can find the largest sum of a submatrix that uses every row in [r1, r2] in linear time using a sliding window.
+TC: O(M*N^2)
 """
+from collections import defaultdict
 from typing import List
 
 
@@ -43,17 +46,14 @@ class NumberOfSubmatricesThatSumToTarget:
 
         for sc in range(cols):
             for ec in range(sc, cols):
-                row_sum_cnt = {0: 1}
+                row_sum_cnt = defaultdict(int)
+                row_sum_cnt[0] = 1
                 total = 0
                 for r in range(rows):
                     if sc == 0:
                         total += pre_sum[r][ec]
                     else:
                         total += pre_sum[r][ec] - pre_sum[r][sc - 1]
-                    if total - target in row_sum_cnt:
-                        res += row_sum_cnt[total - target]
-                    if total in row_sum_cnt:
-                        row_sum_cnt[total] += 1
-                    else:
-                        row_sum_cnt[total] = 1
+                    res += row_sum_cnt[total - target]
+                    row_sum_cnt[total] += 1
         return res

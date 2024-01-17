@@ -13,20 +13,15 @@ Return the minimum weight of a subgraph of the graph such that it is possible to
 
 A subgraph is a graph whose vertices and edges are subsets of the original graph. The weight of a subgraph is the sum of weights of its constituent edges.
 
-
-
 Example 1:
-
-
 Input: n = 6, edges = [[0,2,2],[0,5,6],[1,0,3],[1,4,5],[2,1,1],[2,3,3],[2,3,4],[3,4,2],[4,5,1]], src1 = 0, src2 = 1, dest = 5
 Output: 9
 Explanation:
 The above figure represents the input graph.
 The blue edges represent one of the subgraphs that yield the optimal answer.
 Note that the subgraph [[1,0,3],[0,5,6]] also yields the optimal answer. It is not possible to get a subgraph with less weight satisfying all the constraints.
+
 Example 2:
-
-
 Input: n = 3, edges = [[0,1,1],[2,1,1]], src1 = 0, src2 = 1, dest = 2
 Output: -1
 Explanation:

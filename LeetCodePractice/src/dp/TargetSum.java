@@ -23,11 +23,12 @@ Let P denotes a set of nums have + sign before it
 Let N denotes a set of nums have - sign before it
 P U N = nums
 sum(P) - sum(N) = S
-sum(P) - sum(N) + sum(P) + sum(N) = target + sum(P) + sum(N)
+sum(P) - sum(N) + sum(P) + sum(N) = S + sum(P) + sum(N)
 2 * sum(P) = S + sum(nums);
 sum(P) = (S + sum(nums)) / 2; ~ 0:1 backpack problem         https://www.youtube.com/watch?v=zks6mN06xdQ
 new target is (S + sum(nums)) / 2
 
+TC: O(M*N)
 */
 public class TargetSum {
 	/**

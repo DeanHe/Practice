@@ -32,7 +32,6 @@ City 4 -> [City 1, City 2, City 3]
 The city 0 has 1 neighboring city at a distanceThreshold = 2.
 
 Constraints:
-
 2 <= n <= 100
 1 <= edges.length <= n * (n - 1) / 2
 edges[i].length == 3
