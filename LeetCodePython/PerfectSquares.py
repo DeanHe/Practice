@@ -15,6 +15,10 @@ Explanation: 13 = 4 + 9.
 
 Constraints:
 1 <= n <= 10^4
+
+analysis:
+DP
+TC: O(N * sqrt(N))
 """
 
 class PerfectSquares:

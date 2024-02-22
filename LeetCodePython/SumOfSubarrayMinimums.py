@@ -18,7 +18,7 @@ Constraints:
 1 <= arr[i] <= 3 * 10^4
 
 analysis:
-dp[i] means sum of subarrayMins end at arr[i]
+dp[i] means sum of subarray Mins end at arr[i]
 """
 from typing import List
 

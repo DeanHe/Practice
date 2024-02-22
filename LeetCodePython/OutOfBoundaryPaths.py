@@ -20,6 +20,11 @@ Constraints:
 hint:
 1 Is traversing every path feasible? There are many possible paths for a small matrix. Try to optimize it.
 2 Can we use some space to store the number of paths and update them after every move?
+
+Analysis:
+Dynamic Programming
+dp[r][c] means # of ways to reach (r, c) after certain moves
+TC:O(maxMoves * rows * cols)
 """
 
 class OutOfBoundaryPaths:

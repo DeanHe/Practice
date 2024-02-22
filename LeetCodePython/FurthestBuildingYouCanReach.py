@@ -39,6 +39,9 @@ hint:
 2 You'll have to do a set of jumps, and choose for each one whether to do it using a ladder or bricks.
 It's always optimal to use ladders in the largest jumps.
 3 Iterate on the buildings, maintaining the largest r jumps and the sum of the remaining ones so far, and stop whenever this sum exceeds b.
+
+analysis:
+use priority queue to track the gap from greatest to smallest. and use ladders to cover them in order
 """
 import heapq
 from typing import List

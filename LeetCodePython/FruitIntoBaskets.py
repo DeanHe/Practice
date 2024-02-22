@@ -39,7 +39,7 @@ TC: O(N)
 from typing import List
 
 
-class FurthestBuildingYouCanReach:
+class FruitIntoBaskets:
     def totalFruit(self, fruits: List[int]) -> int:
         n = len(fruits)
         res = cnt = 0

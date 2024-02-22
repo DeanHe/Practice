@@ -14,6 +14,9 @@ Explanation: The array [1,3,2] and [2,1,3] have exactly 1 inverse pair.
 Constraints:
 1 <= n <= 1000
 0 <= k <= 1000
+
+analysis:
+dp[i][j] means # of permutation of (1...i) with j reverse pairs
 """
 
 class KInversePairsArray:
@@ -24,7 +27,7 @@ class KInversePairsArray:
             tmp = [0]
             for j in range(k + 1):
                 v = dp[j + 1]
-                v -= dp[k - i + 1] if j >= i else 0
+                v -= dp[j - i + 1] if j >= i else 0
                 tmp.append((tmp[-1] + v) % MOD)
             dp = tmp
         return (dp[k + 1] - dp[k]) % MOD

@@ -42,7 +42,7 @@ cols == grid[i].length
 0 <= grid[i][j] <= 100
 
 hint:
-1 Use dynammic programming, define DP[i][j][k]: The maximum cherries that both robots can take starting on the ith row, and column j and k of Robot 1 and 2 respectively.
+1 Use dynamic programming, define DP[i][j][k]: The maximum cherries that both robots can take starting on the ith row, and column j and k of Robot 1 and 2 respectively.
 */
 
 public class CherryPickupII {
