@@ -28,18 +28,26 @@ Constraints:
 """
 class LargestNumberAfterDigitSwapsByParity:
     def largestInteger(self, num: int) -> int:
-        odd, even, total, res = [], [], 0, 0
+        odd, even, parity, res = [], [], [], 0
         while num > 0:
             d = num % 10
             if d % 2 == 0:
                 even.append(d)
+                parity.append(True)
             else:
                 odd.append(d)
+                parity.append(False)
             num = num // 10
-            total += 1
-        for _ in range()
-        total = zip(sorted(even), sorted(odd))
-        for n in total[::-1]:
+        even.sort(reverse=True)
+        odd.sort(reverse=True)
+        e_i = o_i = 0
+        sz = len(parity)
+        for i in range(sz):
             res = res * 10
-            res += n
+            if parity[sz - i - 1]:
+                res += even[e_i]
+                e_i += 1
+            else:
+                res += odd[o_i]
+                o_i += 1
         return res

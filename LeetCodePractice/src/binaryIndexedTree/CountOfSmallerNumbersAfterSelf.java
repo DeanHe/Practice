@@ -35,7 +35,7 @@ public class CountOfSmallerNumbersAfterSelf {
 		int len = nums.length;
 		bit = new int[len + 1];
 
-		discretization(nums);
+		compress(nums);
 		for (int i = len - 1; i >= 0; i--) {
 			int count = getPrefixSum(nums[i] - 1);
 			res.add(0, count);
@@ -49,7 +49,7 @@ public class CountOfSmallerNumbersAfterSelf {
 	// the order in the sorted arr;
 	// i.e: [1, 1000, -100, 10, 100] -> [1, 4, 0, 2, 3] , get rid of very large
 	// number or negative number
-	private void discretization(int[] nums) {
+	private void compress(int[] nums) {
 		int[] sorted = nums.clone();
 		Arrays.sort(sorted);
 		for (int i = 0; i < nums.length; i++) {

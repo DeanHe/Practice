@@ -40,7 +40,7 @@ public class CountNumberOfTeams {
         int res = 0, len = rating.length;
         left = new int[len + 1];
         right = new int[len + 1];
-        discretization(rating);
+        compress(rating);
         for(int i = 0; i < len; i++){
             update(right, rating[i] , 1);
         }
@@ -56,7 +56,7 @@ public class CountNumberOfTeams {
         return res;
     }
 
-    private void discretization(int[] nums) {
+    private void compress(int[] nums) {
         int[] sorted = nums.clone();
         Arrays.sort(sorted);
         for(int i = 0; i < nums.length; i++){

@@ -36,7 +36,7 @@ public class CountOfSmallerNumberBeforeItself {
     public List<Integer> countOfSmallerNumberII(int[] A) {
         int len = A.length;
         bit = new int[len + 1];
-        discretization(A);
+        compress(A);
         List<Integer> res = new ArrayList<>();
         for(int n : A){
             int count = getPreSum(n - 1);
@@ -46,7 +46,7 @@ public class CountOfSmallerNumberBeforeItself {
         return res;
     }
 
-    private void discretization(int[] nums) {
+    private void compress(int[] nums) {
         int[] sorted = nums.clone();
         Arrays.sort(sorted);
         for (int i = 0; i < nums.length; i++) {

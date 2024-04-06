@@ -32,12 +32,23 @@ board and word consists of only lowercase and uppercase English letters.
 
 Follow up: Could you use search pruning to make your solution faster with a larger board?
 """
+from collections import Counter, defaultdict
 from typing import List
 
 
 class WordSearch:
     def exist(self, board: List[List[str]], word: str) -> bool:
         rows, cols = len(board), len(board[0])
+        if len(word) > rows * cols:
+            return False
+        board_letters = defaultdict(int)
+        for r in range(rows):
+            for c in range(cols):
+                board_letters[board[r][c]] += 1
+        letters = Counter(word)
+        for c in letters:
+            if c not in board_letters or board_letters[c] < letters[c]:
+                return False
         dirs = [0, 1, 0, -1, 0]
 
         def dfs(r, c, cnt):

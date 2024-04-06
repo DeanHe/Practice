@@ -44,16 +44,16 @@ from typing import List
 
 class CheapestFlightsWithinKStops:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
-        stops = [float('inf')] * n
+        dist = [float('inf')] * n
         graph = collections.defaultdict(dict)
         for start, end, travel in flights:
             graph[start][end] = travel
         q = [(0, src, -1)]
         while q:
             cost, city, steps = heapq.heappop(q)
-            if steps > stops[city] or steps > k:
+            if steps > dist[city] or steps > k:
                 continue
-            stops[city] = steps
+            dist[city] = steps
             if city == dst:
                 return cost
             for nb in graph[city]:

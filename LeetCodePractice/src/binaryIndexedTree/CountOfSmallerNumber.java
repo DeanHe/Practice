@@ -31,7 +31,7 @@ public class CountOfSmallerNumber {
     public List<Integer> countOfSmallerNumber(int[] A, int[] queries) {
         bit = new int[A.length + queries.length + 1];
         List<Integer> res = new ArrayList<>();
-        discretization(A, queries);
+        compress(A, queries);
         for (int i = 0; i < A.length; i++) {
             update(A[i]);
         }
@@ -42,7 +42,7 @@ public class CountOfSmallerNumber {
         return res;
     }
 
-    private void discretization(int[] nums, int[] queries) {
+    private void compress(int[] nums, int[] queries) {
         // combine nums and queries
         int[] sorted = new int[nums.length + queries.length];
         System.arraycopy(nums, 0, sorted, 0, nums.length);
