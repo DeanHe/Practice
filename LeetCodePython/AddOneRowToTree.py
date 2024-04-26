@@ -41,11 +41,22 @@ class TreeNode:
 
 class AddOneRowToTree:
     def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
-        dummy, dummy.left = TreeNode(None), root
+        dummy = TreeNode()
+        dummy.left = root
         q = [dummy]
         for _ in range(depth - 1):
-            q = [child for cur in q for child in (cur.left, cur.right) if child]
+            nq = []
+            for cur in q:
+                if cur.left:
+                    nq.append(cur.left)
+                if cur.right:
+                    nq.append(cur.right)
+            q = nq
         for cur in q:
-            cur.left, cur.left.left = TreeNode(val), cur.left
-            cur.right, cur.right.right = TreeNode(val), cur.right
+            existing_left = cur.left
+            cur.left = TreeNode(val)
+            cur.left.left = existing_left
+            existing_right = cur.right
+            cur.right = TreeNode(val)
+            cur.right.right = existing_right
         return dummy.left

@@ -28,20 +28,26 @@ s consists of lowercase English letters.
 hint:
 1 How can you calculate the longest ideal subsequence that ends at a specific index i?
 2 Can you calculate it for all positions i? How can you use previously calculated answers to calculate the answer for the next position?
+
+analysis:
+dynamic programming
+dp[letter] means the longest subsequence length ended with letter
+TC: O(N * K)
 """
 
-class Solution:
+class LongestIdealSubsequence:
     def longestIdealString(self, s: str, k: int) -> int:
-        cnt = [0] * 26
         res = 0
+        dp = [0] * 26
         for c in s:
             i = ord(c) - ord('a')
-            tmp = 0
-            for j in range(max(0, i - k), min(25, i + k) + 1):
-                tmp = max(tmp, 1 + cnt[j])
-            cnt[i] = tmp
-            # print(str(c) + ":" + str(cnt[i]))
-            res = max(res, cnt[i])
+            best = 0
+            for j in range(26):
+                if abs(i - j) <= k:
+                    best = max(best, dp[j])
+            dp[i] = max(dp[i], best + 1)
+            # print(str(c) + ":" + str(dp[i]))
+            res = max(res, dp[i])
         return res
 
 

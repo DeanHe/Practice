@@ -26,19 +26,19 @@ s[i] is '(', ')' or '*'.
 """
 class ValidParenthesisString:
     def checkValidString(self, s: str) -> bool:
-        open_min, open_max = 0, 0
-        for i in range(0, len(s)):
-            if s[i] == '(':
-                open_min += 1
-                open_max += 1
-            elif s[i] == ')':
-                if open_min > 0:
-                    open_min -= 1
-                open_max -= 1
-            else: # for '*'
-                if open_min > 0:
-                    open_min -= 1
-                open_max += 1
-            if open_max < 0:
+        left_min = left_max = 0
+        for c in s:
+            if c == '(':
+                left_min += 1
+                left_max += 1
+            elif c == ')':
+                if left_min > 0:
+                    left_min -= 1
+                left_max -= 1
+            elif c == '*':
+                if left_min > 0:
+                    left_min -= 1
+                left_max += 1
+            if left_max < 0:
                 return False
-        return open_min == 0
+        return left_min == 0

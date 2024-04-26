@@ -19,11 +19,15 @@ rows == matrix.length
 cols == matrix[i].length
 1 <= row, cols <= 200
 matrix[i][j] is '0' or '1'.
+
+analysis:
+monotonic stack
+TC: O(N^2)
 """
 from typing import List
 
 
-class Solution:
+class MaximalRectangle:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
         rows, cols, res = len(matrix), len(matrix[0]), 0
         heights = [0] * cols
