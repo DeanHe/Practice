@@ -31,6 +31,9 @@ The given input represents a valid tree.
 
 analysis:
 if a and b are neighboring nodes
+
+When we move our root from parent to its child i, count[i] points get 1 closer to root, n - count[i] nodes get 1 futhur to root.
+
 res[a] - res[b] = # of node in subtree(b) - # of node in subtree(a)
 res[a] = res[b] + # of node in subtree(b) - # of node in subtree(a)
 res[a] = res[b] + n - # of node in subtree(a) - # of node in subtree(a)
