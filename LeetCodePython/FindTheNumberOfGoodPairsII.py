@@ -51,6 +51,7 @@ class FindTheNumberOfGoodPairsII:
         return res
 
     # multiply num2 factor to match nums1, using space to trade off time cost
+    # TC: O(NlogN) ~ 6 * 10^6
     def numberOfPairs2(self, nums1: List[int], nums2: List[int], k: int) -> int:
         res = 0
         num1_max = max(nums1)
