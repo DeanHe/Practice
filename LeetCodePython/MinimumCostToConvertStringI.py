@@ -43,6 +43,14 @@ hints:
 If there is no path between source[i] and target[i], the answer is -1.
 3 Any shortest path algorithms will work since we only have 26 nodes. Since we only have at most 26 * 26 pairs, we can save the result to avoid re-calculation.
 4 We can also use Floyd Warshall's algorithm to precompute all the results.
+
+Analysis：
+Floyd Warshall's algorithm
+Let n be the length of source and m be the length of the original array.
+Populating minCosts with the initial conversion costs takes O(m) time.
+Each of the three nested loops runs 26 times. Thus, the overall time taken is O(26^3）= O(1).
+To calculate the totalCost, the algorithm loops over the source string, which takes linear time.
+Thus, the time complexity of the algorithm is O(m)+O(1)+O(n), which simplifies to O(m+n).
 """
 from typing import List
 

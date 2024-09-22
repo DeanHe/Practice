@@ -18,7 +18,12 @@ The number of nodes in the given tree is at most 1000.
 Each node has a distinct value between 1 and 1000.
 to_delete.length <= 1000
 to_delete contains distinct values between 1 and 1000.
+
+analysis:
+DFS post order traverse
+TC: O(N)
 """
+from collections import deque
 from typing import Optional, List
 
 
@@ -46,6 +51,32 @@ class DeleteNodesAndReturnForest:
             return None if need_to_delete else cur
 
         dfs(root, True)
+        return res
+
+    def delNodesBFS(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+        res = []
+        if not root:
+            return res
+        to_delete = set(to_delete)
+
+        q = deque([root])
+        while q:
+            cur = q.popleft()
+            if cur.left:
+                q.append(cur.left)
+                if cur.left.val in to_delete:
+                   cur.left = None
+            if cur.right:
+                q.append(cur.right)
+                if cur.right.val in to_delete:
+                    cur.right = None
+            if cur.val in to_delete:
+                if cur.left:
+                    res.append(cur.left)
+                if cur.right:
+                    res.append(cur.right)
+        if root.val not in to_delete:
+            res.append(root)
         return res
 
 

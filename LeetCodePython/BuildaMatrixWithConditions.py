@@ -43,41 +43,43 @@ lefti != righti
 hint:
 1 Can you think of the problem in terms of graphs?
 2 What algorithm allows you to find the order of nodes in a graph?
+
+analysis:
+Kahn's Algorithm
+BFS topological sort indegree
+TC: O(max(k*k, n))
 """
-import collections
+from collections import defaultdict, deque
 from typing import List
 
 
 class BuildaMatrixWithConditions:
     def buildMatrix(self, k: int, rowConditions: List[List[int]], colConditions: List[List[int]]) -> List[List[int]]:
         def bfs(conditions):
-            graph = collections.defaultdict(set)
-            indeg = [0] * k
-            visited = set()
-            q = collections.deque()
+            graph = defaultdict(set)
+            indeg = defaultdict(int)
+            q = deque()
             res = []
             conditions = set([tuple(a) for a in conditions])
             for s, e in conditions:
-                graph[s - 1].add(e - 1)
-                indeg[e - 1] += 1
-            for i in range(k):
+                graph[s].add(e)
+                indeg[e] += 1
+            for i in range(1, k + 1):
                 if indeg[i] == 0:
                     q.append(i)
-                    visited.add(i)
             while q:
                 cur = q.popleft()
                 res.append(cur)
                 for nb in graph[cur]:
                     indeg[nb] -= 1
-                    if indeg[nb] == 0 and nb not in visited:
+                    if indeg[nb] == 0:
                         q.append(nb)
-                        visited.add(nb)
-            return res if len(visited) == k else []
+            return res if len(res) == k else []
 
         res_rows, res_cols = bfs(rowConditions), bfs(colConditions)
         if not res_rows or not res_cols:
             return []
         mat = [[0] * k for _ in range(k)]
-        for i in range(k):
-            mat[res_rows.index(i)][res_cols.index(i)] = i + 1
+        for i in range(1, k + 1):
+            mat[res_rows.index(i)][res_cols.index(i)] = i
         return mat

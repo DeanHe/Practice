@@ -10,15 +10,12 @@ The test cases will be generated such that the binary tree is valid.
 
 
 Example 1:
-
-
 Input: descriptions = [[20,15,1],[20,17,0],[50,20,1],[50,80,0],[80,19,1]]
 Output: [50,20,80,15,17,19]
 Explanation: The root node is the node with value 50 since it has no parent.
 The resulting binary tree is shown in the diagram.
+
 Example 2:
-
-
 Input: descriptions = [[1,2,1],[2,3,0],[3,4,1]]
 Output: [1,2,null,null,3,4]
 Explanation: The root node is the node with value 1 since it has no parent.
@@ -26,13 +23,22 @@ The resulting binary tree is shown in the diagram.
 
 
 Constraints:
-
-1 <= descriptions.length <= 104
+1 <= descriptions.length <= 10^4
 descriptions[i].length == 3
-1 <= parenti, childi <= 105
+1 <= parenti, childi <= 10^5
 0 <= isLefti <= 1
 The binary tree described by descriptions is valid.
+
+hints:
+1 Could you represent and store the descriptions more efficiently?
+2 Could you find the root node?
+3 The node that is not a child in any of the descriptions is the root node.
+
+analysis:
+TC: O(N)
 """
+from typing import List, Optional
+
 
 # Definition for a binary tree node.
 class TreeNode(object):
@@ -41,21 +47,19 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
-class CreateBinaryTreeFromDescriptions(object):
-    def createBinaryTree(self, descriptions):
-        """
-        :type descriptions: List[List[int]]
-        :rtype:
-        """
+class CreateBinaryTreeFromDescriptions:
+    def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
         children = set()
         map = {}
         for parent, child, is_left in descriptions:
-            parent_node = map.setdefault(parent, TreeNode(parent))
-            child_node = map.setdefault(child, TreeNode(child))
+            if parent not in map:
+                map[parent] = TreeNode(parent)
+            if child not in map:
+                map[child] = TreeNode(child)
             if is_left:
-                parent_node.left = child_node
+                map[parent].left = map[child]
             else:
-                parent_node.right = child_node
+                map[parent].right = map[child]
             children.add(child)
         root = (set(map) - set(children)).pop()
         return map[root]

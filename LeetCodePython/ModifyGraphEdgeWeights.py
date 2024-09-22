@@ -54,52 +54,43 @@ class Solution:
         limit = 2 * 10 ** 9
         graph = [[] for _ in range(n)]
         for a, b, w in edges:
-            graph[a].append((b, w))
-            graph[b].append((a, w))
+            if w != -1:
+                graph[a].append((b, w))
+                graph[b].append((a, w))
 
-        def dijkstra(src, skip_negative):
-            pq = [(0, src, -1)]
-            dist = {}
-            parent = {}
+        def dijkstra(src, dest):
+            pq = [(0, src)]
+            dist = defaultdict(lambda: limit)
             while pq:
-                d, cur, pre = heapq.heappop(pq)
-                if cur not in dist:
+                d, cur = heapq.heappop(pq)
+                if d <= dist[cur]:
                     dist[cur] = d
-                    parent[cur] = pre
-                for nb, w in graph[cur]:
-                    if w == -1:
-                        if skip_negative:
-                            continue
-                        w = 1
-                    if nb not in dist:
-                        heapq.heappush(pq, (d + w, nb, cur))
-            return dist, parent
+                    for nb, w in graph[cur]:
+                        if d + w < dist[nb]:
+                            dist[nb] = d + w
+                            heapq.heappush(pq, (d + w, nb))
+            return dist[dest]
 
-        dist_from_dest, parent_from_dest = dijkstra(destination, skip_negative=True)
-        if dist_from_dest.get(source, limit) < target:
+        shortest_dist = dijkstra(source, destination)
+        if shortest_dist < target:
             return []
-        dist_from_src, parent_from_src = dijkstra(source, skip_negative=False)
-        if dist_from_src[destination] > target:
-            return []
+        elif shortest_dist == target:
+            for edge in edges:
+                if edge[2] == -1:
+                    edge[2] = limit
+            return edges
 
-        edges = {(min(a, b), max(a, b)): w for a, b, w in edges}
-
-        path = [destination]
-        while path[-1] != source:
-            path.append(parent_from_src[path[-1]])
-        path = path[::-1]
-
-        cost = 0
-        for i in range(len(path) - 1):
-            cur, nxt = path[i], path[i + 1]
-            key = (min(cur, nxt), max(cur, nxt))
-            if edges[key] == -1:
-                edges[key] = max(target - dist_from_dest.get(nxt, limit) - cost, 1)
-            cost += edges[key]
-
-        for key, w in edges.items():
+        for i, (a, b, w) in enumerate(edges):
             if w == -1:
-                edges[key] = limit
-
-        return [[a, b, w] for (a, b), w in edges.items()]
+                edges[i][2] = 1
+                graph[a].append((b, 1))
+                graph[b].append((a, 1))
+                shortest_dist = dijkstra(source, destination)
+                if shortest_dist <= target:
+                    edges[i][2] += target - shortest_dist
+                    for j in range(i + 1, len(edges)):
+                        if edges[j][2] == -1:
+                            edges[j][2] = limit
+                    return edges
+        return []
 

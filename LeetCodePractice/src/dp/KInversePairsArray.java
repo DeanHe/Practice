@@ -23,7 +23,6 @@ The array [1,3,2] and [2,1,3] have exactly 1 inverse pair.
  
 
 Note:
-
 The integer n is in the range [1, 1000] and k is in the range [0, 1000].
 
 analysis:

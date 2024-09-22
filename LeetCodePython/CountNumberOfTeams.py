@@ -21,13 +21,18 @@ Example 3:
 Input: rating = [1,2,3,4]
 Output: 4
 
-
 Constraints:
-
 n == rating.length
 3 <= n <= 1000
 1 <= rating[i] <= 10^5
 All the integers in rating are unique.
+
+hints:
+1 BruteForce, check all possibilities.
+
+Analysis:
+DP (Optimized), fix the middle number
+TC: O(N^2)
 """
 from typing import List
 
