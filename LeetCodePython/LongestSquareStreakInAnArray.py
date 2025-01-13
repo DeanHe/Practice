@@ -32,12 +32,12 @@ class LongestSquareStreakInAnArray:
     def longestSquareStreak(self, nums: List[int]) -> int:
         res = 0
         dp = {}
-        for n in nums:
-            dp[n] = 1
         nums.sort()
-        for n in sorted(dp.keys()):
-            square = n ** 2
-            if square in dp:
-                dp[square] += dp[n]
-            res = max(res, dp[n])
+        for num in nums:
+            square_root = int(num ** 0.5)
+            if square_root * square_root == num and square_root in dp:
+                dp[num] = dp[square_root] + 1
+            else:
+                dp[num] = 1
+            res = max(res, dp[num])
         return res if res > 1 else -1

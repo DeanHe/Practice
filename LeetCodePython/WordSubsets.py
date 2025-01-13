@@ -36,11 +36,17 @@ class Solution:
 
         word2_max = [0] * 26
         for w in words2:
-            for i, c in enumerate(count(w)):
-                word2_max[i] = max(word2_max[i], c)
+            for i, n in enumerate(count(w)):
+                word2_max[i] = max(word2_max[i], n)
 
         res = []
         for w in words1:
-            if all(x >= y for x, y in zip(count(w), word2_max)):
+            i = 0
+            cnt_w = count(w)
+            while i < 26:
+                if cnt_w[i] < word2_max[i]:
+                    break
+                i += 1
+            if i == 26:
                 res.append(w)
         return res

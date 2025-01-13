@@ -49,6 +49,7 @@ binary search
 TC: O(NlogN)
 """
 import bisect
+import heapq
 from collections import deque
 from typing import List
 
@@ -74,4 +75,26 @@ class FindBuildingWhereAliceAndBobCanMeet:
             # note: in here we already have heights[a] > heights[b]
             j = bisect.bisect_right(stack, heights[a], key=lambda x: heights[x])
             res[i] = stack[j] if j < len(stack) else -1
+        return res
+
+    def leftmostBuildingQueriesPriorityQueue(self, heights: List[int], queries: List[List[int]]) -> List[int]:
+        res = [-1] * len(queries)
+        pq = []
+        store_queries = [[] for _ in heights]
+        for i, query in enumerate(queries):
+            a, b = query
+            if a < b and heights[a] < heights[b]:
+                res[i] = b
+            elif b < a and heights[b] < heights[a]:
+                res[i] = a
+            elif a == b:
+                res[i] = a
+            else:
+                store_queries[max(a, b)].append((max(heights[a], heights[b]), i))
+        for i, height in enumerate(heights):
+            while pq and pq[0][0] < height:
+                _, idx = heapq.heappop(pq)
+                res[idx] = i
+            for x in store_queries[i]:
+                heapq.heappush(pq, x)
         return res

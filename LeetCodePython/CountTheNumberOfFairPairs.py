@@ -22,6 +22,15 @@ Constraints:
 nums.length == n
 -10^9 <= nums[i] <= 10^9
 -10^9 <= lower <= upper <= 10^9
+
+hints:
+1 Sort the array in ascending order.
+2 For each number in the array, keep track of the smallest and largest numbers in the array that can form a fair pair with this number.
+3 As you move to larger number, both boundaries move down.
+
+Analysis:
+Binary Search
+TC: O(NlogN)
 """
 from bisect import bisect_left, bisect_right
 from typing import List
@@ -39,3 +48,20 @@ class CountTheNumberOfFairPairs:
                 cnt -= 1
             res += cnt
         return res // 2
+
+    def countFairPairs2(self, nums: List[int], lower: int, upper: int) -> int:
+        nums.sort()
+
+        def lower_bound(x):
+            res = 0
+            s, e = 0, len(nums) - 1
+            while s < e:
+                total = nums[s] + nums[e]
+                if total < x:
+                    res += e - s
+                    s += 1
+                else:
+                    e -= 1
+            return res
+
+        return lower_bound(upper + 1) - lower_bound(lower)

@@ -59,14 +59,15 @@ class PrimeSubtractionOperation:
         for i in range(n - 2, -1, -1):
             if nums[i] < last:
                 last = nums[i]
-                continue
-            snapshot = last
-            for p in primes:
-                if 0 < nums[i] - p < last:
-                    last = nums[i] - p
-                    break
-            if last == snapshot:
-                return False
+            else:
+                can_subtract = False
+                for p in primes:
+                    if 0 < nums[i] - p < last:
+                        last = nums[i] - p
+                        can_subtract = True
+                        break
+                if not can_subtract:
+                    return False
         return True
 
 

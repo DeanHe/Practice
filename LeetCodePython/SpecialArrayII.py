@@ -19,13 +19,16 @@ Explanation:
 The subarray is [4,3,1]. 3 and 1 are both odd. So the answer to this query is false.
 The subarray is [1,6]. There is only one pair: (1,6) and it contains numbers with different parity. So the answer to this query is true.
 
-
 Constraints:
 1 <= nums.length <= 10^5
 1 <= nums[i] <= 10^5
 1 <= queries.length <= 10^5
 queries[i].length == 2
 0 <= queries[i][0] <= queries[i][1] <= nums.length - 1
+
+Analysis:
+prefix array prefix[i] = j means the longest special array till i is from j
+TC: O(N)
 """
 from typing import List
 
@@ -41,10 +44,6 @@ class SpecialArrayII:
                 prefix[i] = prefix[i - 1]
             else:
                 prefix[i] = i
-        print(prefix)
         for s, e in queries:
-            if s < prefix[e]:
-                res.append(False)
-            else:
-                res.append(True)
+            res.append(prefix[e] <= s)
         return res

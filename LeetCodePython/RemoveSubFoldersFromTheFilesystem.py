@@ -32,12 +32,51 @@ Each folder name is unique.
 hints:
 1 Sort the folders lexicographically.
 2 Insert the current element in an array and then loop until we get rid of all of their subfolders, repeat this until no element is left.
+
+analysis:
+Trie
+TC: O(N * L) where N is number of folders and L is maximum length of a folder path
 """
 from typing import List
 
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
 
 class RemoveSubFoldersFromTheFilesystem:
     def removeSubfolders(self, folder: List[str]) -> List[str]:
+        res = []
+        self.root = TrieNode()
+        for path in folder:
+            cur = self.root
+            dirs = path.split('/')
+            for dir in dirs:
+                if dir != '':
+                    if dir not in cur.children:
+                        cur.children[dir] = TrieNode()
+                    cur = cur.children[dir]
+            cur.isEnd = True
+        for path in folder:
+            is_sub = False
+            cur = self.root
+            dirs = path.split('/')
+            for i, dir in enumerate(dirs):
+                if dir != '':
+                    child = cur.children[dir]
+                    if child.isEnd and i != len(dirs) - 1:
+                        is_sub = True
+                        break
+                    cur = child
+            if not is_sub:
+                res.append(path)
+        return res
+
+
+
+
+
+    def removeSubfoldersBySort(self, folder: List[str]) -> List[str]:
         visited = set()
         folder.sort(key=len)
         for f in folder:

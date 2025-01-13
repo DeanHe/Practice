@@ -23,7 +23,7 @@ Output: 1
 Constraints:
 
 1 <= nums.length <= 2500
--104 <= nums[i] <= 104
+-10^4 <= nums[i] <= 10^4
 
 
 Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?

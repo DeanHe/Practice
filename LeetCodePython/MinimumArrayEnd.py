@@ -25,14 +25,14 @@ hints:
 
 class MinimumArrayEnd:
     def minEnd(self, n: int, x: int) -> int:
+        res = x
         n -= 1
         bit = 1
-        for i in range(64):
-            if bit & x == 0:
-                if n & 1:
-                    x |= bit
+        while n > 0:
+            if bit & res == 0:
+                res |= (n & 1) * bit
                 n >>= 1
             bit <<= 1
-        return x
+        return res
 
 

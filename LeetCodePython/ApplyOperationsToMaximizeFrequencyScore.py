@@ -44,6 +44,7 @@ from typing import List
 
 class ApplyOperationsToMaximizeFrequencyScore:
     def maxFrequencyScore(self, nums: List[int], k: int) -> int:
+        nums.sort(lambda x: -bin(x).count("0"))
         res = 0
         nums.sort()
         l = ops = 0

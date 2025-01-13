@@ -32,8 +32,15 @@ Constraints:
 1 <= nums.length <= 10^5
 0 <= nums[i], k <= 10^5
 
+hints:
+1 Sort the array.
+2 The problem becomes the following: find maximum subarray A[i … j] such that A[j] - A[i] ≤ 2 * k.
+
 analysis:
 sliding window
+TC: O(NlogN)
+
+sweep line
 TC: O(N)
 """
 from typing import List
@@ -49,4 +56,18 @@ class MaximumBeautyOfAnArrayAfterApplyingOperation:
             while nums[r] - nums[l] > 2 * k:
                 l += 1
             res = max(res, r - l + 1)
+        return res
+
+    def maximumBeauty_prefix(self, nums: List[int], k: int) -> int:
+        if len(nums) == 1:
+            return 1
+        most = max(nums)
+        axis = [0] * (most + 2 * k + 2)
+        for n in nums:
+            axis[n] += 1
+            axis[n + 2 * k + 1] -= 1
+        res = cur = 0
+        for n in axis:
+            cur += n
+            res = max(res, cur)
         return res

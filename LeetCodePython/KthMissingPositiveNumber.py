@@ -24,6 +24,10 @@ Could you solve this problem in less than O(n) complexity?
 
 hint:
 1 Keep track of how many positive numbers are missing as you scan the array.
+
+Analysis:
+The number of positive integers which are missing before the arr[idx] is equal to arr[idx] - (idx + 1)
+TC: O(logN)
 """
 from typing import List
 

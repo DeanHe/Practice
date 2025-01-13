@@ -17,11 +17,15 @@ Input: s = "a", k = 1
 Output: -1
 Explanation: It is not possible to take one 'b' or 'c' so return -1.
 
-
 Constraints:
 1 <= s.length <= 10^5
 s consists of only the letters 'a', 'b', and 'c'.
 0 <= k <= s.length
+
+hints:
+1 Start by counting the frequency of each character and checking if it is possible.
+2 If you take x characters from the left side, what is the minimum number of characters you need to take from the right side? Find this for all values of x in the range 0 ≤ x ≤ s.length.
+3 Use a two-pointers approach to avoid computing the same information multiple times.
 
 analysis:
 sliding window
@@ -32,6 +36,9 @@ the problem becomes "finding the longest substring where the occurrence of each 
 TC: O(N)
 SC: O(1)
 """
+from collections import defaultdict
+
+
 class TakeKofEachCharacterFromLeftAndRight:
     def takeCharacters(self, s: str, k: int) -> int:
         n = len(s)
@@ -47,3 +54,26 @@ class TakeKofEachCharacterFromLeftAndRight:
                 l += 1
             res = max(res, r - l + 1)
         return n - res
+
+    def takeCharacters2(self, s: str, k: int) -> int:
+        max_keep = l = 0
+        extra = [0] * 3
+        for c in s:
+            i = ord(c) - ord('a')
+            extra[i] += 1
+        for i in range(3):
+            extra[i] -= k
+            if extra[i] < 0:
+                return -1
+        keep = [0] * 3
+        for r, c in enumerate(s):
+            i = ord(c) - ord('a')
+            keep[i] += 1
+            while extra[i] < keep[i]:
+                j = ord(s[l]) - ord('a')
+                keep[j] -= 1
+                l += 1
+            max_keep = max(max_keep, r - l + 1)
+        return len(s) - max_keep
+
+

@@ -35,26 +35,21 @@ hints:
 2 Only two elements change, the element at i + 1 is added into the subarray, and the element at i - k + 1 gets removed from the subarray.
 3 Iterate through each subarray of size k and keep track of the sum of the subarray and the frequency of each element.
 """
+from collections import defaultdict
 from typing import List
 
 
 class MaximumSumOfDistinctSubarraysWithLengthK:
     def maximumSubarraySum(self, nums: List[int], k: int) -> int:
-        res = total = 0
-        freq = {}
-        for i, n in enumerate(nums):
-            if i - k >= 0:
-                start = nums[i - k]
-                total -= start
-                if freq[start] > 1:
-                    freq[start] -= 1
-                else:
-                    freq.pop(start)
-            total += n
-            if n not in freq:
-                freq[n] = 1
-            else:
-                freq[n] += 1
-            if len(freq) == k:
+        res = total = l = 0
+        num_to_idx = defaultdict(lambda: -1)
+        for r, n in enumerate(nums):
+            last_occurrence = num_to_idx[n]
+            while l <= last_occurrence or k < r - l + 1:
+                total -= nums[l]
+                l += 1
+            num_to_idx[n] = r
+            total += nums[r]
+            if r - l + 1 == k:
                 res = max(res, total)
         return res

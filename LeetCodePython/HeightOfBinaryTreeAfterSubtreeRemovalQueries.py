@@ -50,6 +50,7 @@ TC: O(N)
 SC: O(N)
 """
 import collections
+import heapq
 from functools import lru_cache
 from typing import Optional, List
 
@@ -74,20 +75,19 @@ class HeightOfBinaryTreeAfterSubtreeRemovalQueries:
 
         dfs(root, 0)
         for n, depth in depths.items():
-            siblings[depth].append((-heights[n], n))
-            siblings[depth].sort()
+            heapq.heappush(siblings[depth], (heights[n], n))
             # keep only 2 candidates
             if len(siblings[depth]) > 2:
-                siblings[depth].pop()
+                heapq.heappop(siblings[depth])
         for q in queries:
             depth = depths[q]
             if len(siblings[depth]) == 1:
                 res.append(depth - 1)
                 # q is the longest
-            elif siblings[depth][0][1] == q:
-                res.append(-siblings[depth][1][0] + depth)
+            elif siblings[depth][1][1] == q:
+                res.append(siblings[depth][0][0] + depth)
             else:
-                res.append(-siblings[depth][0][0] + depth)
+                res.append(siblings[depth][1][0] + depth)
         return res
 
 

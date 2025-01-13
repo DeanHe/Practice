@@ -54,7 +54,8 @@ dp[i][j][k] means minimum total distance to arrange robot[i:] using factory[j:] 
 at each stop j choose to pick or not pick
 TC O(m * n * k)
 """
-from functools import lru_cache
+from functools import cache
+from math import inf
 from typing import List
 
 
@@ -63,14 +64,14 @@ class Solution:
         robot.sort()
         factory.sort()
 
-        @lru_cache(None)
+        @cache
         def dfs(i, j, k):
             if i == len(robot):
                 return 0
             if j == len(factory):
-                return float('inf')
+                return inf
             skip = dfs(i, j + 1, 0)
-            repair = abs(robot[i] - factory[j][0]) + dfs(i + 1, j, k + 1) if factory[j][1] > k else float('inf')
+            repair = abs(robot[i] - factory[j][0]) + dfs(i + 1, j, k + 1) if factory[j][1] > k else inf
             return min(skip, repair)
 
         return dfs(0, 0, 0)

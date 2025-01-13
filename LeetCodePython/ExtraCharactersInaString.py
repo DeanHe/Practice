@@ -23,6 +23,12 @@ dictionary contains distinct words
 hints:
 1 Can we use Dynamic Programming here?
 2 Define DP[i] as the min extra character if breaking up s[0:i] optimally.
+
+Let N be the total characters in the string.
+Let M be the average length of the strings in dictionary.
+Let K be the length of the dictionary.
+
+Time complexity: O(N^2+M⋅K). There can be N+1 unique states of the dp method. Each state of the dp method costs O(N) to compute. Hence, the overall cost simply O(N^2). Building the trie costs O(M⋅K).
 """
 from collections import defaultdict
 from functools import cache

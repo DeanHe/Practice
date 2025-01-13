@@ -33,6 +33,12 @@ sum(words[i].length) <= 3 * 10^5
 1 <= queries.length <= 10^5
 0 <= li <= ri < words.length
 
+hints:
+1 Precompute the prefix sum of strings that start and end with vowels.
+2 Use unordered_set to store vowels.
+3 Check if the first and last characters of the string are present in the vowels set.
+4 Subtract prefix sum for range [l-1, r] to find the number of strings starting and ending with vowels.
+
 analysis:
 Prefix Sum
 """

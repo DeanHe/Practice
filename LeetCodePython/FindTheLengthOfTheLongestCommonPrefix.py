@@ -33,7 +33,8 @@ hints:
 2 For all the possible prefixes of each element in arr2, check if it exists in the HashSet.
 
 analysis:
-Trie
+Trie, reference implementing queue with two stacks
+TC：O(M + N) where M is the length of arr1, N is the length of arr2.
 """
 from typing import List
 
