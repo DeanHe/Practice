@@ -22,6 +22,10 @@ Note:
 1 <= n <= 100
 Two functions won't start or end at the same time.
 Functions will always log when they exit.
+
+Analysis:
+Stack
+TC:O(N)
 """
 from typing import List
 

@@ -51,6 +51,7 @@ class SolvingQuestionsWithBrainpower:
         def dfs(idx):
             if idx >= len(questions):
                 return 0
-            return max(dfs(idx + 1), dfs(idx + questions[idx][1] + 1) + questions[idx][0])
+            points, jumps = questions[idx]
+            return max(dfs(idx + 1), dfs(idx + jumps + 1) + points)
 
         return dfs(0)

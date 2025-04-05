@@ -30,16 +30,20 @@ Constraints:
 pattern consists of only the letters 'I' and 'D'.
 
 hint:
-With the constraints, could we generate every possible string?
-Yes we can. Now we just need to check if the string meets all the conditions.
+1 With the constraints, could we generate every possible string?
+2 Yes we can. Now we just need to check if the string meets all the conditions.
+
+analysis:
+Stack solve for recursion problem
+TC: O(N)
 """
 
 class ConstructSmallestNumberFromDIString:
     def smallestNumber(self, pattern: str) -> str:
         res, stack = [], []
-        for i, c in enumerate(pattern + 'I', 1):
-            stack.append(str(i))
-            if c == 'I':
-                res += stack[::-1]
-                stack = []
+        for i in range(len(pattern) + 1):
+            stack.append(i + 1)
+            if i == len(pattern) or pattern[i] == 'I':
+                while stack:
+                    res.append(str(stack.pop()))
         return ''.join(res)

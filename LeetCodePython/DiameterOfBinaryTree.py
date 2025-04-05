@@ -50,3 +50,18 @@ class Solution:
 
         _, res = dfs(root)
         return res - 1
+
+    def diameterOfBinaryTreeGlobalVariable(self, root: Optional[TreeNode]) -> int:
+        res = 0
+
+        def dfs(node):
+            if not node:
+                return 0
+            nonlocal res
+            l = dfs(node.left)
+            r = dfs(node.right)
+            res = max(res, l + r + 1)
+            return max(l, r) + 1
+
+        dfs(root)
+        return res

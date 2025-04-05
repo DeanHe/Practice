@@ -29,7 +29,13 @@ hints:
 1 Find the connected components of an undirected graph using depth-first search (DFS) or breadth-first search (BFS).
 2 For each connected component, count the number of nodes and edges in the component.
 3 A connected component is complete if and only if the number of edges in the component is equal to m*(m-1)/2, where m is the number of nodes in the component.
+
+analysis:
+Union find
+Let N be the number of vertices and M be the number of edges in the given graph.
+TC: O(N + M * α(N))
 """
+from collections import defaultdict
 from typing import List
 
 
@@ -37,8 +43,8 @@ class CountTheNumberOfCompleteComponents:
     def countCompleteComponents(self, n: int, edges: List[List[int]]) -> int:
         res = 0
         parent = list(range(n))
-        edge_cnt = [0] * n
-        node_cnt = [0] * n
+        edge_cnt = defaultdict(int)
+        node_cnt = [1] * n
 
         def find_root(x):
             root = x
@@ -52,14 +58,19 @@ class CountTheNumberOfCompleteComponents:
 
         def union(a, b):
             root_a, root_b = find_root(a), find_root(b)
-            edge_cnt[root_b] += 1
             if root_a != root_b:
-                parent[root_a] = parent[root_b]
-                node_cnt[root_b] += node_cnt[root_a]
-                edge_cnt[root_b] += edge_cnt[root_a]
+                if node_cnt[root_a] <= node_cnt[root_b]:
+                    parent[root_a] = root_b
+                    node_cnt[root_b] += node_cnt[root_a]
+                else:
+                    parent[root_b] = root_a
+                    node_cnt[root_a] += node_cnt[root_b]
 
         for a, b in edges:
             union(a, b)
+        for a, _ in edges:
+            root = find_root(a)
+            edge_cnt[root] += 1
         for i in range(n):
             if parent[i] == i and node_cnt[i] > 0 and edge_cnt[i] == node_cnt[i] * (node_cnt[i] - 1) / 2:
                 res += 1

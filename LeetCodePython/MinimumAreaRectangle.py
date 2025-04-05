@@ -16,8 +16,11 @@ Constraints:
 
 1 <= points.length <= 500
 points[i].length == 2
-0 <= xi, yi <= 4 * 104
+0 <= xi, yi <= 4 * 10^4
 All the given points are unique.
+
+Analysis:
+TC: O(N^2)
 """
 from typing import List
 

@@ -31,16 +31,19 @@ TC O(N)
 """
 class MinimizeXOR:
     def minimizeXor(self, num1: int, num2: int) -> int:
-        num1_bits = num1.bit_count()
-        num2_bits = num2.bit_count()
-        res = num1
-        for i in range(32):
-            if num1_bits > num2_bits and (1 << i) & num1 > 0:
-                res ^= 1 << i
-                num2_bits += 1
-            if num1_bits < num2_bits and (1 << i) & num1 == 0:
+        res_target_bits = num2.bit_count()
+        res_bits = 0
+        res = 0
+        # start from most significant bit
+        i = 31
+        # res bits are not enough
+        while res_bits < res_target_bits:
+            # if num1 bit i is 1 or must set all remaining bits
+            if((1 << i) & num1) > 0 or res_target_bits - res_bits > i:
+                # set res bit i to 1
                 res |= 1 << i
-                num1_bits += 1
+                res_bits += 1
+            i -= 1
         return res
 
 

@@ -32,6 +32,7 @@ hint:
 2 The length of the longest nice subarray cannot exceed 30. Why is that?
 
 analysis:
+sliding window
 TC: O(N)
 SC: O(1)
 """

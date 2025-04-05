@@ -36,6 +36,15 @@ The number of nodes in the tree will be in the range [1, 500].
 The values of the nodes in the tree are unique.
 
 Note: This question is the same as 1123: https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/
+
+hints:
+1 Do a postorder traversal.
+2 Then, if both subtrees contain a deepest leaf, you can mark this node as the answer (so far).
+3 The final node marked will be the correct answer.
+
+Analysis:
+recursion
+TC:O(N)
 """
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

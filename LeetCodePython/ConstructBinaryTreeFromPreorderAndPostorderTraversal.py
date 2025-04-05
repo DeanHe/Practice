@@ -19,6 +19,9 @@ postorder.length == preorder.length
 1 <= postorder[i] <= postorder.length
 All the values of postorder are unique.
 It is guaranteed that preorder and postorder are the preorder traversal and postorder traversal of the same binary tree.
+
+Analysis:
+TC:O(N)
 """
 from typing import List, Optional
 
@@ -30,8 +33,27 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class ConstructBinaryTreeFromPreorderAndPostorderTraversal:
+
+    def __init__(self):
+        self.pre_idx = 0
+        self.post_idx = 0
+
     def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+
+        def dfs():
+            root = TreeNode(preorder[self.pre_idx])
+            self.pre_idx += 1
+            if root.val != postorder[self.post_idx]:
+                root.left = dfs()
+            if root.val != postorder[self.post_idx]:
+                root.right = dfs()
+            self.post_idx += 1
+            return root
+
+        return dfs()
+
+    def constructFromPrePostII(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         if len(preorder) != len(postorder):
             return None
 
@@ -45,9 +67,10 @@ class Solution:
             root = TreeNode(preorder[pre_s])
             if pre_s == pre_e:
                 return root
-            postorder_split = postorder_map[preorder[pre_s + 1]]
-            root.left = dfs(pre_s + 1, pre_s + 1 + postorder_split - post_s, post_s, postorder_split)
-            root.right = dfs(pre_s + 2 + postorder_split - post_s, pre_e, postorder_split + 1, post_e - 1)
+            left_node_postorder_idx = postorder_map[preorder[pre_s + 1]]
+            left_tree_size = left_node_postorder_idx - post_s + 1
+            root.left = dfs(pre_s + 1, pre_s + left_tree_size, post_s, left_node_postorder_idx)
+            root.right = dfs(pre_s + left_tree_size + 1, pre_e, left_node_postorder_idx + 1, post_e - 1)
             return root
 
         return dfs(0, len(preorder) - 1, 0, len(postorder) - 1)

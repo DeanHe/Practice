@@ -37,7 +37,7 @@ Expected solution is O(n^3).
 from typing import List
 
 
-class Solution:
+class CountSubmatricesWithAllOnes:
     def numSubmat(self, mat: List[List[int]]) -> int:
         rows, cols, res = len(mat), len(mat[0]), 0
         heights = [0] * cols

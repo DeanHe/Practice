@@ -11,8 +11,9 @@ then the five characters are considered to be the same scene. Give a string to f
 
 https://www.lintcode.com/problem/the-longest-scene/description
 
+Analysis:
 */
-public class ThelongestScene {
+public class TheLongestScene {
     /**
      * @param str: The scene string
      * @return: Return the length longest scene

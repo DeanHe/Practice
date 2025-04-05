@@ -38,6 +38,9 @@ The product of the stream at any point in time will fit in a 32-bit integer.
 hint:
 1 Keep all prefix products of numbers in an array, then calculate the product of last K elements in O(1) complexity.
 2 When a zero number is added, clean the array of prefix products.
+
+Analysis:
+TC: O(N)
 """
 
 class ProductOfNumbers:

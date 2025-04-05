@@ -92,8 +92,8 @@ public class MinimumCostToMakeAtLeastOneValidPathInaGrid {
     public int minCostDijk(int[][] grid) {
         int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         int rows = grid.length, cols = grid[0].length;
-        int[][] cost = new int[rows][cols];
-        for(int[] row : cost){
+        int[][] dist = new int[rows][cols];
+        for(int[] row : dist){
             Arrays.fill(row, Integer.MAX_VALUE);
         }
         PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
@@ -102,27 +102,26 @@ public class MinimumCostToMakeAtLeastOneValidPathInaGrid {
             int[] cur = pq.poll();
             int r = cur[0];
             int c = cur[1];
-            int dist = cur[2];
-            if(cost[r][c] != Integer.MAX_VALUE){
-                continue;
-            }
-            cost[r][c] = dist;
-            for(int i = 0; i < dirs.length; i++){
-                int[] dir = dirs[i];
-                int nb_r = r + dir[0];
-                int nb_c = c + dir[1];
-                if(nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols){
-                    int edge = 1;
-                    if(i == grid[r][c] - 1){
-                        edge = 0;
-                    }
-                    if(cost[nb_r][nb_c] == Integer.MAX_VALUE){
-                        pq.offer(new int[]{nb_r, nb_c, cost[r][c] + edge});
+            int d = cur[2];
+            if(dist[r][c] == Integer.MAX_VALUE) {
+                dist[r][c] = d;
+                for (int i = 0; i < dirs.length; i++) {
+                    int[] dir = dirs[i];
+                    int nb_r = r + dir[0];
+                    int nb_c = c + dir[1];
+                    if (nb_r >= 0 && nb_r < rows && nb_c >= 0 && nb_c < cols) {
+                        int cost = 1;
+                        if (i == grid[r][c] - 1) {
+                            cost = 0;
+                        }
+                        if (dist[nb_r][nb_c] == Integer.MAX_VALUE) {
+                            pq.offer(new int[]{nb_r, nb_c, dist[r][c] + cost});
+                        }
                     }
                 }
             }
         }
-        return cost[rows - 1][cols - 1];
+        return dist[rows - 1][cols - 1];
     }
 
 

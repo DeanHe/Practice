@@ -27,6 +27,10 @@ All the strings of nums are unique.
 hints:
 1 We can convert the given strings into base 10 integers.
 2 Can we use recursion to generate all possible strings?
+
+Analysis:
+Cantor's Diagonal Argument
+TC: O(N)
 """
 from typing import List
 

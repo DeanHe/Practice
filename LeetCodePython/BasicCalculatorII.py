@@ -26,10 +26,37 @@ s consists of integers and operators ('+', '-', '*', '/') separated by some numb
 s represents a valid expression.
 All the integers in the expression are non-negative integers in the range [0, 231 - 1].
 The answer is guaranteed to fit in a 32-bit integer.
+
+Analysis:
+TC: O(N)
+SC: there is an O(1) solution
 """
 
-
 class BasicCalculatorII:
+    def calculate(self, s: str) -> int:
+        res, last, cur, sign = 0, 0, 0, '+'
+        for i, c in enumerate(s):
+            if c.isdigit():
+                cur = cur * 10 + ord(c) - ord('0')
+            if (not c.isdigit() and c != ' ') or i == len(s) - 1:
+                if sign == '+':
+                    res += last
+                    last = cur
+                elif sign == '-':
+                    res += last
+                    last = -cur
+                elif sign == '*':
+                    last *= cur
+                elif sign == '/':
+                    if last // cur < 0 and last % cur != 0:
+                        last = last // cur + 1
+                    else:
+                        last = last // cur
+                sign = c
+                cur = 0
+        res += last
+        return res
+
     def calculate(self, s: str) -> int:
         stack = []
         res, cur, sign = 0, 0, '+'

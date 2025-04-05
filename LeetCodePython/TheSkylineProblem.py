@@ -35,7 +35,7 @@ import heapq
 from typing import List
 
 
-class Solution:
+class TheSkylineProblem:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
         axis = sorted([(l, -h, r) for l, r, h in buildings] + [(r, 0, 0) for _, r, _ in buildings])
         res, max_heap = [[0, 0]], [(0, float('inf'))]

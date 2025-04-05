@@ -25,6 +25,15 @@ Explanation: The only ordered triplet of indices (0, 1, 2) has a negative value 
 Constraints:
 3 <= nums.length <= 10^5
 1 <= nums[i] <= 10^6
+
+hints:
+1 Preprocess the prefix maximum array, prefix_max[i] = max(nums[0], nums[1], …, nums[i]) and the suffix maximum array, suffix_max[i] = max(nums[i], nums[i + 1], …, nums[i - 1]).
+2 For each index j, find two indices i and k such that i < j < k and (nums[i] - nums[j]) * nums[k] is the maximum, using the prefix and suffix maximum arrays.
+3 For index j, the maximum triplet value is (prefix_max[j - 1] - nums[j]) * suffix_max[j + 1].
+
+Analysis:
+Greedy
+TC: O(N)
 """
 from typing import List
 

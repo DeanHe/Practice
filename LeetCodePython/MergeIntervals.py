@@ -12,14 +12,19 @@ Output: [[1,5]]
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 
 Constraints:
-1 <= intervals.length <= 104
+1 <= intervals.length <= 10^4
 intervals[i].length == 2
-0 <= starti <= endi <= 104
+0 <= starti <= endi <= 10^4
+
+Analysis:
+TC: O(NlogN)
 """
+import math
+from collections import defaultdict
 from typing import List
 
 
-class Solution:
+class MergeIntervals:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if len(intervals) < 2:
             return intervals
@@ -34,5 +39,26 @@ class Solution:
             else:
                 pre[1] = max(pre[1], cur[1])
         res.append(pre)
+        return res
+
+    def mergeSweepline(self, intervals: List[List[int]]) -> List[List[int]]:
+        if len(intervals) < 2:
+            return intervals
+        res = []
+        cur = 0
+        axis = defaultdict(int)
+        for s, e in intervals:
+            axis[s] += 1
+            axis[e] -= 1
+        s = math.inf
+        e = -math.inf
+        for i in sorted(axis.keys()):
+            cur += axis[i]
+            s = min(s, i)
+            e = max(e, i)
+            if cur == 0:
+                res.append([s, e])
+                s = math.inf
+                e = -math.inf
         return res
 

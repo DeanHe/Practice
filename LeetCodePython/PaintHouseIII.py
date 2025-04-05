@@ -36,7 +36,7 @@ n == cost[i].length
 1 <= n <= 20
 1 <= target <= m
 0 <= houses[i] <= n
-1 <= cost[i][j] <= 104
+1 <= cost[i][j] <= 10^4
 
 hint:
 1 Use Dynamic programming.

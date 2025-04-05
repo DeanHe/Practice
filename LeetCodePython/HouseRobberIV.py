@@ -41,12 +41,12 @@ class HouseRobberIV:
             cnt = 0
             took_previous_house = False
             for n in nums:
-                if took_previous_house:
+                if not took_previous_house:
+                    if n <= capacity:
+                        cnt += 1
+                        took_previous_house = True
+                else:
                     took_previous_house = False
-                    continue
-                if n <= capacity:
-                    cnt += 1
-                    took_previous_house = True
             return cnt
 
         s, e = min(nums), max(nums)

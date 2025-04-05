@@ -40,7 +40,7 @@ SC: k
 from typing import List
 
 
-class Solution:
+class CombinationSumIII:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         res = []
 

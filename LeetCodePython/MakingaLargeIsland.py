@@ -20,11 +20,14 @@ Explanation: Can't change any 0 to 1, only one island with area = 4.
 
 
 Constraints:
-
 n == grid.length
 n == grid[i].length
 1 <= n <= 500
 grid[i][j] is either 0 or 1.
+
+Analysis:
+DFS or Union Find
+TC:O(rows * cols)
 """
 import collections
 from typing import List
@@ -40,6 +43,7 @@ class MakingaLargeIsland:
             for c in range(0, self.cols):
                 if grid[r][c] == 1:
                     color += 1
+                    # island of color: its area
                     memo[color] = self.getArea(r, c, color, grid)
                     res = max(res, memo[color])
 

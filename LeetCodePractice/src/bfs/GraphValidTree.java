@@ -7,7 +7,6 @@ Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge 
 
 Example
 Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
-
 Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
 
 Notice
@@ -78,9 +77,9 @@ public class GraphValidTree {
         for (int i = 0; i < n; i++) {
             g.put(i, new ArrayList<>());
         }
-        for (int i = 0; i < edges.length; i++) {
-            g.get(edges[i][0]).add(edges[i][1]);
-            g.get(edges[i][1]).add(edges[i][0]);
+        for (int[] edge : edges) {
+            g.get(edge[0]).add(edge[1]);
+            g.get(edge[1]).add(edge[0]);
         }
         boolean[] visited = new boolean[n];
         if (!dfs(0, -1, g, visited)) {

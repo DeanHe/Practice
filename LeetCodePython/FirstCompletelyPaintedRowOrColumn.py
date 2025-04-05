@@ -26,6 +26,15 @@ arr.length == m * n
 1 <= arr[i], mat[r][c] <= m * n
 All the integers of arr are unique.
 All the integers of mat are unique.
+
+hints:
+1 Can we use a frequency array?
+2 Pre-process the positions of the values in the matrix.
+3 Traverse the array and increment the corresponding row and column frequency using the pre-processed positions.
+4 If the row frequency becomes equal to the number of columns, or vice-versa return the current index.
+
+Analysis:
+TC: O(N)
 """
 from typing import List
 
@@ -35,12 +44,12 @@ class FirstCompletelyPaintedRowOrColumn:
         rows, cols = len(mat), len(mat[0])
         rows_cnt = [0] * rows
         cols_cnt = [0] * cols
-        d = {}
+        idx = {}
         for r in range(rows):
             for c in range(cols):
-                d[mat[r][c]] = (r, c)
+                idx[mat[r][c]] = (r, c)
         for i, num in enumerate(arr):
-            r, c = d[num]
+            r, c = idx[num]
             rows_cnt[r] += 1
             cols_cnt[c] += 1
             if rows_cnt[r] == cols or cols_cnt[c] == rows:

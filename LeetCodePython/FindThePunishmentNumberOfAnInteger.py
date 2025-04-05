@@ -25,29 +25,33 @@ Explanation: There are exactly 4 integers i that satisfy the conditions in the s
 - 36 since 36 * 36 = 1296 and 1296 can be partitioned into 1 + 29 + 6.
 Hence, the punishment number of 37 is 1 + 81 + 100 + 1296 = 1478
 
-
 Constraints:
 1 <= n <= 1000
+
+hints:
+1 Can we generate all possible partitions of a number?
+2 Use a recursive algorithm that splits the number into two parts, generates all possible partitions of each part recursively, and then combines them in all possible ways.
 """
 
 class FindThePunishmentNumberOfAnInteger:
     def punishmentNumber(self, n: int) -> int:
         res = 0
 
-        def can_punish(num, target, pos, total):
-            s = str(num)
-            if pos == len(s):
-                if total == target:
+        def can_punish(num_str, total):
+            if not num_str:
+                if total == 0:
                     return True
                 return False
 
-            for j in range(pos, len(s)):
-                if can_punish(num, target, j + 1, total + int(s[pos:j + 1])):
+            for i in range(len(num_str)):
+                left_str = num_str[:i + 1]
+                right_str = num_str[i + 1:]
+                if can_punish(right_str, total - int(left_str)):
                     return True
             return False
 
         for i in range(1, n + 1):
             x = i * i
-            if can_punish(x, i, 0, 0):
+            if can_punish(str(x), i):
                 res += x
         return res

@@ -42,13 +42,36 @@ hints:
 4 Sort nums. Now we just need to consider if the consecutive elements have an edge to check if they belong to the same connected component. Hence, all connected components become a list of position-consecutive elements after sorting.
 5 For each index of nums from 0 to nums.length - 1 we can change it to the current minimum value we have in its connected component and remove that value from the connected component.
 
+Analysis：
+Sorting + Grouping
 TC: O(NlogN)
 """
+from collections import deque
 from typing import List
 
 
 class MakeLexicographicallySmallestArrayBySwappingElements:
+
     def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:
+        sz = len(nums)
+        res = []
+        nums_sorted = sorted(nums)
+        g = 0
+        num_to_group = {nums_sorted[0]: g}
+        group_to_list = {g: deque([nums_sorted[0]])}
+        for i in range(1, sz):
+            if limit < nums_sorted[i] - nums_sorted[i - 1]:
+                g += 1
+            num_to_group[nums_sorted[i]] = g
+            if g not in group_to_list:
+                group_to_list[g] = deque()
+            group_to_list[g].append(nums_sorted[i])
+        for num in nums:
+            g = num_to_group[num]
+            res.append(group_to_list[g].popleft())
+        return res
+
+    def lexicographicallySmallestArray2(self, nums: List[int], limit: int) -> List[int]:
         sz = len(nums)
         arr = []
         res = [-1] * sz

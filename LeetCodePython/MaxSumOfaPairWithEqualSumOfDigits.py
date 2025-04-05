@@ -17,8 +17,15 @@ Output: -1
 Explanation: There are no two numbers that satisfy the conditions, so we return -1.
 
 Constraints:
-1 <= nums.length <= 105
-1 <= nums[i] <= 109
+1 <= nums.length <= 10^5
+1 <= nums[i] <= 10^9
+
+hints:
+1 What is the largest possible sum of digits a number can have?
+2 Group the array elements by the sum of their digits, and find the largest two elements of each group.
+
+Analysis:
+TC: O(NlogM) where Let N be the size of nums, and let M be the maximum number in nums.
 """
 import collections
 import heapq
@@ -27,23 +34,22 @@ from typing import List
 
 class MaxSumOfaPairWithEqualSumOfDigits:
     def maximumSum(self, nums: List[int]) -> int:
-        m = collections.defaultdict(list)
+        digit_sum_max = {}
         res = 0
 
         def digit_sum(x):
             total = 0
-            for d in str(x):
-                total += int(d)
+            while x > 0:
+                total += x % 10
+                x //= 10
             return total
 
         for n in nums:
-            ds = digit_sum(n)
-            heapq.heappush(m[ds], n)
-            if len(m[ds]) > 2:
-                heapq.heappop(m[ds])
-
-        for _, q in m.items():
-            if len(q) == 2:
-                res = max(res, q[0] + q[1])
+            total = digit_sum(n)
+            if total not in digit_sum_max:
+                digit_sum_max[total] = n
+            else:
+                res = max(res, n + digit_sum_max[total])
+                digit_sum_max[total] = max(digit_sum_max[total], n)
         return res if res > 0 else -1
 

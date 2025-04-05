@@ -28,6 +28,11 @@ k == queries.length
 1 <= k <= 10^4
 1 <= grid[i][j], queries[i] <= 10^6
 
+hints:
+1 The queries are all given to you beforehand so you can answer them in any order you want.
+2 Sort the queries knowing their original order to be able to build the answer array.
+3 Run a BFS on the graph and answer the queries in increasing order.
+
 analysis:
 TC: O(rows * cols * log(rows * cols))
 SC: O(rows * cols)
@@ -52,12 +57,7 @@ class MaximumNumberOfPointsFromGridQueries:
                 nb_r, nb_c = r + dirs[i], c + dirs[i + 1]
                 if 0 <= nb_r < rows and 0 <= nb_c < cols and (nb_r, nb_c) not in visited:
                     visited.add((nb_r, nb_c))
-                    heapq.heappush(pq, (grid[nb_r][nb_c], nb_r, nb_c))
-        # make order list monotonic increasing
-        most = float('-inf')
-        for i in range(len(order)):
-            most = max(most, order[i])
-            order[i] = most
+                    heapq.heappush(pq, (max(val, grid[nb_r][nb_c]), nb_r, nb_c))
 
         def binary_search(target):
             s, e = 0, len(order)
