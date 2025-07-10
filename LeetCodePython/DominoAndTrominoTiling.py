@@ -20,6 +20,10 @@ Constraints:
 
 analysis:
 dp[c][s] means the # of ways to fill board 2 * c as shape s
+s = 0 means |
+s = 1 mean _
+s = 2 mean -
+TC: O(N)
 """
 
 class DominoAndTrominoTiling:

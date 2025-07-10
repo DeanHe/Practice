@@ -46,10 +46,26 @@ Otherwise we don’t need to delete it.
 
 TC: O(N + 26 * 26)
 """
+from collections import defaultdict
 
 
 class MinimumDeletionsToMakeStringKSpecial:
     def minimumDeletions(self, word: str, k: int) -> int:
+        res = len(word)
+        cnt = defaultdict(int)
+        for c in word:
+            cnt[c] += 1
+        for min_freq in cnt.values():
+            deleted = 0
+            for f in cnt.values():
+                if f < min_freq:
+                    deleted += f
+                elif min_freq + k < f:
+                    deleted += f - (min_freq + k)
+            res = min(res, deleted)
+        return res
+
+    def minimumDeletions2(self, word: str, k: int) -> int:
         cnt = [0] * 26
         res = len(word)
         deleted_le = 0

@@ -28,6 +28,10 @@ hints:
 
 analysis:
 Sliding Window, find the valid left side of subarray, and iterate on the right side.
+to find the left most index l, that the subarray don't have k different values. which means the subarray starting at 0,1,..,l-1, have k different values. That is l subarray in total,
+so we update res += l.
+
+TC: O(N)
 """
 from collections import defaultdict, Counter
 from typing import List

@@ -30,6 +30,7 @@ hints:
 3 Divide the array into multiple subarrays such that each number in each subarray is between minK and maxK inclusive, solve the previous problem for each subarray, and sum all the answers.
 
 analysis:
+for each n as the end of subarray [s:r], s must be picked from range (l, min(r_min, r_max))
 sliding window:
 TC: O(N)
 """
@@ -38,14 +39,14 @@ from typing import List
 
 class CountSubarraysWithFixedBounds:
     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
-        res = s = 0
-        s_min = s_max = -1
-        for e, n in enumerate(nums):
+        res = l = 0
+        r_min = r_max = -1
+        for r, n in enumerate(nums):
             if not minK <= n <= maxK:
-                s_min, s_max, s = -1, -1, e + 1
+                r_min, r_max, l = -1, -1, r + 1
             if minK == n:
-                s_min = e
+                r_min = r
             if maxK == n:
-                s_max = e
-            res += max(0, min(s_min, s_max) - s + 1)
+                r_max = r
+            res += max(0, min(r_min, r_max) - l + 1)
         return res

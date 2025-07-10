@@ -38,10 +38,18 @@ Since three subsequences were created, we return 3. It can be shown that 3 is th
 
 
 Constraints:
+1 <= nums.length <= 10^5
+0 <= nums[i] <= 10^5
+0 <= k <= 10^5
 
-1 <= nums.length <= 105
-0 <= nums[i] <= 105
-0 <= k <= 105
+hints:
+1 Which values in each subsequence matter? The only values that matter are the maximum and minimum values.
+2 Let the maximum and minimum values of a subsequence be Max and Min. It is optimal to place all values in between Max and Min in the original array in the same subsequence as Max and Min.
+3 Sort the array.
+
+Analysis:
+sort + greedy
+TC: O(NlogN)
 """
 from typing import List
 

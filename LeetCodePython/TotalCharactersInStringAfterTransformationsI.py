@@ -51,19 +51,24 @@ hints:
 Analysis:
 DP
 TC: O(N)
+cnt means the alphabet counts of s
 """
 
 
 class TotalCharactersInStringAfterTransformationsI:
     def lengthAfterTransformations(self, s: str, t: int) -> int:
         MOD = 10 ** 9 + 7
-        res = 0
-        dp = [1] * 26 + [0] * 100100
-        for i in range(26, 100100):
-            dp[i] = (dp[i - 26] + dp[i - 26 + 1]) % MOD
+        cnt = [0] * 26
         for c in s:
-            res = (res + dp[ord(c) - ord('a') + t]) % MOD
-        return res
+            cnt[ord(c) - ord('a')] += 1
+        for _ in range(t):
+            nxt = [0] * 26
+            nxt[0] = cnt[25] # z -> ab
+            nxt[1] = (cnt[25] + cnt[0]) % MOD # a -> b, z -> ab
+            for i in range(2, 26):
+                nxt[i] = cnt[i - 1]
+            cnt = nxt
+        return sum(cnt) % MOD
 
 
 

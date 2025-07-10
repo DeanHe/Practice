@@ -30,4 +30,13 @@ func main() {
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 	t4, _ := time.ParseInLocation(DATE, str, loc)
 	fmt.Println(t4.Unix())
+
+	windowDuration := time.Duration(10 * time.Second)
+	window := time.Now().Truncate(windowDuration)
+	if entry.Timestamp.Before(window) {
+		return
+	}
+	if entry.Timestamp.After(window.Add(windowDuration)) {
+		openNewWindow()
+	}
 }

@@ -27,6 +27,10 @@ Constraints:
 n == dominoes.length
 1 <= n <= 10^5
 dominoes[i] is either 'L', 'R', or '.'.
+
+Analysis:
+two pointers
+TC: O(N)
 """
 
 class PushDominoes:

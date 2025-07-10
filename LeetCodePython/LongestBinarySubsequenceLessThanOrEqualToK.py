@@ -32,9 +32,22 @@ hint:
 
 analysis:
 greedy: count of all zeros + count of all 1s from last which forms binary less than k
+TC：O(N)
 """
 class LongestBinarySubsequenceLessThanOrEqualToK:
     def longestSubsequence(self, s: str, k: int) -> int:
+        cur = 0
+        res = 0
+        for i, c in enumerate(s[::-1]):
+            if c == '1':
+                if i < k.bit_length() and cur + (1 << i) <= k:
+                    cur += 1 << i
+                    res += 1
+            else:
+                res += 1
+        return res
+
+    def longestSubsequence2(self, s: str, k: int) -> int:
         i, zeros = len(s) - 1, s.count("0")
         while i >= 0 and int(s[i:], 2) <= k:
             i -= 1

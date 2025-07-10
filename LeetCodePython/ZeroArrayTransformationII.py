@@ -43,7 +43,7 @@ queries[i].length == 3
 from typing import List
 
 
-class Solution:
+class ZeroArrayTransformationII:
     def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
         sz = len(nums)
         def can_transform(target):

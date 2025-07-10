@@ -44,19 +44,16 @@ hints:
 class MaximumManhattanDistanceAfterKChanges:
     def maxDistance(self, st: str, k: int) -> int:
         res = 0
-        n = s = e = w = h_min = v_min = 0
+        latitude = longitude = 0
         for i in range(len(st)):
             c = st[i]
             if c == 'N':
-                n += 1
+                latitude += 1
             elif c == 'S':
-                s += 1
+                latitude -= 1
             elif c == 'E':
-                e += 1
+                longitude += 1
             elif c == 'W':
-                w += 1
-            h_min = min(e, w)
-            v_min = min(n, s)
-            res = max(res, abs(n - s) + abs(w - e) + 2 * min(h_min + v_min, k))
-            res = min(res, i + 1)
+                longitude -= 1
+            res = max(res, min(i + 1, abs(latitude) + abs(longitude) + 2 * k))
         return res

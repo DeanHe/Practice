@@ -34,9 +34,8 @@ class LexicographicallyMinimumStringAfterRemovingStars:
         for i, c in enumerate(s):
             if c == '*':
                 deleted_idx.add(i)
-                c, j = heapq.heappop(letters)
-                j = -j
-                deleted_idx.add(j)
+                _, j = heapq.heappop(letters)
+                deleted_idx.add(-j)
             else:
                 heapq.heappush(letters, (c, -i))
 

@@ -28,6 +28,10 @@ hints:
 2 When a number is added to a subarray, it increases the number of pairs by its previous appearances.
 3 When a number is removed from the subarray, it decreases the number of pairs by its remaining appearances.
 4 Maintain 2-pointers l and r such that we can keep in account the number of equal pairs.
+
+analysis:
+sliding window
+TC:O(N)
 """
 from collections import defaultdict
 from typing import List

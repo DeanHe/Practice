@@ -7,15 +7,13 @@ import java.util.List;
 Give you an integer arr (index from 0 to n-1, where n is the size of this arr, data value from 0 to 10000) .
 For each element Ai in the arr, count the number of element left this element Ai is smaller than it and return count number arr.
 
-Example
 Example 1:
-
 Input:
 [1,2,7,8,5]
 Output:
 [0,1,2,3,2]
-Example 2:
 
+Example 2:
 Input:
 [7,8,2,1,3]
 Output:

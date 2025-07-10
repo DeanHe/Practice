@@ -57,6 +57,7 @@ class UsingaRobotToPrintTheLexicographicallySmallestString:
                 del cnt[c]
             else:
                 cnt[c] -= 1
+            # if top of stack is less than min letter
             while cnt and stack and stack[-1] <= min(cnt):
                 res.append(stack.pop())
         while stack:

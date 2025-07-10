@@ -28,6 +28,10 @@ colors consists of lowercase English letters.
 hints:
 1 Use topological sort.
 2 let dp[u][c] := the maximum count of vertices with color c of any path starting from vertex u.
+
+Analysis:
+TC: O(26 * N)
+SC: O(26 * N)
 """
 from collections import defaultdict, deque
 from typing import List
@@ -50,7 +54,6 @@ class LargestColorValueInaDirectedGraph:
         while q:
             cur = q.popleft()
             color = ord(colors[cur]) - ord('a')
-            print(color)
             dp[cur][color] += 1
             res = max(res, dp[cur][color])
             visited += 1

@@ -43,6 +43,7 @@ hints:
 
 Analysis:
 DFS to count the neighbors with distance less than k for each node
+TC：O()
 """
 from collections import defaultdict
 from typing import List
