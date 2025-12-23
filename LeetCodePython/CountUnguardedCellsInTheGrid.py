@@ -33,6 +33,10 @@ All the positions in guards and walls are unique.
 hint:
 1 Create a 2D array to represent the grid. Can you mark the tiles that can be seen by a guard?
 2 Iterate over the guards, and for each of the 4 directions, advance the current tile and mark the tile. When should you stop advancing?
+
+analysis:
+TC:O(M*N)
+dp: 0 means unvisited, 1 means wall or guard, 2 means visited
 """
 from typing import List
 

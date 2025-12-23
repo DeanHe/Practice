@@ -5,9 +5,6 @@ package LinkedList;
 
         For example: we have a Skiplist containing [30,40,50,60,70,90] and we want to add 80 and 45 into it. The Skiplist works this way:
 
-
-        Artyom Kalinin [CC BY-SA 3.0], via Wikimedia Commons
-
         You can see there are many layers in the Skiplist. Each layer is a sorted linked list. With the help of the top layers, add , erase and search can be faster than O(n). It can be proven that the average time complexity for each operation is O(log(n)) and space complexity is O(n).
 
         To be specific, your design should include these functions:
@@ -18,8 +15,6 @@ package LinkedList;
         See more about Skiplist : https://en.wikipedia.org/wiki/Skip_list
 
         Note that duplicates may exist in the Skiplist, your code needs to handle this situation.
-
-
 
         Example:
 
@@ -37,7 +32,6 @@ package LinkedList;
 
 
         Constraints:
-
         0 <= num, target <= 20000
         At most 50000 calls will be made to search, add, and erase.*/
 

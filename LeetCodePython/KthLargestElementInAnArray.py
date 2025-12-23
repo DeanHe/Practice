@@ -17,7 +17,11 @@ analysis:
 quick select
  based on selection algorithm (based on the partition method - the same one as used in quicksort).
 O(N) best case / O(N^2) worst case running time + O(1) memory
+
+To make it O(N) guaranteed?
+The answer is quite simple, we can randomize the input, so that even when the worst case input would be provided the algorithm wouldn't be affected.
 """
+import random
 from typing import List
 
 
@@ -46,3 +50,27 @@ class KthLargestElementInAnArray:
                 return getKth(s, idx - 1, k)
 
         return getKth(0, len(nums) - 1, len(nums) - k)
+
+    def findKthLargestIterative(self, nums: List[int], k: int) -> int:
+
+        def partition(s, e):
+            pivot = nums[e]
+            i = s
+            for j in range(s, e):
+                if nums[j] < pivot:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    i += 1
+            nums[i], nums[e] = nums[e], nums[i]
+            return i
+
+        k = len(nums) - k
+        s, e = 0, len(nums) - 1
+        while s < e:
+            i = partition(s, e)
+            if i == k:
+                break
+            elif i < k:
+                s = i + 1
+            else:
+                e = i - 1
+        return nums[k]

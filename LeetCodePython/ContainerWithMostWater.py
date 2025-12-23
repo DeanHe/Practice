@@ -36,6 +36,8 @@ However, this container might not be the maximum in size as one of the vertical 
 
 Start with the maximum width container and go to a shorter width container if there is a vertical line longer than the current containers shorter line.
 This way we are compromising on the width but we are looking forward to a longer length container.
+
+TC: O(N)
 """
 from typing import List
 

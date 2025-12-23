@@ -36,6 +36,10 @@ hints:
 2 For each fruit from left to right, use binary search to find the first index in the sorted array such that basket[i] >= fruit.
 3 Use a segment tree to maintain the smallest original indices where basket[i] >= fruit.
 4 When a valid index is found, set the corresponding point to infinity to mark it as used.
+
+Analysis:
+Segment tree + binary search
+TC:O(NlogN)
 """
 import math
 from typing import List

@@ -54,6 +54,9 @@ hint:
 3 Then, starting with a given t minutes of staying in the initial position,
 we can check if there is a safe path to the safehouse using the obtained information about the fire.
 4 We can use binary search to efficiently find the maximum t that allows us to reach the safehouse.
+
+analysis:
+two BFS
 """
 import collections
 from typing import List
@@ -77,12 +80,9 @@ class EscapeTheSpreadingFire:
                             queue.append((nb_r, nb_c, time + 1))
                         else:
                             if time + 1 < fire_reach[nb_r][nb_c] \
-                                or fire_reach[nb_r][nb_c] == -1 \
-                                or (time + 1 == fire_reach[nb_r][nb_c] and nb_r == rows - 1 and nb_c == cols - 1):
+                                    or fire_reach[nb_r][nb_c] == -1 \
+                                    or (nb_r == rows - 1 and nb_c == cols - 1 and time + 1 == fire_reach[nb_r][nb_c]):
                                 queue.append((nb_r, nb_c, time + 1))
-
-
-
 
         fire_queue = collections.deque([(r, c, 0) for r in range(rows) for c in range(cols) if grid[r][c] == 1])
         bfs(fire_queue, fire_reach)

@@ -22,6 +22,8 @@ Constraints:
 hint:
 1 The main point here is for the subarray to contain unique elements for each index. Only the first subarrays starting from that index have unique elements.
 2 This can be solved using the two pointers technique
+
+TC: O(N)
 """
 import collections
 from typing import List

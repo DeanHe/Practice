@@ -24,7 +24,7 @@ Explanation: It can be proven, that it is impossible to make 5 equal to 0 with t
 
 Constraints:
 1 <= num1 <= 10^9
--109 <= num2 <= 10^9
+-10^9 <= num2 <= 10^9
 
 hints:
 1 If we want to make integer n equal to 0 by only subtracting powers of 2 from n, in how many operations can we achieve it?
@@ -34,7 +34,8 @@ hints:
 
 analysis:
 bit manipulation
-TC: O(N)
+as step increases, diff is monotonic decreasing
+TC: O(log(num1))
 """
 
 class MinimumOperationsToMakeTheIntegerZero:
@@ -44,14 +45,9 @@ class MinimumOperationsToMakeTheIntegerZero:
 
         for step in range(101):
             diff = num1 - num2 * step
-            bits = self.countBits(diff)
-            if bits <= step <= diff:
+            bits = diff.bit_count()
+            if diff < step:
+                return -1
+            if bits <= step:
                 return step
         return -1
-
-    def countBits(self, num):
-        cnt = 0
-        while num > 0:
-            cnt += num & 1
-            num >>= 1
-        return cnt

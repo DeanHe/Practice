@@ -57,6 +57,10 @@ hints:
 5 Precompute all components and then handle each query in O(log n) time using the sorted sets
 
 analysis:
+Maintaining the minimum identifier of the currently online power stations
+Consider processing the queries in reverse order. From this perspective, an offline operation effectively becomes an online operation.
+As each power plant comes back online, maintaining the minimum identifier among all online power plants simply requires repeatedly taking the min.
+
 Union Find
 TC: O( (connections+queries)×log(C) )
 """
@@ -67,7 +71,9 @@ class PowerGridMaintenance:
     def processQueries(self, c: int, connections: List[List[int]], queries: List[List[int]]) -> List[int]:
         res = []
         parent = list(range(c + 1))
-        members = [{i} for i in range(c + 1)]
+        online = [True] * (c + 1)
+        offline_cnt = [0] * (c + 1)
+        min_online_station = {}
 
         def find_root(x):
             root = x
@@ -83,26 +89,41 @@ class PowerGridMaintenance:
             root_a = find_root(a)
             root_b = find_root(b)
             if root_a < root_b:
-                members[root_a].update(members[root_b])
-                members[root_b].clear()
                 parent[root_b] = parent[root_a]
             elif root_b < root_a:
-                members[root_b].update(members[root_a])
-                members[root_a].clear()
                 parent[root_a] = parent[root_b]
 
         for a, b in connections:
             union(a, b)
 
         for op, x in queries:
+            if op == 2:
+                online[x] = False
+                offline_cnt[x] += 1
+
+        for x in range(1, c + 1):
             root_x = find_root(x)
+            if root_x not in min_online_station:
+                min_online_station[root_x] = -1
+            ms = min_online_station[root_x]
+            if online[x]:
+                if ms == -1 or ms > x:
+                    min_online_station[root_x] = x
+
+        for i in range(len(queries) - 1, -1, -1):
+            op, x = queries[i]
+            root_x = find_root(x)
+            ms = min_online_station[root_x]
             if op == 1:
-                if x in members[root_x]:
+                if online[x]:
                     res.append(x)
-                elif members[root_x]:
-                    res.append(min(members[root_x]))
                 else:
-                    res.append(-1)
+                    res.append(ms)
             elif op == 2:
-                members[root_x].discard(x)
-        return res
+                if offline_cnt[x] > 1:
+                    offline_cnt[x] -= 1
+                else:
+                    online[x] = True
+                    if ms == -1 or ms > x:
+                        min_online_station[root_x] = x
+        return res[::-1]

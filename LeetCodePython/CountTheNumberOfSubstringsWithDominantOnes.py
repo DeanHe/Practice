@@ -44,38 +44,25 @@ an important conclusion: the maximum number of zeros in a valid substring can't 
 
 TC: O(N * sqrt(N))
 """
-from collections import deque
 
 
 class CountTheNumberOfSubstringsWithDominantOnes:
     def numberOfSubstrings(self, s: str) -> int:
         res = 0
         sz = len(s)
-        for possible_0_cnt in range(1, int(sz ** 0.5) + 1):
-            zeros = deque()
-            first_0 = -1
-            one_cnt = 0
-            for r in range(sz):
-                if s[r] == '0':
-                    zeros.append(r)
-                    while len(zeros) > possible_0_cnt:
-                        one_cnt -= (zeros[0] - first_0 - 1)
-                        first_0 = zeros.popleft()
-                else:
-                    one_cnt += 1
-                if len(zeros) == possible_0_cnt and possible_0_cnt ** 2 <= one_cnt:
-                    res += min(zeros[0] - first_0, one_cnt - possible_0_cnt ** 2 + 1)
-        # Handle all-ones substrings
-        i = 0
-        while i < sz:
+        pre_0_idx = [0] * sz
+        last = -1
+        for i in range(sz):
+            pre_0_idx[i] = last
             if s[i] == '0':
-                i += 1
-                continue
-            one_cnt = 0
-            while i < sz and s[i] == '1':
-                one_cnt += 1
-                i += 1
-            # Add number of all-ones substrings
-            res += (one_cnt * (one_cnt + 1)) // 2
+                last = i
+        for r in range(sz):
+            cnt0 = 1 if s[r] == '0' else 0
+            l = r
+            while l >= 0 and cnt0 * cnt0 <= sz:
+                cnt1 = (r - pre_0_idx[l]) - cnt0
+                if cnt0 * cnt0 <= cnt1:
+                    res += min(l - pre_0_idx[l], cnt1 - cnt0 * cnt0 + 1)
+                l = pre_0_idx[l]
+                cnt0 += 1
         return res
-

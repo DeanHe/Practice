@@ -43,13 +43,13 @@ class MaximumTotalDamageWithSpellCasting:
         power.sort()
         dp = [0] * (sz + 1)
         pre = 0
-        pre_sum_max = 0
-        for i in range(sz + 1):
-            if i == 0 or power[i] == power[i + 1]:
+        pre_dp_max = 0
+        for i in range(sz):
+            if i == 0 or power[i] == power[i - 1]:
                 dp[i + 1] = dp[i] + power[i]
             else:
                 while power[pre] + 2 < power[i]:
+                    pre_dp_max = max(pre_dp_max, dp[pre + 1])
                     pre += 1
-                    pre_sum_max = max(pre_sum_max, dp[pre])
-                dp[i + 1] = pre_sum_max + power[i]
+                dp[i + 1] = pre_dp_max + power[i]
         return max(dp)

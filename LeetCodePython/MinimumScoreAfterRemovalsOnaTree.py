@@ -43,6 +43,9 @@ edges represents a valid tree.
 hint:
 1 Consider iterating over the first edge to remove, and then doing some precalculations on the 2 resulting connected components.
 2 Will calculating the XOR of each subtree help?
+
+analysis:
+TC:O(N^2)
 """
 import collections
 import math

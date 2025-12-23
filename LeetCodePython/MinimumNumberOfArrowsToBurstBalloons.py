@@ -40,9 +40,9 @@ from typing import List
 class MinimumNumberOfArrowsToBurstBalloons:
     def findMinArrowShots(self, points: List[List[int]]) -> int:
         points.sort(key=lambda x: x[1])
-        pre_end, arrows = float('-inf'), 0
+        pre_end, res = float('-inf'), 0
         for start, end in points:
             if start > pre_end:
-                arrows += 1
+                res += 1
                 pre_end = end
-        return arrows
+        return res

@@ -34,6 +34,9 @@ the answer is guaranteed to fit into signed 32-bit integer
 
 tag:
 dfs + memorization
+
+Analysis:
+TC:O(M*N)
 */
 
 public class CoinChangeII {
@@ -57,10 +60,10 @@ public class CoinChangeII {
             return 1;
         }
         Integer[][] dp = new Integer[amount + 1][coins.length + 1];
-        return dfs(amount, coins, dp, 0, amount);
+        return dfs(coins, dp, 0, amount);
     }
 
-    int dfs(int amount, int[] coins, Integer[][] dp, int i, int cur) {
+    int dfs(int[] coins, Integer[][] dp, int i, int cur) {
         if (i == coins.length) {
             return 0;
         }
@@ -74,8 +77,8 @@ public class CoinChangeII {
             return dp[cur][i];
         }
         int res = 0;
-        res += dfs(amount, coins, dp, i, cur - coins[i]);
-        res += dfs(amount, coins, dp, i + 1, cur);
+        res += dfs(coins, dp, i, cur - coins[i]);
+        res += dfs(coins, dp, i + 1, cur);
         return dp[cur][i] = res;
     }
 }

@@ -29,6 +29,12 @@ hints:
 3 Store the elements that need to be swapped in a vector, and sort it.
 4 Can we reduce swapping cost with the help of minimum element?
 5 Calculate the minimum cost of swapping.
+
+Analysis:
+Greedy
+1 Direct exchange: Swap x1 with x2, with a cost of x1
+2 Indirect exchange: Both x1 and x2, are exchanged through the minimum fruit cost m across both baskets, with a total cost of 2×m.
+TC：O(NlogN)
 """
 from collections import Counter
 from typing import List

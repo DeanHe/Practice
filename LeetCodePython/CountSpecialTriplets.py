@@ -46,6 +46,13 @@ nums[4] = nums[2] * 2 = 2 * 2 = 4
 Constraints:
 3 <= n == nums.length <= 10^5
 0 <= nums[i] <= 10^5
+
+hints:
+1 Use frequency arrays or maps, e.g. freqPrev and freqNext—to track how many times each value appears before and after the current index.
+2 For each index j in the triplet (i,j,k), compute its contribution to the answer using your freqPrev and freqNext counts.
+
+analysis:
+TC:O(N)
 """
 from collections import defaultdict
 from typing import List

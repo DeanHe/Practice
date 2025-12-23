@@ -55,7 +55,6 @@ Output: "00553311"
 
 
 Constraints:
-
 2 <= s.length <= 100
 s.length is even.
 s consists of digits from 0 to 9 only.

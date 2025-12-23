@@ -26,11 +26,15 @@ Constraints:
 1 <= maxPts <= 10^4
 
 analysis:
-dp[i] means the probability to get i points
+DP + sliding window
+
+dp[i] means the probability to get i points, where in the answer, we care about k <= i <= n
 logic:
 probability to get i points = sum(probability to get i - x points * 1 / maxPts) for x can be any of [1, maxPts]
 uses pre_sum_i_w to represent
 where 0 <= i - w < K
+
+TC: O(N)
 """
 
 class New21Game:
@@ -38,14 +42,14 @@ class New21Game:
         if k == 0 or n >= k + maxPts:
             return 1
         dp = [0] * (n + 1)
-        pre_sum_x, res = 1, 0
+        sliding_window_sum, res = 1, 0
         dp[0] = 1
         for i in range(1, n + 1):
-            dp[i] = pre_sum_x / maxPts
+            dp[i] = sliding_window_sum / maxPts
             if i < k:
-                pre_sum_x += dp[i]
+                sliding_window_sum += dp[i]
             else:
                 res += dp[i]
             if i - maxPts >= 0:
-                pre_sum_x -= dp[i - maxPts]
+                sliding_window_sum -= dp[i - maxPts]
         return res

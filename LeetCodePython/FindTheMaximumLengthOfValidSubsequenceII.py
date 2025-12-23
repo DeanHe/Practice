@@ -38,6 +38,16 @@ from typing import List
 
 class FindTheMaximumLengthOfValidSubsequenceII:
     def maximumLength(self, nums: List[int], k: int) -> int:
+        res = 0
+        dp = [[0] * k for _ in range(k)]
+        for num in nums:
+            last = num % k
+            for pre in range(k):
+                dp[pre][last] = dp[last][pre] + 1
+                res = max(res, dp[pre][last])
+        return res
+
+    def maximumLength2(self, nums: List[int], k: int) -> int:
         sz = len(nums)
         dp = defaultdict(int)
         for i in range(sz):

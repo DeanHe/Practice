@@ -25,6 +25,18 @@ Constraints:
 0 <= nums[i] <= 1000
 0 <= sum(nums[i]) <= 1000
 -1000 <= target <= 1000
+
+analysis:
+Let P denotes a set of nums have + sign before it
+Let N denotes a set of nums have - sign before it
+P U N = nums
+sum(P) - sum(N) = S
+sum(P) - sum(N) + sum(P) + sum(N) = S + sum(P) + sum(N)
+2 * sum(P) = S + sum(nums);
+sum(P) = (S + sum(nums)) / 2; ~ 0:1 backpack problem
+new target is (S + sum(nums)) / 2
+
+TC: O(M*N)
 """
 from typing import List
 

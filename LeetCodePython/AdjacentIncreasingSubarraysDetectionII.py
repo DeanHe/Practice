@@ -40,9 +40,8 @@ class AdjacentIncreasingSubarraysDetectionII:
                 inc[i] = inc[i - 1] + 1
 
         for i in range(1, sz):
-            if inc[i] <= i + 1:
-                if inc[i] <= i and inc[i] <= inc[i - inc[i]]:
-                    res = max(res, inc[i])
-                else:
-                    res = max(res, inc[i] // 2)
+            if inc[i] <= i and inc[i] <= inc[i - inc[i]]:
+                res = max(res, inc[i])
+            else:
+                res = max(res, inc[i] // 2)
         return res

@@ -43,7 +43,7 @@ TC:O(N)
 from functools import cache
 
 
-class Solution:
+class NumberOfWaysToDivideaLongCorridor:
     def numberOfWays(self, corridor: str) -> int:
         MOD = 10**9 + 7
         sz = len(corridor)
@@ -55,10 +55,13 @@ class Solution:
 
             if seats == 2:
                 if corridor[pos] == 'P':
-                    return (dfs(pos + 1, 0) + dfs(pos + 1, seats)) % MOD
+                    return (dfs(pos + 1, 0) + dfs(pos + 1, seats=2)) % MOD
                 else:
                     return dfs(pos + 1, 1)
             else:
-                return dfs(pos + 1, (seats + (1 if corridor[pos] == 'S' else 0)) % MOD)
+                if corridor[pos] == 'P':
+                    return dfs(pos + 1, seats)
+                else:
+                    return dfs(pos + 1, seats + 1)
 
         return dfs(0, 0)

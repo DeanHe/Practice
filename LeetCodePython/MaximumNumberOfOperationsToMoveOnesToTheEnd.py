@@ -28,6 +28,10 @@ s[i] is either '0' or '1'.
 hints:
 1 It is optimal to perform the operation on the lowest index possible each time.
 2 Traverse the string from left to right and perform the operation every time it is possible.
+
+analysis:
+accumulate ones met, and add operation when meet end of zero
+TC: O(N)
 """
 class MaximumNumberOfOperationsToMoveOnesToTheEnd:
     def maxOperations(self, s: str) -> int:

@@ -27,7 +27,13 @@ Constraints:
 hints:
 1 Note that if you have at least one occurrence of 1 in the array, then you can make all the other elements equal to 1 with one operation each.
 2 Try finding the shortest subarray with a gcd equal to 1.
+
+analysis:
+Greedy
+TC:O(N^2*LogM)
+computing the gcd takes O(logM)
 """
+import math
 from collections import Counter
 from typing import List
 
@@ -39,15 +45,15 @@ class Solution:
                 return b
             return gcd(b % a, a)
 
-        size = len(nums)
+        sz = len(nums)
         cnt = Counter(nums)
         if 1 in cnt:
-            return size - cnt[1]
-        res = float('inf')
-        for l in range(size):
+            return sz - cnt[1]
+        min_len = sz + 1
+        for l in range(sz):
             g = nums[l]
-            for r in range(l + 1, size):
+            for r in range(l + 1, sz):
                 g = gcd(g, nums[r])
                 if g == 1:
-                    res = min(res, r - l + size - 1)
-        return res if res != float('inf') else -1
+                    min_len = min(min_len, r - l + 1)
+        return min_len - 1 + sz - 1 if min_len != sz + 1 else -1

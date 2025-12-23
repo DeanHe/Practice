@@ -27,13 +27,31 @@ The maximum sum subarray is [1, 2, -3, 4] which has length equal to 4 which is d
 Constraints:
 1 <= k <= nums.length <= 2 * 10^5
 -10^9 <= nums[i] <= 10^9
+
+analysis:
+hints: Maintain minimum prefix sum ending at every possible index % k.
+
+dp[i] is the max subarray[:i] sum which has size divisible by k
+TC: O(N)
 """
 import math
+import sys
 from typing import List
 
 
-class Solution:
+class MaximumSubarraySumWithLengthDivisibleByK:
     def maxSubarraySum(self, nums: List[int], k: int) -> int:
+        res = -sys.maxsize
+        pre_sum = 0
+        k_sum = [sys.maxsize // 2] * k
+        k_sum[k - 1] = 0
+        for i, n in enumerate(nums):
+            pre_sum += n
+            res = max(res, pre_sum - k_sum[i % k])
+            k_sum[i % k] = min(k_sum[i % k], pre_sum)
+        return res
+
+    def maxSubarraySum2(self, nums: List[int], k: int) -> int:
         res = -math.inf
         sz = len(nums)
         pre_sum = [0]

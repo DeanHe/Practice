@@ -39,21 +39,36 @@ Note that there are other ways to obtain the same resultant array.
 
 
 Constraints:
+1 <= nums.length <= 10^5
+1 <= nums[i] <= 10^5
+The test cases are generated such that the values in the final array are less than or equal to 10^8.
 
-1 <= nums.length <= 105
-1 <= nums[i] <= 105
-The test cases are generated such that the values in the final array are less than or equal to 108.
+hints:
+1 Notice that the order of merging two numbers into their LCM does not matter so we can greedily merge elements to its left if possible.
+2 If a new value is formed, we should recursively check if it can be merged with the value to its left.
+3 To simulate the merge efficiently, we can maintain a stack that stores processed elements. When we iterate through the array, we only compare with the top of the stack (which is the value to its left).
+
+Analysis:
+Math + stack
+TC:O(NlogN)
 """
-import math
-class ReplaceNonCoprimeNumbersInArray(object):
-    def replaceNonCoprimes(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        stack = []
+from typing import List
+
+
+class ReplaceNonCoprimeNumbersInArray:
+    def replaceNonCoprimes(self, nums: List[int]) -> List[int]:
+        def gcd(a, b):
+            if a == 0:
+                return b
+            return gcd(b % a, a)
+
+        res = []
         for n in nums:
-            stack.append(n)
-            while len(stack) > 1 and math.gcd(stack[-1], stack[-2]) > 1:
-                stack.append(math.lcm(stack.pop(), stack.pop()))
-        return stack
+            while res:
+                common = gcd(n, res[-1])
+                if common == 1:
+                    # co-prime
+                    break
+                n *= res.pop() // common
+            res.append(n)
+        return res

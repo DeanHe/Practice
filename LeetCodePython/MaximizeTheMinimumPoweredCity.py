@@ -43,6 +43,8 @@ hints:
 1 Pre calculate the number of stations on each city using Line Sweep.
 2 Use binary search to maximize the minimum.
 
+analysis:
+sliding window + greedy
 TC: O(N * log(sum_stations + k))
 """
 from typing import List
@@ -65,6 +67,7 @@ class MaximizeTheMinimumPoweredCity:
                         return False
                     cur = min_power_required
                     extra -= gap
+                    # Plant the additional stations on the farthest city in the range to cover as many cities as possible
                     addition_powers[min(n - 1, i + r)] += gap
                 if i - r >= 0:
                     cur -= stations[i - r] + addition_powers[i - r]

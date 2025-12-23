@@ -46,6 +46,9 @@ All coordinates of buildings are unique.
 hints:
 1 Group buildings with the same x or y value together, and sort each group.
 2 In each sorted list, the buildings that are not at the first or last positions are covered in that direction.
+
+analysis:
+TC:O(M) when M is the len(buildings)
 """
 from bisect import bisect_left
 from collections import defaultdict
@@ -55,18 +58,16 @@ from typing import List
 class CountCoveredBuildings:
     def countCoveredBuildings(self, n: int, buildings: List[List[int]]) -> int:
         res = 0
-        x_axis = defaultdict(list)
-        y_axis = defaultdict(list)
-        for x, y in buildings:
-            x_axis[x].append(y)
-            y_axis[y].append(x)
-        for ls in x_axis.values():
-            ls.sort()
-        for ls in y_axis.values():
-            ls.sort()
-        for x, y in buildings:
-            idx_y = bisect_left(x_axis[x], y)
-            idx_x = bisect_left(y_axis[y], x)
-            if idx_y != 0 and idx_y != len(x_axis[x]) - 1 and idx_x != 0 and idx_x != len(y_axis[y]) - 1:
+        max_row = [0] * (n + 1)
+        min_row = [n + 1] * (n + 1)
+        max_col = [0] * (n + 1)
+        min_col = [n + 1] * (n + 1)
+        for r, c in buildings:
+            max_row[c] = max(max_row[c], r)
+            min_row[c] = min(min_row[c], r)
+            max_col[r] = max(max_col[r], c)
+            min_col[r] = min(min_col[r], c)
+        for r, c in buildings:
+            if min_row[c] < r < max_row[c] and min_col[r] < c < max_col[r]:
                 res += 1
         return res

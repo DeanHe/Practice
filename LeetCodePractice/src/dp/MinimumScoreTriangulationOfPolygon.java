@@ -30,7 +30,6 @@ mem[i][j] means the minimum score to triangulate A[i] ~ A[j],
 while there is edge connect A[i] and A[j].
 We enumerate all points A[k] with i < k < j to form a triangle.
 The score of this triangulation is mem[i][j], mem[i][k] + mem[k][j] + A[i] * A[j] * A[k]
-
 */
 public class MinimumScoreTriangulationOfPolygon {
 	public int minScoreTriangulation(int[] A) {

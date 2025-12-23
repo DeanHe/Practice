@@ -39,10 +39,20 @@ Room 0 held 1 meeting while rooms 1 and 2 each held 2 meetings, so we return 1.
 
 Constraints:
 1 <= n <= 100
-1 <= meetings.length <= 105
+1 <= meetings.length <= 10^5
 meetings[i].length == 2
-0 <= starti < endi <= 5 * 105
+0 <= starti < endi <= 5 * 10^5
 All the values of starti are unique.
+
+hints:
+1 Sort meetings based on start times.
+2 Use two min heaps, the first one keeps track of the numbers of all the rooms that are free. The second heap keeps track of the end times of all the meetings that are happening and the room that they are in.
+3 Keep track of the number of times each room is used in an array.
+4 With each meeting, check if there are any free rooms. If there are, then use the room with the smallest number. Otherwise, assign the meeting to the room whose meeting will end the soonest.
+
+Analysis:
+sort + Priority Queue
+TC: O(MlogM + MlogN)
 """
 import heapq
 from typing import List
@@ -62,6 +72,7 @@ class MeetingRoomsIII:
             if free_rooms:
                 free_room_id = heapq.heappop(free_rooms)
                 cnt[free_room_id] += 1
+                # save free_time and room_id
                 heapq.heappush(occupied_rooms, (e, free_room_id))
             else:
                 available, occupied_room_id = heapq.heappop(occupied_rooms)

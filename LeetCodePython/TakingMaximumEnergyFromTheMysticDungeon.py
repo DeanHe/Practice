@@ -39,7 +39,7 @@ class TakingMaximumEnergyFromTheMysticDungeon:
         res = -math.inf
         dp = energy.copy()
         sz = len(energy)
-        for i in range(sz - 1, -1 , -1):
+        for i in range(sz - 1, -1, -1):
             if i + k < sz:
                 dp[i] += dp[i + k]
             res = max(res, dp[i])

@@ -35,6 +35,7 @@ hints:
 3 How does finding the frequency of (nums[i] mod value) help
 
 analysis:
+TC: O(N)
 """
 from collections import Counter
 from typing import List

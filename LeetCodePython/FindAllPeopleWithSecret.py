@@ -7,10 +7,7 @@ The secrets are shared instantaneously. That is, a person may receive the secret
 
 Return a list of all the people that have the secret after all the meetings have taken place. You may return the answer in any order.
 
-
-
 Example 1:
-
 Input: n = 6, meetings = [[1,2,5],[2,3,8],[1,5,10]], firstPerson = 1
 Output: [0,1,2,3,5]
 Explanation:

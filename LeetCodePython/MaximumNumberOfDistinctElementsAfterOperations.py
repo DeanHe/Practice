@@ -48,8 +48,9 @@ class MaximumNumberOfDistinctElementsAfterOperations:
                     most += 1
                     visited.add(most)
             else:
-                most = max(most, nums[i])
-                visited.add(most)
+                if most < nums[i]:
+                    most = nums[i]
+                    visited.add(nums[i])
         return len(visited)
 
 

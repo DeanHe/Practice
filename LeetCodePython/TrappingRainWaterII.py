@@ -37,13 +37,13 @@ class TrappingRainWaterII(object):
             return 0
         dirs = [(0, 1), (0, -1), (-1, 0), (1, 0)]
         res, rows, cols = 0, len(heightMap), len(heightMap[0])
-        visited = [[0] * cols for _ in range(rows)]
+        visited = [[False] * cols for _ in range(rows)]
         heap = []
         for r in range(rows):
             for c in range(cols):
                 if r == 0 or c == 0 or r == rows - 1 or c == cols - 1:
                     heapq.heappush(heap, (heightMap[r][c], r, c))
-                    visited[r][c] = 1
+                    visited[r][c] = True
         while heap:
             height, r, c = heapq.heappop(heap)
             for dr, dc in dirs:
@@ -54,5 +54,5 @@ class TrappingRainWaterII(object):
                         # nb's height is the lowest, it can trap water
                         res += height - heightMap[nb_r][nb_c]
                     heapq.heappush(heap, (max(height, heightMap[nb_r][nb_c]), nb_r, nb_c))
-                    visited[nb_r][nb_c] = 1
+                    visited[nb_r][nb_c] = True
         return res

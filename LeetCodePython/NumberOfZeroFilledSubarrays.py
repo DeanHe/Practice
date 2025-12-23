@@ -33,6 +33,9 @@ Constraints:
 hints:
 1 For each zero, you can calculate the number of zero-filled subarrays that end on that index, which is the number of consecutive zeros behind the current element + 1.
 2 Maintain the number of consecutive zeros behind the current element, count the number of zero-filled subarrays that end on each index, sum it up to get the answer.
+
+Analysis:
+TC: O(N)
 """
 from typing import List
 
