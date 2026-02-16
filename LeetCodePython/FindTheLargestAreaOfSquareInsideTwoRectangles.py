@@ -31,6 +31,15 @@ bottomLeft[i].length == topRight[i].length == 2
 1 <= topRight[i][0], topRight[i][1] <= 10^7
 bottomLeft[i][0] < topRight[i][0]
 bottomLeft[i][1] < topRight[i][1]
+
+hints:
+1 Brute Force the intersection area of each pair of rectangles.
+2 Two rectangles will not overlap when the bottom left x coordinate of one rectangle is greater than the top right x coordinate of the other rectangle. The same is true for the y coordinate.
+3 The intersection area (if any) is also a rectangle. Find its corners.
+
+Analysis:
+TC:O(N^2)
+
 """
 from typing import List
 

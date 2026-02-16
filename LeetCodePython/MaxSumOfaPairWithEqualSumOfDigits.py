@@ -27,8 +27,6 @@ hints:
 Analysis:
 TC: O(NlogM) where Let N be the size of nums, and let M be the maximum number in nums.
 """
-import collections
-import heapq
 from typing import List
 
 

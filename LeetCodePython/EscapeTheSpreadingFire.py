@@ -14,8 +14,6 @@ Note that even if the fire spreads to the safehouse immediately after you have r
 
 A cell is adjacent to another cell if the former is directly north, east, south, or west of the latter (i.e., their sides are touching).
 
-
-
 Example 1:
 Input: grid = [[0,2,0,0,0,0,0],[0,0,0,2,2,1,0],[0,2,0,0,1,2,0],[0,0,2,2,2,0,2],[0,0,0,0,0,0,0]]
 Output: 3
@@ -31,16 +29,13 @@ Fire will spread to any cell you move towards and it is impossible to safely rea
 Thus, -1 is returned.
 Example 3:
 
-
 Input: grid = [[0,0,0],[2,2,0],[1,2,0]]
 Output: 1000000000
 Explanation: The figure above shows the initial grid.
 Notice that the fire is contained by walls and you will always be able to safely reach the safehouse.
 Thus, 10^9 is returned.
 
-
 Constraints:
-
 m == grid.length
 n == grid[i].length
 2 <= m, n <= 300

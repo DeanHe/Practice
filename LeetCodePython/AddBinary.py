@@ -15,12 +15,11 @@ Constraints:
 a and b consist only of '0' or '1' characters.
 Each string does not contain leading zeros except for the zero itself.
 """
-import str as str
 
 
 class AddBinary:
     def addBinary(self, a: str, b: str) -> str:
-        res, cur, carry, i, j = "", 0, 0, len(a) - 1, len(b) - 1
+        res, cur, carry, i, j = '', 0, 0, len(a) - 1, len(b) - 1
         while i >= 0 or j >= 0 or carry > 0:
             cur = carry
             if i >= 0:

@@ -28,15 +28,20 @@ Output: 2
 Explanation:
 One of the longest balanced substrings is "ab" because both distinct characters 'a' and 'b' each appear exactly 1 time. Another longest balanced substring is "ba".
 
-
 Constraints:
 1 <= s.length <= 1000
 s consists of lowercase English letters.
+
+hints:
+1 Use bruteforce over all substrings
+
+Analysis:
+TC:O(N^2)
 """
 import math
 
 
-class Solution:
+class LongestBalancedSubarrayI:
     def longestBalanced(self, s: str) -> int:
         res = 1
         sz = len(s)

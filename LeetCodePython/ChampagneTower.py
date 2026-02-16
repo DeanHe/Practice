@@ -32,12 +32,15 @@ DP simulation
 
 class ChampagneTower:
     def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
-        dp = [[0] * 101 for _ in range(101)]
+        dp = [[0] * (query_row + 1) for _ in range(query_row + 1)]
         dp[0][0] = poured
-        for r in range(100):
-            for i in range(r):
-                if dp[r][i] > 1.0:
+        for r in range(query_row):
+            for i in range(r + 1):
+                if dp[r][i] > 1:
                     dp[r + 1][i] += (dp[r][i] - 1.0) / 2
                     dp[r + 1][i + 1] += (dp[r][i] - 1.0) / 2
                     dp[r][i] = 1.0
-        return dp[query_row][query_glass]
+        if dp[query_row][query_glass] >= 1.0:
+            return 1.0
+        else:
+            return dp[query_row][query_glass]

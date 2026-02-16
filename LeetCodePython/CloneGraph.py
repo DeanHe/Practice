@@ -48,7 +48,7 @@ The Graph is connected and all nodes can be visited starting from the given node
 """
 
 # Definition for a Node.
-import collections
+from collections import deque
 
 
 class Node:
@@ -63,7 +63,7 @@ class Solution:
 
         head = Node(node.val)
         map = {node: head}
-        q = collections.deque()
+        q = deque()
         q.append(node)
         while q:
             cur = q.popleft()

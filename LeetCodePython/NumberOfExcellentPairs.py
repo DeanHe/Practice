@@ -26,19 +26,19 @@ Output: 0
 Explanation: There are no excellent pairs for this array.
 
 Constraints:
-1 <= nums.length <= 105
-1 <= nums[i] <= 109
+1 <= nums.length <= 10^5
+1 <= nums[i] <= 10^9
 1 <= k <= 60
 
 hint:
 1 Can you find a different way to describe the second condition?
 2 The sum of the number of set bits in (num1 OR num2) and (num1 AND num2) is equal to the sum of the number of set bits in num1 and num2.
 """
-import collections
+from collections import Counter
 from typing import List
 
 
 class NumberOfExcellentPairs:
     def countExcellentPairs(self, nums: List[int], k: int) -> int:
-        cnt = collections.Counter(map(int.bit_count, set(nums)))
+        cnt = Counter(map(int.bit_count, set(nums)))
         return sum(cnt[a] * cnt[b] for a in cnt for b in cnt if a + b >= k)

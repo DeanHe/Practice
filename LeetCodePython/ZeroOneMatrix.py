@@ -20,7 +20,7 @@ n == mat[i].length
 mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
 """
-import collections
+from collections import deque
 from typing import List
 
 
@@ -28,7 +28,7 @@ class ZeroOneMatrix:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         dirs = [0, 1, 0, -1, 0]
         rows, cols = len(mat), len(mat[0])
-        q = collections.deque()
+        q = deque()
         for r in range(rows):
             for c in range(cols):
                 if mat[r][c] == 0:

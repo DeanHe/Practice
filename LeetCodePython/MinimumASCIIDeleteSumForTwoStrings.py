@@ -24,6 +24,7 @@ s1 and s2 consist of lowercase English letters.
 
 analysis:
 DP, dp[i][j] means min cost to make s1[:i] and s2[:j] equal
+TC:O(M*N)
 """
 
 class MinimumASCIIDeleteSumForTwoStrings:

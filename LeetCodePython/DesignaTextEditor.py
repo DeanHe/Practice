@@ -53,7 +53,7 @@ Constraints:
 
 1 <= text.length, k <= 40
 text consists of lowercase English letters.
-At most 2 * 104 calls in total will be made to addText, deleteText, cursorLeft and cursorRight.
+At most 2 * 10^4 calls in total will be made to addText, deleteText, cursorLeft and cursorRight.
 
 
 hint:
@@ -61,35 +61,71 @@ hint:
 2 Can you partition your data structure (text with cursor) into two parts, such that each part changes only near its ends?
 3 Can you think of a data structure that supports efficient removals/additions to the front/back?
 4 Try to solve the problem with two deques by maintaining the prefix and the suffix separately.
+
+Analysis:
+Deque
+TC:O(N)
 """
+from collections import deque
+
 
 class TextEditor:
 
     def __init__(self):
-        self.s = ""
-        self.cursor = 0
+        self.left = []
+        self.right = deque([])
 
     def addText(self, text: str) -> None:
-        self.s = self.s[:self.cursor] + text + self.s[self.cursor:]
-        self.cursor += len(text)
+        self.left.append(text)
 
     def deleteText(self, k: int) -> int:
-        cur = max(0, self.cursor - k)
-        delete_cnt = k if self.cursor - k >= 0 else self.cursor
-        self.s = self.s[:cur] + self.s[self.cursor:]
-        self.cursor = cur
-        return delete_cnt
+        removed = 0
+        while k:
+            if not self.left:
+                break
+            cur = self.left.pop()
+            if len(cur) > k:
+                cur = cur[:-k]
+                self.left.append(cur)
+                removed += k
+                break
+            k -= len(cur)
+            removed += len(cur)
+        return removed
 
     def cursorLeft(self, k: int) -> str:
-        self.cursor = max(0, self.cursor - k)
-        start = max(0, self.cursor - 10)
-        return self.s[start:self.cursor]
+        while k:
+            if not self.left:
+                break
+            cur = self.left.pop()
+            if len(cur) > k:
+                self.left.append(cur[:-k])
+                self.right.appendleft(cur[-k:])
+                break
+            self.right.appendleft(cur)
+            k -= len(cur)
+        return self.read_left_10_char()
 
     def cursorRight(self, k: int) -> str:
-        self.cursor = min(len(self.s), self.cursor + k)
-        start = max(0, self.cursor - 10)
-        return self.s[start:self.cursor]
+        while k:
+            if not self.right:
+                break
+            cur = self.right.popleft()
+            if len(cur) > k:
+                self.left.append(cur[:k])
+                self.right.appendleft(cur[k:])
+                break
+            self.left.append(cur)
+            k -= len(cur)
+        return self.read_left_10_char()
 
+    def read_left_10_char(self):
+        res = ''
+        i = len(self.left) - 1
+        while i >= 0 and len(res) < 10:
+            res = self.left[i] + res
+            i -= 1
+        return res[-10:]
 
 # Your TextEditor object will be instantiated and called as such:
 # obj = TextEditor()

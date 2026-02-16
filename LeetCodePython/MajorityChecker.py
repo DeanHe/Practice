@@ -36,8 +36,8 @@ hint:
 4 It's more than 50% if that array has a majority element.
 5 Try a random index for a proper number of times so that the probability of not finding the answer tends to zero.
 """
-import bisect
-import collections
+from bisect import bisect_left, bisect_right
+from collections import defaultdict
 import random
 from typing import List
 
@@ -46,7 +46,7 @@ class MajorityChecker:
 
     def __init__(self, arr: List[int]):
         self.arr = arr
-        self.idx_map = collections.defaultdict(list)
+        self.idx_map = defaultdict(list)
         for i, n in enumerate(arr):
             self.idx_map[n].append(i)
 
@@ -54,8 +54,8 @@ class MajorityChecker:
         for _ in range(20):
             n = self.arr[random.randint(left, right)]
             indexes = self.idx_map[n]
-            l = bisect.bisect_left(indexes, left)
-            r = bisect.bisect_right(indexes, right)
+            l = bisect_left(indexes, left)
+            r = bisect_right(indexes, right)
             if threshold <= r - l:
                 return n
         return -1

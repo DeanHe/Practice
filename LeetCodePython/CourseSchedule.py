@@ -23,16 +23,16 @@ prerequisites[i].length == 2
 0 <= ai, bi < numCourses
 All the pairs prerequisites[i] are unique.
 """
-import collections
+from collections import deque, defaultdict
 from typing import List
 
 
 class CourseSchedule:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = collections.defaultdict(list)
+        graph = defaultdict(list)
         indeg = [0] * numCourses
         cnt = 0
-        q = collections.deque()
+        q = deque()
         for post, pre in prerequisites:
             graph[pre].append(post)
             indeg[post] += 1

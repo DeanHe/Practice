@@ -35,19 +35,19 @@ TC O(N log N)
 bucket sort:
 TC: O(N)
 """
-import collections
+from collections import Counter
 
 
 class SortCharactersByFrequency:
     def frequencySort(self, s: str) -> str:
-        cnt = collections.Counter(s)
+        cnt = Counter(s)
         s = list(s)
         s.reverse()
         s.sort(key=lambda x: (-cnt[x], x))
         return "".join(s)
 
     def frequencySortBucketSort(self, s: str) -> str:
-        cnt = collections.Counter(s)
+        cnt = Counter(s)
         n = len(s)
         bucket = [[] for _ in range(n + 1)]
         for c, freq in cnt.items():

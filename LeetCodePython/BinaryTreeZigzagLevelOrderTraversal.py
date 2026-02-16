@@ -17,7 +17,7 @@ Constraints:
 The number of nodes in the tree is in the range [0, 2000].
 -100 <= Node.val <= 100
 """
-import collections
+from collections import deque
 from typing import Optional, List
 
 
@@ -33,7 +33,7 @@ class BinaryTreeZigzagLevelOrderTraversal:
         if not root:
             return []
 
-        q = collections.deque([root])
+        q = deque([root])
         res, dir = [], 1
         while q:
             lvl = []
