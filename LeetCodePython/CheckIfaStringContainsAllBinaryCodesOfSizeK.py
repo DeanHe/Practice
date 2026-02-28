@@ -24,6 +24,9 @@ s[i] is either '0' or '1'.
 hint:
 1 We need only to check all sub-strings of length k.
 2 The number of distinct sub-strings should be exactly 2^k.
+
+Analysis:
+TC:O(N)
 """
 import collections
 
@@ -35,6 +38,6 @@ class CheckIfaStringContainsAllBinaryCodesOfSizeK:
         for c in s:
             q.append(c)
             if len(q) == k:
-                visited.add("".join(q))
+                visited.add(''.join(q))
                 q.popleft()
         return len(visited) == 1 << k

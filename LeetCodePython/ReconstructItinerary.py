@@ -22,12 +22,15 @@ fromi.length == 3
 toi.length == 3
 fromi and toi consist of uppercase English letters.
 fromi != toi
+
+analysis:
+Eulerian path. Greedy DFS, building the route backwards when retreating
 """
 import collections
 from typing import List
 
 
-class Solution:
+class ReconstructItinerary:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         graph = collections.defaultdict(list)
         for s, e in sorted(tickets)[::-1]:
