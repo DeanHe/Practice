@@ -1,0 +1,35 @@
+package main
+
+func minimumArea(grid [][]int) int {
+	rows := len(grid)
+	cols := len(grid[0])
+	left := cols
+	right := 0
+	top := rows
+	bottom := 0
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			if grid[r][c] == 1 {
+				left = min(left, c)
+				right = max(right, c)
+				top = min(top, r)
+				bottom = max(bottom, r)
+			}
+		}
+	}
+	return (right - left + 1) * (bottom - top + 1)
+}
+
+func min(a int, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a int, b int) int {
+	if a < b {
+		return b
+	}
+	return a
+}
