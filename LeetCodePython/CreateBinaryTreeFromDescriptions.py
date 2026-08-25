@@ -50,16 +50,18 @@ class TreeNode(object):
 class CreateBinaryTreeFromDescriptions:
     def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
         children = set()
-        map = {}
+        val_to_node = {}
         for parent, child, is_left in descriptions:
-            if parent not in map:
-                map[parent] = TreeNode(parent)
-            if child not in map:
-                map[child] = TreeNode(child)
+            if parent not in val_to_node:
+                val_to_node[parent] = TreeNode(parent)
+            if child not in val_to_node:
+                val_to_node[child] = TreeNode(child)
             if is_left:
-                map[parent].left = map[child]
+                val_to_node[parent].left = val_to_node[child]
             else:
-                map[parent].right = map[child]
+                val_to_node[parent].right = val_to_node[child]
             children.add(child)
-        root = (set(map) - set(children)).pop()
-        return map[root]
+        for val, node in val_to_node.items():
+            if val not in children:
+                return node
+        return None

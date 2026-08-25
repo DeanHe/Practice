@@ -56,10 +56,12 @@ class MinimumOperationsToEqualizeBinaryString:
         res = math.inf
         if zeros % 2 == 0:
             ops = max(self.ceiling(zeros, k), self.ceiling(zeros, size - k))
+            # if ops is odd make it even
             ops += ops & 1
             res = min(res, ops)
         if zeros % 2 == k % 2:
             ops = max(self.ceiling(zeros, k), self.ceiling(size - zeros, size - k))
+            # if ops is even make it odd
             if ops & 1 == 0:
                 ops += 1
             res = min(res, ops)

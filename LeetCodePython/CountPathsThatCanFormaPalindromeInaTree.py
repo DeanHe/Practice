@@ -36,14 +36,21 @@ hints:
 
 analysis:
 dfs of path string from root to node
+cnt: track the frequency of each path from every node to root
+
+u-v path is valid iff there is at most 1 letter has odd frequency and all others letters having even frequency.
+For each letter on u-v path, their frequency == (frequency on root->u path) + (frequency on root->v path) - 2 * (frequency on root -> LCA(u, v) path), where LCA is the lowest common ancestor of u and v.
+if we only consider the parity (or just consider % 2), the 2 * (frequency on root -> LCA(u, v) path) part doesn't matter (since it's always even),
+so our interested part is just (frequency on root->u path) + (frequency on root->v path), both parts can be just calculated in a simple DFS.
+TC: O(N*26)
 """
-from collections import Counter
+from collections import Counter, defaultdict
 from functools import cache
 from typing import List
 
 class CountPathsThatCanFormaPalindromeInaTree:
     def countPalindromePaths(self, parent: List[int], s: str) -> int:
-        cnt = Counter()
+        cnt = defaultdict(int)
         res = 0
         n = len(parent)
 

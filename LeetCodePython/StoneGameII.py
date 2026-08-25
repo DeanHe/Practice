@@ -21,6 +21,10 @@ Output: 104
 Constraints:
 1 <= piles.length <= 100
 1 <= piles[i] <= 10^4
+
+hints:
+1 Use dynamic programming: the states are (i, m) for the answer of piles[i:] and that given m.
+TC:O(N^3)
 """
 from functools import cache
 from typing import List

@@ -46,6 +46,8 @@ hints:
 3 To check if the bottom-right cell of the grid can be reached **through a path of safeness factor v**, eliminate all cells (x, y) such that grid[x][y] < v. if (0, 0) and (n - 1, n - 1) are still connected, there exists a path between (0, 0) and (n - 1, n - 1) of safeness factor v.
 4 Binary search over the final safeness factor v.
 
+analysis:
+Dijkstra heap
 TC: O(V + ElogV)
 """
 import heapq
@@ -58,36 +60,40 @@ class FindTheSafestPathInaGrid:
         dirs = [0, 1, 0, -1, 0]
         n = len(grid)
         q = deque([])
+        visited = set()
         for r in range(n):
             for c in range(n):
                 # add thieves
                 if grid[r][c] == 1:
                     q.append((r, c))
+                    visited.add((r, c))
+        d = 0
         while q:
             sz = len(q)
             for _ in range(sz):
                 r, c = q.popleft()
+                grid[r][c] = d
                 for i in range(len(dirs) - 1):
                     nb_r, nb_c = r + dirs[i], c + dirs[i + 1]
                     if 0 <= nb_r < n and 0 <= nb_c < n:
-                        if grid[nb_r][nb_c] == 0:
-                            grid[nb_r][nb_c] = grid[r][c] + 1
+                        if (nb_r, nb_c) not in visited:
                             q.append((nb_r, nb_c))
-
+                            visited.add((nb_r, nb_c))
+            d += 1
         pq = []
         # max heap
         heapq.heappush(pq, (-grid[0][0], 0, 0))
         while pq:
             val, r, c = heapq.heappop(pq)
-            if grid[r][c] > 0:
+            if grid[r][c] >= 0:
                 # mark as visited
-                grid[r][c] = val
+                grid[r][c] = -1
                 if r == c == n - 1:
-                    return -val - 1
+                    return -val
                 for i in range(len(dirs) - 1):
                     nb_r, nb_c = r + dirs[i], c + dirs[i + 1]
                     if 0 <= nb_r < n and 0 <= nb_c < n:
-                        if grid[nb_r][nb_c] > 0:
+                        if grid[nb_r][nb_c] >= 0:
                             heapq.heappush(pq, (-min(-val, grid[nb_r][nb_c]), nb_r, nb_c))
         return -1
 

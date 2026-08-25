@@ -13,6 +13,14 @@ Output: "acdb"
 Constraints:
 1 <= s.length <= 10^4
 s consists of lowercase English letters.
+
+hints:
+1 Greedily try to add one missing character. How to check if adding some character will not cause problems ?
+Use bit-masks to check whether you will be able to complete the sub-sequence if you add the character at some index i.
+
+analysis:
+Monotonic Stack
+TC:O(N)
 """
 
 
@@ -25,7 +33,7 @@ class RemoveDuplicateLetters:
             if c not in visited:
                 while res and c < res[-1] and i < last_idx[res[-1]]:
                     end_c = res.pop()
-                    visited.discard(end_c)
+                    visited.remove(end_c)
                 res.append(c)
                 visited.add(c)
         return ''.join(res)

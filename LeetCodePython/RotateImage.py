@@ -16,6 +16,12 @@ Constraints:
 n == matrix.length == matrix[i].length
 1 <= n <= 20
 -1000 <= matrix[i][j] <= 1000
+
+analysis:
+transpose: flip top-right corner to bot-left corner
+reverse: flip by row
+TC:O(N^2)
+SC:O(1)
 """
 from typing import List
 

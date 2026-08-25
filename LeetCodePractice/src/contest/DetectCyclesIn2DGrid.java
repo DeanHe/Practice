@@ -33,14 +33,16 @@ Example 3:
 Input: grid = [["a","b","b"],["b","z","b"],["b","b","a"]]
 Output: false
 
-
 Constraints:
-
 m == grid.length
 n == grid[i].length
 1 <= m <= 500
 1 <= n <= 500
 grid consists only of lowercase English letters.
+
+hints:
+1 Keep track of the parent (previous position) to avoid considering an invalid path.
+2 Use DFS or BFS and keep track of visited cells to see if there is a cycle.
  */
 public class DetectCyclesIn2DGrid {
     int[] dirs = {0, -1, 0, 1, 0};
@@ -53,7 +55,7 @@ public class DetectCyclesIn2DGrid {
         for(int r = 0; r < rows; r++){
             for(int c = 0; c < cols; c++){
                 if(!visited[r][c]){
-                    if(dfs(r, c, r, c, grid, visited)){
+                    if(dfs(r, c, -1, -1, grid, visited)){
                         return true;
                     }
                 }
@@ -64,7 +66,7 @@ public class DetectCyclesIn2DGrid {
 
     private boolean dfs(int r, int c, int pre_r, int pre_c, char[][] grid, boolean[][] visited) {
         if(visited[r][c]){
-            return false;
+            return true;
         }
         visited[r][c] = true;
         for(int i = 0; i < dirs.length - 1; i++){

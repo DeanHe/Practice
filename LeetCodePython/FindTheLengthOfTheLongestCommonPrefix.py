@@ -51,7 +51,6 @@ class Solution:
                 if not cur.children[n]:
                     cur.children[n] = TrieNode()
                 cur = cur.children[n]
-            cur.end = True
 
         def search(st):
             res = 0
@@ -83,4 +82,3 @@ class Solution:
 class TrieNode:
     def __init__(self):
         self.children = [None] * 10
-        self.end = False

@@ -40,20 +40,26 @@ class RotatedDigits:
         num_str = str(n)
         sz = len(num_str)
         digits = {0, 1, 2, 5, 6, 8, 9}
-        rotated = {2, 5, 6, 9}
+        rotate_digits = {2, 5, 6, 9}
 
         @cache
-        def dfs(i, limited, valid):
+        def dfs(i, limited, rotated):
             if i == sz:
-                if valid:
+                if rotated:
                     return 1
                 return 0
             res = 0
             max_digit = int(num_str[i]) if limited else 9
             for d in range(max_digit + 1):
                 if d in digits:
-                    next_limited = limited and d == int(num_str[i])
-                    res += dfs(i + 1, next_limited, valid or d in rotated)
+                    next_limited = False
+                    if limited:
+                        if d == int(num_str[i]):
+                            next_limited = True
+                    next_rotated = rotated
+                    if d in rotate_digits:
+                        next_rotated = True
+                    res += dfs(i + 1, next_limited, next_rotated)
             return res
 
         return dfs(0, True, False)

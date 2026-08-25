@@ -71,7 +71,8 @@ class Solution:
             if j == len(factory):
                 return inf
             skip = dfs(i, j + 1, 0)
-            repair = abs(robot[i] - factory[j][0]) + dfs(i + 1, j, k + 1) if factory[j][1] > k else inf
+            factory_pos, factory_cap = factory[j]
+            repair = abs(robot[i] - factory_pos) + dfs(i + 1, j, k + 1) if factory_cap > k else inf
             return min(skip, repair)
 
         return dfs(0, 0, 0)

@@ -35,7 +35,7 @@ analysis:
 recursion TC:O(N)
 """
 
-class Solution:
+class MinimumSwapsToArrangeaBinaryGrid:
     def findKthBit(self, n: int, k: int) -> str:
         if n == 1:
             return '0'

@@ -39,6 +39,9 @@ Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
 Constraints:
 The number of nodes in the tree is in the range [1, 10^4].
 0 <= Node.val <= 10^4
+
+analysis:
+Tree DP
 */
 public class HouseRobberIII {
 	Map<TreeNode, Integer> map;

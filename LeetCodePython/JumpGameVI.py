@@ -22,14 +22,18 @@ Input: nums = [1,-5,-20,4,-1,3,-6,-3], k = 2
 Output: 0
 
 Constraints:
-1 <= nums.length, k <= 105
--104 <= nums[i] <= 104
+1 <= nums.length, k <= 10^5
+-10^4 <= nums[i] <= 10^4
 
 hint:
 1 Let dp[i] be "the maximum score to reach the end starting at index i". The answer for dp[i] is nums[i] + max{dp[i+j]} for 1 <= j <= k.
 That gives an O(n*k) solution.
 2 Instead of checking every j for every i, keep track of the largest dp[i] values in a heap and calculate dp[i] from right to left.
 When the largest value in the heap is out of bounds of the current index, remove it and keep checking.
+
+analysis:
+DP + monotonic queue
+TC:O(N*K)
 """
 import collections
 from typing import List

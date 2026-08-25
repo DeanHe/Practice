@@ -30,8 +30,14 @@ Output: "Tie"
 Explanation: Alice cannot win this game. She can end the game in a draw if she decided to choose all the first three piles, otherwise she will lose.
 
 Constraints:
-1 <= stoneValue.length <= 5 * 104
+1 <= stoneValue.length <= 5 * 10^4
 -1000 <= stoneValue[i] <= 1000
+
+hints:
+1 The game can be mapped to minmax game. Alice tries to maximize the total score and Bob tries to minimize it.
+2 Use dynamic programming to simulate the game. If the total score was 0 the game is "Tie", and if it has positive value then "Alice" wins, otherwise "Bob" wins.
+
+TC:O(N)
 """
 from functools import lru_cache
 from typing import List

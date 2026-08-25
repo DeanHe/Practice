@@ -34,6 +34,7 @@ hints:
 
 Analysis:
 TC: O(N) optimal answer with one pass
+SC: O(N)
 """
 from typing import List
 

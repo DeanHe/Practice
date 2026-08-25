@@ -29,6 +29,7 @@ hints:
 
 analysis:
 two sweep: left to right, then right to left
+Grouping + Prefix Sum
 TC: O(N)
 """
 from collections import defaultdict
@@ -37,19 +38,20 @@ from typing import List
 
 class SumOfDistances:
     def distance(self, nums: List[int]) -> List[int]:
-        size = len(nums)
-        freq_l = defaultdict(int)
-        num_index_sum_l = defaultdict(int)
-        freq_r = defaultdict(int)
-        num_index_sum_r = defaultdict(int)
-        res = [0] * size
-        for i, n in enumerate(nums):
-            res[i] += freq_l[n] * i - num_index_sum_l[n]
-            num_index_sum_l[n] += i
-            freq_l[n] += 1
-        for i in range(size - 1, -1, -1):
-            n = nums[i]
-            res[i] += num_index_sum_r[n] - freq_r[n] * i
-            num_index_sum_r[n] += i
-            freq_r[n] += 1
+        n = len(nums)
+        res = [0] * n
+        groups = defaultdict(list)
+        for i, num in enumerate(nums):
+            groups[num].append(i)
+        for indexes in groups.values():
+            total = sum(indexes)
+            left_sum = 0
+            idx_cnt = len(indexes)
+            for i in range(idx_cnt):
+                right_sum = total - indexes[i] - left_sum
+                left_contribution = indexes[i] * i - left_sum
+                right_contribution = right_sum - indexes[i] * (idx_cnt - i - 1)
+                res[indexes[i]] = left_contribution + right_contribution
+                left_sum += indexes[i]
         return res
+

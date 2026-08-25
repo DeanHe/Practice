@@ -1,20 +1,10 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"log"
-	"math"
 	"sync"
 )
-
-type I interface {
-	printMethod()
-}
-
-type T struct {
-	str string
-}
 
 type Doctor struct {
 	number     int
@@ -27,34 +17,11 @@ func (doc *Doctor) heal() (bool, error) {
 	return true, nil
 }
 
-func (t *T) printMethod() {
-	fmt.Println(t.str)
-}
-
-type F float64
-
-func (f F) printMethod() {
-	fmt.Println(f)
-}
-
 // channel
 var wg = sync.WaitGroup{}
 var doneCh = make(chan struct{})
 
 func main() {
-	var a int = 1
-	fmt.Println(a)
-
-	var i I
-
-	i = &T{"Hello"}
-	describe(i)
-	i.printMethod()
-
-	i = F(math.Pi)
-	describe(i)
-	i.printMethod()
-
 	// map
 	dict := make(map[string]int)
 	delete(dict, "Georgia")
@@ -74,7 +41,7 @@ func main() {
 	}
 
 	// struct
-	aDoctor := Doctor{
+	doctor := Doctor{
 		number: 3,
 		actor:  "Jon Deer",
 		companions: []string{
@@ -83,8 +50,8 @@ func main() {
 			"Smith",
 		},
 	}
-	aDoctor.heal()
-	fmt.Println(aDoctor.actor)
+	doctor.heal()
+	fmt.Println(doctor.actor)
 
 	// loop
 	for i, j := 0, 0; i < 10; i, j = i+1, j+1 {
@@ -101,19 +68,13 @@ func main() {
 	}
 
 	// pointer
-	var doc *Doctor
-	doc = &aDoctor
-	fmt.Println(doc.actor)
+	var doctorPointer *Doctor
+	doctorPointer = &doctor
+	fmt.Println(doctorPointer.actor)
 
+	// function with variadic parameters
 	s := sum(1, 2, 3, 4, 5)
 	fmt.Println("The sum is: ", s)
-
-	// interface example
-	myInt := IntCounter(0)
-	var incrementer Incrementer = &myInt
-	for i := 0; i < 10; i++ {
-		fmt.Println(incrementer.Increment())
-	}
 
 	// empty interface
 	var obj interface{} = 0
@@ -125,11 +86,6 @@ func main() {
 	default:
 		fmt.Println("I don't know what i is")
 	}
-
-	// composed interface example
-	var wc WriterCloser = InitBufferedWriterCloser()
-	wc.Write([]byte("Hello world!"))
-	wc.Close()
 
 	// channel
 	ch := make(chan int)
@@ -169,10 +125,6 @@ func main() {
 	doneCh <- struct{}{}
 }
 
-func describe(i I) {
-	fmt.Printf("(%v, %T)\n", i, i)
-}
-
 func panicker() {
 	fmt.Println("about to panic")
 	defer func() {
@@ -191,74 +143,6 @@ func sum(values ...int) *int {
 		res += v
 	}
 	return &res
-}
-
-// interface exmaple with composed interfaces and struct
-type Writer interface {
-	Write([]byte) (int, error)
-}
-
-type Closer interface {
-	Close() error
-}
-
-type WriterCloser interface {
-	Writer
-	Closer
-}
-
-type BufferedWriterCloser struct {
-	buffer *bytes.Buffer
-}
-
-func (bwc *BufferedWriterCloser) Write(data []byte) (int, error) {
-	n, err := bwc.buffer.Write(data)
-	if err != nil {
-		return 0, err
-	}
-
-	v := make([]byte, 8)
-	for bwc.buffer.Len() > 8 {
-		_, err = bwc.buffer.Read(v)
-		if err != nil {
-			return 0, err
-		}
-		_, err = fmt.Println(string(v))
-		if err != nil {
-			return 0, err
-		}
-	}
-
-	return n, nil
-}
-
-func (bwc *BufferedWriterCloser) Close() error {
-	for bwc.buffer.Len() > 0 {
-		data := bwc.buffer.Next(8)
-		_, err := fmt.Println(string(data))
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func InitBufferedWriterCloser() *BufferedWriterCloser {
-	return &BufferedWriterCloser{
-		buffer: bytes.NewBuffer([]byte{}),
-	}
-}
-
-// interface example with int type
-type Incrementer interface {
-	Increment() int
-}
-
-type IntCounter int
-
-func (ic *IntCounter) Increment() int {
-	*ic++
-	return int(*ic)
 }
 
 func logger() {

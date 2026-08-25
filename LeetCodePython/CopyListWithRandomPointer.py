@@ -13,31 +13,28 @@ val: an integer representing Node.val
 random_index: the index of the node (range from 0 to n-1) that the random pointer points to, or null if it does not point to any node.
 Your code will only be given the head of the original linked list.
 
-
-
 Example 1:
-
-
 Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
 Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
 Example 2:
-
-
 Input: head = [[1,1],[2,1]]
 Output: [[1,1],[2,1]]
+
 Example 3:
-
-
-
 Input: head = [[3,null],[3,0],[3,null]]
 Output: [[3,null],[3,0],[3,null]]
 
-
 Constraints:
-
 0 <= n <= 1000
 -104 <= Node.val <= 104
 Node.random is null or is pointing to some node in the linked list.
+
+analysis:
+two approach:
+1 using Map of origin to copy, SC:O(1)
+2 without using map SC:O(1)
+TC:O(N)
 """
 class Node:
     def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
@@ -49,22 +46,43 @@ class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         if not head:
             return head
-        dummy = Node(0)
-        cur = dummy
         mirror = {}
-        while head:
-            if head in mirror:
-                copy = mirror[head]
-            else:
-                copy = Node(head.val)
-                mirror[head] = copy
-            if head.random:
-                if head.random in mirror:
-                    copy.random = mirror[head.random]
-                else:
-                    copy.random = Node(head.random.val)
-                    mirror[head.random] = copy.random
-            cur.next = copy
+        cur = head
+        while cur:
+            mirror[cur] = Node(cur.val)
             cur = cur.next
-            head = head.next
-        return dummy.next
+        cur = head
+        while cur:
+            mirror[cur].next = mirror.get(cur.next)
+            mirror[cur].random = mirror.get(cur.random)
+            cur = cur.next
+        return mirror[head]
+
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+
+        cur = head
+        while cur:
+            new_node = Node(cur.val, cur.next)
+            cur.next = new_node
+            cur = new_node.next
+
+        cur = head
+        while cur:
+            if cur.random:
+                cur.next.random = cur.random.next
+            cur = cur.next.next
+
+        old_head = head
+        new_head = head.next
+        cur_old = old_head
+        curr_new = new_head
+
+        while cur_old:
+            cur_old.next = cur_old.next.next
+            curr_new.next = curr_new.next.next if curr_new.next else None
+            cur_old = cur_old.next
+            curr_new = curr_new.next
+
+        return new_head

@@ -40,6 +40,9 @@ Sum of wordsQuery[i].length is at most 5 * 10^5.
 hints:
 1 If we reverse the strings, the problem changes to finding the longest common prefix.
 2 Build a Trie, each node is a letter and only saves the best word’s index in each node, based on the criteria.
+
+analysis:
+TC:O(N)
 """
 from typing import List
 
@@ -57,6 +60,7 @@ class LongestCommonSuffixQueries:
                     cur.children[j] = TrieNode(idx)
                 cur = cur.children[j]
                 if len(wordsContainer[idx]) < len(wordsContainer[cur.index]):
+                    # point the shortest word which has postfix (cur -- root)
                     cur.index = idx
 
         def search(word):
@@ -72,6 +76,7 @@ class LongestCommonSuffixQueries:
 
         for i in range(len(wordsContainer)):
             if len(wordsContainer[i]) < len(wordsContainer[root.index]):
+                # find the shortest word index
                 root.index = i
             insert(i)
         for w in wordsQuery:

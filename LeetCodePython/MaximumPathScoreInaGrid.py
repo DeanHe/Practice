@@ -44,6 +44,10 @@ hints:
 2 Let dp[i][j][c] = max score at cell (i,j) with total cost exactly c (0 <= c <= k).
 3 Update dp[i][j][c] from (i-1,j) and (i,j-1) using cost = (grid[i][j] == 0 ? 0 : 1) and score = grid[i][j].
 4 Answer = max(dp[m-1][n-1][c]) for c=0..k, or -1 if none.
+
+analysis:
+DP
+TC:O(rows * cols * k)
 """
 from collections import defaultdict
 from typing import List
@@ -71,3 +75,28 @@ class MaximumPathScoreInaGrid:
         if dp[-1][-1]:
             res = max(dp[-1][-1].values())
         return res
+
+    def maxPathScore2(self, grid: List[List[int]], k: int) -> int:
+        least = float('-inf')
+        rows, cols = len(grid), len(grid[0])
+        dp = [[[least] * (k + 1) for _ in range(cols)] for _ in range(rows)]
+        dp[0][0][0] = 0
+        for r in range(rows):
+            for c in range(cols):
+                for i in range(k + 1):
+                    cost = 0
+                    if grid[r][c] > 0:
+                        cost = 1
+                    if r > 0:
+                        if dp[r - 1][c][i] != least:
+                            if i + cost <= k:
+                                dp[r][c][i + cost] = max(dp[r][c][i + cost], dp[r - 1][c][i] + grid[r][c])
+                    if c > 0:
+                        if dp[r][c - 1][i] != least:
+                            if i + cost <= k:
+                                dp[r][c][i + cost] = max(dp[r][c][i + cost], dp[r][c - 1][i] + grid[r][c])
+        res = max(dp[-1][-1])
+        if res < 0:
+            return -1
+        return res
+

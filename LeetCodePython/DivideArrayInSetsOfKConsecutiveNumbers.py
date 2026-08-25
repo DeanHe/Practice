@@ -22,6 +22,14 @@ Constraints:
 1 <= nums[i] <= 10^9
 
 Note: This question is the same as 846: https://leetcode.com/problems/hand-of-straights/
+
+hints:
+1 If the smallest number in the possible-to-split array is V, then numbers V+1, V+2, ... V+k-1 must contain there as well.
+2 You can iteratively find k sets and remove them from array until it becomes empty.
+3 Failure to do so would mean that array is unsplittable.
+
+analysis:
+TC:O(NlogN + N * K)
 """
 from collections import Counter
 from typing import List
@@ -34,10 +42,11 @@ class DivideArrayInSetsOfKConsecutiveNumbers:
             return False
         nums.sort()
         cnt = Counter(nums)
-        for num in nums:
-            if cnt[num] > 0:
-                for nb in range(num, num + k):
-                    if cnt[nb] == 0:
+        for num in sorted(cnt.keys()):
+            freq = cnt[num]
+            if freq > 0:
+                for i in range(num, num + k):
+                    if cnt[i] < freq:
                         return False
-                    cnt[nb] -= 1
+                    cnt[i] -= freq
         return True

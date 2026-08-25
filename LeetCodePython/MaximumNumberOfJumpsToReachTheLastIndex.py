@@ -39,6 +39,14 @@ Constraints:
 2 <= nums.length == n <= 1000
 -109 <= nums[i] <= 10^9
 0 <= target <= 2 * 10^9
+
+hints:
+1 Use a dynamic programming approach.
+2 Define a dynamic programming array dp of size n, where dp[i] represents the maximum number of jumps from index 0 to index i.
+3 For each j iterate over all i < j. Set dp[j] = max(dp[j], dp[i] + 1) if -target <= nums[j] - nums[i] <= target.
+
+analysis:
+TC:O(N^2)
 """
 from typing import List
 

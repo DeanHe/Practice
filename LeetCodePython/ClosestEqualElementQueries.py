@@ -24,6 +24,14 @@ Constraints:
 1 <= queries.length <= nums.length <= 10^5
 1 <= nums[i] <= 10^6
 0 <= queries[i] < nums.length
+
+hints:
+1 Use a dictionary that maps each unique value in the array to a sorted list of its indices.
+2 For each query, use binary search on the sorted indices list to find the nearest occurrences of the target value.
+
+analysis:
+hashmap
+TC:O(N+M)
 """
 from collections import defaultdict
 from typing import List

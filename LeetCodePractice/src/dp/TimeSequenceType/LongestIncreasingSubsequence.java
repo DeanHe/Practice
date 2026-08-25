@@ -33,7 +33,7 @@ lowest to highest, and in which the subsequence is as long as possible. This sub
 
 analysis:
 use binary search for TC O(nlogn)
-array lis saves the current lis ended with nums[i]
+array lis saves the current list ended with nums[i]
 
 */
 public class LongestIncreasingSubsequence {

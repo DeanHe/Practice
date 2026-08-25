@@ -39,10 +39,13 @@ func main() {
 	//consumer
 	go consume()
 
+	// wait for all producers to finish
 	for i := 0; i < producer_cnt; i++ {
 		<-producer_finish
 	}
 
 	close(buffer)
+
+	// wait for consumer to finish
 	<-consumer_finish
 }

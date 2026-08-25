@@ -25,6 +25,10 @@ Constraints:
 1 <= grid[i].length <= 50
 -1000 <= grid[i][j] <= 1000
 0 <= k <= 100
+
+analysis:
+in place shift
+SCL:O(1)
 """
 from typing import List
 

@@ -39,6 +39,9 @@ invocations[i] != invocations[j]
 hints:
 1 Use DFS from node k.
 2 Mark all the nodes visited from node k, and then check if they can be visited from the other nodes.
+
+analysis:
+TC:O(nodes + edges)
 """
 from collections import defaultdict, deque
 from typing import List

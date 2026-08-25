@@ -66,12 +66,13 @@ hints:
 4 If the mapped range is empty return 0; otherwise get x from P, get sum from the digit-prefix, and return (x * sum) % mod.
 
 analysis:
+prefix sum
 TC: O(N)
 """
 from typing import List
 
 
-class Solution:
+class ConcatenateNonZeroDigitsAndMultiplyBySumII:
     def sumAndMultiply(self, s: str, queries: List[List[int]]) -> List[int]:
         MOD = 10 ** 9 + 7
         res = []

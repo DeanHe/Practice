@@ -28,25 +28,25 @@ def process_worker(data_chunk):
 def main():
     print("=== Python multi process and coroutines example ===")
     start_time = time.time()
-    data_chunk = [
+    data_chunks = [
         list(range(1, 1001)),
         list(range(1001, 2001)),
         list(range(2001, 3001)),
         list(range(3001, 4001)),
     ]
     with multiprocessing.Pool(processes=2) as pool:
-        process_results = pool.starmap(process_worker(data_chunk))
+        process_results = pool.map(process_worker, data_chunks)
         aggregated_result = sum(process_results)
         end_time = time.time()
         total_duration = end_time - start_time
         print(f"\n=== multi process and coroutines task finish ===")
-        print(f"duration：{total_duration:.2f} second")
-        print(f"final results：{aggregated_result}")
+        print(f"duration:{total_duration:.2f} second")
+        print(f"final results:{aggregated_result}")
         # assume each data chunk wait 1 sec for I/O, and process the data_chunks in sequence
         pure_multi_process_time = 4 * 1 + 0.5
         print(
-        f"if sequential execute，in theory duration≈{pure_multi_process_time:.2f} second（hybrid processing improvement≈{pure_multi_process_time / total_duration:.1f} fold）")
+            f"if sequential execute, in theory duration≈{pure_multi_process_time:.2f} second (hybrid processing improvement≈{pure_multi_process_time / total_duration:.1f} fold) ")
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     main()

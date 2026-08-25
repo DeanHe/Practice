@@ -25,7 +25,7 @@ func main() {
 	}()
 
 	//consumer
-	consumer_finish := make(chan struct{})
+	consumer_finish := make(chan struct{}) // channel with size 0, a write and a read must happen at the exact same time
 	go func() {
 		sum := 0
 		for {
@@ -43,5 +43,5 @@ func main() {
 
 	producer_wg.Wait()
 	close(ch)
-	<-consumer_finish
+	<-consumer_finish // alternatively, we can use sync.WaitGroup to wait for the consumer to finish
 }

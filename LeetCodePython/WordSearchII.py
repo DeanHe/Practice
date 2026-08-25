@@ -22,6 +22,14 @@ board[i][j] is a lowercase English letter.
 1 <= words[i].length <= 10
 words[i] consists of lowercase English letters.
 All the strings of words are unique.
+
+hints:
+1 You would need to optimize your backtracking to pass the larger test. Could you stop backtracking earlier?
+2 If the current candidate does not exist in all words' prefix, you could stop backtracking immediately. What kind of data structure could answer such query efficiently? Does a hash table work? Why or why not? How about a Trie? If you would like to learn how to implement a basic trie, please work on this problem: Implement Trie (Prefix Tree) first.
+
+analysis:
+Trie + backtracking
+TC O(rows * cols * 4 ^ (maxWordLen))
 """
 import collections
 
@@ -41,15 +49,6 @@ class Trie:
         for c in word:
             node = node.children[c]
         node.isEnd = True
-
-    def search(self, word):
-        node = self.root
-        for c in word:
-            node = node.children.get(c)
-            if not node:
-                return False
-        return node.isEnd
-
 
 class WordSearchII(object):
     def findWords(self, board, words):

@@ -27,6 +27,11 @@ Constraints:
 1 <= coins[i] <= 25
 1 <= k <= 2 * 10^9
 coins contains pairwise distinct integers.
+
+hints:
+1 Binary search the answer x.
+2 Use the inclusion-exclusion principle to count the number of distinct amounts that can be made up to x.
+
 """
 import itertools
 import math

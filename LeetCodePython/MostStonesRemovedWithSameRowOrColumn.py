@@ -32,7 +32,7 @@ Explanation: [0,0] is the only stone on the plane, so you cannot remove it.
 
 Constraints:
 1 <= stones.length <= 1000
-0 <= xi, yi <= 104
+0 <= xi, yi <= 10^4
 No two stones are at the same coordinate point.
 
 TC: O(N)

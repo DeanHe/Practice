@@ -16,7 +16,7 @@ dp
 
 Complexity Analysis
 Time Complexity: O(N^2)
-where NN is the length of nums. There are two for-loops and the work inside is O(1)O(1).
+where N is the length of nums. There are two for-loops and the work inside is O(1).
 Space Complexity: O(N), the space used by lengths and counts.
 */
 public class NumberOfLongestIncreasingSubsequence {

@@ -15,7 +15,7 @@ async def async_io_task(task_id, delay):
 
 
 async def coroutine_main():
-    print("=== Python multi coroutine example（I/O intensive task）===")
+    print("=== Python multi coroutine example (I/O intensive task) ===")
     start_time = time.time()
     task_list = [
         async_io_task(1, 2),
@@ -27,16 +27,16 @@ async def coroutine_main():
         async_io_task(7, 3),
         async_io_task(8, 1),
     ]
-    task_results = await asyncio.gather(task_list)
+    task_results = await asyncio.gather(*task_list)
     # use API for single task handle: asyncio.create_task() + asyncio.as_completed()
     total_duration = time.time() - start_time
     print(f"\n=== coroutine task finish ===")
-    print(f"duration：{total_duration:.2f} second")
+    print(f"duration: {total_duration:.2f} second")
     for i, res in enumerate(task_results, 1):
-        print(f" task {i}：{res}")
+        print(f" task {i}: {res}")
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     asyncio.run(coroutine_main())
 
 async def block_task_example():

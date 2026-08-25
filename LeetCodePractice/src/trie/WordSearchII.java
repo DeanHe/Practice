@@ -27,6 +27,8 @@ board[i][j] is a lowercase English letter.
 words[i] consists of lowercase English letters.
 All the strings of words are unique.
 
+analysis:
+Trie + Backtracking
 time complexity:
 TC O(rows * cols * 4 ^ (maxWordLen))
  */

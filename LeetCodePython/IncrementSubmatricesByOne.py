@@ -49,7 +49,9 @@ class IncrementSubmatricesByOne:
                 res[r][c] += res[r][c - 1]
         return res
 
-    # TC: O(N^2)
+    # TC: O(len(query) + N^2)
+    # pre_sum[i][j]=diff[i][j]+pre_sum[i−1][j]+pre_sum[i][j−1]−pre_sum[i−1][j−1]
+    # where pre_sum is mat, and diff is current cell
     def rangeAddQueries2(self, n: int, queries: List[List[int]]) -> List[List[int]]:
         diff = [[0] * (n + 1) for _ in range(n + 1)]
         for row1, col1, row2, col2 in queries:

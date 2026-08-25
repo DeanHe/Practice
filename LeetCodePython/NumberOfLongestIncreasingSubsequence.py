@@ -29,7 +29,9 @@ class NumberOfLongestIncreasingSubsequence:
     def findNumberOfLIS(self, nums: List[int]) -> int:
         res = 0
         n = len(nums)
+        # length of LIS ended at idx i
         length = [1] * n
+        # count of LIS ended at idx i
         count = [1] * n
         for i in range(n):
             for j in range(i):

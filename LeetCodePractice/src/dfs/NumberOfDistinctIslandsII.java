@@ -11,7 +11,6 @@ Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (rep
 
 Count the number of distinct islands. An island is considered to be the same as another if they have the same shape, or have the same shape after rotation (90, 180, or 270 degrees only) or reflection (left/right direction or up/down direction).
 
-Example
 Example 1:
 
 11000

@@ -38,18 +38,20 @@ analysis:
 since it guarantees to exist a path from 1 to n, bfs from 1 and track the shortest dist.
 TC O(N)
 """
-import collections
+import math
+from collections import deque, defaultdict
 from typing import List
 
 
 class MinimumScoreOfaPathBetweenTwoCities:
     def minScore(self, n: int, roads: List[List[int]]) -> int:
-        res = float('inf')
-        graph = collections.defaultdict(dict)
+        res = math.inf
+        graph = defaultdict(dict)
         for a, b, dist in roads:
             graph[a][b] = graph[b][a] = dist
         visited = set()
-        q = collections.deque([1])
+        q = deque([1])
+        visited.add(1)
         while q:
             cur = q.popleft()
             for nb, dist in graph[cur].items():

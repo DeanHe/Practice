@@ -32,6 +32,9 @@ Constraints:
 hint:
 1 Build a graph of n nodes where nodes are the indices of the array and edges for node i are nodes i+1, i-1, j where arr[i] == arr[j].
 2 Start bfs from node 0 and keep distance. The answer is the distance when you reach node n-1.
+
+analysis:
+TC:O(N)
 """
 import collections
 from typing import List
